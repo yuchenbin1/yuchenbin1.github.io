@@ -202,6 +202,139 @@
             
 
   
+    <article id="post-for-in以及标签语句" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/03/06/for-in%E4%BB%A5%E5%8F%8A%E6%A0%87%E7%AD%BE%E8%AF%AD%E5%8F%A5/" target="_blank">for/in以及标签语句</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/03/06/for-in%E4%BB%A5%E5%8F%8A%E6%A0%87%E7%AD%BE%E8%AF%AD%E5%8F%A5/" class="archive-article-date">
+        <time datetime="2020-03-06T11:41:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-06</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="for-in语句"><a href="#for-in语句" class="headerlink" title="for/in语句"></a>for/in语句</h1><p>for/in语句一般用来枚举对象的属性，特别是不知道数据或者json中包含哪些元素时</p>
+<h4 id="用法："><a href="#用法：" class="headerlink" title="用法："></a>用法：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for(variable in object)&#123;</span><br><span class="line">	statement;  &#x2F;&#x2F;执行语句</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中variable为定义的变量，object为对象</p>
+<p>例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var o&#x3D;&#123;x:&quot;hello&quot;,y:&quot;world&quot;,z:&quot;nihao&quot;&#125;;</span><br><span class="line">var a;</span><br><span class="line">for(a in o)&#x2F;*empty*&#x2F;; &#x2F;&#x2F;这里的空语句最好注释一下</span><br><span class="line">console.log(a);</span><br></pre></td></tr></table></figure>
+
+<p>这里会输出z这个属性名，因为对象o中的属性名一个一个赋值给a，最终输出为z</p>
+<p>如果想一一枚举出o中的属性名可以把上述代码中的console.log(a)放在for循环中如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var o&#x3D;&#123;x:&quot;hello&quot;,y:&quot;world&quot;,z:&quot;nihao&quot;&#125;;</span><br><span class="line">var a;</span><br><span class="line">for(a in o)&#123;</span><br><span class="line">console.log(a);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里输出:</p>
+<p>x</p>
+<p>y</p>
+<p>z</p>
+<h5 id="如果想要枚举出属性名对应的索引"><a href="#如果想要枚举出属性名对应的索引" class="headerlink" title="如果想要枚举出属性名对应的索引"></a>如果想要枚举出属性名对应的索引</h5><p>代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var o&#x3D;&#123;x:&quot;hello&quot;,y:&quot;world&quot;,z:&quot;nihao&quot;&#125;;</span><br><span class="line">			var a&#x3D;[];</span><br><span class="line">			var i&#x3D;0;</span><br><span class="line">			for(a[i++] in o) &#x2F;*empty*&#x2F;;&#x2F;&#x2F;这里的空语句最好注释一下</span><br><span class="line">			for(i in a) </span><br><span class="line">			console.log(i);</span><br></pre></td></tr></table></figure>
+
+<p>这里输出：</p>
+<p>0</p>
+<p>1</p>
+<p>2</p>
+<h4 id="以上我们已知遍历属性名，因此我们可以通过-对象-属性名-或者-对象-属性名"><a href="#以上我们已知遍历属性名，因此我们可以通过-对象-属性名-或者-对象-属性名" class="headerlink" title="以上我们已知遍历属性名，因此我们可以通过  对象.属性名  或者  对象[属性名]"></a>以上我们已知遍历属性名，因此我们可以通过  对象.属性名  或者  对象[属性名]</h4><h4 id="对属性值进行遍历"><a href="#对属性值进行遍历" class="headerlink" title="对属性值进行遍历"></a>对属性值进行遍历</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var o&#x3D;&#123;x:&quot;hello&quot;,y:&quot;world&quot;,z:&quot;nihao&quot;&#125;;</span><br><span class="line">var a;</span><br><span class="line">for(a in o)&#123;</span><br><span class="line">console.log(o[a]);&#x2F;&#x2F;或者o.a进行输出</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p>hello</p>
+<p>world</p>
+<p>nihao</p>
+<h4 id="链接："><a href="#链接：" class="headerlink" title="链接："></a>链接：</h4><p><a href="https://blog.csdn.net/wangpenglonton/article/details/79095011" target="_blank" rel="noopener">for/in遍历的bug</a></p>
+<h4 id="for循环我们很熟悉，在额外探讨一下in的用法"><a href="#for循环我们很熟悉，在额外探讨一下in的用法" class="headerlink" title="for循环我们很熟悉，在额外探讨一下in的用法"></a>for循环我们很熟悉，在额外探讨一下in的用法</h4><p>in的右侧对象拥有一个名为左侧类型的属性名是返回true，否则返回false</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var obj&#x3D;&#123;x:123,y:456&#125;;</span><br><span class="line">&quot;x&quot; in obj &#x2F;&#x2F;true，obj对象中有名为x的属性名</span><br><span class="line">&quot;z&quot; in obj &#x2F;&#x2F;false</span><br><span class="line">&quot;toString&quot; in obj &#x2F;&#x2F;true,toString属性除了null和undefined没有，其余类型都有</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var arr&#x3D;[7,8,9];</span><br><span class="line">&quot;0&quot; in arr &#x2F;&#x2F;true，有数组下标为0的7在</span><br><span class="line">2 in arr &#x2F;&#x2F;true,2这里js自动转化为字符串，下标为2的9在</span><br><span class="line">3 in arr &#x2F;&#x2F;false</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="标签语句"><a href="#标签语句" class="headerlink" title="标签语句"></a>标签语句</h1><p>给语句定义标签，那么可以在程序的任何地方通过标签名引用这条语句或者循环体</p>
+<p>break和continue是js中唯二可以使用标签的语句</p>
+<p>break：跳出最内层的循环语句</p>
+<p>continue：跳过当次循环</p>
+<h4 id="当我们希望break不是跳出最内层循环时可以用标签语句，或者在switch语句中也可以用。"><a href="#当我们希望break不是跳出最内层循环时可以用标签语句，或者在switch语句中也可以用。" class="headerlink" title="当我们希望break不是跳出最内层循环时可以用标签语句，或者在switch语句中也可以用。"></a>当我们希望break不是跳出最内层循环时可以用标签语句，或者在switch语句中也可以用。</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var num&#x3D;0;</span><br><span class="line">iden:for(var i&#x3D;0;i&lt;10;i++)&#123;</span><br><span class="line">		for(var j&#x3D;0;j&lt;10;j++)&#123;</span><br><span class="line">			while(i&#x3D;&#x3D;5&amp;&amp;j&#x3D;&#x3D;5)&#123;</span><br><span class="line">			break iden ;&#x2F;&#x2F;标签名只能在同一行上</span><br><span class="line">			&#125;</span><br><span class="line">			num++;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">alert(num);</span><br></pre></td></tr></table></figure>
+
+<p>解：num值为55，如果没有用标签名break只能退出j相关的那个循环，用标签可以直接退到外部</p>
+<p>如果没有标签如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">		var num&#x3D;0;</span><br><span class="line">		for(var i&#x3D;0;i&lt;10;i++)&#123;</span><br><span class="line">			for(var j&#x3D;0;j&lt;10;j++)&#123;</span><br><span class="line">				while(i&#x3D;&#x3D;5&amp;&amp;j&#x3D;&#x3D;5)&#123;</span><br><span class="line">				break ;&#x2F;&#x2F;标签名只能在同一行上</span><br><span class="line">				&#125;</span><br><span class="line">			num++;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">alert(num);</span><br></pre></td></tr></table></figure>
+
+<p>解：num的值为100，break仅仅出了while的循环</p>
+<h4 id="标签用在continue中与break类似，当我们在嵌套的循环体中想跳到外部循环体时可以用，但是要注意continue不管带不带标签都只能在循环体内使用"><a href="#标签用在continue中与break类似，当我们在嵌套的循环体中想跳到外部循环体时可以用，但是要注意continue不管带不带标签都只能在循环体内使用" class="headerlink" title="标签用在continue中与break类似，当我们在嵌套的循环体中想跳到外部循环体时可以用，但是要注意continue不管带不带标签都只能在循环体内使用."></a>标签用在continue中与break类似，当我们在嵌套的循环体中想跳到外部循环体时可以用，但是要注意continue不管带不带标签都只能在循环体内使用.</h4><p>continue就不举例了（~~）</p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/03/06/for-in%E4%BB%A5%E5%8F%8A%E6%A0%87%E7%AD%BE%E8%AF%AD%E5%8F%A5/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-函数与对象关系" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1163,11 +1296,15 @@ prototype中一般情况下用于存储所有对象都相同的一些属性以�
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
+                <a href="javascript:void(0)" class="js-tag color5">页面设计</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">日志</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
