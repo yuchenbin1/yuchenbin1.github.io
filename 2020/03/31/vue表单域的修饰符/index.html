@@ -6,22 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://yuchenbin1.github.io">
-  <title>ycb的博客</title>
+  <title>vue表单域的修饰符 | ycb的博客</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-    
-    <!-- <meta name="keywords" content="">
-    <meta name="description" content="这是我的个人技术博客"> -->
-  
-  <meta name="description" content="这是我的个人技术博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="ycb的博客">
-<meta property="og:url" content="https://yuchenbin1.github.io/page/3/index.html">
+  <meta name="description" content="vue的表单域的修饰符number:转化为数组 trim:去掉开始和结尾的空格 lazy:将input事件切换为change事件  ​        input事件每次输入都会触发，change事件会在失去焦点的时候触发 1234567891011121314151617181920212223242526272829303132333435363738394041424344&lt;!DOCTY">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue表单域的修饰符">
+<meta property="og:url" content="https://yuchenbin1.github.io/2020/03/31/vue%E8%A1%A8%E5%8D%95%E5%9F%9F%E7%9A%84%E4%BF%AE%E9%A5%B0%E7%AC%A6/index.html">
 <meta property="og:site_name" content="ycb的博客">
-<meta property="og:description" content="这是我的个人技术博客">
+<meta property="og:description" content="vue的表单域的修饰符number:转化为数组 trim:去掉开始和结尾的空格 lazy:将input事件切换为change事件  ​        input事件每次输入都会触发，change事件会在失去焦点的时候触发 1234567891011121314151617181920212223242526272829303132333435363738394041424344&lt;!DOCTY">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-03-31T10:05:01.000Z">
+<meta property="article:modified_time" content="2020-03-31T10:06:42.022Z">
 <meta property="article:author" content="ycb">
+<meta property="article:tag" content="vue">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="ycb的博客" type="application/atom+xml">
@@ -199,288 +198,122 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-
-  
-    <article id="post-常用的数字对象函数" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-vue表单域的修饰符" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/03/05/%E5%B8%B8%E7%94%A8%E7%9A%84%E6%95%B0%E5%AD%97%E5%AF%B9%E8%B1%A1%E5%87%BD%E6%95%B0/" target="_blank">常用的数字对象函数</a>
-  
+    <h1 class="article-title" itemprop="name">
+      vue表单域的修饰符
     </h1>
   
 
 
   
   
-<a href="/2020/03/05/%E5%B8%B8%E7%94%A8%E7%9A%84%E6%95%B0%E5%AD%97%E5%AF%B9%E8%B1%A1%E5%87%BD%E6%95%B0/" class="archive-article-date">
-        <time datetime="2020-03-05T08:28:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-05</time>
+        
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
+<a href="/2020/03/31/vue%E8%A1%A8%E5%8D%95%E5%9F%9F%E7%9A%84%E4%BF%AE%E9%A5%B0%E7%AC%A6/" class="archive-article-date">
+        <time datetime="2020-03-31T10:05:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-31</time>
 </a>
 
   
   
     
+<div style="margin-top:10px;">
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <!-- fonts.scss -->
+      <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
+      <i class="icon-statistics"></i>
+      <span class="post-meta-item-text"> 字数统计:</span>
+      <span class="post-count">351字</span>
+    </span>
+  </span>
+
+  <span class="post-time">
+    &nbsp; | &nbsp;
+    <span class="post-meta-item-icon">
+      <i class="icon-book icon"></i>
+      <span class="post-meta-item-text"> 阅读时长≈</span>
+      <span class="post-count">1分</span>
+    </span>
+  </span>
+</div>
+
 
   
   </header>
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h3 id="Math-pow-求幂或求根"><a href="#Math-pow-求幂或求根" class="headerlink" title="Math.pow 求幂或求根"></a>Math.pow 求幂或求根</h3><p>Math.pow(2,53)  //2的53次幂<br>Math.pow(2,1/3)  //2的立方根</p>
-<h3 id="Math-exp（n）-e的n次幂或求根"><a href="#Math-exp（n）-e的n次幂或求根" class="headerlink" title="Math.exp（n） e的n次幂或求根"></a>Math.exp（n） e的n次幂或求根</h3><p>Math.exp(3)  //e的3次幂<br>Math.exp(1/3)  //e的立方根</p>
-<h3 id="Math-round-四舍五入"><a href="#Math-round-四舍五入" class="headerlink" title="Math.round 四舍五入"></a>Math.round 四舍五入</h3><p>Math.round(.6)  //1.0</p>
-<h3 id="Math-ceil-向上求整-Math-floor-向下取整"><a href="#Math-ceil-向上求整-Math-floor-向下取整" class="headerlink" title="Math.ceil 向上求整    Math.floor 向下取整"></a>Math.ceil 向上求整    Math.floor 向下取整</h3><p>Math.ceil(.6)  //1.0</p>
-<p>Math.floor(.6)  //0.0</p>
-<h3 id="Math-abs-绝对值"><a href="#Math-abs-绝对值" class="headerlink" title="Math.abs 绝对值"></a>Math.abs 绝对值</h3><p>Math.abs(-0.6)  //0.6     负号是一元求反运算符并不是数字直接量语法的组成部分</p>
-<h3 id="Math-max-返回最大值-Math-min-返回最小值"><a href="#Math-max-返回最大值-Math-min-返回最小值" class="headerlink" title="Math.max 返回最大值  Math.min 返回最小值"></a>Math.max 返回最大值  Math.min 返回最小值</h3><p>Math.max(0,0.6,6)  //6  </p>
-<p>Math.min(0,0.6,6)  //0</p>
-<h3 id="Math-random-生成-0-1-0-的随机数"><a href="#Math-random-生成-0-1-0-的随机数" class="headerlink" title="Math.random 生成[0,1.0)的随机数"></a>Math.random 生成[0,1.0)的随机数</h3><p>a=Math.random()<br>b=a*100 //生成[0,100)的随机数</p>
-<h3 id="Math-sqrt-平方根"><a href="#Math-sqrt-平方根" class="headerlink" title="Math.sqrt 平方根"></a>Math.sqrt 平方根</h3><p>Math.sqrt(4) //2</p>
-<h3 id="三角函数"><a href="#三角函数" class="headerlink" title="三角函数"></a>三角函数</h3><p>Math.sin(x)  //正弦值,其中x为弧度制<br>Math.cos(x)  //余弦值<br>Math.tan(x)  //正切值<br>Math.asin(x) //反正弦值，x范围是[-1.0,1.0]，超出范围返回NaN（not a number）<br>Math.acos(x)  //反余弦值，x同上<br>Math.atan(x)  //反正切值，x范围在-π/2到π/2之间<br>Math.atan2(y,x)  //计算从x轴到指定点的角度，y为y坐标，x为x坐标，返回x轴正半轴逆时针到指定点的夹角[-π,π]</p>
-<h3 id="对数函数"><a href="#对数函数" class="headerlink" title="对数函数"></a>对数函数</h3><h4 id="gt-gt-gt-gt-对数常量"><a href="#gt-gt-gt-gt-对数常量" class="headerlink" title="&gt;&gt;&gt;&gt;对数常量"></a>&gt;&gt;&gt;&gt;对数常量</h4><blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>Math.LN10  //10的自然对数（底为e）</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>Math.LN2  //2的自然对数（底为e）</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>Math.LOG10E  //底为10的e的对数</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>Math.LOG2E  //底为2的e的对数</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-<h4 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h4><p>Math.log(x)  //计算x的自然对数（底为e）</p>
-<p>若要计算n为底的x的对数：<br>Math.log(x)/Math.log(n)或者Math.log(x/n)</p>
-<h3 id="Math-PI-圆周率π（约为3-1415926）Math-E-自然对数底数（e约为2-7182818284）"><a href="#Math-PI-圆周率π（约为3-1415926）Math-E-自然对数底数（e约为2-7182818284）" class="headerlink" title="Math.PI 圆周率π（约为3.1415926）Math.E 自然对数底数（e约为2.7182818284）"></a>Math.PI 圆周率π（约为3.1415926）Math.E 自然对数底数（e约为2.7182818284）</h3>
-    
+    <h1 id="vue的表单域的修饰符"><a href="#vue的表单域的修饰符" class="headerlink" title="vue的表单域的修饰符"></a>vue的表单域的修饰符</h1><p>number:转化为数组</p>
+<p>trim:去掉开始和结尾的空格</p>
+<p>lazy:将input事件切换为change事件 </p>
+<p>​        <strong>input事件每次输入都会触发，change事件会在失去焦点的时候触发</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=<span class="string">"utf-8"</span>&gt;</span><br><span class="line">		&lt;title&gt;&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;!-- number:转化为数组</span><br><span class="line">		     trim:去掉开始和结尾的空格</span><br><span class="line">		     lazy:将input事件切换为change事件 --&gt;</span><br><span class="line">		&lt;!-- input事件每次输入都会触发，change事件会在失去焦点的时候触发--&gt;</span><br><span class="line">		&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">			&lt;input type=<span class="string">"text"</span> v-model.number=<span class="string">"age"</span>&gt;&lt;!-- number转化为数字,没有number会变成字符串的拼接 --&gt;</span><br><span class="line">			&lt;button @click=<span class="string">"handle1"</span>&gt;点击&lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp">			&lt;input type="text" v-model.trim="info"&gt;&lt;!-- trim忽略字符串前后的空格 --&gt;</span></span><br><span class="line"><span class="regexp">			&lt;button @click="handle2"&gt;点击&lt;/</span>button&gt;</span><br><span class="line">			&lt;input type=<span class="string">"text"</span> v-model.lazy=<span class="string">"msg"</span>&gt;&lt;!-- lazy会延迟显示 --&gt;</span><br><span class="line">			&lt;div&gt;&#123;&#123;msg&#125;&#125;&lt;<span class="regexp">/div&gt;&lt;!-- 常用于用户名的验证，在输完后提交验证 --&gt;</span></span><br><span class="line"><span class="regexp">			&lt;button @click="handle3"&gt;点击&lt;/</span>button&gt;</span><br><span class="line">		&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">		&lt;script src="https:/</span><span class="regexp">/cdn.jsdelivr.net/</span>npm/vue/dist/vue.js<span class="string">"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="string">		&lt;script type="</span>text/javascript<span class="string">"&gt;</span></span><br><span class="line"><span class="string">			var app=new Vue(&#123;</span></span><br><span class="line">				el:"#app",</span><br><span class="line">				data:&#123;</span><br><span class="line">					age:<span class="string">''</span>,</span><br><span class="line">					info:<span class="string">''</span>,</span><br><span class="line">					msg:<span class="string">''</span></span><br><span class="line">				&#125;,</span><br><span class="line">				methods:&#123;</span><br><span class="line">					handle1:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">						<span class="built_in">console</span>.log(<span class="keyword">this</span>.age+<span class="number">13</span>)</span><br><span class="line">					&#125;,</span><br><span class="line">					handle2:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">						<span class="built_in">console</span>.log(<span class="keyword">this</span>.info.length)</span><br><span class="line">					&#125;,</span><br><span class="line">					handle3:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">						</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;)</span><br><span class="line">		&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>body&gt;</span><br><span class="line">&lt;<span class="regexp">/html&gt;</span></span><br></pre></td></tr></table></figure>
+
 
     
 
     
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/03/05/%E5%B8%B8%E7%94%A8%E7%9A%84%E6%95%B0%E5%AD%97%E5%AF%B9%E8%B1%A1%E5%87%BD%E6%95%B0/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
+    <div class="page-reward">
+      <a href="javascript:void(0);" class="page-reward-btn tooltip-top" target="_self">
+        <div class="tooltip tooltip-east">
+          <span class="tooltip-item">
+            赏
+          </span>
+          <span class="tooltip-content">
+            <span class="tooltip-text">
+              <span class="tooltip-inner">
+                <p class="reward-p"><i class="icon icon-quo-left"></i>o谢谢你请我吃糖果o<i
+                    class="icon icon-quo-right"></i></p>
+                <div class="reward-box">
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/zhifubaopad.jpg">
+                    <span class="reward-type">支付宝</span>
+                  </div>
+                  
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/weixinpad.png">
+                    <span class="reward-type">微信</span>
+                  </div>
+                  
+                </div>
+              </span>
+            </span>
+          </span>
         </div>
-        
-        
+      </a>
     </div>
-</aside>
-
-
-
-
-  
-    <article id="post-数据类型" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/03/05/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" target="_blank">数据类型</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/03/05/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" class="archive-article-date">
-        <time datetime="2020-03-05T07:14:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-05</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="js中的数据类型"><a href="#js中的数据类型" class="headerlink" title="js中的数据类型"></a>js中的数据类型</h1><p>两大类：</p>
-<p>​    原始数据：数字，字符串，布尔值 以及特殊的原始值null和undefined</p>
-<p>​    对象类型：对象（object），数组（array），函数（function）等</p>
-<p>*** 其中null==undefined 但是null不全等于undefined</p>
-<p>null的typeof为object  原因：对象在js中的二进制前三位为0，而null全为0，因此null被判为object了</p>
-<p><a href=" https://blog.csdn.net/lareinalove/article/details/79895760
- ">链接</a></p>
-
     
 
     
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/03/05/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
+    <div class="declare"> 
+      <ul class="post-copyright">
+        <li>
+          <strong>本文作者：</strong>
+          ycb
+        </li>
+        <li>
+          <strong>本文链接：</strong>
+          <a href="https:/yuchenbin1.github.io/2020/03/31/vue表单域的修饰符/" title="vue表单域的修饰符" target="_blank">https:/yuchenbin1.github.io/2020/03/31/vue表单域的修饰符/</a>
+        </li>
         
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
+        <li>
+          <strong>版权声明： </strong>
+          
+          本博客所有文章除特别声明外，均采用 <a href="https://github.com/JoeyBling/hexo-theme-yilia-plus/blob/master/LICENSE" rel="external nofollow" target="_blank">MIT</a> 许可协议。转载请注明出处！
+        </li>
         
-        
+      </ul>
     </div>
-</aside>
-
-
-
-
-  
-    <article id="post-vue的简单语法二" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/03/04/vue%E7%9A%84%E7%AE%80%E5%8D%95%E8%AF%AD%E6%B3%95%E4%BA%8C/" target="_blank">vue的简单语法二</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/03/04/vue%E7%9A%84%E7%AE%80%E5%8D%95%E8%AF%AD%E6%B3%95%E4%BA%8C/" class="archive-article-date">
-        <time datetime="2020-03-04T07:15:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-04</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="v-for"><a href="#v-for" class="headerlink" title="v-for"></a>v-for</h1><p>根据数据生成列表结构</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">	&lt;ui&gt;</span><br><span class="line">		&lt;li v-for&#x3D;&quot;(item,index) in arr&quot;&gt;</span><br><span class="line">			序号：&#123;&#123;index&#125;&#125;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;姓名：&#123;&#123;item.name&#125;&#125;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;年龄:&#123;&#123;item.age&#125;&#125;</span><br><span class="line">		&lt;&#x2F;li&gt;</span><br><span class="line">	&lt;&#x2F;ui&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line">&lt;script src&#x3D;&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;vue&#x2F;dist&#x2F;vue.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">	var app&#x3D;new Vue(&#123;</span><br><span class="line">		el:&quot;#app&quot;,</span><br><span class="line">		data:&#123;</span><br><span class="line">			arr:[&#123;name:&quot;张三&quot;,age:17&#125;,</span><br><span class="line">				&#123;name:&quot;李四&quot;,age:45&#125;,</span><br><span class="line">				&#123;name:&quot;王五&quot;,age:65&#125;,</span><br><span class="line">				&#123;name:&quot;牛大&quot;,age:12&#125;,</span><br><span class="line">				&#123;name:&quot;黄二&quot;,age:78&#125;,</span><br><span class="line">				],</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;)</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
-
-<p><img src="D:%5Ctupian%5C%E5%AD%A6%E4%B9%A0%5Con-for.png" alt="on-for"></p>
-<p>**这里想去掉前面的点可以用list-style-type:none</p>
-<p>** 这里v-for想遍历多个数组，可以把多个数组放在一个数组中，利用属性名进行遍历。</p>
-<p>** 关于v-for和v-if在一起用的说明 </p>
-<p><a href="https://cn.vuejs.org/v2/style-guide/#%E9%81%BF%E5%85%8D-v-if-%E5%92%8C-v-for-%E7%94%A8%E5%9C%A8%E4%B8%80%E8%B5%B7-%E5%BF%85%E8%A6%81" target="_blank">解答</a></p>
-<h1 id="v-on补充"><a href="#v-on补充" class="headerlink" title="v-on补充"></a>v-on补充</h1><p>传递自定义参数，事件修饰符（function）v-on：可以用@表示</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">	&lt;input type&#x3D;&quot;button&quot; v-on:click&#x3D;&quot;dolt(787)&quot;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var app&#x3D;new Vue(&#123;</span><br><span class="line">	el:&quot;#app&quot;,</span><br><span class="line">	methods:&#123;</span><br><span class="line">		dolt:function(p1)&#123;</span><br><span class="line">		console.log(&quot;hello&quot;);</span><br><span class="line">		&#125;,</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<h1 id="v-model"><a href="#v-model" class="headerlink" title="v-model"></a>v-model</h1><p>获取和设置表单元素的值（双向数据绑定）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">			&lt;input type&#x3D;&quot;text&quot; v-model&#x3D;&quot;message&quot;&gt;</span><br><span class="line">			&lt;h3 v-text&#x3D;&quot;message&quot;&gt;&lt;&#x2F;h3&gt;</span><br><span class="line">			&lt;h3&gt;&#123;&#123;message&#125;&#125;&lt;&#x2F;h3&gt;</span><br><span class="line">		&lt;&#x2F;div&gt;</span><br><span class="line">		&lt;script src&#x3D;&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;vue&#x2F;dist&#x2F;vue.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">		&lt;script&gt;</span><br><span class="line">			var app&#x3D;new Vue(&#123;</span><br><span class="line">				el:&quot;#app&quot;,</span><br><span class="line">				data:&#123;</span><br><span class="line">					message:&quot;hello world&quot;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;)</span><br><span class="line">		&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
-
-<p>这里要注意改变input输入的值同时改变message的值</p>
-<h3 id="总结：以上是我vue最基本语法的学习，之后我会暂时放开vue，我觉得我的css和js需要巩固一下了"><a href="#总结：以上是我vue最基本语法的学习，之后我会暂时放开vue，我觉得我的css和js需要巩固一下了" class="headerlink" title="总结：以上是我vue最基本语法的学习，之后我会暂时放开vue，我觉得我的css和js需要巩固一下了"></a>总结：以上是我vue最基本语法的学习，之后我会暂时放开vue，我觉得我的css和js需要巩固一下了</h3>
-    
-
-    
-
     
 
   </div>
@@ -501,16 +334,76 @@
     
 
     
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/03/04/vue%E7%9A%84%E7%AE%80%E5%8D%95%E8%AF%AD%E6%B3%95%E4%BA%8C/">展开全文 >></a>
-    </p>
+
     
+    
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <!-- <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a> -->
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://yuchenbin1.github.io/2020/03/31/vue%E8%A1%A8%E5%8D%95%E5%9F%9F%E7%9A%84%E4%BF%AE%E9%A5%B0%E7%AC%A6/" alt="微信分享二维码"> -->
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
 
     
     <div class="clearfix"></div>
   </div>
   </div>
 </article>
+
+
+<nav id="article-nav">
+  
+  
+    <a href="/2020/03/31/vue%E7%9A%84%E8%A1%A8%E5%8D%95%E6%93%8D%E4%BD%9C/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">vue的表单操作</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -531,377 +424,14 @@
 
 
 
-  
-    <article id="post-忙碌的一天结束了" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/03/03/%E5%BF%99%E7%A2%8C%E7%9A%84%E4%B8%80%E5%A4%A9%E7%BB%93%E6%9D%9F%E4%BA%86/" target="_blank">忙碌的一天结束了</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/03/03/%E5%BF%99%E7%A2%8C%E7%9A%84%E4%B8%80%E5%A4%A9%E7%BB%93%E6%9D%9F%E4%BA%86/" class="archive-article-date">
-        <time datetime="2020-03-03T14:21:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-03</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="undefined的问题"><a href="#undefined的问题" class="headerlink" title="undefined的问题"></a>undefined的问题</h1><p><a href="https://www.cnblogs.com/fundebug/archive/2019/08/01/7-tips-to-handle-undefined-in-javascript.html" target="_blank">解决方法</a></p>
-<p>变量没有定义这个问题困扰了我好久最后我重新下载安装的，问题并没有解决的，可能有以下几个原因：</p>
-<ol>
-<li>变量重名</li>
-<li>变量未初始化</li>
-<li>访问中出现问题</li>
-</ol>
-<h1 id="vue语法总结"><a href="#vue语法总结" class="headerlink" title="vue语法总结"></a>vue语法总结</h1><h3 id="v-text"><a href="#v-text" class="headerlink" title="v-text"></a>v-text</h3><p>改变全部的文本内容（完全是文本格式）</p>
-<h3 id="v-html"><a href="#v-html" class="headerlink" title="v-html"></a>v-html</h3><p>改变全部的文本内容（html标签可以解析）</p>
-<h3 id="v-on"><a href="#v-on" class="headerlink" title="v-on"></a>v-on</h3><p>为元素绑定事件（onclick，onmouseout，function的自定义方法等）</p>
-<h3 id="v-show"><a href="#v-show" class="headerlink" title="v-show"></a>v-show</h3><p>根据表达值的真假，切换元素的显示和隐藏（true为显示，false为隐藏）</p>
-<p>v-show=”age&gt;=18”     内部可以是表达式</p>
-<p>他操作的是display（属性一直改）</p>
-<h3 id="v-if"><a href="#v-if" class="headerlink" title="v-if"></a>v-if</h3><p>根据表达值的真假，切换元素的显示和隐藏（true为显示，false为隐藏）</p>
-<p>v-if=”age&gt;=18”     内部可以是表达式</p>
-<p>他操作的是dom元素（属性直接不见了）</p>
-<p>**需要频繁切换的元素用v-show，反之用v-if</p>
-<h3 id="v-bind"><a href="#v-bind" class="headerlink" title="v-bind"></a>v-bind</h3><p>v-bind：属性名=表达式</p>
-<p>设置元素的属性（src，title，class等）</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>今天很累，年轻需要努力奋斗，但也需要良好健康的身体，有健康的作息才有更高效率的学习状态，加油！</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/03/03/%E5%BF%99%E7%A2%8C%E7%9A%84%E4%B8%80%E5%A4%A9%E7%BB%93%E6%9D%9F%E4%BA%86/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
 
 
 
 
-  
-    <article id="post-从明天开始好好学习vue" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/03/03/%E4%BB%8E%E6%98%8E%E5%A4%A9%E5%BC%80%E5%A7%8B%E5%A5%BD%E5%A5%BD%E5%AD%A6%E4%B9%A0vue/" target="_blank">从明天开始好好学习vue</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/03/03/%E4%BB%8E%E6%98%8E%E5%A4%A9%E5%BC%80%E5%A7%8B%E5%A5%BD%E5%A5%BD%E5%AD%A6%E4%B9%A0vue/" class="archive-article-date">
-        <time datetime="2020-03-02T16:23:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-03</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="挂载符-el：挂载符"><a href="#挂载符-el：挂载符" class="headerlink" title="挂载符  el：挂载符"></a>挂载符  el：挂载符</h2><p>指定vue作用的范围，可指向div、class、span等</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">		&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">			&#123;&#123;message&#125;&#125;</span><br><span class="line">		&lt;&#x2F;div&gt;</span><br><span class="line">		&lt;script src&#x3D;&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;vue&#x2F;dist&#x2F;vue.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">		&lt;script&gt;</span><br><span class="line">			var app&#x3D; new Vue(&#123;</span><br><span class="line">			el:&quot;#app&quot;,</span><br><span class="line">				data:&#123;</span><br><span class="line">				message:&quot;hello world&quot;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;)</span><br><span class="line">		&lt;&#x2F;script&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br></pre></td></tr></table></figure>
-
-<h2 id="data数据对象"><a href="#data数据对象" class="headerlink" title="data数据对象"></a>data数据对象</h2><p>数据对象可以自己随便设置<br>获取对象中的语法可以用  <em>对象.属性</em>  的方法<br><strong>注意行内样式要在style对象内部</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">		&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">			&lt;h1 style&#x3D;&quot;font-weight:700;color: crimson;&quot;&gt;&#123;&#123;message&#125;&#125;&lt;&#x2F;h1&gt;</span><br><span class="line">			&lt;h2&gt;姓名：&#123;&#123;school.name&#125;&#125;&lt;&#x2F;h2&gt;</span><br><span class="line">			&lt;h3&gt;学号：&#123;&#123;school.studyID&#125;&#125;&lt;&#x2F;h3&gt;</span><br><span class="line">			&lt;h3&gt;排名：&#123;&#123;school.rank&#125;&#125;&lt;&#x2F;h3&gt;</span><br><span class="line">		&lt;&#x2F;div&gt;</span><br><span class="line">		&lt;script src&#x3D;&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;vue&#x2F;dist&#x2F;vue.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">		&lt;script&gt;</span><br><span class="line">			var app&#x3D; new Vue(&#123;</span><br><span class="line">			el:&quot;#app&quot;,</span><br><span class="line">				data:&#123;</span><br><span class="line">					message:&quot;排名公示&quot;,</span><br><span class="line">					school:&#123;</span><br><span class="line">						name:&quot;ycb&quot;,</span><br><span class="line">						studyID:&quot;1920165620&quot;,</span><br><span class="line">						rank:&quot;NO.1&quot;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;)</span><br><span class="line">		&lt;&#x2F;script&gt;</span><br><span class="line">	&lt;&#x2F;body&gt;</span><br></pre></td></tr></table></figure>
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/03/03/%E4%BB%8E%E6%98%8E%E5%A4%A9%E5%BC%80%E5%A7%8B%E5%A5%BD%E5%A5%BD%E5%AD%A6%E4%B9%A0vue/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
 
 
 
 
-  
-    <article id="post-加油坚持就是胜利" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/03/02/%E5%8A%A0%E6%B2%B9%E5%9D%9A%E6%8C%81%E5%B0%B1%E6%98%AF%E8%83%9C%E5%88%A9/" target="_blank">加油坚持就是胜利</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/03/02/%E5%8A%A0%E6%B2%B9%E5%9D%9A%E6%8C%81%E5%B0%B1%E6%98%AF%E8%83%9C%E5%88%A9/" class="archive-article-date">
-        <time datetime="2020-03-02T15:20:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-02</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="Hexo搭建网站"><a href="#Hexo搭建网站" class="headerlink" title="Hexo搭建网站"></a>Hexo搭建网站</h1><p>第一次搭建网站花了我一个下午的时间，通过看视频，找资料。<br>装载node和git后了解了一些cmd命令行语句以及markdown语法（markdown中的语法要注意关键字后面有空格），但是千万不要忘了自己的目标是<em>前端</em>！！！</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">尝试搭建</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/03/02/%E5%8A%A0%E6%B2%B9%E5%9D%9A%E6%8C%81%E5%B0%B1%E6%98%AF%E8%83%9C%E5%88%A9/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-小白第一次尝试" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/03/02/%E5%B0%8F%E7%99%BD%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%B0%9D%E8%AF%95/" target="_blank">小白第一次尝试</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/03/02/%E5%B0%8F%E7%99%BD%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%B0%9D%E8%AF%95/" class="archive-article-date">
-        <time datetime="2020-03-02T06:54:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-02</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">尝试搭建</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/03/02/%E5%B0%8F%E7%99%BD%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%B0%9D%E8%AF%95/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-  
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
-    </nav>
-  
 
 
           </div>
@@ -941,8 +471,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
