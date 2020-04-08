@@ -6,21 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://yuchenbin1.github.io">
-  <title>throw、with、debugger语句、异常处理机制和use strict | ycb的博客</title>
+  <title>vue的全局组件化 | ycb的博客</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="throw语句用法： throw expression  一般会放在try语句中，用来抛出一个用户自定义的异常。当前函数的执行将被停止（throw之后的语句将不会执行），并且控制将被传递到调用堆栈中的第一个catch块。如果调用者函数中没有catch块，程序将会终止。  1234function factorial(x)&amp;#123;	if(x&lt;&#x3D;0)&amp;#123;	throw &amp;qu">
+  <meta name="description" content="vue的全局组件化组件化即为模块化 12345678910Vue.component(&#39;组件名&#39;，&amp;#123;	data:function()&amp;#123;	return &amp;#123;		&amp;#125;，	template:&#39;&#39;,	methods:&amp;#123;		&amp;#125;&amp;#125;)  注意必须要有var vm&#x3D;new Vue({})命名的模块里面才有效，这里的全局指的是有new Vue定义的全">
 <meta property="og:type" content="article">
-<meta property="og:title" content="throw、with、debugger语句、异常处理机制和use strict">
-<meta property="og:url" content="https://yuchenbin1.github.io/2020/03/07/throw%E3%80%81with%E3%80%81debugger%E8%AF%AD%E5%8F%A5%E5%92%8Cuse-strict/index.html">
+<meta property="og:title" content="vue的全局组件化">
+<meta property="og:url" content="https://yuchenbin1.github.io/2020/04/08/vue%E7%9A%84%E5%85%A8%E5%B1%80%E7%BB%84%E4%BB%B6%E5%8C%96/index.html">
 <meta property="og:site_name" content="ycb的博客">
-<meta property="og:description" content="throw语句用法： throw expression  一般会放在try语句中，用来抛出一个用户自定义的异常。当前函数的执行将被停止（throw之后的语句将不会执行），并且控制将被传递到调用堆栈中的第一个catch块。如果调用者函数中没有catch块，程序将会终止。  1234function factorial(x)&amp;#123;	if(x&lt;&#x3D;0)&amp;#123;	throw &amp;qu">
+<meta property="og:description" content="vue的全局组件化组件化即为模块化 12345678910Vue.component(&#39;组件名&#39;，&amp;#123;	data:function()&amp;#123;	return &amp;#123;		&amp;#125;，	template:&#39;&#39;,	methods:&amp;#123;		&amp;#125;&amp;#125;)  注意必须要有var vm&#x3D;new Vue({})命名的模块里面才有效，这里的全局指的是有new Vue定义的全">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-03-07T07:00:29.000Z">
-<meta property="article:modified_time" content="2020-03-07T11:50:23.570Z">
+<meta property="article:published_time" content="2020-04-08T15:05:50.000Z">
+<meta property="article:modified_time" content="2020-04-08T15:26:27.968Z">
 <meta property="article:author" content="ycb">
-<meta property="article:tag" content="js">
+<meta property="article:tag" content="vue">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="ycb的博客" type="application/atom+xml">
@@ -198,14 +198,14 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-throw、with、debugger语句和use-strict" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-vue的全局组件化" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
     <h1 class="article-title" itemprop="name">
-      throw、with、debugger语句、异常处理机制和use strict
+      vue的全局组件化
     </h1>
   
 
@@ -217,8 +217,8 @@
               <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
         </span>
 
-<a href="/2020/03/07/throw%E3%80%81with%E3%80%81debugger%E8%AF%AD%E5%8F%A5%E5%92%8Cuse-strict/" class="archive-article-date">
-        <time datetime="2020-03-07T07:00:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-07</time>
+<a href="/2020/04/08/vue%E7%9A%84%E5%85%A8%E5%B1%80%E7%BB%84%E4%BB%B6%E5%8C%96/" class="archive-article-date">
+        <time datetime="2020-04-08T15:05:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-08</time>
 </a>
 
   
@@ -231,7 +231,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">1.1k字</span>
+      <span class="post-count">496字</span>
     </span>
   </span>
 
@@ -240,7 +240,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">4分</span>
+      <span class="post-count">2分</span>
     </span>
   </span>
 </div>
@@ -251,60 +251,18 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="throw语句"><a href="#throw语句" class="headerlink" title="throw语句"></a>throw语句</h1><p><strong>用法：</strong></p>
-<p>throw expression</p>
-<p> 一般会放在try语句中，用来抛出一个用户<strong>自定义的异常</strong>。当前函数的执行将被停止（<code>throw</code>之后的语句将不会执行），并且控制将被传递到调用堆栈中的第一个<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/try...catch" target="_blank" rel="noopener"><code>catch</code></a>块。如果调用者函数中没有<code>catch</code>块，程序将会终止。 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function factorial(x)&#123;</span><br><span class="line">	if(x&lt;&#x3D;0)&#123;</span><br><span class="line">	throw &quot;it not a positive number&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    <h1 id="vue的全局组件化"><a href="#vue的全局组件化" class="headerlink" title="vue的全局组件化"></a>vue的全局组件化</h1><p>组件化即为模块化</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(<span class="string">'组件名'</span>，&#123;</span><br><span class="line">	data:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> &#123;</span><br><span class="line">	</span><br><span class="line">	&#125;，</span><br><span class="line">	template:<span class="string">''</span>,</span><br><span class="line">	methods:&#123;</span><br><span class="line">	</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
-<p>这里是自定义的异常，显示这个数不是一个正数，发生后程序会停止，跳转到就近的异常处理程序（try/catch/finally的catch从句）。</p>
-<p>如果没有catch从句，解释器会检查更高层的闭合代码块，看有没有异常处理程序，以此类推，找到为止。</p>
-<p>如果有catch从句但是没有处理这个异常函数的语句，异常会向上传播到调用该函数的代码。依照js的词法结构和调用栈向上传播。</p>
-<p>如果没有找到，js会把异常当成程序错误来处理，并报告给用户。</p>
-<h1 id="try-catch-finally语句"><a href="#try-catch-finally语句" class="headerlink" title="try/catch/finally语句"></a>try/catch/finally语句</h1><p><strong>try</strong>语句允许我们定义在执行时进行错误测试的代码块。（尝试执行的代码块）</p>
-<p><strong>catch</strong> 语句允许我们定义当 <strong>try</strong> 代码块发生错误时，所执行的代码块。（捕获错误的代码块）</p>
-<p><strong>finally</strong> 语句在 try 和 catch 之后无论有无异常都会执行。（无论如何都会执行的代码块）</p>
-<p><strong>注意：</strong> catch 和 finally 语句都是可选的，但你在使用 try 语句时必须至少使用一个。</p>
-<p>例1：(检测输入的值是否错误，如果错误则抛出异常)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;请输入 5 和 10 之间的一个数:&lt;&#x2F;p&gt;</span><br><span class="line"> </span><br><span class="line">&lt;input id&#x3D;&quot;demo&quot; type&#x3D;&quot;text&quot;&gt;</span><br><span class="line">&lt;button type&#x3D;&quot;button&quot; onclick&#x3D;&quot;myFunction()&quot;&gt;检测输入&lt;&#x2F;button&gt;</span><br><span class="line">&lt;p id&#x3D;&quot;message&quot;&gt;&lt;&#x2F;p&gt;</span><br><span class="line"> </span><br><span class="line">&lt;script&gt;</span><br><span class="line">function myFunction() &#123;</span><br><span class="line">    var message, x;</span><br><span class="line">    message &#x3D; document.getElementById(&quot;message&quot;);</span><br><span class="line">    message.innerHTML &#x3D; &quot;&quot;;</span><br><span class="line">    x &#x3D; document.getElementById(&quot;demo&quot;).value;</span><br><span class="line">    try &#123; </span><br><span class="line">        if(x &#x3D;&#x3D; &quot;&quot;)  throw &quot;为空&quot;;</span><br><span class="line">        if(isNaN(x)) throw &quot;不是一个数字&quot;;</span><br><span class="line">        if(x &gt; 10)   throw &quot;太大了&quot;;</span><br><span class="line">        if(x &lt; 5)    throw &quot;太小了&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">    catch(err) &#123;</span><br><span class="line">        message.innerHTML &#x3D; &quot;输入的值 &quot; + err;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>注意必须要有<code>var vm=new Vue({})</code>命名的模块里面才有效，这里的全局指的是有new Vue定义的全局</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=<span class="string">"utf-8"</span>&gt;</span><br><span class="line">		&lt;title&gt;&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">			&lt;button-counter1&gt;&lt;<span class="regexp">/button-counter1&gt;</span></span><br><span class="line"><span class="regexp">		&lt;div id="app"&gt;</span></span><br><span class="line"><span class="regexp">			&lt;button-counter1&gt;&lt;/</span>button-counter1&gt;</span><br><span class="line">			&lt;button-counter1&gt;&lt;<span class="regexp">/button-counter1&gt;</span></span><br><span class="line"><span class="regexp">			&lt;button-counter2&gt;&lt;/</span>button-counter2&gt;</span><br><span class="line">			&lt;button-counter2&gt;&lt;<span class="regexp">/button-counter2&gt;</span></span><br><span class="line"><span class="regexp">		&lt;/</span>div&gt;</span><br><span class="line">		&lt;script src=<span class="string">"https://cdn.jsdelivr.net/npm/vue/dist/vue.js"</span>&gt;&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">		&lt;script&gt;</span></span><br><span class="line"><span class="regexp">			Vue.component('button-counter1',&#123;</span></span><br><span class="line"><span class="regexp">				data:function()&#123;/</span><span class="regexp">/data是一个函数</span></span><br><span class="line"><span class="regexp">					return &#123;</span></span><br><span class="line"><span class="regexp">						count:0,</span></span><br><span class="line"><span class="regexp">					&#125;</span></span><br><span class="line"><span class="regexp">				&#125;,</span></span><br><span class="line"><span class="regexp">				template:'&lt;button @click="handle"&gt;点击了&#123;&#123;count&#125;&#125;次&lt;/</span>button&gt;<span class="string">',//外部一定要是一个单个的根元素</span></span><br><span class="line"><span class="string">				methods:&#123;</span></span><br><span class="line"><span class="string">					handle:function()&#123;</span></span><br><span class="line"><span class="string">						this.count++;</span></span><br><span class="line"><span class="string">					&#125;</span></span><br><span class="line"><span class="string">				&#125;</span></span><br><span class="line"><span class="string">			&#125;)</span></span><br><span class="line"><span class="string">			Vue.component('</span>button-counter2<span class="string">',&#123;</span></span><br><span class="line"><span class="string">				data:function()&#123;//data是一个函数</span></span><br><span class="line"><span class="string">					return &#123;</span></span><br><span class="line"><span class="string">						count:0,</span></span><br><span class="line"><span class="string">					&#125;</span></span><br><span class="line"><span class="string">				&#125;,</span></span><br><span class="line"><span class="string">				template:`&lt;div&gt;</span></span><br><span class="line"><span class="string">				&lt;button @click="handle"&gt;点击了&#123;&#123;count&#125;&#125;次&lt;/button&gt;</span></span><br><span class="line"><span class="string">				&lt;button @click="handle"&gt;点击了&#123;&#123;count&#125;&#125;次&lt;/button&gt;,</span></span><br><span class="line"><span class="string">				&lt;/div&gt;`,//外部一定要是一个单个的根元素</span></span><br><span class="line"><span class="string">				methods:&#123;</span></span><br><span class="line"><span class="string">					handle:function()&#123;</span></span><br><span class="line"><span class="string">						this.count+=2;</span></span><br><span class="line"><span class="string">					&#125;</span></span><br><span class="line"><span class="string">				&#125;</span></span><br><span class="line"><span class="string">			&#125;)</span></span><br><span class="line"><span class="string">			var vm=new Vue(&#123;//这部分一定要有</span></span><br><span class="line">				el:'#app',</span><br><span class="line">				data:&#123;</span><br><span class="line">					</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;);</span><br><span class="line">		&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>body&gt;</span><br><span class="line">&lt;<span class="regexp">/html&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>例2：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">function myFunction() &#123;</span><br><span class="line">    var message, x;</span><br><span class="line">    message &#x3D; document.getElementById(&quot;message&quot;);</span><br><span class="line">    message.innerHTML &#x3D; &quot;&quot;;</span><br><span class="line">    x &#x3D; document.getElementById(&quot;demo&quot;).value;</span><br><span class="line">    try &#123; </span><br><span class="line">        if(x &#x3D;&#x3D; &quot;&quot;)  throw &quot;为空&quot;;</span><br><span class="line">        if(isNaN(x)) throw &quot;不是一个数字&quot;;</span><br><span class="line">        if(x &gt; 10)   throw &quot;太大&quot;;</span><br><span class="line">        if(x &lt; 5)    throw &quot;太小&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">    catch(err) &#123;</span><br><span class="line">        message.innerHTML &#x3D; &quot;输入的值 &quot; + err;</span><br><span class="line">    &#125;</span><br><span class="line">    finally &#123;</span><br><span class="line">        document.getElementById(&quot;demo&quot;).value &#x3D; &quot;&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>finally语句无论如何都会执行。</p>
-<h4 id="几种情况"><a href="#几种情况" class="headerlink" title="几种情况"></a>几种情况</h4><ol>
-<li><p>通常情况下，解释器执行到try的尾部（没有异常时），再执行finally中的逻辑，但当有return（返回一个值）、continue（跳过当次循环）、break（跳过就近的循环体）使解释器跳出try语句块时，在执行性的目标代码时先执行finally中的语句。</p>
-</li>
-<li><p>try语句中出现异常时，如果有catch来处理，那么执行完catch再执行finally，如果没有catch来处理，那么执行完finally之后向上传播这个异常，直到找到为止。</p>
-</li>
-<li><p>如果finally使用了return（返回一个值）、continue（跳过当次循环）、break（跳过就近的循环体）或者throw语句使其跳转，又或是调用抛出异常的方法改变程序的执行流程，不管跳转使程序怎么样，解释器都会忽略跳转，正常执行，例如return就正常返回。</p>
-</li>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><ol>
+<li>data是一个函数，有function()，然后return一个对象</li>
+<li>template后面可以用引号或者反引号，引号必须紧凑在一起，而反引号可以格式分开，模板化</li>
+<li>template里面必须有一个根元素，比如’<button></button><button></button>‘这样就不行，必须是’<div><button></button><button></button></div>‘才行</li>
+<li>组件的命名一般是用短横线-连接的，也可以用驼峰式的命名(someBody),但是这种命名的组件只能用于相关组件的template字符串模板里面，不能直接使用在<body></body>这种普通的模板。<strong>要使用只能用短横线的命名方式。</strong></li>
 </ol>
-<h1 id="with语句"><a href="#with语句" class="headerlink" title="with语句"></a>with语句</h1><p>严格模式禁止使用，非严格模式下也不推荐使用</p>
-<p>with语句难于优化，运行又慢</p>
-<p>用法：</p>
-<p>with（object）</p>
-<p>statement</p>
-<p>会用于在对象嵌套很深的情况下简化代码编写</p>
-<p>with（document.a[0]){</p>
-<p>name=””;</p>
-<p>address=””;</p>
-<p>email=””;</p>
-<p>}</p>
-<p>等同于</p>
-<p>f=document.a[0];</p>
-<p>f.name=””;</p>
-<p>f.address=””;</p>
-<p>f.email=””;</p>
-<p><strong>注意with只能用来读取，不能创建属性</strong></p>
-<h1 id="debugger"><a href="#debugger" class="headerlink" title="debugger"></a>debugger</h1><p>用于调试</p>
-<p>js会在debugger处执行停止</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function f(o)&#123;</span><br><span class="line">	if(o&#x3D;&#x3D;&#x3D;undefined) debugger;&#x2F;&#x2F;这里执行停止</span><br><span class="line">	... &#x2F;&#x2F;函数其余部分</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="“use-strict”"><a href="#“use-strict”" class="headerlink" title="“use strict”"></a>“use strict”</h1><p>有ECMAScript5标准的开启严格模式，没有的直接忽略。</p>
-<p>只能出现在脚本代码的开始或函数体的开始，或任何实体语句之前（并不一定在首行）</p>
-<p><a href="https://www.runoob.com/js/js-strict.html" target="_blank" rel="noopener">相关规则</a></p>
 
     
 
@@ -351,7 +309,7 @@
         </li>
         <li>
           <strong>本文链接：</strong>
-          <a href="https:/yuchenbin1.github.io/2020/03/07/throw、with、debugger语句和use-strict/" title="throw、with、debugger语句、异常处理机制和use strict" target="_blank">https:/yuchenbin1.github.io/2020/03/07/throw、with、debugger语句和use-strict/</a>
+          <a href="https:/yuchenbin1.github.io/2020/04/08/vue的全局组件化/" title="vue的全局组件化" target="_blank">https:/yuchenbin1.github.io/2020/04/08/vue的全局组件化/</a>
         </li>
         
         <li>
@@ -373,7 +331,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
         		</li>
       		
 		</ul>
@@ -429,7 +387,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://yuchenbin1.github.io/2020/03/07/throw%E3%80%81with%E3%80%81debugger%E8%AF%AD%E5%8F%A5%E5%92%8Cuse-strict/" alt="微信分享二维码"> -->
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://yuchenbin1.github.io/2020/04/08/vue%E7%9A%84%E5%85%A8%E5%B1%80%E7%BB%84%E4%BB%B6%E5%8C%96/" alt="微信分享二维码"> -->
     </div>
 </div>
 
@@ -444,18 +402,18 @@
 
 <nav id="article-nav">
   
-    <a href="/2020/03/07/%E5%8E%9F%E5%9E%8B%E5%92%8C%E5%8E%9F%E5%9E%8B%E9%93%BE%E4%BB%A5%E5%8F%8A%E7%BB%A7%E6%89%BF/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/04/08/vue%E7%9A%84%E5%B1%80%E9%83%A8%E7%BB%84%E4%BB%B6%E5%8C%96/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          原型和原型链以及继承
+          vue的局部组件化
         
       </div>
     </a>
   
   
-    <a href="/2020/03/06/for-in%E4%BB%A5%E5%8F%8A%E6%A0%87%E7%AD%BE%E8%AF%AD%E5%8F%A5/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">for/in以及标签语句</div>
+    <a href="/2020/04/06/vue%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">vue的生命周期</div>
       <i class="icon-circle-right"></i>
     </a>
   
