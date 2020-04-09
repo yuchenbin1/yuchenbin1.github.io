@@ -202,6 +202,108 @@
             
 
   
+    <article id="post-vue父组件向子组件传值" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/04/09/vue%E7%88%B6%E7%BB%84%E4%BB%B6%E5%90%91%E5%AD%90%E7%BB%84%E4%BB%B6%E4%BC%A0%E5%80%BC/" target="_blank">vue父组件向子组件传值</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/04/09/vue%E7%88%B6%E7%BB%84%E4%BB%B6%E5%90%91%E5%AD%90%E7%BB%84%E4%BB%B6%E4%BC%A0%E5%80%BC/" class="archive-article-date">
+        <time datetime="2020-04-09T13:13:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-09</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="父组件向子组件传值"><a href="#父组件向子组件传值" class="headerlink" title="父组件向子组件传值"></a>父组件向子组件传值</h1><p>组件化开发</p>
+<p>props:[‘属性名1’，’属性名2’]</p>
+<h3 id="props属性名规则"><a href="#props属性名规则" class="headerlink" title="props属性名规则"></a>props属性名规则</h3><ol>
+<li>在props中使用驼峰式，在模板中使用对应的短横线形式</li>
+<li>字符串形式模板中没有这个限制``</li>
+</ol>
+<h3 id="props属性值的类型"><a href="#props属性值的类型" class="headerlink" title="props属性值的类型"></a>props属性值的类型</h3><p>属性名=’属性值‘              ：属性名=’属性值‘</p>
+<ol>
+<li>字符串string</li>
+<li>数值，在上述第一种情况是字符串，第二种是数值</li>
+<li>布尔值，在上述对重情况是字符串，第二种是布尔值</li>
+<li>数组</li>
+<li>对象，可以用.取对象中的属性名</li>
+</ol>
+<p>一般使用</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=<span class="string">"utf-8"</span>&gt;</span><br><span class="line">		&lt;title&gt;&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">			&lt;menu-item &gt;&lt;<span class="regexp">/menu-item&gt;</span></span><br><span class="line"><span class="regexp">			&lt;menu-item title="parentMsg"&gt;&lt;/m</span>enu-item&gt;&lt;!-- 这里显示parentMsg --&gt;</span><br><span class="line">			&lt;menu-item :title=<span class="string">"parentMsg"</span>&gt;&lt;<span class="regexp">/menu-item&gt;&lt;!-- 这里显示父组件中的数据 --&gt;</span></span><br><span class="line"><span class="regexp">		&lt;/</span>div&gt;</span><br><span class="line">		&lt;script src=<span class="string">"https://cdn.jsdelivr.net/npm/vue/dist/vue.js"</span>&gt;&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">		&lt;script&gt;</span></span><br><span class="line"><span class="regexp">			Vue.component('menu-item',&#123;</span></span><br><span class="line"><span class="regexp">				props:['title'],</span></span><br><span class="line"><span class="regexp">				data:function()&#123;</span></span><br><span class="line"><span class="regexp">					return &#123;</span></span><br><span class="line"><span class="regexp">						msg:'子组件本身的数据'</span></span><br><span class="line"><span class="regexp">					&#125;</span></span><br><span class="line"><span class="regexp">				&#125;,</span></span><br><span class="line"><span class="regexp">				template:'&lt;div&gt;&#123;&#123;msg+"---"+title&#125;&#125;&lt;/</span>div&gt;<span class="string">' //切记引号内嵌要用单双引号</span></span><br><span class="line"><span class="string">			&#125;);</span></span><br><span class="line"><span class="string">			var vm=new Vue(&#123;</span></span><br><span class="line">				el:'#app',</span><br><span class="line">				data:&#123;</span><br><span class="line">					parentMsg:<span class="string">'父组件中的数据'</span></span><br><span class="line">				&#125;</span><br><span class="line">			&#125;);</span><br><span class="line">		&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>body&gt;</span><br><span class="line">&lt;<span class="regexp">/html&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/04/09/vue%E7%88%B6%E7%BB%84%E4%BB%B6%E5%90%91%E5%AD%90%E7%BB%84%E4%BB%B6%E4%BC%A0%E5%80%BC/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-vue的局部组件化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1035,105 +1137,6 @@
 
 
   
-    <article id="post-天知道" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/03/30/%E5%A4%A9%E7%9F%A5%E9%81%93/" target="_blank">天知道</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/03/30/%E5%A4%A9%E7%9F%A5%E9%81%93/" class="archive-article-date">
-        <time datetime="2020-03-30T14:10:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-30</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="天知道"><a href="#天知道" class="headerlink" title="天知道"></a>天知道</h1><p>利用<a href="http://wthrcdn.etouch.cn/weather_mini的axios天气接口，运用vue.js构建逻辑层" target="_blank" rel="noopener">http://wthrcdn.etouch.cn/weather_mini的axios天气接口，运用vue.js构建逻辑层</a></p>
-<p><a href=" https://gitee.com/yuchenbin/weatherKnow " target="_blank" rel="noopener">源码链接</a></p>
-<p><a href="http://yuchenbin.gitee.io/weatherknow" target="_blank" rel="noopener">项目链接</a></p>
-<h3 id="功能："><a href="#功能：" class="headerlink" title="功能："></a>功能：</h3><p>查询各个城市近五天的天气，点击热门城市直接查询</p>
-<h2 id="遇到的难点"><a href="#遇到的难点" class="headerlink" title="遇到的难点"></a>遇到的难点</h2><ol>
-<li>v-for的运用，使得数组遍历</li>
-<li>html中用a标签同时绑定事件时，我一开始没注意href的值，导致点击事件的同时链接一直触发，使得达不到理想的效果，找了好久把href中的值改为”javascript:;”这样的空js语句就行了，这样把a的链接跳转功能忽视了，还有一种办法是改为”#”也行</li>
-</ol>
-<h3 id="html文件"><a href="#html文件" class="headerlink" title="html文件"></a>html文件</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"zh"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">	&lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">	&lt;meta name=<span class="string">"viewport"</span> content=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span><br><span class="line">	&lt;meta http-equiv=<span class="string">"X-UA-Compatible"</span> content=<span class="string">"ie=edge"</span>&gt;</span><br><span class="line">	&lt;title&gt;&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">	&lt;link rel="stylesheet" href="./</span>style.css<span class="string">"&gt;</span></span><br><span class="line"><span class="string">&lt;/head&gt;</span></span><br><span class="line"><span class="string">&lt;body&gt;</span></span><br><span class="line"><span class="string">	&lt;div id="</span>outer<span class="string">"&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>head<span class="string">"&gt;天知道&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>search<span class="string">"&gt;</span></span><br><span class="line"><span class="string">			&lt;input type="</span>text<span class="string">" v-model="</span>city<span class="string">" @keyup.enter="</span>searchWeather<span class="string">" class="</span>input_txt<span class="string">" placeholder="</span>请输入要查询的城市<span class="string">"&gt;</span></span><br><span class="line"><span class="string">			&lt;button class="</span>input_sub<span class="string">" @click="</span>searchWeather<span class="string">"&gt;搜索&lt;/button&gt;</span></span><br><span class="line"><span class="string">		&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>city<span class="string">"&gt;</span></span><br><span class="line"><span class="string">			&lt;a href="</span>javascript:;<span class="string">" @click="</span>changeCity(<span class="string">'北京'</span>)<span class="string">"&gt;北京&lt;/a&gt;&lt;!-- href中的内容不可少 --&gt;</span></span><br><span class="line"><span class="string">			&lt;a href="</span>javascript:;<span class="string">" @click="</span>changeCity(<span class="string">'上海'</span>)<span class="string">"&gt;上海&lt;/a&gt;</span></span><br><span class="line"><span class="string">			&lt;a href="</span>javascript:;<span class="string">" @click="</span>changeCity(<span class="string">'广州'</span>)<span class="string">"&gt;广州&lt;/a&gt;</span></span><br><span class="line"><span class="string">			&lt;a href="</span>javascript:;<span class="string">" @click="</span>changeCity(<span class="string">'深圳'</span>)<span class="string">"&gt;深圳&lt;/a&gt;</span></span><br><span class="line"><span class="string">			&lt;a href="</span>javascript:;<span class="string">" @click="</span>changeCity(<span class="string">'杭州'</span>)<span class="string">"&gt;杭州&lt;/a&gt;</span></span><br><span class="line"><span class="string">		&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>output<span class="string">" &gt;</span></span><br><span class="line"><span class="string">			&lt;div class="</span><span class="built_in">module</span><span class="string">" v-for="</span>item <span class="keyword">in</span> weatherList<span class="string">"&gt;</span></span><br><span class="line"><span class="string">				&lt;div class="</span>weather<span class="string">"&gt;&lt;span v-cloak&gt;&#123;&#123;item.type&#125;&#125;&lt;/span&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">				&lt;div class="</span>temp<span class="string">"&gt;&lt;b v-cloak&gt;&#123;&#123;item.low&#125;&#125;~&lt;/b&gt;&lt;b v-cloak&gt;&#123;&#123;item.high&#125;&#125;&lt;/b&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">				&lt;div class="</span>wind<span class="string">"&gt;&lt;span v-cloak&gt;&#123;&#123;item.fengxiang&#125;&#125;&lt;/span&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">				&lt;div class="</span>date<span class="string">"&gt;&lt;span v-cloak&gt;&#123;&#123;item.date&#125;&#125;&lt;/span&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">			&lt;/div&gt;</span></span><br><span class="line"><span class="string">			</span></span><br><span class="line"><span class="string">		&lt;/div&gt;</span></span><br><span class="line"><span class="string">	&lt;/div&gt;</span></span><br><span class="line"><span class="string">	&lt;script src="</span>https:<span class="comment">//cdn.jsdelivr.net/npm/vue/dist/vue.js"&gt;&lt;/script&gt;</span></span><br><span class="line">	&lt;script src=<span class="string">"https://unpkg.com/axios/dist/axios.min.js"</span>&gt;&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">	&lt;script src="./i</span>ndex.js<span class="string">"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="string">&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="js文件"><a href="#js文件" class="headerlink" title="js文件"></a>js文件</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 请求接口: http://wthrcdn.etouch.cn/weather_mini</span></span><br><span class="line">		<span class="comment">// 请求方法: get</span></span><br><span class="line">		<span class="comment">// 请求参数: city(查询城市名)</span></span><br><span class="line">		<span class="comment">// 响应内容: 天气信息</span></span><br><span class="line">		<span class="keyword">var</span> app=<span class="keyword">new</span> Vue(&#123;</span><br><span class="line">			el:<span class="string">"#outer"</span>,</span><br><span class="line">			data:&#123;</span><br><span class="line">				city:<span class="string">''</span>,</span><br><span class="line">				weatherList:[]</span><br><span class="line">			</span><br><span class="line">			&#125;,</span><br><span class="line">			methods:&#123;</span><br><span class="line">				searchWeather:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">					<span class="comment">//调用接口</span></span><br><span class="line">					<span class="keyword">var</span> that=<span class="keyword">this</span>;</span><br><span class="line">					axios.get(<span class="string">'http://wthrcdn.etouch.cn/weather_mini?city='</span></span><br><span class="line">					+<span class="keyword">this</span>.city)</span><br><span class="line">					.then(<span class="function"><span class="keyword">function</span>(<span class="params">response</span>)</span>&#123;</span><br><span class="line">						that.weatherList=response.data.data.forecast;</span><br><span class="line">					&#125;,</span><br><span class="line">					<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;&#125;)</span><br><span class="line">				&#125;,</span><br><span class="line">				changeCity:<span class="function"><span class="keyword">function</span>(<span class="params">where</span>)</span>&#123;</span><br><span class="line">					<span class="keyword">this</span>.city=where;</span><br><span class="line">					<span class="keyword">this</span>.searchWeather();</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;,</span><br><span class="line">		&#125;)</span><br></pre></td></tr></table></figure>
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">页面项目</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/03/30/%E5%A4%A9%E7%9F%A5%E9%81%93/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1275,11 +1278,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
