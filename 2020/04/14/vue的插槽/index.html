@@ -6,21 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://yuchenbin1.github.io">
-  <title>css中透明度继承的问题 | ycb的博客</title>
+  <title>vue的插槽 | ycb的博客</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="背景图透明度继承问题opacity是继承的，目前没有什么方法可以直接使子元素不继承父元素。 我在实际项目中设父元素opacity为0.5，在子元素中设opacity设1，但是并没有得到想要的结果 12345678910111213141516&lt;style&gt;.father&amp;#123;    &#x2F;*。。。一些样式；*&#x2F;opacity:0.5;&amp;#125;.child&amp;#123;    &#x2F;*。">
+  <meta name="description" content="vue插槽的一般用法插槽主要是把父组件中的内容传递到子组件的指定位置中 通过子组件中的&lt;slot&gt;&lt;&#x2F;slot&gt;来确定具体的位置 如果父组件没有提供内容则取子组件中&lt;slot&gt;默认内容&lt;&#x2F;slot&gt;的内容 123456789101112131415161718192021222324252627282930313233343536373839&lt;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="css中透明度继承的问题">
-<meta property="og:url" content="https://yuchenbin1.github.io/2020/04/12/css%E4%B8%AD%E9%80%8F%E6%98%8E%E5%BA%A6%E7%BB%A7%E6%89%BF%E7%9A%84%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:title" content="vue的插槽">
+<meta property="og:url" content="https://yuchenbin1.github.io/2020/04/14/vue%E7%9A%84%E6%8F%92%E6%A7%BD/index.html">
 <meta property="og:site_name" content="ycb的博客">
-<meta property="og:description" content="背景图透明度继承问题opacity是继承的，目前没有什么方法可以直接使子元素不继承父元素。 我在实际项目中设父元素opacity为0.5，在子元素中设opacity设1，但是并没有得到想要的结果 12345678910111213141516&lt;style&gt;.father&amp;#123;    &#x2F;*。。。一些样式；*&#x2F;opacity:0.5;&amp;#125;.child&amp;#123;    &#x2F;*。">
+<meta property="og:description" content="vue插槽的一般用法插槽主要是把父组件中的内容传递到子组件的指定位置中 通过子组件中的&lt;slot&gt;&lt;&#x2F;slot&gt;来确定具体的位置 如果父组件没有提供内容则取子组件中&lt;slot&gt;默认内容&lt;&#x2F;slot&gt;的内容 123456789101112131415161718192021222324252627282930313233343536373839&lt;">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-04-11T18:20:24.000Z">
-<meta property="article:modified_time" content="2020-04-11T18:40:14.851Z">
+<meta property="article:published_time" content="2020-04-14T13:37:37.000Z">
+<meta property="article:modified_time" content="2020-04-14T13:51:09.014Z">
 <meta property="article:author" content="ycb">
-<meta property="article:tag" content="css">
+<meta property="article:tag" content="vue">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="ycb的博客" type="application/atom+xml">
@@ -198,14 +198,14 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-css中透明度继承的问题" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-vue的插槽" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
     <h1 class="article-title" itemprop="name">
-      css中透明度继承的问题
+      vue的插槽
     </h1>
   
 
@@ -217,8 +217,8 @@
               <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
         </span>
 
-<a href="/2020/04/12/css%E4%B8%AD%E9%80%8F%E6%98%8E%E5%BA%A6%E7%BB%A7%E6%89%BF%E7%9A%84%E9%97%AE%E9%A2%98/" class="archive-article-date">
-        <time datetime="2020-04-11T18:20:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-12</time>
+<a href="/2020/04/14/vue%E7%9A%84%E6%8F%92%E6%A7%BD/" class="archive-article-date">
+        <time datetime="2020-04-14T13:37:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-14</time>
 </a>
 
   
@@ -231,7 +231,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">249字</span>
+      <span class="post-count">957字</span>
     </span>
   </span>
 
@@ -240,7 +240,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">1分</span>
+      <span class="post-count">5分</span>
     </span>
   </span>
 </div>
@@ -251,16 +251,20 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="背景图透明度继承问题"><a href="#背景图透明度继承问题" class="headerlink" title="背景图透明度继承问题"></a>背景图透明度继承问题</h1><p>opacity是继承的，目前没有什么方法可以直接使子元素不继承父元素。</p>
-<p>我在实际项目中设父元素opacity为0.5，在子元素中设opacity设1，但是并没有得到想要的结果</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="css"><span class="selector-class">.father</span>&#123;</span></span><br><span class="line"><span class="css">    <span class="comment">/*。。。一些样式；*/</span></span></span><br><span class="line"><span class="css"><span class="selector-tag">opacity</span><span class="selector-pseudo">:0.5</span>;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="css"><span class="selector-class">.child</span>&#123;</span></span><br><span class="line"><span class="css">    <span class="comment">/*。。。一些样式；*/</span></span></span><br><span class="line">opacity：1；</span><br><span class="line">&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"father"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"child"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+    <h1 id="vue插槽的一般用法"><a href="#vue插槽的一般用法" class="headerlink" title="vue插槽的一般用法"></a>vue插槽的一般用法</h1><p>插槽主要是把父组件中的内容传递到子组件的指定位置中</p>
+<p>通过子组件中的<code>&lt;slot&gt;&lt;/slot&gt;</code>来确定具体的位置</p>
+<p>如果父组件没有提供内容则取子组件中<code>&lt;slot&gt;默认内容&lt;/slot&gt;</code>的内容</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">    &lt;meta name=<span class="string">"viewport"</span> content=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span><br><span class="line">    &lt;title&gt;组件插槽&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- 信息‘有错误’传入到slot的组件里面 --&gt;</span><br><span class="line">    &lt;!-- 每个slot组件都会有传入的信息 --&gt;</span><br><span class="line">    &lt;!-- 如果没有传入信息则显示的是默认内容 --&gt;</span><br><span class="line">    &lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">        &lt;alert-box&gt;有错误&lt;<span class="regexp">/alert-box&gt;</span></span><br><span class="line"><span class="regexp">        &lt;alert-box&gt;have a bug&lt;/</span>alert-box&gt;</span><br><span class="line">        &lt;alert-box&gt;&lt;<span class="regexp">/alert-box&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">    &lt;/</span>div&gt;</span><br><span class="line">    &lt;script src=<span class="string">"https://cdn.jsdelivr.net/npm/vue/dist/vue.js"</span>&gt;&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">    &lt;script&gt;</span></span><br><span class="line"><span class="regexp">        Vue.component('alert-box',&#123;</span></span><br><span class="line"><span class="regexp">            template:`</span></span><br><span class="line"><span class="regexp">            &lt;div&gt;</span></span><br><span class="line"><span class="regexp">            &lt;slot&gt;&lt;/</span>slot&gt;</span><br><span class="line">            &lt;strong&gt;ERROR:&lt;<span class="regexp">/strong&gt;</span></span><br><span class="line"><span class="regexp">            &lt;slot&gt;&lt;/</span>slot&gt;</span><br><span class="line">            &lt;slot&gt;默认内容&lt;<span class="regexp">/slot&gt;</span></span><br><span class="line"><span class="regexp">            &lt;/</span>div&gt;</span><br><span class="line">            <span class="string">`</span></span><br><span class="line"><span class="string">        &#125;);</span></span><br><span class="line"><span class="string">        var vm=new Vue(&#123;</span></span><br><span class="line"><span class="string">            el:"#app",</span></span><br><span class="line"><span class="string">            data:&#123;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string">        &#125;)</span></span><br><span class="line"><span class="string">    &lt;/script&gt;</span></span><br><span class="line"><span class="string">&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>这里有一种好的方法</p>
-<p><strong>设置一个和father样式一模一样的元素放在father下面作为子元素的一员</strong></p>
-<p><strong>再把背景图的设置放在新建的元素样式中包括opacity</strong></p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="css"><span class="selector-class">.father</span>,<span class="selector-class">.fatherSec</span>&#123;</span></span><br><span class="line"><span class="css">    <span class="comment">/*。。。一些样式；*/</span></span></span><br><span class="line">&#125;</span><br><span class="line"><span class="css"><span class="selector-class">.fatherSec</span>&#123;</span></span><br><span class="line"><span class="css"><span class="comment">/*背景图的样式*/</span> </span></span><br><span class="line"><span class="css"><span class="selector-tag">opacity</span><span class="selector-pseudo">:0.5</span>;</span></span><br><span class="line">&#125;    </span><br><span class="line"><span class="css"><span class="selector-class">.child</span>&#123;</span></span><br><span class="line"><span class="css">    <span class="comment">/*。。。一些样式；*/</span></span></span><br><span class="line">&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"father"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"fatherSec"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"child"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="插槽具名化"><a href="#插槽具名化" class="headerlink" title="插槽具名化"></a>插槽具名化</h2><p>用于在符组件中传递的内容插入子组件中的指定位置</p>
+<p>在子组件<code>&lt;slot name=&quot;名字&quot;&gt;&lt;/slot&gt;</code>中用name来命名</p>
+<p>在父组件中用slot=”名字”的方式指定位置</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">    &lt;meta name=<span class="string">"viewport"</span> content=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;!-- 具名化插槽指的是根据名称匹配 --&gt;</span><br><span class="line">    &lt;!-- template标签可以临时包裹 --&gt;</span><br><span class="line">    &lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">        &lt;base-layout&gt;</span><br><span class="line">            &lt;p slot=<span class="string">"header"</span>&gt;主要标题&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">            &lt;p&gt;主要内容1&lt;/</span>p&gt;</span><br><span class="line">            &lt;p&gt;主要内容<span class="number">2</span>&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">            &lt;p slot="footer"&gt;底部信息&lt;/</span>p&gt;</span><br><span class="line">        &lt;<span class="regexp">/base-layout&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">        &lt;base-layout&gt;</span></span><br><span class="line"><span class="regexp">            &lt;template slot="header"&gt;</span></span><br><span class="line"><span class="regexp">                &lt;p &gt;主要标题&lt;/</span>p&gt;</span><br><span class="line">                &lt;p&gt;主要内容<span class="number">1</span>&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">            &lt;/</span>template&gt;</span><br><span class="line">            &lt;p&gt;主要内容<span class="number">2</span>&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">            &lt;p slot="footer"&gt;底部信息&lt;/</span>p&gt;</span><br><span class="line">        &lt;<span class="regexp">/base-layout&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>div&gt;</span><br><span class="line">    &lt;script src=<span class="string">"https://cdn.jsdelivr.net/npm/vue/dist/vue.js"</span>&gt;&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">    &lt;script&gt;</span></span><br><span class="line"><span class="regexp">        Vue.component('base-layout',&#123;</span></span><br><span class="line"><span class="regexp">            template:`</span></span><br><span class="line"><span class="regexp">                &lt;div&gt;</span></span><br><span class="line"><span class="regexp">                    &lt;header&gt;</span></span><br><span class="line"><span class="regexp">                        &lt;slot name="header"&gt;&lt;/</span>slot&gt;    </span><br><span class="line">                    &lt;<span class="regexp">/header&gt;    </span></span><br><span class="line"><span class="regexp">                    &lt;main&gt;</span></span><br><span class="line"><span class="regexp">                        &lt;slot&gt;&lt;/</span>slot&gt;    </span><br><span class="line">                    &lt;<span class="regexp">/main&gt;</span></span><br><span class="line"><span class="regexp">                    &lt;footer&gt;</span></span><br><span class="line"><span class="regexp">                        &lt;slot name="footer"&gt;&lt;/</span>slot&gt;    </span><br><span class="line">                    &lt;<span class="regexp">/footer&gt;</span></span><br><span class="line"><span class="regexp">                &lt;/</span>div&gt;</span><br><span class="line">            <span class="string">`</span></span><br><span class="line"><span class="string">        &#125;)</span></span><br><span class="line"><span class="string">        var vm=new Vue(&#123;</span></span><br><span class="line"><span class="string">            el:"#app",</span></span><br><span class="line"><span class="string">            data:&#123;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string">        &#125;)</span></span><br><span class="line"><span class="string">    &lt;/script&gt;</span></span><br><span class="line"><span class="string">&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>这种方法是可靠的</p>
+<h2 id="作用域插槽"><a href="#作用域插槽" class="headerlink" title="作用域插槽"></a>作用域插槽</h2><p>但我们想要通过父组件对子组件的内容进行加工处理时，需要作用域插槽</p>
+<p>slot-scope属性代表的是子组件中的属性集合</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">    &lt;meta name=<span class="string">"viewport"</span> content=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">    &lt;style&gt;</span></span><br><span class="line"><span class="regexp">        .gaoliang&#123;</span></span><br><span class="line"><span class="regexp">            color:yellow;</span></span><br><span class="line"><span class="regexp">        &#125;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>style&gt;</span><br><span class="line">&lt;<span class="regexp">/head&gt;</span></span><br><span class="line"><span class="regexp">&lt;body&gt;</span></span><br><span class="line"><span class="regexp">    &lt;!-- 作用域插槽</span></span><br><span class="line"><span class="regexp">    父组件对子组件的内容进行加工处理 --&gt;</span></span><br><span class="line"><span class="regexp">        &lt;div id="app"&gt;</span></span><br><span class="line"><span class="regexp">            &lt;fruit-list :list='list'&gt;</span></span><br><span class="line"><span class="regexp">                &lt;template slot-scope='slotProps'&gt;&lt;!--slotProps表示属性数组--&gt;</span></span><br><span class="line"><span class="regexp">                    &lt;strong v-if='slotProps.info.id==2' class="gaoliang"&gt;&#123;&#123;slotProps.info.name&#125;&#125;&lt;/</span>strong&gt;</span><br><span class="line">                    &lt;strong v-<span class="keyword">else</span>&gt;&#123;&#123;slotProps.info.name&#125;&#125;&lt;<span class="regexp">/strong&gt;</span></span><br><span class="line"><span class="regexp">                &lt;/</span>template&gt;</span><br><span class="line">            &lt;<span class="regexp">/fruit-list&gt;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>div&gt;</span><br><span class="line">    &lt;script src=<span class="string">"https://cdn.jsdelivr.net/npm/vue/dist/vue.js"</span>&gt;&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">    &lt;script&gt;</span></span><br><span class="line"><span class="regexp">        Vue.component('fruit-list',&#123;</span></span><br><span class="line"><span class="regexp">            props:['list'],</span></span><br><span class="line"><span class="regexp">            template:`</span></span><br><span class="line"><span class="regexp">                &lt;div&gt;</span></span><br><span class="line"><span class="regexp">                    &lt;li :key="list.id" v-for="item in list"&gt;</span></span><br><span class="line"><span class="regexp">                        &lt;slot :info='item'&gt;&#123;&#123;item.name&#125;&#125;&lt;/</span>slot&gt;</span><br><span class="line">                    &lt;<span class="regexp">/li&gt;</span></span><br><span class="line"><span class="regexp">                &lt;/</span>div&gt;</span><br><span class="line">            <span class="string">`</span></span><br><span class="line"><span class="string">        &#125;)</span></span><br><span class="line"><span class="string">        var vm=new Vue(&#123;</span></span><br><span class="line"><span class="string">            el:"#app",</span></span><br><span class="line"><span class="string">            data:&#123;</span></span><br><span class="line"><span class="string">                list:[&#123;</span></span><br><span class="line"><span class="string">                    id:1,</span></span><br><span class="line"><span class="string">                    name:'apple'</span></span><br><span class="line"><span class="string">                &#125;,&#123;</span></span><br><span class="line"><span class="string">                    id:2,</span></span><br><span class="line"><span class="string">                    name:'orange'</span></span><br><span class="line"><span class="string">                &#125;,&#123;</span></span><br><span class="line"><span class="string">                    id:3,</span></span><br><span class="line"><span class="string">                    name:'melon'</span></span><br><span class="line"><span class="string">                &#125;</span></span><br><span class="line"><span class="string">                ]</span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string">        &#125;)</span></span><br><span class="line"><span class="string">    &lt;/script&gt;</span></span><br><span class="line"><span class="string">&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure>
+
 
     
 
@@ -307,7 +311,7 @@
         </li>
         <li>
           <strong>本文链接：</strong>
-          <a href="https:/yuchenbin1.github.io/2020/04/12/css中透明度继承的问题/" title="css中透明度继承的问题" target="_blank">https:/yuchenbin1.github.io/2020/04/12/css中透明度继承的问题/</a>
+          <a href="https:/yuchenbin1.github.io/2020/04/14/vue的插槽/" title="vue的插槽" target="_blank">https:/yuchenbin1.github.io/2020/04/14/vue的插槽/</a>
         </li>
         
         <li>
@@ -329,7 +333,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">css</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
         		</li>
       		
 		</ul>
@@ -385,7 +389,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://yuchenbin1.github.io/2020/04/12/css%E4%B8%AD%E9%80%8F%E6%98%8E%E5%BA%A6%E7%BB%A7%E6%89%BF%E7%9A%84%E9%97%AE%E9%A2%98/" alt="微信分享二维码"> -->
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://yuchenbin1.github.io/2020/04/14/vue%E7%9A%84%E6%8F%92%E6%A7%BD/" alt="微信分享二维码"> -->
     </div>
 </div>
 
@@ -400,18 +404,9 @@
 
 <nav id="article-nav">
   
-    <a href="/2020/04/12/%E6%82%A6%E5%90%AC%E6%92%AD%E6%94%BE%E5%99%A8/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          悦听播放器
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/04/12/vue%E9%97%AA%E5%8A%A8%E7%9A%84%E9%97%AE%E9%A2%98/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">vue闪动的问题</div>
+    <a href="/2020/04/13/20%E5%B9%B44%E6%9C%8813%E6%97%A5/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">20年4月13日</div>
       <i class="icon-circle-right"></i>
     </a>
   
