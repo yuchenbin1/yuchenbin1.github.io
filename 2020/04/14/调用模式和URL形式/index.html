@@ -6,18 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://yuchenbin1.github.io">
-  <title>Archives: 2020/3 | ycb的博客</title>
+  <title>调用模式和URL形式 | ycb的博客</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="这是我的个人技术博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="ycb的博客">
-<meta property="og:url" content="https://yuchenbin1.github.io/archives/2020/03/page/2/index.html">
+  <meta name="description" content="接口的调用方式1.原生ajax2.基于jQuery的ajax3.fetch4.axios(基于ajax的第三方库) 客户端和服务器的交互模式1.计算机通过互联网与服务器连接2.服务器返回有两个形式：    1.一个完整的HTML页面    2.只返回特定格式的数据，比如：json 两种URL地址形式1.传统的形式​    schema:&#x2F;&#x2F;host:post&#x2F;path?query#fragment">
+<meta property="og:type" content="article">
+<meta property="og:title" content="调用模式和URL形式">
+<meta property="og:url" content="https://yuchenbin1.github.io/2020/04/14/%E8%B0%83%E7%94%A8%E6%A8%A1%E5%BC%8F%E5%92%8CURL%E5%BD%A2%E5%BC%8F/index.html">
 <meta property="og:site_name" content="ycb的博客">
-<meta property="og:description" content="这是我的个人技术博客">
+<meta property="og:description" content="接口的调用方式1.原生ajax2.基于jQuery的ajax3.fetch4.axios(基于ajax的第三方库) 客户端和服务器的交互模式1.计算机通过互联网与服务器连接2.服务器返回有两个形式：    1.一个完整的HTML页面    2.只返回特定格式的数据，比如：json 两种URL地址形式1.传统的形式​    schema:&#x2F;&#x2F;host:post&#x2F;path?query#fragment">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-04-14T14:17:17.000Z">
+<meta property="article:modified_time" content="2020-04-14T14:18:46.419Z">
 <meta property="article:author" content="ycb">
+<meta property="article:tag" content="js">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="ycb的博客" type="application/atom+xml">
@@ -195,213 +198,140 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-调用模式和URL形式" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2020/03/15/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E6%97%B6%E9%92%9F/" class="archive-article-date">
-        <time datetime="2020-03-15T07:19:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-15</time>
-</a>
-
-        </div>
-    	 
+      <header class="article-header">
   
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2020/03/15/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E6%97%B6%E9%92%9F/" target="_blank">一个简单的时钟</a>
   
+    <h1 class="article-title" itemprop="name">
+      调用模式和URL形式
     </h1>
   
 
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">页面项目</a>
-        		</li>
-      		
-		</ul>
-	</div>
+  
+  
+        
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
 
-          
+<a href="/2020/04/14/%E8%B0%83%E7%94%A8%E6%A8%A1%E5%BC%8F%E5%92%8CURL%E5%BD%A2%E5%BC%8F/" class="archive-article-date">
+        <time datetime="2020-04-14T14:17:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-14</time>
+</a>
 
+  
+  
+    
+<div style="margin-top:10px;">
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <!-- fonts.scss -->
+      <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
+      <i class="icon-statistics"></i>
+      <span class="post-meta-item-text"> 字数统计:</span>
+      <span class="post-count">255字</span>
+    </span>
+  </span>
+
+  <span class="post-time">
+    &nbsp; | &nbsp;
+    <span class="post-meta-item-icon">
+      <i class="icon-book icon"></i>
+      <span class="post-meta-item-text"> 阅读时长≈</span>
+      <span class="post-count">1分</span>
+    </span>
+  </span>
+</div>
+
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="接口的调用方式"><a href="#接口的调用方式" class="headerlink" title="接口的调用方式"></a>接口的调用方式</h1><p>1.原生ajax<br>2.基于jQuery的ajax<br>3.fetch<br>4.axios(基于ajax的第三方库)</p>
+<h1 id="客户端和服务器的交互模式"><a href="#客户端和服务器的交互模式" class="headerlink" title="客户端和服务器的交互模式"></a>客户端和服务器的交互模式</h1><p>1.计算机通过互联网与服务器连接<br>2.服务器返回有两个形式：<br>    1.一个完整的HTML页面<br>    2.只返回特定格式的数据，比如：json</p>
+<h1 id="两种URL地址形式"><a href="#两种URL地址形式" class="headerlink" title="两种URL地址形式"></a>两种URL地址形式</h1><h3 id="1-传统的形式"><a href="#1-传统的形式" class="headerlink" title="1.传统的形式"></a>1.传统的形式</h3><p>​    schema://host:post/path?query#fragment<br>​    </p>
+<pre><code>1.schema:协议。例如：http、https、ftp等
+2.host:域名或者IP地址。例如:www.baidu.com
+3.port:端口，http默认端口为80，可以省略
+4.path:路径，例如/asc/ac/a
+5.query:查询参数，例如uname=list&amp;age=12
+6.fragment:锚点（哈希Hash），用于定位页面的某个位置</code></pre><p>协议域名时必须的（端口可以省略）</p>
+<h3 id="2-Restful形式的URL"><a href="#2-Restful形式的URL" class="headerlink" title="2.Restful形式的URL"></a>2.Restful形式的URL</h3><p>​    http的请求方式<br>​        1.GET       查询<br>​        2.POST      添加<br>​        3.PUT       修改<br>​        4.DELETE    删除</p>
+<pre><code>例如：
+    1.
+    http://www.hello.com/books GET
+    2.
+    http://www.hello.com/books POST
+    3.
+    http://www.hello.com/books/123 PUT
+    4.
+    http://www.hello.com/books/123 DELETE</code></pre>
+    
+
+    
+    <div class="page-reward">
+      <a href="javascript:void(0);" class="page-reward-btn tooltip-top" target="_self">
+        <div class="tooltip tooltip-east">
+          <span class="tooltip-item">
+            赏
+          </span>
+          <span class="tooltip-content">
+            <span class="tooltip-text">
+              <span class="tooltip-inner">
+                <p class="reward-p"><i class="icon icon-quo-left"></i>o谢谢你请我吃糖果o<i
+                    class="icon icon-quo-right"></i></p>
+                <div class="reward-box">
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/zhifubaopad.jpg">
+                    <span class="reward-type">支付宝</span>
+                  </div>
+                  
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/weixinpad.png">
+                    <span class="reward-type">微信</span>
+                  </div>
+                  
+                </div>
+              </span>
+            </span>
+          </span>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </a>
+    </div>
+    
+
+    
+    <div class="declare"> 
+      <ul class="post-copyright">
+        <li>
+          <strong>本文作者：</strong>
+          ycb
+        </li>
+        <li>
+          <strong>本文链接：</strong>
+          <a href="https:/yuchenbin1.github.io/2020/04/14/调用模式和URL形式/" title="调用模式和URL形式" target="_blank">https:/yuchenbin1.github.io/2020/04/14/调用模式和URL形式/</a>
+        </li>
+        
+        <li>
+          <strong>版权声明： </strong>
+          
+          本博客所有文章除特别声明外，均采用 <a href="https://github.com/JoeyBling/hexo-theme-yilia-plus/blob/master/LICENSE" rel="external nofollow" target="_blank">MIT</a> 许可协议。转载请注明出处！
+        </li>
+        
+      </ul>
+    </div>
+    
+
   </div>
-</article>
-  
+  <div class="article-info article-info-index">
     
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2020/03/14/%E5%AE%A2%E6%88%B7%E7%AB%AFjavascript%E6%97%B6%E9%97%B4%E7%BA%BF/" class="archive-article-date">
-        <time datetime="2020-03-14T11:15:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-14</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2020/03/14/%E5%AE%A2%E6%88%B7%E7%AB%AFjavascript%E6%97%B6%E9%97%B4%E7%BA%BF/" target="_blank">客户端javascript时间线</a>
-  
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2020/03/13/%E5%93%8D%E5%BA%94%E5%BC%8F%E9%A1%B5%E9%9D%A2%E5%B8%83%E5%B1%80/" class="archive-article-date">
-        <time datetime="2020-03-13T13:58:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-13</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2020/03/13/%E5%93%8D%E5%BA%94%E5%BC%8F%E9%A1%B5%E9%9D%A2%E5%B8%83%E5%B1%80/" target="_blank">响应式页面布局</a>
-  
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">页面项目</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2020/03/12/20%E5%B9%B43%E6%9C%8812%E6%97%A5/" class="archive-article-date">
-        <time datetime="2020-03-12T09:29:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-12</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2020/03/12/20%E5%B9%B43%E6%9C%8812%E6%97%A5/" target="_blank">20年3月12日</a>
-  
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日志</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2020/03/10/%E5%87%BD%E6%95%B0%E7%9A%84%E5%88%9B%E5%BB%BA%E5%92%8C%E5%BA%94%E7%94%A8/" class="archive-article-date">
-        <time datetime="2020-03-10T09:06:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-10</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2020/03/10/%E5%87%BD%E6%95%B0%E7%9A%84%E5%88%9B%E5%BB%BA%E5%92%8C%E5%BA%94%E7%94%A8/" target="_blank">函数的创建和应用</a>
-  
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -413,152 +343,116 @@
 		</ul>
 	</div>
 
-          
+    
 
+    
+
+    
+    
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <!-- <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a> -->
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://yuchenbin1.github.io/2020/04/14/%E8%B0%83%E7%94%A8%E6%A8%A1%E5%BC%8F%E5%92%8CURL%E5%BD%A2%E5%BC%8F/" alt="微信分享二维码"> -->
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+
+    
+    <div class="clearfix"></div>
+  </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2020/03/10/%E7%AE%80%E5%8D%95%E7%9A%84%E5%8A%A8%E7%94%BB/" class="archive-article-date">
-        <time datetime="2020-03-10T07:30:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-10</time>
-</a>
 
+
+<nav id="article-nav">
+  
+    <a href="/2020/04/15/%E4%BA%A4%E4%BA%92%E7%9A%84%E6%A8%A1%E5%BC%8F/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          交互的模式
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/04/14/vue%E7%9A%84%E6%8F%92%E6%A7%BD/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">vue的插槽</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2020/03/10/%E7%AE%80%E5%8D%95%E7%9A%84%E5%8A%A8%E7%94%BB/" target="_blank">简单的动画</a>
-  
-    </h1>
-  
+        
+        
+    </div>
+</aside>
 
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2020/03/08/%E6%95%B0%E7%BB%84%E5%92%8C%E6%95%B0%E7%BB%84%E6%96%B9%E6%B3%95/" class="archive-article-date">
-        <time datetime="2020-03-08T13:33:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-08</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2020/03/08/%E6%95%B0%E7%BB%84%E5%92%8C%E6%95%B0%E7%BB%84%E6%96%B9%E6%B3%95/" target="_blank">数组和数组方法</a>
-  
-    </h1>
-  
 
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2020/03/08/%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%B1%9E%E6%80%A7%E7%89%B9%E6%80%A7%E3%80%81%E5%AF%B9%E8%B1%A1%E6%96%B9%E6%B3%95/" class="archive-article-date">
-        <time datetime="2020-03-08T07:24:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-08</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2020/03/08/%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%B1%9E%E6%80%A7%E7%89%B9%E6%80%A7%E3%80%81%E5%AF%B9%E8%B1%A1%E6%96%B9%E6%B3%95/" target="_blank">对象的属性特性、对象方法</a>
-  
-    </h1>
-  
 
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
-        		</li>
-      		
-		</ul>
-	</div>
 
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/2020/03/">&amp;laquo; Prev</a><a class="page-number" href="/archives/2020/03/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/2020/03/page/3/">3</a><a class="page-number" href="/archives/2020/03/page/4/">4</a><a class="extend next" rel="next" href="/archives/2020/03/page/3/">Next &amp;raquo;</a>
-    </nav>
-  
+
+
+
 
 
           </div>
@@ -599,8 +493,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,
