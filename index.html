@@ -202,6 +202,100 @@
             
 
   
+    <article id="post-vue的简单路由" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/04/16/vue%E7%9A%84%E7%AE%80%E5%8D%95%E8%B7%AF%E7%94%B1/" target="_blank">vue的简单路由</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/04/16/vue%E7%9A%84%E7%AE%80%E5%8D%95%E8%B7%AF%E7%94%B1/" class="archive-article-date">
+        <time datetime="2020-04-16T14:13:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-16</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="路由是什么"><a href="#路由是什么" class="headerlink" title="路由是什么"></a>路由是什么</h1><p>本质是对应关系</p>
+<p>路由分为前端路由和后端路由</p>
+<p>后端路由：根据不同用户的URL请求返回不同的内容</p>
+<p>前端路由：根据不同的用户事件，显示不同的页面内容</p>
+<p>由不同的hash值，控制组件的切换</p>
+<p><code>window.onhashchange(){}</code>用来监听hash是否改变，改变则触发</p>
+<p><code>location.hash</code>获取最新的hash值（是带#/的）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">    &lt;meta name=<span class="string">"viewport"</span> content=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span><br><span class="line">    &lt;title&gt;路由&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;!-- <span class="built_in">window</span>.onhashchange=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="comment">//监听hash值的改变</span></span><br><span class="line">       <span class="comment">// 通过location.hash获取到最新的hash值</span></span><br><span class="line">    &#125; --&gt;</span><br><span class="line">    &lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">       &lt;a href=<span class="string">"#/zhuye"</span>&gt;主页&lt;<span class="regexp">/a&gt;    </span></span><br><span class="line"><span class="regexp">       &lt;a href="#/</span>keji<span class="string">"&gt;科技&lt;/a&gt;    </span></span><br><span class="line">       &lt;a href="#/caijing"&gt;财经&lt;/a&gt;    </span><br><span class="line">       &lt;a href=<span class="string">"#/yule"</span>&gt;娱乐&lt;<span class="regexp">/a&gt;   </span></span><br><span class="line"><span class="regexp">       </span></span><br><span class="line"><span class="regexp">       &lt;component :is="comName"&gt;&lt;/</span>component&gt;</span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">		&lt;script src="https:/</span><span class="regexp">/cdn.jsdelivr.net/</span>npm/vue/dist/vue.js<span class="string">"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="string">        &lt;script&gt;</span></span><br><span class="line"><span class="string">            const zhuye=&#123;</span></span><br><span class="line"><span class="string">                template:'&lt;h1&gt;主页信息&lt;/h1&gt;'</span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">            const keji=&#123;</span></span><br><span class="line"><span class="string">                template:'&lt;h1&gt;科技信息&lt;/h1&gt;'</span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">            const caijing=&#123;</span></span><br><span class="line"><span class="string">                template:'&lt;h1&gt;财经信息&lt;/h1&gt;'</span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">            const yule=&#123;</span></span><br><span class="line"><span class="string">                template:'&lt;h1&gt;娱乐信息&lt;/h1&gt;'</span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">            const vm=new Vue(&#123;</span></span><br><span class="line"><span class="string">                el:'#app',</span></span><br><span class="line"><span class="string">                data:&#123;</span></span><br><span class="line"><span class="string">                    comName:'keji',</span></span><br><span class="line"><span class="string">                &#125;,</span></span><br><span class="line"><span class="string">                components: &#123;</span></span><br><span class="line"><span class="string">                    zhuye,</span></span><br><span class="line"><span class="string">                    keji,</span></span><br><span class="line"><span class="string">                    caijing,</span></span><br><span class="line"><span class="string">                    yule</span></span><br><span class="line"><span class="string">                &#125;</span></span><br><span class="line"><span class="string">            &#125;)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">            window.onhashchange=function()&#123;</span></span><br><span class="line"><span class="string">                // console.log(location.hash)</span></span><br><span class="line"><span class="string">                switch(location.hash.slice(1))&#123;</span></span><br><span class="line"><span class="string">                    case '/zhuye': vm.comName='zhuye';break;</span></span><br><span class="line"><span class="string">                    case '/keji': vm.comName='keji';break;</span></span><br><span class="line"><span class="string">                    case '/caijing': vm.comName='caijing';break;</span></span><br><span class="line"><span class="string">                    case '/yule': vm.comName='yule';break;</span></span><br><span class="line"><span class="string">                &#125;</span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string">        &lt;/script&gt;</span></span><br><span class="line"><span class="string">&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/04/16/vue%E7%9A%84%E7%AE%80%E5%8D%95%E8%B7%AF%E7%94%B1/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-交互的模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1138,108 +1232,6 @@
 
 
   
-    <article id="post-vue父组件向子组件传值" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/04/09/vue%E7%88%B6%E7%BB%84%E4%BB%B6%E5%90%91%E5%AD%90%E7%BB%84%E4%BB%B6%E4%BC%A0%E5%80%BC/" target="_blank">vue父组件向子组件传值</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/04/09/vue%E7%88%B6%E7%BB%84%E4%BB%B6%E5%90%91%E5%AD%90%E7%BB%84%E4%BB%B6%E4%BC%A0%E5%80%BC/" class="archive-article-date">
-        <time datetime="2020-04-09T13:13:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-09</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="父组件向子组件传值"><a href="#父组件向子组件传值" class="headerlink" title="父组件向子组件传值"></a>父组件向子组件传值</h1><p>组件化开发</p>
-<p>props:[‘属性名1’，’属性名2’]</p>
-<h3 id="props属性名规则"><a href="#props属性名规则" class="headerlink" title="props属性名规则"></a>props属性名规则</h3><ol>
-<li>在props中使用驼峰式，在模板中使用对应的短横线形式</li>
-<li>字符串形式模板中没有这个限制``</li>
-</ol>
-<h3 id="props属性值的类型"><a href="#props属性值的类型" class="headerlink" title="props属性值的类型"></a>props属性值的类型</h3><p>属性名=’属性值‘              ：属性名=’属性值‘</p>
-<ol>
-<li>字符串string</li>
-<li>数值，在上述第一种情况是字符串，第二种是数值</li>
-<li>布尔值，在上述对重情况是字符串，第二种是布尔值</li>
-<li>数组</li>
-<li>对象，可以用.取对象中的属性名</li>
-</ol>
-<p>一般使用</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=<span class="string">"utf-8"</span>&gt;</span><br><span class="line">		&lt;title&gt;&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">			&lt;menu-item &gt;&lt;<span class="regexp">/menu-item&gt;</span></span><br><span class="line"><span class="regexp">			&lt;menu-item title="parentMsg"&gt;&lt;/m</span>enu-item&gt;&lt;!-- 这里显示parentMsg --&gt;</span><br><span class="line">			&lt;menu-item :title=<span class="string">"parentMsg"</span>&gt;&lt;<span class="regexp">/menu-item&gt;&lt;!-- 这里显示父组件中的数据 --&gt;</span></span><br><span class="line"><span class="regexp">		&lt;/</span>div&gt;</span><br><span class="line">		&lt;script src=<span class="string">"https://cdn.jsdelivr.net/npm/vue/dist/vue.js"</span>&gt;&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">		&lt;script&gt;</span></span><br><span class="line"><span class="regexp">			Vue.component('menu-item',&#123;</span></span><br><span class="line"><span class="regexp">				props:['title'],</span></span><br><span class="line"><span class="regexp">				data:function()&#123;</span></span><br><span class="line"><span class="regexp">					return &#123;</span></span><br><span class="line"><span class="regexp">						msg:'子组件本身的数据'</span></span><br><span class="line"><span class="regexp">					&#125;</span></span><br><span class="line"><span class="regexp">				&#125;,</span></span><br><span class="line"><span class="regexp">				template:'&lt;div&gt;&#123;&#123;msg+"---"+title&#125;&#125;&lt;/</span>div&gt;<span class="string">' //切记引号内嵌要用单双引号</span></span><br><span class="line"><span class="string">			&#125;);</span></span><br><span class="line"><span class="string">			var vm=new Vue(&#123;</span></span><br><span class="line">				el:'#app',</span><br><span class="line">				data:&#123;</span><br><span class="line">					parentMsg:<span class="string">'父组件中的数据'</span></span><br><span class="line">				&#125;</span><br><span class="line">			&#125;);</span><br><span class="line">		&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>body&gt;</span><br><span class="line">&lt;<span class="regexp">/html&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/04/09/vue%E7%88%B6%E7%BB%84%E4%BB%B6%E5%90%91%E5%AD%90%E7%BB%84%E4%BB%B6%E4%BC%A0%E5%80%BC/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1381,19 +1373,19 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">vue</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
               </li>
              
               <li class="article-tag-list-item">

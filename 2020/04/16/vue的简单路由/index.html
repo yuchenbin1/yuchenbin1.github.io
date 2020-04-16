@@ -6,21 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://yuchenbin1.github.io">
-  <title>天知道 | ycb的博客</title>
+  <title>vue的简单路由 | ycb的博客</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="天知道利用http:&#x2F;&#x2F;wthrcdn.etouch.cn&#x2F;weather_mini的axios天气接口，运用vue.js构建逻辑层 源码链接 项目链接 功能：查询各个城市近五天的天气，点击热门城市直接查询 遇到的难点 v-for的运用，使得数组遍历 html中用a标签同时绑定事件时，我一开始没注意href的值，导致点击事件的同时链接一直触发，使得达不到理想的效果，找了好久把href中的值改为”j">
+  <meta name="description" content="路由是什么本质是对应关系 路由分为前端路由和后端路由 后端路由：根据不同用户的URL请求返回不同的内容 前端路由：根据不同的用户事件，显示不同的页面内容 由不同的hash值，控制组件的切换 window.onhashchange(){}用来监听hash是否改变，改变则触发 location.hash获取最新的hash值（是带#&#x2F;的） 12345678910111213141516171819202">
 <meta property="og:type" content="article">
-<meta property="og:title" content="天知道">
-<meta property="og:url" content="https://yuchenbin1.github.io/2020/03/30/%E5%A4%A9%E7%9F%A5%E9%81%93/index.html">
+<meta property="og:title" content="vue的简单路由">
+<meta property="og:url" content="https://yuchenbin1.github.io/2020/04/16/vue%E7%9A%84%E7%AE%80%E5%8D%95%E8%B7%AF%E7%94%B1/index.html">
 <meta property="og:site_name" content="ycb的博客">
-<meta property="og:description" content="天知道利用http:&#x2F;&#x2F;wthrcdn.etouch.cn&#x2F;weather_mini的axios天气接口，运用vue.js构建逻辑层 源码链接 项目链接 功能：查询各个城市近五天的天气，点击热门城市直接查询 遇到的难点 v-for的运用，使得数组遍历 html中用a标签同时绑定事件时，我一开始没注意href的值，导致点击事件的同时链接一直触发，使得达不到理想的效果，找了好久把href中的值改为”j">
+<meta property="og:description" content="路由是什么本质是对应关系 路由分为前端路由和后端路由 后端路由：根据不同用户的URL请求返回不同的内容 前端路由：根据不同的用户事件，显示不同的页面内容 由不同的hash值，控制组件的切换 window.onhashchange(){}用来监听hash是否改变，改变则触发 location.hash获取最新的hash值（是带#&#x2F;的） 12345678910111213141516171819202">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-03-30T14:10:31.000Z">
-<meta property="article:modified_time" content="2020-03-30T14:25:14.399Z">
+<meta property="article:published_time" content="2020-04-16T14:13:31.000Z">
+<meta property="article:modified_time" content="2020-04-16T14:22:58.861Z">
 <meta property="article:author" content="ycb">
-<meta property="article:tag" content="页面项目">
+<meta property="article:tag" content="vue">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="ycb的博客" type="application/atom+xml">
@@ -198,14 +198,14 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-天知道" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-vue的简单路由" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
     <h1 class="article-title" itemprop="name">
-      天知道
+      vue的简单路由
     </h1>
   
 
@@ -217,8 +217,8 @@
               <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
         </span>
 
-<a href="/2020/03/30/%E5%A4%A9%E7%9F%A5%E9%81%93/" class="archive-article-date">
-        <time datetime="2020-03-30T14:10:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-30</time>
+<a href="/2020/04/16/vue%E7%9A%84%E7%AE%80%E5%8D%95%E8%B7%AF%E7%94%B1/" class="archive-article-date">
+        <time datetime="2020-04-16T14:13:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-16</time>
 </a>
 
   
@@ -231,7 +231,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">647字</span>
+      <span class="post-count">383字</span>
     </span>
   </span>
 
@@ -240,7 +240,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">3分</span>
+      <span class="post-count">1分</span>
     </span>
   </span>
 </div>
@@ -251,19 +251,14 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="天知道"><a href="#天知道" class="headerlink" title="天知道"></a>天知道</h1><p>利用<a href="http://wthrcdn.etouch.cn/weather_mini的axios天气接口，运用vue.js构建逻辑层" target="_blank" rel="noopener">http://wthrcdn.etouch.cn/weather_mini的axios天气接口，运用vue.js构建逻辑层</a></p>
-<p><a href=" https://gitee.com/yuchenbin/weatherKnow " target="_blank" rel="noopener">源码链接</a></p>
-<p><a href="http://yuchenbin.gitee.io/weatherknow" target="_blank" rel="noopener">项目链接</a></p>
-<h3 id="功能："><a href="#功能：" class="headerlink" title="功能："></a>功能：</h3><p>查询各个城市近五天的天气，点击热门城市直接查询</p>
-<h2 id="遇到的难点"><a href="#遇到的难点" class="headerlink" title="遇到的难点"></a>遇到的难点</h2><ol>
-<li>v-for的运用，使得数组遍历</li>
-<li>html中用a标签同时绑定事件时，我一开始没注意href的值，导致点击事件的同时链接一直触发，使得达不到理想的效果，找了好久把href中的值改为”javascript:;”这样的空js语句就行了，这样把a的链接跳转功能忽视了，还有一种办法是改为”#”也行</li>
-</ol>
-<h3 id="html文件"><a href="#html文件" class="headerlink" title="html文件"></a>html文件</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"zh"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">	&lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">	&lt;meta name=<span class="string">"viewport"</span> content=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span><br><span class="line">	&lt;meta http-equiv=<span class="string">"X-UA-Compatible"</span> content=<span class="string">"ie=edge"</span>&gt;</span><br><span class="line">	&lt;title&gt;&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">	&lt;link rel="stylesheet" href="./</span>style.css<span class="string">"&gt;</span></span><br><span class="line"><span class="string">&lt;/head&gt;</span></span><br><span class="line"><span class="string">&lt;body&gt;</span></span><br><span class="line"><span class="string">	&lt;div id="</span>outer<span class="string">"&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>head<span class="string">"&gt;天知道&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>search<span class="string">"&gt;</span></span><br><span class="line"><span class="string">			&lt;input type="</span>text<span class="string">" v-model="</span>city<span class="string">" @keyup.enter="</span>searchWeather<span class="string">" class="</span>input_txt<span class="string">" placeholder="</span>请输入要查询的城市<span class="string">"&gt;</span></span><br><span class="line"><span class="string">			&lt;button class="</span>input_sub<span class="string">" @click="</span>searchWeather<span class="string">"&gt;搜索&lt;/button&gt;</span></span><br><span class="line"><span class="string">		&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>city<span class="string">"&gt;</span></span><br><span class="line"><span class="string">			&lt;a href="</span>javascript:;<span class="string">" @click="</span>changeCity(<span class="string">'北京'</span>)<span class="string">"&gt;北京&lt;/a&gt;&lt;!-- href中的内容不可少 --&gt;</span></span><br><span class="line"><span class="string">			&lt;a href="</span>javascript:;<span class="string">" @click="</span>changeCity(<span class="string">'上海'</span>)<span class="string">"&gt;上海&lt;/a&gt;</span></span><br><span class="line"><span class="string">			&lt;a href="</span>javascript:;<span class="string">" @click="</span>changeCity(<span class="string">'广州'</span>)<span class="string">"&gt;广州&lt;/a&gt;</span></span><br><span class="line"><span class="string">			&lt;a href="</span>javascript:;<span class="string">" @click="</span>changeCity(<span class="string">'深圳'</span>)<span class="string">"&gt;深圳&lt;/a&gt;</span></span><br><span class="line"><span class="string">			&lt;a href="</span>javascript:;<span class="string">" @click="</span>changeCity(<span class="string">'杭州'</span>)<span class="string">"&gt;杭州&lt;/a&gt;</span></span><br><span class="line"><span class="string">		&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>output<span class="string">" &gt;</span></span><br><span class="line"><span class="string">			&lt;div class="</span><span class="built_in">module</span><span class="string">" v-for="</span>item <span class="keyword">in</span> weatherList<span class="string">"&gt;</span></span><br><span class="line"><span class="string">				&lt;div class="</span>weather<span class="string">"&gt;&lt;span v-cloak&gt;&#123;&#123;item.type&#125;&#125;&lt;/span&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">				&lt;div class="</span>temp<span class="string">"&gt;&lt;b v-cloak&gt;&#123;&#123;item.low&#125;&#125;~&lt;/b&gt;&lt;b v-cloak&gt;&#123;&#123;item.high&#125;&#125;&lt;/b&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">				&lt;div class="</span>wind<span class="string">"&gt;&lt;span v-cloak&gt;&#123;&#123;item.fengxiang&#125;&#125;&lt;/span&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">				&lt;div class="</span>date<span class="string">"&gt;&lt;span v-cloak&gt;&#123;&#123;item.date&#125;&#125;&lt;/span&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">			&lt;/div&gt;</span></span><br><span class="line"><span class="string">			</span></span><br><span class="line"><span class="string">		&lt;/div&gt;</span></span><br><span class="line"><span class="string">	&lt;/div&gt;</span></span><br><span class="line"><span class="string">	&lt;script src="</span>https:<span class="comment">//cdn.jsdelivr.net/npm/vue/dist/vue.js"&gt;&lt;/script&gt;</span></span><br><span class="line">	&lt;script src=<span class="string">"https://unpkg.com/axios/dist/axios.min.js"</span>&gt;&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">	&lt;script src="./i</span>ndex.js<span class="string">"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="string">&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="js文件"><a href="#js文件" class="headerlink" title="js文件"></a>js文件</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 请求接口: http://wthrcdn.etouch.cn/weather_mini</span></span><br><span class="line">		<span class="comment">// 请求方法: get</span></span><br><span class="line">		<span class="comment">// 请求参数: city(查询城市名)</span></span><br><span class="line">		<span class="comment">// 响应内容: 天气信息</span></span><br><span class="line">		<span class="keyword">var</span> app=<span class="keyword">new</span> Vue(&#123;</span><br><span class="line">			el:<span class="string">"#outer"</span>,</span><br><span class="line">			data:&#123;</span><br><span class="line">				city:<span class="string">''</span>,</span><br><span class="line">				weatherList:[]</span><br><span class="line">			</span><br><span class="line">			&#125;,</span><br><span class="line">			methods:&#123;</span><br><span class="line">				searchWeather:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">					<span class="comment">//调用接口</span></span><br><span class="line">					<span class="keyword">var</span> that=<span class="keyword">this</span>;</span><br><span class="line">					axios.get(<span class="string">'http://wthrcdn.etouch.cn/weather_mini?city='</span></span><br><span class="line">					+<span class="keyword">this</span>.city)</span><br><span class="line">					.then(<span class="function"><span class="keyword">function</span>(<span class="params">response</span>)</span>&#123;</span><br><span class="line">						that.weatherList=response.data.data.forecast;</span><br><span class="line">					&#125;,</span><br><span class="line">					<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;&#125;)</span><br><span class="line">				&#125;,</span><br><span class="line">				changeCity:<span class="function"><span class="keyword">function</span>(<span class="params">where</span>)</span>&#123;</span><br><span class="line">					<span class="keyword">this</span>.city=where;</span><br><span class="line">					<span class="keyword">this</span>.searchWeather();</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;,</span><br><span class="line">		&#125;)</span><br></pre></td></tr></table></figure>
+    <h1 id="路由是什么"><a href="#路由是什么" class="headerlink" title="路由是什么"></a>路由是什么</h1><p>本质是对应关系</p>
+<p>路由分为前端路由和后端路由</p>
+<p>后端路由：根据不同用户的URL请求返回不同的内容</p>
+<p>前端路由：根据不同的用户事件，显示不同的页面内容</p>
+<p>由不同的hash值，控制组件的切换</p>
+<p><code>window.onhashchange(){}</code>用来监听hash是否改变，改变则触发</p>
+<p><code>location.hash</code>获取最新的hash值（是带#/的）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">    &lt;meta name=<span class="string">"viewport"</span> content=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span><br><span class="line">    &lt;title&gt;路由&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;!-- <span class="built_in">window</span>.onhashchange=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="comment">//监听hash值的改变</span></span><br><span class="line">       <span class="comment">// 通过location.hash获取到最新的hash值</span></span><br><span class="line">    &#125; --&gt;</span><br><span class="line">    &lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">       &lt;a href=<span class="string">"#/zhuye"</span>&gt;主页&lt;<span class="regexp">/a&gt;    </span></span><br><span class="line"><span class="regexp">       &lt;a href="#/</span>keji<span class="string">"&gt;科技&lt;/a&gt;    </span></span><br><span class="line">       &lt;a href="#/caijing"&gt;财经&lt;/a&gt;    </span><br><span class="line">       &lt;a href=<span class="string">"#/yule"</span>&gt;娱乐&lt;<span class="regexp">/a&gt;   </span></span><br><span class="line"><span class="regexp">       </span></span><br><span class="line"><span class="regexp">       &lt;component :is="comName"&gt;&lt;/</span>component&gt;</span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">		&lt;script src="https:/</span><span class="regexp">/cdn.jsdelivr.net/</span>npm/vue/dist/vue.js<span class="string">"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="string">        &lt;script&gt;</span></span><br><span class="line"><span class="string">            const zhuye=&#123;</span></span><br><span class="line"><span class="string">                template:'&lt;h1&gt;主页信息&lt;/h1&gt;'</span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">            const keji=&#123;</span></span><br><span class="line"><span class="string">                template:'&lt;h1&gt;科技信息&lt;/h1&gt;'</span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">            const caijing=&#123;</span></span><br><span class="line"><span class="string">                template:'&lt;h1&gt;财经信息&lt;/h1&gt;'</span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">            const yule=&#123;</span></span><br><span class="line"><span class="string">                template:'&lt;h1&gt;娱乐信息&lt;/h1&gt;'</span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">            const vm=new Vue(&#123;</span></span><br><span class="line"><span class="string">                el:'#app',</span></span><br><span class="line"><span class="string">                data:&#123;</span></span><br><span class="line"><span class="string">                    comName:'keji',</span></span><br><span class="line"><span class="string">                &#125;,</span></span><br><span class="line"><span class="string">                components: &#123;</span></span><br><span class="line"><span class="string">                    zhuye,</span></span><br><span class="line"><span class="string">                    keji,</span></span><br><span class="line"><span class="string">                    caijing,</span></span><br><span class="line"><span class="string">                    yule</span></span><br><span class="line"><span class="string">                &#125;</span></span><br><span class="line"><span class="string">            &#125;)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">            window.onhashchange=function()&#123;</span></span><br><span class="line"><span class="string">                // console.log(location.hash)</span></span><br><span class="line"><span class="string">                switch(location.hash.slice(1))&#123;</span></span><br><span class="line"><span class="string">                    case '/zhuye': vm.comName='zhuye';break;</span></span><br><span class="line"><span class="string">                    case '/keji': vm.comName='keji';break;</span></span><br><span class="line"><span class="string">                    case '/caijing': vm.comName='caijing';break;</span></span><br><span class="line"><span class="string">                    case '/yule': vm.comName='yule';break;</span></span><br><span class="line"><span class="string">                &#125;</span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string">        &lt;/script&gt;</span></span><br><span class="line"><span class="string">&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure>
 
 
     
@@ -311,7 +306,7 @@
         </li>
         <li>
           <strong>本文链接：</strong>
-          <a href="https:/yuchenbin1.github.io/2020/03/30/天知道/" title="天知道" target="_blank">https:/yuchenbin1.github.io/2020/03/30/天知道/</a>
+          <a href="https:/yuchenbin1.github.io/2020/04/16/vue的简单路由/" title="vue的简单路由" target="_blank">https:/yuchenbin1.github.io/2020/04/16/vue的简单路由/</a>
         </li>
         
         <li>
@@ -333,7 +328,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">页面项目</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
         		</li>
       		
 		</ul>
@@ -389,7 +384,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://yuchenbin1.github.io/2020/03/30/%E5%A4%A9%E7%9F%A5%E9%81%93/" alt="微信分享二维码"> -->
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://yuchenbin1.github.io/2020/04/16/vue%E7%9A%84%E7%AE%80%E5%8D%95%E8%B7%AF%E7%94%B1/" alt="微信分享二维码"> -->
     </div>
 </div>
 
@@ -404,18 +399,9 @@
 
 <nav id="article-nav">
   
-    <a href="/2020/03/31/vue%E7%9A%84%E8%A1%A8%E5%8D%95%E6%93%8D%E4%BD%9C/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          vue的表单操作
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/03/29/simple-calculator/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">simple calculator</div>
+    <a href="/2020/04/15/%E4%BA%A4%E4%BA%92%E7%9A%84%E6%A8%A1%E5%BC%8F/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">交互的模式</div>
       <i class="icon-circle-right"></i>
     </a>
   
