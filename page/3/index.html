@@ -202,6 +202,95 @@
             
 
   
+    <article id="post-vue的计算属性" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/04/03/vue%E7%9A%84%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7/" target="_blank">vue的计算属性</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/04/03/vue%E7%9A%84%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7/" class="archive-article-date">
+        <time datetime="2020-04-03T13:35:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-03</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="计算属性"><a href="#计算属性" class="headerlink" title="计算属性"></a>计算属性</h1><p>表达式的计算逻辑可能比较复杂，使用计算属性可以使模板内容更加简洁</p>
+<h3 id="计算属性-computed-与方法属性-methods-的区别"><a href="#计算属性-computed-与方法属性-methods-的区别" class="headerlink" title="计算属性(computed)与方法属性(methods)的区别"></a>计算属性(computed)与方法属性(methods)的区别</h3><p>计算属性的值基于data，会缓存，data数据改变了，它的值也会改变，而方法属性调用一次就会计算一次，它的值不会改变。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=<span class="string">"utf-8"</span>&gt;</span><br><span class="line">		&lt;title&gt;&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;!-- 表达式的计算逻辑可能比较复杂，使用计算属性可以使模板内容更加简洁 --&gt;</span><br><span class="line">		&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">			&lt;div&gt;&#123;&#123;msg&#125;&#125;&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">			&lt;div&gt;&#123;&#123;msg.split('').reverse().join('')&#125;&#125;&lt;/</span>div&gt;</span><br><span class="line">			&lt;div&gt;&#123;&#123;reversedMsg&#125;&#125;&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">			&lt;div&gt;&#123;&#123;reversedMessage()&#125;&#125;&lt;/</span>div&gt;</span><br><span class="line">		&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">		&lt;script type="text/</span>javascript<span class="string">" src="</span>../<span class="number">000</span>-vue.js/vue.js<span class="string">"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="string">		&lt;script&gt;</span></span><br><span class="line"><span class="string">			var vm=new Vue(&#123;</span></span><br><span class="line"><span class="string">				el:'#app',</span></span><br><span class="line"><span class="string">				data:&#123;</span></span><br><span class="line"><span class="string">					msg:'hello',</span></span><br><span class="line"><span class="string">				&#125;,</span></span><br><span class="line"><span class="string">				computed:&#123;//计算属性，基于data，当数据改变计算属性也会改变，会缓存，类似的方法属性不会缓存</span></span><br><span class="line"><span class="string">					reversedMsg:function()&#123;</span></span><br><span class="line"><span class="string">						return this.msg.split('').reverse().join('');</span></span><br><span class="line"><span class="string">					&#125;</span></span><br><span class="line"><span class="string">				&#125;,</span></span><br><span class="line"><span class="string">				methods:&#123;//方法属性调用一次就会计算一次</span></span><br><span class="line"><span class="string">					reversedMessage:function()&#123;</span></span><br><span class="line"><span class="string">						return this.msg.split('').reverse().join('');</span></span><br><span class="line"><span class="string">					&#125;</span></span><br><span class="line"><span class="string">				&#125;</span></span><br><span class="line"><span class="string">			&#125;)</span></span><br><span class="line"><span class="string">		&lt;/script&gt;</span></span><br><span class="line"><span class="string">	&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/04/03/vue%E7%9A%84%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-vue自定义指令" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1089,106 +1178,6 @@
 
 
   
-    <article id="post-一个简单的时钟" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/03/15/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E6%97%B6%E9%92%9F/" target="_blank">一个简单的时钟</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/03/15/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E6%97%B6%E9%92%9F/" class="archive-article-date">
-        <time datetime="2020-03-15T07:19:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-15</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="一个简单的时钟"><a href="#一个简单的时钟" class="headerlink" title="一个简单的时钟"></a>一个简单的时钟</h1><p>由本地时间控制的指针时钟，用的是最原始的代码，利用setInterval方法每过一秒读取一次本地时间，随之改变指针角度的方法</p>
-<p>代码如下：</p>
-<p>index.html</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"zh"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">	&lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">	&lt;meta name=<span class="string">"viewport"</span> content=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span><br><span class="line">	&lt;meta http-equiv=<span class="string">"X-UA-Compatible"</span> content=<span class="string">"ie=edge"</span>&gt;</span><br><span class="line">	&lt;title&gt;&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">	&lt;link rel="stylesheet" href="./</span>style.css<span class="string">"&gt;</span></span><br><span class="line"><span class="string">&lt;/head&gt;</span></span><br><span class="line"><span class="string">&lt;body&gt;</span></span><br><span class="line"><span class="string">	&lt;div class="</span>outer<span class="string">"&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>num one<span class="string">"&gt;1&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>num two<span class="string">"&gt;2&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>num three<span class="string">"&gt;3&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>num four<span class="string">"&gt;4&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>num five<span class="string">"&gt;5&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>num six<span class="string">"&gt;6&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>num seven<span class="string">"&gt;7&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>num eight<span class="string">"&gt;8&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>num nine<span class="string">"&gt;9&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>num ten<span class="string">"&gt;10&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>num eleven<span class="string">"&gt;11&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>num twelve<span class="string">"&gt;12&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>origin<span class="string">"&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>pointer<span class="string">"&gt;	</span></span><br><span class="line"><span class="string">			&lt;div class="</span>hour<span class="string">"&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">			&lt;div class="</span>minute<span class="string">"&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">			&lt;div class="</span>second<span class="string">"&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;/div&gt;</span></span><br><span class="line"><span class="string">	&lt;/div&gt;</span></span><br><span class="line"><span class="string">	&lt;script src="</span>./index.js<span class="string">"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="string">&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>style.css</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br></pre></td><td class="code"><pre><span class="line">*&#123;</span><br><span class="line">	margin :<span class="number">0</span>;</span><br><span class="line">	padding:<span class="number">0</span>;</span><br><span class="line">	font-family: <span class="string">"microsoft yahei"</span>,<span class="string">"microsoft sans serif"</span>;</span><br><span class="line">	font-size: <span class="number">45</span>px;</span><br><span class="line">	box-sizing: border-box;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.outer&#123;</span><br><span class="line">	width:<span class="number">650</span>px;</span><br><span class="line">	height:<span class="number">650</span>px;</span><br><span class="line">	border:solid <span class="number">5</span>px black;</span><br><span class="line">	position:absolute;</span><br><span class="line">	top:<span class="number">50</span>%;</span><br><span class="line">	left:<span class="number">50</span>%;</span><br><span class="line">	transform: translate(<span class="number">-50</span>%,<span class="number">-50</span>%);</span><br><span class="line">	border-radius: <span class="number">50</span>%;</span><br><span class="line">	background-color: #dfdfcd;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.num&#123;</span><br><span class="line">	display: block;</span><br><span class="line">	width:<span class="number">70</span>px;</span><br><span class="line">	height:<span class="number">70</span>px;</span><br><span class="line">	color:#aa0000;</span><br><span class="line">	position: absolute;</span><br><span class="line">	top:<span class="number">50</span>%;</span><br><span class="line">	left:<span class="number">50</span>%;</span><br><span class="line">	margin-top: <span class="number">-35</span>px;</span><br><span class="line">	margin-left: <span class="number">-35</span>px;</span><br><span class="line">	text-align: center;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.num.one&#123;</span><br><span class="line">	transform: rotate(<span class="number">30</span>deg) translateY(<span class="number">-290</span>px);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.num.two&#123;</span><br><span class="line">	transform: rotate(<span class="number">60</span>deg) translateY(<span class="number">-290</span>px);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.num.three&#123;</span><br><span class="line">	transform: rotate(<span class="number">90</span>deg) translateY(<span class="number">-290</span>px);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.num.four&#123;</span><br><span class="line">	transform: rotate(<span class="number">120</span>deg) translateY(<span class="number">-290</span>px);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.num.five&#123;</span><br><span class="line">	transform: rotate(<span class="number">150</span>deg) translateY(<span class="number">-290</span>px);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.num.six&#123;</span><br><span class="line">	transform: rotate(<span class="number">180</span>deg) translateY(<span class="number">-290</span>px);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.num.seven&#123;</span><br><span class="line">	transform: rotate(<span class="number">210</span>deg) translateY(<span class="number">-290</span>px);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.num.eight&#123;</span><br><span class="line">	transform: rotate(<span class="number">240</span>deg) translateY(<span class="number">-290</span>px);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.num.nine&#123;</span><br><span class="line">	transform: rotate(<span class="number">270</span>deg) translateY(<span class="number">-290</span>px);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.num.ten&#123;</span><br><span class="line">	transform: rotate(<span class="number">300</span>deg) translateY(<span class="number">-290</span>px);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.num.eleven&#123;</span><br><span class="line">	transform: rotate(<span class="number">330</span>deg) translateY(<span class="number">-290</span>px);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.num.twelve&#123;</span><br><span class="line">	transform: translateY(<span class="number">-290</span>px);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">.origin&#123;</span><br><span class="line">	width: <span class="number">50</span>px;</span><br><span class="line">	height: <span class="number">50</span>px;</span><br><span class="line">	position: absolute;</span><br><span class="line">	top:<span class="number">50</span>%;</span><br><span class="line">	left:<span class="number">50</span>%;</span><br><span class="line">	background-color: #AA0000;</span><br><span class="line">	border-radius: <span class="number">50</span>%;</span><br><span class="line">	margin-top: <span class="number">-25</span>px;</span><br><span class="line">	margin-left:<span class="number">-25</span>px;</span><br><span class="line">	z-index: <span class="number">500</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 指针部分 */</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">.hour&#123;</span><br><span class="line">	width:<span class="number">32</span>px;</span><br><span class="line">	height: <span class="number">200</span>px;</span><br><span class="line">	background-color: #ff0000;</span><br><span class="line">	border-radius: <span class="number">40</span>px;</span><br><span class="line">	position: absolute;</span><br><span class="line">	top:<span class="number">50</span>%;</span><br><span class="line">	left:<span class="number">50</span>%;</span><br><span class="line">	margin-top:<span class="number">-200</span>px;</span><br><span class="line">	margin-left: <span class="number">-16</span>px;</span><br><span class="line">	transform-origin:center bottom;</span><br><span class="line">	z-index: <span class="number">100</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.minute&#123;</span><br><span class="line">	width:<span class="number">25</span>px;</span><br><span class="line">	height:<span class="number">230</span>px;</span><br><span class="line">	background-color: aqua;</span><br><span class="line">	border-radius: <span class="number">30</span>px;</span><br><span class="line">	position: absolute;</span><br><span class="line">	top:<span class="number">50</span>%;</span><br><span class="line">	left:<span class="number">50</span>%;</span><br><span class="line">	margin-top: <span class="number">-230</span>px;</span><br><span class="line">	margin-left: <span class="number">-12.5</span>px;</span><br><span class="line">	transform-origin:center bottom;</span><br><span class="line">	z-index: <span class="number">50</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.second&#123;</span><br><span class="line">	width:<span class="number">15</span>px;</span><br><span class="line">	height:<span class="number">250</span>px;</span><br><span class="line">	background-color: chartreuse;</span><br><span class="line">	border-radius: <span class="number">20</span>px;</span><br><span class="line">	position: absolute;</span><br><span class="line">	top:<span class="number">50</span>%;</span><br><span class="line">	left:<span class="number">50</span>%;</span><br><span class="line">	margin-top:<span class="number">-250</span>px;</span><br><span class="line">	margin-left:<span class="number">-7.5</span>px;</span><br><span class="line">	transform-origin:center bottom;</span><br><span class="line">	z-index: <span class="number">10</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>index.js</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>.setInterval(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">	</span><br><span class="line"><span class="keyword">var</span> now=<span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line"><span class="keyword">var</span> h=now.getHours();</span><br><span class="line"><span class="keyword">var</span> m=now.getMinutes();</span><br><span class="line"><span class="keyword">var</span> s=now.getSeconds();</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> hourEl=<span class="built_in">document</span>.querySelector(<span class="string">".hour"</span>);</span><br><span class="line"><span class="keyword">const</span> minuteEl=<span class="built_in">document</span>.querySelector(<span class="string">".minute"</span>);</span><br><span class="line"><span class="keyword">const</span> secondEl=<span class="built_in">document</span>.querySelector(<span class="string">".second"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(h&lt;=<span class="number">12</span>)&#123;</span><br><span class="line">	<span class="keyword">var</span> angleH=(h+m/<span class="number">60</span>+s/<span class="number">3600</span>)*<span class="number">30</span>;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> angleH=((h+m/<span class="number">60</span>+s/<span class="number">3600</span>)<span class="number">-12</span>)*<span class="number">30</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> angleM=(m+s/<span class="number">60</span>)*<span class="number">6</span>;</span><br><span class="line">	<span class="keyword">var</span> angleS=s*<span class="number">6</span>;</span><br><span class="line">	hourEl.style.transform=<span class="string">"rotate("</span>+angleH+<span class="string">"deg)"</span>;<span class="comment">//为什么一定要加+好呢</span></span><br><span class="line">	minuteEl.style.transform=<span class="string">"rotate("</span>+angleM+<span class="string">"deg)"</span>;</span><br><span class="line">	secondEl.style.transform=<span class="string">"rotate("</span>+angleS+<span class="string">"deg)"</span>;</span><br><span class="line">&#125;,<span class="number">1000</span>);</span><br></pre></td></tr></table></figure>
-
-<h3 id="代码链接"><a href="#代码链接" class="headerlink" title="代码链接"></a><a href="https://github.com/yuchenbin1/web-design" target="_blank" rel="noopener">代码链接</a></h3><p>在制作过程中遇到的问题：</p>
-<p>主要集中在js中，（1） 为什么用变量去更改css中的样式，变量两边要用+并且用引号括起来</p>
-<p>（2）在改变样式过程中我用obj.style.transform改变transform成功了，而我想使用obj.setAttribute(“transform”,……)时失败了</p>
-<p>这两个问题我希望我以后知识多了之后能明白</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">页面项目</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/03/15/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E6%97%B6%E9%92%9F/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/">Next &amp;raquo;</a>
@@ -1326,11 +1315,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1338,11 +1327,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
