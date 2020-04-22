@@ -18,7 +18,7 @@
 <meta property="og:description" content="vue脚手架使用感悟对于一个项目，自己动手创建相关配置实在是有点麻烦 vue给了我们一个脚手架，脚手架事先配置好了相关的文件，还可以配置插件， 在开发中十分方便 vue脚手架有种方式创建模板，这里介绍三种常见的：1.基于交互式命令行的方式，创建新版vue项目(就是在命令面板里面创建)vue create my-project2.基于图形化界面的方式，创建新版vue项目（推荐使用）vue ui3.基">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-04-21T11:40:11.000Z">
-<meta property="article:modified_time" content="2020-04-21T11:49:32.598Z">
+<meta property="article:modified_time" content="2020-04-22T08:58:47.243Z">
 <meta property="article:author" content="ycb">
 <meta property="article:tag" content="日志">
 <meta name="twitter:card" content="summary">
@@ -231,7 +231,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">295字</span>
+      <span class="post-count">482字</span>
     </span>
   </span>
 
@@ -256,6 +256,18 @@
 <p>在开发中十分方便</p>
 <h4 id="vue脚手架有种方式创建模板，这里介绍三种常见的："><a href="#vue脚手架有种方式创建模板，这里介绍三种常见的：" class="headerlink" title="vue脚手架有种方式创建模板，这里介绍三种常见的："></a>vue脚手架有种方式创建模板，这里介绍三种常见的：</h4><p>1.基于交互式命令行的方式，创建新版vue项目(就是在命令面板里面创建)<br>vue create my-project<br>2.基于图形化界面的方式，创建新版vue项目（推荐使用）<br>vue ui<br>3.基于2.x的旧版本模板，创建旧版的vue项目<br>npm install -g @vue/cli-init<br>vue init webpack my-project</p>
 <h5 id="其中最常用的就是图形化界面了"><a href="#其中最常用的就是图形化界面了" class="headerlink" title="其中最常用的就是图形化界面了"></a>其中最常用的就是图形化界面了</h5><p>具体的操作就不描述了，根据英文提示来就行了。</p>
+<h2 id="脚手架生成项目的结构"><a href="#脚手架生成项目的结构" class="headerlink" title="脚手架生成项目的结构"></a>脚手架生成项目的结构</h2><p>node_modules——依赖包目录<br>public————静态资源目录<br>src—————组件源码目录<br>    assets———–资源、样式表、图片<br>    components——-组件<br>    views————视图组件<br>    App.vue———-项目根组件<br>    main.js———-项目的打包入口文件<br>    router.js——–路由相关的配置<br>babel.config.js—babel配置文件<br>eslintrc.js——-eslint语法相关的文件<br>gitignore———git的忽略文件<br>package.json——包管理文件<br>postcss.config.js-postcss的配置文件</p>
+<h2 id="vue自定义配置"><a href="#vue自定义配置" class="headerlink" title="vue自定义配置"></a>vue自定义配置</h2><h4 id="1-通过package-json配置-主要用来管理包的配置信息，不推荐这种方式"><a href="#1-通过package-json配置-主要用来管理包的配置信息，不推荐这种方式" class="headerlink" title="1.通过package.json配置(主要用来管理包的配置信息，不推荐这种方式)"></a>1.通过package.json配置(主要用来管理包的配置信息，不推荐这种方式)</h4><p>比如：设置webpack-dev-server</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"vue"</span>:&#123;</span><br><span class="line">    <span class="string">"devServer"</span>:&#123;</span><br><span class="line">        <span class="string">"port"</span>:<span class="string">"8888"</span>,</span><br><span class="line">        <span class="string">"open"</span>:<span class="string">"true"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-通过在根目录自定义vue-config-js配置文件"><a href="#2-通过在根目录自定义vue-config-js配置文件" class="headerlink" title="2.通过在根目录自定义vue.config.js配置文件"></a>2.通过在根目录自定义vue.config.js配置文件</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports=&#123;</span><br><span class="line">    devServer:&#123;</span><br><span class="line">        <span class="string">"port"</span>:<span class="string">"8888"</span>,</span><br><span class="line">        <span class="string">"open"</span>:<span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
 <h2 id="之后的计划"><a href="#之后的计划" class="headerlink" title="之后的计划"></a>之后的计划</h2><p>从今天开始，我会根据网上的电商后台管理系统的构建来学习，但是这个项目已经烂了，我也不是培训出来的。我想完整的做一个项目总会有好处的。之后在学习vuex，然后巩固vue全家桶之后学习react去了。</p>
 
     
@@ -395,6 +407,15 @@
 
 
 <nav id="article-nav">
+  
+    <a href="/2020/04/22/ElementUI%E7%9A%84%E4%BD%BF%E7%94%A8/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          ElementUI的使用
+        
+      </div>
+    </a>
   
   
     <a href="/2020/04/20/webpack%E6%89%93%E5%8C%85%E5%8F%91%E5%B8%83/" id="article-nav-older" class="article-nav-link-wrap">
@@ -560,6 +581,10 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">日志</a>
               </li>
              
@@ -576,19 +601,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webpage</a>
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
+                <a href="javascript:void(0)" class="js-tag color3">webpage</a>
               </li>
              
               <li class="article-tag-list-item">
