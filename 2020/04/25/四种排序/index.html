@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://yuchenbin1.github.io">
-  <title>三种排序 | ycb的博客</title>
+  <title>四种排序 | ycb的博客</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="1.冒泡排序从第一位开始与之后每一位比较，满足一定的条件，交换位置； 之后是第二位。 12345678910111213function maopao(arr)&amp;#123;            for(let i&#x3D;0;i&lt;arr.length-1;i++)&amp;#123;                for(let j&#x3D;i;j&lt;arr.length;j++)&amp;#123;">
+  <meta name="description" content="1.选择排序从第一位开始与之后每一位比较，满足一定的条件，交换位置； 之后是第二位。 12345678910111213function xuanze(arr)&amp;#123;            for(let i&#x3D;0;i&lt;arr.length-1;i++)&amp;#123;                for(let j&#x3D;i;j&lt;arr.length;j++)&amp;#123;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="三种排序">
-<meta property="og:url" content="https://yuchenbin1.github.io/2020/04/25/%E4%B8%89%E7%A7%8D%E6%8E%92%E5%BA%8F/index.html">
+<meta property="og:title" content="四种排序">
+<meta property="og:url" content="https://yuchenbin1.github.io/2020/04/25/%E5%9B%9B%E7%A7%8D%E6%8E%92%E5%BA%8F/index.html">
 <meta property="og:site_name" content="ycb的博客">
-<meta property="og:description" content="1.冒泡排序从第一位开始与之后每一位比较，满足一定的条件，交换位置； 之后是第二位。 12345678910111213function maopao(arr)&amp;#123;            for(let i&#x3D;0;i&lt;arr.length-1;i++)&amp;#123;                for(let j&#x3D;i;j&lt;arr.length;j++)&amp;#123;">
+<meta property="og:description" content="1.选择排序从第一位开始与之后每一位比较，满足一定的条件，交换位置； 之后是第二位。 12345678910111213function xuanze(arr)&amp;#123;            for(let i&#x3D;0;i&lt;arr.length-1;i++)&amp;#123;                for(let j&#x3D;i;j&lt;arr.length;j++)&amp;#123;">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-04-25T06:11:13.000Z">
-<meta property="article:modified_time" content="2020-04-25T06:19:27.308Z">
+<meta property="article:modified_time" content="2020-04-26T11:06:59.453Z">
 <meta property="article:author" content="ycb">
 <meta property="article:tag" content="js">
 <meta name="twitter:card" content="summary">
@@ -198,14 +198,14 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-三种排序" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-四种排序" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
     <h1 class="article-title" itemprop="name">
-      三种排序
+      四种排序
     </h1>
   
 
@@ -217,7 +217,7 @@
               <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
         </span>
 
-<a href="/2020/04/25/%E4%B8%89%E7%A7%8D%E6%8E%92%E5%BA%8F/" class="archive-article-date">
+<a href="/2020/04/25/%E5%9B%9B%E7%A7%8D%E6%8E%92%E5%BA%8F/" class="archive-article-date">
         <time datetime="2020-04-25T06:11:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-25</time>
 </a>
 
@@ -231,7 +231,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">332字</span>
+      <span class="post-count">386字</span>
     </span>
   </span>
 
@@ -251,15 +251,17 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="1-冒泡排序"><a href="#1-冒泡排序" class="headerlink" title="1.冒泡排序"></a>1.冒泡排序</h1><p>从第一位开始与之后每一位比较，满足一定的条件，交换位置；</p>
+    <h1 id="1-选择排序"><a href="#1-选择排序" class="headerlink" title="1.选择排序"></a>1.选择排序</h1><p>从第一位开始与之后每一位比较，满足一定的条件，交换位置；</p>
 <p>之后是第二位。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">maopao</span>(<span class="params">arr</span>)</span>&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;arr.length<span class="number">-1</span>;i++)&#123;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">let</span> j=i;j&lt;arr.length;j++)&#123;</span><br><span class="line">                    <span class="keyword">if</span>(arr[i]&gt;arr[j])&#123;</span><br><span class="line">                        changePlace(i,j,arr);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> arr;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">changePlace</span>(<span class="params">m,n,arr</span>)</span>&#123;</span><br><span class="line">            [arr[m],arr[n]]=[arr[n],arr[m]];</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">xuanze</span>(<span class="params">arr</span>)</span>&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;arr.length<span class="number">-1</span>;i++)&#123;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">let</span> j=i;j&lt;arr.length;j++)&#123;</span><br><span class="line">                    <span class="keyword">if</span>(arr[i]&gt;arr[j])&#123;</span><br><span class="line">                        changePlace(i,j,arr);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> arr;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">changePlace</span>(<span class="params">m,n,arr</span>)</span>&#123;</span><br><span class="line">            [arr[m],arr[n]]=[arr[n],arr[m]];</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
 
 <h1 id="2-插入排序"><a href="#2-插入排序" class="headerlink" title="2.插入排序"></a>2.插入排序</h1><p>先取第一位为基准，之后第二位与之比较，满足一定条件放在该数的后面，再取第三位，满足一定的条件在放某个数的后面</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">charu</span>(<span class="params">arr</span>)</span>&#123;</span><br><span class="line">            <span class="keyword">let</span> handle=[arr[<span class="number">0</span>]];</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">1</span>;i&lt;arr.length;i++)&#123;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">let</span> j=handle.length<span class="number">-1</span>;j&gt;=<span class="number">0</span>;j--)&#123;</span><br><span class="line">                    <span class="keyword">if</span>(arr[i]&gt;handle[j])&#123;</span><br><span class="line">                        handle.splice(j+<span class="number">1</span>,<span class="number">0</span>,arr[i]);</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">if</span>(j===<span class="number">0</span>)&#123;</span><br><span class="line">                        handle.unshift(arr[i]);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> handle</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
 
 <h1 id="3-快速排序"><a href="#3-快速排序" class="headerlink" title="3.快速排序"></a>3.快速排序</h1><p>取数组中间值，其余的数与之比较，大的放一边，小的放另一边，再在这些边里继续分，直到剩余一个数，最后返回数组的拼接concat</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">kuaisu</span>(<span class="params">arr</span>)</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(arr.length&lt;=<span class="number">1</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span> arr;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">let</span> middleNum=<span class="built_in">Math</span>.floor(arr.length/<span class="number">2</span>);</span><br><span class="line">            <span class="keyword">let</span> middleValue=arr[middleNum];</span><br><span class="line">            arr.splice(middleNum,<span class="number">1</span>);</span><br><span class="line">            <span class="keyword">let</span> left=[];</span><br><span class="line">            <span class="keyword">let</span> right=[];</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;arr.length;i++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(arr[i]&lt;middleValue)&#123;</span><br><span class="line">                    left.push(arr[i]);</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    right.push(arr[i]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> kuaisu(left).concat(middleValue,kuaisu(right));</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="4-冒泡排序"><a href="#4-冒泡排序" class="headerlink" title="4.冒泡排序"></a>4.冒泡排序</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">maopao</span>(<span class="params">arr</span>)</span>&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;arr.length;i++)&#123;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">let</span> j=<span class="number">0</span>;j&lt;arr.length<span class="number">-1</span>;j++)&#123;</span><br><span class="line">                    <span class="keyword">if</span>(arr[j]&gt;arr[j+<span class="number">1</span>])&#123;</span><br><span class="line">                        temp=arr[j];</span><br><span class="line">                        arr[j]=arr[i];</span><br><span class="line">                        arr[i]=temp;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> arr</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
 
 
     
@@ -307,7 +309,7 @@
         </li>
         <li>
           <strong>本文链接：</strong>
-          <a href="https:/yuchenbin1.github.io/2020/04/25/三种排序/" title="三种排序" target="_blank">https:/yuchenbin1.github.io/2020/04/25/三种排序/</a>
+          <a href="https:/yuchenbin1.github.io/2020/04/25/四种排序/" title="四种排序" target="_blank">https:/yuchenbin1.github.io/2020/04/25/四种排序/</a>
         </li>
         
         <li>
@@ -385,7 +387,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://yuchenbin1.github.io/2020/04/25/%E4%B8%89%E7%A7%8D%E6%8E%92%E5%BA%8F/" alt="微信分享二维码"> -->
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://yuchenbin1.github.io/2020/04/25/%E5%9B%9B%E7%A7%8D%E6%8E%92%E5%BA%8F/" alt="微信分享二维码"> -->
     </div>
 </div>
 
@@ -584,11 +586,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
