@@ -18,7 +18,7 @@
 <meta property="og:description" content="json JSON(JavaScript Object Notation, JS 对象简谱) 是一种轻量级的数据交换格式。它基于 ECMAScript (欧洲计算机协会制定的js规范)的一个子集 。  值可以是对象、数组、数字、字符串或者三个字面值(false、null、true)中的一个。值中的字面值中的英文必须使用小写。  对象由花括号括起来的逗号分割的成员构成，成员是字符串键和上文所述的值由">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-04-28T12:25:15.000Z">
-<meta property="article:modified_time" content="2020-04-28T13:02:05.359Z">
+<meta property="article:modified_time" content="2020-04-30T09:23:02.393Z">
 <meta property="article:author" content="ycb">
 <meta property="article:tag" content="js">
 <meta name="twitter:card" content="summary">
@@ -231,7 +231,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">307字</span>
+      <span class="post-count">251字</span>
     </span>
   </span>
 
@@ -254,16 +254,16 @@
     <h1 id="json"><a href="#json" class="headerlink" title="json"></a>json</h1><p> <a href="https://baike.baidu.com/item/JSON" target="_blank" rel="noopener">JSON</a>(<a href="https://baike.baidu.com/item/JavaScript" target="_blank" rel="noopener">JavaScript</a> Object Notation, JS 对象简谱) 是一种轻量级的数据交换格式。它基于 <a href="https://baike.baidu.com/item/ECMAScript" target="_blank" rel="noopener">ECMAScript</a> (欧洲计算机协会制定的js规范)的一个子集 。</p>
 <p> <strong>值</strong>可以是<strong>对象</strong>、<strong>数组</strong>、<strong>数字</strong>、<strong>字符串</strong>或者三个<strong>字面值</strong>(false、null、true)中的一个。值中的字面值中的英文必须使用小写。 </p>
 <p><strong>对象</strong>由花括号括起来的逗号分割的成员构成，成员是字符串键和上文所述的<strong>值</strong>由逗号分割的<strong>键值对</strong>组成，如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#96;  &#96;&#96;&#123;&#96;&#96;&quot;name&quot;&#96;&#96;: &#96;&#96;&quot;John Doe&quot;&#96;&#96;, &#96;&#96;&quot;age&quot;&#96;&#96;: 18, &#96;&#96;&quot;address&quot;&#96;&#96;: &#123;&#96;&#96;&quot;country&quot;&#96; &#96;: &#96;&#96;&quot;china&quot;&#96;&#96;, &#96;&#96;&quot;zip-code&quot;&#96;&#96;: &#96;&#96;&quot;10000&quot;&#96;&#96;&#125;&#125;&#96;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">"name"</span>:<span class="string">"John Doe"</span>,<span class="string">"age"</span>: <span class="number">18</span>,<span class="string">"address"</span>:&#123;<span class="string">"country"</span>:<span class="string">"china"</span>,<span class="string">"zip-code"</span>:<span class="string">"10000"</span>&#125;&#125;</span><br></pre></td></tr></table></figure>
 
 <p><strong>数组</strong>是由方括号括起来的一组值构成，如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#96;[3, 1, 4, 1, 5, 9, 2, 6]&#96;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">3</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">9</span>, <span class="number">2</span>, <span class="number">6</span>]</span><br></pre></td></tr></table></figure>
 
 
 
-<h3 id="要实现从JSON字符串转换为JS对象，使用-JSON-parse-方法："><a href="#要实现从JSON字符串转换为JS对象，使用-JSON-parse-方法：" class="headerlink" title="要实现从JSON字符串转换为JS对象，使用 JSON.parse() 方法："></a>要实现从JSON字符串转换为JS对象，使用 JSON.parse() 方法：</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">`var`</span> <span class="string">`obj = JSON.parse(`</span><span class="string">`'&#123;"a": "Hello", "b": "World"&#125;'`</span><span class="string">`); `</span><span class="string">`//结果是 &#123;a: 'Hello', b: 'World'&#125;`</span></span><br></pre></td></tr></table></figure>
+<h3 id="要实现从JSON字符串转换为JS对象，使用-JSON-parse-方法："><a href="#要实现从JSON字符串转换为JS对象，使用-JSON-parse-方法：" class="headerlink" title="要实现从JSON字符串转换为JS对象，使用 JSON.parse() 方法："></a>要实现从JSON字符串转换为JS对象，使用 JSON.parse() 方法：</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = <span class="built_in">JSON</span>.parse(<span class="string">'&#123;"a": "Hello", "b": "World"&#125;'</span>); <span class="comment">//结果是 &#123;a: 'Hello', b: 'World'&#125;`</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="要实现从JS对象转换为JSON字符串，使用-JSON-stringify-方法："><a href="#要实现从JS对象转换为JSON字符串，使用-JSON-stringify-方法：" class="headerlink" title="要实现从JS对象转换为JSON字符串，使用 JSON.stringify() 方法："></a>要实现从JS对象转换为JSON字符串，使用 JSON.stringify() 方法：</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">`var`</span> <span class="string">`json = JSON.stringify(&#123;a: `</span><span class="string">`'Hello'`</span><span class="string">`, b: `</span><span class="string">`'World'`</span><span class="string">`&#125;); `</span><span class="string">`//结果是 '&#123;"a": "Hello", "b": "World"&#125;'`</span></span><br></pre></td></tr></table></figure>
+<h3 id="要实现从JS对象转换为JSON字符串，使用-JSON-stringify-方法："><a href="#要实现从JS对象转换为JSON字符串，使用-JSON-stringify-方法：" class="headerlink" title="要实现从JS对象转换为JSON字符串，使用 JSON.stringify() 方法："></a>要实现从JS对象转换为JSON字符串，使用 JSON.stringify() 方法：</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> json = <span class="built_in">JSON</span>.stringify(&#123;<span class="attr">a</span>:<span class="string">'Hello'</span>, <span class="attr">b</span>:<span class="string">'World'</span>&#125;);<span class="comment">//结果是 '&#123;"a": "Hello", "b": "World"&#125;'</span></span><br></pre></td></tr></table></figure>
 
 
 
@@ -582,10 +582,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
@@ -594,15 +590,19 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
               </li>
              
               <li class="article-tag-list-item">

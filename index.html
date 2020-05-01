@@ -202,6 +202,107 @@
             
 
   
+    <article id="post-vuex的一般使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/05/01/vuex%E7%9A%84%E4%B8%80%E8%88%AC%E4%BD%BF%E7%94%A8/" target="_blank">vuex的一般使用</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/05/01/vuex%E7%9A%84%E4%B8%80%E8%88%AC%E4%BD%BF%E7%94%A8/" class="archive-article-date">
+        <time datetime="2020-05-01T01:42:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-01</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="vuex的一般使用"><a href="#vuex的一般使用" class="headerlink" title="vuex的一般使用"></a>vuex的一般使用</h1><p>一般使用：</p>
+<p>1.安装vuex依赖包</p>
+<p><code>npm install vuex --save</code></p>
+<p>2.导入vuex包</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vuex <span class="keyword">from</span> <span class="string">'vuex'</span></span><br><span class="line">Vue.use(Vuex)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>3.创建store对象</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> store=<span class="keyword">new</span> Vuex.store(&#123;</span><br><span class="line">    <span class="comment">//state 中存放的就是全局共享的数据</span></span><br><span class="line">    state:&#123;<span class="attr">count</span>:<span class="number">0</span>&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>4.将store对象挂载到vue实例中</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el:<span class="string">'#app'</span>,</span><br><span class="line">    render:<span class="function"><span class="params">h</span>=&gt;</span>h(app),</span><br><span class="line">    router,</span><br><span class="line"></span><br><span class="line">    store</span><br><span class="line"></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/05/01/vuex%E7%9A%84%E4%B8%80%E8%88%AC%E4%BD%BF%E7%94%A8/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-继承" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -440,16 +541,16 @@
     <h1 id="json"><a href="#json" class="headerlink" title="json"></a>json</h1><p> <a href="https://baike.baidu.com/item/JSON" target="_blank" rel="noopener">JSON</a>(<a href="https://baike.baidu.com/item/JavaScript" target="_blank" rel="noopener">JavaScript</a> Object Notation, JS 对象简谱) 是一种轻量级的数据交换格式。它基于 <a href="https://baike.baidu.com/item/ECMAScript" target="_blank" rel="noopener">ECMAScript</a> (欧洲计算机协会制定的js规范)的一个子集 。</p>
 <p> <strong>值</strong>可以是<strong>对象</strong>、<strong>数组</strong>、<strong>数字</strong>、<strong>字符串</strong>或者三个<strong>字面值</strong>(false、null、true)中的一个。值中的字面值中的英文必须使用小写。 </p>
 <p><strong>对象</strong>由花括号括起来的逗号分割的成员构成，成员是字符串键和上文所述的<strong>值</strong>由逗号分割的<strong>键值对</strong>组成，如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#96;  &#96;&#96;&#123;&#96;&#96;&quot;name&quot;&#96;&#96;: &#96;&#96;&quot;John Doe&quot;&#96;&#96;, &#96;&#96;&quot;age&quot;&#96;&#96;: 18, &#96;&#96;&quot;address&quot;&#96;&#96;: &#123;&#96;&#96;&quot;country&quot;&#96; &#96;: &#96;&#96;&quot;china&quot;&#96;&#96;, &#96;&#96;&quot;zip-code&quot;&#96;&#96;: &#96;&#96;&quot;10000&quot;&#96;&#96;&#125;&#125;&#96;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">"name"</span>:<span class="string">"John Doe"</span>,<span class="string">"age"</span>: <span class="number">18</span>,<span class="string">"address"</span>:&#123;<span class="string">"country"</span>:<span class="string">"china"</span>,<span class="string">"zip-code"</span>:<span class="string">"10000"</span>&#125;&#125;</span><br></pre></td></tr></table></figure>
 
 <p><strong>数组</strong>是由方括号括起来的一组值构成，如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#96;[3, 1, 4, 1, 5, 9, 2, 6]&#96;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">3</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">9</span>, <span class="number">2</span>, <span class="number">6</span>]</span><br></pre></td></tr></table></figure>
 
 
 
-<h3 id="要实现从JSON字符串转换为JS对象，使用-JSON-parse-方法："><a href="#要实现从JSON字符串转换为JS对象，使用-JSON-parse-方法：" class="headerlink" title="要实现从JSON字符串转换为JS对象，使用 JSON.parse() 方法："></a>要实现从JSON字符串转换为JS对象，使用 JSON.parse() 方法：</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">`var`</span> <span class="string">`obj = JSON.parse(`</span><span class="string">`'&#123;"a": "Hello", "b": "World"&#125;'`</span><span class="string">`); `</span><span class="string">`//结果是 &#123;a: 'Hello', b: 'World'&#125;`</span></span><br></pre></td></tr></table></figure>
+<h3 id="要实现从JSON字符串转换为JS对象，使用-JSON-parse-方法："><a href="#要实现从JSON字符串转换为JS对象，使用-JSON-parse-方法：" class="headerlink" title="要实现从JSON字符串转换为JS对象，使用 JSON.parse() 方法："></a>要实现从JSON字符串转换为JS对象，使用 JSON.parse() 方法：</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = <span class="built_in">JSON</span>.parse(<span class="string">'&#123;"a": "Hello", "b": "World"&#125;'</span>); <span class="comment">//结果是 &#123;a: 'Hello', b: 'World'&#125;`</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="要实现从JS对象转换为JSON字符串，使用-JSON-stringify-方法："><a href="#要实现从JS对象转换为JSON字符串，使用-JSON-stringify-方法：" class="headerlink" title="要实现从JS对象转换为JSON字符串，使用 JSON.stringify() 方法："></a>要实现从JS对象转换为JSON字符串，使用 JSON.stringify() 方法：</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">`var`</span> <span class="string">`json = JSON.stringify(&#123;a: `</span><span class="string">`'Hello'`</span><span class="string">`, b: `</span><span class="string">`'World'`</span><span class="string">`&#125;); `</span><span class="string">`//结果是 '&#123;"a": "Hello", "b": "World"&#125;'`</span></span><br></pre></td></tr></table></figure>
+<h3 id="要实现从JS对象转换为JSON字符串，使用-JSON-stringify-方法："><a href="#要实现从JS对象转换为JSON字符串，使用-JSON-stringify-方法：" class="headerlink" title="要实现从JS对象转换为JSON字符串，使用 JSON.stringify() 方法："></a>要实现从JS对象转换为JSON字符串，使用 JSON.stringify() 方法：</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> json = <span class="built_in">JSON</span>.stringify(&#123;<span class="attr">a</span>:<span class="string">'Hello'</span>, <span class="attr">b</span>:<span class="string">'World'</span>&#125;);<span class="comment">//结果是 '&#123;"a": "Hello", "b": "World"&#125;'</span></span><br></pre></td></tr></table></figure>
 
 
 
@@ -1099,94 +1200,6 @@
 
 
   
-    <article id="post-webpack打包发布" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/04/20/webpack%E6%89%93%E5%8C%85%E5%8F%91%E5%B8%83/" target="_blank">webpack打包发布</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/04/20/webpack%E6%89%93%E5%8C%85%E5%8F%91%E5%B8%83/" class="archive-article-date">
-        <time datetime="2020-04-20T14:54:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-20</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="webpack的上线前的打包发布"><a href="#webpack的上线前的打包发布" class="headerlink" title="webpack的上线前的打包发布"></a>webpack的上线前的打包发布</h1><p>上线之前要将应用整体打包，可以通过package.json文件配置打包命令：<br>//在package.json文件中配置webpack打包命令<br>//该命令默认加载项目根目录下的webpack.config.js配置文件</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"scripts"</span>:&#123;</span><br><span class="line">    <span class="comment">//用于打包的命令</span></span><br><span class="line">    <span class="string">"build"</span>:<span class="string">"webpack -p"</span>,</span><br><span class="line">    <span class="comment">//用于开发调试的命令</span></span><br><span class="line">    <span class="string">"dev"</span>:<span class="string">"webpack-dev-server --open --host 127.0.0.1 --post 3000"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">webpack</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/04/20/webpack%E6%89%93%E5%8C%85%E5%8F%91%E5%B8%83/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1324,10 +1337,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
@@ -1336,15 +1345,19 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
               </li>
              
               <li class="article-tag-list-item">
