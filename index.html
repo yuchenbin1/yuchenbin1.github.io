@@ -202,6 +202,100 @@
             
 
   
+    <article id="post-react环境的搭建与基本的使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/05/07/react%E7%8E%AF%E5%A2%83%E7%9A%84%E6%90%AD%E5%BB%BA%E4%B8%8E%E5%9F%BA%E6%9C%AC%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_blank">react环境的搭建与基本的使用</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/05/07/react%E7%8E%AF%E5%A2%83%E7%9A%84%E6%90%AD%E5%BB%BA%E4%B8%8E%E5%9F%BA%E6%9C%AC%E7%9A%84%E4%BD%BF%E7%94%A8/" class="archive-article-date">
+        <time datetime="2020-05-07T05:53:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-07</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h2 id="react环境的基本搭建"><a href="#react环境的基本搭建" class="headerlink" title="react环境的基本搭建"></a>react环境的基本搭建</h2><p>1.react.js核心文件<br>2.react-dom.js渲染页面中的DOM，当前文件依赖于react核心文件<br>3.babel.js ES6转化为ES5 JSX语法转化为js 与现今的浏览器进行代码的兼容</p>
+<p>下载<br>react       npm i react –save<br>react-dom   npm i react-dom –save<br>babel       npm i babel-standalone –save</p>
+<h2 id="react的基本的使用"><a href="#react的基本的使用" class="headerlink" title="react的基本的使用"></a>react的基本的使用</h2><h4 id="jsx"><a href="#jsx" class="headerlink" title="jsx"></a>jsx</h4><p>jsx=javascript xml javascript的扩展语法</p>
+<p>  优点：</p>
+<p>  1.执行的效率更快</p>
+<p>  2.它是类型安全的，编译的过程中就能及时的发现错误</p>
+<p>  3.在使用jax的时候编写的会更加的简单与快速</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>环境的搭建<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"node_modules/react/umd/react.development.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"node_modules/react-dom/umd/react-dom.development.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"node_modules/babel-standalone/babel.min.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 创建dom的根节点,一般只创建一个根节点 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"demoReact"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/babel"</span>&gt;</span></span><br><span class="line"><span class="actionscript">    <span class="comment">// jsx=javascript xml javascript的扩展语法</span></span></span><br><span class="line"><span class="actionscript">    <span class="comment">//优点：</span></span></span><br><span class="line"><span class="actionscript">    <span class="comment">//1.执行的效率更快</span></span></span><br><span class="line"><span class="actionscript">    <span class="comment">//2.它是类型安全的，编译的过程中就能及时的发现错误</span></span></span><br><span class="line"><span class="actionscript">    <span class="comment">//3.在使用jax的时候编写的会更加的简单与快速</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> myDom=<span class="xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>你好<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span>;</span></span><br><span class="line"><span class="javascript">        ReactDOM.render(myDom,<span class="built_in">document</span>.getElementById(<span class="string">'demoReact'</span>));</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">react</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/05/07/react%E7%8E%AF%E5%A2%83%E7%9A%84%E6%90%AD%E5%BB%BA%E4%B8%8E%E5%9F%BA%E6%9C%AC%E7%9A%84%E4%BD%BF%E7%94%A8/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-react的基本特点" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1093,110 +1187,6 @@
 
 
   
-    <article id="post-20年4月24日" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/04/24/20%E5%B9%B44%E6%9C%8824%E6%97%A5/" target="_blank">20年4月24日</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/04/24/20%E5%B9%B44%E6%9C%8824%E6%97%A5/" class="archive-article-date">
-        <time datetime="2020-04-24T09:25:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-24</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="第一次凉经总结"><a href="#第一次凉经总结" class="headerlink" title="第一次凉经总结"></a>第一次凉经总结</h1><p>今天去面试，我自己开车过去，然后坐地铁。</p>
-<p>我到公司的时候已经是1点了。</p>
-<p>天气异常的热。</p>
-<p>总结一下第一次面试的感受：</p>
-<ol>
-<li>我很紧张，紧张到注意力无法集中。</li>
-<li>笔试题大多数是算法题，而我重心不在算法上面，导致我3道题甚至一道题都没有答出来。</li>
-<li>我是否对于前端的领域有所误解，还是说我与这家公司格格不入，我花了大量的时间在</li>
-</ol>
-<p>基础上面，我认为一个前端工程师是要写出好看完善的样式并且能解决简单的人机交互，再者就是调</p>
-<p>用后端给的接口，但是笔试题大多是算法题，公司更注重一个人的思维能力。</p>
-<ol start="4">
-<li>在面试的过程中，因为我并不是计算机专业的，大四开始自学，感觉并不是很稳，在被问到json是什么数据类型的时候，我并没有get到面试官要我回答什么，我一直以为他让我回答调用接口返回的json是什么类型，我一想这不什么都有吗，一下子感觉又不是，然后就开始猜了，一下子给面试官的印象就不好。不管怎么样，之后遇到这种情况，我应该冷静分析一下，或者让面试官具体一点讲，json不就是object的形式嘛。</li>
-<li>最后就是我的态度，不管怎么样，人家面试官现在懂得就是比你多，比你牛。态度一定要谦卑，要恭敬。我一直说话就比较积极，但是在别人看来我可能比较冲。</li>
-</ol>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结:"></a>总结:</h3><p>从今天开始，在没有特殊的情况下，每天至少练习两道算法题。</p>
-<p>面试的时候一定要谦卑，在不会的地方可以问或者说不知道，一定不能乱猜。</p>
-<p>最后，我怀疑一下人性，我到底该不该撒谎呢，我一直真诚的对待每一个人，到最后有点感觉人格受到侮辱，和我同一时间笔试的那个java程序员，用手机查答案，貌似他答得还不错，唉，人与人之间能不能多一点真诚，我希望我不要忘记我的初心吧。</p>
-<p>加油努力成长吧，只有能力足够强大，就不怕任何的困难了。</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日志</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/04/24/20%E5%B9%B44%E6%9C%8824%E6%97%A5/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1338,15 +1328,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">node</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1354,11 +1340,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+                <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
