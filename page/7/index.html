@@ -202,6 +202,110 @@
             
 
   
+    <article id="post-vue的简单语法二" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/03/04/vue%E7%9A%84%E7%AE%80%E5%8D%95%E8%AF%AD%E6%B3%95%E4%BA%8C/" target="_blank">vue的简单语法二</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/03/04/vue%E7%9A%84%E7%AE%80%E5%8D%95%E8%AF%AD%E6%B3%95%E4%BA%8C/" class="archive-article-date">
+        <time datetime="2020-03-04T07:15:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-04</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="v-for"><a href="#v-for" class="headerlink" title="v-for"></a>v-for</h1><p>根据数据生成列表结构</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">	&lt;ui&gt;</span><br><span class="line">		&lt;li v-for&#x3D;&quot;(item,index) in arr&quot;&gt;</span><br><span class="line">			序号：&#123;&#123;index&#125;&#125;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;姓名：&#123;&#123;item.name&#125;&#125;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;年龄:&#123;&#123;item.age&#125;&#125;</span><br><span class="line">		&lt;&#x2F;li&gt;</span><br><span class="line">	&lt;&#x2F;ui&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line">&lt;script src&#x3D;&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;vue&#x2F;dist&#x2F;vue.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">	var app&#x3D;new Vue(&#123;</span><br><span class="line">		el:&quot;#app&quot;,</span><br><span class="line">		data:&#123;</span><br><span class="line">			arr:[&#123;name:&quot;张三&quot;,age:17&#125;,</span><br><span class="line">				&#123;name:&quot;李四&quot;,age:45&#125;,</span><br><span class="line">				&#123;name:&quot;王五&quot;,age:65&#125;,</span><br><span class="line">				&#123;name:&quot;牛大&quot;,age:12&#125;,</span><br><span class="line">				&#123;name:&quot;黄二&quot;,age:78&#125;,</span><br><span class="line">				],</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;)</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="D:%5Ctupian%5C%E5%AD%A6%E4%B9%A0%5Con-for.png" alt="on-for"></p>
+<p>**这里想去掉前面的点可以用list-style-type:none</p>
+<p>** 这里v-for想遍历多个数组，可以把多个数组放在一个数组中，利用属性名进行遍历。</p>
+<p>** 关于v-for和v-if在一起用的说明 </p>
+<p><a href="https://cn.vuejs.org/v2/style-guide/#%E9%81%BF%E5%85%8D-v-if-%E5%92%8C-v-for-%E7%94%A8%E5%9C%A8%E4%B8%80%E8%B5%B7-%E5%BF%85%E8%A6%81" target="_blank">解答</a></p>
+<h1 id="v-on补充"><a href="#v-on补充" class="headerlink" title="v-on补充"></a>v-on补充</h1><p>传递自定义参数，事件修饰符（function）v-on：可以用@表示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">	&lt;input type&#x3D;&quot;button&quot; v-on:click&#x3D;&quot;dolt(787)&quot;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var app&#x3D;new Vue(&#123;</span><br><span class="line">	el:&quot;#app&quot;,</span><br><span class="line">	methods:&#123;</span><br><span class="line">		dolt:function(p1)&#123;</span><br><span class="line">		console.log(&quot;hello&quot;);</span><br><span class="line">		&#125;,</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h1 id="v-model"><a href="#v-model" class="headerlink" title="v-model"></a>v-model</h1><p>获取和设置表单元素的值（双向数据绑定）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">			&lt;input type&#x3D;&quot;text&quot; v-model&#x3D;&quot;message&quot;&gt;</span><br><span class="line">			&lt;h3 v-text&#x3D;&quot;message&quot;&gt;&lt;&#x2F;h3&gt;</span><br><span class="line">			&lt;h3&gt;&#123;&#123;message&#125;&#125;&lt;&#x2F;h3&gt;</span><br><span class="line">		&lt;&#x2F;div&gt;</span><br><span class="line">		&lt;script src&#x3D;&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;vue&#x2F;dist&#x2F;vue.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">		&lt;script&gt;</span><br><span class="line">			var app&#x3D;new Vue(&#123;</span><br><span class="line">				el:&quot;#app&quot;,</span><br><span class="line">				data:&#123;</span><br><span class="line">					message:&quot;hello world&quot;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;)</span><br><span class="line">		&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>这里要注意改变input输入的值同时改变message的值</p>
+<h3 id="总结：以上是我vue最基本语法的学习，之后我会暂时放开vue，我觉得我的css和js需要巩固一下了"><a href="#总结：以上是我vue最基本语法的学习，之后我会暂时放开vue，我觉得我的css和js需要巩固一下了" class="headerlink" title="总结：以上是我vue最基本语法的学习，之后我会暂时放开vue，我觉得我的css和js需要巩固一下了"></a>总结：以上是我vue最基本语法的学习，之后我会暂时放开vue，我觉得我的css和js需要巩固一下了</h3>
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/03/04/vue%E7%9A%84%E7%AE%80%E5%8D%95%E8%AF%AD%E6%B3%95%E4%BA%8C/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-忙碌的一天结束了" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -708,15 +812,19 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">node</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">react</a>
               </li>
              
               <li class="article-tag-list-item">
