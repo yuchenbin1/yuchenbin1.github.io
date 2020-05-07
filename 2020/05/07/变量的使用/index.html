@@ -6,22 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://yuchenbin1.github.io">
-  <title>ycb的博客</title>
+  <title>变量的使用 | ycb的博客</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-    
-    <!-- <meta name="keywords" content="">
-    <meta name="description" content="这是我的个人技术博客"> -->
-  
-  <meta name="description" content="这是我的个人技术博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="ycb的博客">
-<meta property="og:url" content="https://yuchenbin1.github.io/page/4/index.html">
+  <meta name="description" content="react中jsx的注释在jsx中注释需要先用大括号包裹再注释掉,   多行注释需要用一个父元素外括之后注释掉 1234567891011121314151617181920212223242526272829&lt;!DOCTYPE html&gt;&lt;html lang&#x3D;&quot;en&quot;&gt;&lt;head&gt;    &lt;meta charset&#x3D;&quot;UTF-8&quot;&gt;    &lt;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="变量的使用">
+<meta property="og:url" content="https://yuchenbin1.github.io/2020/05/07/%E5%8F%98%E9%87%8F%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
 <meta property="og:site_name" content="ycb的博客">
-<meta property="og:description" content="这是我的个人技术博客">
+<meta property="og:description" content="react中jsx的注释在jsx中注释需要先用大括号包裹再注释掉,   多行注释需要用一个父元素外括之后注释掉 1234567891011121314151617181920212223242526272829&lt;!DOCTYPE html&gt;&lt;html lang&#x3D;&quot;en&quot;&gt;&lt;head&gt;    &lt;meta charset&#x3D;&quot;UTF-8&quot;&gt;    &lt;">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-05-07T06:27:39.000Z">
+<meta property="article:modified_time" content="2020-05-07T06:29:46.389Z">
 <meta property="article:author" content="ycb">
+<meta property="article:tag" content="react">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="ycb的博客" type="application/atom+xml">
@@ -199,54 +198,122 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-
-  
-    <article id="post-vue非父子组件间的数据交换" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-变量的使用" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/04/11/vue%E9%9D%9E%E7%88%B6%E5%AD%90%E7%BB%84%E4%BB%B6%E9%97%B4%E7%9A%84%E6%95%B0%E6%8D%AE%E4%BA%A4%E6%8D%A2/" target="_blank">vue非父子组件间的数据交换</a>
-  
+    <h1 class="article-title" itemprop="name">
+      变量的使用
     </h1>
   
 
 
   
   
-<a href="/2020/04/11/vue%E9%9D%9E%E7%88%B6%E5%AD%90%E7%BB%84%E4%BB%B6%E9%97%B4%E7%9A%84%E6%95%B0%E6%8D%AE%E4%BA%A4%E6%8D%A2/" class="archive-article-date">
-        <time datetime="2020-04-11T08:04:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-11</time>
+        
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
+<a href="/2020/05/07/%E5%8F%98%E9%87%8F%E7%9A%84%E4%BD%BF%E7%94%A8/" class="archive-article-date">
+        <time datetime="2020-05-07T06:27:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-07</time>
 </a>
 
   
   
     
+<div style="margin-top:10px;">
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <!-- fonts.scss -->
+      <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
+      <i class="icon-statistics"></i>
+      <span class="post-meta-item-text"> 字数统计:</span>
+      <span class="post-count">516字</span>
+    </span>
+  </span>
+
+  <span class="post-time">
+    &nbsp; | &nbsp;
+    <span class="post-meta-item-icon">
+      <i class="icon-book icon"></i>
+      <span class="post-meta-item-text"> 阅读时长≈</span>
+      <span class="post-count">2分</span>
+    </span>
+  </span>
+</div>
+
 
   
   </header>
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="vue非父子（兄弟之间）组件的数据交换"><a href="#vue非父子（兄弟之间）组件的数据交换" class="headerlink" title="vue非父子（兄弟之间）组件的数据交换"></a>vue非父子（兄弟之间）组件的数据交换</h1><p>通过中心事件来过渡</p>
-<p><img src="QQ%E5%9B%BE%E7%89%8720200411162640.png" alt=""></p>
-<ol>
-<li>创建事件中心</li>
-<li>$emit触发事件</li>
-<li>$on监听事件</li>
-<li>$off销毁事件</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=<span class="string">"utf-8"</span>&gt;</span><br><span class="line">		&lt;title&gt;&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;!-- </span><br><span class="line">		非父子间组件的数据交互</span><br><span class="line">		<span class="number">1.</span>创建一个单独的实践中心，管理组件之间的通信</span><br><span class="line">		<span class="keyword">var</span> eventHub=<span class="keyword">new</span> Vue()</span><br><span class="line">		<span class="number">2.</span>监听事件与销毁事件</span><br><span class="line">		eventHub.$on(<span class="string">'add-todo'</span>,addTodo)</span><br><span class="line">		eventHub.$off(<span class="string">'add-todo'</span>)</span><br><span class="line">		<span class="number">3.</span>触发事件</span><br><span class="line">		eventHub.$emit(<span class="string">'add-todo'</span>,id)</span><br><span class="line">		 --&gt;</span><br><span class="line">		 &lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">			 &lt;div&gt;父组件&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">			 &lt;div&gt;</span></span><br><span class="line"><span class="regexp">				 &lt;button @click="handle"&gt;销毁事件&lt;/</span>button&gt;</span><br><span class="line">			 &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">			 &lt;test-tom&gt;&lt;/</span>test-tom&gt;</span><br><span class="line">			 &lt;test-jerry&gt;&lt;<span class="regexp">/test-jerry&gt;</span></span><br><span class="line"><span class="regexp">		&lt;/</span>div&gt;</span><br><span class="line">					</span><br><span class="line">			</span><br><span class="line">		&lt;script src=<span class="string">"https://cdn.jsdelivr.net/npm/vue/dist/vue.js"</span>&gt;&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">		&lt;script&gt;</span></span><br><span class="line"><span class="regexp">			var hub=new Vue();/</span><span class="regexp">/提供事件中心</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">			Vue.component('test-tom',&#123;/</span><span class="regexp">/子组件1</span></span><br><span class="line"><span class="regexp">				data:function()&#123;</span></span><br><span class="line"><span class="regexp">					return &#123;</span></span><br><span class="line"><span class="regexp">						num:0,</span></span><br><span class="line"><span class="regexp">						change:1</span></span><br><span class="line"><span class="regexp">					&#125;</span></span><br><span class="line"><span class="regexp">				&#125;,</span></span><br><span class="line"><span class="regexp">				template:`</span></span><br><span class="line"><span class="regexp">				&lt;div&gt;</span></span><br><span class="line"><span class="regexp">					&lt;div&gt;Tom:&#123;&#123;num&#125;&#125;&lt;/</span>div&gt;		</span><br><span class="line">					&lt;div&gt;</span><br><span class="line">						&lt;button @click=<span class="string">'handle'</span>&gt;点击&lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp">					&lt;/</span>div&gt;</span><br><span class="line">				&lt;<span class="regexp">/div&gt;	</span></span><br><span class="line"><span class="regexp">				`, </span></span><br><span class="line"><span class="regexp">				methods: &#123;</span></span><br><span class="line"><span class="regexp">					handle:function()&#123;</span></span><br><span class="line"><span class="regexp">						hub.$emit('jerry-event',this.change);</span></span><br><span class="line"><span class="regexp">					&#125;</span></span><br><span class="line"><span class="regexp">				&#125;,</span></span><br><span class="line"><span class="regexp">				mounted:function()&#123;/</span><span class="regexp">/模板部署完成</span></span><br><span class="line"><span class="regexp">					hub.$on('tom-event', (val)=&gt;&#123;/</span><span class="regexp">/这里的val是jerry提供的</span></span><br><span class="line"><span class="regexp">						this.num+=val;</span></span><br><span class="line"><span class="regexp">					&#125;)</span></span><br><span class="line"><span class="regexp">				&#125;</span></span><br><span class="line"><span class="regexp">			&#125;);</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">			Vue.component('test-jerry',&#123;/</span><span class="regexp">/子组件2</span></span><br><span class="line"><span class="regexp">				data:function()&#123;</span></span><br><span class="line"><span class="regexp">					return &#123;</span></span><br><span class="line"><span class="regexp">						num:0,</span></span><br><span class="line"><span class="regexp">						change:2</span></span><br><span class="line"><span class="regexp">					&#125;</span></span><br><span class="line"><span class="regexp">				&#125;,</span></span><br><span class="line"><span class="regexp">				template:`</span></span><br><span class="line"><span class="regexp">				&lt;div&gt;</span></span><br><span class="line"><span class="regexp">					&lt;div&gt;JERRY:&#123;&#123;num&#125;&#125;&lt;/</span>div&gt;		</span><br><span class="line">					&lt;div&gt;</span><br><span class="line">						&lt;button @click=<span class="string">'handle'</span>&gt;点击&lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp">					&lt;/</span>div&gt;</span><br><span class="line">				&lt;<span class="regexp">/div&gt;	</span></span><br><span class="line"><span class="regexp">				`,</span></span><br><span class="line"><span class="regexp">				methods: &#123;</span></span><br><span class="line"><span class="regexp">					handle:function()&#123;</span></span><br><span class="line"><span class="regexp">						hub.$emit('tom-event',this.change);</span></span><br><span class="line"><span class="regexp">					&#125;</span></span><br><span class="line"><span class="regexp">				&#125;,</span></span><br><span class="line"><span class="regexp">				mounted:function()&#123;</span></span><br><span class="line"><span class="regexp">					hub.$on('jerry-event',(val)=&gt;&#123;</span></span><br><span class="line"><span class="regexp">						this.num+=val;</span></span><br><span class="line"><span class="regexp">					&#125;)</span></span><br><span class="line"><span class="regexp">				&#125;</span></span><br><span class="line"><span class="regexp">			&#125;);</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">			var vm=new Vue(&#123;</span></span><br><span class="line"><span class="regexp">				el:'#app',</span></span><br><span class="line"><span class="regexp">				data:&#123;</span></span><br><span class="line"><span class="regexp">					</span></span><br><span class="line"><span class="regexp">				&#125;,</span></span><br><span class="line"><span class="regexp">				methods:&#123;</span></span><br><span class="line"><span class="regexp">					handle:function()&#123;/</span><span class="regexp">/销毁事件之后点击无效</span></span><br><span class="line"><span class="regexp">						hub.$off('tom-event');</span></span><br><span class="line"><span class="regexp">						hub.$off('jerry-event');</span></span><br><span class="line"><span class="regexp">					&#125;</span></span><br><span class="line"><span class="regexp">				&#125;</span></span><br><span class="line"><span class="regexp">			&#125;)</span></span><br><span class="line"><span class="regexp">		&lt;/</span>script&gt;</span><br><span class="line">	&lt;<span class="regexp">/body&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>html&gt;</span><br></pre></td></tr></table></figure>
+    <h2 id="react中jsx的注释"><a href="#react中jsx的注释" class="headerlink" title="react中jsx的注释"></a>react中jsx的注释</h2><p>在jsx中注释需要先用大括号包裹再注释掉,</p>
+<p>  多行注释需要用一个父元素外括之后注释掉</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>环境的搭建<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../00-01环境的搭建/node_modules/react/umd/react.development.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../00-01环境的搭建/node_modules/react-dom/umd/react-dom.development.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../00-01环境的搭建/node_modules/babel-standalone/babel.min.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 创建dom的根节点,一般只创建一个根节点 --&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 在jsx中注释需要先用大括号包裹再注释掉,</span></span><br><span class="line"><span class="comment">    多行注释需要用一个父元素外括之后注释掉 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"demoReact"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/babel"</span>&gt;</span></span><br><span class="line">    </span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> myDom=(<span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">h1</span>&gt;</span>你好<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span></span><br><span class="line"><span class="actionscript">            &#123;<span class="comment">/*我是注释的内容*/</span>&#125;</span></span><br><span class="line"><span class="handlebars"><span class="xml">            &#123;/*<span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">h1</span>&gt;</span>我是多行注释的内容<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">            <span class="tag">&lt;<span class="name">h1</span>&gt;</span>多行注释的内容<span class="tag">&lt;/<span class="name">h1</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span>*/&#125;</span></span></span><br><span class="line"><span class="handlebars"><span class="xml">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span></span><br><span class="line">        );</span><br><span class="line"><span class="javascript">        ReactDOM.render(myDom,<span class="built_in">document</span>.getElementById(<span class="string">'demoReact'</span>));</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p><strong>我在这犯了一个错误，切记在methods中调用data中的数据需要用this，而在模板字符串中不需要用this</strong></p>
+<h2 id="变量的使用"><a href="#变量的使用" class="headerlink" title="变量的使用"></a>变量的使用</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>环境的搭建<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../00-01环境的搭建/node_modules/react/umd/react.development.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../00-01环境的搭建/node_modules/react-dom/umd/react-dom.development.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../00-01环境的搭建/node_modules/babel-standalone/babel.min.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"demoReact"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/babel"</span>&gt;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> text=<span class="string">"你好啊"</span>;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> num=<span class="number">12</span>;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> zhangsan=&#123;</span></span><br><span class="line"><span class="actionscript">            name:<span class="string">'zhangsan'</span>,</span></span><br><span class="line">            age:18</span><br><span class="line">        &#125;</span><br><span class="line"><span class="actionscript">        <span class="function"><span class="keyword">function</span> <span class="title">fun</span><span class="params">(obj)</span></span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;obj.name&#125;</span>的年龄是<span class="subst">$&#123;obj.age&#125;</span>`</span></span></span><br><span class="line">        &#125;</span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> myDom=<span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#123;text&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">            <span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#123;num+2&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">            <span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#123;fun(zhangsan)&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span></span><br><span class="line">        ;</span><br><span class="line"><span class="javascript">        ReactDOM.render(myDom,<span class="built_in">document</span>.getElementById(<span class="string">'demoReact'</span>));</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
 
     
 
     
+    <div class="page-reward">
+      <a href="javascript:void(0);" class="page-reward-btn tooltip-top" target="_self">
+        <div class="tooltip tooltip-east">
+          <span class="tooltip-item">
+            赏
+          </span>
+          <span class="tooltip-content">
+            <span class="tooltip-text">
+              <span class="tooltip-inner">
+                <p class="reward-p"><i class="icon icon-quo-left"></i>o谢谢你请我吃糖果o<i
+                    class="icon icon-quo-right"></i></p>
+                <div class="reward-box">
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/zhifubaopad.jpg">
+                    <span class="reward-type">支付宝</span>
+                  </div>
+                  
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/weixinpad.png">
+                    <span class="reward-type">微信</span>
+                  </div>
+                  
+                </div>
+              </span>
+            </span>
+          </span>
+        </div>
+      </a>
+    </div>
+    
 
+    
+    <div class="declare"> 
+      <ul class="post-copyright">
+        <li>
+          <strong>本文作者：</strong>
+          ycb
+        </li>
+        <li>
+          <strong>本文链接：</strong>
+          <a href="https:/yuchenbin1.github.io/2020/05/07/变量的使用/" title="变量的使用" target="_blank">https:/yuchenbin1.github.io/2020/05/07/变量的使用/</a>
+        </li>
+        
+        <li>
+          <strong>版权声明： </strong>
+          
+          本博客所有文章除特别声明外，均采用 <a href="https://github.com/JoeyBling/hexo-theme-yilia-plus/blob/master/LICENSE" rel="external nofollow" target="_blank">MIT</a> 许可协议。转载请注明出处！
+        </li>
+        
+      </ul>
+    </div>
     
 
   </div>
@@ -258,7 +325,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">react</a>
         		</li>
       		
 		</ul>
@@ -267,16 +334,76 @@
     
 
     
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/04/11/vue%E9%9D%9E%E7%88%B6%E5%AD%90%E7%BB%84%E4%BB%B6%E9%97%B4%E7%9A%84%E6%95%B0%E6%8D%AE%E4%BA%A4%E6%8D%A2/">展开全文 >></a>
-    </p>
+
     
+    
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <!-- <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a> -->
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://yuchenbin1.github.io/2020/05/07/%E5%8F%98%E9%87%8F%E7%9A%84%E4%BD%BF%E7%94%A8/" alt="微信分享二维码"> -->
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
 
     
     <div class="clearfix"></div>
   </div>
   </div>
 </article>
+
+
+<nav id="article-nav">
+  
+  
+    <a href="/2020/05/07/react%E7%8E%AF%E5%A2%83%E7%9A%84%E6%90%AD%E5%BB%BA%E4%B8%8E%E5%9F%BA%E6%9C%AC%E7%9A%84%E4%BD%BF%E7%94%A8/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">react环境的搭建与基本的使用</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -297,870 +424,14 @@
 
 
 
-  
-    <article id="post-vue子组件向父组件传值" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/04/10/vue%E5%AD%90%E7%BB%84%E4%BB%B6%E5%90%91%E7%88%B6%E7%BB%84%E4%BB%B6%E4%BC%A0%E5%80%BC/" target="_blank">vue子组件向父组件传值</a>
-  
-    </h1>
-  
 
 
-  
-  
-<a href="/2020/04/10/vue%E5%AD%90%E7%BB%84%E4%BB%B6%E5%90%91%E7%88%B6%E7%BB%84%E4%BB%B6%E4%BC%A0%E5%80%BC/" class="archive-article-date">
-        <time datetime="2020-04-10T13:38:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-10</time>
-</a>
 
-  
-  
-    
 
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="vue子组件向父组件传值"><a href="#vue子组件向父组件传值" class="headerlink" title="vue子组件向父组件传值"></a>vue子组件向父组件传值</h1><p>子组件通过自定义事件向父组件传递信息</p>
-<p><strong>就是子组件先监听一个事件，运行对应方法用$emit(‘’)定义</strong></p>
-<p><strong>再在父组件中监听这个在子组件中新定义的方法，运行一个方法</strong></p>
-<p><strong>该方法在父组件methods中定义就好了</strong></p>
-<p>比如：</p>
-<p>先在子组件menu-item的template属性中<code>&lt;button @click=&quot;$emit(&#39;handleChild&#39;)&quot;&gt;&lt;/button&gt;</code></p>
-<p>再在父组件中运用<code>&lt;menu-item @handleChild=&quot;handleParent&quot;&gt;&lt;/menu-item&gt;</code></p>
-<p>然后在父组件中定义这个handleParent方法就好了</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=<span class="string">"utf-8"</span>&gt;</span><br><span class="line">		&lt;title&gt;&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;!-- 子组件通过自定义事件向父组件传递信息 --&gt;</span><br><span class="line">		&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">			&lt;span :style=<span class="string">"&#123;fontSize:size+'px'&#125;"</span>&gt;&#123;&#123;msg&#125;&#125;&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">			&lt;menu-item @large-text="handle"&gt;&lt;/m</span>enu-item&gt;</span><br><span class="line">		&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">		&lt;script src="https:/</span><span class="regexp">/cdn.jsdelivr.net/</span>npm/vue/dist/vue.js<span class="string">"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="string">		&lt;script&gt;</span></span><br><span class="line"><span class="string">			Vue.component('menu-item',&#123;</span></span><br><span class="line"><span class="string">				template:`</span></span><br><span class="line"><span class="string">				&lt;div&gt;</span></span><br><span class="line"><span class="string">					&lt;button @click="</span>$emit(<span class="string">'large-text'</span>)<span class="string">"&gt;扩大字体&lt;/button&gt;</span></span><br><span class="line"><span class="string">				&lt;/div&gt;</span></span><br><span class="line"><span class="string">				`</span></span><br><span class="line"><span class="string">			&#125;);</span></span><br><span class="line"><span class="string">			var vm=new Vue(&#123;</span></span><br><span class="line"><span class="string">				el:'#app',</span></span><br><span class="line"><span class="string">				data:&#123;</span></span><br><span class="line"><span class="string">					msg:'父组件中的内容',</span></span><br><span class="line"><span class="string">					size:18,</span></span><br><span class="line"><span class="string">				&#125;,</span></span><br><span class="line"><span class="string">				methods:&#123;</span></span><br><span class="line"><span class="string">					handle:function()&#123;</span></span><br><span class="line"><span class="string">						this.size+=1;</span></span><br><span class="line"><span class="string">					&#125;</span></span><br><span class="line"><span class="string">				&#125;</span></span><br><span class="line"><span class="string">			&#125;)</span></span><br><span class="line"><span class="string">		&lt;/script&gt;</span></span><br><span class="line"><span class="string">	&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>要真正的传值可以把变为<code>$emit(&#39;large-text&#39;,omsg)</code>这里的omsg携带了子组件的值</p>
-<p>在父组件中监听运行方法有参数<code>@large-text=&quot;handle($event)&quot;</code></p>
-<p>在父组件中定义一个带参数的方法</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=<span class="string">"utf-8"</span>&gt;</span><br><span class="line">		&lt;title&gt;&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;!-- 子组件通过自定义事件向父组件传递信息 --&gt;</span><br><span class="line">		&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">			&lt;span :style=<span class="string">"&#123;fontSize:size+'px'&#125;"</span>&gt;&#123;&#123;msg&#125;&#125;&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">			&lt;menu-item @large-text="handle($event)"&gt;&lt;/m</span>enu-item&gt;</span><br><span class="line">		&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">		&lt;script src="https:/</span><span class="regexp">/cdn.jsdelivr.net/</span>npm/vue/dist/vue.js<span class="string">"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="string">		&lt;script&gt;</span></span><br><span class="line"><span class="string">			Vue.component('menu-item',&#123;</span></span><br><span class="line"><span class="string">				data:function()&#123;</span></span><br><span class="line"><span class="string">					return &#123;</span></span><br><span class="line"><span class="string">						omsg:1,</span></span><br><span class="line"><span class="string">					&#125;</span></span><br><span class="line"><span class="string">				&#125;,</span></span><br><span class="line"><span class="string">				template:`</span></span><br><span class="line"><span class="string">				&lt;div&gt;</span></span><br><span class="line"><span class="string">					&lt;button @click="</span>$emit(<span class="string">'large-text'</span>,omsg)<span class="string">"&gt;扩大字体&lt;/button&gt;</span></span><br><span class="line"><span class="string">				&lt;/div&gt;</span></span><br><span class="line"><span class="string">				`</span></span><br><span class="line"><span class="string">			&#125;);</span></span><br><span class="line"><span class="string">			var vm=new Vue(&#123;</span></span><br><span class="line"><span class="string">				el:'#app',</span></span><br><span class="line"><span class="string">				data:&#123;</span></span><br><span class="line"><span class="string">					msg:'父组件中的内容',</span></span><br><span class="line"><span class="string">					size:18,</span></span><br><span class="line"><span class="string">				&#125;,</span></span><br><span class="line"><span class="string">				methods:&#123;</span></span><br><span class="line"><span class="string">					handle:function($event)&#123;</span></span><br><span class="line"><span class="string">						this.size+=$event;</span></span><br><span class="line"><span class="string">					&#125;</span></span><br><span class="line"><span class="string">				&#125;</span></span><br><span class="line"><span class="string">			&#125;)</span></span><br><span class="line"><span class="string">		&lt;/script&gt;</span></span><br><span class="line"><span class="string">	&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure>
 
 
 
-<h3 id="父组件传值给子组件"><a href="#父组件传值给子组件" class="headerlink" title="父组件传值给子组件"></a>父组件传值给子组件</h3><p><a href=" [https://yuchenbin1.github.io/2020/04/09/vue%E7%88%B6%E7%BB%84%E4%BB%B6%E5%90%91%E5%AD%90%E7%BB%84%E4%BB%B6%E4%BC%A0%E5%80%BC/](https://yuchenbin1.github.io/2020/04/09/vue父组件向子组件传值/) ">原文链接</a></p>
-<p>利用props创建一个新的属性，在父组件中把值赋给这个新的属性，新的属性就可以在子组件中用了。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=<span class="string">"utf-8"</span>&gt;</span><br><span class="line">		&lt;title&gt;&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">			&lt;menu-item &gt;&lt;<span class="regexp">/menu-item&gt;</span></span><br><span class="line"><span class="regexp">			&lt;menu-item title="parentMsg"&gt;&lt;/m</span>enu-item&gt;&lt;!-- 这里显示parentMsg --&gt;</span><br><span class="line">			&lt;menu-item :title=<span class="string">"parentMsg"</span>&gt;&lt;<span class="regexp">/menu-item&gt;&lt;!-- 这里显示父组件中的数据 --&gt;</span></span><br><span class="line"><span class="regexp">		&lt;/</span>div&gt;</span><br><span class="line">		&lt;script src=<span class="string">"https://cdn.jsdelivr.net/npm/vue/dist/vue.js"</span>&gt;&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">		&lt;script&gt;</span></span><br><span class="line"><span class="regexp">			Vue.component('menu-item',&#123;</span></span><br><span class="line"><span class="regexp">				props:['title'],</span></span><br><span class="line"><span class="regexp">				data:function()&#123;</span></span><br><span class="line"><span class="regexp">					return &#123;</span></span><br><span class="line"><span class="regexp">						msg:'子组件本身的数据'</span></span><br><span class="line"><span class="regexp">					&#125;</span></span><br><span class="line"><span class="regexp">				&#125;,</span></span><br><span class="line"><span class="regexp">				template:'&lt;div&gt;&#123;&#123;msg+"---"+title&#125;&#125;&lt;/</span>div&gt;<span class="string">' //切记引号内嵌要用单双引号</span></span><br><span class="line"><span class="string">			&#125;);</span></span><br><span class="line"><span class="string">			var vm=new Vue(&#123;</span></span><br><span class="line">				el:'#app',</span><br><span class="line">				data:&#123;</span><br><span class="line">					parentMsg:<span class="string">'父组件中的数据'</span></span><br><span class="line">				&#125;</span><br><span class="line">			&#125;);</span><br><span class="line">		&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>body&gt;</span><br><span class="line">&lt;<span class="regexp">/html&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/04/10/vue%E5%AD%90%E7%BB%84%E4%BB%B6%E5%90%91%E7%88%B6%E7%BB%84%E4%BB%B6%E4%BC%A0%E5%80%BC/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-vue父组件向子组件传值" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/04/09/vue%E7%88%B6%E7%BB%84%E4%BB%B6%E5%90%91%E5%AD%90%E7%BB%84%E4%BB%B6%E4%BC%A0%E5%80%BC/" target="_blank">vue父组件向子组件传值</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/04/09/vue%E7%88%B6%E7%BB%84%E4%BB%B6%E5%90%91%E5%AD%90%E7%BB%84%E4%BB%B6%E4%BC%A0%E5%80%BC/" class="archive-article-date">
-        <time datetime="2020-04-09T13:13:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-09</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="父组件向子组件传值"><a href="#父组件向子组件传值" class="headerlink" title="父组件向子组件传值"></a>父组件向子组件传值</h1><p>组件化开发</p>
-<p>props:[‘属性名1’，’属性名2’]</p>
-<h3 id="props属性名规则"><a href="#props属性名规则" class="headerlink" title="props属性名规则"></a>props属性名规则</h3><ol>
-<li>在props中使用驼峰式，在模板中使用对应的短横线形式</li>
-<li>字符串形式模板中没有这个限制``</li>
-</ol>
-<h3 id="props属性值的类型"><a href="#props属性值的类型" class="headerlink" title="props属性值的类型"></a>props属性值的类型</h3><p>属性名=’属性值‘              ：属性名=’属性值‘</p>
-<ol>
-<li>字符串string</li>
-<li>数值，在上述第一种情况是字符串，第二种是数值</li>
-<li>布尔值，在上述对重情况是字符串，第二种是布尔值</li>
-<li>数组</li>
-<li>对象，可以用.取对象中的属性名</li>
-</ol>
-<p>一般使用</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=<span class="string">"utf-8"</span>&gt;</span><br><span class="line">		&lt;title&gt;&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">			&lt;menu-item &gt;&lt;<span class="regexp">/menu-item&gt;</span></span><br><span class="line"><span class="regexp">			&lt;menu-item title="parentMsg"&gt;&lt;/m</span>enu-item&gt;&lt;!-- 这里显示parentMsg --&gt;</span><br><span class="line">			&lt;menu-item :title=<span class="string">"parentMsg"</span>&gt;&lt;<span class="regexp">/menu-item&gt;&lt;!-- 这里显示父组件中的数据 --&gt;</span></span><br><span class="line"><span class="regexp">		&lt;/</span>div&gt;</span><br><span class="line">		&lt;script src=<span class="string">"https://cdn.jsdelivr.net/npm/vue/dist/vue.js"</span>&gt;&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">		&lt;script&gt;</span></span><br><span class="line"><span class="regexp">			Vue.component('menu-item',&#123;</span></span><br><span class="line"><span class="regexp">				props:['title'],</span></span><br><span class="line"><span class="regexp">				data:function()&#123;</span></span><br><span class="line"><span class="regexp">					return &#123;</span></span><br><span class="line"><span class="regexp">						msg:'子组件本身的数据'</span></span><br><span class="line"><span class="regexp">					&#125;</span></span><br><span class="line"><span class="regexp">				&#125;,</span></span><br><span class="line"><span class="regexp">				template:'&lt;div&gt;&#123;&#123;msg+"---"+title&#125;&#125;&lt;/</span>div&gt;<span class="string">' //切记引号内嵌要用单双引号</span></span><br><span class="line"><span class="string">			&#125;);</span></span><br><span class="line"><span class="string">			var vm=new Vue(&#123;</span></span><br><span class="line">				el:'#app',</span><br><span class="line">				data:&#123;</span><br><span class="line">					parentMsg:<span class="string">'父组件中的数据'</span></span><br><span class="line">				&#125;</span><br><span class="line">			&#125;);</span><br><span class="line">		&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>body&gt;</span><br><span class="line">&lt;<span class="regexp">/html&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/04/09/vue%E7%88%B6%E7%BB%84%E4%BB%B6%E5%90%91%E5%AD%90%E7%BB%84%E4%BB%B6%E4%BC%A0%E5%80%BC/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-vue的局部组件化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/04/08/vue%E7%9A%84%E5%B1%80%E9%83%A8%E7%BB%84%E4%BB%B6%E5%8C%96/" target="_blank">vue的局部组件化</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/04/08/vue%E7%9A%84%E5%B1%80%E9%83%A8%E7%BB%84%E4%BB%B6%E5%8C%96/" class="archive-article-date">
-        <time datetime="2020-04-08T15:33:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-08</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="vue的局部组件化"><a href="#vue的局部组件化" class="headerlink" title="vue的局部组件化"></a>vue的局部组件化</h1><p>conponents{</p>
-<p>组件名1：组件对象1，</p>
-<p>组件名2：组件对象2</p>
-<p>}</p>
-<p>局部组件化只能在el所挂载的区域内</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=<span class="string">"utf-8"</span>&gt;</span><br><span class="line">		&lt;title&gt;&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">			&lt;hello-world&gt;&lt;<span class="regexp">/hello-world&gt;</span></span><br><span class="line"><span class="regexp">			&lt;hello-world&gt;&lt;/</span>hello-world&gt;</span><br><span class="line">		&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">		&lt;script src="https:/</span><span class="regexp">/cdn.jsdelivr.net/</span>npm/vue/dist/vue.js<span class="string">"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="string">		&lt;script&gt;</span></span><br><span class="line"><span class="string">			var HelloWorld=&#123;</span></span><br><span class="line"><span class="string">				data:function()&#123;</span></span><br><span class="line"><span class="string">					return &#123;</span></span><br><span class="line"><span class="string">						msg:'hello'</span></span><br><span class="line"><span class="string">					&#125;</span></span><br><span class="line"><span class="string">				&#125;,</span></span><br><span class="line"><span class="string">				template:'&lt;div&gt;&#123;&#123;msg&#125;&#125;&lt;/div&gt;'</span></span><br><span class="line"><span class="string">			&#125;</span></span><br><span class="line"><span class="string">			var vm=new Vue(&#123;</span></span><br><span class="line"><span class="string">				el:'#app',</span></span><br><span class="line"><span class="string">				data:&#123;</span></span><br><span class="line"><span class="string">					</span></span><br><span class="line"><span class="string">				&#125;,</span></span><br><span class="line"><span class="string">				components:&#123;</span></span><br><span class="line"><span class="string">					'hello-world':HelloWorld,</span></span><br><span class="line"><span class="string">				&#125;</span></span><br><span class="line"><span class="string">			&#125;)</span></span><br><span class="line"><span class="string">		&lt;/script&gt;</span></span><br><span class="line"><span class="string">	&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>与全局不同的点就在于components内部是用：分隔的，而全局是用，分隔。</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/04/08/vue%E7%9A%84%E5%B1%80%E9%83%A8%E7%BB%84%E4%BB%B6%E5%8C%96/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-vue的全局组件化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/04/08/vue%E7%9A%84%E5%85%A8%E5%B1%80%E7%BB%84%E4%BB%B6%E5%8C%96/" target="_blank">vue的全局组件化</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/04/08/vue%E7%9A%84%E5%85%A8%E5%B1%80%E7%BB%84%E4%BB%B6%E5%8C%96/" class="archive-article-date">
-        <time datetime="2020-04-08T15:05:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-08</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="vue的全局组件化"><a href="#vue的全局组件化" class="headerlink" title="vue的全局组件化"></a>vue的全局组件化</h1><p>组件化即为模块化</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(<span class="string">'组件名'</span>，&#123;</span><br><span class="line">	data:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> &#123;</span><br><span class="line">	</span><br><span class="line">	&#125;，</span><br><span class="line">	template:<span class="string">''</span>,</span><br><span class="line">	methods:&#123;</span><br><span class="line">	</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p><strong>注意必须要有<code>var vm=new Vue({})</code>命名的模块里面才有效，这里的全局指的是有new Vue定义的全局</strong></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=<span class="string">"utf-8"</span>&gt;</span><br><span class="line">		&lt;title&gt;&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">			&lt;button-counter1&gt;&lt;<span class="regexp">/button-counter1&gt;</span></span><br><span class="line"><span class="regexp">		&lt;div id="app"&gt;</span></span><br><span class="line"><span class="regexp">			&lt;button-counter1&gt;&lt;/</span>button-counter1&gt;</span><br><span class="line">			&lt;button-counter1&gt;&lt;<span class="regexp">/button-counter1&gt;</span></span><br><span class="line"><span class="regexp">			&lt;button-counter2&gt;&lt;/</span>button-counter2&gt;</span><br><span class="line">			&lt;button-counter2&gt;&lt;<span class="regexp">/button-counter2&gt;</span></span><br><span class="line"><span class="regexp">		&lt;/</span>div&gt;</span><br><span class="line">		&lt;script src=<span class="string">"https://cdn.jsdelivr.net/npm/vue/dist/vue.js"</span>&gt;&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">		&lt;script&gt;</span></span><br><span class="line"><span class="regexp">			Vue.component('button-counter1',&#123;</span></span><br><span class="line"><span class="regexp">				data:function()&#123;/</span><span class="regexp">/data是一个函数</span></span><br><span class="line"><span class="regexp">					return &#123;</span></span><br><span class="line"><span class="regexp">						count:0,</span></span><br><span class="line"><span class="regexp">					&#125;</span></span><br><span class="line"><span class="regexp">				&#125;,</span></span><br><span class="line"><span class="regexp">				template:'&lt;button @click="handle"&gt;点击了&#123;&#123;count&#125;&#125;次&lt;/</span>button&gt;<span class="string">',//外部一定要是一个单个的根元素</span></span><br><span class="line"><span class="string">				methods:&#123;</span></span><br><span class="line"><span class="string">					handle:function()&#123;</span></span><br><span class="line"><span class="string">						this.count++;</span></span><br><span class="line"><span class="string">					&#125;</span></span><br><span class="line"><span class="string">				&#125;</span></span><br><span class="line"><span class="string">			&#125;)</span></span><br><span class="line"><span class="string">			Vue.component('</span>button-counter2<span class="string">',&#123;</span></span><br><span class="line"><span class="string">				data:function()&#123;//data是一个函数</span></span><br><span class="line"><span class="string">					return &#123;</span></span><br><span class="line"><span class="string">						count:0,</span></span><br><span class="line"><span class="string">					&#125;</span></span><br><span class="line"><span class="string">				&#125;,</span></span><br><span class="line"><span class="string">				template:`&lt;div&gt;</span></span><br><span class="line"><span class="string">				&lt;button @click="handle"&gt;点击了&#123;&#123;count&#125;&#125;次&lt;/button&gt;</span></span><br><span class="line"><span class="string">				&lt;button @click="handle"&gt;点击了&#123;&#123;count&#125;&#125;次&lt;/button&gt;,</span></span><br><span class="line"><span class="string">				&lt;/div&gt;`,//外部一定要是一个单个的根元素</span></span><br><span class="line"><span class="string">				methods:&#123;</span></span><br><span class="line"><span class="string">					handle:function()&#123;</span></span><br><span class="line"><span class="string">						this.count+=2;</span></span><br><span class="line"><span class="string">					&#125;</span></span><br><span class="line"><span class="string">				&#125;</span></span><br><span class="line"><span class="string">			&#125;)</span></span><br><span class="line"><span class="string">			var vm=new Vue(&#123;//这部分一定要有</span></span><br><span class="line">				el:'#app',</span><br><span class="line">				data:&#123;</span><br><span class="line">					</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;);</span><br><span class="line">		&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>body&gt;</span><br><span class="line">&lt;<span class="regexp">/html&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><ol>
-<li>data是一个函数，有function()，然后return一个对象</li>
-<li>template后面可以用引号或者反引号，引号必须紧凑在一起，而反引号可以格式分开，模板化</li>
-<li>template里面必须有一个根元素，比如’<button></button><button></button>‘这样就不行，必须是’<div><button></button><button></button></div>‘才行</li>
-<li>组件的命名一般是用短横线-连接的，也可以用驼峰式的命名(someBody),但是这种命名的组件只能用于相关组件的template字符串模板里面，不能直接使用在<body></body>这种普通的模板。<strong>要使用只能用短横线的命名方式。</strong></li>
-</ol>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/04/08/vue%E7%9A%84%E5%85%A8%E5%B1%80%E7%BB%84%E4%BB%B6%E5%8C%96/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-vue的生命周期" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/04/06/vue%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" target="_blank">vue的生命周期</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/04/06/vue%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" class="archive-article-date">
-        <time datetime="2020-04-06T14:15:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-06</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="vue的生命周期"><a href="#vue的生命周期" class="headerlink" title="vue的生命周期"></a>vue的生命周期</h1><p>1.挂载（初始化相关属性）<br>            beforeCreate  创建前<br>            created       创建<br>            beforeMount   组织前<br>            mounted       组织(重要，<strong>初始化完成，模板已经被替换了</strong>)<br>2.更新（元素或组件的变更操作）<br>            beforeUpdate  更新前<br>            updated       更新<br>3.销毁（销毁相关属性）<br>            beforeDestroy 销毁前<br>            destroyed     销毁</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=<span class="string">"utf-8"</span>&gt;</span><br><span class="line">		&lt;title&gt;&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;!-- 生命周期</span><br><span class="line">		<span class="number">1.</span>挂载（初始化相关属性）</span><br><span class="line">			beforeCreate  创建前</span><br><span class="line">			created       创建</span><br><span class="line">			beforeMount   组织前</span><br><span class="line">			mounted       组织(重要，初始化完成，模板已经被替换了)</span><br><span class="line">		<span class="number">2.</span>更新（元素或组件的变更操作）</span><br><span class="line">			beforeUpdate  更新前</span><br><span class="line">			updated       更新</span><br><span class="line">		<span class="number">3.</span>销毁（销毁相关属性）</span><br><span class="line">			beforeDestroy 销毁前</span><br><span class="line">			destroyed     销毁</span><br><span class="line">		--&gt;</span><br><span class="line">		</span><br><span class="line">		&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">			&lt;div&gt;&#123;&#123;msg&#125;&#125;&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">			&lt;button @click="update"&gt;更新&lt;/</span>button&gt;</span><br><span class="line">			&lt;button @click=<span class="string">"destroy"</span>&gt;销毁&lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp">		&lt;/</span>div&gt;</span><br><span class="line">		&lt;script src=<span class="string">"../000-vue.js/vue.js"</span>&gt;&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">		&lt;script&gt;</span></span><br><span class="line"><span class="regexp">			var vm=new Vue(&#123;</span></span><br><span class="line"><span class="regexp">				el:'#app',</span></span><br><span class="line"><span class="regexp">				data:&#123;</span></span><br><span class="line"><span class="regexp">					msg:'生命周期'</span></span><br><span class="line"><span class="regexp">				&#125;,</span></span><br><span class="line"><span class="regexp">				methods:&#123;</span></span><br><span class="line"><span class="regexp">					update:function()&#123;</span></span><br><span class="line"><span class="regexp">						this.msg='hello';</span></span><br><span class="line"><span class="regexp">					&#125;,</span></span><br><span class="line"><span class="regexp">					destroy:function()&#123;</span></span><br><span class="line"><span class="regexp">						this.$destroy();</span></span><br><span class="line"><span class="regexp">					&#125;,</span></span><br><span class="line"><span class="regexp">				&#125;,</span></span><br><span class="line"><span class="regexp">				beforeCreate:function()&#123;</span></span><br><span class="line"><span class="regexp">					console.log('beforeCreate');</span></span><br><span class="line"><span class="regexp">				&#125;,</span></span><br><span class="line"><span class="regexp">				created:function()&#123;</span></span><br><span class="line"><span class="regexp">					console.log('created');</span></span><br><span class="line"><span class="regexp">				&#125;,</span></span><br><span class="line"><span class="regexp">				beforeMount:function()&#123;</span></span><br><span class="line"><span class="regexp">					console.log('beforeMount');</span></span><br><span class="line"><span class="regexp">				&#125;,</span></span><br><span class="line"><span class="regexp">				mounted:function()&#123;</span></span><br><span class="line"><span class="regexp">					console.log('mounted');</span></span><br><span class="line"><span class="regexp">				&#125;,</span></span><br><span class="line"><span class="regexp">				beforeUpdate:function()&#123;</span></span><br><span class="line"><span class="regexp">					console.log('beforeUpdate');</span></span><br><span class="line"><span class="regexp">				&#125;,</span></span><br><span class="line"><span class="regexp">				updated:function()&#123;</span></span><br><span class="line"><span class="regexp">					console.log('updated');</span></span><br><span class="line"><span class="regexp">				&#125;,</span></span><br><span class="line"><span class="regexp">				beforeDestroy:function()&#123;</span></span><br><span class="line"><span class="regexp">					console.log('beforeDestroy');</span></span><br><span class="line"><span class="regexp">				&#125;,</span></span><br><span class="line"><span class="regexp">				destroyed:function()&#123;</span></span><br><span class="line"><span class="regexp">					console.log('destroyed');</span></span><br><span class="line"><span class="regexp">				&#125;,</span></span><br><span class="line"><span class="regexp">			&#125;)</span></span><br><span class="line"><span class="regexp">		&lt;/</span>script&gt;</span><br><span class="line">	&lt;<span class="regexp">/body&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>html&gt;</span><br></pre></td></tr></table></figure>
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/04/06/vue%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-vue的过滤器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/04/05/vue%E7%9A%84%E8%BF%87%E6%BB%A4%E5%99%A8/" target="_blank">vue的过滤器</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/04/05/vue%E7%9A%84%E8%BF%87%E6%BB%A4%E5%99%A8/" class="archive-article-date">
-        <time datetime="2020-04-05T13:29:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-05</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="vue的过滤器"><a href="#vue的过滤器" class="headerlink" title="vue的过滤器"></a>vue的过滤器</h1><p>过滤器可以使值进行一些操作再赋给对象，过滤器可以是链式的（连续使用）</p>
-<p>过滤器与计算属性一样有分为局部和全局的</p>
-<h3 id="全局的用法"><a href="#全局的用法" class="headerlink" title="全局的用法"></a>全局的用法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=<span class="string">"utf-8"</span>&gt;</span><br><span class="line">		&lt;title&gt;&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">			&lt;input type=<span class="string">"text"</span> v-model=<span class="string">"msg"</span>&gt;</span><br><span class="line">			&lt;span&gt;&#123;&#123;msg|upper&#125;&#125;&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">			&lt;div&gt;&#123;&#123;msg|upper|lower&#125;&#125;&lt;/</span>div&gt;</span><br><span class="line">			&lt;div v-bind:color=<span class="string">"msg|upper"</span>&gt;用于属性绑定&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">		&lt;/</span>div&gt;</span><br><span class="line">		&lt;script src=<span class="string">"../../000-vue.js/vue.js"</span>&gt;&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">		&lt;script type="text/</span>javascript<span class="string">"&gt;</span></span><br><span class="line"><span class="string">			Vue.filter('upper',function(val)&#123;</span></span><br><span class="line"><span class="string">				return val.charAt(0).toUpperCase()+val.slice(1);</span></span><br><span class="line"><span class="string">			&#125;);//首字母过滤为大写</span></span><br><span class="line"><span class="string">			Vue.filter('lower',function(val)&#123;</span></span><br><span class="line"><span class="string">				return val.charAt(0).toLowerCase()+val.slice(1);</span></span><br><span class="line"><span class="string">			&#125;);//首字母过滤为小写</span></span><br><span class="line"><span class="string">			var vm=new Vue(&#123;</span></span><br><span class="line"><span class="string">				el:'#app',</span></span><br><span class="line"><span class="string">				data:&#123;</span></span><br><span class="line"><span class="string">					msg:'',</span></span><br><span class="line"><span class="string">				&#125;</span></span><br><span class="line"><span class="string">			&#125;);</span></span><br><span class="line"><span class="string">		&lt;/script&gt;</span></span><br><span class="line"><span class="string">	&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="局部的用法"><a href="#局部的用法" class="headerlink" title="局部的用法"></a>局部的用法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=<span class="string">"utf-8"</span>&gt;</span><br><span class="line">		&lt;title&gt;&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">			&lt;input type=<span class="string">"text"</span> v-model=<span class="string">"msg"</span>&gt;</span><br><span class="line">			&lt;span&gt;&#123;&#123;msg|upper&#125;&#125;&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">			&lt;div&gt;&#123;&#123;msg|upper|lower&#125;&#125;&lt;/</span>div&gt;</span><br><span class="line">			&lt;div v-bind:color=<span class="string">"msg|upper"</span>&gt;用于属性绑定&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">		&lt;/</span>div&gt;</span><br><span class="line">		&lt;script src=<span class="string">"../../000-vue.js/vue.js"</span>&gt;&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">		&lt;script type="text/</span>javascript<span class="string">"&gt;</span></span><br><span class="line"><span class="string">			var vm=new Vue(&#123;</span></span><br><span class="line"><span class="string">				el:'#app',</span></span><br><span class="line"><span class="string">				data:&#123;</span></span><br><span class="line"><span class="string">					msg:'',</span></span><br><span class="line"><span class="string">				&#125;,</span></span><br><span class="line"><span class="string">				filters:&#123;</span></span><br><span class="line"><span class="string">					upper:function(val)&#123;</span></span><br><span class="line"><span class="string">						return val.charAt(0).toUpperCase()+val.slice(1);</span></span><br><span class="line"><span class="string">					&#125;,</span></span><br><span class="line"><span class="string">					lower:function(val)&#123;</span></span><br><span class="line"><span class="string">						return val.charAt(0).toLowerCase()+val.slice(1);</span></span><br><span class="line"><span class="string">					&#125;</span></span><br><span class="line"><span class="string">				&#125;</span></span><br><span class="line"><span class="string">			&#125;);</span></span><br><span class="line"><span class="string">		&lt;/script&gt;</span></span><br><span class="line"><span class="string">	&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="带参数用法，格式显示日期（不推荐）"><a href="#带参数用法，格式显示日期（不推荐）" class="headerlink" title="带参数用法，格式显示日期（不推荐）"></a>带参数用法，格式显示日期（不推荐）</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=<span class="string">"utf-8"</span>&gt;</span><br><span class="line">		&lt;title&gt;&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">			&lt;input type=<span class="string">"text"</span> v-model=<span class="string">"msg"</span>&gt;</span><br><span class="line">			&lt;span&gt;&#123;&#123;msg|upper&#125;&#125;&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">			&lt;div&gt;&#123;&#123;msg|upper|lower&#125;&#125;&lt;/</span>div&gt;</span><br><span class="line">			&lt;div v-bind:color=<span class="string">"msg|upper"</span>&gt;用于属性绑定&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">		&lt;/</span>div&gt;</span><br><span class="line">		&lt;script src=<span class="string">"../../000-vue.js/vue.js"</span>&gt;&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">		&lt;script type="text/</span>javascript<span class="string">"&gt;</span></span><br><span class="line"><span class="string">			var vm=new Vue(&#123;</span></span><br><span class="line"><span class="string">				el:'#app',</span></span><br><span class="line"><span class="string">				data:&#123;</span></span><br><span class="line"><span class="string">					msg:'',</span></span><br><span class="line"><span class="string">				&#125;,</span></span><br><span class="line"><span class="string">				filters:&#123;</span></span><br><span class="line"><span class="string">					upper:function(val)&#123;</span></span><br><span class="line"><span class="string">						return val.charAt(0).toUpperCase()+val.slice(1);</span></span><br><span class="line"><span class="string">					&#125;,</span></span><br><span class="line"><span class="string">					lower:function(val)&#123;</span></span><br><span class="line"><span class="string">						return val.charAt(0).toLowerCase()+val.slice(1);</span></span><br><span class="line"><span class="string">					&#125;</span></span><br><span class="line"><span class="string">				&#125;</span></span><br><span class="line"><span class="string">			&#125;);</span></span><br><span class="line"><span class="string">		&lt;/script&gt;</span></span><br><span class="line"><span class="string">	&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="利用正则格式化显示日期"><a href="#利用正则格式化显示日期" class="headerlink" title="利用正则格式化显示日期"></a>利用正则格式化显示日期</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=<span class="string">"utf-8"</span>&gt;</span><br><span class="line">		&lt;title&gt;&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">			&lt;div&gt;&#123;&#123;date|format(<span class="string">'yyyy-MM-dd'</span>)&#125;&#125;&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">		&lt;/</span>div&gt;</span><br><span class="line">		&lt;script src=<span class="string">"../../../000-vue.js/vue.js"</span>&gt;&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">		&lt;script&gt;</span></span><br><span class="line"><span class="regexp">			Vue.filter('format',function(value,arg)&#123;</span></span><br><span class="line"><span class="regexp">				function dateFormat(date,format)&#123;</span></span><br><span class="line"><span class="regexp">					if(typeof date==='string')&#123;</span></span><br><span class="line"><span class="regexp">						var mts=date.match(/</span>(\/<span class="built_in">Date</span>\((\d+)\)\/)/);</span><br><span class="line">						<span class="keyword">if</span>(mts&amp;&amp;mts.length&gt;=<span class="number">3</span>)&#123;</span><br><span class="line">							date=<span class="built_in">parseInt</span>(mts[<span class="number">2</span>]);</span><br><span class="line">						&#125;</span><br><span class="line">					&#125;</span><br><span class="line">					date=<span class="keyword">new</span> <span class="built_in">Date</span>(date);</span><br><span class="line">					<span class="keyword">if</span>(!date||date.toUTCString()==<span class="string">'Invalid Date'</span>)&#123;</span><br><span class="line">						<span class="keyword">return</span> <span class="string">''</span>;</span><br><span class="line">					&#125;</span><br><span class="line">					<span class="keyword">var</span> map=&#123;</span><br><span class="line">						<span class="string">'M'</span> : date.getMonth()+<span class="number">1</span>,<span class="comment">//月</span></span><br><span class="line">						<span class="string">'d'</span> : date.getDate(),<span class="comment">//日</span></span><br><span class="line">						<span class="string">'h'</span> : date.getHours(),<span class="comment">//时</span></span><br><span class="line">						<span class="string">'m'</span> : date.getMinutes(),<span class="comment">//分</span></span><br><span class="line">						<span class="string">'s'</span> : date.getSeconds(),<span class="comment">//秒</span></span><br><span class="line">						<span class="string">'q'</span> : <span class="built_in">Math</span>.floor((date.getMonth()+<span class="number">3</span>)/<span class="number">3</span>),<span class="comment">//季</span></span><br><span class="line">						<span class="string">'S'</span> : date.getMilliseconds()<span class="comment">//毫秒</span></span><br><span class="line">					&#125;;</span><br><span class="line">					format=format.replace(<span class="regexp">/([yMdhmsqS])+/g</span>,<span class="function"><span class="keyword">function</span>(<span class="params">all,t</span>)</span>&#123;</span><br><span class="line">						<span class="keyword">var</span> v=map[t];</span><br><span class="line">						<span class="keyword">if</span>(v!==<span class="literal">undefined</span>)&#123;</span><br><span class="line">							<span class="keyword">if</span>(all.length&gt;<span class="number">1</span>)&#123;</span><br><span class="line">								v=<span class="string">'0'</span>+v;</span><br><span class="line">								v=v.substr(v.length<span class="number">-2</span>);</span><br><span class="line">							&#125;</span><br><span class="line">							<span class="keyword">return</span> v;</span><br><span class="line">						&#125;<span class="keyword">else</span> <span class="keyword">if</span>(t===<span class="string">'y'</span>)&#123;</span><br><span class="line">							<span class="keyword">return</span> (date.getFullYear()+<span class="string">''</span>).substr(<span class="number">4</span>-all.length);</span><br><span class="line">						&#125;</span><br><span class="line">						<span class="keyword">return</span> all;</span><br><span class="line">					&#125;);</span><br><span class="line">					<span class="keyword">return</span> format;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">return</span> dateFormat(value,arg);</span><br><span class="line">			&#125;)</span><br><span class="line">			<span class="keyword">var</span> vm=<span class="keyword">new</span> Vue(&#123;</span><br><span class="line">				el:<span class="string">'#app'</span>,</span><br><span class="line">				data:&#123;</span><br><span class="line">					date:<span class="keyword">new</span> <span class="built_in">Date</span>()</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;);</span><br><span class="line">		&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>body&gt;</span><br><span class="line">&lt;<span class="regexp">/html&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/04/05/vue%E7%9A%84%E8%BF%87%E6%BB%A4%E5%99%A8/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-vue的侦听器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/04/04/vue%E7%9A%84%E4%BE%A6%E5%90%AC%E5%99%A8/" target="_blank">vue的侦听器</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/04/04/vue%E7%9A%84%E4%BE%A6%E5%90%AC%E5%99%A8/" class="archive-article-date">
-        <time datetime="2020-04-04T13:35:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-04</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="vue的侦听器"><a href="#vue的侦听器" class="headerlink" title="vue的侦听器"></a>vue的侦听器</h1><p>利用check属性，当data中的数据改变时触发，这个效果也可以用计算属性</p>
-<p>但是当有异步请求和较大的开销的操作时建议用侦听器</p>
-<h3 id="一般的情况"><a href="#一般的情况" class="headerlink" title="一般的情况:"></a>一般的情况:</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=<span class="string">"utf-8"</span>&gt;</span><br><span class="line">		&lt;title&gt;&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">			&lt;div&gt;</span><br><span class="line">				&lt;span&gt;名：&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">				&lt;span&gt;</span></span><br><span class="line"><span class="regexp">					&lt;input type="text" v-model="firstName"&gt;</span></span><br><span class="line"><span class="regexp">				&lt;/</span>span&gt;</span><br><span class="line">			&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">			&lt;div&gt;</span></span><br><span class="line"><span class="regexp">				&lt;span&gt;姓：&lt;/</span>span&gt;</span><br><span class="line">				&lt;span&gt;</span><br><span class="line">					&lt;input type=<span class="string">"text"</span> v-model=<span class="string">"lastName"</span>&gt;</span><br><span class="line">				&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">			&lt;/</span>div&gt;</span><br><span class="line">			&lt;div&gt;&#123;&#123;fullName&#125;&#125;&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">		&lt;/</span>div&gt;</span><br><span class="line">		&lt;script src=<span class="string">"../000-vue.js/vue.js"</span>&gt;&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">		&lt;script&gt;</span></span><br><span class="line"><span class="regexp">			var vm=new Vue(&#123;</span></span><br><span class="line"><span class="regexp">				el:'#app',</span></span><br><span class="line"><span class="regexp">				data:&#123;</span></span><br><span class="line"><span class="regexp">					firstName:'',</span></span><br><span class="line"><span class="regexp">					lastName:'',</span></span><br><span class="line"><span class="regexp">					fullName:''</span></span><br><span class="line"><span class="regexp">				&#125;,</span></span><br><span class="line"><span class="regexp">				watch:&#123;/</span><span class="regexp">/侦听器，也可以用计算属性，但是数据变化执行异步或开销较大的操作</span></span><br><span class="line"><span class="regexp">					firstName:function(val)&#123;</span></span><br><span class="line"><span class="regexp">						this.fullName=val+''+this.lastName;</span></span><br><span class="line"><span class="regexp">					&#125;,</span></span><br><span class="line"><span class="regexp">					lastName:function(val)&#123;</span></span><br><span class="line"><span class="regexp">						this.fullName=this.firstName+''+val;</span></span><br><span class="line"><span class="regexp">					&#125;</span></span><br><span class="line"><span class="regexp">				&#125;</span></span><br><span class="line"><span class="regexp">			&#125;)</span></span><br><span class="line"><span class="regexp">		&lt;/</span>script&gt;</span><br><span class="line">	&lt;<span class="regexp">/body&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>html&gt;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="异步请求的用法："><a href="#异步请求的用法：" class="headerlink" title="异步请求的用法："></a>异步请求的用法：</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=<span class="string">"utf-8"</span>&gt;</span><br><span class="line">		&lt;title&gt;&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">			&lt;span&gt;用户名：&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">			&lt;span&gt;</span></span><br><span class="line"><span class="regexp">				&lt;input type="text" v-model.lazy="uname"&gt;</span></span><br><span class="line"><span class="regexp">			&lt;/</span>span&gt;</span><br><span class="line">			&lt;span v-text=<span class="string">"tip"</span>&gt;&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">		&lt;/</span>div&gt;</span><br><span class="line">		&lt;script src=<span class="string">'../../000-vue.js/vue.js'</span>&gt;&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">		&lt;!-- 1.采用侦听器监听变化</span></span><br><span class="line"><span class="regexp">		2.调用后台接口（这里用setTimeout模拟）</span></span><br><span class="line"><span class="regexp">		3.根据验证调整提示信息 --&gt;</span></span><br><span class="line"><span class="regexp">		&lt;script&gt;</span></span><br><span class="line"><span class="regexp">			var vm=new Vue(&#123;</span></span><br><span class="line"><span class="regexp">				el:'#app',</span></span><br><span class="line"><span class="regexp">				data:&#123;</span></span><br><span class="line"><span class="regexp">					uname:'',</span></span><br><span class="line"><span class="regexp">					tip:''</span></span><br><span class="line"><span class="regexp">				&#125;,</span></span><br><span class="line"><span class="regexp">				methods:&#123;</span></span><br><span class="line"><span class="regexp">					checkName:function(uname)&#123;</span></span><br><span class="line"><span class="regexp">						var that=this;</span></span><br><span class="line"><span class="regexp">						setTimeout(function()&#123;</span></span><br><span class="line"><span class="regexp">							if(uname=='admin')&#123;</span></span><br><span class="line"><span class="regexp">								that.tip='用户名已存在，请更换一个';</span></span><br><span class="line"><span class="regexp">							&#125;else&#123;</span></span><br><span class="line"><span class="regexp">								that.tip='用户名可以使用'</span></span><br><span class="line"><span class="regexp">							&#125;</span></span><br><span class="line"><span class="regexp">						&#125;,2000);</span></span><br><span class="line"><span class="regexp">					&#125;</span></span><br><span class="line"><span class="regexp">				&#125;,</span></span><br><span class="line"><span class="regexp">				watch:&#123;</span></span><br><span class="line"><span class="regexp">					uname:function(val)&#123;</span></span><br><span class="line"><span class="regexp">						this.checkName(val);</span></span><br><span class="line"><span class="regexp">						this.tip='正在验证...';</span></span><br><span class="line"><span class="regexp">					&#125;</span></span><br><span class="line"><span class="regexp">				&#125;</span></span><br><span class="line"><span class="regexp">			&#125;)</span></span><br><span class="line"><span class="regexp">		&lt;/</span>script&gt;</span><br><span class="line">	&lt;<span class="regexp">/body&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>html&gt;</span><br></pre></td></tr></table></figure>
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/04/04/vue%E7%9A%84%E4%BE%A6%E5%90%AC%E5%99%A8/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-vue的计算属性" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/04/03/vue%E7%9A%84%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7/" target="_blank">vue的计算属性</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/04/03/vue%E7%9A%84%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7/" class="archive-article-date">
-        <time datetime="2020-04-03T13:35:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-03</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="计算属性"><a href="#计算属性" class="headerlink" title="计算属性"></a>计算属性</h1><p>表达式的计算逻辑可能比较复杂，使用计算属性可以使模板内容更加简洁</p>
-<h3 id="计算属性-computed-与方法属性-methods-的区别"><a href="#计算属性-computed-与方法属性-methods-的区别" class="headerlink" title="计算属性(computed)与方法属性(methods)的区别"></a>计算属性(computed)与方法属性(methods)的区别</h3><p>计算属性的值基于data，会缓存，data数据改变了，它的值也会改变，而方法属性调用一次就会计算一次，它的值不会改变。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=<span class="string">"utf-8"</span>&gt;</span><br><span class="line">		&lt;title&gt;&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;!-- 表达式的计算逻辑可能比较复杂，使用计算属性可以使模板内容更加简洁 --&gt;</span><br><span class="line">		&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">			&lt;div&gt;&#123;&#123;msg&#125;&#125;&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">			&lt;div&gt;&#123;&#123;msg.split('').reverse().join('')&#125;&#125;&lt;/</span>div&gt;</span><br><span class="line">			&lt;div&gt;&#123;&#123;reversedMsg&#125;&#125;&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">			&lt;div&gt;&#123;&#123;reversedMessage()&#125;&#125;&lt;/</span>div&gt;</span><br><span class="line">		&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">		&lt;script type="text/</span>javascript<span class="string">" src="</span>../<span class="number">000</span>-vue.js/vue.js<span class="string">"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="string">		&lt;script&gt;</span></span><br><span class="line"><span class="string">			var vm=new Vue(&#123;</span></span><br><span class="line"><span class="string">				el:'#app',</span></span><br><span class="line"><span class="string">				data:&#123;</span></span><br><span class="line"><span class="string">					msg:'hello',</span></span><br><span class="line"><span class="string">				&#125;,</span></span><br><span class="line"><span class="string">				computed:&#123;//计算属性，基于data，当数据改变计算属性也会改变，会缓存，类似的方法属性不会缓存</span></span><br><span class="line"><span class="string">					reversedMsg:function()&#123;</span></span><br><span class="line"><span class="string">						return this.msg.split('').reverse().join('');</span></span><br><span class="line"><span class="string">					&#125;</span></span><br><span class="line"><span class="string">				&#125;,</span></span><br><span class="line"><span class="string">				methods:&#123;//方法属性调用一次就会计算一次</span></span><br><span class="line"><span class="string">					reversedMessage:function()&#123;</span></span><br><span class="line"><span class="string">						return this.msg.split('').reverse().join('');</span></span><br><span class="line"><span class="string">					&#125;</span></span><br><span class="line"><span class="string">				&#125;</span></span><br><span class="line"><span class="string">			&#125;)</span></span><br><span class="line"><span class="string">		&lt;/script&gt;</span></span><br><span class="line"><span class="string">	&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/04/03/vue%E7%9A%84%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-vue自定义指令" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/04/02/vue%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8C%87%E4%BB%A4/" target="_blank">vue自定义指令</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/04/02/vue%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8C%87%E4%BB%A4/" class="archive-article-date">
-        <time datetime="2020-04-02T11:36:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-02</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="vue的自定义指令"><a href="#vue的自定义指令" class="headerlink" title="vue的自定义指令"></a>vue的自定义指令</h1><ol>
-<li>全局自定义</li>
-<li>局部自定义</li>
-</ol>
-<h3 id="vue的全局自定义"><a href="#vue的全局自定义" class="headerlink" title="vue的全局自定义"></a>vue的全局自定义</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=<span class="string">"utf-8"</span>&gt;</span><br><span class="line">		&lt;title&gt;&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">			&lt;input type=<span class="string">"text"</span> v-focus v-color=<span class="string">"msg"</span>&gt;</span><br><span class="line">		&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">		&lt;script src="../</span>../<span class="number">000</span>-vue.js/vue.js<span class="string">"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="string">		&lt;script&gt;</span></span><br><span class="line"><span class="string">			Vue.directive('focus',&#123;//自动聚焦</span></span><br><span class="line"><span class="string">				inserted:function(el)&#123;</span></span><br><span class="line"><span class="string">					el.focus();</span></span><br><span class="line"><span class="string">				&#125;</span></span><br><span class="line"><span class="string">			&#125;),</span></span><br><span class="line"><span class="string">			Vue.directive('color',&#123;//改变颜色</span></span><br><span class="line"><span class="string">				bind:function(el,binding)&#123;</span></span><br><span class="line"><span class="string">					el.style.backgroundColor=binding.value.color;</span></span><br><span class="line"><span class="string">				&#125;</span></span><br><span class="line"><span class="string">			&#125;);</span></span><br><span class="line"><span class="string">			var vm=new Vue(&#123;</span></span><br><span class="line">				el:"#app",</span><br><span class="line">				data:&#123;</span><br><span class="line">					msg:&#123;</span><br><span class="line">						color:<span class="string">"red"</span></span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;)</span><br><span class="line">		&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>body&gt;</span><br><span class="line">&lt;<span class="regexp">/html&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>这里定义 了v-focus的自动聚焦的指令，还有v-color这个改变背景颜色的指令</p>
-<h3 id="vue的局部自定义指令"><a href="#vue的局部自定义指令" class="headerlink" title="vue的局部自定义指令"></a>vue的局部自定义指令</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=<span class="string">"utf-8"</span>&gt;</span><br><span class="line">		&lt;title&gt;&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">			&lt;input type=<span class="string">"text"</span> v-focus v-color=<span class="string">"msg"</span>&gt;</span><br><span class="line">		&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">		&lt;script src="../</span>../<span class="number">000</span>-vue.js/vue.js<span class="string">"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="string">		&lt;script&gt;</span></span><br><span class="line"><span class="string">			var vm=new Vue(&#123;</span></span><br><span class="line"><span class="string">				el:'#app',</span></span><br><span class="line"><span class="string">				data:&#123;</span></span><br><span class="line"><span class="string">					msg:&#123;</span></span><br><span class="line"><span class="string">						color:'yellow',</span></span><br><span class="line"><span class="string">					&#125;</span></span><br><span class="line"><span class="string">				&#125;,</span></span><br><span class="line"><span class="string">				directives:&#123;</span></span><br><span class="line"><span class="string">					focus:&#123;</span></span><br><span class="line"><span class="string">						inserted:function(el)&#123;</span></span><br><span class="line"><span class="string">							el.focus();</span></span><br><span class="line"><span class="string">						&#125;</span></span><br><span class="line"><span class="string">					&#125;,</span></span><br><span class="line"><span class="string">					color:&#123;</span></span><br><span class="line"><span class="string">						inserted:function(el,binding)&#123;</span></span><br><span class="line"><span class="string">							el.style.backgroundColor=binding.value.color;</span></span><br><span class="line"><span class="string">						&#125;</span></span><br><span class="line"><span class="string">					&#125;</span></span><br><span class="line"><span class="string">				&#125;</span></span><br><span class="line"><span class="string">			&#125;)</span></span><br><span class="line"><span class="string">		&lt;/script&gt;</span></span><br><span class="line"><span class="string">	&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>这里定义 了v-focus的自动聚焦的指令，还有v-color这个改变背景颜色的指令，但他是局部的，只在id为app的div内可以使用</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/04/02/vue%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8C%87%E4%BB%A4/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-  
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/3/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/5/">Next &amp;raquo;</a>
-    </nav>
-  
 
 
           </div>
@@ -1200,8 +471,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,

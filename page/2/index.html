@@ -202,6 +202,99 @@
             
 
   
+    <article id="post-算法题解1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/04/25/%E7%AE%97%E6%B3%95%E9%A2%98%E8%A7%A31/" target="_blank">算法题解1</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/04/25/%E7%AE%97%E6%B3%95%E9%A2%98%E8%A7%A31/" class="archive-article-date">
+        <time datetime="2020-04-25T01:53:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-25</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="1"><a href="#1" class="headerlink" title="1."></a>1.</h1><p>指定H为1，O为2，C为3，R为4，给一串字符串得到</p>
+<p>比如H2O为1<em>2+2=4；C11R4H为3</em>11+4<em>4+1</em>1=50</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getResult</span>(<span class="params">str</span>)</span>&#123;</span><br><span class="line">            <span class="keyword">let</span> getSum=<span class="number">0</span>;</span><br><span class="line">            <span class="keyword">let</span> arr=str.match(<span class="regexp">/[A-Z]&#123;1&#125;\d*/g</span>);</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;arr.length;i++)&#123;</span><br><span class="line">                <span class="keyword">let</span> char=arr[i].charAt(<span class="number">0</span>);</span><br><span class="line">                <span class="keyword">if</span>(arr[i].length==<span class="number">1</span>)&#123;</span><br><span class="line">                <span class="keyword">var</span> number=<span class="number">1</span>;</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                 number=arr[i].slice(<span class="number">1</span>);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">switch</span>(char)&#123;</span><br><span class="line">                    <span class="keyword">case</span> <span class="string">'H'</span> : getSum+=<span class="number">1</span>*number;<span class="keyword">break</span>;</span><br><span class="line">                    <span class="keyword">case</span> <span class="string">'O'</span> : getSum+=<span class="number">2</span>*number;<span class="keyword">break</span>;</span><br><span class="line">                    <span class="keyword">case</span> <span class="string">'C'</span> : getSum+=<span class="number">3</span>*number;<span class="keyword">break</span>;</span><br><span class="line">                    <span class="keyword">case</span> <span class="string">'R'</span> : getSum+=<span class="number">4</span>*number;<span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                </span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> getSum</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="2"><a href="#2" class="headerlink" title="2."></a>2.</h1><p>连续的OOXOOOX，连续的第一个O代表的是1第二个代表2，以此类推，X为0。</p>
+<p>例如：OOXOOOOXOOX=1+2+0+1+2+3+4+0+1+2=16</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getSum</span>(<span class="params">str</span>)</span>&#123;</span><br><span class="line">            <span class="keyword">let</span> result=<span class="number">0</span>;</span><br><span class="line">            <span class="keyword">let</span> arr=str.match(<span class="regexp">/O&#123;0,&#125;X/g</span>);</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;arr.length;i++)&#123;</span><br><span class="line">                result+=Sum(arr[i].length<span class="number">-1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> result</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">Sum</span>(<span class="params">number</span>)</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> (number+<span class="number">1</span>)*(number)/<span class="number">2</span>        </span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/04/25/%E7%AE%97%E6%B3%95%E9%A2%98%E8%A7%A31/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-20年4月24日" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1149,110 +1242,6 @@
 
 
   
-    <article id="post-vue的编程式导航" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/04/18/vue%E7%9A%84%E7%BC%96%E7%A8%8B%E5%BC%8F%E5%AF%BC%E8%88%AA/" target="_blank">vue的编程式导航</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/04/18/vue%E7%9A%84%E7%BC%96%E7%A8%8B%E5%BC%8F%E5%AF%BC%E8%88%AA/" class="archive-article-date">
-        <time datetime="2020-04-18T08:22:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-18</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="vue的编程式导航"><a href="#vue的编程式导航" class="headerlink" title="vue的编程式导航"></a>vue的编程式导航</h1><h3 id="两个导航方式"><a href="#两个导航方式" class="headerlink" title="两个导航方式:"></a>两个导航方式:</h3><p>  1.声明式导航:通过点击链接实现导航的方式</p>
-<p>  例如:普通网页中的<code>&lt;a&gt;&lt;/a&gt;</code>链接或vue中的<code>&lt;router-link&gt;&lt;/router-link&gt;</code></p>
-<p>  2.编程式导航:通过JavaScript形式的API实现导航的方式</p>
-<p>  例如:普通网页中的<code>location.href</code></p>
-<h3 id="常用的API"><a href="#常用的API" class="headerlink" title="常用的API:"></a>常用的API:</h3><p>  this.$router.push(‘hash地址’)</p>
-<p>  this.$router.go(n)</p>
-<p>  这里n为1则前进一位，-1则后退一位</p>
-<h3 id="router-push-方法的参数规则"><a href="#router-push-方法的参数规则" class="headerlink" title="router.push()方法的参数规则"></a>router.push()方法的参数规则</h3><ol>
-<li><p>router.push(‘/home’)</p>
-</li>
-<li><p>router.push({path:’/home’})</p>
-</li>
-<li><p>router.push({name:’/user’,params:{userId:123}})</p>
-</li>
-<li><p>router.push({path:’/register’,query:{uName:’zhangsan’}})</p>
-</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">    &lt;meta name=<span class="string">"viewport"</span> content=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span><br><span class="line">    &lt;title&gt;vue-router&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;!--</span><br><span class="line">    两个导航方式:</span><br><span class="line">    <span class="number">1.</span>声明式导航:通过点击链接实现导航的方式</span><br><span class="line">    例如:普通网页中的&lt;a&gt;&lt;<span class="regexp">/a&gt;链接或vue中的&lt;router-link&gt;&lt;/</span>router-link&gt;</span><br><span class="line">    <span class="number">2.</span>编程式导航:通过JavaScript形式的API实现导航的方式</span><br><span class="line">    例如:普通网页中的location.href</span><br><span class="line">    --&gt;</span><br><span class="line">    &lt;!--</span><br><span class="line">    常用的API:</span><br><span class="line">    <span class="keyword">this</span>.$router.push(<span class="string">'hash地址'</span>)</span><br><span class="line">    <span class="keyword">this</span>.$router.go(n)</span><br><span class="line">    这里n为<span class="number">1</span>则前进一位，<span class="number">-1</span>则后退一位</span><br><span class="line">    --&gt;</span><br><span class="line">    &lt;!--</span><br><span class="line">    router.push()方法的参数规则</span><br><span class="line">    <span class="number">1.</span> router.push(<span class="string">'/home'</span>)</span><br><span class="line">    <span class="number">2.</span> router.push(&#123;<span class="attr">path</span>:<span class="string">'/home'</span>&#125;)</span><br><span class="line">    <span class="number">3.</span> router.push(&#123;<span class="attr">name</span>:<span class="string">'/user'</span>,<span class="attr">params</span>:&#123;<span class="attr">userId</span>:<span class="number">123</span>&#125;&#125;)</span><br><span class="line">    <span class="number">4.</span> router.push(&#123;<span class="attr">path</span>:<span class="string">'/register'</span>,<span class="attr">query</span>:&#123;<span class="attr">uName</span>:<span class="string">'zhangsan'</span>&#125;&#125;)</span><br><span class="line">    --&gt;</span><br><span class="line">   </span><br><span class="line">    &lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        &lt;router-link to=<span class="string">"/zhuye"</span>&gt;主页&lt;<span class="regexp">/router-link&gt;</span></span><br><span class="line"><span class="regexp">        &lt;router-link to="/</span>keji/<span class="number">1</span><span class="string">"&gt;科技1&lt;/router-link&gt;</span></span><br><span class="line"><span class="string">        &lt;router-link :to="</span>&#123;<span class="attr">name</span>:<span class="string">'keji'</span>,<span class="attr">params</span>:&#123;<span class="attr">id</span>:<span class="number">2</span>&#125;&#125;<span class="string">"&gt;科技2&lt;/router-link&gt;&lt;!--注意绑定的对象外面有引号--&gt;</span></span><br><span class="line"><span class="string">        &lt;router-link to="</span>/keji/<span class="number">3</span><span class="string">"&gt;科技3&lt;/router-link&gt;</span></span><br><span class="line"><span class="string">        &lt;router-link to="</span>/caijing<span class="string">"&gt;财经&lt;/router-link&gt;</span></span><br><span class="line"><span class="string">        &lt;router-link to="</span>/yule<span class="string">"&gt;娱乐&lt;/router-link&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        </span></span><br><span class="line"><span class="string">        &lt;router-view&gt;&lt;/router-view&gt;</span></span><br><span class="line"><span class="string">    &lt;/div&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &lt;script src="</span>https:<span class="comment">//cdn.jsdelivr.net/npm/vue/dist/vue.js"&gt;&lt;/script&gt;</span></span><br><span class="line">    &lt;script src=<span class="string">"https://unpkg.com/vue-router/dist/vue-router.js"</span>&gt;&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">    &lt;script&gt;</span></span><br><span class="line"><span class="regexp">        const zhuye=&#123;</span></span><br><span class="line"><span class="regexp">            template:`&lt;div&gt;</span></span><br><span class="line"><span class="regexp">                &lt;h1&gt;主页组件&lt;/</span>h1&gt;</span><br><span class="line">                &lt;button @click=<span class="string">"goYule"</span>&gt;跳转到娱乐页面&lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp">                &lt;/</span>div&gt;<span class="string">`,</span></span><br><span class="line"><span class="string">            methods: &#123;</span></span><br><span class="line"><span class="string">                goYule:function()&#123;</span></span><br><span class="line"><span class="string">                    this.$router.push('/yule');//跳转到娱乐页面</span></span><br><span class="line"><span class="string">                &#125;</span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">        const keji=&#123;</span></span><br><span class="line"><span class="string">            props:['id','name','age'],</span></span><br><span class="line"><span class="string">            template:`</span>&lt;h1&gt;科技信息--用户id为&#123;&#123;id&#125;&#125;--名字为&#123;&#123;name&#125;&#125;--年龄为&#123;&#123;age&#125;&#125;&lt;<span class="regexp">/h1&gt;`</span></span><br><span class="line"><span class="regexp">        &#125;</span></span><br><span class="line"><span class="regexp">        const caijing=&#123;</span></span><br><span class="line"><span class="regexp">            template:`&lt;h1&gt;财经信息&lt;/</span>h1&gt;<span class="string">`</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">        const yule=&#123;</span></span><br><span class="line"><span class="string">            template:`</span>&lt;div&gt; </span><br><span class="line">                &lt;h1&gt;娱乐信息&lt;<span class="regexp">/h1&gt;</span></span><br><span class="line"><span class="regexp">                &lt;button @click="goBack"&gt;后退&lt;/</span>button&gt;</span><br><span class="line">                &lt;<span class="regexp">/div&gt;`,</span></span><br><span class="line"><span class="regexp">            methods:&#123;</span></span><br><span class="line"><span class="regexp">                goBack:function()&#123;</span></span><br><span class="line"><span class="regexp">                    this.$router.go(-1);</span></span><br><span class="line"><span class="regexp">                &#125;</span></span><br><span class="line"><span class="regexp">            &#125;</span></span><br><span class="line"><span class="regexp">        &#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">        const router=new VueRouter(&#123;</span></span><br><span class="line"><span class="regexp">            routes:[</span></span><br><span class="line"><span class="regexp">                &#123;path:'/',redirect: '/zhuye'&#125;,</span></span><br><span class="line"><span class="regexp">                // 命名路由的规则</span></span><br><span class="line"><span class="regexp">                &#123;path:'/zhuye',component:zhuye &#125;,</span></span><br><span class="line"><span class="regexp">                &#123;name:'keji', path:'/keji/:id',component:keji,props:route=&gt;(&#123;name:'bob',age:31,id:route.params.id&#125;)&#125;,//props为函数类型时，id是获取不到的</span></span><br><span class="line"><span class="regexp">                &#123;path:'/caijing',component:caijing &#125;,</span></span><br><span class="line"><span class="regexp">                &#123;path:'/yule',component:yule &#125;,</span></span><br><span class="line"><span class="regexp">               </span></span><br><span class="line"><span class="regexp">            ]</span></span><br><span class="line"><span class="regexp">        &#125;)</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">        const vm=new Vue(&#123;</span></span><br><span class="line"><span class="regexp">            el:'#app',</span></span><br><span class="line"><span class="regexp">            data:&#123;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">            &#125;,</span></span><br><span class="line"><span class="regexp">            router:router/</span><span class="regexp">/一定要挂载</span></span><br><span class="line"><span class="regexp">        &#125;)</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">        </span></span><br><span class="line"><span class="regexp">    &lt;/</span>script&gt;</span><br><span class="line">&lt;<span class="regexp">/body&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>html&gt;</span><br></pre></td></tr></table></figure>
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/04/18/vue%E7%9A%84%E7%BC%96%E7%A8%8B%E5%BC%8F%E5%AF%BC%E8%88%AA/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
@@ -1390,6 +1379,10 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">webpack</a>
               </li>
              
@@ -1398,7 +1391,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1406,15 +1399,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">node</a>
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">

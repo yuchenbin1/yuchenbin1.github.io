@@ -202,6 +202,115 @@
             
 
   
+    <article id="post-响应式页面布局" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/03/13/%E5%93%8D%E5%BA%94%E5%BC%8F%E9%A1%B5%E9%9D%A2%E5%B8%83%E5%B1%80/" target="_blank">响应式页面布局</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/03/13/%E5%93%8D%E5%BA%94%E5%BC%8F%E9%A1%B5%E9%9D%A2%E5%B8%83%E5%B1%80/" class="archive-article-date">
+        <time datetime="2020-03-13T13:58:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-13</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="页面实现功能"><a href="#页面实现功能" class="headerlink" title="页面实现功能"></a>页面实现功能</h1><ol>
+<li><p>第一部分：导航区</p>
+<p>导航区始终在页面上方，点击导航到达相应的区域</p>
+</li>
+<li><p>第二部分：内容区</p>
+<p>（1)首页：首页是个轮播图，采用库函数glide，其中视频自动播放，图片视频采用遮罩，探索更多按钮转到关于我们部分</p>
+<p>（2）关于我们和服务流程：当页面出现时各模块一一出现，采用库函数scrollReveal</p>
+<p>（3）成功案例：有可供筛选的按钮，采用库函数isotope</p>
+<p>（4）团队介绍和公司动态：鼠标悬浮动画</p>
+<p>（5）数据部分：当页面移到这时，数字从0开始涨的动画，背景图在滚动时有视差</p>
+</li>
+<li><p>第三部分：页脚</p>
+<p>栅格布局，有返回顶部按钮</p>
+</li>
+<li><p>其他</p>
+<p>响应式布局：media</p>
+<p>顺畅滑动：库函数smooth-scroll</p>
+</li>
+</ol>
+<h3 id="详情代码链接"><a href="#详情代码链接" class="headerlink" title="详情代码链接"></a><a href="https://github.com/yuchenbin1/web-design.git" target="_blank" rel="noopener">详情代码链接</a></h3><p>javascript部分代码</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> headerEl=<span class="built_in">document</span>.querySelector(<span class="string">"header"</span>);</span><br><span class="line"><span class="keyword">const</span> scrollTOTop=<span class="built_in">document</span>.querySelector(<span class="string">".scrollToTop"</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">"scroll"</span>,()=&gt;&#123;<span class="comment">//滚动事件</span></span><br><span class="line">	<span class="keyword">let</span> height=headerEl.getBoundingClientRect().height;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span>(<span class="built_in">window</span>.pageYOffset-height&gt;<span class="number">800</span>)&#123;<span class="comment">//设置顶部导航出现的位置</span></span><br><span class="line">		<span class="keyword">if</span>(!headerEl.classList.contains(<span class="string">"sticky"</span>))&#123;</span><br><span class="line">			headerEl.classList.add(<span class="string">"sticky"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">		<span class="keyword">else</span>&#123;</span><br><span class="line">			headerEl.classList.remove(<span class="string">"sticky"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span>(<span class="built_in">window</span>.pageYOffset&gt;<span class="number">2000</span>)&#123;<span class="comment">//设置返回顶部的按钮出现的位置</span></span><br><span class="line">		scrollTOTop.style.display=<span class="string">"block"</span>;</span><br><span class="line">	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">		scrollTOTop.style.display=<span class="string">"none"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> glide=<span class="keyword">new</span> Glide(<span class="string">".glide"</span>);  <span class="comment">//捕获轮播组件</span></span><br><span class="line"><span class="keyword">const</span> captionsEl=<span class="built_in">document</span>.querySelectorAll(<span class="string">".slide-caption"</span>);  <span class="comment">//获取标题的容器</span></span><br><span class="line"></span><br><span class="line">glide.on([<span class="string">"mount.after"</span>,<span class="string">"run.after"</span>],()=&gt;&#123;  <span class="comment">//监听函数 mount.after是加载后，run.after是轮播后</span></span><br><span class="line">	<span class="keyword">const</span> caption=captionsEl[glide.index];  <span class="comment">//获取到能看见的元素的下标</span></span><br><span class="line">	anime(&#123;</span><br><span class="line">		targets:caption.children,  <span class="comment">//caption下的直接子元素块依次出现</span></span><br><span class="line">		opacity:[<span class="number">0</span>,<span class="number">1</span>],  <span class="comment">//透明度0到1</span></span><br><span class="line">		duration:<span class="number">400</span>,  <span class="comment">//动画执行时间400毫秒</span></span><br><span class="line">		easing:<span class="string">"linear"</span>,  <span class="comment">//动画执行函数，线性的</span></span><br><span class="line">		delay:anime.stagger(<span class="number">400</span>,&#123;<span class="attr">start</span>:<span class="number">300</span>&#125;),  <span class="comment">//第一个300毫秒后出现，对caption下的children，第一个出现后等400毫秒出现</span></span><br><span class="line">		tranlateY:[anime.stagger([<span class="number">40</span>,<span class="number">10</span>]),<span class="number">0</span>]  <span class="comment">//h1移动40到0，h3移动中间数到0，按钮移动10到0</span></span><br><span class="line">	&#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">glide.on(<span class="string">"run.before"</span>,()=&gt;&#123;  <span class="comment">//坚听到run.before轮播前</span></span><br><span class="line">	<span class="built_in">document</span>.querySelectorAll(<span class="string">".slide-caption&gt;*"</span>).forEach(<span class="function"><span class="params">el</span>=&gt;</span>&#123;  <span class="comment">//选取到caption下面的每个元素</span></span><br><span class="line">		el.style.opacity=<span class="number">0</span>;  <span class="comment">//每次切换都把有透明度重置为0</span></span><br><span class="line">	&#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">glide.mount();  <span class="comment">//下载轮播组件</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> isotope=<span class="keyword">new</span> Isotope(<span class="string">".cases"</span>,&#123;  <span class="comment">//捕获成功案例的容器</span></span><br><span class="line">	layoutMode:<span class="string">"fitRows"</span>,  <span class="comment">//根据行模式布局</span></span><br><span class="line">	itemSelector:<span class="string">".case-item"</span>  <span class="comment">//各个子元素图片</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> filterBtns=<span class="built_in">document</span>.querySelector(<span class="string">".filter-btns"</span>);  <span class="comment">//获取筛选按钮父元素</span></span><br><span class="line"></span><br><span class="line">filterBtns.addEventListener(<span class="string">"click"</span>,e=&gt;&#123;  <span class="comment">//监听事件</span></span><br><span class="line">	<span class="keyword">let</span>&#123;target&#125;=e;</span><br><span class="line">	<span class="keyword">const</span> filterOption=target.getAttribute(<span class="string">"data-filter"</span>);</span><br><span class="line">	<span class="keyword">if</span>(filterOption)&#123;</span><br><span class="line">		<span class="built_in">document</span></span><br><span class="line">			.querySelectorAll(<span class="string">".filter-btn.active"</span>)</span><br><span class="line">			.forEach(<span class="function"><span class="params">btn</span>=&gt;</span>btn.classList.remove(<span class="string">"active"</span>));  <span class="comment">//取消所有active</span></span><br><span class="line">		target.classList.add(<span class="string">"active"</span>);  <span class="comment">//当前点击的按钮增加active</span></span><br><span class="line">		</span><br><span class="line">		isotope.arrange(&#123;<span class="attr">filter</span>:filterOption&#125;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> staggeringOption=&#123;</span><br><span class="line">	delay:<span class="number">300</span>,  <span class="comment">//延迟300毫秒</span></span><br><span class="line">	distance:<span class="string">"50px"</span>,  <span class="comment">//移动50像素</span></span><br><span class="line">	duration:<span class="number">500</span>,  <span class="comment">//动画执行500毫秒</span></span><br><span class="line">	easing:<span class="string">"ease-in-out"</span>,</span><br><span class="line">	origin:<span class="string">"bottom"</span>  <span class="comment">//从下到上</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ScrollReveal().reveal(<span class="string">".feature"</span>,&#123;...staggeringOption,<span class="attr">interval</span>:<span class="number">350</span>&#125;);<span class="comment">//三个点的意思是把staggeringOption中的属性拿出来和后面interval拼成一个新的对象并返回</span></span><br><span class="line">ScrollReveal().reveal(<span class="string">".service-item"</span>,&#123;...staggeringOption,<span class="attr">interval</span>:<span class="number">350</span>&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> dataSectionEl=<span class="built_in">document</span>.querySelector(<span class="string">".data-section"</span>);<span class="comment">//捕获数据的部分，数字增长动画</span></span><br><span class="line">ScrollReveal().reveal(<span class="string">".data-section"</span>,&#123;</span><br><span class="line">	beforeReveal:<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">		anime(&#123;</span><br><span class="line">			targets:<span class="string">".data-piece .num"</span>,<span class="comment">//捕获数字区域</span></span><br><span class="line">			innerHTML:<span class="function"><span class="params">el</span>=&gt;</span>&#123;</span><br><span class="line">				<span class="keyword">return</span> [<span class="number">0</span>,el.innerHTML];</span><br><span class="line">			&#125;,</span><br><span class="line">			duration:<span class="number">2000</span>,<span class="comment">//执行时间</span></span><br><span class="line">			round:<span class="number">1</span>,<span class="comment">//数字按1增长，去掉那么按小数增长</span></span><br><span class="line">			easing:<span class="string">"easeInExpo"</span><span class="comment">//越来越快的动画效果</span></span><br><span class="line">		&#125;);</span><br><span class="line">		dataSectionEl.style.backgroundPosition=<span class="string">`center cale(50%-<span class="subst">$&#123;dataSectionEl.getBoundingClientRect().bottom<span class="regexp">/5&#125;px)`;/</span><span class="regexp">/在出现之前更新背景位置，防止在页面中心是重新加载导致被设为默认</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">	&#125;,</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">&#125;);</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp"></span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp"></span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">window.addEventListener("scroll",()=&gt;&#123;/</span><span class="regexp">/监听滚动事件，用于数据部分背景图的视差效果</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">	const bottom=dataSectionEl.getBoundingClientRect().bottom;/</span><span class="regexp">/当前底部距离浏览器距离</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">	const top=dataSectionEl.getBoundingClientRect().top;/</span><span class="regexp">/当前顶部距离浏览器距离</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">	</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">	if(bottom&gt;=0&amp;&amp;top&lt;=window.innerHeight)&#123;/</span><span class="regexp">/是否在可见区域</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">		dataSectionEl.style.backgroundPosition=`center cale(50%-$&#123;bottom/</span><span class="number">5</span>&#125;</span>px)`</span>;<span class="comment">//水平居中不动，但是垂直方向上随滚动移动</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> scroll=<span class="keyword">new</span> SmoothScroll(<span class="string">'nav a[href*="#"],.scrollToTop a[href*="#"]'</span>,&#123;</span><br><span class="line">	header:<span class="string">"header"</span>,</span><br><span class="line">	offset:<span class="number">80</span></span><br><span class="line">&#125;)  <span class="comment">//对跳转的按钮进行监听</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">document</span>.addEventListener(<span class="string">"scrollStart"</span>,()=&gt;&#123;</span><br><span class="line">	<span class="keyword">if</span>(headerEl.classList.contains(<span class="string">"open"</span>))&#123;</span><br><span class="line">		headerEl.classList.remove(<span class="string">"open"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> exploreBtnEl=<span class="built_in">document</span>.querySelectorAll(<span class="string">".explore-btn"</span>);<span class="comment">//探索更多跳转到关于我们</span></span><br><span class="line">exploreBtnEl.forEach(<span class="function"><span class="params">exploreBtnEl</span>=&gt;</span>&#123;</span><br><span class="line">	exploreBtnEl.addEventListener(<span class="string">"click"</span>,()=&gt;&#123;</span><br><span class="line">		scroll.animateScroll(<span class="built_in">document</span>.querySelector(<span class="string">"#about-us"</span>));</span><br><span class="line">	&#125;);	</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">//折叠按钮</span></span><br><span class="line"><span class="keyword">const</span> burgerEl=<span class="built_in">document</span>.querySelector(<span class="string">".burger"</span>);</span><br><span class="line">burgerEl.addEventListener(<span class="string">"click"</span>,()=&gt;&#123;</span><br><span class="line">	headerEl.classList.toggle(<span class="string">"open"</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">页面项目</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/03/13/%E5%93%8D%E5%BA%94%E5%BC%8F%E9%A1%B5%E9%9D%A2%E5%B8%83%E5%B1%80/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-20年3月12日" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1541,140 +1650,6 @@ prototype中一般情况下用于存储所有对象都相同的一些属性以�
 
 
   
-    <article id="post-常用的数字对象函数" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/03/05/%E5%B8%B8%E7%94%A8%E7%9A%84%E6%95%B0%E5%AD%97%E5%AF%B9%E8%B1%A1%E5%87%BD%E6%95%B0/" target="_blank">常用的数字对象函数</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/03/05/%E5%B8%B8%E7%94%A8%E7%9A%84%E6%95%B0%E5%AD%97%E5%AF%B9%E8%B1%A1%E5%87%BD%E6%95%B0/" class="archive-article-date">
-        <time datetime="2020-03-05T08:28:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-05</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h3 id="Math-pow-求幂或求根"><a href="#Math-pow-求幂或求根" class="headerlink" title="Math.pow 求幂或求根"></a>Math.pow 求幂或求根</h3><p>Math.pow(2,53)  //2的53次幂<br>Math.pow(2,1/3)  //2的立方根</p>
-<h3 id="Math-exp（n）-e的n次幂或求根"><a href="#Math-exp（n）-e的n次幂或求根" class="headerlink" title="Math.exp（n） e的n次幂或求根"></a>Math.exp（n） e的n次幂或求根</h3><p>Math.exp(3)  //e的3次幂<br>Math.exp(1/3)  //e的立方根</p>
-<h3 id="Math-round-四舍五入"><a href="#Math-round-四舍五入" class="headerlink" title="Math.round 四舍五入"></a>Math.round 四舍五入</h3><p>Math.round(.6)  //1.0</p>
-<h3 id="Math-ceil-向上求整-Math-floor-向下取整"><a href="#Math-ceil-向上求整-Math-floor-向下取整" class="headerlink" title="Math.ceil 向上求整    Math.floor 向下取整"></a>Math.ceil 向上求整    Math.floor 向下取整</h3><p>Math.ceil(.6)  //1.0</p>
-<p>Math.floor(.6)  //0.0</p>
-<h3 id="Math-abs-绝对值"><a href="#Math-abs-绝对值" class="headerlink" title="Math.abs 绝对值"></a>Math.abs 绝对值</h3><p>Math.abs(-0.6)  //0.6     负号是一元求反运算符并不是数字直接量语法的组成部分</p>
-<h3 id="Math-max-返回最大值-Math-min-返回最小值"><a href="#Math-max-返回最大值-Math-min-返回最小值" class="headerlink" title="Math.max 返回最大值  Math.min 返回最小值"></a>Math.max 返回最大值  Math.min 返回最小值</h3><p>Math.max(0,0.6,6)  //6  </p>
-<p>Math.min(0,0.6,6)  //0</p>
-<h3 id="Math-random-生成-0-1-0-的随机数"><a href="#Math-random-生成-0-1-0-的随机数" class="headerlink" title="Math.random 生成[0,1.0)的随机数"></a>Math.random 生成[0,1.0)的随机数</h3><p>a=Math.random()<br>b=a*100 //生成[0,100)的随机数</p>
-<h3 id="Math-sqrt-平方根"><a href="#Math-sqrt-平方根" class="headerlink" title="Math.sqrt 平方根"></a>Math.sqrt 平方根</h3><p>Math.sqrt(4) //2</p>
-<h3 id="三角函数"><a href="#三角函数" class="headerlink" title="三角函数"></a>三角函数</h3><p>Math.sin(x)  //正弦值,其中x为弧度制<br>Math.cos(x)  //余弦值<br>Math.tan(x)  //正切值<br>Math.asin(x) //反正弦值，x范围是[-1.0,1.0]，超出范围返回NaN（not a number）<br>Math.acos(x)  //反余弦值，x同上<br>Math.atan(x)  //反正切值，x范围在-π/2到π/2之间<br>Math.atan2(y,x)  //计算从x轴到指定点的角度，y为y坐标，x为x坐标，返回x轴正半轴逆时针到指定点的夹角[-π,π]</p>
-<h3 id="对数函数"><a href="#对数函数" class="headerlink" title="对数函数"></a>对数函数</h3><h4 id="gt-gt-gt-gt-对数常量"><a href="#gt-gt-gt-gt-对数常量" class="headerlink" title="&gt;&gt;&gt;&gt;对数常量"></a>&gt;&gt;&gt;&gt;对数常量</h4><blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>Math.LN10  //10的自然对数（底为e）</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>Math.LN2  //2的自然对数（底为e）</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>Math.LOG10E  //底为10的e的对数</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>Math.LOG2E  //底为2的e的对数</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-<h4 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h4><p>Math.log(x)  //计算x的自然对数（底为e）</p>
-<p>若要计算n为底的x的对数：<br>Math.log(x)/Math.log(n)或者Math.log(x/n)</p>
-<h3 id="Math-PI-圆周率π（约为3-1415926）Math-E-自然对数底数（e约为2-7182818284）"><a href="#Math-PI-圆周率π（约为3-1415926）Math-E-自然对数底数（e约为2-7182818284）" class="headerlink" title="Math.PI 圆周率π（约为3.1415926）Math.E 自然对数底数（e约为2.7182818284）"></a>Math.PI 圆周率π（约为3.1415926）Math.E 自然对数底数（e约为2.7182818284）</h3>
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/03/05/%E5%B8%B8%E7%94%A8%E7%9A%84%E6%95%B0%E5%AD%97%E5%AF%B9%E8%B1%A1%E5%87%BD%E6%95%B0/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/5/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/7/">Next &amp;raquo;</a>
@@ -1812,6 +1787,10 @@ prototype中一般情况下用于存储所有对象都相同的一些属性以�
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">webpack</a>
               </li>
              
@@ -1820,7 +1799,7 @@ prototype中一般情况下用于存储所有对象都相同的一些属性以�
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1828,15 +1807,11 @@ prototype中一般情况下用于存储所有对象都相同的一些属性以�
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">node</a>
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
