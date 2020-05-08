@@ -202,6 +202,378 @@
             
 
   
+    <article id="post-vue的过滤器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/04/05/vue%E7%9A%84%E8%BF%87%E6%BB%A4%E5%99%A8/" target="_blank">vue的过滤器</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/04/05/vue%E7%9A%84%E8%BF%87%E6%BB%A4%E5%99%A8/" class="archive-article-date">
+        <time datetime="2020-04-05T13:29:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-05</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="vue的过滤器"><a href="#vue的过滤器" class="headerlink" title="vue的过滤器"></a>vue的过滤器</h1><p>过滤器可以使值进行一些操作再赋给对象，过滤器可以是链式的（连续使用）</p>
+<p>过滤器与计算属性一样有分为局部和全局的</p>
+<h3 id="全局的用法"><a href="#全局的用法" class="headerlink" title="全局的用法"></a>全局的用法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=<span class="string">"utf-8"</span>&gt;</span><br><span class="line">		&lt;title&gt;&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">			&lt;input type=<span class="string">"text"</span> v-model=<span class="string">"msg"</span>&gt;</span><br><span class="line">			&lt;span&gt;&#123;&#123;msg|upper&#125;&#125;&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">			&lt;div&gt;&#123;&#123;msg|upper|lower&#125;&#125;&lt;/</span>div&gt;</span><br><span class="line">			&lt;div v-bind:color=<span class="string">"msg|upper"</span>&gt;用于属性绑定&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">		&lt;/</span>div&gt;</span><br><span class="line">		&lt;script src=<span class="string">"../../000-vue.js/vue.js"</span>&gt;&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">		&lt;script type="text/</span>javascript<span class="string">"&gt;</span></span><br><span class="line"><span class="string">			Vue.filter('upper',function(val)&#123;</span></span><br><span class="line"><span class="string">				return val.charAt(0).toUpperCase()+val.slice(1);</span></span><br><span class="line"><span class="string">			&#125;);//首字母过滤为大写</span></span><br><span class="line"><span class="string">			Vue.filter('lower',function(val)&#123;</span></span><br><span class="line"><span class="string">				return val.charAt(0).toLowerCase()+val.slice(1);</span></span><br><span class="line"><span class="string">			&#125;);//首字母过滤为小写</span></span><br><span class="line"><span class="string">			var vm=new Vue(&#123;</span></span><br><span class="line"><span class="string">				el:'#app',</span></span><br><span class="line"><span class="string">				data:&#123;</span></span><br><span class="line"><span class="string">					msg:'',</span></span><br><span class="line"><span class="string">				&#125;</span></span><br><span class="line"><span class="string">			&#125;);</span></span><br><span class="line"><span class="string">		&lt;/script&gt;</span></span><br><span class="line"><span class="string">	&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="局部的用法"><a href="#局部的用法" class="headerlink" title="局部的用法"></a>局部的用法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=<span class="string">"utf-8"</span>&gt;</span><br><span class="line">		&lt;title&gt;&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">			&lt;input type=<span class="string">"text"</span> v-model=<span class="string">"msg"</span>&gt;</span><br><span class="line">			&lt;span&gt;&#123;&#123;msg|upper&#125;&#125;&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">			&lt;div&gt;&#123;&#123;msg|upper|lower&#125;&#125;&lt;/</span>div&gt;</span><br><span class="line">			&lt;div v-bind:color=<span class="string">"msg|upper"</span>&gt;用于属性绑定&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">		&lt;/</span>div&gt;</span><br><span class="line">		&lt;script src=<span class="string">"../../000-vue.js/vue.js"</span>&gt;&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">		&lt;script type="text/</span>javascript<span class="string">"&gt;</span></span><br><span class="line"><span class="string">			var vm=new Vue(&#123;</span></span><br><span class="line"><span class="string">				el:'#app',</span></span><br><span class="line"><span class="string">				data:&#123;</span></span><br><span class="line"><span class="string">					msg:'',</span></span><br><span class="line"><span class="string">				&#125;,</span></span><br><span class="line"><span class="string">				filters:&#123;</span></span><br><span class="line"><span class="string">					upper:function(val)&#123;</span></span><br><span class="line"><span class="string">						return val.charAt(0).toUpperCase()+val.slice(1);</span></span><br><span class="line"><span class="string">					&#125;,</span></span><br><span class="line"><span class="string">					lower:function(val)&#123;</span></span><br><span class="line"><span class="string">						return val.charAt(0).toLowerCase()+val.slice(1);</span></span><br><span class="line"><span class="string">					&#125;</span></span><br><span class="line"><span class="string">				&#125;</span></span><br><span class="line"><span class="string">			&#125;);</span></span><br><span class="line"><span class="string">		&lt;/script&gt;</span></span><br><span class="line"><span class="string">	&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="带参数用法，格式显示日期（不推荐）"><a href="#带参数用法，格式显示日期（不推荐）" class="headerlink" title="带参数用法，格式显示日期（不推荐）"></a>带参数用法，格式显示日期（不推荐）</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=<span class="string">"utf-8"</span>&gt;</span><br><span class="line">		&lt;title&gt;&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">			&lt;input type=<span class="string">"text"</span> v-model=<span class="string">"msg"</span>&gt;</span><br><span class="line">			&lt;span&gt;&#123;&#123;msg|upper&#125;&#125;&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">			&lt;div&gt;&#123;&#123;msg|upper|lower&#125;&#125;&lt;/</span>div&gt;</span><br><span class="line">			&lt;div v-bind:color=<span class="string">"msg|upper"</span>&gt;用于属性绑定&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">		&lt;/</span>div&gt;</span><br><span class="line">		&lt;script src=<span class="string">"../../000-vue.js/vue.js"</span>&gt;&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">		&lt;script type="text/</span>javascript<span class="string">"&gt;</span></span><br><span class="line"><span class="string">			var vm=new Vue(&#123;</span></span><br><span class="line"><span class="string">				el:'#app',</span></span><br><span class="line"><span class="string">				data:&#123;</span></span><br><span class="line"><span class="string">					msg:'',</span></span><br><span class="line"><span class="string">				&#125;,</span></span><br><span class="line"><span class="string">				filters:&#123;</span></span><br><span class="line"><span class="string">					upper:function(val)&#123;</span></span><br><span class="line"><span class="string">						return val.charAt(0).toUpperCase()+val.slice(1);</span></span><br><span class="line"><span class="string">					&#125;,</span></span><br><span class="line"><span class="string">					lower:function(val)&#123;</span></span><br><span class="line"><span class="string">						return val.charAt(0).toLowerCase()+val.slice(1);</span></span><br><span class="line"><span class="string">					&#125;</span></span><br><span class="line"><span class="string">				&#125;</span></span><br><span class="line"><span class="string">			&#125;);</span></span><br><span class="line"><span class="string">		&lt;/script&gt;</span></span><br><span class="line"><span class="string">	&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="利用正则格式化显示日期"><a href="#利用正则格式化显示日期" class="headerlink" title="利用正则格式化显示日期"></a>利用正则格式化显示日期</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=<span class="string">"utf-8"</span>&gt;</span><br><span class="line">		&lt;title&gt;&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">			&lt;div&gt;&#123;&#123;date|format(<span class="string">'yyyy-MM-dd'</span>)&#125;&#125;&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">		&lt;/</span>div&gt;</span><br><span class="line">		&lt;script src=<span class="string">"../../../000-vue.js/vue.js"</span>&gt;&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">		&lt;script&gt;</span></span><br><span class="line"><span class="regexp">			Vue.filter('format',function(value,arg)&#123;</span></span><br><span class="line"><span class="regexp">				function dateFormat(date,format)&#123;</span></span><br><span class="line"><span class="regexp">					if(typeof date==='string')&#123;</span></span><br><span class="line"><span class="regexp">						var mts=date.match(/</span>(\/<span class="built_in">Date</span>\((\d+)\)\/)/);</span><br><span class="line">						<span class="keyword">if</span>(mts&amp;&amp;mts.length&gt;=<span class="number">3</span>)&#123;</span><br><span class="line">							date=<span class="built_in">parseInt</span>(mts[<span class="number">2</span>]);</span><br><span class="line">						&#125;</span><br><span class="line">					&#125;</span><br><span class="line">					date=<span class="keyword">new</span> <span class="built_in">Date</span>(date);</span><br><span class="line">					<span class="keyword">if</span>(!date||date.toUTCString()==<span class="string">'Invalid Date'</span>)&#123;</span><br><span class="line">						<span class="keyword">return</span> <span class="string">''</span>;</span><br><span class="line">					&#125;</span><br><span class="line">					<span class="keyword">var</span> map=&#123;</span><br><span class="line">						<span class="string">'M'</span> : date.getMonth()+<span class="number">1</span>,<span class="comment">//月</span></span><br><span class="line">						<span class="string">'d'</span> : date.getDate(),<span class="comment">//日</span></span><br><span class="line">						<span class="string">'h'</span> : date.getHours(),<span class="comment">//时</span></span><br><span class="line">						<span class="string">'m'</span> : date.getMinutes(),<span class="comment">//分</span></span><br><span class="line">						<span class="string">'s'</span> : date.getSeconds(),<span class="comment">//秒</span></span><br><span class="line">						<span class="string">'q'</span> : <span class="built_in">Math</span>.floor((date.getMonth()+<span class="number">3</span>)/<span class="number">3</span>),<span class="comment">//季</span></span><br><span class="line">						<span class="string">'S'</span> : date.getMilliseconds()<span class="comment">//毫秒</span></span><br><span class="line">					&#125;;</span><br><span class="line">					format=format.replace(<span class="regexp">/([yMdhmsqS])+/g</span>,<span class="function"><span class="keyword">function</span>(<span class="params">all,t</span>)</span>&#123;</span><br><span class="line">						<span class="keyword">var</span> v=map[t];</span><br><span class="line">						<span class="keyword">if</span>(v!==<span class="literal">undefined</span>)&#123;</span><br><span class="line">							<span class="keyword">if</span>(all.length&gt;<span class="number">1</span>)&#123;</span><br><span class="line">								v=<span class="string">'0'</span>+v;</span><br><span class="line">								v=v.substr(v.length<span class="number">-2</span>);</span><br><span class="line">							&#125;</span><br><span class="line">							<span class="keyword">return</span> v;</span><br><span class="line">						&#125;<span class="keyword">else</span> <span class="keyword">if</span>(t===<span class="string">'y'</span>)&#123;</span><br><span class="line">							<span class="keyword">return</span> (date.getFullYear()+<span class="string">''</span>).substr(<span class="number">4</span>-all.length);</span><br><span class="line">						&#125;</span><br><span class="line">						<span class="keyword">return</span> all;</span><br><span class="line">					&#125;);</span><br><span class="line">					<span class="keyword">return</span> format;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">return</span> dateFormat(value,arg);</span><br><span class="line">			&#125;)</span><br><span class="line">			<span class="keyword">var</span> vm=<span class="keyword">new</span> Vue(&#123;</span><br><span class="line">				el:<span class="string">'#app'</span>,</span><br><span class="line">				data:&#123;</span><br><span class="line">					date:<span class="keyword">new</span> <span class="built_in">Date</span>()</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;);</span><br><span class="line">		&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>body&gt;</span><br><span class="line">&lt;<span class="regexp">/html&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/04/05/vue%E7%9A%84%E8%BF%87%E6%BB%A4%E5%99%A8/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-vue的侦听器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/04/04/vue%E7%9A%84%E4%BE%A6%E5%90%AC%E5%99%A8/" target="_blank">vue的侦听器</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/04/04/vue%E7%9A%84%E4%BE%A6%E5%90%AC%E5%99%A8/" class="archive-article-date">
+        <time datetime="2020-04-04T13:35:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-04</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="vue的侦听器"><a href="#vue的侦听器" class="headerlink" title="vue的侦听器"></a>vue的侦听器</h1><p>利用check属性，当data中的数据改变时触发，这个效果也可以用计算属性</p>
+<p>但是当有异步请求和较大的开销的操作时建议用侦听器</p>
+<h3 id="一般的情况"><a href="#一般的情况" class="headerlink" title="一般的情况:"></a>一般的情况:</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=<span class="string">"utf-8"</span>&gt;</span><br><span class="line">		&lt;title&gt;&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">			&lt;div&gt;</span><br><span class="line">				&lt;span&gt;名：&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">				&lt;span&gt;</span></span><br><span class="line"><span class="regexp">					&lt;input type="text" v-model="firstName"&gt;</span></span><br><span class="line"><span class="regexp">				&lt;/</span>span&gt;</span><br><span class="line">			&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">			&lt;div&gt;</span></span><br><span class="line"><span class="regexp">				&lt;span&gt;姓：&lt;/</span>span&gt;</span><br><span class="line">				&lt;span&gt;</span><br><span class="line">					&lt;input type=<span class="string">"text"</span> v-model=<span class="string">"lastName"</span>&gt;</span><br><span class="line">				&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">			&lt;/</span>div&gt;</span><br><span class="line">			&lt;div&gt;&#123;&#123;fullName&#125;&#125;&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">		&lt;/</span>div&gt;</span><br><span class="line">		&lt;script src=<span class="string">"../000-vue.js/vue.js"</span>&gt;&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">		&lt;script&gt;</span></span><br><span class="line"><span class="regexp">			var vm=new Vue(&#123;</span></span><br><span class="line"><span class="regexp">				el:'#app',</span></span><br><span class="line"><span class="regexp">				data:&#123;</span></span><br><span class="line"><span class="regexp">					firstName:'',</span></span><br><span class="line"><span class="regexp">					lastName:'',</span></span><br><span class="line"><span class="regexp">					fullName:''</span></span><br><span class="line"><span class="regexp">				&#125;,</span></span><br><span class="line"><span class="regexp">				watch:&#123;/</span><span class="regexp">/侦听器，也可以用计算属性，但是数据变化执行异步或开销较大的操作</span></span><br><span class="line"><span class="regexp">					firstName:function(val)&#123;</span></span><br><span class="line"><span class="regexp">						this.fullName=val+''+this.lastName;</span></span><br><span class="line"><span class="regexp">					&#125;,</span></span><br><span class="line"><span class="regexp">					lastName:function(val)&#123;</span></span><br><span class="line"><span class="regexp">						this.fullName=this.firstName+''+val;</span></span><br><span class="line"><span class="regexp">					&#125;</span></span><br><span class="line"><span class="regexp">				&#125;</span></span><br><span class="line"><span class="regexp">			&#125;)</span></span><br><span class="line"><span class="regexp">		&lt;/</span>script&gt;</span><br><span class="line">	&lt;<span class="regexp">/body&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>html&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="异步请求的用法："><a href="#异步请求的用法：" class="headerlink" title="异步请求的用法："></a>异步请求的用法：</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=<span class="string">"utf-8"</span>&gt;</span><br><span class="line">		&lt;title&gt;&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">			&lt;span&gt;用户名：&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">			&lt;span&gt;</span></span><br><span class="line"><span class="regexp">				&lt;input type="text" v-model.lazy="uname"&gt;</span></span><br><span class="line"><span class="regexp">			&lt;/</span>span&gt;</span><br><span class="line">			&lt;span v-text=<span class="string">"tip"</span>&gt;&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">		&lt;/</span>div&gt;</span><br><span class="line">		&lt;script src=<span class="string">'../../000-vue.js/vue.js'</span>&gt;&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">		&lt;!-- 1.采用侦听器监听变化</span></span><br><span class="line"><span class="regexp">		2.调用后台接口（这里用setTimeout模拟）</span></span><br><span class="line"><span class="regexp">		3.根据验证调整提示信息 --&gt;</span></span><br><span class="line"><span class="regexp">		&lt;script&gt;</span></span><br><span class="line"><span class="regexp">			var vm=new Vue(&#123;</span></span><br><span class="line"><span class="regexp">				el:'#app',</span></span><br><span class="line"><span class="regexp">				data:&#123;</span></span><br><span class="line"><span class="regexp">					uname:'',</span></span><br><span class="line"><span class="regexp">					tip:''</span></span><br><span class="line"><span class="regexp">				&#125;,</span></span><br><span class="line"><span class="regexp">				methods:&#123;</span></span><br><span class="line"><span class="regexp">					checkName:function(uname)&#123;</span></span><br><span class="line"><span class="regexp">						var that=this;</span></span><br><span class="line"><span class="regexp">						setTimeout(function()&#123;</span></span><br><span class="line"><span class="regexp">							if(uname=='admin')&#123;</span></span><br><span class="line"><span class="regexp">								that.tip='用户名已存在，请更换一个';</span></span><br><span class="line"><span class="regexp">							&#125;else&#123;</span></span><br><span class="line"><span class="regexp">								that.tip='用户名可以使用'</span></span><br><span class="line"><span class="regexp">							&#125;</span></span><br><span class="line"><span class="regexp">						&#125;,2000);</span></span><br><span class="line"><span class="regexp">					&#125;</span></span><br><span class="line"><span class="regexp">				&#125;,</span></span><br><span class="line"><span class="regexp">				watch:&#123;</span></span><br><span class="line"><span class="regexp">					uname:function(val)&#123;</span></span><br><span class="line"><span class="regexp">						this.checkName(val);</span></span><br><span class="line"><span class="regexp">						this.tip='正在验证...';</span></span><br><span class="line"><span class="regexp">					&#125;</span></span><br><span class="line"><span class="regexp">				&#125;</span></span><br><span class="line"><span class="regexp">			&#125;)</span></span><br><span class="line"><span class="regexp">		&lt;/</span>script&gt;</span><br><span class="line">	&lt;<span class="regexp">/body&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>html&gt;</span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/04/04/vue%E7%9A%84%E4%BE%A6%E5%90%AC%E5%99%A8/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-vue的计算属性" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/04/03/vue%E7%9A%84%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7/" target="_blank">vue的计算属性</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/04/03/vue%E7%9A%84%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7/" class="archive-article-date">
+        <time datetime="2020-04-03T13:35:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-03</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="计算属性"><a href="#计算属性" class="headerlink" title="计算属性"></a>计算属性</h1><p>表达式的计算逻辑可能比较复杂，使用计算属性可以使模板内容更加简洁</p>
+<h3 id="计算属性-computed-与方法属性-methods-的区别"><a href="#计算属性-computed-与方法属性-methods-的区别" class="headerlink" title="计算属性(computed)与方法属性(methods)的区别"></a>计算属性(computed)与方法属性(methods)的区别</h3><p>计算属性的值基于data，会缓存，data数据改变了，它的值也会改变，而方法属性调用一次就会计算一次，它的值不会改变。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=<span class="string">"utf-8"</span>&gt;</span><br><span class="line">		&lt;title&gt;&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;!-- 表达式的计算逻辑可能比较复杂，使用计算属性可以使模板内容更加简洁 --&gt;</span><br><span class="line">		&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">			&lt;div&gt;&#123;&#123;msg&#125;&#125;&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">			&lt;div&gt;&#123;&#123;msg.split('').reverse().join('')&#125;&#125;&lt;/</span>div&gt;</span><br><span class="line">			&lt;div&gt;&#123;&#123;reversedMsg&#125;&#125;&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">			&lt;div&gt;&#123;&#123;reversedMessage()&#125;&#125;&lt;/</span>div&gt;</span><br><span class="line">		&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">		&lt;script type="text/</span>javascript<span class="string">" src="</span>../<span class="number">000</span>-vue.js/vue.js<span class="string">"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="string">		&lt;script&gt;</span></span><br><span class="line"><span class="string">			var vm=new Vue(&#123;</span></span><br><span class="line"><span class="string">				el:'#app',</span></span><br><span class="line"><span class="string">				data:&#123;</span></span><br><span class="line"><span class="string">					msg:'hello',</span></span><br><span class="line"><span class="string">				&#125;,</span></span><br><span class="line"><span class="string">				computed:&#123;//计算属性，基于data，当数据改变计算属性也会改变，会缓存，类似的方法属性不会缓存</span></span><br><span class="line"><span class="string">					reversedMsg:function()&#123;</span></span><br><span class="line"><span class="string">						return this.msg.split('').reverse().join('');</span></span><br><span class="line"><span class="string">					&#125;</span></span><br><span class="line"><span class="string">				&#125;,</span></span><br><span class="line"><span class="string">				methods:&#123;//方法属性调用一次就会计算一次</span></span><br><span class="line"><span class="string">					reversedMessage:function()&#123;</span></span><br><span class="line"><span class="string">						return this.msg.split('').reverse().join('');</span></span><br><span class="line"><span class="string">					&#125;</span></span><br><span class="line"><span class="string">				&#125;</span></span><br><span class="line"><span class="string">			&#125;)</span></span><br><span class="line"><span class="string">		&lt;/script&gt;</span></span><br><span class="line"><span class="string">	&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/04/03/vue%E7%9A%84%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-vue自定义指令" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/04/02/vue%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8C%87%E4%BB%A4/" target="_blank">vue自定义指令</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/04/02/vue%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8C%87%E4%BB%A4/" class="archive-article-date">
+        <time datetime="2020-04-02T11:36:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-02</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="vue的自定义指令"><a href="#vue的自定义指令" class="headerlink" title="vue的自定义指令"></a>vue的自定义指令</h1><ol>
+<li>全局自定义</li>
+<li>局部自定义</li>
+</ol>
+<h3 id="vue的全局自定义"><a href="#vue的全局自定义" class="headerlink" title="vue的全局自定义"></a>vue的全局自定义</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=<span class="string">"utf-8"</span>&gt;</span><br><span class="line">		&lt;title&gt;&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">			&lt;input type=<span class="string">"text"</span> v-focus v-color=<span class="string">"msg"</span>&gt;</span><br><span class="line">		&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">		&lt;script src="../</span>../<span class="number">000</span>-vue.js/vue.js<span class="string">"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="string">		&lt;script&gt;</span></span><br><span class="line"><span class="string">			Vue.directive('focus',&#123;//自动聚焦</span></span><br><span class="line"><span class="string">				inserted:function(el)&#123;</span></span><br><span class="line"><span class="string">					el.focus();</span></span><br><span class="line"><span class="string">				&#125;</span></span><br><span class="line"><span class="string">			&#125;),</span></span><br><span class="line"><span class="string">			Vue.directive('color',&#123;//改变颜色</span></span><br><span class="line"><span class="string">				bind:function(el,binding)&#123;</span></span><br><span class="line"><span class="string">					el.style.backgroundColor=binding.value.color;</span></span><br><span class="line"><span class="string">				&#125;</span></span><br><span class="line"><span class="string">			&#125;);</span></span><br><span class="line"><span class="string">			var vm=new Vue(&#123;</span></span><br><span class="line">				el:"#app",</span><br><span class="line">				data:&#123;</span><br><span class="line">					msg:&#123;</span><br><span class="line">						color:<span class="string">"red"</span></span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;)</span><br><span class="line">		&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>body&gt;</span><br><span class="line">&lt;<span class="regexp">/html&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这里定义 了v-focus的自动聚焦的指令，还有v-color这个改变背景颜色的指令</p>
+<h3 id="vue的局部自定义指令"><a href="#vue的局部自定义指令" class="headerlink" title="vue的局部自定义指令"></a>vue的局部自定义指令</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=<span class="string">"utf-8"</span>&gt;</span><br><span class="line">		&lt;title&gt;&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">			&lt;input type=<span class="string">"text"</span> v-focus v-color=<span class="string">"msg"</span>&gt;</span><br><span class="line">		&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">		&lt;script src="../</span>../<span class="number">000</span>-vue.js/vue.js<span class="string">"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="string">		&lt;script&gt;</span></span><br><span class="line"><span class="string">			var vm=new Vue(&#123;</span></span><br><span class="line"><span class="string">				el:'#app',</span></span><br><span class="line"><span class="string">				data:&#123;</span></span><br><span class="line"><span class="string">					msg:&#123;</span></span><br><span class="line"><span class="string">						color:'yellow',</span></span><br><span class="line"><span class="string">					&#125;</span></span><br><span class="line"><span class="string">				&#125;,</span></span><br><span class="line"><span class="string">				directives:&#123;</span></span><br><span class="line"><span class="string">					focus:&#123;</span></span><br><span class="line"><span class="string">						inserted:function(el)&#123;</span></span><br><span class="line"><span class="string">							el.focus();</span></span><br><span class="line"><span class="string">						&#125;</span></span><br><span class="line"><span class="string">					&#125;,</span></span><br><span class="line"><span class="string">					color:&#123;</span></span><br><span class="line"><span class="string">						inserted:function(el,binding)&#123;</span></span><br><span class="line"><span class="string">							el.style.backgroundColor=binding.value.color;</span></span><br><span class="line"><span class="string">						&#125;</span></span><br><span class="line"><span class="string">					&#125;</span></span><br><span class="line"><span class="string">				&#125;</span></span><br><span class="line"><span class="string">			&#125;)</span></span><br><span class="line"><span class="string">		&lt;/script&gt;</span></span><br><span class="line"><span class="string">	&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这里定义 了v-focus的自动聚焦的指令，还有v-color这个改变背景颜色的指令，但他是局部的，只在id为app的div内可以使用</p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/04/02/vue%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8C%87%E4%BB%A4/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-vue表单域的修饰符" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -805,394 +1177,9 @@
 
 
   
-    <article id="post-选取文档元素" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/03/21/%E9%80%89%E5%8F%96%E6%96%87%E6%A1%A3%E5%85%83%E7%B4%A0/" target="_blank">选取文档元素</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/03/21/%E9%80%89%E5%8F%96%E6%96%87%E6%A1%A3%E5%85%83%E7%B4%A0/" class="archive-article-date">
-        <time datetime="2020-03-21T08:45:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-21</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="选取文档元素"><a href="#选取文档元素" class="headerlink" title="选取文档元素"></a>选取文档元素</h1><p>用指定的id选取<code>document.getElementById()</code>注意这是document的特定方法,返回一个对象</p>
-<p>用指定的标签选取<code>element.getElementsByTagName()</code>返回一个对象类数组</p>
-<p>用指定的class类选取<code>element.getElementsByClassName()</code>返回一个对象类数组</p>
-<p>用指定的name属性选取<code>element.getElementsByName</code>返回一个对象类数组(常用于表单)</p>
-<p>通过css选择器选取<code>document.querySelectorAll()</code>返回一个对象类数组或<code>document.querySelector()</code>返回一个对象</p>
-<p><strong>通过css选择器与上述方法的区别</strong></p>
-<p>返回的类对象不是实时的，不会更新后续文档的变化，而且注意的是Css中的一些伪元素（如:first-line和first-letter)与之使用会导致这些伪元素不匹配，因为这些伪元素只匹配了文本文档的一部分。</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/03/21/%E9%80%89%E5%8F%96%E6%96%87%E6%A1%A3%E5%85%83%E7%B4%A0/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-图片与方法的惰性载入" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/03/18/%E5%9B%BE%E7%89%87%E4%B8%8E%E6%96%B9%E6%B3%95%E7%9A%84%E6%83%B0%E6%80%A7%E8%BD%BD%E5%85%A5/" target="_blank">图片与方法的惰性载入</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/03/18/%E5%9B%BE%E7%89%87%E4%B8%8E%E6%96%B9%E6%B3%95%E7%9A%84%E6%83%B0%E6%80%A7%E8%BD%BD%E5%85%A5/" class="archive-article-date">
-        <time datetime="2020-03-18T09:16:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-18</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="图片的惰性载入"><a href="#图片的惰性载入" class="headerlink" title="图片的惰性载入"></a>图片的惰性载入</h1><p>即推迟加载，用到的时候再加载，这样做可以使html页面快速载入，而图片最后载入</p>
-<p>通过先给所有需要懒加载的图片的src属性值设置一个同样的地址（一般为loading载入中样式的图片），这样载入第一张loading样式图后，会放在缓存中，这样读取快，随后真实图片的地址放在另一个属性中（例如data-origin），当满足条件时（如在可视范围内）利用事件监听函数把data-origin的属性值赋给src属性值(直接指向不太好，最好等图片加载完后指向)</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul&gt;</span><br><span class="line">  &lt;li <span class="class"><span class="keyword">class</span></span>=<span class="string">'lazy'</span>&gt;<span class="xml"><span class="tag">&lt;<span class="name">img</span> <span class="attr">data-origin</span>=<span class="string">'images/0.jpg'</span> <span class="attr">src</span>=<span class="string">'images/loading.gif'</span>/&gt;</span></span>&lt;<span class="regexp">/li&gt;</span></span><br><span class="line"><span class="regexp">  &lt;li class='lazy'&gt;&lt;img data-origin='images/</span><span class="number">1.</span>jpg<span class="string">' src='</span>images/loading.gif<span class="string">'/&gt;&lt;/li&gt;</span></span><br><span class="line"><span class="string">  &lt;li class='</span>lazy<span class="string">'&gt;&lt;img data-origin='</span>images/<span class="number">2.</span>jpg<span class="string">' src='</span>images/loading.gif<span class="string">'/&gt;&lt;/li&gt;</span></span><br><span class="line"><span class="string">  &lt;li class='</span>lazy<span class="string">'&gt;&lt;img data-origin='</span>images/<span class="number">3.</span>jpg<span class="string">' src='</span>images/loading.gif<span class="string">'/&gt;&lt;/li&gt;</span></span><br><span class="line"><span class="string">  &lt;li class='</span>lazy<span class="string">'&gt;&lt;img data-origin='</span>images/<span class="number">4.</span>jpg<span class="string">' src='</span>images/loading.gif<span class="string">'/&gt;&lt;/li&gt;</span></span><br><span class="line"><span class="string">  &lt;li class='</span>lazy<span class="string">'&gt;&lt;img data-origin='</span>images/<span class="number">5.</span>jpg<span class="string">' src='</span>images/loading.gif<span class="string">'/&gt;&lt;/li&gt;</span></span><br><span class="line"><span class="string">  &lt;li class='</span>lazy<span class="string">'&gt;&lt;img data-origin='</span>images/<span class="number">6.</span>jpg<span class="string">' src='</span>images/loading.gif<span class="string">'/&gt;&lt;/li&gt;</span></span><br><span class="line"><span class="string">  &lt;li class='</span>lazy<span class="string">'&gt;&lt;img data-origin='</span>images/<span class="number">7.</span>jpg<span class="string">' src='</span>images/loading.gif<span class="string">'/&gt;&lt;/li&gt;</span></span><br><span class="line"><span class="string">  &lt;li class='</span>lazy<span class="string">'&gt;&lt;img data-origin='</span>images/<span class="number">8.</span>jpg<span class="string">' src='</span>images/loading.gif<span class="string">'/&gt;&lt;/li&gt;</span></span><br><span class="line"><span class="string">  &lt;li class='</span>lazy<span class="string">'&gt;&lt;img data-origin='</span>images/<span class="number">9.</span>jpg<span class="string">' src='</span>images/loading.gif<span class="string">'/&gt;&lt;/li&gt;</span></span><br><span class="line"><span class="string">  &lt;li class='</span>lazy<span class="string">'&gt;&lt;img data-origin='</span>images/<span class="number">10.</span>jpg<span class="string">' src='</span>images/loading.gif<span class="string">'/&gt;&lt;/li&gt;</span></span><br><span class="line"><span class="string">  &lt;li class='</span>lazy<span class="string">'&gt;&lt;img data-origin='</span>images/<span class="number">11.</span>jpg<span class="string">' src='</span>images/loading.gif<span class="string">'/&gt;&lt;/li&gt;</span></span><br><span class="line"><span class="string">  &lt;li class='</span>lazy<span class="string">'&gt;&lt;img data-origin='</span>images/<span class="number">12.</span>jpg<span class="string">' src='</span>images/loading.gif<span class="string">'/&gt;&lt;/li&gt;</span></span><br><span class="line"><span class="string">&lt;/ul&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">init</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> images = <span class="built_in">document</span>.images;</span><br><span class="line">  <span class="comment">// 加载首屏图片</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, len = images.length; i &lt; len; i++) &#123;</span><br><span class="line">    <span class="keyword">var</span> obj = images[i];</span><br><span class="line">    <span class="comment">// 如果在可视区域并且还没被加载过</span></span><br><span class="line">    <span class="keyword">if</span> (obj.getBoundingClientRect().top &lt; <span class="built_in">document</span>.documentElement.clientHeight &amp;&amp; !obj.isLoad) &#123;</span><br><span class="line">      obj.isLoad = <span class="literal">true</span>;</span><br><span class="line">      <span class="comment">// 先调用 HTML5 方法</span></span><br><span class="line">      <span class="keyword">if</span> (obj.dataset) </span><br><span class="line">        imageLoaded(obj, obj.dataset.origin);</span><br><span class="line">      <span class="keyword">else</span> </span><br><span class="line">        imageLoaded(obj, obj.getAttribute(<span class="string">'data-origin'</span>));</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;  <span class="comment">// 假设图片标签在 HTML 中的顺序和实际页面中顺序一致</span></span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">imageLoaded</span>(<span class="params">obj, src</span>) </span>&#123;<span class="comment">//将真实的图片地址指向元素</span></span><br><span class="line">  <span class="keyword">var</span> img = <span class="keyword">new</span> Image();</span><br><span class="line">  img.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    obj.src = src;</span><br><span class="line">  &#125;;</span><br><span class="line">  img.src = src;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 如果直接将 data-original 属性值指向图片的 src 属性的话，看到的图片可能会一段一段出现，而先将图片完全加载，然后再赋值使图片出现的话，体验就好多了 </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onscroll = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  lazyload();</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">lazyload</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> lazy = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">var</span> images = <span class="built_in">document</span>.images;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, len = images.length; i &lt; len; i++) &#123;</span><br><span class="line">    <span class="keyword">var</span> obj = images[i];</span><br><span class="line">    <span class="keyword">if</span> (obj.getBoundingClientRect().top - lazy &lt; <span class="built_in">document</span>.documentElement.clientHeight &amp;&amp; !obj.isLoad) &#123;</span><br><span class="line">      obj.isLoad = <span class="literal">true</span>;</span><br><span class="line">      <span class="keyword">if</span> (obj.dataset) </span><br><span class="line">        imageLoaded(obj, obj.dataset.original);</span><br><span class="line">      <span class="keyword">else</span> </span><br><span class="line">        imageLoaded(obj, obj.getAttribute(<span class="string">'data-original'</span>));</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 惰性加载虽然好处多，但是也有一个 “非致命” 的缺点，影响 SEO。因为图片都被替换成假的图片，所以会影响图片的收录，<strong>所以这功能不建议在详情页使用</strong> </p>
-<h1 id="方法的惰性载入"><a href="#方法的惰性载入" class="headerlink" title="方法的惰性载入"></a>方法的惰性载入</h1><p>即重复判断的条件，无需再判断</p>
-<p>在判断条件的时候返回一个新的函数</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/03/18/%E5%9B%BE%E7%89%87%E4%B8%8E%E6%96%B9%E6%B3%95%E7%9A%84%E6%83%B0%E6%80%A7%E8%BD%BD%E5%85%A5/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-一个简单的时钟" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/03/15/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E6%97%B6%E9%92%9F/" target="_blank">一个简单的时钟</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/03/15/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E6%97%B6%E9%92%9F/" class="archive-article-date">
-        <time datetime="2020-03-15T07:19:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-15</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="一个简单的时钟"><a href="#一个简单的时钟" class="headerlink" title="一个简单的时钟"></a>一个简单的时钟</h1><p>由本地时间控制的指针时钟，用的是最原始的代码，利用setInterval方法每过一秒读取一次本地时间，随之改变指针角度的方法</p>
-<p>代码如下：</p>
-<p>index.html</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"zh"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">	&lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">	&lt;meta name=<span class="string">"viewport"</span> content=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span><br><span class="line">	&lt;meta http-equiv=<span class="string">"X-UA-Compatible"</span> content=<span class="string">"ie=edge"</span>&gt;</span><br><span class="line">	&lt;title&gt;&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">	&lt;link rel="stylesheet" href="./</span>style.css<span class="string">"&gt;</span></span><br><span class="line"><span class="string">&lt;/head&gt;</span></span><br><span class="line"><span class="string">&lt;body&gt;</span></span><br><span class="line"><span class="string">	&lt;div class="</span>outer<span class="string">"&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>num one<span class="string">"&gt;1&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>num two<span class="string">"&gt;2&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>num three<span class="string">"&gt;3&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>num four<span class="string">"&gt;4&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>num five<span class="string">"&gt;5&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>num six<span class="string">"&gt;6&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>num seven<span class="string">"&gt;7&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>num eight<span class="string">"&gt;8&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>num nine<span class="string">"&gt;9&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>num ten<span class="string">"&gt;10&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>num eleven<span class="string">"&gt;11&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>num twelve<span class="string">"&gt;12&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>origin<span class="string">"&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>pointer<span class="string">"&gt;	</span></span><br><span class="line"><span class="string">			&lt;div class="</span>hour<span class="string">"&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">			&lt;div class="</span>minute<span class="string">"&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">			&lt;div class="</span>second<span class="string">"&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;/div&gt;</span></span><br><span class="line"><span class="string">	&lt;/div&gt;</span></span><br><span class="line"><span class="string">	&lt;script src="</span>./index.js<span class="string">"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="string">&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>style.css</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br></pre></td><td class="code"><pre><span class="line">*&#123;</span><br><span class="line">	margin :<span class="number">0</span>;</span><br><span class="line">	padding:<span class="number">0</span>;</span><br><span class="line">	font-family: <span class="string">"microsoft yahei"</span>,<span class="string">"microsoft sans serif"</span>;</span><br><span class="line">	font-size: <span class="number">45</span>px;</span><br><span class="line">	box-sizing: border-box;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.outer&#123;</span><br><span class="line">	width:<span class="number">650</span>px;</span><br><span class="line">	height:<span class="number">650</span>px;</span><br><span class="line">	border:solid <span class="number">5</span>px black;</span><br><span class="line">	position:absolute;</span><br><span class="line">	top:<span class="number">50</span>%;</span><br><span class="line">	left:<span class="number">50</span>%;</span><br><span class="line">	transform: translate(<span class="number">-50</span>%,<span class="number">-50</span>%);</span><br><span class="line">	border-radius: <span class="number">50</span>%;</span><br><span class="line">	background-color: #dfdfcd;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.num&#123;</span><br><span class="line">	display: block;</span><br><span class="line">	width:<span class="number">70</span>px;</span><br><span class="line">	height:<span class="number">70</span>px;</span><br><span class="line">	color:#aa0000;</span><br><span class="line">	position: absolute;</span><br><span class="line">	top:<span class="number">50</span>%;</span><br><span class="line">	left:<span class="number">50</span>%;</span><br><span class="line">	margin-top: <span class="number">-35</span>px;</span><br><span class="line">	margin-left: <span class="number">-35</span>px;</span><br><span class="line">	text-align: center;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.num.one&#123;</span><br><span class="line">	transform: rotate(<span class="number">30</span>deg) translateY(<span class="number">-290</span>px);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.num.two&#123;</span><br><span class="line">	transform: rotate(<span class="number">60</span>deg) translateY(<span class="number">-290</span>px);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.num.three&#123;</span><br><span class="line">	transform: rotate(<span class="number">90</span>deg) translateY(<span class="number">-290</span>px);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.num.four&#123;</span><br><span class="line">	transform: rotate(<span class="number">120</span>deg) translateY(<span class="number">-290</span>px);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.num.five&#123;</span><br><span class="line">	transform: rotate(<span class="number">150</span>deg) translateY(<span class="number">-290</span>px);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.num.six&#123;</span><br><span class="line">	transform: rotate(<span class="number">180</span>deg) translateY(<span class="number">-290</span>px);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.num.seven&#123;</span><br><span class="line">	transform: rotate(<span class="number">210</span>deg) translateY(<span class="number">-290</span>px);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.num.eight&#123;</span><br><span class="line">	transform: rotate(<span class="number">240</span>deg) translateY(<span class="number">-290</span>px);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.num.nine&#123;</span><br><span class="line">	transform: rotate(<span class="number">270</span>deg) translateY(<span class="number">-290</span>px);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.num.ten&#123;</span><br><span class="line">	transform: rotate(<span class="number">300</span>deg) translateY(<span class="number">-290</span>px);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.num.eleven&#123;</span><br><span class="line">	transform: rotate(<span class="number">330</span>deg) translateY(<span class="number">-290</span>px);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.num.twelve&#123;</span><br><span class="line">	transform: translateY(<span class="number">-290</span>px);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">.origin&#123;</span><br><span class="line">	width: <span class="number">50</span>px;</span><br><span class="line">	height: <span class="number">50</span>px;</span><br><span class="line">	position: absolute;</span><br><span class="line">	top:<span class="number">50</span>%;</span><br><span class="line">	left:<span class="number">50</span>%;</span><br><span class="line">	background-color: #AA0000;</span><br><span class="line">	border-radius: <span class="number">50</span>%;</span><br><span class="line">	margin-top: <span class="number">-25</span>px;</span><br><span class="line">	margin-left:<span class="number">-25</span>px;</span><br><span class="line">	z-index: <span class="number">500</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 指针部分 */</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">.hour&#123;</span><br><span class="line">	width:<span class="number">32</span>px;</span><br><span class="line">	height: <span class="number">200</span>px;</span><br><span class="line">	background-color: #ff0000;</span><br><span class="line">	border-radius: <span class="number">40</span>px;</span><br><span class="line">	position: absolute;</span><br><span class="line">	top:<span class="number">50</span>%;</span><br><span class="line">	left:<span class="number">50</span>%;</span><br><span class="line">	margin-top:<span class="number">-200</span>px;</span><br><span class="line">	margin-left: <span class="number">-16</span>px;</span><br><span class="line">	transform-origin:center bottom;</span><br><span class="line">	z-index: <span class="number">100</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.minute&#123;</span><br><span class="line">	width:<span class="number">25</span>px;</span><br><span class="line">	height:<span class="number">230</span>px;</span><br><span class="line">	background-color: aqua;</span><br><span class="line">	border-radius: <span class="number">30</span>px;</span><br><span class="line">	position: absolute;</span><br><span class="line">	top:<span class="number">50</span>%;</span><br><span class="line">	left:<span class="number">50</span>%;</span><br><span class="line">	margin-top: <span class="number">-230</span>px;</span><br><span class="line">	margin-left: <span class="number">-12.5</span>px;</span><br><span class="line">	transform-origin:center bottom;</span><br><span class="line">	z-index: <span class="number">50</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.second&#123;</span><br><span class="line">	width:<span class="number">15</span>px;</span><br><span class="line">	height:<span class="number">250</span>px;</span><br><span class="line">	background-color: chartreuse;</span><br><span class="line">	border-radius: <span class="number">20</span>px;</span><br><span class="line">	position: absolute;</span><br><span class="line">	top:<span class="number">50</span>%;</span><br><span class="line">	left:<span class="number">50</span>%;</span><br><span class="line">	margin-top:<span class="number">-250</span>px;</span><br><span class="line">	margin-left:<span class="number">-7.5</span>px;</span><br><span class="line">	transform-origin:center bottom;</span><br><span class="line">	z-index: <span class="number">10</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>index.js</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>.setInterval(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">	</span><br><span class="line"><span class="keyword">var</span> now=<span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line"><span class="keyword">var</span> h=now.getHours();</span><br><span class="line"><span class="keyword">var</span> m=now.getMinutes();</span><br><span class="line"><span class="keyword">var</span> s=now.getSeconds();</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> hourEl=<span class="built_in">document</span>.querySelector(<span class="string">".hour"</span>);</span><br><span class="line"><span class="keyword">const</span> minuteEl=<span class="built_in">document</span>.querySelector(<span class="string">".minute"</span>);</span><br><span class="line"><span class="keyword">const</span> secondEl=<span class="built_in">document</span>.querySelector(<span class="string">".second"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(h&lt;=<span class="number">12</span>)&#123;</span><br><span class="line">	<span class="keyword">var</span> angleH=(h+m/<span class="number">60</span>+s/<span class="number">3600</span>)*<span class="number">30</span>;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> angleH=((h+m/<span class="number">60</span>+s/<span class="number">3600</span>)<span class="number">-12</span>)*<span class="number">30</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> angleM=(m+s/<span class="number">60</span>)*<span class="number">6</span>;</span><br><span class="line">	<span class="keyword">var</span> angleS=s*<span class="number">6</span>;</span><br><span class="line">	hourEl.style.transform=<span class="string">"rotate("</span>+angleH+<span class="string">"deg)"</span>;<span class="comment">//为什么一定要加+好呢</span></span><br><span class="line">	minuteEl.style.transform=<span class="string">"rotate("</span>+angleM+<span class="string">"deg)"</span>;</span><br><span class="line">	secondEl.style.transform=<span class="string">"rotate("</span>+angleS+<span class="string">"deg)"</span>;</span><br><span class="line">&#125;,<span class="number">1000</span>);</span><br></pre></td></tr></table></figure>
-
-<h3 id="代码链接"><a href="#代码链接" class="headerlink" title="代码链接"></a><a href="https://github.com/yuchenbin1/web-design" target="_blank" rel="noopener">代码链接</a></h3><p>在制作过程中遇到的问题：</p>
-<p>主要集中在js中，（1） 为什么用变量去更改css中的样式，变量两边要用+并且用引号括起来</p>
-<p>（2）在改变样式过程中我用obj.style.transform改变transform成功了，而我想使用obj.setAttribute(“transform”,……)时失败了</p>
-<p>这两个问题我希望我以后知识多了之后能明白</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">页面项目</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/03/15/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E6%97%B6%E9%92%9F/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-客户端javascript时间线" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/03/14/%E5%AE%A2%E6%88%B7%E7%AB%AFjavascript%E6%97%B6%E9%97%B4%E7%BA%BF/" target="_blank">客户端javascript时间线</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/03/14/%E5%AE%A2%E6%88%B7%E7%AB%AFjavascript%E6%97%B6%E9%97%B4%E7%BA%BF/" class="archive-article-date">
-        <time datetime="2020-03-14T11:15:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-14</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="客户端javascript时间线"><a href="#客户端javascript时间线" class="headerlink" title="客户端javascript时间线"></a>客户端javascript时间线</h1><ol>
-<li>浏览器先创建Document对象，并开始解析Web页面，解析器先解析HTML元素以及之后的元素（element）对象和文本（text）节点到文档中。document.readystate值为”loading“(读取中)。</li>
-<li>若解析器没有遇到async（异步）和defer（推迟）元素时，元素添加到文档中，并执行行内或外部脚本，这是若脚本在下载或者执行是，解析器是停止的。这样的脚本可以用document.write()来把文本插入到输入流中。当解析器恢复时这些文本已经成为文档内容了。同步脚本可以看到自己和之前的文档内容。</li>
-<li>当遇到async（异步）的script元素时，开始下载脚本，但解析器继续解析，脚本下完后会尽快执行，可以看到自己和之前的文档。禁止使用document.write()把文本插入到输入流。</li>
-<li>当这些都解析完成，document.readystate值为”interactive”(交互式的)。</li>
-<li>所有defer（推迟）的script元素按顺序执行，当然异步脚本可能没下载完，在这个时间执行<strong>（当script元素中既有defer又有async一般会忽略defer）</strong>，这些defer脚本可以访问完整的文档树，禁止使用document.write()把文本插入到输入流。</li>
-<li>浏览器在Document对象上触发DOMContentLoaded事件时，标志程序从同步脚本执行阶段到异步事件驱动阶段，当然这个时间异步脚本可能没有下载或执行完。</li>
-<li>文档解析完成，包括异步脚本完成载入和执行，<strong>但是浏览器可能还在等待其他内容（图片，视频等）的载入</strong>，这时document.readystate值为“complete”（完整的），web浏览器触发Window对象上的load事件。</li>
-<li>以后，可以调用异步事件了，如用户输入事件、网络事件、计数器事件等。</li>
-</ol>
-<p><strong>这条时间线没有指明什么时候文档开始对用户可见或什么时候web浏览器必须响应用户输入事件，有时文档很长或者网速较慢时，在脚本执行之前，浏览器会先绚染一部分文档，能允许用户开始和页面产生一些交互，这时的用户输入事件可能在程序执行事件驱动阶段开始之前触发。</strong></p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/03/14/%E5%AE%A2%E6%88%B7%E7%AB%AFjavascript%E6%97%B6%E9%97%B4%E7%BA%BF/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/4/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/6/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/4/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/6/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -1327,7 +1314,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1335,15 +1322,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">node</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">react</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">

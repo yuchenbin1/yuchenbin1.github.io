@@ -202,6 +202,464 @@
             
 
   
+    <article id="post-webpack加载器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/04/20/webpack%E5%8A%A0%E8%BD%BD%E5%99%A8/" target="_blank">webpack加载器</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/04/20/webpack%E5%8A%A0%E8%BD%BD%E5%99%A8/" class="archive-article-date">
+        <time datetime="2020-04-20T12:35:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-20</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="通过loader打包非js模块"><a href="#通过loader打包非js模块" class="headerlink" title="通过loader打包非js模块"></a>通过loader打包非js模块</h1><p>在实际开发过程中，webpack默认只能打包处理以.js后缀名结尾的模块，其他的<br>非.js后缀名结尾的模块，webpack打包不了，需要调用loader加载器才可以正常打包，否则会报错</p>
+<p>loader加载器可以协助webpack打包处理特定的文件模块，比如：<br>less-loader可以打包处理.less相关的文件<br>sass-loader可以打包处理.scss相关的文件<br>url-loader可以打包处理css中与url路径相关的文件</p>
+<h2 id="打包处理css文件"><a href="#打包处理css文件" class="headerlink" title="打包处理css文件"></a>打包处理css文件</h2><p>1.npm i style-loader css-loader -D命令，安装处理css文件的loader<br>2.webpack.config.js的module-&gt;rules数组中，添加loader规则如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>:&#123;</span><br><span class="line">       rules:[</span><br><span class="line">           &#123;<span class="attr">test</span>:<span class="regexp">/\.css$/</span>,<span class="attr">use</span>:[<span class="string">'style-loader'</span>,<span class="string">'css-loader'</span>]&#125;</span><br><span class="line">       ]<span class="comment">//其中test表示匹配的文件类型，use表示对应要调用的loader</span></span><br><span class="line">   &#125;<span class="comment">//其中use的顺序是固定的，多个loader是从后面往前面调用</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="打包处理less文件"><a href="#打包处理less文件" class="headerlink" title="打包处理less文件"></a>打包处理less文件</h2><p>确保style-loader和css-loader安装完成<br>1.运行npm i less-loader less -D命令<br>2.在webpack.config.js中的module-&gt;rules数组中，添加loader规则如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>:&#123;</span><br><span class="line">    rules:[</span><br><span class="line">        &#123;<span class="attr">test</span>:<span class="regexp">/\.less$/</span>,<span class="attr">use</span>:[<span class="string">'style-loader'</span>,<span class="string">'css-loader'</span>,<span class="string">'less-loader'</span>]&#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="打包处理scss文件"><a href="#打包处理scss文件" class="headerlink" title="打包处理scss文件"></a>打包处理scss文件</h2><p>确保style-loader和css-loader安装完成<br>1.运行npm i sass-loader node-sass -D命令<br>2.在webpack.config.js中的module-&gt;rules数组中，添加loader规则如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>:&#123;</span><br><span class="line">    rules:[</span><br><span class="line">        &#123;<span class="attr">test</span>:<span class="regexp">/\.scss$/</span>,<span class="attr">use</span>:[<span class="string">'style-loader'</span>,<span class="string">'css-loader'</span>,<span class="string">'sass-loader'</span>]&#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="配置postCSS自动添加css的兼容-厂商-前缀"><a href="#配置postCSS自动添加css的兼容-厂商-前缀" class="headerlink" title="配置postCSS自动添加css的兼容(厂商)前缀"></a>配置postCSS自动添加css的兼容(厂商)前缀</h2><p>1.运行npm i postcss-loader autoprefixer -D命令<br>2.在项目根目录中创建postcss的配置文件postcss.config.js,并初始化如下配置：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> autoprefixer=<span class="built_in">require</span>(<span class="string">'autoprefixer'</span>)</span><br><span class="line"><span class="built_in">module</span>.exports=&#123;</span><br><span class="line">    plugins:[autoprefixer]<span class="comment">//挂载插件</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>3.在webpack.config.js的module-&gt;rules数组中，修改css的loader规则如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>:&#123;</span><br><span class="line">    rules:[</span><br><span class="line">        &#123;<span class="attr">test</span>:<span class="regexp">/\.css$/</span>,<span class="attr">use</span>:[<span class="string">'style-loader'</span>,<span class="string">'css-loader'</span>,<span class="string">'postcss-loader'</span>]&#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="打包样式表中的图片和字体文件"><a href="#打包样式表中的图片和字体文件" class="headerlink" title="打包样式表中的图片和字体文件"></a>打包样式表中的图片和字体文件</h2><p>1.运行npm i url-loader file-loader -D命令<br>2.在webpack.config.js中的module-&gt;rules数组中，添加loader规则如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>:&#123;</span><br><span class="line">    rules:[</span><br><span class="line">        &#123;</span><br><span class="line">            test:<span class="regexp">/\.jpg|png|gif|bmp|ttf|eot|svg|woff|woff2$/</span>,</span><br><span class="line">            use:<span class="string">'url-loader?limit=16940'</span><span class="comment">//?后面是参数项，</span></span><br><span class="line">            <span class="comment">//limit表示图片大小，单位字节，小于该值，才会转化为base64图片</span></span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="打包处理js文件中的高级语法"><a href="#打包处理js文件中的高级语法" class="headerlink" title="打包处理js文件中的高级语法"></a>打包处理js文件中的高级语法</h2><p>1.安装babel转换器相关的包:npm i babel-loader @babel/core @babel/runtime -D<br>2.安装babel语法插件相关的包:npm i @babel/preset-env @babel/plugin-transform-runtime @babel/plugin-proposal-class-properties -D<br>3.在项目根目录中，创建babel配置文件babel.config.js并初始化基本配置如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports=&#123;</span><br><span class="line">    presets:[<span class="string">'@babel/preset-env'</span>],</span><br><span class="line">    plugins:[<span class="string">'@babel/plugin-transform-runtime'</span>,<span class="string">'@babel/plugin-proposal-class-properties'</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>4.在webpack.config.js的module-&gt;rules数组中，添加loader规则如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">test</span>:<span class="regexp">/\.js$/</span>,<span class="attr">use</span>:<span class="string">'babel-loader'</span>,<span class="attr">exclude</span>:<span class="regexp">/node_modules/</span>&#125;</span><br><span class="line"><span class="comment">//exclude为排除项，表示babel-loader不处理node_modules中的js文件</span></span><br></pre></td></tr></table></figure>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">webpack</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/04/20/webpack%E5%8A%A0%E8%BD%BD%E5%99%A8/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-webpack的简单使用与动态打包" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/04/19/webpack%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%8A%A8%E6%80%81%E6%89%93%E5%8C%85/" target="_blank">webpack的简单使用与动态打包</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/04/19/webpack%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%8A%A8%E6%80%81%E6%89%93%E5%8C%85/" class="archive-article-date">
+        <time datetime="2020-04-19T14:11:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-19</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="webpack的简单使用"><a href="#webpack的简单使用" class="headerlink" title="webpack的简单使用"></a>webpack的简单使用</h1><ol>
+<li><p>新建项目空白目录，并运行npm init -y 命令，初始化包管理配置文件package.json</p>
+</li>
+<li><p>新建src源代码目录</p>
+</li>
+<li><p>新建src-&gt;index.html首页</p>
+</li>
+<li><p>初始化首页基本的结构</p>
+</li>
+</ol>
+<h3 id="webpack转化代码实现模块化"><a href="#webpack转化代码实现模块化" class="headerlink" title="webpack转化代码实现模块化"></a>webpack转化代码实现模块化</h3><ol>
+<li><p>运行npm install webpack webpack-cli -D命令，安装webpack相关的包</p>
+</li>
+<li><p>在项目的根目录中，创建名为webpack.config.js的webpack配置文件</p>
+</li>
+<li><p>在webpack配置文件webpack.config.js中，初始化如下的基本配置:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports=&#123;</span><br><span class="line">    mode:<span class="string">'development'</span> <span class="comment">//mode用来指定构建模式，development为开发模式,production为压缩版本</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="4">
+<li>在package.json配置文件中的scripts节点下，新增dev脚本如下:</li>
+</ol>
+<p>​     “scripts”:{<br>​         “dev”:”webpack”//script节点下的脚本，可以通过npm run执行<br>​     }</p>
+<ol start="5">
+<li>在终端中运行npm run dev 命令，启动webpack进行项目的打包</li>
+</ol>
+<h3 id="改变打包的入口（默认为src-gt-index-js）和出口（默认为dist-gt-main-js）"><a href="#改变打包的入口（默认为src-gt-index-js）和出口（默认为dist-gt-main-js）" class="headerlink" title="改变打包的入口（默认为src-&gt;index.js）和出口（默认为dist-&gt;main.js）"></a>改变打包的入口（默认为src-&gt;index.js）和出口（默认为dist-&gt;main.js）</h3><p>在配置文件webpack.config.js中改为:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path=<span class="built_in">require</span>(<span class="string">'path'</span>)                          <span class="comment">//导入node.js中的path模块来指定路线</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports=&#123;</span><br><span class="line">    mode:<span class="string">'development'</span>,                             <span class="comment">//模式指定</span></span><br><span class="line">    entry:path.join(__dirname,<span class="string">'./src/index.js'</span>),    <span class="comment">//__dirname表示当前目录下</span></span><br><span class="line">    output:&#123;</span><br><span class="line">        path:path.join(__dirname,<span class="string">'./dist'</span>),         <span class="comment">//path表示路径</span></span><br><span class="line">        filename:<span class="string">'bundle.js'</span>                        <span class="comment">//filename表示输出的文件名</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="动态打包"><a href="#动态打包" class="headerlink" title="动态打包"></a>动态打包</h1><p>在前面基本使用(初始化webpack，npm webpack相关库，创建webpack.config.js的配置文件)的基础上<br>配置自动打包的功能：</p>
+<p>1.运行npm install webpack-dev-server -D命令，安装支持项目自动打包的工具</p>
+<p>2.修改package.json-&gt;scripts中的dev命令如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"scripts"</span>:&#123;</span><br><span class="line">    <span class="string">"dev"</span>:<span class="string">"webpack-dev-server"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>3.将src-&gt;index.html中的，script脚本的引用路径”../dist/buldle.js”，修改为根目录下的文件”/buldle.js”</p>
+<p>4.运行npm run dev命令，重新进行打包</p>
+<p>5.在浏览器中访问 <a href="http://lacalhost:8080" target="_blank" rel="noopener">http://lacalhost:8080</a> 地址可以查看打包的效果</p>
+<p>6.ctrl+c 退出</p>
+<h1 id="生成预览页面"><a href="#生成预览页面" class="headerlink" title="生成预览页面"></a>生成预览页面</h1><p>1.运行npm install html-webpack-plugin -D命令，安装生成预览页面的插件<br>2.修改webpack.config.js文件头部区域，添加</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> HtmlWebpackPlugin=<span class="built_in">require</span>(<span class="string">'html-webpack-plugin'</span>)</span><br><span class="line"><span class="keyword">const</span> htmlPlugin=<span class="keyword">new</span> HtmlWebpackPlugin(&#123;</span><br><span class="line">    template:<span class="string">'./src/index.html'</span>,<span class="comment">//指定的主页地址</span></span><br><span class="line">    filename:<span class="string">'index.html'</span><span class="comment">//命名生成的文件，该文件不显示，只在内存中</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>3.修改webpack.config,js文件中向外暴露的配置对象，新增加如下配置节点：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports=&#123;</span><br><span class="line">    plugins:[htmlPlugin]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="配置完成自动打开页面，并且配置服务器参数"><a href="#配置完成自动打开页面，并且配置服务器参数" class="headerlink" title="配置完成自动打开页面，并且配置服务器参数"></a>配置完成自动打开页面，并且配置服务器参数</h1><p>package.json中的配置<br>–open 打包完成后自动打开浏览器的页面<br>–host 配置IP地址<br>–port 配置端口</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"scripts"</span>:&#123;</span><br><span class="line">    <span class="string">"dev"</span>:<span class="string">"webpack-dev-server --open --host 127.0.0.1 --port 8888"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">webpack</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/04/19/webpack%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%8A%A8%E6%80%81%E6%89%93%E5%8C%85/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-for-in与for-of的区别" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/04/18/for-in%E4%B8%8Efor-of%E7%9A%84%E5%8C%BA%E5%88%AB/" target="_blank">for/in与for/of的区别</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/04/18/for-in%E4%B8%8Efor-of%E7%9A%84%E5%8C%BA%E5%88%AB/" class="archive-article-date">
+        <time datetime="2020-04-18T14:38:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-18</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="for-in与for-of的区别"><a href="#for-in与for-of的区别" class="headerlink" title="for/in与for/of的区别"></a>for/in与for/of的区别</h1><p>遍历主要方法有：</p>
+<ol>
+<li>for</li>
+<li>for/in</li>
+<li>for/of</li>
+<li>forEach</li>
+<li>map</li>
+<li>……(一些特别遍历比如some,every,filter,reduce,ES6中的values、entries、keys，Set和Map等)</li>
+</ol>
+<h3 id="其他的我就不一一介绍了，主要讲一下for-in和for-of"><a href="#其他的我就不一一介绍了，主要讲一下for-in和for-of" class="headerlink" title="其他的我就不一一介绍了，主要讲一下for/in和for/of"></a>其他的我就不一一介绍了，主要讲一下for/in和for/of</h3><p><strong>for in更适合遍历对象，不要使用for in遍历数组。</strong>使用for in 也可以遍历数组，但是会存在以下问题：</p>
+<ol>
+<li><strong>index索引为字符串型数字，不能直接进行几何运算</strong></li>
+<li><strong>使用for in会遍历数组所有的可枚举属性，包括原型。例如上栗的原型方法method和name属性</strong></li>
+<li><strong>遍历顺序有可能不是按照实际数组的内部顺序</strong></li>
+</ol>
+<p>更简单的正确的遍历数组ES6中的for of更胜一筹。</p>
+<p>for of遍历的只是数组内的元素，而不包括数组的原型属性method和索引name</p>
+<p>for in遍历的是数组的索引（即键名），而for of遍历的是数组元素值。</p>
+<p>通常用for in来遍历对象的键名。</p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/04/18/for-in%E4%B8%8Efor-of%E7%9A%84%E5%8C%BA%E5%88%AB/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-vue路由实例" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/04/18/vue%E8%B7%AF%E7%94%B1%E5%AE%9E%E4%BE%8B/" target="_blank">vue路由实例</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/04/18/vue%E8%B7%AF%E7%94%B1%E5%AE%9E%E4%BE%8B/" class="archive-article-date">
+        <time datetime="2020-04-18T12:40:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-18</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="vue的路由的实例"><a href="#vue的路由的实例" class="headerlink" title="vue的路由的实例"></a>vue的路由的实例</h1><p>实现</p>
+<ol>
+<li>基本用法</li>
+<li>重定向</li>
+<li>嵌套路由</li>
+<li>动态路由</li>
+<li>编程式导航</li>
+</ol>
+<h3 id="html文件如下"><a href="#html文件如下" class="headerlink" title="html文件如下"></a>html文件如下</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>后台管理系统<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"./style.css"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">router-view</span>&gt;</span><span class="tag">&lt;/<span class="name">router-view</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://cdn.jsdelivr.net/npm/vue/dist/vue.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://unpkg.com/vue-router/dist/vue-router.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"./index.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="css文件如下"><a href="#css文件如下" class="headerlink" title="css文件如下"></a>css文件如下</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><span class="line">*&#123;</span><br><span class="line">    <span class="attribute">padding</span>:<span class="number">0</span>;</span><br><span class="line">    <span class="attribute">margin</span>:<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">html</span>,<span class="selector-tag">body</span>&#123;</span><br><span class="line">    <span class="attribute">width</span>:<span class="number">100%</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.container</span>&#123;</span><br><span class="line">    <span class="attribute">width</span>:<span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">height</span>:<span class="number">969px</span>;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">flex-direction</span>: column;</span><br><span class="line">    <span class="attribute">justify-content</span>: space-between;</span><br><span class="line">    <span class="attribute">text-align</span>: center;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.container</span> <span class="selector-class">.header</span>&#123;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">36px</span>;</span><br><span class="line">    <span class="attribute">flex</span>:<span class="number">0</span> <span class="number">0</span> <span class="number">50px</span>;</span><br><span class="line">    <span class="attribute">line-height</span>: <span class="number">50px</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: slategrey;</span><br><span class="line">    <span class="attribute">color</span>: white;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.container</span> <span class="selector-class">.main</span>&#123;</span><br><span class="line">    <span class="attribute">flex</span>:<span class="number">1</span> <span class="number">1</span> auto;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.container</span> <span class="selector-class">.footer</span>&#123;</span><br><span class="line">    <span class="attribute">flex</span>:<span class="number">0</span> <span class="number">0</span> <span class="number">50px</span>;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">24px</span>;</span><br><span class="line">    <span class="attribute">line-height</span>: <span class="number">50px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.main</span> &#123;</span><br><span class="line">   <span class="attribute">display</span>: grid;</span><br><span class="line">   <span class="attribute">grid-template-columns</span>: <span class="number">1</span>fr <span class="number">5</span>fr; </span><br><span class="line">   <span class="attribute">justify-content</span>: center;</span><br><span class="line">   <span class="attribute">text-align</span>: center;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.main</span> <span class="selector-class">.contain_options</span>&#123;</span><br><span class="line">    <span class="attribute">background-color</span>: gray;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.main</span> <span class="selector-class">.contain_options</span> <span class="selector-tag">li</span>&#123;</span><br><span class="line">    <span class="attribute">width</span>:<span class="number">100%</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="attribute">line-height</span>: <span class="number">60px</span>;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">20px</span>;</span><br><span class="line">    <span class="attribute">cursor</span>: pointer;</span><br><span class="line">    <span class="attribute">color</span>: white;</span><br><span class="line">    </span><br><span class="line">    <span class="attribute">list-style</span>: none;</span><br><span class="line">    <span class="attribute">background-color</span>: burlywood;</span><br><span class="line">    <span class="attribute">margin</span>:<span class="number">2px</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="selector-class">.contain_msg</span> <span class="selector-tag">h3</span>&#123;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">30px</span>;</span><br><span class="line">    <span class="attribute">margin</span>:<span class="number">10px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.contain_msg</span> <span class="selector-tag">table</span>&#123;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">flex-direction</span>: column;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="selector-class">.contain_msg</span> <span class="selector-tag">td</span>,<span class="selector-tag">th</span>&#123;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">2px</span> solid <span class="built_in">rgba</span>(<span class="number">150</span>,<span class="number">150</span>,<span class="number">150</span>,<span class="number">0.3</span>);</span><br><span class="line">    <span class="attribute">width</span>:<span class="number">20vw</span>;</span><br><span class="line">    <span class="attribute">margin</span>:<span class="number">1px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">50px</span>;</span><br><span class="line">    <span class="attribute">line-height</span>: <span class="number">50px</span>;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">20px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="selector-class">.contain_msg</span> <span class="selector-tag">tr</span>&#123;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">justify-content</span>: space-around;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.contain_msg</span> <span class="selector-tag">th</span>&#123;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="built_in">rgb</span>(<span class="number">168</span>, <span class="number">167</span>, <span class="number">167</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.contain_msg</span> <span class="selector-tag">td</span>&gt;<span class="selector-tag">a</span>&#123;</span><br><span class="line">    <span class="attribute">color</span>:blue;</span><br><span class="line">    <span class="attribute">text-decoration</span>: underline;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.footer</span>&#123;</span><br><span class="line">    <span class="attribute">color</span>:white;</span><br><span class="line">    <span class="attribute">background-color</span>: burlywood;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">a</span> &#123;</span><br><span class="line">    <span class="attribute">text-decoration</span>: none;</span><br><span class="line">    <span class="attribute">color</span>:white;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="js文件"><a href="#js文件" class="headerlink" title="js文件"></a>js文件</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//定义根组件</span></span><br><span class="line"><span class="keyword">const</span> App=&#123;</span><br><span class="line">    template:<span class="string">`</span></span><br><span class="line"><span class="string">        &lt;div class="container"&gt;</span></span><br><span class="line"><span class="string">        &lt;header class="header"&gt;&lt;p&gt;用户管理系统&lt;/p&gt;&lt;/header&gt;</span></span><br><span class="line"><span class="string">            &lt;div class="main"&gt;</span></span><br><span class="line"><span class="string">                &lt;div class="contain_options"&gt;</span></span><br><span class="line"><span class="string">                    &lt;ul&gt;</span></span><br><span class="line"><span class="string">                        &lt;li&gt;&lt;router-link to="/users"&gt;用户管理&lt;/router-link&gt;&lt;/li&gt;</span></span><br><span class="line"><span class="string">                        &lt;li&gt;&lt;router-link to="/rights"&gt;权限管理&lt;/router-link&gt;&lt;/li&gt;</span></span><br><span class="line"><span class="string">                        &lt;li&gt;&lt;router-link to="/goods"&gt;商品订单&lt;/router-link&gt;&lt;/li&gt;</span></span><br><span class="line"><span class="string">                        &lt;li&gt;&lt;router-link to="/orders"&gt;订单管理&lt;/router-link&gt;&lt;/li&gt;</span></span><br><span class="line"><span class="string">                        &lt;li&gt;&lt;router-link to="/settings"&gt;系统设置&lt;/router-link&gt;&lt;/li&gt;</span></span><br><span class="line"><span class="string">                    &lt;/ul&gt;</span></span><br><span class="line"><span class="string">                &lt;/div&gt;</span></span><br><span class="line"><span class="string">                &lt;div class="contain_msg"&gt;</span></span><br><span class="line"><span class="string">                    &lt;div&gt;</span></span><br><span class="line"><span class="string">                        &lt;router-view&gt;&lt;/router-view&gt;</span></span><br><span class="line"><span class="string">                    &lt;/div&gt;</span></span><br><span class="line"><span class="string">                &lt;/div&gt;</span></span><br><span class="line"><span class="string">            &lt;/div&gt;</span></span><br><span class="line"><span class="string">            &lt;footer class="footer"&gt;&lt;p&gt;版权信息&lt;/p&gt;&lt;/footer&gt;</span></span><br><span class="line"><span class="string">        &lt;/div&gt;</span></span><br><span class="line"><span class="string">    `</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> User=&#123;</span><br><span class="line">    data:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            userList:[</span><br><span class="line">                &#123;<span class="attr">id</span>:<span class="number">1</span>,<span class="attr">name</span>:<span class="string">'张三'</span>,<span class="attr">age</span>:<span class="number">18</span>&#125;,</span><br><span class="line">                &#123;<span class="attr">id</span>:<span class="number">2</span>,<span class="attr">name</span>:<span class="string">'李四'</span>,<span class="attr">age</span>:<span class="number">20</span>&#125;,</span><br><span class="line">                &#123;<span class="attr">id</span>:<span class="number">3</span>,<span class="attr">name</span>:<span class="string">'王五'</span>,<span class="attr">age</span>:<span class="number">32</span>&#125;,</span><br><span class="line">                &#123;<span class="attr">id</span>:<span class="number">4</span>,<span class="attr">name</span>:<span class="string">'赵六'</span>,<span class="attr">age</span>:<span class="number">14</span>&#125;,</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    template:<span class="string">`</span></span><br><span class="line"><span class="string">    &lt;div&gt;</span></span><br><span class="line"><span class="string">        &lt;h3&gt;用户管理区域&lt;/h3&gt;</span></span><br><span class="line"><span class="string">        &lt;table&gt;</span></span><br><span class="line"><span class="string">            &lt;thead&gt;</span></span><br><span class="line"><span class="string">                &lt;tr&gt;</span></span><br><span class="line"><span class="string">                    &lt;th&gt;编号&lt;/th&gt;</span></span><br><span class="line"><span class="string">                    &lt;th&gt;姓名&lt;/th&gt;</span></span><br><span class="line"><span class="string">                    &lt;th&gt;年龄&lt;/th&gt;</span></span><br><span class="line"><span class="string">                    &lt;th&gt;操作&lt;/th&gt;</span></span><br><span class="line"><span class="string">                &lt;/tr&gt;</span></span><br><span class="line"><span class="string">            &lt;/thead&gt;</span></span><br><span class="line"><span class="string">            &lt;tbody&gt;</span></span><br><span class="line"><span class="string">                &lt;tr v-for='item in userList' :key='item.id'&gt;</span></span><br><span class="line"><span class="string">                    &lt;td&gt;&#123;&#123;item.id&#125;&#125;&lt;/td&gt;</span></span><br><span class="line"><span class="string">                    &lt;td&gt;&#123;&#123;item.name&#125;&#125;&lt;/td&gt;</span></span><br><span class="line"><span class="string">                    &lt;td&gt;&#123;&#123;item.age&#125;&#125;&lt;/td&gt;</span></span><br><span class="line"><span class="string">                    &lt;td&gt;</span></span><br><span class="line"><span class="string">                        &lt;a href="javascript:;" @click='goDetail(item.id)'&gt;详情&lt;/a&gt;</span></span><br><span class="line"><span class="string">                    &lt;/td&gt;</span></span><br><span class="line"><span class="string">                &lt;/tr&gt;</span></span><br><span class="line"><span class="string">            &lt;/tbody&gt;</span></span><br><span class="line"><span class="string">        &lt;/table&gt;</span></span><br><span class="line"><span class="string">    &lt;/div&gt;</span></span><br><span class="line"><span class="string">    `</span>,</span><br><span class="line">    methods: &#123;</span><br><span class="line">        goDetail:<span class="function"><span class="keyword">function</span>(<span class="params">id</span>)</span>&#123;</span><br><span class="line">            <span class="comment">// console.log(id);</span></span><br><span class="line">            <span class="keyword">this</span>.$router.push(<span class="string">'/userInfo/'</span>+id);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> UserInfo=&#123;</span><br><span class="line">    props:[</span><br><span class="line">        <span class="string">'id'</span></span><br><span class="line">    ],</span><br><span class="line">    template:<span class="string">`&lt;div&gt;</span></span><br><span class="line"><span class="string">        &lt;h5&gt;用户详情页&lt;/h5&gt;</span></span><br><span class="line"><span class="string">        &lt;p&gt;当前用户的id为&#123;&#123;id&#125;&#125;&lt;/p&gt;</span></span><br><span class="line"><span class="string">        &lt;button @click="goBack"&gt;后退&lt;/button&gt;</span></span><br><span class="line"><span class="string">        &lt;/div&gt;</span></span><br><span class="line"><span class="string">    `</span>,</span><br><span class="line">    methods: &#123;</span><br><span class="line">        goBack:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.$router.go(<span class="number">-1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Rights=&#123;</span><br><span class="line">    template:<span class="string">`</span></span><br><span class="line"><span class="string">    &lt;h3&gt;权限管理区域&lt;/h3&gt;</span></span><br><span class="line"><span class="string">    `</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Goods=&#123;</span><br><span class="line">    template:<span class="string">`</span></span><br><span class="line"><span class="string">    &lt;h3&gt;商品管理区域&lt;/h3&gt;</span></span><br><span class="line"><span class="string">    `</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Orders=&#123;</span><br><span class="line">    template:<span class="string">`</span></span><br><span class="line"><span class="string">    &lt;h3&gt;订单管理区域&lt;/h3&gt;</span></span><br><span class="line"><span class="string">    `</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Settings=&#123;</span><br><span class="line">    template:<span class="string">`</span></span><br><span class="line"><span class="string">    &lt;h3&gt;系统管理区域&lt;/h3&gt;</span></span><br><span class="line"><span class="string">    `</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建路由对象</span></span><br><span class="line"><span class="keyword">const</span> router=<span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line">    routes:[</span><br><span class="line">        </span><br><span class="line">        &#123;<span class="attr">path</span>:<span class="string">'/'</span>,<span class="attr">redirect</span>: <span class="string">'/users'</span>,<span class="attr">component</span>:App,<span class="attr">children</span>:[<span class="comment">//注意子组件加在children中</span></span><br><span class="line">            &#123;<span class="attr">path</span>:<span class="string">'/users'</span>,<span class="attr">component</span>:User&#125;,</span><br><span class="line">            &#123;<span class="attr">path</span>:<span class="string">'/userInfo/:id'</span>,<span class="attr">component</span>:UserInfo,<span class="attr">props</span>:<span class="literal">true</span>&#125;,</span><br><span class="line">            &#123;<span class="attr">path</span>:<span class="string">'/rights'</span>,<span class="attr">component</span>:Rights&#125;,</span><br><span class="line">            &#123;<span class="attr">path</span>:<span class="string">'/goods'</span>,<span class="attr">component</span>:Goods&#125;,</span><br><span class="line">            &#123;<span class="attr">path</span>:<span class="string">'/orders'</span>,<span class="attr">component</span>:Orders&#125;,</span><br><span class="line">            &#123;<span class="attr">path</span>:<span class="string">'/settings'</span>,<span class="attr">component</span>:Settings&#125;</span><br><span class="line">        ]&#125;,</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">    ]</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> vm=<span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el:<span class="string">'#app'</span>,</span><br><span class="line">    router</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/04/18/vue%E8%B7%AF%E7%94%B1%E5%AE%9E%E4%BE%8B/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-vue的编程式导航" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -863,389 +1321,9 @@
 
 
   
-    <article id="post-20年4月13日" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/04/13/20%E5%B9%B44%E6%9C%8813%E6%97%A5/" target="_blank">20年4月13日</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/04/13/20%E5%B9%B44%E6%9C%8813%E6%97%A5/" class="archive-article-date">
-        <time datetime="2020-04-13T15:04:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-13</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>着手做一个键盘导航的单页面，实现键盘按键导航设定的网页，或者鼠标单击，这是我目前已经完成的，之后的任务是实现自定义网址绑定某个按键。</p>
-<p>在做的过程中遇到许多的困难，其中对我而言最难的是键盘事件，因为新版vue没有keycode这个功能，我只能从原生js去写，网上找了一些资料，在键盘事件中还要注意的是焦点，这个是最麻烦的，今天刚检查一遍，发现了这个情况，在input时同时会触发键盘事件，这个我要处理一下。</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日志</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/04/13/20%E5%B9%B44%E6%9C%8813%E6%97%A5/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-悦听播放器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/04/12/%E6%82%A6%E5%90%AC%E6%92%AD%E6%94%BE%E5%99%A8/" target="_blank">悦听播放器</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/04/12/%E6%82%A6%E5%90%AC%E6%92%AD%E6%94%BE%E5%99%A8/" class="archive-article-date">
-        <time datetime="2020-04-12T07:07:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-12</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="悦听播放器"><a href="#悦听播放器" class="headerlink" title="悦听播放器"></a>悦听播放器</h1><p>利用vue构建逻辑层</p>
-<p><a href=" https://yuchenbin1.github.io/listener/" >链接地址</a></p>
-<p><a href=" https://github.com/yuchenbin1/listener " target="_blank" rel="noopener">码源地址</a></p>
-<p>达到搜索歌曲，点击放歌，中心图片旋转，以及MV播放的功能。</p>
-<h3 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h3><ol>
-<li><p>vue闪动问题</p>
-<p><a href=" [https://yuchenbin1.github.io/2020/04/12/vue%E9%97%AA%E5%8A%A8%E7%9A%84%E9%97%AE%E9%A2%98/](https://yuchenbin1.github.io/2020/04/12/vue闪动的问题/) ">解决方法的链接</a></p>
-</li>
-<li><p>css背景图透明度问题</p>
-<p><a href=" [https://yuchenbin1.github.io/2020/04/12/css%E4%B8%AD%E9%80%8F%E6%98%8E%E5%BA%A6%E7%BB%A7%E6%89%BF%E7%9A%84%E9%97%AE%E9%A2%98/](https://yuchenbin1.github.io/2020/04/12/css中透明度继承的问题/) ">解决方法的链接</a></p>
-</li>
-</ol>
-<p>悦听播放器html部分</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line"></span><br><span class="line">&lt;head&gt;</span><br><span class="line">  &lt;meta charset=<span class="string">"UTF-8"</span> /&gt;</span><br><span class="line">  &lt;meta name=<span class="string">"viewport"</span> content=<span class="string">"width=device-width, initial-scale=1.0"</span> /&gt;</span><br><span class="line">  &lt;meta http-equiv=<span class="string">"X-UA-Compatible"</span> content=<span class="string">"ie=edge"</span> /&gt;</span><br><span class="line">  &lt;title&gt;悦听播放器&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">  &lt;!-- 样式 --&gt;</span></span><br><span class="line"><span class="regexp">  &lt;link rel="stylesheet" href="./</span>style.css<span class="string">"&gt;</span></span><br><span class="line"><span class="string">&lt;/head&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&lt;body&gt;</span></span><br><span class="line"><span class="string">  &lt;div class="</span>wrap<span class="string">" style="</span>display:none<span class="string">" :style="</span>&#123;<span class="attr">display</span>:<span class="string">'block'</span>&#125;<span class="string">"&gt;</span></span><br><span class="line"><span class="string">    &lt;div class="</span>wrap2<span class="string">" :style="</span>&#123;<span class="attr">backgroundImage</span>: <span class="string">'url('</span> +bg+ <span class="string">')'</span>&#125;<span class="string">"&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">    &lt;!-- 播放器主体区域 --&gt;</span></span><br><span class="line"><span class="string">    &lt;div class="</span>play_wrap<span class="string">" id="</span>player<span class="string">"&gt;</span></span><br><span class="line"><span class="string">      &lt;div class="</span>search_bar<span class="string">"&gt;</span></span><br><span class="line"><span class="string">        &lt;img src="</span>./imgs/player_title.png<span class="string">" alt="</span><span class="string">" /&gt;</span></span><br><span class="line"><span class="string">        &lt;!-- 搜索歌曲 --&gt;</span></span><br><span class="line"><span class="string">        &lt;input type="</span>text<span class="string">" autocomplete="</span>off<span class="string">" v-model="</span>query<span class="string">" @keyup.enter="</span>searchMusic<span class="string">" /&gt;</span></span><br><span class="line"><span class="string">      &lt;/div&gt;</span></span><br><span class="line"><span class="string">      &lt;div class="</span>center_con<span class="string">"&gt;</span></span><br><span class="line"><span class="string">        &lt;!-- 搜索歌曲列表 --&gt;</span></span><br><span class="line"><span class="string">        &lt;div class='song_wrapper'&gt;</span></span><br><span class="line"><span class="string">          &lt;ul class="</span>song_list<span class="string">"&gt;</span></span><br><span class="line"><span class="string">           &lt;li v-for="</span>item <span class="keyword">in</span> musicList<span class="string">"&gt;</span></span><br><span class="line"><span class="string">             &lt;a href="</span>javascript:;<span class="string">" @click="</span>playMusic(item.id),changePicture(item.id),getComment(item.id)<span class="string">"&gt;&lt;/a&gt; </span></span><br><span class="line"><span class="string">             &lt;b v-cloak&gt;&#123;&#123;item.name&#125;&#125;&lt;/b&gt;</span></span><br><span class="line"><span class="string">             &lt;span v-cloak v-if="</span>item.mvid!=<span class="number">0</span><span class="string">" @click="</span>playMv(item.mvid)<span class="string">"&gt;&lt;i&gt;&lt;/i&gt;&lt;/span&gt;</span></span><br><span class="line"><span class="string">           &lt;/li&gt;</span></span><br><span class="line"><span class="string">          &lt;/ul&gt;</span></span><br><span class="line"><span class="string">          &lt;img src="</span>./imgs/line.png<span class="string">" v-cloak class="</span>switch_btn<span class="string">" alt="</span><span class="string">"&gt;</span></span><br><span class="line"><span class="string">        &lt;/div&gt;</span></span><br><span class="line"><span class="string">        &lt;!-- 歌曲信息容器 --&gt;</span></span><br><span class="line"><span class="string">        &lt;div class="</span>player_con<span class="string">" :class="</span>&#123;<span class="attr">playing</span>:isPlaying&#125;<span class="string">"&gt;</span></span><br><span class="line"><span class="string">          &lt;img src="</span>./imgs/player_bar.png<span class="string">" class="</span>play_bar<span class="string">" /&gt;</span></span><br><span class="line"><span class="string">          &lt;!-- 黑胶碟片 --&gt;</span></span><br><span class="line"><span class="string">          &lt;img src="</span>./imgs/disc.png<span class="string">" class="</span>disc autoRotate<span class="string">" /&gt;</span></span><br><span class="line"><span class="string">          &lt;img :src="</span>pictureId<span class="string">" class="</span>cover autoRotate<span class="string">" /&gt;</span></span><br><span class="line"><span class="string">        &lt;/div&gt;</span></span><br><span class="line"><span class="string">        &lt;!-- 评论容器 --&gt;</span></span><br><span class="line"><span class="string">        &lt;div class="</span>comment_wrapper<span class="string">"&gt;</span></span><br><span class="line"><span class="string">          &lt;h5 class='title'&gt;热门留言&lt;/h5&gt;</span></span><br><span class="line"><span class="string">          &lt;div class='comment_list' &gt;</span></span><br><span class="line"><span class="string">            &lt;dl v-for="</span>item <span class="keyword">in</span> localHotComments<span class="string">"&gt;</span></span><br><span class="line"><span class="string">              &lt;dt&gt;&lt;img :src="</span>item.user.avatarUrl<span class="string">" alt="</span><span class="string">"&gt;&lt;/dt&gt;</span></span><br><span class="line"><span class="string">              &lt;dd class="</span>name<span class="string">" v-cloak&gt;&#123;&#123;item.user.nickname&#125;&#125;&lt;/dd&gt;</span></span><br><span class="line"><span class="string">              &lt;dd class="</span>detail<span class="string">" v-cloak&gt;</span></span><br><span class="line"><span class="string">                &#123;&#123;item.content&#125;&#125;</span></span><br><span class="line"><span class="string">              &lt;/dd&gt;</span></span><br><span class="line"><span class="string">            &lt;/dl&gt;</span></span><br><span class="line"><span class="string">          &lt;/div&gt;</span></span><br><span class="line"><span class="string">          &lt;img src="</span>./imgs/line.png<span class="string">" class="</span>right_line<span class="string">"&gt;</span></span><br><span class="line"><span class="string">        &lt;/div&gt;</span></span><br><span class="line"><span class="string">      &lt;/div&gt;</span></span><br><span class="line"><span class="string">      &lt;div class="</span>audio_con<span class="string">"&gt;</span></span><br><span class="line"><span class="string">        &lt;audio ref='audio'  @play="</span>play<span class="string">" @pause="</span>pause<span class="string">" :src="</span>musicUrl<span class="string">" controls autoplay loop class="</span>myaudio<span class="string">"&gt;&lt;/audio&gt;</span></span><br><span class="line"><span class="string">      &lt;/div&gt;</span></span><br><span class="line"><span class="string">      &lt;div class="</span>video_con<span class="string">" v-show="</span>isShow<span class="string">"  style="</span>display: none;<span class="string">"&gt;</span></span><br><span class="line"><span class="string">        &lt;video :src="</span>mvUrl<span class="string">" controls="</span>controls<span class="string">"&gt;&lt;/video&gt;</span></span><br><span class="line"><span class="string">        &lt;div class="</span>mask<span class="string">" @click="</span>hide<span class="string">"&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">      &lt;/div&gt;</span></span><br><span class="line"><span class="string">    &lt;/div&gt;</span></span><br><span class="line"><span class="string">  &lt;/div&gt;</span></span><br><span class="line"><span class="string">  &lt;!-- 开发环境版本，包含了有帮助的命令行警告 --&gt;</span></span><br><span class="line"><span class="string">  &lt;script src="</span>https:<span class="comment">//cdn.jsdelivr.net/npm/vue/dist/vue.js"&gt;&lt;/script&gt;</span></span><br><span class="line">  &lt;!-- 官网提供的 axios 在线地址 --&gt;</span><br><span class="line">  &lt;script src=<span class="string">"https://unpkg.com/axios/dist/axios.min.js"</span>&gt;&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">	&lt;script src="./i</span>ndex.js<span class="string">"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="string">&lt;/body&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">页面项目</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/04/12/%E6%82%A6%E5%90%AC%E6%92%AD%E6%94%BE%E5%99%A8/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-css中透明度继承的问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/04/12/css%E4%B8%AD%E9%80%8F%E6%98%8E%E5%BA%A6%E7%BB%A7%E6%89%BF%E7%9A%84%E9%97%AE%E9%A2%98/" target="_blank">css中透明度继承的问题</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/04/12/css%E4%B8%AD%E9%80%8F%E6%98%8E%E5%BA%A6%E7%BB%A7%E6%89%BF%E7%9A%84%E9%97%AE%E9%A2%98/" class="archive-article-date">
-        <time datetime="2020-04-11T18:20:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-12</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="背景图透明度继承问题"><a href="#背景图透明度继承问题" class="headerlink" title="背景图透明度继承问题"></a>背景图透明度继承问题</h1><p>opacity是继承的，目前没有什么方法可以直接使子元素不继承父元素。</p>
-<p>我在实际项目中设父元素opacity为0.5，在子元素中设opacity设1，但是并没有得到想要的结果</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="css"><span class="selector-class">.father</span>&#123;</span></span><br><span class="line"><span class="css">    <span class="comment">/*。。。一些样式；*/</span></span></span><br><span class="line"><span class="css"><span class="selector-tag">opacity</span><span class="selector-pseudo">:0.5</span>;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="css"><span class="selector-class">.child</span>&#123;</span></span><br><span class="line"><span class="css">    <span class="comment">/*。。。一些样式；*/</span></span></span><br><span class="line">opacity：1；</span><br><span class="line">&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"father"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"child"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>这里有一种好的方法</p>
-<p><strong>设置一个和father样式一模一样的元素放在father下面作为子元素的一员</strong></p>
-<p><strong>再把背景图的设置放在新建的元素样式中包括opacity</strong></p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="css"><span class="selector-class">.father</span>,<span class="selector-class">.fatherSec</span>&#123;</span></span><br><span class="line"><span class="css">    <span class="comment">/*。。。一些样式；*/</span></span></span><br><span class="line">&#125;</span><br><span class="line"><span class="css"><span class="selector-class">.fatherSec</span>&#123;</span></span><br><span class="line"><span class="css"><span class="comment">/*背景图的样式*/</span> </span></span><br><span class="line"><span class="css"><span class="selector-tag">opacity</span><span class="selector-pseudo">:0.5</span>;</span></span><br><span class="line">&#125;    </span><br><span class="line"><span class="css"><span class="selector-class">.child</span>&#123;</span></span><br><span class="line"><span class="css">    <span class="comment">/*。。。一些样式；*/</span></span></span><br><span class="line">&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"father"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"fatherSec"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"child"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这种方法是可靠的</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">css</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/04/12/css%E4%B8%AD%E9%80%8F%E6%98%8E%E5%BA%A6%E7%BB%A7%E6%89%BF%E7%9A%84%E9%97%AE%E9%A2%98/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-vue闪动的问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/04/12/vue%E9%97%AA%E5%8A%A8%E7%9A%84%E9%97%AE%E9%A2%98/" target="_blank">vue闪动的问题</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/04/12/vue%E9%97%AA%E5%8A%A8%E7%9A%84%E9%97%AE%E9%A2%98/" class="archive-article-date">
-        <time datetime="2020-04-11T18:07:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-12</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="vue闪动问题的处理"><a href="#vue闪动问题的处理" class="headerlink" title="vue闪动问题的处理"></a>vue闪动问题的处理</h1><p>在实际vue项目中，经常会遇到初始化的时候画面会闪动。</p>
-<p>处理这些的方法一般是用v-cloak</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div v-cloak&gt;&#123;&#123;msg&#125;&#125;&lt;<span class="regexp">/div&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p>然后在css里面</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[v-clock]&#123;</span><br><span class="line">display:none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这种方法在插值表达式时有用，但是常常还是会出现闪动</p>
-<p><strong>彻底地解决这种闪动可以在dom树的根元素上加上<code>style=&quot;display:none&quot; v-bind:style=&quot;{display:&#39;block&#39;}&quot;</code>就可以</strong></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"app"</span> style=<span class="string">"display:none;"</span> v-bind:style=<span class="string">"&#123;display:'block'&#125;&gt;</span></span><br><span class="line"><span class="string">	&#123;&#123;msg&#125;&#125;</span></span><br><span class="line"><span class="string">&lt;/div&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/04/12/vue%E9%97%AA%E5%8A%A8%E7%9A%84%E9%97%AE%E9%A2%98/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/4/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/4/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -1380,7 +1458,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1388,15 +1466,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">node</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">react</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
