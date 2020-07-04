@@ -202,6 +202,106 @@
             
 
   
+    <article id="post-vuex的state属性" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/05/02/vuex%E7%9A%84state%E5%B1%9E%E6%80%A7/" target="_blank">vuex的state属性</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/05/02/vuex%E7%9A%84state%E5%B1%9E%E6%80%A7/" class="archive-article-date">
+        <time datetime="2020-05-02T09:12:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-02</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="vue的state属性及其使用"><a href="#vue的state属性及其使用" class="headerlink" title="vue的state属性及其使用"></a>vue的state属性及其使用</h1><p>state提供唯一的一个公共数据源，<br>所有共享的数据都要统一放到Store的State中进行存储。</p>
+<p>创建store数据源，提供唯一的数据源</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> store=<span class="keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">    state:&#123;</span><br><span class="line">        count:<span class="number">0</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="访问方法"><a href="#访问方法" class="headerlink" title="访问方法"></a>访问方法</h3><p>1.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.$store.state.全局数据名称</span><br></pre></td></tr></table></figure>
+
+<p>其中在template标签中this可以使用</p>
+<p>2.</p>
+<p>首先从vuex中按需导入mapState函数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;mapstate&#125; <span class="keyword">from</span> <span class="string">'vuex'</span></span><br></pre></td></tr></table></figure>
+
+<p>然后，通过刚才导入的mapstate函数，将当前组件需要的全局数据，映射为当前组件的computed计算属性</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">computed:&#123;</span><br><span class="line">    ...mapstate(&#123;<span class="string">'count'</span>&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/05/02/vuex%E7%9A%84state%E5%B1%9E%E6%80%A7/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-vuex的一般使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1097,109 +1197,6 @@
 
 
   
-    <article id="post-vue脚手架的使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/04/21/vue%E8%84%9A%E6%89%8B%E6%9E%B6%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_blank">vue脚手架的使用</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/04/21/vue%E8%84%9A%E6%89%8B%E6%9E%B6%E7%9A%84%E4%BD%BF%E7%94%A8/" class="archive-article-date">
-        <time datetime="2020-04-21T11:40:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-21</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="vue脚手架使用感悟"><a href="#vue脚手架使用感悟" class="headerlink" title="vue脚手架使用感悟"></a>vue脚手架使用感悟</h1><p>对于一个项目，自己动手创建相关配置实在是有点麻烦</p>
-<p>vue给了我们一个脚手架，脚手架事先配置好了相关的文件，还可以配置插件，</p>
-<p>在开发中十分方便</p>
-<h4 id="vue脚手架有种方式创建模板，这里介绍三种常见的："><a href="#vue脚手架有种方式创建模板，这里介绍三种常见的：" class="headerlink" title="vue脚手架有种方式创建模板，这里介绍三种常见的："></a>vue脚手架有种方式创建模板，这里介绍三种常见的：</h4><p>1.基于交互式命令行的方式，创建新版vue项目(就是在命令面板里面创建)<br>vue create my-project<br>2.基于图形化界面的方式，创建新版vue项目（推荐使用）<br>vue ui<br>3.基于2.x的旧版本模板，创建旧版的vue项目<br>npm install -g @vue/cli-init<br>vue init webpack my-project</p>
-<h5 id="其中最常用的就是图形化界面了"><a href="#其中最常用的就是图形化界面了" class="headerlink" title="其中最常用的就是图形化界面了"></a>其中最常用的就是图形化界面了</h5><p>具体的操作就不描述了，根据英文提示来就行了。</p>
-<h2 id="脚手架生成项目的结构"><a href="#脚手架生成项目的结构" class="headerlink" title="脚手架生成项目的结构"></a>脚手架生成项目的结构</h2><p>node_modules——依赖包目录<br>public————静态资源目录<br>src—————组件源码目录<br>    assets———–资源、样式表、图片<br>    components——-组件<br>    views————视图组件<br>    App.vue———-项目根组件<br>    main.js———-项目的打包入口文件<br>    router.js——–路由相关的配置<br>babel.config.js—babel配置文件<br>eslintrc.js——-eslint语法相关的文件<br>gitignore———git的忽略文件<br>package.json——包管理文件<br>postcss.config.js-postcss的配置文件</p>
-<h2 id="vue自定义配置"><a href="#vue自定义配置" class="headerlink" title="vue自定义配置"></a>vue自定义配置</h2><h4 id="1-通过package-json配置-主要用来管理包的配置信息，不推荐这种方式"><a href="#1-通过package-json配置-主要用来管理包的配置信息，不推荐这种方式" class="headerlink" title="1.通过package.json配置(主要用来管理包的配置信息，不推荐这种方式)"></a>1.通过package.json配置(主要用来管理包的配置信息，不推荐这种方式)</h4><p>比如：设置webpack-dev-server</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"vue"</span>:&#123;</span><br><span class="line">    <span class="string">"devServer"</span>:&#123;</span><br><span class="line">        <span class="string">"port"</span>:<span class="string">"8888"</span>,</span><br><span class="line">        <span class="string">"open"</span>:<span class="string">"true"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="2-通过在根目录自定义vue-config-js配置文件"><a href="#2-通过在根目录自定义vue-config-js配置文件" class="headerlink" title="2.通过在根目录自定义vue.config.js配置文件"></a>2.通过在根目录自定义vue.config.js配置文件</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports=&#123;</span><br><span class="line">    devServer:&#123;</span><br><span class="line">        <span class="string">"port"</span>:<span class="string">"8888"</span>,</span><br><span class="line">        <span class="string">"open"</span>:<span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h2 id="之后的计划"><a href="#之后的计划" class="headerlink" title="之后的计划"></a>之后的计划</h2><p>从今天开始，我会根据网上的电商后台管理系统的构建来学习，但是这个项目已经烂了，我也不是培训出来的。我想完整的做一个项目总会有好处的。之后在学习vuex，然后巩固vue全家桶之后学习react去了。</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日志</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/04/21/vue%E8%84%9A%E6%89%8B%E6%9E%B6%E7%9A%84%E4%BD%BF%E7%94%A8/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
@@ -1337,15 +1334,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">css</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
               </li>
              
               <li class="article-tag-list-item">
