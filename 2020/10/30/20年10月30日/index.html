@@ -6,21 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://yuchenbin1.github.io">
-  <title>对象的遍历 | ycb的博客</title>
+  <title>20年10月30日 | ycb的博客</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="对象属性的提取方法123456789101112131415161718192021222324252627&lt;!DOCTYPE html&gt;&lt;html lang&#x3D;&quot;en&quot;&gt;&lt;head&gt;    &lt;meta charset&#x3D;&quot;UTF-8&quot;&gt;    &lt;meta name&#x3D;&quot;viewport&quot; content&#x3D;&quot;width&#x3D;device-width, i">
+  <meta name="description" content="事件销毁在vue处理document.onkeydown事件的时候需要把该事件在具体的某个页面进行实现，否则在document中是全局触发的，解决这个问题的方法 方法： 用vue的生命周期destoryed销毁该监听事件 1234destroyed()&amp;#123;	const that&#x3D;this;	document.removeEventListener(&#39;keydown&amp;#39">
 <meta property="og:type" content="article">
-<meta property="og:title" content="对象的遍历">
-<meta property="og:url" content="https://yuchenbin1.github.io/2020/05/08/%E5%AF%B9%E8%B1%A1%E7%9A%84%E9%81%8D%E5%8E%86/index.html">
+<meta property="og:title" content="20年10月30日">
+<meta property="og:url" content="https://yuchenbin1.github.io/2020/10/30/20%E5%B9%B410%E6%9C%8830%E6%97%A5/index.html">
 <meta property="og:site_name" content="ycb的博客">
-<meta property="og:description" content="对象属性的提取方法123456789101112131415161718192021222324252627&lt;!DOCTYPE html&gt;&lt;html lang&#x3D;&quot;en&quot;&gt;&lt;head&gt;    &lt;meta charset&#x3D;&quot;UTF-8&quot;&gt;    &lt;meta name&#x3D;&quot;viewport&quot; content&#x3D;&quot;width&#x3D;device-width, i">
+<meta property="og:description" content="事件销毁在vue处理document.onkeydown事件的时候需要把该事件在具体的某个页面进行实现，否则在document中是全局触发的，解决这个问题的方法 方法： 用vue的生命周期destoryed销毁该监听事件 1234destroyed()&amp;#123;	const that&#x3D;this;	document.removeEventListener(&#39;keydown&amp;#39">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-05-08T07:50:41.000Z">
-<meta property="article:modified_time" content="2020-05-08T07:52:44.497Z">
+<meta property="article:published_time" content="2020-10-30T12:34:38.000Z">
+<meta property="article:modified_time" content="2020-10-30T12:47:14.117Z">
 <meta property="article:author" content="ycb">
-<meta property="article:tag" content="react">
+<meta property="article:tag" content="日志">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="ycb的博客" type="application/atom+xml">
@@ -198,14 +198,14 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-对象的遍历" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-20年10月30日" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
     <h1 class="article-title" itemprop="name">
-      对象的遍历
+      20年10月30日
     </h1>
   
 
@@ -217,8 +217,8 @@
               <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
         </span>
 
-<a href="/2020/05/08/%E5%AF%B9%E8%B1%A1%E7%9A%84%E9%81%8D%E5%8E%86/" class="archive-article-date">
-        <time datetime="2020-05-08T07:50:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-08</time>
+<a href="/2020/10/30/20%E5%B9%B410%E6%9C%8830%E6%97%A5/" class="archive-article-date">
+        <time datetime="2020-10-30T12:34:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-30</time>
 </a>
 
   
@@ -231,7 +231,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">505字</span>
+      <span class="post-count">82字</span>
     </span>
   </span>
 
@@ -240,7 +240,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">2分</span>
+      <span class="post-count">1分</span>
     </span>
   </span>
 </div>
@@ -251,9 +251,10 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h2 id="对象属性的提取方法"><a href="#对象属性的提取方法" class="headerlink" title="对象属性的提取方法"></a>对象属性的提取方法</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">    <span class="keyword">var</span> obj=&#123;</span></span><br><span class="line"><span class="actionscript">        name:<span class="string">"小明同学"</span>,</span></span><br><span class="line">        age:18</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(obj.name);</span></span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(obj[<span class="string">"age"</span>]);</span></span><br><span class="line"><span class="actionscript">    <span class="comment">//两者的区别</span></span></span><br><span class="line"><span class="actionscript">    <span class="comment">//点的方式比较方便</span></span></span><br><span class="line"><span class="actionscript">    <span class="comment">//如果key是一个变量的话，就不能使用点这种方式来取值</span></span></span><br><span class="line"></span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(<span class="built_in">Object</span>.keys(obj))<span class="comment">//返回一个数组类型的数据，它得知是对象中的键（key）</span></span></span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(<span class="built_in">Object</span>.values(obj))<span class="comment">//返回一个数组类型的数据，返回的内容是对象的值（value）</span></span></span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(<span class="built_in">Object</span>.entries(obj))<span class="comment">//返回的是键值对形式的数组类型的数据，这里返回[["name","小明同学"],["age",18]]</span></span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="对象的遍历"><a href="#对象的遍历" class="headerlink" title="对象的遍历"></a>对象的遍历</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>环境的搭建<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../00-01环境的搭建/node_modules/react/umd/react.development.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../00-01环境的搭建/node_modules/react-dom/umd/react-dom.development.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../00-01环境的搭建/node_modules/babel-standalone/babel.min.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"demoReact"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/babel"</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">let</span> obj=&#123;</span></span><br><span class="line"><span class="actionscript">        name:<span class="string">"zhangsan"</span>,</span></span><br><span class="line">        age:18,</span><br><span class="line"><span class="actionscript">        sex:<span class="string">"男"</span></span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="actionscript">    <span class="comment">//console.log(Object.keys(obj))//返回一个数组类型的数据，它得知是对象中的键（key）</span></span></span><br><span class="line"><span class="actionscript">    <span class="comment">//console.log(Object.values(obj))//返回一个数组类型的数据，返回的内容是对象的值（value）</span></span></span><br><span class="line"><span class="actionscript">    <span class="comment">//console.log(Object.entries(obj))//返回的是键值对形式的数组类型的数据，这里返回[["name","小明同学"],["age",18]]</span></span></span><br><span class="line"><span class="javascript">    <span class="keyword">let</span> myDom=<span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span></span><br><span class="line"><span class="javascript">            &#123;<span class="built_in">Object</span>.keys(obj).map(<span class="function">(<span class="params">v,i</span>)=&gt;</span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">p</span> <span class="attr">key</span>=<span class="string">&#123;i&#125;</span>&gt;</span>遍历的属性是:&#123;v&#125;------遍历出来的值是:&#123;obj[v]&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span></span><br><span class="line">        &#125;)&#125;</span><br><span class="line"><span class="actionscript">    &lt;/div&gt;<span class="comment">//注意最好要有key</span></span></span><br><span class="line"><span class="javascript">        ReactDOM.render(myDom,<span class="built_in">document</span>.getElementById(<span class="string">'demoReact'</span>));</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+    <h1 id="事件销毁"><a href="#事件销毁" class="headerlink" title="事件销毁"></a>事件销毁</h1><p>在<code>vue</code>处理<code>document.onkeydown</code>事件的时候需要把该事件在具体的某个页面进行实现，否则在<code>document</code>中是全局触发的，解决这个问题的方法</p>
+<p><strong>方法</strong>：</p>
+<p>用<code>vue</code>的生命周期<code>destoryed</code>销毁该监听事件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">destroyed()&#123;</span><br><span class="line">	const that&#x3D;this;</span><br><span class="line">	document.removeEventListener(&#39;keydown&#39;,that.readCardId)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
     
@@ -301,7 +302,7 @@
         </li>
         <li>
           <strong>本文链接：</strong>
-          <a href="https:/yuchenbin1.github.io/2020/05/08/对象的遍历/" title="对象的遍历" target="_blank">https:/yuchenbin1.github.io/2020/05/08/对象的遍历/</a>
+          <a href="https:/yuchenbin1.github.io/2020/10/30/20年10月30日/" title="20年10月30日" target="_blank">https:/yuchenbin1.github.io/2020/10/30/20年10月30日/</a>
         </li>
         
         <li>
@@ -323,7 +324,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">react</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日志</a>
         		</li>
       		
 		</ul>
@@ -379,7 +380,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://yuchenbin1.github.io/2020/05/08/%E5%AF%B9%E8%B1%A1%E7%9A%84%E9%81%8D%E5%8E%86/" alt="微信分享二维码"> -->
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://yuchenbin1.github.io/2020/10/30/20%E5%B9%B410%E6%9C%8830%E6%97%A5/" alt="微信分享二维码"> -->
     </div>
 </div>
 
@@ -394,18 +395,9 @@
 
 <nav id="article-nav">
   
-    <a href="/2020/05/08/%E7%BB%84%E4%BB%B6/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          组件
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/05/08/%E5%88%97%E8%A1%A8%E7%9A%84%E4%BD%BF%E7%94%A8/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">列表的使用</div>
+    <a href="/2020/10/29/20%E5%B9%B410%E6%9C%8829%E6%97%A5/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">20年10月29日</div>
       <i class="icon-circle-right"></i>
     </a>
   
