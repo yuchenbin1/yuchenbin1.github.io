@@ -202,6 +202,112 @@
             
 
   
+    <article id="post-cookie的时间到期设置" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/04/27/cookie%E7%9A%84%E6%97%B6%E9%97%B4%E5%88%B0%E6%9C%9F%E8%AE%BE%E7%BD%AE/" target="_blank">cookie的时间到期设置</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/04/27/cookie%E7%9A%84%E6%97%B6%E9%97%B4%E5%88%B0%E6%9C%9F%E8%AE%BE%E7%BD%AE/" class="archive-article-date">
+        <time datetime="2020-04-27T13:48:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-27</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="设置cookie的到期时间"><a href="#设置cookie的到期时间" class="headerlink" title="设置cookie的到期时间"></a>设置cookie的到期时间</h1><p>1.** 使用Cookie的: Expires 属性. 它可以设置cookie的过期时间. 下面的代码表示id这条cookie的过期时间是2015年10月21日早上7点28分;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Set-Cookie: id&#x3D;a3fWa; Expires&#x3D;Wed, 21 Oct 2015 07:28:00 GMT;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>2.</strong> 使用Cookie的: Max-Age 属性. 它可以指定从现在开始Cookie存在的秒数. 秒数过完则cookie过期.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Set-Cookie: id&#x3D;a3fWa; Max-Age&#x3D;86400</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>注意:</strong> </p>
+<p><strong>1.</strong> Expires设置的过期时间是UTC格式, 可以用 Date.prototype.toUTCString()转换.</p>
+<p><strong>2.</strong> Expires设置的时间是以浏览器本地时间作为参照的, 这样同一条cookie在不同设备上的失效时间其实是不一样的.</p>
+<p><strong>3.</strong> 如果一条cookie既没有设置Expires 也没有设置 Max-Age, 则这条cookie变成了session cookie, 这时cookie的行为和session的类似.</p>
+<p><strong>4.</strong> 如果同时存在 Expires 和 Max-Age, 则优先以Max-Age设置的值为准.</p>
+<h1 id="cookie与localStorage、sessionStorage"><a href="#cookie与localStorage、sessionStorage" class="headerlink" title="cookie与localStorage、sessionStorage"></a>cookie与localStorage、sessionStorage</h1><ol>
+<li>大小差异：cookie一般比较小，大概在4KB左右；webStorage在5MB左右</li>
+<li>到期时间差异：cookie可以通过expires或者Max-Age进行设置；sessionStorage在浏览器关闭后销毁；localStorage会永远保存</li>
+<li>存储位置差异：cookie在浏览器与服务器之间来回传递 ；webStorage在客户端本地</li>
+<li>作用域差异：sessionStorage在不同的浏览器窗口中不能共享 ； localStorage在所有同源窗口中都是共享的；cookie也是在所有同源窗口中都是共享的 </li>
+</ol>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/04/27/cookie%E7%9A%84%E6%97%B6%E9%97%B4%E5%88%B0%E6%9C%9F%E8%AE%BE%E7%BD%AE/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-四种排序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1107,110 +1213,6 @@
     
     <p class="article-more-link">
       <a class="article-more-a" href="/2020/04/19/webpack%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%8A%A8%E6%80%81%E6%89%93%E5%8C%85/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-for-in与for-of的区别" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/04/18/for-in%E4%B8%8Efor-of%E7%9A%84%E5%8C%BA%E5%88%AB/" target="_blank">for/in与for/of的区别</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/04/18/for-in%E4%B8%8Efor-of%E7%9A%84%E5%8C%BA%E5%88%AB/" class="archive-article-date">
-        <time datetime="2020-04-18T14:38:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-18</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="for-in与for-of的区别"><a href="#for-in与for-of的区别" class="headerlink" title="for/in与for/of的区别"></a>for/in与for/of的区别</h1><p>遍历主要方法有：</p>
-<ol>
-<li>for</li>
-<li>for/in</li>
-<li>for/of</li>
-<li>forEach</li>
-<li>map</li>
-<li>……(一些特别遍历比如some,every,filter,reduce,ES6中的values、entries、keys，Set和Map等)</li>
-</ol>
-<h3 id="其他的我就不一一介绍了，主要讲一下for-in和for-of"><a href="#其他的我就不一一介绍了，主要讲一下for-in和for-of" class="headerlink" title="其他的我就不一一介绍了，主要讲一下for/in和for/of"></a>其他的我就不一一介绍了，主要讲一下for/in和for/of</h3><p><strong>for in更适合遍历对象，不要使用for in遍历数组。</strong>使用for in 也可以遍历数组，但是会存在以下问题：</p>
-<ol>
-<li><strong>index索引为字符串型数字，不能直接进行几何运算</strong></li>
-<li><strong>使用for in会遍历数组所有的可枚举属性，包括原型。例如上栗的原型方法method和name属性</strong></li>
-<li><strong>遍历顺序有可能不是按照实际数组的内部顺序</strong></li>
-</ol>
-<p>更简单的正确的遍历数组ES6中的for of更胜一筹。</p>
-<p>for of遍历的只是数组内的元素，而不包括数组的原型属性method和索引name</p>
-<p>for in遍历的是数组的索引（即键名），而for of遍历的是数组元素值。</p>
-<p>通常用for in来遍历对象的键名。</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/04/18/for-in%E4%B8%8Efor-of%E7%9A%84%E5%8C%BA%E5%88%AB/">展开全文 >></a>
     </p>
     
 
