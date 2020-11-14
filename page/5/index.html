@@ -202,6 +202,105 @@
             
 
   
+    <article id="post-vue的插槽" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/04/14/vue%E7%9A%84%E6%8F%92%E6%A7%BD/" target="_blank">vue的插槽</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/04/14/vue%E7%9A%84%E6%8F%92%E6%A7%BD/" class="archive-article-date">
+        <time datetime="2020-04-14T13:37:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-14</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="vue插槽的一般用法"><a href="#vue插槽的一般用法" class="headerlink" title="vue插槽的一般用法"></a>vue插槽的一般用法</h1><p>插槽主要是把父组件中的内容传递到子组件的指定位置中</p>
+<p>通过子组件中的<code>&lt;slot&gt;&lt;/slot&gt;</code>来确定具体的位置</p>
+<p>如果父组件没有提供内容则取子组件中<code>&lt;slot&gt;默认内容&lt;/slot&gt;</code>的内容</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">    &lt;meta name=<span class="string">"viewport"</span> content=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span><br><span class="line">    &lt;title&gt;组件插槽&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- 信息‘有错误’传入到slot的组件里面 --&gt;</span><br><span class="line">    &lt;!-- 每个slot组件都会有传入的信息 --&gt;</span><br><span class="line">    &lt;!-- 如果没有传入信息则显示的是默认内容 --&gt;</span><br><span class="line">    &lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">        &lt;alert-box&gt;有错误&lt;<span class="regexp">/alert-box&gt;</span></span><br><span class="line"><span class="regexp">        &lt;alert-box&gt;have a bug&lt;/</span>alert-box&gt;</span><br><span class="line">        &lt;alert-box&gt;&lt;<span class="regexp">/alert-box&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">    &lt;/</span>div&gt;</span><br><span class="line">    &lt;script src=<span class="string">"https://cdn.jsdelivr.net/npm/vue/dist/vue.js"</span>&gt;&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">    &lt;script&gt;</span></span><br><span class="line"><span class="regexp">        Vue.component('alert-box',&#123;</span></span><br><span class="line"><span class="regexp">            template:`</span></span><br><span class="line"><span class="regexp">            &lt;div&gt;</span></span><br><span class="line"><span class="regexp">            &lt;slot&gt;&lt;/</span>slot&gt;</span><br><span class="line">            &lt;strong&gt;ERROR:&lt;<span class="regexp">/strong&gt;</span></span><br><span class="line"><span class="regexp">            &lt;slot&gt;&lt;/</span>slot&gt;</span><br><span class="line">            &lt;slot&gt;默认内容&lt;<span class="regexp">/slot&gt;</span></span><br><span class="line"><span class="regexp">            &lt;/</span>div&gt;</span><br><span class="line">            <span class="string">`</span></span><br><span class="line"><span class="string">        &#125;);</span></span><br><span class="line"><span class="string">        var vm=new Vue(&#123;</span></span><br><span class="line"><span class="string">            el:"#app",</span></span><br><span class="line"><span class="string">            data:&#123;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string">        &#125;)</span></span><br><span class="line"><span class="string">    &lt;/script&gt;</span></span><br><span class="line"><span class="string">&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="插槽具名化"><a href="#插槽具名化" class="headerlink" title="插槽具名化"></a>插槽具名化</h2><p>用于在符组件中传递的内容插入子组件中的指定位置</p>
+<p>在子组件<code>&lt;slot name=&quot;名字&quot;&gt;&lt;/slot&gt;</code>中用name来命名</p>
+<p>在父组件中用slot=”名字”的方式指定位置</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">    &lt;meta name=<span class="string">"viewport"</span> content=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;!-- 具名化插槽指的是根据名称匹配 --&gt;</span><br><span class="line">    &lt;!-- template标签可以临时包裹 --&gt;</span><br><span class="line">    &lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">        &lt;base-layout&gt;</span><br><span class="line">            &lt;p slot=<span class="string">"header"</span>&gt;主要标题&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">            &lt;p&gt;主要内容1&lt;/</span>p&gt;</span><br><span class="line">            &lt;p&gt;主要内容<span class="number">2</span>&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">            &lt;p slot="footer"&gt;底部信息&lt;/</span>p&gt;</span><br><span class="line">        &lt;<span class="regexp">/base-layout&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">        &lt;base-layout&gt;</span></span><br><span class="line"><span class="regexp">            &lt;template slot="header"&gt;</span></span><br><span class="line"><span class="regexp">                &lt;p &gt;主要标题&lt;/</span>p&gt;</span><br><span class="line">                &lt;p&gt;主要内容<span class="number">1</span>&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">            &lt;/</span>template&gt;</span><br><span class="line">            &lt;p&gt;主要内容<span class="number">2</span>&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">            &lt;p slot="footer"&gt;底部信息&lt;/</span>p&gt;</span><br><span class="line">        &lt;<span class="regexp">/base-layout&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>div&gt;</span><br><span class="line">    &lt;script src=<span class="string">"https://cdn.jsdelivr.net/npm/vue/dist/vue.js"</span>&gt;&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">    &lt;script&gt;</span></span><br><span class="line"><span class="regexp">        Vue.component('base-layout',&#123;</span></span><br><span class="line"><span class="regexp">            template:`</span></span><br><span class="line"><span class="regexp">                &lt;div&gt;</span></span><br><span class="line"><span class="regexp">                    &lt;header&gt;</span></span><br><span class="line"><span class="regexp">                        &lt;slot name="header"&gt;&lt;/</span>slot&gt;    </span><br><span class="line">                    &lt;<span class="regexp">/header&gt;    </span></span><br><span class="line"><span class="regexp">                    &lt;main&gt;</span></span><br><span class="line"><span class="regexp">                        &lt;slot&gt;&lt;/</span>slot&gt;    </span><br><span class="line">                    &lt;<span class="regexp">/main&gt;</span></span><br><span class="line"><span class="regexp">                    &lt;footer&gt;</span></span><br><span class="line"><span class="regexp">                        &lt;slot name="footer"&gt;&lt;/</span>slot&gt;    </span><br><span class="line">                    &lt;<span class="regexp">/footer&gt;</span></span><br><span class="line"><span class="regexp">                &lt;/</span>div&gt;</span><br><span class="line">            <span class="string">`</span></span><br><span class="line"><span class="string">        &#125;)</span></span><br><span class="line"><span class="string">        var vm=new Vue(&#123;</span></span><br><span class="line"><span class="string">            el:"#app",</span></span><br><span class="line"><span class="string">            data:&#123;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string">        &#125;)</span></span><br><span class="line"><span class="string">    &lt;/script&gt;</span></span><br><span class="line"><span class="string">&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="作用域插槽"><a href="#作用域插槽" class="headerlink" title="作用域插槽"></a>作用域插槽</h2><p>但我们想要通过父组件对子组件的内容进行加工处理时，需要作用域插槽</p>
+<p>slot-scope属性代表的是子组件中的属性集合</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">    &lt;meta name=<span class="string">"viewport"</span> content=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">    &lt;style&gt;</span></span><br><span class="line"><span class="regexp">        .gaoliang&#123;</span></span><br><span class="line"><span class="regexp">            color:yellow;</span></span><br><span class="line"><span class="regexp">        &#125;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>style&gt;</span><br><span class="line">&lt;<span class="regexp">/head&gt;</span></span><br><span class="line"><span class="regexp">&lt;body&gt;</span></span><br><span class="line"><span class="regexp">    &lt;!-- 作用域插槽</span></span><br><span class="line"><span class="regexp">    父组件对子组件的内容进行加工处理 --&gt;</span></span><br><span class="line"><span class="regexp">        &lt;div id="app"&gt;</span></span><br><span class="line"><span class="regexp">            &lt;fruit-list :list='list'&gt;</span></span><br><span class="line"><span class="regexp">                &lt;template slot-scope='slotProps'&gt;&lt;!--slotProps表示属性数组--&gt;</span></span><br><span class="line"><span class="regexp">                    &lt;strong v-if='slotProps.info.id==2' class="gaoliang"&gt;&#123;&#123;slotProps.info.name&#125;&#125;&lt;/</span>strong&gt;</span><br><span class="line">                    &lt;strong v-<span class="keyword">else</span>&gt;&#123;&#123;slotProps.info.name&#125;&#125;&lt;<span class="regexp">/strong&gt;</span></span><br><span class="line"><span class="regexp">                &lt;/</span>template&gt;</span><br><span class="line">            &lt;<span class="regexp">/fruit-list&gt;</span></span><br><span class="line"><span class="regexp">        &lt;/</span>div&gt;</span><br><span class="line">    &lt;script src=<span class="string">"https://cdn.jsdelivr.net/npm/vue/dist/vue.js"</span>&gt;&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">    &lt;script&gt;</span></span><br><span class="line"><span class="regexp">        Vue.component('fruit-list',&#123;</span></span><br><span class="line"><span class="regexp">            props:['list'],</span></span><br><span class="line"><span class="regexp">            template:`</span></span><br><span class="line"><span class="regexp">                &lt;div&gt;</span></span><br><span class="line"><span class="regexp">                    &lt;li :key="list.id" v-for="item in list"&gt;</span></span><br><span class="line"><span class="regexp">                        &lt;slot :info='item'&gt;&#123;&#123;item.name&#125;&#125;&lt;/</span>slot&gt;</span><br><span class="line">                    &lt;<span class="regexp">/li&gt;</span></span><br><span class="line"><span class="regexp">                &lt;/</span>div&gt;</span><br><span class="line">            <span class="string">`</span></span><br><span class="line"><span class="string">        &#125;)</span></span><br><span class="line"><span class="string">        var vm=new Vue(&#123;</span></span><br><span class="line"><span class="string">            el:"#app",</span></span><br><span class="line"><span class="string">            data:&#123;</span></span><br><span class="line"><span class="string">                list:[&#123;</span></span><br><span class="line"><span class="string">                    id:1,</span></span><br><span class="line"><span class="string">                    name:'apple'</span></span><br><span class="line"><span class="string">                &#125;,&#123;</span></span><br><span class="line"><span class="string">                    id:2,</span></span><br><span class="line"><span class="string">                    name:'orange'</span></span><br><span class="line"><span class="string">                &#125;,&#123;</span></span><br><span class="line"><span class="string">                    id:3,</span></span><br><span class="line"><span class="string">                    name:'melon'</span></span><br><span class="line"><span class="string">                &#125;</span></span><br><span class="line"><span class="string">                ]</span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string">        &#125;)</span></span><br><span class="line"><span class="string">    &lt;/script&gt;</span></span><br><span class="line"><span class="string">&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/04/14/vue%E7%9A%84%E6%8F%92%E6%A7%BD/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-20年4月13日" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1076,94 +1175,6 @@
 
 
   
-    <article id="post-vue的生命周期" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/04/06/vue%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" target="_blank">vue的生命周期</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/04/06/vue%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" class="archive-article-date">
-        <time datetime="2020-04-06T14:15:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-06</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="vue的生命周期"><a href="#vue的生命周期" class="headerlink" title="vue的生命周期"></a>vue的生命周期</h1><p>1.挂载（初始化相关属性）<br>            beforeCreate  创建前<br>            created       创建<br>            beforeMount   组织前<br>            mounted       组织(重要，<strong>初始化完成，模板已经被替换了</strong>)<br>2.更新（元素或组件的变更操作）<br>            beforeUpdate  更新前<br>            updated       更新<br>3.销毁（销毁相关属性）<br>            beforeDestroy 销毁前<br>            destroyed     销毁</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=<span class="string">"utf-8"</span>&gt;</span><br><span class="line">		&lt;title&gt;&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;!-- 生命周期</span><br><span class="line">		<span class="number">1.</span>挂载（初始化相关属性）</span><br><span class="line">			beforeCreate  创建前</span><br><span class="line">			created       创建</span><br><span class="line">			beforeMount   组织前</span><br><span class="line">			mounted       组织(重要，初始化完成，模板已经被替换了)</span><br><span class="line">		<span class="number">2.</span>更新（元素或组件的变更操作）</span><br><span class="line">			beforeUpdate  更新前</span><br><span class="line">			updated       更新</span><br><span class="line">		<span class="number">3.</span>销毁（销毁相关属性）</span><br><span class="line">			beforeDestroy 销毁前</span><br><span class="line">			destroyed     销毁</span><br><span class="line">		--&gt;</span><br><span class="line">		</span><br><span class="line">		&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">			&lt;div&gt;&#123;&#123;msg&#125;&#125;&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">			&lt;button @click="update"&gt;更新&lt;/</span>button&gt;</span><br><span class="line">			&lt;button @click=<span class="string">"destroy"</span>&gt;销毁&lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp">		&lt;/</span>div&gt;</span><br><span class="line">		&lt;script src=<span class="string">"../000-vue.js/vue.js"</span>&gt;&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">		&lt;script&gt;</span></span><br><span class="line"><span class="regexp">			var vm=new Vue(&#123;</span></span><br><span class="line"><span class="regexp">				el:'#app',</span></span><br><span class="line"><span class="regexp">				data:&#123;</span></span><br><span class="line"><span class="regexp">					msg:'生命周期'</span></span><br><span class="line"><span class="regexp">				&#125;,</span></span><br><span class="line"><span class="regexp">				methods:&#123;</span></span><br><span class="line"><span class="regexp">					update:function()&#123;</span></span><br><span class="line"><span class="regexp">						this.msg='hello';</span></span><br><span class="line"><span class="regexp">					&#125;,</span></span><br><span class="line"><span class="regexp">					destroy:function()&#123;</span></span><br><span class="line"><span class="regexp">						this.$destroy();</span></span><br><span class="line"><span class="regexp">					&#125;,</span></span><br><span class="line"><span class="regexp">				&#125;,</span></span><br><span class="line"><span class="regexp">				beforeCreate:function()&#123;</span></span><br><span class="line"><span class="regexp">					console.log('beforeCreate');</span></span><br><span class="line"><span class="regexp">				&#125;,</span></span><br><span class="line"><span class="regexp">				created:function()&#123;</span></span><br><span class="line"><span class="regexp">					console.log('created');</span></span><br><span class="line"><span class="regexp">				&#125;,</span></span><br><span class="line"><span class="regexp">				beforeMount:function()&#123;</span></span><br><span class="line"><span class="regexp">					console.log('beforeMount');</span></span><br><span class="line"><span class="regexp">				&#125;,</span></span><br><span class="line"><span class="regexp">				mounted:function()&#123;</span></span><br><span class="line"><span class="regexp">					console.log('mounted');</span></span><br><span class="line"><span class="regexp">				&#125;,</span></span><br><span class="line"><span class="regexp">				beforeUpdate:function()&#123;</span></span><br><span class="line"><span class="regexp">					console.log('beforeUpdate');</span></span><br><span class="line"><span class="regexp">				&#125;,</span></span><br><span class="line"><span class="regexp">				updated:function()&#123;</span></span><br><span class="line"><span class="regexp">					console.log('updated');</span></span><br><span class="line"><span class="regexp">				&#125;,</span></span><br><span class="line"><span class="regexp">				beforeDestroy:function()&#123;</span></span><br><span class="line"><span class="regexp">					console.log('beforeDestroy');</span></span><br><span class="line"><span class="regexp">				&#125;,</span></span><br><span class="line"><span class="regexp">				destroyed:function()&#123;</span></span><br><span class="line"><span class="regexp">					console.log('destroyed');</span></span><br><span class="line"><span class="regexp">				&#125;,</span></span><br><span class="line"><span class="regexp">			&#125;)</span></span><br><span class="line"><span class="regexp">		&lt;/</span>script&gt;</span><br><span class="line">	&lt;<span class="regexp">/body&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>html&gt;</span><br></pre></td></tr></table></figure>
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/04/06/vue%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/4/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/6/">Next &amp;raquo;</a>
@@ -1305,7 +1316,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">node</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1313,7 +1324,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1321,11 +1332,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
