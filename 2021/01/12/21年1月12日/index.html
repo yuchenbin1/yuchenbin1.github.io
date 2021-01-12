@@ -6,18 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://yuchenbin1.github.io">
-  <title>Archives | ycb的博客</title>
+  <title>21年1月12日 | ycb的博客</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="这是我的个人技术博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="ycb的博客">
-<meta property="og:url" content="https://yuchenbin1.github.io/archives/index.html">
+  <meta name="description" content="穿梭框加上排序功能使用element UI中的el-transfer穿梭框设置表格头，但是其没有排序的功能，为此在右侧加上两个按钮用于调整表格头的显示 1234567891011121314151617181920212223242526272829303132&lt;el-row&gt;    &lt;el-col :span&#x3D;&quot;20&quot;&gt;     &lt;div class&#x3D;&quot;chuanS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="21年1月12日">
+<meta property="og:url" content="https://yuchenbin1.github.io/2021/01/12/21%E5%B9%B41%E6%9C%8812%E6%97%A5/index.html">
 <meta property="og:site_name" content="ycb的博客">
-<meta property="og:description" content="这是我的个人技术博客">
+<meta property="og:description" content="穿梭框加上排序功能使用element UI中的el-transfer穿梭框设置表格头，但是其没有排序的功能，为此在右侧加上两个按钮用于调整表格头的显示 1234567891011121314151617181920212223242526272829303132&lt;el-row&gt;    &lt;el-col :span&#x3D;&quot;20&quot;&gt;     &lt;div class&#x3D;&quot;chuanS">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-01-12T13:24:28.000Z">
+<meta property="article:modified_time" content="2021-01-12T13:26:48.377Z">
 <meta property="article:author" content="ycb">
+<meta property="article:tag" content="日志">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="ycb的博客" type="application/atom+xml">
@@ -195,41 +198,136 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-21年1月12日" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
   
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
+    <h1 class="article-title" itemprop="name">
+      21年1月12日
+    </h1>
+  
+
+
+  
+  
+        
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
 <a href="/2021/01/12/21%E5%B9%B41%E6%9C%8812%E6%97%A5/" class="archive-article-date">
         <time datetime="2021-01-12T13:24:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-12</time>
 </a>
 
+  
+  
+    
+<div style="margin-top:10px;">
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <!-- fonts.scss -->
+      <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
+      <i class="icon-statistics"></i>
+      <span class="post-meta-item-text"> 字数统计:</span>
+      <span class="post-count">431字</span>
+    </span>
+  </span>
+
+  <span class="post-time">
+    &nbsp; | &nbsp;
+    <span class="post-meta-item-icon">
+      <i class="icon-book icon"></i>
+      <span class="post-meta-item-text"> 阅读时长≈</span>
+      <span class="post-count">2分</span>
+    </span>
+  </span>
+</div>
+
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="穿梭框加上排序功能"><a href="#穿梭框加上排序功能" class="headerlink" title="穿梭框加上排序功能"></a>穿梭框加上排序功能</h1><p>使用element UI中的el-transfer穿梭框设置表格头，但是其没有排序的功能，为此在右侧加上两个按钮用于调整表格头的显示</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">el-row</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">el-col</span> <span class="attr">:span</span>=<span class="string">"20"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">     <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"chuanSuo"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">el-transfer</span></span></span><br><span class="line"><span class="tag">       <span class="attr">filterable</span></span></span><br><span class="line"><span class="tag">       <span class="attr">filter-placeholder</span>=<span class="string">"请输入表头名称"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">:titles</span>=<span class="string">"['未选字段', '已选字段']"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">v-model</span>=<span class="string">"value"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">:data</span>=<span class="string">"data"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">target-order</span>=<span class="string">"unshirt"</span> </span></span><br><span class="line"><span class="tag">       @<span class="attr">right-check-change</span>=<span class="string">"rightCheck"</span> //穿梭框右侧选择改变时触发</span></span><br><span class="line"><span class="tag">      \&gt;</span><span class="tag">&lt;/<span class="name">el-transfer</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">​    <span class="tag">&lt;/<span class="name">el-col</span>&gt;</span></span><br><span class="line">​    <span class="tag">&lt;<span class="name">el-col</span> <span class="attr">:span</span>=<span class="string">"2"</span>&gt;</span></span><br><span class="line">​     <span class="tag">&lt;<span class="name">el-button</span></span></span><br><span class="line"><span class="tag">​     <span class="attr">round</span></span></span><br><span class="line"><span class="tag">​      <span class="attr">class</span>=<span class="string">"el-icon-arrow-up sort_button"</span></span></span><br><span class="line"><span class="tag">​      <span class="attr">:disabled</span>=<span class="string">"upDisAbled"</span></span></span><br><span class="line"><span class="tag">​      @<span class="attr">click</span>=<span class="string">"handleToUp"</span> </span></span><br><span class="line"><span class="tag">​      <span class="attr">style</span>=<span class="string">"margin-top:110px"</span></span></span><br><span class="line"><span class="tag">​     \&gt;</span><span class="tag">&lt;/<span class="name">el-button</span>&gt;</span></span><br><span class="line">​     <span class="tag">&lt;<span class="name">el-button</span></span></span><br><span class="line"><span class="tag">​     <span class="attr">round</span></span></span><br><span class="line"><span class="tag">​      <span class="attr">class</span>=<span class="string">"el-icon-arrow-down sort_button"</span></span></span><br><span class="line"><span class="tag">​      <span class="attr">:disabled</span>=<span class="string">"downDisAbled"</span></span></span><br><span class="line"><span class="tag">​      @<span class="attr">click</span>=<span class="string">"handleToDown"</span></span></span><br><span class="line"><span class="tag">​      <span class="attr">style</span>=<span class="string">"margin:10px 0"</span></span></span><br><span class="line"><span class="tag">​     \&gt;</span><span class="tag">&lt;/<span class="name">el-button</span>&gt;</span></span><br><span class="line">​    <span class="tag">&lt;/<span class="name">el-col</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">el-row</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>data中的变量</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">data() &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">   tempSelectionKeys: [], <span class="comment">//右侧选中的项的数组</span></span><br><span class="line">   upDisAbled: <span class="literal">true</span>,</span><br><span class="line">   downDisAbled: <span class="literal">true</span>,</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>methods</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//穿梭框右侧选中改变触发的事件</span></span><br><span class="line">  rightCheck(selectionKeys, changeKeys) &#123;</span><br><span class="line">   <span class="keyword">this</span>.tempSelectionKeys = selectionKeys;</span><br><span class="line">   <span class="keyword">if</span> (selectionKeys.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">this</span>.upDisAbled = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">this</span>.downDisAbled = <span class="literal">false</span>;</span><br><span class="line">   &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">this</span>.upDisAbled = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">this</span>.downDisAbled = <span class="literal">true</span>;</span><br><span class="line">   &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  handleToUp() &#123;</span><br><span class="line">   <span class="keyword">if</span> (<span class="keyword">this</span>.tempSelectionKeys.length &gt; <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="keyword">this</span>.$Message.warning(<span class="string">'仅支持单选调顺序'</span>);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">let</span> indexNum = <span class="number">0</span>;</span><br><span class="line">   <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.tempSelectionKeys.length; i++) &#123;</span><br><span class="line">    indexNum = <span class="keyword">this</span>.value.indexOf(<span class="keyword">this</span>.tempSelectionKeys[i]);</span><br><span class="line">    <span class="keyword">if</span> (indexNum &gt; <span class="number">0</span>) &#123;</span><br><span class="line">     <span class="keyword">this</span>.value.splice(</span><br><span class="line">      indexNum - <span class="number">1</span>,</span><br><span class="line">      <span class="number">0</span>,</span><br><span class="line">      <span class="keyword">this</span>.tempSelectionKeys[i]</span><br><span class="line">     );</span><br><span class="line">     <span class="keyword">this</span>.value.splice(indexNum + <span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">   &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  handleToDown() &#123;</span><br><span class="line">   <span class="keyword">if</span> (<span class="keyword">this</span>.tempSelectionKeys.length &gt; <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="keyword">this</span>.$Message.warning(<span class="string">'仅支持单选调顺序'</span>);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">let</span> indexNum = <span class="number">0</span>;</span><br><span class="line">   <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.tempSelectionKeys.length; i++) &#123;</span><br><span class="line">    indexNum = <span class="keyword">this</span>.value.indexOf(<span class="keyword">this</span>.tempSelectionKeys[i]);</span><br><span class="line">    <span class="keyword">if</span> (indexNum &gt; <span class="number">-1</span> &amp;&amp; indexNum != <span class="keyword">this</span>.value.length - <span class="number">1</span>) &#123;</span><br><span class="line">     <span class="keyword">this</span>.value.splice(</span><br><span class="line">      indexNum + <span class="number">2</span>,</span><br><span class="line">      <span class="number">0</span>,</span><br><span class="line">      <span class="keyword">this</span>.tempSelectionKeys[i]</span><br><span class="line">     );</span><br><span class="line">     <span class="keyword">this</span>.value.splice(indexNum, <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">   &#125;</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+
+<p>最后调整一下按钮的样式</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.sort_button</span>&#123;</span><br><span class="line">  <span class="attribute">padding</span>:<span class="number">10px</span>;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意事项</strong></p>
+<p>el-transfer的属性target-order值为original功能失效 </p>
+
+    
+
+    
+    <div class="page-reward">
+      <a href="javascript:void(0);" class="page-reward-btn tooltip-top" target="_self">
+        <div class="tooltip tooltip-east">
+          <span class="tooltip-item">
+            赏
+          </span>
+          <span class="tooltip-content">
+            <span class="tooltip-text">
+              <span class="tooltip-inner">
+                <p class="reward-p"><i class="icon icon-quo-left"></i>o谢谢你请我吃糖果o<i
+                    class="icon icon-quo-right"></i></p>
+                <div class="reward-box">
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/zhifubaopad.jpg">
+                    <span class="reward-type">支付宝</span>
+                  </div>
+                  
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/weixinpad.png">
+                    <span class="reward-type">微信</span>
+                  </div>
+                  
+                </div>
+              </span>
+            </span>
+          </span>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2021/01/12/21%E5%B9%B41%E6%9C%8812%E6%97%A5/" target="_blank">21年1月12日</a>
-  
-    </h1>
-  
+      </a>
+    </div>
+    
 
-
-        <div class="article-info info-on-right">
+    
+    <div class="declare"> 
+      <ul class="post-copyright">
+        <li>
+          <strong>本文作者：</strong>
+          ycb
+        </li>
+        <li>
+          <strong>本文链接：</strong>
+          <a href="https:/yuchenbin1.github.io/2021/01/12/21年1月12日/" title="21年1月12日" target="_blank">https:/yuchenbin1.github.io/2021/01/12/21年1月12日/</a>
+        </li>
+        
+        <li>
+          <strong>版权声明： </strong>
           
+          本博客所有文章除特别声明外，均采用 <a href="https://github.com/JoeyBling/hexo-theme-yilia-plus/blob/master/LICENSE" rel="external nofollow" target="_blank">MIT</a> 许可协议。转载请注明出处！
+        </li>
+        
+      </ul>
+    </div>
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -241,334 +339,107 @@
 		</ul>
 	</div>
 
-          
+    
 
+    
+
+    
+    
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <!-- <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a> -->
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://yuchenbin1.github.io/2021/01/12/21%E5%B9%B41%E6%9C%8812%E6%97%A5/" alt="微信分享二维码"> -->
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+
+    
+    <div class="clearfix"></div>
+  </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2021/01/07/21%E5%B9%B41%E6%9C%887%E6%97%A5/" class="archive-article-date">
-        <time datetime="2021-01-07T13:09:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-07</time>
-</a>
 
+
+<nav id="article-nav">
+  
+  
+    <a href="/2021/01/07/21%E5%B9%B41%E6%9C%887%E6%97%A5/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">21年1月7日</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2021/01/07/21%E5%B9%B41%E6%9C%887%E6%97%A5/" target="_blank">21年1月7日</a>
-  
-    </h1>
-  
+        
+        
+    </div>
+</aside>
 
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日志</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-      
-        </div></section>
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2020/11/25/20%E5%B9%B411%E6%9C%8825%E6%97%A5/" class="archive-article-date">
-        <time datetime="2020-11-25T13:37:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-25</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2020/11/25/20%E5%B9%B411%E6%9C%8825%E6%97%A5/" target="_blank">20年11月25日</a>
-  
-    </h1>
-  
 
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日志</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2020/11/14/20%E5%B9%B411%E6%9C%8814%E6%97%A5/" class="archive-article-date">
-        <time datetime="2020-11-14T15:37:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-14</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2020/11/14/20%E5%B9%B411%E6%9C%8814%E6%97%A5/" target="_blank">20年11月14日</a>
-  
-    </h1>
-  
 
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日志</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2020/11/09/20%E5%B9%B411%E6%9C%889%E6%97%A5/" class="archive-article-date">
-        <time datetime="2020-11-09T13:03:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-09</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2020/11/09/20%E5%B9%B411%E6%9C%889%E6%97%A5/" target="_blank">20年11月9日</a>
-  
-    </h1>
-  
 
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日志</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2020/11/05/20%E5%B9%B411%E6%9C%885%E6%97%A5/" class="archive-article-date">
-        <time datetime="2020-11-05T12:55:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-05</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2020/11/05/20%E5%B9%B411%E6%9C%885%E6%97%A5/" target="_blank">20年11月5日</a>
-  
-    </h1>
-  
 
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日志</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2020/11/04/20%E5%B9%B411%E6%9C%884%E6%97%A5/" class="archive-article-date">
-        <time datetime="2020-11-04T12:03:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-04</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2020/11/04/20%E5%B9%B411%E6%9C%884%E6%97%A5/" target="_blank">20年11月4日</a>
-  
-    </h1>
-  
 
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日志</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2020/11/03/20%E5%B9%B411%E6%9C%883%E6%97%A5/" class="archive-article-date">
-        <time datetime="2020-11-03T14:03:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-03</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2020/11/03/20%E5%B9%B411%E6%9C%883%E6%97%A5/" target="_blank">20年11月3日</a>
-  
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日志</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="page-number" href="/archives/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/11/">11</a><a class="extend next" rel="next" href="/archives/page/2/">Next &amp;raquo;</a>
-    </nav>
-  
 
 
           </div>
@@ -609,8 +480,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,
