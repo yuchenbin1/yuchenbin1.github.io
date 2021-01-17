@@ -202,6 +202,104 @@
             
 
   
+    <article id="post-21年1月17日" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/01/17/21%E5%B9%B41%E6%9C%8817%E6%97%A5/" target="_blank">21年1月17日</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/01/17/21%E5%B9%B41%E6%9C%8817%E6%97%A5/" class="archive-article-date">
+        <time datetime="2021-01-17T10:57:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-17</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="微信小程序tabbar的配置"><a href="#微信小程序tabbar的配置" class="headerlink" title="微信小程序tabbar的配置"></a>微信小程序tabbar的配置</h1><p>微信小程序与一般的web开发不一样，一般web端就是导航栏，然后配置路由，可以在制定的区域进行路由的跳转，但是微信小程序总是一个一个的页面跳转的，官方以及vant给的tabbar是底部导航，它的配置有一定的要求。</p>
+<p>配置的步骤：</p>
+<p>1.下载相关的UI库</p>
+<p>官方的WEUI组件库或者是有赞的vant weapp</p>
+<p>2.配置app.json</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">"pages": [</span><br><span class="line">    "pages/index/index",</span><br><span class="line">    "pages/appcenter/appcenter",</span><br><span class="line">    "pages/mySetting/mySetting",</span><br><span class="line">    "pages/check/check",</span><br><span class="line">    <span class="string">"custom-tab-bar/index"</span></span><br><span class="line">  ],</span><br><span class="line">  "tabBar": &#123;</span><br><span class="line">    "custom": true,</span><br><span class="line">    "color": "#7A7E83",</span><br><span class="line">    "selectedColor": "#3cc51f",</span><br><span class="line">    "borderStyle": "black",</span><br><span class="line">    "backgroundColor": "#ffffff",</span><br><span class="line">    "list": [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">"pagePath"</span>: <span class="string">"pages/appcenter/appcenter"</span>,</span><br><span class="line">        <span class="attr">"text"</span>: <span class="string">"应用中心"</span></span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">"pagePath"</span>: <span class="string">"pages/mySetting/mySetting"</span>,</span><br><span class="line">        <span class="attr">"text"</span>: <span class="string">"我的"</span></span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+
+<p><strong>需要注意的是pages中的路径需要和pagePath一致</strong></p>
+<p>3.在项目的根目录创建custom-tab-bar目录，创建index组件</p>
+<p>注意在该目录的json文件中检查是否有<code>&quot;components&quot;：true</code>的配置，在js的文件中Page改为Component，然后在这个目录中放上tabbar的组件，还有一些相关的操作。</p>
+<p><strong>注意在page中没有methods：{}这样的方法</strong></p>
+<p>tabbar不会自动的切换路径，需要用到tab的切换方法<code>wx.swtichTab</code></p>
+<h1 id="阿里云http升级为https"><a href="#阿里云http升级为https" class="headerlink" title="阿里云http升级为https"></a>阿里云http升级为https</h1><p>http升级为https需要ssl证书，如果是阿里云的域名，每年可以申请20张免费的ssl证书，但是保护一个域名，比如：<a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a>, 但是它的子域名比如<a href="http://www.ay.baidu.com就不会保护，如果是保护该域名下的所有子域名是需要付费的。" target="_blank" rel="noopener">www.ay.baidu.com就不会保护，如果是保护该域名下的所有子域名是需要付费的。</a></p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日志</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/01/17/21%E5%B9%B41%E6%9C%8817%E6%97%A5/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-21年1月12日" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1070,96 +1168,6 @@
 
 
   
-    <article id="post-20年10月30日" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/10/30/20%E5%B9%B410%E6%9C%8830%E6%97%A5/" target="_blank">20年10月30日</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/10/30/20%E5%B9%B410%E6%9C%8830%E6%97%A5/" class="archive-article-date">
-        <time datetime="2020-10-30T12:34:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-30</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="事件销毁"><a href="#事件销毁" class="headerlink" title="事件销毁"></a>事件销毁</h1><p>在<code>vue</code>处理<code>document.onkeydown</code>事件的时候需要把该事件在具体的某个页面进行实现，否则在<code>document</code>中是全局触发的，解决这个问题的方法</p>
-<p><strong>方法</strong>：</p>
-<p>用<code>vue</code>的生命周期<code>destoryed</code>销毁该监听事件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">destroyed()&#123;</span><br><span class="line">	const that&#x3D;this;</span><br><span class="line">	document.removeEventListener(&#39;keydown&#39;,that.readCardId)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日志</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/10/30/20%E5%B9%B410%E6%9C%8830%E6%97%A5/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1317,11 +1325,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
