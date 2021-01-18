@@ -202,6 +202,97 @@
             
 
   
+    <article id="post-变量的使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/05/07/%E5%8F%98%E9%87%8F%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_blank">变量的使用</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/05/07/%E5%8F%98%E9%87%8F%E7%9A%84%E4%BD%BF%E7%94%A8/" class="archive-article-date">
+        <time datetime="2020-05-07T06:27:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-07</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h2 id="react中jsx的注释"><a href="#react中jsx的注释" class="headerlink" title="react中jsx的注释"></a>react中jsx的注释</h2><p>在jsx中注释需要先用大括号包裹再注释掉,</p>
+<p>  多行注释需要用一个父元素外括之后注释掉</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>环境的搭建<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../00-01环境的搭建/node_modules/react/umd/react.development.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../00-01环境的搭建/node_modules/react-dom/umd/react-dom.development.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../00-01环境的搭建/node_modules/babel-standalone/babel.min.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 创建dom的根节点,一般只创建一个根节点 --&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 在jsx中注释需要先用大括号包裹再注释掉,</span></span><br><span class="line"><span class="comment">    多行注释需要用一个父元素外括之后注释掉 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"demoReact"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/babel"</span>&gt;</span></span><br><span class="line">    </span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> myDom=(<span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">h1</span>&gt;</span>你好<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span></span><br><span class="line"><span class="actionscript">            &#123;<span class="comment">/*我是注释的内容*/</span>&#125;</span></span><br><span class="line"><span class="handlebars"><span class="xml">            &#123;/*<span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">h1</span>&gt;</span>我是多行注释的内容<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">            <span class="tag">&lt;<span class="name">h1</span>&gt;</span>多行注释的内容<span class="tag">&lt;/<span class="name">h1</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span>*/&#125;</span></span></span><br><span class="line"><span class="handlebars"><span class="xml">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span></span><br><span class="line">        );</span><br><span class="line"><span class="javascript">        ReactDOM.render(myDom,<span class="built_in">document</span>.getElementById(<span class="string">'demoReact'</span>));</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="变量的使用"><a href="#变量的使用" class="headerlink" title="变量的使用"></a>变量的使用</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>环境的搭建<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../00-01环境的搭建/node_modules/react/umd/react.development.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../00-01环境的搭建/node_modules/react-dom/umd/react-dom.development.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../00-01环境的搭建/node_modules/babel-standalone/babel.min.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"demoReact"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/babel"</span>&gt;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> text=<span class="string">"你好啊"</span>;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> num=<span class="number">12</span>;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> zhangsan=&#123;</span></span><br><span class="line"><span class="actionscript">            name:<span class="string">'zhangsan'</span>,</span></span><br><span class="line">            age:18</span><br><span class="line">        &#125;</span><br><span class="line"><span class="actionscript">        <span class="function"><span class="keyword">function</span> <span class="title">fun</span><span class="params">(obj)</span></span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;obj.name&#125;</span>的年龄是<span class="subst">$&#123;obj.age&#125;</span>`</span></span></span><br><span class="line">        &#125;</span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> myDom=<span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#123;text&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">            <span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#123;num+2&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">            <span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#123;fun(zhangsan)&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span></span><br><span class="line">        ;</span><br><span class="line"><span class="javascript">        ReactDOM.render(myDom,<span class="built_in">document</span>.getElementById(<span class="string">'demoReact'</span>));</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">react</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/05/07/%E5%8F%98%E9%87%8F%E7%9A%84%E4%BD%BF%E7%94%A8/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-react环境的搭建与基本的使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1094,99 +1185,6 @@
 
 
   
-    <article id="post-算法题解1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/04/25/%E7%AE%97%E6%B3%95%E9%A2%98%E8%A7%A31/" target="_blank">算法题解1</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/04/25/%E7%AE%97%E6%B3%95%E9%A2%98%E8%A7%A31/" class="archive-article-date">
-        <time datetime="2020-04-25T01:53:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-25</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="1"><a href="#1" class="headerlink" title="1."></a>1.</h1><p>指定H为1，O为2，C为3，R为4，给一串字符串得到</p>
-<p>比如H2O为1<em>2+2=4；C11R4H为3</em>11+4<em>4+1</em>1=50</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getResult</span>(<span class="params">str</span>)</span>&#123;</span><br><span class="line">            <span class="keyword">let</span> getSum=<span class="number">0</span>;</span><br><span class="line">            <span class="keyword">let</span> arr=str.match(<span class="regexp">/[A-Z]&#123;1&#125;\d*/g</span>);</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;arr.length;i++)&#123;</span><br><span class="line">                <span class="keyword">let</span> char=arr[i].charAt(<span class="number">0</span>);</span><br><span class="line">                <span class="keyword">if</span>(arr[i].length==<span class="number">1</span>)&#123;</span><br><span class="line">                <span class="keyword">var</span> number=<span class="number">1</span>;</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                 number=arr[i].slice(<span class="number">1</span>);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">switch</span>(char)&#123;</span><br><span class="line">                    <span class="keyword">case</span> <span class="string">'H'</span> : getSum+=<span class="number">1</span>*number;<span class="keyword">break</span>;</span><br><span class="line">                    <span class="keyword">case</span> <span class="string">'O'</span> : getSum+=<span class="number">2</span>*number;<span class="keyword">break</span>;</span><br><span class="line">                    <span class="keyword">case</span> <span class="string">'C'</span> : getSum+=<span class="number">3</span>*number;<span class="keyword">break</span>;</span><br><span class="line">                    <span class="keyword">case</span> <span class="string">'R'</span> : getSum+=<span class="number">4</span>*number;<span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                </span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> getSum</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="2"><a href="#2" class="headerlink" title="2."></a>2.</h1><p>连续的OOXOOOX，连续的第一个O代表的是1第二个代表2，以此类推，X为0。</p>
-<p>例如：OOXOOOOXOOX=1+2+0+1+2+3+4+0+1+2=16</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getSum</span>(<span class="params">str</span>)</span>&#123;</span><br><span class="line">            <span class="keyword">let</span> result=<span class="number">0</span>;</span><br><span class="line">            <span class="keyword">let</span> arr=str.match(<span class="regexp">/O&#123;0,&#125;X/g</span>);</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;arr.length;i++)&#123;</span><br><span class="line">                result+=Sum(arr[i].length<span class="number">-1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> result</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">Sum</span>(<span class="params">number</span>)</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> (number+<span class="number">1</span>)*(number)/<span class="number">2</span>        </span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/04/25/%E7%AE%97%E6%B3%95%E9%A2%98%E8%A7%A31/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/4/">Next &amp;raquo;</a>
@@ -1344,11 +1342,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
               </li>
              
               <li class="article-tag-list-item">
