@@ -202,6 +202,99 @@
             
 
   
+    <article id="post-vue的侦听器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/04/04/vue%E7%9A%84%E4%BE%A6%E5%90%AC%E5%99%A8/" target="_blank">vue的侦听器</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/04/04/vue%E7%9A%84%E4%BE%A6%E5%90%AC%E5%99%A8/" class="archive-article-date">
+        <time datetime="2020-04-04T13:35:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-04</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="vue的侦听器"><a href="#vue的侦听器" class="headerlink" title="vue的侦听器"></a>vue的侦听器</h1><p>利用check属性，当data中的数据改变时触发，这个效果也可以用计算属性</p>
+<p>但是当有异步请求和较大的开销的操作时建议用侦听器</p>
+<h3 id="一般的情况"><a href="#一般的情况" class="headerlink" title="一般的情况:"></a>一般的情况:</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=<span class="string">"utf-8"</span>&gt;</span><br><span class="line">		&lt;title&gt;&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">			&lt;div&gt;</span><br><span class="line">				&lt;span&gt;名：&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">				&lt;span&gt;</span></span><br><span class="line"><span class="regexp">					&lt;input type="text" v-model="firstName"&gt;</span></span><br><span class="line"><span class="regexp">				&lt;/</span>span&gt;</span><br><span class="line">			&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">			&lt;div&gt;</span></span><br><span class="line"><span class="regexp">				&lt;span&gt;姓：&lt;/</span>span&gt;</span><br><span class="line">				&lt;span&gt;</span><br><span class="line">					&lt;input type=<span class="string">"text"</span> v-model=<span class="string">"lastName"</span>&gt;</span><br><span class="line">				&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">			&lt;/</span>div&gt;</span><br><span class="line">			&lt;div&gt;&#123;&#123;fullName&#125;&#125;&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">		&lt;/</span>div&gt;</span><br><span class="line">		&lt;script src=<span class="string">"../000-vue.js/vue.js"</span>&gt;&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">		&lt;script&gt;</span></span><br><span class="line"><span class="regexp">			var vm=new Vue(&#123;</span></span><br><span class="line"><span class="regexp">				el:'#app',</span></span><br><span class="line"><span class="regexp">				data:&#123;</span></span><br><span class="line"><span class="regexp">					firstName:'',</span></span><br><span class="line"><span class="regexp">					lastName:'',</span></span><br><span class="line"><span class="regexp">					fullName:''</span></span><br><span class="line"><span class="regexp">				&#125;,</span></span><br><span class="line"><span class="regexp">				watch:&#123;/</span><span class="regexp">/侦听器，也可以用计算属性，但是数据变化执行异步或开销较大的操作</span></span><br><span class="line"><span class="regexp">					firstName:function(val)&#123;</span></span><br><span class="line"><span class="regexp">						this.fullName=val+''+this.lastName;</span></span><br><span class="line"><span class="regexp">					&#125;,</span></span><br><span class="line"><span class="regexp">					lastName:function(val)&#123;</span></span><br><span class="line"><span class="regexp">						this.fullName=this.firstName+''+val;</span></span><br><span class="line"><span class="regexp">					&#125;</span></span><br><span class="line"><span class="regexp">				&#125;</span></span><br><span class="line"><span class="regexp">			&#125;)</span></span><br><span class="line"><span class="regexp">		&lt;/</span>script&gt;</span><br><span class="line">	&lt;<span class="regexp">/body&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>html&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="异步请求的用法："><a href="#异步请求的用法：" class="headerlink" title="异步请求的用法："></a>异步请求的用法：</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=<span class="string">"utf-8"</span>&gt;</span><br><span class="line">		&lt;title&gt;&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">			&lt;span&gt;用户名：&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">			&lt;span&gt;</span></span><br><span class="line"><span class="regexp">				&lt;input type="text" v-model.lazy="uname"&gt;</span></span><br><span class="line"><span class="regexp">			&lt;/</span>span&gt;</span><br><span class="line">			&lt;span v-text=<span class="string">"tip"</span>&gt;&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">		&lt;/</span>div&gt;</span><br><span class="line">		&lt;script src=<span class="string">'../../000-vue.js/vue.js'</span>&gt;&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">		&lt;!-- 1.采用侦听器监听变化</span></span><br><span class="line"><span class="regexp">		2.调用后台接口（这里用setTimeout模拟）</span></span><br><span class="line"><span class="regexp">		3.根据验证调整提示信息 --&gt;</span></span><br><span class="line"><span class="regexp">		&lt;script&gt;</span></span><br><span class="line"><span class="regexp">			var vm=new Vue(&#123;</span></span><br><span class="line"><span class="regexp">				el:'#app',</span></span><br><span class="line"><span class="regexp">				data:&#123;</span></span><br><span class="line"><span class="regexp">					uname:'',</span></span><br><span class="line"><span class="regexp">					tip:''</span></span><br><span class="line"><span class="regexp">				&#125;,</span></span><br><span class="line"><span class="regexp">				methods:&#123;</span></span><br><span class="line"><span class="regexp">					checkName:function(uname)&#123;</span></span><br><span class="line"><span class="regexp">						var that=this;</span></span><br><span class="line"><span class="regexp">						setTimeout(function()&#123;</span></span><br><span class="line"><span class="regexp">							if(uname=='admin')&#123;</span></span><br><span class="line"><span class="regexp">								that.tip='用户名已存在，请更换一个';</span></span><br><span class="line"><span class="regexp">							&#125;else&#123;</span></span><br><span class="line"><span class="regexp">								that.tip='用户名可以使用'</span></span><br><span class="line"><span class="regexp">							&#125;</span></span><br><span class="line"><span class="regexp">						&#125;,2000);</span></span><br><span class="line"><span class="regexp">					&#125;</span></span><br><span class="line"><span class="regexp">				&#125;,</span></span><br><span class="line"><span class="regexp">				watch:&#123;</span></span><br><span class="line"><span class="regexp">					uname:function(val)&#123;</span></span><br><span class="line"><span class="regexp">						this.checkName(val);</span></span><br><span class="line"><span class="regexp">						this.tip='正在验证...';</span></span><br><span class="line"><span class="regexp">					&#125;</span></span><br><span class="line"><span class="regexp">				&#125;</span></span><br><span class="line"><span class="regexp">			&#125;)</span></span><br><span class="line"><span class="regexp">		&lt;/</span>script&gt;</span><br><span class="line">	&lt;<span class="regexp">/body&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>html&gt;</span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/04/04/vue%E7%9A%84%E4%BE%A6%E5%90%AC%E5%99%A8/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-vue的计算属性" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1081,103 +1174,6 @@
 
 
   
-    <article id="post-图片与方法的惰性载入" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/03/18/%E5%9B%BE%E7%89%87%E4%B8%8E%E6%96%B9%E6%B3%95%E7%9A%84%E6%83%B0%E6%80%A7%E8%BD%BD%E5%85%A5/" target="_blank">图片与方法的惰性载入</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/03/18/%E5%9B%BE%E7%89%87%E4%B8%8E%E6%96%B9%E6%B3%95%E7%9A%84%E6%83%B0%E6%80%A7%E8%BD%BD%E5%85%A5/" class="archive-article-date">
-        <time datetime="2020-03-18T09:16:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-18</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="图片的惰性载入"><a href="#图片的惰性载入" class="headerlink" title="图片的惰性载入"></a>图片的惰性载入</h1><p>即推迟加载，用到的时候再加载，这样做可以使html页面快速载入，而图片最后载入</p>
-<p>通过先给所有需要懒加载的图片的src属性值设置一个同样的地址（一般为loading载入中样式的图片），这样载入第一张loading样式图后，会放在缓存中，这样读取快，随后真实图片的地址放在另一个属性中（例如data-origin），当满足条件时（如在可视范围内）利用事件监听函数把data-origin的属性值赋给src属性值(直接指向不太好，最好等图片加载完后指向)</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul&gt;</span><br><span class="line">  &lt;li <span class="class"><span class="keyword">class</span></span>=<span class="string">'lazy'</span>&gt;<span class="xml"><span class="tag">&lt;<span class="name">img</span> <span class="attr">data-origin</span>=<span class="string">'images/0.jpg'</span> <span class="attr">src</span>=<span class="string">'images/loading.gif'</span>/&gt;</span></span>&lt;<span class="regexp">/li&gt;</span></span><br><span class="line"><span class="regexp">  &lt;li class='lazy'&gt;&lt;img data-origin='images/</span><span class="number">1.</span>jpg<span class="string">' src='</span>images/loading.gif<span class="string">'/&gt;&lt;/li&gt;</span></span><br><span class="line"><span class="string">  &lt;li class='</span>lazy<span class="string">'&gt;&lt;img data-origin='</span>images/<span class="number">2.</span>jpg<span class="string">' src='</span>images/loading.gif<span class="string">'/&gt;&lt;/li&gt;</span></span><br><span class="line"><span class="string">  &lt;li class='</span>lazy<span class="string">'&gt;&lt;img data-origin='</span>images/<span class="number">3.</span>jpg<span class="string">' src='</span>images/loading.gif<span class="string">'/&gt;&lt;/li&gt;</span></span><br><span class="line"><span class="string">  &lt;li class='</span>lazy<span class="string">'&gt;&lt;img data-origin='</span>images/<span class="number">4.</span>jpg<span class="string">' src='</span>images/loading.gif<span class="string">'/&gt;&lt;/li&gt;</span></span><br><span class="line"><span class="string">  &lt;li class='</span>lazy<span class="string">'&gt;&lt;img data-origin='</span>images/<span class="number">5.</span>jpg<span class="string">' src='</span>images/loading.gif<span class="string">'/&gt;&lt;/li&gt;</span></span><br><span class="line"><span class="string">  &lt;li class='</span>lazy<span class="string">'&gt;&lt;img data-origin='</span>images/<span class="number">6.</span>jpg<span class="string">' src='</span>images/loading.gif<span class="string">'/&gt;&lt;/li&gt;</span></span><br><span class="line"><span class="string">  &lt;li class='</span>lazy<span class="string">'&gt;&lt;img data-origin='</span>images/<span class="number">7.</span>jpg<span class="string">' src='</span>images/loading.gif<span class="string">'/&gt;&lt;/li&gt;</span></span><br><span class="line"><span class="string">  &lt;li class='</span>lazy<span class="string">'&gt;&lt;img data-origin='</span>images/<span class="number">8.</span>jpg<span class="string">' src='</span>images/loading.gif<span class="string">'/&gt;&lt;/li&gt;</span></span><br><span class="line"><span class="string">  &lt;li class='</span>lazy<span class="string">'&gt;&lt;img data-origin='</span>images/<span class="number">9.</span>jpg<span class="string">' src='</span>images/loading.gif<span class="string">'/&gt;&lt;/li&gt;</span></span><br><span class="line"><span class="string">  &lt;li class='</span>lazy<span class="string">'&gt;&lt;img data-origin='</span>images/<span class="number">10.</span>jpg<span class="string">' src='</span>images/loading.gif<span class="string">'/&gt;&lt;/li&gt;</span></span><br><span class="line"><span class="string">  &lt;li class='</span>lazy<span class="string">'&gt;&lt;img data-origin='</span>images/<span class="number">11.</span>jpg<span class="string">' src='</span>images/loading.gif<span class="string">'/&gt;&lt;/li&gt;</span></span><br><span class="line"><span class="string">  &lt;li class='</span>lazy<span class="string">'&gt;&lt;img data-origin='</span>images/<span class="number">12.</span>jpg<span class="string">' src='</span>images/loading.gif<span class="string">'/&gt;&lt;/li&gt;</span></span><br><span class="line"><span class="string">&lt;/ul&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">init</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> images = <span class="built_in">document</span>.images;</span><br><span class="line">  <span class="comment">// 加载首屏图片</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, len = images.length; i &lt; len; i++) &#123;</span><br><span class="line">    <span class="keyword">var</span> obj = images[i];</span><br><span class="line">    <span class="comment">// 如果在可视区域并且还没被加载过</span></span><br><span class="line">    <span class="keyword">if</span> (obj.getBoundingClientRect().top &lt; <span class="built_in">document</span>.documentElement.clientHeight &amp;&amp; !obj.isLoad) &#123;</span><br><span class="line">      obj.isLoad = <span class="literal">true</span>;</span><br><span class="line">      <span class="comment">// 先调用 HTML5 方法</span></span><br><span class="line">      <span class="keyword">if</span> (obj.dataset) </span><br><span class="line">        imageLoaded(obj, obj.dataset.origin);</span><br><span class="line">      <span class="keyword">else</span> </span><br><span class="line">        imageLoaded(obj, obj.getAttribute(<span class="string">'data-origin'</span>));</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;  <span class="comment">// 假设图片标签在 HTML 中的顺序和实际页面中顺序一致</span></span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">imageLoaded</span>(<span class="params">obj, src</span>) </span>&#123;<span class="comment">//将真实的图片地址指向元素</span></span><br><span class="line">  <span class="keyword">var</span> img = <span class="keyword">new</span> Image();</span><br><span class="line">  img.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    obj.src = src;</span><br><span class="line">  &#125;;</span><br><span class="line">  img.src = src;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 如果直接将 data-original 属性值指向图片的 src 属性的话，看到的图片可能会一段一段出现，而先将图片完全加载，然后再赋值使图片出现的话，体验就好多了 </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onscroll = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  lazyload();</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">lazyload</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> lazy = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">var</span> images = <span class="built_in">document</span>.images;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, len = images.length; i &lt; len; i++) &#123;</span><br><span class="line">    <span class="keyword">var</span> obj = images[i];</span><br><span class="line">    <span class="keyword">if</span> (obj.getBoundingClientRect().top - lazy &lt; <span class="built_in">document</span>.documentElement.clientHeight &amp;&amp; !obj.isLoad) &#123;</span><br><span class="line">      obj.isLoad = <span class="literal">true</span>;</span><br><span class="line">      <span class="keyword">if</span> (obj.dataset) </span><br><span class="line">        imageLoaded(obj, obj.dataset.original);</span><br><span class="line">      <span class="keyword">else</span> </span><br><span class="line">        imageLoaded(obj, obj.getAttribute(<span class="string">'data-original'</span>));</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 惰性加载虽然好处多，但是也有一个 “非致命” 的缺点，影响 SEO。因为图片都被替换成假的图片，所以会影响图片的收录，<strong>所以这功能不建议在详情页使用</strong> </p>
-<h1 id="方法的惰性载入"><a href="#方法的惰性载入" class="headerlink" title="方法的惰性载入"></a>方法的惰性载入</h1><p>即重复判断的条件，无需再判断</p>
-<p>在判断条件的时候返回一个新的函数</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/03/18/%E5%9B%BE%E7%89%87%E4%B8%8E%E6%96%B9%E6%B3%95%E7%9A%84%E6%83%B0%E6%80%A7%E8%BD%BD%E5%85%A5/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/6/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/8/">Next &amp;raquo;</a>
@@ -1315,7 +1311,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1323,7 +1319,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1335,11 +1331,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
