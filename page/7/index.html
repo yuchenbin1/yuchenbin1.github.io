@@ -202,6 +202,94 @@
             
 
   
+    <article id="post-vue的生命周期" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/04/06/vue%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" target="_blank">vue的生命周期</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/04/06/vue%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" class="archive-article-date">
+        <time datetime="2020-04-06T14:15:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-06</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="vue的生命周期"><a href="#vue的生命周期" class="headerlink" title="vue的生命周期"></a>vue的生命周期</h1><p>1.挂载（初始化相关属性）<br>            beforeCreate  创建前<br>            created       创建<br>            beforeMount   组织前<br>            mounted       组织(重要，<strong>初始化完成，模板已经被替换了</strong>)<br>2.更新（元素或组件的变更操作）<br>            beforeUpdate  更新前<br>            updated       更新<br>3.销毁（销毁相关属性）<br>            beforeDestroy 销毁前<br>            destroyed     销毁</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=<span class="string">"utf-8"</span>&gt;</span><br><span class="line">		&lt;title&gt;&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;!-- 生命周期</span><br><span class="line">		<span class="number">1.</span>挂载（初始化相关属性）</span><br><span class="line">			beforeCreate  创建前</span><br><span class="line">			created       创建</span><br><span class="line">			beforeMount   组织前</span><br><span class="line">			mounted       组织(重要，初始化完成，模板已经被替换了)</span><br><span class="line">		<span class="number">2.</span>更新（元素或组件的变更操作）</span><br><span class="line">			beforeUpdate  更新前</span><br><span class="line">			updated       更新</span><br><span class="line">		<span class="number">3.</span>销毁（销毁相关属性）</span><br><span class="line">			beforeDestroy 销毁前</span><br><span class="line">			destroyed     销毁</span><br><span class="line">		--&gt;</span><br><span class="line">		</span><br><span class="line">		&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">			&lt;div&gt;&#123;&#123;msg&#125;&#125;&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">			&lt;button @click="update"&gt;更新&lt;/</span>button&gt;</span><br><span class="line">			&lt;button @click=<span class="string">"destroy"</span>&gt;销毁&lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp">		&lt;/</span>div&gt;</span><br><span class="line">		&lt;script src=<span class="string">"../000-vue.js/vue.js"</span>&gt;&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">		&lt;script&gt;</span></span><br><span class="line"><span class="regexp">			var vm=new Vue(&#123;</span></span><br><span class="line"><span class="regexp">				el:'#app',</span></span><br><span class="line"><span class="regexp">				data:&#123;</span></span><br><span class="line"><span class="regexp">					msg:'生命周期'</span></span><br><span class="line"><span class="regexp">				&#125;,</span></span><br><span class="line"><span class="regexp">				methods:&#123;</span></span><br><span class="line"><span class="regexp">					update:function()&#123;</span></span><br><span class="line"><span class="regexp">						this.msg='hello';</span></span><br><span class="line"><span class="regexp">					&#125;,</span></span><br><span class="line"><span class="regexp">					destroy:function()&#123;</span></span><br><span class="line"><span class="regexp">						this.$destroy();</span></span><br><span class="line"><span class="regexp">					&#125;,</span></span><br><span class="line"><span class="regexp">				&#125;,</span></span><br><span class="line"><span class="regexp">				beforeCreate:function()&#123;</span></span><br><span class="line"><span class="regexp">					console.log('beforeCreate');</span></span><br><span class="line"><span class="regexp">				&#125;,</span></span><br><span class="line"><span class="regexp">				created:function()&#123;</span></span><br><span class="line"><span class="regexp">					console.log('created');</span></span><br><span class="line"><span class="regexp">				&#125;,</span></span><br><span class="line"><span class="regexp">				beforeMount:function()&#123;</span></span><br><span class="line"><span class="regexp">					console.log('beforeMount');</span></span><br><span class="line"><span class="regexp">				&#125;,</span></span><br><span class="line"><span class="regexp">				mounted:function()&#123;</span></span><br><span class="line"><span class="regexp">					console.log('mounted');</span></span><br><span class="line"><span class="regexp">				&#125;,</span></span><br><span class="line"><span class="regexp">				beforeUpdate:function()&#123;</span></span><br><span class="line"><span class="regexp">					console.log('beforeUpdate');</span></span><br><span class="line"><span class="regexp">				&#125;,</span></span><br><span class="line"><span class="regexp">				updated:function()&#123;</span></span><br><span class="line"><span class="regexp">					console.log('updated');</span></span><br><span class="line"><span class="regexp">				&#125;,</span></span><br><span class="line"><span class="regexp">				beforeDestroy:function()&#123;</span></span><br><span class="line"><span class="regexp">					console.log('beforeDestroy');</span></span><br><span class="line"><span class="regexp">				&#125;,</span></span><br><span class="line"><span class="regexp">				destroyed:function()&#123;</span></span><br><span class="line"><span class="regexp">					console.log('destroyed');</span></span><br><span class="line"><span class="regexp">				&#125;,</span></span><br><span class="line"><span class="regexp">			&#125;)</span></span><br><span class="line"><span class="regexp">		&lt;/</span>script&gt;</span><br><span class="line">	&lt;<span class="regexp">/body&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>html&gt;</span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/04/06/vue%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-vue的过滤器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1048,135 +1136,6 @@
 
 
   
-    <article id="post-node-first-day" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/03/24/node-first-day/" target="_blank">node first day</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/03/24/node-first-day/" class="archive-article-date">
-        <time datetime="2020-03-24T06:53:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-24</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="node"><a href="#node" class="headerlink" title="node"></a>node</h1><p>node是一种js的运行环境</p>
-<p>主要用途是打开响应服务器</p>
-<p>只有ECMAScript基本语法，没有BOM和DOM</p>
-<p>有浏览器js没有的文件操作能力</p>
-<p>为js提供一些服务器级别的API</p>
-<h2 id="node环境版本号"><a href="#node环境版本号" class="headerlink" title="node环境版本号"></a>node环境版本号</h2><p>打开命令行 输入node –version或node -v</p>
-<h2 id="node文件的读写"><a href="#node文件的读写" class="headerlink" title="node文件的读写"></a>node文件的读写</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fs=<span class="built_in">require</span>(<span class="string">'fs'</span>)</span><br><span class="line">fs.readFile(<span class="string">'文件的地址'</span>，<span class="function"><span class="keyword">function</span>(<span class="params">error,data</span>))</span>&#123;&#125;)<span class="comment">//文件读取</span></span><br><span class="line">fs.writeFile(<span class="string">'文件的地址'</span>，<span class="string">'文件内容'</span>，<span class="function"><span class="keyword">function</span>(<span class="params">error</span>)</span>&#123;&#125;)<span class="comment">//文件写入</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="web浏览器的简单创建与应用"><a href="#web浏览器的简单创建与应用" class="headerlink" title="web浏览器的简单创建与应用"></a>web浏览器的简单创建与应用</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> http=<span class="built_in">require</span>(<span class="string">'http'</span>)<span class="comment">//加载核心模块</span></span><br><span class="line"><span class="keyword">var</span> server=http.createServer()<span class="comment">//创建一个服务器，返回一个实例</span></span><br><span class="line">server.on(<span class="string">'server'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">request,response</span>)</span>&#123;&#125;)<span class="comment">//请求过来，自动触发服务器request请求事件，request是请求，response是响应</span></span><br><span class="line">server.listen(<span class="number">3000</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;)<span class="comment">//绑定端口号，启动服务器，可通过http://127.0.0.1:3000/来访问</span></span><br></pre></td></tr></table></figure>
-
-<p><code>response.write()</code>回应</p>
-<p><code>response.end()</code>告诉客户端，话说完了，把以上传递给用户</p>
-<h2 id="web响应不同的url"><a href="#web响应不同的url" class="headerlink" title="web响应不同的url"></a>web响应不同的url</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> http=<span class="built_in">require</span>(<span class="string">'http'</span>)</span><br><span class="line"><span class="keyword">var</span> server=http.createServer()</span><br><span class="line">server.on(<span class="string">'server'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">request,response</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> url=request.url</span><br><span class="line">    <span class="keyword">if</span>(url===<span class="string">'/'</span>)&#123;</span><br><span class="line">        resquest.end(<span class="string">'index page'</span>)</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(url===<span class="string">'/login'</span>)&#123;</span><br><span class="line">        resquest.end(<span class="string">'login page'</span>)<span class="comment">//响应内容只能是字符串或者二进制数据，所以在处理数组的时候可以用json.stringify()转化</span></span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        res.end(<span class="string">'404 Not Found.'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line">server.listen(<span class="number">3000</span>,funtion()&#123;&#125;)</span><br></pre></td></tr></table></figure>
-
-<h2 id="node中的js"><a href="#node中的js" class="headerlink" title="node中的js"></a>node中的js</h2><ol>
-<li><p>ECMAScript</p>
-<p>没有BOM和DOM</p>
-</li>
-<li><p>核心模块</p>
-</li>
-<li><p>第三方模块</p>
-</li>
-<li><p>用户自定义模块</p>
-</li>
-</ol>
-<h3 id="核心模块"><a href="#核心模块" class="headerlink" title="核心模块"></a>核心模块</h3><p>利用<code>require(&#39;核心模块&#39;)</code>来导入API</p>
-<p>在官网有很多</p>
-<p>主要用到的有fs、http、os、path等</p>
-<h3 id="第三方模块"><a href="#第三方模块" class="headerlink" title="第三方模块"></a>第三方模块</h3><p><code>require()</code>其实是一个加载模块的方法</p>
-<p><code>require(&#39;./a.js&#39;)</code>其中.js可以省略，但是./不能省略因为会被当成核心模块</p>
-<p>可以用它来加载其他的文件和模块，但是node没有全局作用域，<strong>文件之间不能相互调用</strong></p>
-<p>  <strong>文件之间对象访问</strong></p>
-<p>利用require的第二个作用：拿到被加载模块文件的导出（exports）的接口对象</p>
-<p>如：</p>
-<p>在a.js文件中</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> foo=<span class="string">"hello world"</span></span><br><span class="line">exports.foo=<span class="string">"hihao"</span></span><br><span class="line">exports.add=<span class="function"><span class="keyword">function</span>(<span class="params">a,b</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a+b</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">a,b</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a-b</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在同一文件夹下的b.js文件中调用a.js</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> aExports=<span class="built_in">require</span>(<span class="string">'./a'</span>)<span class="comment">//得到a.js文件模块中的exports对象，他有属性foo和方法add</span></span><br><span class="line"><span class="built_in">console</span>.log(aExports.add(<span class="number">10</span>,<span class="number">20</span>))<span class="comment">//得到为30</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">node</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/03/24/node-first-day/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/6/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/8/">Next &amp;raquo;</a>
@@ -1314,15 +1273,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">webpack</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1334,11 +1289,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">vue</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
               </li>
              
               <li class="article-tag-list-item">
