@@ -202,6 +202,95 @@
             
 
   
+    <article id="post-从明天开始好好学习vue" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/03/03/%E4%BB%8E%E6%98%8E%E5%A4%A9%E5%BC%80%E5%A7%8B%E5%A5%BD%E5%A5%BD%E5%AD%A6%E4%B9%A0vue/" target="_blank">从明天开始好好学习vue</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/03/03/%E4%BB%8E%E6%98%8E%E5%A4%A9%E5%BC%80%E5%A7%8B%E5%A5%BD%E5%A5%BD%E5%AD%A6%E4%B9%A0vue/" class="archive-article-date">
+        <time datetime="2020-03-02T16:23:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-03</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h2 id="挂载符-el：挂载符"><a href="#挂载符-el：挂载符" class="headerlink" title="挂载符  el：挂载符"></a>挂载符  el：挂载符</h2><p>指定vue作用的范围，可指向div、class、span等</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">		&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">			&#123;&#123;message&#125;&#125;</span><br><span class="line">		&lt;&#x2F;div&gt;</span><br><span class="line">		&lt;script src&#x3D;&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;vue&#x2F;dist&#x2F;vue.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">		&lt;script&gt;</span><br><span class="line">			var app&#x3D; new Vue(&#123;</span><br><span class="line">			el:&quot;#app&quot;,</span><br><span class="line">				data:&#123;</span><br><span class="line">				message:&quot;hello world&quot;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;)</span><br><span class="line">		&lt;&#x2F;script&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="data数据对象"><a href="#data数据对象" class="headerlink" title="data数据对象"></a>data数据对象</h2><p>数据对象可以自己随便设置<br>获取对象中的语法可以用  <em>对象.属性</em>  的方法<br><strong>注意行内样式要在style对象内部</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">		&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">			&lt;h1 style&#x3D;&quot;font-weight:700;color: crimson;&quot;&gt;&#123;&#123;message&#125;&#125;&lt;&#x2F;h1&gt;</span><br><span class="line">			&lt;h2&gt;姓名：&#123;&#123;school.name&#125;&#125;&lt;&#x2F;h2&gt;</span><br><span class="line">			&lt;h3&gt;学号：&#123;&#123;school.studyID&#125;&#125;&lt;&#x2F;h3&gt;</span><br><span class="line">			&lt;h3&gt;排名：&#123;&#123;school.rank&#125;&#125;&lt;&#x2F;h3&gt;</span><br><span class="line">		&lt;&#x2F;div&gt;</span><br><span class="line">		&lt;script src&#x3D;&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;vue&#x2F;dist&#x2F;vue.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">		&lt;script&gt;</span><br><span class="line">			var app&#x3D; new Vue(&#123;</span><br><span class="line">			el:&quot;#app&quot;,</span><br><span class="line">				data:&#123;</span><br><span class="line">					message:&quot;排名公示&quot;,</span><br><span class="line">					school:&#123;</span><br><span class="line">						name:&quot;ycb&quot;,</span><br><span class="line">						studyID:&quot;1920165620&quot;,</span><br><span class="line">						rank:&quot;NO.1&quot;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;)</span><br><span class="line">		&lt;&#x2F;script&gt;</span><br><span class="line">	&lt;&#x2F;body&gt;</span><br></pre></td></tr></table></figure>
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/03/03/%E4%BB%8E%E6%98%8E%E5%A4%A9%E5%BC%80%E5%A7%8B%E5%A5%BD%E5%A5%BD%E5%AD%A6%E4%B9%A0vue/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-加油坚持就是胜利" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -510,11 +599,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -526,15 +619,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">vue</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
               </li>
              
               <li class="article-tag-list-item">
