@@ -202,6 +202,94 @@
             
 
   
+    <article id="post-react的基本特点" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/05/07/react%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%89%B9%E7%82%B9/" target="_blank">react的基本特点</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/05/07/react%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%89%B9%E7%82%B9/" class="archive-article-date">
+        <time datetime="2020-05-07T05:16:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-07</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h3 id="基本特点"><a href="#基本特点" class="headerlink" title="基本特点"></a>基本特点</h3><p>1.react不使用模板<br>2.react不是一个MVC框架<br>3.响应式<br>4.react是一轻量级的js库</p>
+<h4 id="原理："><a href="#原理：" class="headerlink" title="原理："></a>原理：</h4><p>虚拟DOM：react把DOM抽象成一个js对象，<br>    减少直接对DOM的操作，待所有的虚拟DOM更新完统一对真实的DOM进行替换。<br>    diff算法：第一时间更新虚拟DOM，待更新完统一对DOM进行操作</p>
+<p>1.虚拟DOM确保只对界面上面真正发生变化的部分<br>进行实际的DOM操作<br>2.逐层次的来进行节点的比较</p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">react</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/05/07/react%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%89%B9%E7%82%B9/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-vuex的state属性" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1109,94 +1197,6 @@
 
 
   
-    <article id="post-ElementUI的使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/04/22/ElementUI%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_blank">ElementUI的使用</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/04/22/ElementUI%E7%9A%84%E4%BD%BF%E7%94%A8/" class="archive-article-date">
-        <time datetime="2020-04-22T08:55:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-22</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="ElementUI的使用"><a href="#ElementUI的使用" class="headerlink" title="ElementUI的使用"></a>ElementUI的使用</h1><h4 id="基于命令方法的手动安装"><a href="#基于命令方法的手动安装" class="headerlink" title="基于命令方法的手动安装"></a>基于命令方法的手动安装</h4><p>1.安装依赖包<code>npm i element-ui -S</code><br>2.导入Element-UI相关资源<br>//导入组件库<br><code>import ElementUI from &#39;element-ui&#39;;</code><br>//导入组件相关样式<br><code>import &#39;element-ui/lib/theme-chalk/index.css&#39;;</code><br>//配置Vue插件<br><code>Vue.use(ElementUI);</code></p>
-<h4 id="基于图形化界面自动安装"><a href="#基于图形化界面自动安装" class="headerlink" title="基于图形化界面自动安装"></a>基于图形化界面自动安装</h4><p>1.运行vue ui命令，打开图形化界面<br>2.通过Vue项目管理器，进入具体的项目配置面板<br>3.点击 插件-&gt;添加插件，进入插件查询面板<br>4.搜索 vue-cli-plugin-element 并开发<br>5.配置插件，实现按需导入，从而减少打包后项目的体积</p>
-<p>ElementUI导入其实和其他插件差不多，像是bootstrap也是类似的导入方法</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">webpack</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/04/22/ElementUI%E7%9A%84%E4%BD%BF%E7%94%A8/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/3/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/5/">Next &amp;raquo;</a>
@@ -1334,10 +1334,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">webpack</a>
               </li>
              
@@ -1346,11 +1342,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">react</a>
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">node</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">react</a>
               </li>
              
               <li class="article-tag-list-item">
