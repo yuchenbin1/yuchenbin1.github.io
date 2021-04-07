@@ -202,6 +202,98 @@
             
 
   
+    <article id="post-21年1月18日" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/01/18/21%E5%B9%B41%E6%9C%8818%E6%97%A5/" target="_blank">21年1月18日</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/01/18/21%E5%B9%B41%E6%9C%8818%E6%97%A5/" class="archive-article-date">
+        <time datetime="2021-01-18T14:49:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-18</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="微信小程序中的css"><a href="#微信小程序中的css" class="headerlink" title="微信小程序中的css"></a>微信小程序中的css</h1><p>微信小程序中的css样式覆盖，在page页对应的wxss只会作用于当前的page，而app.wxss就是全局的样式了。</p>
+<p>但是对于一些像vant这样的UI组件，他有提供一些比如custom-class这样的根元素的class来覆盖，或者在调试器中找到对应的class名，用！important来覆盖</p>
+<p>注意的是，如果是自定义组件，一定要有这个配置</p>
+<p>在js文件中加上</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">option:&#123;</span><br><span class="line">    styleIsolation:<span class="string">'shared'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样组件自定义样式可以覆盖，但是各个组件之间就会有样式污染的问题了。需要注意取名的时候不要重复。</p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日志</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/01/18/21%E5%B9%B41%E6%9C%8818%E6%97%A5/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-21年1月17日" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1078,96 +1170,6 @@
 
 
   
-    <article id="post-20年11月2日" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/11/02/20%E5%B9%B411%E6%9C%882%E6%97%A5/" target="_blank">20年11月2日</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/11/02/20%E5%B9%B411%E6%9C%882%E6%97%A5/" class="archive-article-date">
-        <time datetime="2020-11-02T13:55:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-02</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="vue异步数据传对象的问题"><a href="#vue异步数据传对象的问题" class="headerlink" title="vue异步数据传对象的问题"></a>vue异步数据传对象的问题</h1><p>异步vue中父传子对象的时候，因为vue中监听对象的一个属性是不可枚举的，导致不能用点或者是中括号取值。</p>
-<p>解决的办法：</p>
-<p>自己使用的是watch监听，不过页面的渲染有点延迟，传过来的数据先<code>JSON.stringity</code>，在子组件取到后<code>JSON.parse</code></p>
-<p><a href="https://www.cnblogs.com/epines/p/9518745.html" target="_blank" rel="noopener">https://www.cnblogs.com/epines/p/9518745.html</a></p>
-<h1 id="vue中v-if判断显示闪烁的问题"><a href="#vue中v-if判断显示闪烁的问题" class="headerlink" title="vue中v-if判断显示闪烁的问题"></a>vue中v-if判断显示闪烁的问题</h1><p>v-if直接判断true或者false会有闪烁的问题，但是在v-if=“a!==null”这样的形式的时候就没有问题了。</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日志</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/11/02/20%E5%B9%B411%E6%9C%882%E6%97%A5/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
@@ -1317,11 +1319,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">react</a>
+                <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">node</a>
+                <a href="javascript:void(0)" class="js-tag color1">react</a>
               </li>
              
               <li class="article-tag-list-item">
