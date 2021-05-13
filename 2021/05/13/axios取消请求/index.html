@@ -6,18 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://yuchenbin1.github.io">
-  <title>Archives: 2020/6 | ycb的博客</title>
+  <title>axios取消请求 | ycb的博客</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="这是我的个人技术博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="ycb的博客">
-<meta property="og:url" content="https://yuchenbin1.github.io/archives/2020/06/index.html">
+  <meta name="description" content="abort 取消请求 123456789101112131415161718192021222324&lt;div class&#x3D;&quot;page&quot; id&#x3D;&quot;app&quot;&gt;    &lt;button  class&#x3D;&quot;get-msg&quot;&gt;获取数据&lt;&#x2F;button&gt;    &lt;butto">
+<meta property="og:type" content="article">
+<meta property="og:title" content="axios取消请求">
+<meta property="og:url" content="https://yuchenbin1.github.io/2021/05/13/axios%E5%8F%96%E6%B6%88%E8%AF%B7%E6%B1%82/index.html">
 <meta property="og:site_name" content="ycb的博客">
-<meta property="og:description" content="这是我的个人技术博客">
+<meta property="og:description" content="abort 取消请求 123456789101112131415161718192021222324&lt;div class&#x3D;&quot;page&quot; id&#x3D;&quot;app&quot;&gt;    &lt;button  class&#x3D;&quot;get-msg&quot;&gt;获取数据&lt;&#x2F;button&gt;    &lt;butto">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-05-13T13:12:55.000Z">
+<meta property="article:modified_time" content="2021-05-13T13:15:54.452Z">
 <meta property="article:author" content="ycb">
+<meta property="article:tag" content="vue">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="ycb的博客" type="application/atom+xml">
@@ -195,65 +198,244 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-axios取消请求" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2020/06/13/6%E6%9C%8813%E6%97%A5/" class="archive-article-date">
-        <time datetime="2020-06-13T13:29:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-13</time>
-</a>
-
-        </div>
-    	 
+      <header class="article-header">
   
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2020/06/13/6%E6%9C%8813%E6%97%A5/" target="_blank">6月13日</a>
   
+    <h1 class="article-title" itemprop="name">
+      axios取消请求
     </h1>
   
 
 
-        <div class="article-info info-on-right">
+  
+  
+        
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
+<a href="/2021/05/13/axios%E5%8F%96%E6%B6%88%E8%AF%B7%E6%B1%82/" class="archive-article-date">
+        <time datetime="2021-05-13T13:12:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-13</time>
+</a>
+
+  
+  
+    
+<div style="margin-top:10px;">
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <!-- fonts.scss -->
+      <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
+      <i class="icon-statistics"></i>
+      <span class="post-meta-item-text"> 字数统计:</span>
+      <span class="post-count">916字</span>
+    </span>
+  </span>
+
+  <span class="post-time">
+    &nbsp; | &nbsp;
+    <span class="post-meta-item-icon">
+      <i class="icon-book icon"></i>
+      <span class="post-meta-item-text"> 阅读时长≈</span>
+      <span class="post-count">4分</span>
+    </span>
+  </span>
+</div>
+
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p><strong>abort</strong></p>
+<p>取消请求</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;page&quot; id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">    &lt;button  class&#x3D;&quot;get-msg&quot;&gt;获取数据&lt;&#x2F;button&gt;</span><br><span class="line">    &lt;button  class&#x3D;&quot;cancel&quot;&gt;取消获取&lt;&#x2F;button&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  var currentAjax &#x3D; null</span><br><span class="line">    $(&#39;.get-msg&#39;).click(function () &#123;</span><br><span class="line">      currentAjax &#x3D; $.ajax(&#123;</span><br><span class="line">        type: &#39;GET&#39;,</span><br><span class="line">        url: &#39;http:&#x2F;&#x2F;jsonplaceholder.typicode.com&#x2F;comments&#39;,</span><br><span class="line">        success: function (res) &#123;</span><br><span class="line">          console.log(res)</span><br><span class="line">        &#125;,</span><br><span class="line">        error: function (err) &#123;</span><br><span class="line">          console.log(&quot;获取失败&quot;)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">    $(&#39;.cancel&#39;).click(function () &#123;</span><br><span class="line">      if (currentAjax) &#123;</span><br><span class="line">        currentAjax.abort()取消请求</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>axios取消请求,CancelToken</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">  &lt;div class&#x3D;&quot;page&quot; id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">    &lt;button @click&#x3D;&quot;getMsg&quot; class&#x3D;&quot;get-msg&quot;&gt;获取数据&lt;&#x2F;button&gt;</span><br><span class="line">    &lt;button @click&#x3D;&quot;cancelGetMsg&quot; class&#x3D;&quot;cancel&quot;&gt;取消获取&lt;&#x2F;button&gt;</span><br><span class="line">    &lt;ul&gt;</span><br><span class="line">      &lt;li v-for&#x3D;&quot;item in items&quot;&gt;&#123;&#123;item.name&#125;&#125;&lt;&#x2F;li&gt;</span><br><span class="line">    &lt;&#x2F;ul&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">  &lt;script&gt;</span><br><span class="line">  var app &#x3D; new Vue(&#123;</span><br><span class="line">    el: &#39;#app&#39;,</span><br><span class="line">    data: &#123;</span><br><span class="line">      message: &#39;Hello Vue!&#39;,</span><br><span class="line">      items: [],</span><br><span class="line">      cancel: null</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">      getMsg () &#123;</span><br><span class="line">        let CancelToken &#x3D; axios.CancelToken</span><br><span class="line">        let self &#x3D; this</span><br><span class="line">        axios.get(&#39;http:&#x2F;&#x2F;jsonplaceholder.typicode.com&#x2F;comments&#39;, &#123;</span><br><span class="line">          cancelToken: new CancelToken(function executor(c) &#123;</span><br><span class="line">            self.cancel &#x3D; c</span><br><span class="line">            console.log(c)</span><br><span class="line">            &#x2F;&#x2F; 这个参数 c 就是CancelToken构造函数里面自带的取消请求的函数，这里把该函数当参数用</span><br><span class="line">          &#125;)</span><br><span class="line">        &#125;).then(res &#x3D;&gt; &#123;</span><br><span class="line">          this.items &#x3D; res.data</span><br><span class="line">        &#125;).catch(err &#x3D;&gt; &#123;</span><br><span class="line">          console.log(err)</span><br><span class="line">        &#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;手速够快就不用写这个定时器了，点击取消获取就可以看到效果了</span><br><span class="line">        setTimeout(function () &#123;</span><br><span class="line">          &#x2F;&#x2F;只要我们去调用了这个cancel()方法，没有完成请求的接口便会停止请求</span><br><span class="line">          self.cancel()</span><br><span class="line">        &#125;, 100)</span><br><span class="line">      &#125;,</span><br><span class="line">      &#x2F;&#x2F;cancelGetMsg 方法跟上面的setTimeout函数是一样的效果，因为手速不够快，哦不，是因为网速太快，导致我来不及点取消获取按钮，数据就获取成功了</span><br><span class="line">      cancelGetMsg () &#123;</span><br><span class="line">        &#x2F;&#x2F; 在这里去判断你的id 1 2 3，你默认是展示的tab1，点击的时候不管你上一个请求有没有执行完都去调用这个cancel()，</span><br><span class="line">        this.cancel()</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">  &lt;&#x2F;script&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br></pre></td></tr></table></figure>
+
+<p>封装axios解决重复点击的问题</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">import axios from &#39;axios&#39;;</span><br><span class="line">   </span><br><span class="line">   axios.defaults.timeout &#x3D; 5000;</span><br><span class="line">   axios.defaults.baseURL &#x3D;&#39;&#39;;</span><br><span class="line"></span><br><span class="line">   let pending &#x3D; []; &#x2F;&#x2F;声明一个数组用于存储每个ajax请求的取消函数和ajax标识</span><br><span class="line">   let cancelToken &#x3D; axios.CancelToken;</span><br><span class="line">   let removePending &#x3D; (ever) &#x3D;&gt; &#123;</span><br><span class="line">       for(let p in pending)&#123;</span><br><span class="line">           if(pending[p].u &#x3D;&#x3D;&#x3D; ever.url + &#39;&amp;&#39; + ever.method) &#123; &#x2F;&#x2F;当当前请求在数组中存在时执行函数体</span><br><span class="line">               pending[p].f(); &#x2F;&#x2F;执行取消操作</span><br><span class="line">               pending.splice(p, 1); &#x2F;&#x2F;把这条记录从数组中移除</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   </span><br><span class="line">   &#x2F;&#x2F;http request 拦截器</span><br><span class="line">   axios.interceptors.request.use(</span><br><span class="line">   config &#x3D;&gt; &#123;</span><br><span class="line">     config.data &#x3D; JSON.stringify(config.data);</span><br><span class="line">     config.headers &#x3D; &#123;</span><br><span class="line">       &#39;Content-Type&#39;:&#39;application&#x2F;x-www-form-urlencoded&#39;</span><br><span class="line">     &#125;</span><br><span class="line">     &#x2F;&#x2F; ------------------------------------------------------------------------------------</span><br><span class="line">     removePending(config); &#x2F;&#x2F;在一个ajax发送前执行一下取消操作</span><br><span class="line">     config.cancelToken &#x3D; new cancelToken((c)&#x3D;&gt;&#123;</span><br><span class="line">        &#x2F;&#x2F; 这里的ajax标识我是用请求地址&amp;请求方式拼接的字符串，当然你可以选择其他的一些方式</span><br><span class="line">        pending.push(&#123; u: config.url + &#39;&amp;&#39; + config.method, f: c &#125;);  </span><br><span class="line">     &#125;);</span><br><span class="line">     &#x2F;&#x2F; -----------------------------------------------------------------------------------------</span><br><span class="line">     return config;</span><br><span class="line">   &#125;,</span><br><span class="line">   error &#x3D;&gt; &#123;</span><br><span class="line">     return Promise.reject(err);</span><br><span class="line">   &#125;</span><br><span class="line"> );</span><br><span class="line"> &#x2F;&#x2F;http response 拦截器</span><br><span class="line"> axios.interceptors.response.use(</span><br><span class="line">   response &#x3D;&gt; &#123;</span><br><span class="line">     &#x2F;&#x2F; ------------------------------------------------------------------------------------------</span><br><span class="line">     removePending(res.config);  &#x2F;&#x2F;在一个ajax响应后再执行一下取消操作，把已经完成的请求从pending中移除</span><br><span class="line">     &#x2F;&#x2F; -------------------------------------------------------------------------------------------</span><br><span class="line">     if(response.data.errCode &#x3D;&#x3D;2)&#123;</span><br><span class="line">       router.push(&#123;</span><br><span class="line">         path:&quot;&#x2F;login&quot;,</span><br><span class="line">         querry:&#123;redirect:router.currentRoute.fullPath&#125;&#x2F;&#x2F;从哪个页面跳转</span><br><span class="line">       &#125;)</span><br><span class="line">     &#125;</span><br><span class="line">     return response;</span><br><span class="line">   &#125;,</span><br><span class="line">   error &#x3D;&gt; &#123;</span><br><span class="line">     return Promise.reject(error)</span><br><span class="line">   &#125;</span><br><span class="line"> )</span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+    <div class="page-reward">
+      <a href="javascript:void(0);" class="page-reward-btn tooltip-top" target="_self">
+        <div class="tooltip tooltip-east">
+          <span class="tooltip-item">
+            赏
+          </span>
+          <span class="tooltip-content">
+            <span class="tooltip-text">
+              <span class="tooltip-inner">
+                <p class="reward-p"><i class="icon icon-quo-left"></i>o谢谢你请我吃糖果o<i
+                    class="icon icon-quo-right"></i></p>
+                <div class="reward-box">
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/zhifubaopad.jpg">
+                    <span class="reward-type">支付宝</span>
+                  </div>
+                  
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/weixinpad.png">
+                    <span class="reward-type">微信</span>
+                  </div>
+                  
+                </div>
+              </span>
+            </span>
+          </span>
+        </div>
+      </a>
+    </div>
+    
+
+    
+    <div class="declare"> 
+      <ul class="post-copyright">
+        <li>
+          <strong>本文作者：</strong>
+          ycb
+        </li>
+        <li>
+          <strong>本文链接：</strong>
+          <a href="https:/yuchenbin1.github.io/2021/05/13/axios取消请求/" title="axios取消请求" target="_blank">https:/yuchenbin1.github.io/2021/05/13/axios取消请求/</a>
+        </li>
+        
+        <li>
+          <strong>版权声明： </strong>
           
+          本博客所有文章除特别声明外，均采用 <a href="https://github.com/JoeyBling/hexo-theme-yilia-plus/blob/master/LICENSE" rel="external nofollow" target="_blank">MIT</a> 许可协议。转载请注明出处！
+        </li>
+        
+      </ul>
+    </div>
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日志</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
+    
 
     
+
+    
+    
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <!-- <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a> -->
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://yuchenbin1.github.io/2021/05/13/axios%E5%8F%96%E6%B6%88%E8%AF%B7%E6%B1%82/" alt="微信分享二维码"> -->
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+
+<nav id="article-nav">
+  
+  
+    <a href="/2021/05/12/triggerEvent/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">triggerEvent</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
           </div>
@@ -294,8 +476,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,
