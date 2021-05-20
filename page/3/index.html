@@ -202,6 +202,123 @@
             
 
   
+    <article id="post-21年1月7日" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/01/07/21%E5%B9%B41%E6%9C%887%E6%97%A5/" target="_blank">21年1月7日</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/01/07/21%E5%B9%B41%E6%9C%887%E6%97%A5/" class="archive-article-date">
+        <time datetime="2021-01-07T13:09:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-07</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>时隔1个多月再次更新日志，这段时间12月份去出差了，半个多月的时间，在那边既要开发软件，又要安装硬件，好好学习的时间比较少。最近遇到的问题做一下总结：</p>
+<h1 id="echarts加上百度地图制作驾驶舱"><a href="#echarts加上百度地图制作驾驶舱" class="headerlink" title="echarts加上百度地图制作驾驶舱"></a>echarts加上百度地图制作驾驶舱</h1><p>平台的驾驶舱需要用到地图，于是乎想到用echarts加上百度地图的方式解决，有几个问题：</p>
+<h3 id="echarts样式接口有问题"><a href="#echarts样式接口有问题" class="headerlink" title="echarts样式接口有问题"></a>echarts样式接口有问题</h3><p>echarts4.9.0版本的mapStyle接口无法生效，这个接口是通过json的配置文件去更改百度地图的样式，后来没办法使用了5.0.0新版本的echarts，这个接口是没有问题的。通过在百度地图开发的个性编辑器设定样式，又有一些问题比如：国境线没法设置样式等</p>
+<h3 id="百度地图图标去除"><a href="#百度地图图标去除" class="headerlink" title="百度地图图标去除"></a>百度地图图标去除</h3><p>通过在<code>index.html</code>文件</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="css">	<span class="selector-class">.anchorBL</span>&#123;</span></span><br><span class="line"><span class="css">		<span class="selector-tag">display</span><span class="selector-pseudo">:none</span>;</span></span><br><span class="line">	&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="echarts的相关配置"><a href="#echarts的相关配置" class="headerlink" title="echarts的相关配置"></a>echarts的相关配置</h3><p>这个配置并不是很好理解的，但是简单来说，echarts的配置内容通过设定维度显示的，具体还是要看说明文档</p>
+<h3 id="驾驶舱全屏"><a href="#驾驶舱全屏" class="headerlink" title="驾驶舱全屏"></a>驾驶舱全屏</h3><p>全屏只能通过人机交互操作，放在mounted里面会有报错</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">fullScreen() &#123;</span><br><span class="line">      <span class="keyword">let</span> element = <span class="built_in">document</span>.getElementById(<span class="string">"screen_container"</span>);</span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">this</span>.fullscreen) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">document</span>.exitFullscreen) &#123;</span><br><span class="line">          <span class="built_in">document</span>.exitFullscreen();</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">document</span>.webkitCancelFullScreen) &#123;</span><br><span class="line">          <span class="built_in">document</span>.webkitCancelFullScreen();</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">document</span>.mozCancelFullScreen) &#123;</span><br><span class="line">          <span class="built_in">document</span>.mozCancelFullScreen();</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">document</span>.msExitFullscreen) &#123;</span><br><span class="line">          <span class="built_in">document</span>.msExitFullscreen();</span><br><span class="line">        &#125;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (element.requestFullscreen) &#123;</span><br><span class="line">          element.requestFullscreen();</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (element.webkitRequestFullScreen) &#123;</span><br><span class="line">          element.webkitRequestFullScreen();</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (element.mozRequestFullScreen) &#123;</span><br><span class="line">          element.mozRequestFullScreen();</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (element.msRequestFullscreen) &#123;</span><br><span class="line">          <span class="comment">// IE11</span></span><br><span class="line">          element.msRequestFullscreen();</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">this</span>.fullscreen = !<span class="keyword">this</span>.fullscreen;</span><br><span class="line">    &#125;,</span><br></pre></td></tr></table></figure>
+
+<h3 id="驾驶舱自适应"><a href="#驾驶舱自适应" class="headerlink" title="驾驶舱自适应"></a>驾驶舱自适应</h3><p>各个dom在设置宽高的时候，要计算好百分比</p>
+<h1 id="pad移动端的相关问题"><a href="#pad移动端的相关问题" class="headerlink" title="pad移动端的相关问题"></a>pad移动端的相关问题</h1><h3 id="全屏自适应"><a href="#全屏自适应" class="headerlink" title="全屏自适应"></a>全屏自适应</h3><p>同样在做全屏的时候，事先以为是800*600的宽高像素比，结果就是会有留白，最后测试实际的宽高比是915*686,通过@media screen媒体查询设置html的font-size，注意一定要加上<code>！important</code>,否则优先级不够，然后在需要响应式的地方用rem单位，比如设置的根元素font-size为16px，有一个div的宽为32px，那么可以改成2rem</p>
+<h3 id="有些字体不显示"><a href="#有些字体不显示" class="headerlink" title="有些字体不显示"></a>有些字体不显示</h3><p>不同的设备，有不同的字体库，没有匹配的字体库的时候不会显示，还遇到过继承的字体大小没有生效的问题，最后通过给他加上字体大小才解决的</p>
+<h3 id="keep-alive"><a href="#keep-alive" class="headerlink" title="keep-alive"></a>keep-alive</h3><p>使用vue的keep-alive，缓存页面，顾名思义就是页面只会加载第一次，路由跳转过来的时候就不会重新加载了，注意在created、mounted等生命周期函数中操作就不会再一次生效了，这需要有<code>activated</code>路由跳转过来的钩子函数，当然还有<code>deactivated</code>路由跳转走的钩子函数，特别的注意像是定时的一些操作需要再一次放在<code>activated</code>中</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">activated()&#123;</span><br><span class="line">    <span class="keyword">const</span> that = <span class="keyword">this</span></span><br><span class="line">    <span class="keyword">this</span>.getmenu()</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.menustatus === <span class="number">-1</span>) &#123;</span><br><span class="line">          <span class="keyword">this</span>.getdeviceInfoList1()</span><br><span class="line">          <span class="keyword">this</span>.setbgcolor()</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">this</span>.menustatus === <span class="number">0</span>) &#123;</span><br><span class="line">          <span class="keyword">this</span>.breakDownDeviceList()</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">this</span>.menustatus === <span class="number">1</span>) &#123;</span><br><span class="line">          <span class="keyword">this</span>.materialMissingList()</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">this</span>.menustatus === <span class="number">2</span>) &#123;</span><br><span class="line">          <span class="keyword">this</span>.runDeviceList()</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">this</span>.menustatus === <span class="number">3</span>) &#123;</span><br><span class="line">          <span class="keyword">this</span>.productPlanAdviceList()</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">this</span>.menustatus === <span class="number">4</span>) &#123;</span><br><span class="line">          <span class="keyword">this</span>.freeAdviceList()</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">this</span>.menustatus === <span class="number">5</span>) &#123;</span><br><span class="line">          <span class="keyword">this</span>.nomaintainList()</span><br><span class="line">        &#125;</span><br><span class="line">    that.getdeviceInfoListbyInterval()</span><br><span class="line">    <span class="built_in">document</span>.addEventListener(<span class="string">'keydown'</span>, that.readCardId)</span><br><span class="line">  &#125;,</span><br><span class="line">  deactivated()&#123;</span><br><span class="line">    <span class="keyword">const</span> that = <span class="keyword">this</span></span><br><span class="line">    <span class="built_in">document</span>.removeEventListener(<span class="string">'keydown'</span>, that.readCardId)</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+
+<h1 id="管理员端的报错与处理"><a href="#管理员端的报错与处理" class="headerlink" title="管理员端的报错与处理"></a>管理员端的报错与处理</h1><p>报错大致分为几类</p>
+<p>1.api特性报错，比如全屏只能人点击全屏，否则报错</p>
+<p>2.返回的接口没有该字段，需要先判断有没有这个字段，再赋值</p>
+<p>3.一些UI组件api的数据类型，默认值需要在data中设置</p>
+<p>4.修改bug的时候，只是把视图层的DOM去掉了，但是没有把一些对DOM的操作去掉</p>
+<p>……</p>
+<h1 id="按钮重复点击的问题"><a href="#按钮重复点击的问题" class="headerlink" title="按钮重复点击的问题"></a>按钮重复点击的问题</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Vue.directive(<span class="string">'preventReClick'</span>, &#123;</span><br><span class="line">  inserted: <span class="function"><span class="keyword">function</span> (<span class="params">el, binding</span>) </span>&#123;</span><br><span class="line">      el.addEventListener(<span class="string">'click'</span>, () =&gt; &#123;</span><br><span class="line">          <span class="keyword">if</span> (!el.disabled) &#123;</span><br><span class="line">              el.disabled = <span class="literal">true</span></span><br><span class="line">              setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">                  el.disabled = <span class="literal">false</span></span><br><span class="line">              &#125;, binding.value || <span class="number">3000</span>)</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>通过在html标签中加上<code>v-preventReClick</code>可以防止重复点击，这里默认为3s，也可以设置，但是经过测试，这方法只能用在button标签上，对其他的div什么的无效</p>
+<p>后来就只能用最笨的办法</p>
+<p>本地设置一个<code>delay=true</code></p>
+<p>在点击的时候<code>@click=&quot;handleClick&quot;</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">handleClick()&#123;</span><br><span class="line">	<span class="keyword">if</span>(<span class="keyword">this</span>.delay===<span class="literal">false</span>)&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">'不能发送点击事件'</span>)</span><br><span class="line">	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.clickMethod()</span><br><span class="line">	&#125;</span><br><span class="line">&#125;,</span><br><span class="line">clickMethod()&#123;</span><br><span class="line">	<span class="keyword">this</span>.delay=<span class="literal">false</span>;</span><br><span class="line">	setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.delay=<span class="literal">true</span></span><br><span class="line">	&#125;,<span class="number">3000</span>);</span><br><span class="line">	<span class="keyword">this</span>.axios......</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="平台ifarme的使用"><a href="#平台ifarme的使用" class="headerlink" title="平台ifarme的使用"></a>平台ifarme的使用</h1><p>因为要做跳转，但是不能直接window.open挑转，于是用到了ifarme这个标签</p>
+<p><code>&lt;iframe src=&quot;http://需要的地址&quot; scrolling=&quot;no&quot; frameborder=&quot;0&quot; width=&quot;100%&quot; height=&quot;100%&quot;&gt;&lt;/iframe&gt;</code></p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日志</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/01/07/21%E5%B9%B41%E6%9C%887%E6%97%A5/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-20年11月25日" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1046,93 +1163,6 @@
 
 
   
-    <article id="post-7月4日" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/07/04/7%E6%9C%884%E6%97%A5/" target="_blank">7月4日</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/07/04/7%E6%9C%884%E6%97%A5/" class="archive-article-date">
-        <time datetime="2020-07-04T13:35:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-04</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>好久没有更新了，因为工作的原因，我总结一下自己现在有哪些技术栈把，首先是html、css、JS，其中css中的canvas比较不熟悉，可视化有兴趣的可以去学习一下，之后我学习了vue和react，可以说是全家桶吧，包括了router和redux、vuex，还有hook。但是自己实际打的代码太少了，要多多的练习一下。个人之前也学了一些webpack的基本配置还有git的操作。还学了sass预处理器，包括了许多插件的使用。像是node.js最近刚开始学，但是感觉之前的东西抓的不是很熟练，因此有想要去放一放。</p>
-<p>​    这是我最近的想法，一定要记住的是，要永远保持一颗学徒的心吧，实际的项目开发才是最为关键的。加油！</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日志</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/07/04/7%E6%9C%884%E6%97%A5/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/4/">Next &amp;raquo;</a>
@@ -1282,11 +1312,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+                <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">node</a>
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
