@@ -202,6 +202,215 @@
             
 
   
+    <article id="post-vue的简单语法二" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/03/04/vue%E7%9A%84%E7%AE%80%E5%8D%95%E8%AF%AD%E6%B3%95%E4%BA%8C/" target="_blank">vue的简单语法二</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/03/04/vue%E7%9A%84%E7%AE%80%E5%8D%95%E8%AF%AD%E6%B3%95%E4%BA%8C/" class="archive-article-date">
+        <time datetime="2020-03-04T07:15:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-04</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="v-for"><a href="#v-for" class="headerlink" title="v-for"></a>v-for</h1><p>根据数据生成列表结构</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">	&lt;ui&gt;</span><br><span class="line">		&lt;li v-for&#x3D;&quot;(item,index) in arr&quot;&gt;</span><br><span class="line">			序号：&#123;&#123;index&#125;&#125;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;姓名：&#123;&#123;item.name&#125;&#125;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;年龄:&#123;&#123;item.age&#125;&#125;</span><br><span class="line">		&lt;&#x2F;li&gt;</span><br><span class="line">	&lt;&#x2F;ui&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line">&lt;script src&#x3D;&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;vue&#x2F;dist&#x2F;vue.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">	var app&#x3D;new Vue(&#123;</span><br><span class="line">		el:&quot;#app&quot;,</span><br><span class="line">		data:&#123;</span><br><span class="line">			arr:[&#123;name:&quot;张三&quot;,age:17&#125;,</span><br><span class="line">				&#123;name:&quot;李四&quot;,age:45&#125;,</span><br><span class="line">				&#123;name:&quot;王五&quot;,age:65&#125;,</span><br><span class="line">				&#123;name:&quot;牛大&quot;,age:12&#125;,</span><br><span class="line">				&#123;name:&quot;黄二&quot;,age:78&#125;,</span><br><span class="line">				],</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;)</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="D:%5Ctupian%5C%E5%AD%A6%E4%B9%A0%5Con-for.png" alt="on-for"></p>
+<p>**这里想去掉前面的点可以用list-style-type:none</p>
+<p>** 这里v-for想遍历多个数组，可以把多个数组放在一个数组中，利用属性名进行遍历。</p>
+<p>** 关于v-for和v-if在一起用的说明 </p>
+<p><a href="https://cn.vuejs.org/v2/style-guide/#%E9%81%BF%E5%85%8D-v-if-%E5%92%8C-v-for-%E7%94%A8%E5%9C%A8%E4%B8%80%E8%B5%B7-%E5%BF%85%E8%A6%81" target="_blank">解答</a></p>
+<h1 id="v-on补充"><a href="#v-on补充" class="headerlink" title="v-on补充"></a>v-on补充</h1><p>传递自定义参数，事件修饰符（function）v-on：可以用@表示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">	&lt;input type&#x3D;&quot;button&quot; v-on:click&#x3D;&quot;dolt(787)&quot;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var app&#x3D;new Vue(&#123;</span><br><span class="line">	el:&quot;#app&quot;,</span><br><span class="line">	methods:&#123;</span><br><span class="line">		dolt:function(p1)&#123;</span><br><span class="line">		console.log(&quot;hello&quot;);</span><br><span class="line">		&#125;,</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h1 id="v-model"><a href="#v-model" class="headerlink" title="v-model"></a>v-model</h1><p>获取和设置表单元素的值（双向数据绑定）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">			&lt;input type&#x3D;&quot;text&quot; v-model&#x3D;&quot;message&quot;&gt;</span><br><span class="line">			&lt;h3 v-text&#x3D;&quot;message&quot;&gt;&lt;&#x2F;h3&gt;</span><br><span class="line">			&lt;h3&gt;&#123;&#123;message&#125;&#125;&lt;&#x2F;h3&gt;</span><br><span class="line">		&lt;&#x2F;div&gt;</span><br><span class="line">		&lt;script src&#x3D;&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;vue&#x2F;dist&#x2F;vue.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">		&lt;script&gt;</span><br><span class="line">			var app&#x3D;new Vue(&#123;</span><br><span class="line">				el:&quot;#app&quot;,</span><br><span class="line">				data:&#123;</span><br><span class="line">					message:&quot;hello world&quot;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;)</span><br><span class="line">		&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>这里要注意改变input输入的值同时改变message的值</p>
+<h3 id="总结：以上是我vue最基本语法的学习，之后我会暂时放开vue，我觉得我的css和js需要巩固一下了"><a href="#总结：以上是我vue最基本语法的学习，之后我会暂时放开vue，我觉得我的css和js需要巩固一下了" class="headerlink" title="总结：以上是我vue最基本语法的学习，之后我会暂时放开vue，我觉得我的css和js需要巩固一下了"></a>总结：以上是我vue最基本语法的学习，之后我会暂时放开vue，我觉得我的css和js需要巩固一下了</h3>
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/03/04/vue%E7%9A%84%E7%AE%80%E5%8D%95%E8%AF%AD%E6%B3%95%E4%BA%8C/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-忙碌的一天结束了" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/03/03/%E5%BF%99%E7%A2%8C%E7%9A%84%E4%B8%80%E5%A4%A9%E7%BB%93%E6%9D%9F%E4%BA%86/" target="_blank">忙碌的一天结束了</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/03/03/%E5%BF%99%E7%A2%8C%E7%9A%84%E4%B8%80%E5%A4%A9%E7%BB%93%E6%9D%9F%E4%BA%86/" class="archive-article-date">
+        <time datetime="2020-03-03T14:21:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-03</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="undefined的问题"><a href="#undefined的问题" class="headerlink" title="undefined的问题"></a>undefined的问题</h1><p><a href="https://www.cnblogs.com/fundebug/archive/2019/08/01/7-tips-to-handle-undefined-in-javascript.html" target="_blank">解决方法</a></p>
+<p>变量没有定义这个问题困扰了我好久最后我重新下载安装的，问题并没有解决的，可能有以下几个原因：</p>
+<ol>
+<li>变量重名</li>
+<li>变量未初始化</li>
+<li>访问中出现问题</li>
+</ol>
+<h1 id="vue语法总结"><a href="#vue语法总结" class="headerlink" title="vue语法总结"></a>vue语法总结</h1><h3 id="v-text"><a href="#v-text" class="headerlink" title="v-text"></a>v-text</h3><p>改变全部的文本内容（完全是文本格式）</p>
+<h3 id="v-html"><a href="#v-html" class="headerlink" title="v-html"></a>v-html</h3><p>改变全部的文本内容（html标签可以解析）</p>
+<h3 id="v-on"><a href="#v-on" class="headerlink" title="v-on"></a>v-on</h3><p>为元素绑定事件（onclick，onmouseout，function的自定义方法等）</p>
+<h3 id="v-show"><a href="#v-show" class="headerlink" title="v-show"></a>v-show</h3><p>根据表达值的真假，切换元素的显示和隐藏（true为显示，false为隐藏）</p>
+<p>v-show=”age&gt;=18”     内部可以是表达式</p>
+<p>他操作的是display（属性一直改）</p>
+<h3 id="v-if"><a href="#v-if" class="headerlink" title="v-if"></a>v-if</h3><p>根据表达值的真假，切换元素的显示和隐藏（true为显示，false为隐藏）</p>
+<p>v-if=”age&gt;=18”     内部可以是表达式</p>
+<p>他操作的是dom元素（属性直接不见了）</p>
+<p>**需要频繁切换的元素用v-show，反之用v-if</p>
+<h3 id="v-bind"><a href="#v-bind" class="headerlink" title="v-bind"></a>v-bind</h3><p>v-bind：属性名=表达式</p>
+<p>设置元素的属性（src，title，class等）</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>今天很累，年轻需要努力奋斗，但也需要良好健康的身体，有健康的作息才有更高效率的学习状态，加油！</p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/03/03/%E5%BF%99%E7%A2%8C%E7%9A%84%E4%B8%80%E5%A4%A9%E7%BB%93%E6%9D%9F%E4%BA%86/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-从明天开始好好学习vue" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -603,7 +812,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
+                <a href="javascript:void(0)" class="js-tag color3">基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -611,7 +820,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">基础</a>
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
