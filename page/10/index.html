@@ -202,6 +202,98 @@
             
 
   
+    <article id="post-vue的表单操作" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/03/31/vue%E7%9A%84%E8%A1%A8%E5%8D%95%E6%93%8D%E4%BD%9C/" target="_blank">vue的表单操作</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/03/31/vue%E7%9A%84%E8%A1%A8%E5%8D%95%E6%93%8D%E4%BD%9C/" class="archive-article-date">
+        <time datetime="2020-03-31T09:23:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-31</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="vue的表单操作"><a href="#vue的表单操作" class="headerlink" title="vue的表单操作"></a>vue的表单操作</h1><p>input      单行文本</p>
+<p>textarea   多行文本</p>
+<p> select     下拉多选</p>
+<p> radio      单选框</p>
+<p> checkbox   多选框</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=<span class="string">"utf-8"</span>&gt;</span><br><span class="line">		&lt;title&gt;&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;!-- input      单行文本</span><br><span class="line">		     textarea   多行文本</span><br><span class="line">		     select     下拉多选</span><br><span class="line">		     radio      单选框</span><br><span class="line">		     checkbox   多选框   --&gt;</span><br><span class="line">		&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">			&lt;form action=<span class="string">"http://www.baidu.com"</span>&gt;</span><br><span class="line">				&lt;div&gt;</span><br><span class="line">					&lt;span&gt;姓名：&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">					&lt;span&gt;</span></span><br><span class="line"><span class="regexp">						&lt;input type="text" v-model="uname"&gt;&lt;!-- 直接v-model绑定 --&gt;</span></span><br><span class="line"><span class="regexp">					&lt;/</span>span&gt;</span><br><span class="line">				&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">				&lt;div&gt;</span></span><br><span class="line"><span class="regexp">					&lt;span&gt;性别：&lt;/</span>span&gt;</span><br><span class="line">					&lt;span&gt;</span><br><span class="line">						&lt;input type=<span class="string">"radio"</span> id=<span class="string">"male"</span> value=<span class="string">"1"</span> v-model=<span class="string">"gender"</span>&gt;&lt;!-- v-model绑定以及当value值与v-model中值一样时显示 --&gt;</span><br><span class="line">						&lt;label <span class="keyword">for</span>=<span class="string">"male"</span>&gt;男&lt;<span class="regexp">/label&gt;</span></span><br><span class="line"><span class="regexp">						&lt;input type="radio" id="female" value="2" v-model="gender"&gt;</span></span><br><span class="line"><span class="regexp">						&lt;label for="female"&gt;女&lt;/</span>label&gt;</span><br><span class="line">					&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">				&lt;/</span>div&gt;</span><br><span class="line">				&lt;div&gt;</span><br><span class="line">					&lt;span&gt;爱好：&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">					&lt;input type="checkbox" id="ball" value="1" v-model="hobby"&gt;&lt;!-- 与radio同理但是hobby是一个数组，可多选 --&gt;</span></span><br><span class="line"><span class="regexp">					&lt;label for="ball"&gt;篮球&lt;/</span>label&gt;</span><br><span class="line">					&lt;input type=<span class="string">"checkbox"</span> id=<span class="string">"sing"</span> value=<span class="string">"2"</span> v-model=<span class="string">"hobby"</span>&gt;</span><br><span class="line">					&lt;label <span class="keyword">for</span>=<span class="string">"sing"</span>&gt;唱歌&lt;<span class="regexp">/label&gt;</span></span><br><span class="line"><span class="regexp">					&lt;input type="checkbox" id="code" value="3" v-model="hobby"&gt;</span></span><br><span class="line"><span class="regexp">					&lt;label for="code"&gt;写代码&lt;/</span>label&gt;</span><br><span class="line">				&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">				&lt;div&gt;</span></span><br><span class="line"><span class="regexp">					&lt;span&gt;职业：&lt;/</span>span&gt;             &lt;!-- multiple是多选的属性 --&gt;&lt;!-- 按住shift可以多选 --&gt;</span><br><span class="line">					&lt;select v-model=<span class="string">"occupation"</span> multiple=<span class="string">"true"</span>&gt;&lt;!-- v-model绑定在select标签中 --&gt;</span><br><span class="line">						&lt;option value=<span class="string">"0"</span>&gt;请选择职业...&lt;<span class="regexp">/option&gt;</span></span><br><span class="line"><span class="regexp">						&lt;option value="1"&gt;教师&lt;/</span>option&gt;</span><br><span class="line">						&lt;option value=<span class="string">"2"</span>&gt;软件工程师&lt;<span class="regexp">/option&gt;</span></span><br><span class="line"><span class="regexp">						&lt;option value="3"&gt;律师&lt;/</span>option&gt;</span><br><span class="line">					&lt;<span class="regexp">/select&gt;</span></span><br><span class="line"><span class="regexp">				&lt;/</span>div&gt;</span><br><span class="line">				&lt;div&gt;</span><br><span class="line">					&lt;span&gt;个人简介：&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">					&lt;textarea v-model="desc"&gt;&lt;/</span>textarea&gt;&lt;!-- 多行文本与单行文本用法一样 --&gt;</span><br><span class="line">				&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">				&lt;div&gt;</span></span><br><span class="line"><span class="regexp">					&lt;input type="submit" value="提交" @click.prevent="handle"&gt;&lt;!-- input的summit按钮会在提交时跳转form的action属性地址 --&gt;</span></span><br><span class="line"><span class="regexp">					&lt;!-- 一般要用自定义事件提交，并把默认的行为禁止掉，用prevent --&gt;</span></span><br><span class="line"><span class="regexp">				&lt;/</span>div&gt;</span><br><span class="line">			&lt;<span class="regexp">/form&gt;</span></span><br><span class="line"><span class="regexp">		&lt;/</span>div&gt;</span><br><span class="line">		&lt;script src=<span class="string">"https://cdn.jsdelivr.net/npm/vue/dist/vue.js"</span>&gt;&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">		&lt;script&gt;</span></span><br><span class="line"><span class="regexp">			var vm=new Vue(&#123;</span></span><br><span class="line"><span class="regexp">				el:"#app",</span></span><br><span class="line"><span class="regexp">				data:&#123;</span></span><br><span class="line"><span class="regexp">					uname:'',</span></span><br><span class="line"><span class="regexp">					gender:1,</span></span><br><span class="line"><span class="regexp">					hobby:[1,2],</span></span><br><span class="line"><span class="regexp">					occupation:[2,3]  ,/</span><span class="regexp">/单选用单一值多选用数组</span></span><br><span class="line"><span class="regexp">					desc:'你好'</span></span><br><span class="line"><span class="regexp">				&#125;,</span></span><br><span class="line"><span class="regexp">				methods:&#123;</span></span><br><span class="line"><span class="regexp">					handle:function()&#123;</span></span><br><span class="line"><span class="regexp">						console.log(this.gender)</span></span><br><span class="line"><span class="regexp">						/</span><span class="regexp">/ 实际上调用ajax接口</span></span><br><span class="line"><span class="regexp">					&#125;</span></span><br><span class="line"><span class="regexp">				&#125;,</span></span><br><span class="line"><span class="regexp">			&#125;)</span></span><br><span class="line"><span class="regexp">		&lt;/</span>script&gt;</span><br><span class="line">	&lt;<span class="regexp">/body&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>html&gt;</span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/03/31/vue%E7%9A%84%E8%A1%A8%E5%8D%95%E6%93%8D%E4%BD%9C/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-天知道" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1116,93 +1208,6 @@
 
 
   
-    <article id="post-20年3月12日" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/03/12/20%E5%B9%B43%E6%9C%8812%E6%97%A5/" target="_blank">20年3月12日</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/03/12/20%E5%B9%B43%E6%9C%8812%E6%97%A5/" class="archive-article-date">
-        <time datetime="2020-03-12T09:29:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-12</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>​        最近我并没有更新新的js学习记录，因为在练习响应式布局，想通过着手一个小项目来提高自己的能力，在实践过程中，学习的内容有些很常用，比如css的伪元素、伪类、弹性盒和栅格布局，而像图像渐变这种用的比较少甚至没有，一般会用到常用的库来代替。</p>
-<p>​        除此之外，我要开始着手毕业设计了，虽然现在回不了学校，但是可以找一些资料了。</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日志</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/03/12/20%E5%B9%B43%E6%9C%8812%E6%97%A5/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/9/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/11/">Next &amp;raquo;</a>
@@ -1340,10 +1345,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">webpack</a>
               </li>
              
@@ -1353,6 +1354,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1368,11 +1373,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
+                <a href="javascript:void(0)" class="js-tag color4">小程序</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">小程序</a>
+                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
               </li>
              
               <li class="article-tag-list-item">
