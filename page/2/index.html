@@ -202,6 +202,104 @@
             
 
   
+    <article id="post-canvas基础与构造函数" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/06/07/canvas%E5%9F%BA%E7%A1%80%E4%B8%8E%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/" target="_blank">canvas基础与构造函数</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/06/07/canvas%E5%9F%BA%E7%A1%80%E4%B8%8E%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/" class="archive-article-date">
+        <time datetime="2021-06-07T14:43:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-07</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="Flash"><a href="#Flash" class="headerlink" title="Flash"></a>Flash</h1><p>长久以来的web端的动画都是Flash，比如动画广告、游戏等等，基本都是Flash，运行它必须安装Adobe Flash Player，漏洞多，重量大，会卡顿和不流畅等</p>
+<h1 id="canvas"><a href="#canvas" class="headerlink" title="canvas"></a>canvas</h1><p>HTML5提出canvas，颠覆Flash的地位，无论是广告与游戏都是可以使用canvas实现，他是一个轻量级的画布，使用canvas进行js的编程不需要额外的插件</p>
+<h1 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">canvas</span> <span class="attr">width</span>=<span class="string">"600"</span> <span class="attr">height</span>=<span class="string">"300"</span>&gt;</span></span><br><span class="line">	当前的浏览器版本不支持，请升级浏览器</span><br><span class="line"><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在canvas中的文字只有在浏览器不支持canvas时才会显示，canvas的标签属性只有width与height，尽量使用标签属性设置宽高，使用css设置会拉伸变形失真</p>
+<h1 id="简单的绘制"><a href="#简单的绘制" class="headerlink" title="简单的绘制"></a>简单的绘制</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">canvas</span> <span class="attr">width</span>=<span class="string">"600"</span> <span class="attr">height</span>=<span class="string">"300"</span> <span class="attr">id</span>=<span class="string">"myCanvas"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">	<span class="comment">//得到canvas的画布</span></span></span><br><span class="line"><span class="javascript">	<span class="keyword">var</span> canvas=<span class="built_in">document</span>.getElementById(<span class="string">'myCanvas'</span>)</span></span><br><span class="line"><span class="actionscript">	<span class="comment">//得到画布的上下文，只有2d与3d</span></span></span><br><span class="line"><span class="actionscript">	<span class="keyword">var</span> ctx=canvas.getContent(<span class="string">'2d'</span>)</span></span><br><span class="line"><span class="actionscript">    <span class="comment">//设置画笔为绿色</span></span></span><br><span class="line"><span class="actionscript">    ctx.fillStyle=<span class="string">"green"</span></span></span><br><span class="line"><span class="actionscript">    <span class="comment">//绘制矩形，在距离画板左上角的x轴100，y轴150的地方绘制宽为200，高为50的矩形</span></span></span><br><span class="line">    ctx.fillRect(100,150,200,50)</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="canvas的像素化"><a href="#canvas的像素化" class="headerlink" title="canvas的像素化"></a>canvas的像素化</h1><p>canvas绘制成功就会像素化了，没有能力再去得到这个图形，也没有能力去修改画布上的内容</p>
+<p>canvas动画：清屏–&gt;更新–&gt;渲染</p>
+<h1 id="canvas的简单动画"><a href="#canvas的简单动画" class="headerlink" title="canvas的简单动画"></a>canvas的简单动画</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">canvas</span> <span class="attr">width</span>=<span class="string">"600"</span> <span class="attr">height</span>=<span class="string">"300"</span> <span class="attr">id</span>=<span class="string">"myCanvas"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">	<span class="keyword">var</span> canvas=<span class="built_in">document</span>.getElementById(<span class="string">'myCanvas'</span>)</span></span><br><span class="line"><span class="actionscript">	<span class="keyword">var</span> ctx=canvas.getContent(<span class="string">'2d'</span>)</span></span><br><span class="line"><span class="actionscript">    ctx.fillStyle=<span class="string">"green"</span></span></span><br><span class="line"><span class="actionscript">    <span class="keyword">var</span> left=<span class="number">100</span></span></span><br><span class="line">    ctx.fillRect(left,150,200,50)</span><br><span class="line"><span class="actionscript">    setInterval(<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">        <span class="comment">//清除画布</span></span></span><br><span class="line">        ctx.clearRect(0,0,600,300)</span><br><span class="line">        left++</span><br><span class="line">        ctx.fillRect(left,150,200,50)</span><br><span class="line">    &#125;,10)</span><br><span class="line">    </span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="canvas构造函数"><a href="#canvas构造函数" class="headerlink" title="canvas构造函数"></a>canvas构造函数</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">canvas</span> <span class="attr">width</span>=<span class="string">"600"</span> <span class="attr">height</span>=<span class="string">"300"</span> <span class="attr">id</span>=<span class="string">"myCanvas"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> canvas=<span class="built_in">document</span>.getElementById(<span class="string">'myCanvas'</span>)</span></span><br><span class="line"><span class="actionscript">    <span class="keyword">var</span> ctx=canvas.getContent(<span class="string">'2d'</span>)</span></span><br><span class="line"><span class="actionscript">    <span class="function"><span class="keyword">function</span> <span class="title">Rect</span><span class="params">(x,y,w,h,color)</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">this</span>.x=x</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">this</span>.y=y</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">this</span>.w=w</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">this</span>.h=h</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">this</span>.color=color</span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="actionscript">    <span class="comment">//更新</span></span></span><br><span class="line"><span class="actionscript">    Rect.prototype.update=<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">this</span>.x++</span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="actionscript">    <span class="comment">//渲染</span></span></span><br><span class="line"><span class="actionscript">    Rect.prototype.render=<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">        ctx.fillStyle=<span class="keyword">this</span>.color</span></span><br><span class="line"><span class="actionscript">        ctx.fillRect(<span class="keyword">this</span>.x,<span class="keyword">this</span>.y,<span class="keyword">this</span>.w,<span class="keyword">this</span>.h)</span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="actionscript">    <span class="comment">//实例化</span></span></span><br><span class="line"><span class="actionscript">    <span class="keyword">var</span> r1=<span class="keyword">new</span> Rect(<span class="number">100</span>,<span class="number">100</span>,<span class="number">50</span>,<span class="number">50</span>,<span class="string">'blue'</span>)</span></span><br><span class="line"><span class="actionscript">    <span class="keyword">var</span> r2=<span class="keyword">new</span> Rect(<span class="number">200</span>,<span class="number">200</span>,<span class="number">50</span>,<span class="number">50</span>,<span class="string">'green'</span>)</span></span><br><span class="line"><span class="actionscript">    <span class="comment">//动画过程</span></span></span><br><span class="line"><span class="actionscript">    setInterval(<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">       <span class="comment">//清屏</span></span></span><br><span class="line">        ctx.clearRect(0,0,canvas.width,canvas.height)</span><br><span class="line"><span class="actionscript">        <span class="comment">//更新方法</span></span></span><br><span class="line">       	r1.update()</span><br><span class="line"><span class="actionscript">        <span class="comment">//渲染方法</span></span></span><br><span class="line">        r1.render()</span><br><span class="line">        </span><br><span class="line"><span class="actionscript">         <span class="comment">//更新方法</span></span></span><br><span class="line">       	r2.update()</span><br><span class="line"><span class="actionscript">        <span class="comment">//渲染方法</span></span></span><br><span class="line">        r2.render()</span><br><span class="line">        </span><br><span class="line">    &#125;,10)</span><br><span class="line">	</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">基础</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/06/07/canvas%E5%9F%BA%E7%A1%80%E4%B8%8E%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-npm包的发布以及yarn" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1108,111 +1206,6 @@
 
 
   
-    <article id="post-21年4月12日" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/04/12/21%E5%B9%B44%E6%9C%8812%E6%97%A5/" target="_blank">21年4月12日</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/04/12/21%E5%B9%B44%E6%9C%8812%E6%97%A5/" class="archive-article-date">
-        <time datetime="2021-04-12T13:19:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-12</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="keep-alive的作用"><a href="#keep-alive的作用" class="headerlink" title="keep-alive的作用"></a>keep-alive的作用</h1><p>主要用于缓存页面，经常在页面跳转之后希望页面的跳转之前的筛选条件不要变</p>
-<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><h3 id="vue的渲染过程"><a href="#vue的渲染过程" class="headerlink" title="vue的渲染过程"></a>vue的渲染过程</h3><p>new vue==&gt;init==&gt;$mount==&gt;compile==&gt;render==&gt;vnode==&gt;patch==&gt;DOM</p>
-<p>Vue的渲染是render阶段开始的，但keep-alive的渲染是在patch阶段，这是构建组件树（虚拟DOM树），并将VNode转换成真正DOM节点的过程。<br><strong>简单描述从render到patch的过程</strong><br> 我们从最简单的new Vue开始：</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> App <span class="keyword">from</span> <span class="string">'./App.vue'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    render: <span class="function"><span class="params">h</span> =&gt;</span> h(App)</span><br><span class="line">&#125;).$mount(<span class="string">'#app'</span>)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>Vue在渲染的时候先调用原型上的_render函数将组件对象转化成一个VNode实例；而_render是通过调用createElement和createEmptyVNode两个函数进行转化；</li>
-<li>createElement的转化过程会根据不同的情形选择new VNode或者调用createComponent函数做VNode实例化；</li>
-<li>完成VNode实例化后，这时候Vue调用原型上的_update函数把VNode渲染成真实DOM，这个过程又是通过调用<strong>patch</strong>函数完成的（这就是patch阶段了）</li>
-</ul>
-<h3 id="keep-alive组件的渲染"><a href="#keep-alive组件的渲染" class="headerlink" title="keep-alive组件的渲染"></a>keep-alive组件的渲染</h3><p>Vue在初始化生命周期的时候，为组件实例建立父子关系会根据abstract属性决定是否忽略某个组件。在keep-alive中，设置了abstract:true，那Vue就会跳过该组件实例。</p>
-<p><strong>最后构建的组件树中就不会包含keep-alive组件，那么由组件树渲染成的DOM树自然也不会有keep-alive相关的节点了。</strong></p>
-<p><strong>keep-alive包裹的组件是如何使用缓存的？</strong><br> 在patch阶段，会执行createComponent函数：</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/core/vdom/patch.js</span></span><br><span class="line"><span class="function">function <span class="title">createComponent</span> (<span class="params">vnode, insertedVnodeQueue, parentElm, refElm</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> i = vnode.data</span><br><span class="line">    <span class="keyword">if</span> (isDef(i)) &#123;</span><br><span class="line">        <span class="keyword">const</span> isReactivated = isDef(vnode.componentInstance) &amp;&amp; i.keepAlive</span><br><span class="line">        <span class="keyword">if</span> (isDef(i = i.hook) &amp;&amp; isDef(i = i.init)) &#123;</span><br><span class="line">            i(vnode, <span class="literal">false</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (isDef(vnode.componentInstance)) &#123;</span><br><span class="line">            initComponent(vnode, insertedVnodeQueue)</span><br><span class="line">            insert(parentElem, vnode.elem, refElem) <span class="comment">// 将缓存的DOM(vnode.elem) 插入父元素中</span></span><br><span class="line">            <span class="keyword">if</span> (isTrue(isReactivated)) &#123;</span><br><span class="line">                reactivateComponent(vnode, insertedVnodeQueue, parentEle, refElm)</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>在首次加载被包裹组建时，由keep-alive.js中的render函数可知，vnode.componentInstance的值是undfined，keepAlive的值是true，因为keep-alive组件作为父组件，它的render函数会先于被包裹组件执行；那么只执行到i(vnode,false)，后面的逻辑不执行；</li>
-<li>再次访问被包裹组件时，vnode.componentInstance的值就是已经缓存的组件实例，那么会执行insert(parentElm, vnode.elm, refElm)逻辑，这样就直接把上一次的DOM插入到父元素中。</li>
-</ul>
-<p>当vnode.componentInstance和keepAlive同时为true时，不再进入$mount过程，那mounted之前的所有钩子函数（beforeCreate、created、mounted）都不再执行。。</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日志</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/04/12/21%E5%B9%B44%E6%9C%8812%E6%97%A5/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
@@ -1354,10 +1347,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">基础</a>
               </li>
              
@@ -1370,6 +1359,10 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
@@ -1378,11 +1371,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
+                <a href="javascript:void(0)" class="js-tag color4">小程序</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">小程序</a>
+                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
               </li>
              
               <li class="article-tag-list-item">

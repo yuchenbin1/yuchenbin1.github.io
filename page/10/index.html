@@ -202,6 +202,101 @@
             
 
   
+    <article id="post-vue自定义指令" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/04/02/vue%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8C%87%E4%BB%A4/" target="_blank">vue自定义指令</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/04/02/vue%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8C%87%E4%BB%A4/" class="archive-article-date">
+        <time datetime="2020-04-02T11:36:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-02</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="vue的自定义指令"><a href="#vue的自定义指令" class="headerlink" title="vue的自定义指令"></a>vue的自定义指令</h1><ol>
+<li>全局自定义</li>
+<li>局部自定义</li>
+</ol>
+<h3 id="vue的全局自定义"><a href="#vue的全局自定义" class="headerlink" title="vue的全局自定义"></a>vue的全局自定义</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=<span class="string">"utf-8"</span>&gt;</span><br><span class="line">		&lt;title&gt;&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">			&lt;input type=<span class="string">"text"</span> v-focus v-color=<span class="string">"msg"</span>&gt;</span><br><span class="line">		&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">		&lt;script src="../</span>../<span class="number">000</span>-vue.js/vue.js<span class="string">"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="string">		&lt;script&gt;</span></span><br><span class="line"><span class="string">			Vue.directive('focus',&#123;//自动聚焦</span></span><br><span class="line"><span class="string">				inserted:function(el)&#123;</span></span><br><span class="line"><span class="string">					el.focus();</span></span><br><span class="line"><span class="string">				&#125;</span></span><br><span class="line"><span class="string">			&#125;),</span></span><br><span class="line"><span class="string">			Vue.directive('color',&#123;//改变颜色</span></span><br><span class="line"><span class="string">				bind:function(el,binding)&#123;</span></span><br><span class="line"><span class="string">					el.style.backgroundColor=binding.value.color;</span></span><br><span class="line"><span class="string">				&#125;</span></span><br><span class="line"><span class="string">			&#125;);</span></span><br><span class="line"><span class="string">			var vm=new Vue(&#123;</span></span><br><span class="line">				el:"#app",</span><br><span class="line">				data:&#123;</span><br><span class="line">					msg:&#123;</span><br><span class="line">						color:<span class="string">"red"</span></span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;)</span><br><span class="line">		&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>body&gt;</span><br><span class="line">&lt;<span class="regexp">/html&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这里定义 了v-focus的自动聚焦的指令，还有v-color这个改变背景颜色的指令</p>
+<h3 id="vue的局部自定义指令"><a href="#vue的局部自定义指令" class="headerlink" title="vue的局部自定义指令"></a>vue的局部自定义指令</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=<span class="string">"utf-8"</span>&gt;</span><br><span class="line">		&lt;title&gt;&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">			&lt;input type=<span class="string">"text"</span> v-focus v-color=<span class="string">"msg"</span>&gt;</span><br><span class="line">		&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">		&lt;script src="../</span>../<span class="number">000</span>-vue.js/vue.js<span class="string">"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="string">		&lt;script&gt;</span></span><br><span class="line"><span class="string">			var vm=new Vue(&#123;</span></span><br><span class="line"><span class="string">				el:'#app',</span></span><br><span class="line"><span class="string">				data:&#123;</span></span><br><span class="line"><span class="string">					msg:&#123;</span></span><br><span class="line"><span class="string">						color:'yellow',</span></span><br><span class="line"><span class="string">					&#125;</span></span><br><span class="line"><span class="string">				&#125;,</span></span><br><span class="line"><span class="string">				directives:&#123;</span></span><br><span class="line"><span class="string">					focus:&#123;</span></span><br><span class="line"><span class="string">						inserted:function(el)&#123;</span></span><br><span class="line"><span class="string">							el.focus();</span></span><br><span class="line"><span class="string">						&#125;</span></span><br><span class="line"><span class="string">					&#125;,</span></span><br><span class="line"><span class="string">					color:&#123;</span></span><br><span class="line"><span class="string">						inserted:function(el,binding)&#123;</span></span><br><span class="line"><span class="string">							el.style.backgroundColor=binding.value.color;</span></span><br><span class="line"><span class="string">						&#125;</span></span><br><span class="line"><span class="string">					&#125;</span></span><br><span class="line"><span class="string">				&#125;</span></span><br><span class="line"><span class="string">			&#125;)</span></span><br><span class="line"><span class="string">		&lt;/script&gt;</span></span><br><span class="line"><span class="string">	&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这里定义 了v-focus的自动聚焦的指令，还有v-color这个改变背景颜色的指令，但他是局部的，只在id为app的div内可以使用</p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/04/02/vue%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8C%87%E4%BB%A4/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-vue表单域的修饰符" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1094,102 +1189,6 @@
 
 
   
-    <article id="post-客户端javascript时间线" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/03/14/%E5%AE%A2%E6%88%B7%E7%AB%AFjavascript%E6%97%B6%E9%97%B4%E7%BA%BF/" target="_blank">客户端javascript时间线</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/03/14/%E5%AE%A2%E6%88%B7%E7%AB%AFjavascript%E6%97%B6%E9%97%B4%E7%BA%BF/" class="archive-article-date">
-        <time datetime="2020-03-14T11:15:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-14</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="客户端javascript时间线"><a href="#客户端javascript时间线" class="headerlink" title="客户端javascript时间线"></a>客户端javascript时间线</h1><ol>
-<li>浏览器先创建Document对象，并开始解析Web页面，解析器先解析HTML元素以及之后的元素（element）对象和文本（text）节点到文档中。document.readystate值为”loading“(读取中)。</li>
-<li>若解析器没有遇到async（异步）和defer（推迟）元素时，元素添加到文档中，并执行行内或外部脚本，这是若脚本在下载或者执行是，解析器是停止的。这样的脚本可以用document.write()来把文本插入到输入流中。当解析器恢复时这些文本已经成为文档内容了。同步脚本可以看到自己和之前的文档内容。</li>
-<li>当遇到async（异步）的script元素时，开始下载脚本，但解析器继续解析，脚本下完后会尽快执行，可以看到自己和之前的文档。禁止使用document.write()把文本插入到输入流。</li>
-<li>当这些都解析完成，document.readystate值为”interactive”(交互式的)。</li>
-<li>所有defer（推迟）的script元素按顺序执行，当然异步脚本可能没下载完，在这个时间执行<strong>（当script元素中既有defer又有async一般会忽略defer）</strong>，这些defer脚本可以访问完整的文档树，禁止使用document.write()把文本插入到输入流。</li>
-<li>浏览器在Document对象上触发DOMContentLoaded事件时，标志程序从同步脚本执行阶段到异步事件驱动阶段，当然这个时间异步脚本可能没有下载或执行完。</li>
-<li>文档解析完成，包括异步脚本完成载入和执行，<strong>但是浏览器可能还在等待其他内容（图片，视频等）的载入</strong>，这时document.readystate值为“complete”（完整的），web浏览器触发Window对象上的load事件。</li>
-<li>以后，可以调用异步事件了，如用户输入事件、网络事件、计数器事件等。</li>
-</ol>
-<p><strong>这条时间线没有指明什么时候文档开始对用户可见或什么时候web浏览器必须响应用户输入事件，有时文档很长或者网速较慢时，在脚本执行之前，浏览器会先绚染一部分文档，能允许用户开始和页面产生一些交互，这时的用户输入事件可能在程序执行事件驱动阶段开始之前触发。</strong></p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/03/14/%E5%AE%A2%E6%88%B7%E7%AB%AFjavascript%E6%97%B6%E9%97%B4%E7%BA%BF/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/9/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/11/">Next &amp;raquo;</a>
@@ -1331,10 +1330,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">基础</a>
               </li>
              
@@ -1347,6 +1342,10 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
@@ -1355,11 +1354,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
+                <a href="javascript:void(0)" class="js-tag color4">小程序</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">小程序</a>
+                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
               </li>
              
               <li class="article-tag-list-item">
