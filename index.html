@@ -202,6 +202,128 @@
             
 
   
+    <article id="post-无限滚动插件" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/07/05/%E6%97%A0%E9%99%90%E6%BB%9A%E5%8A%A8%E6%8F%92%E4%BB%B6/" target="_blank">无限滚动插件</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/07/05/%E6%97%A0%E9%99%90%E6%BB%9A%E5%8A%A8%E6%8F%92%E4%BB%B6/" class="archive-article-date">
+        <time datetime="2021-07-05T14:44:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-05</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>学习使用vue-infinite-scroll这个插件，</p>
+<h1 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h1><p>容器内部无限滚动</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>使用<code>npm install vue-infinite-scroll --save</code></p>
+<h1 id="导入"><a href="#导入" class="headerlink" title="导入"></a>导入</h1><p>引入插件</p>
+<p><code>import infiniteScroll from &quot;vue-infinite-scroll&quot;</code><br>导入指令</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;  </span><br><span class="line">	name: "ComFlowList",</span><br><span class="line">  directives: &#123;infiniteScroll&#125;,</span><br><span class="line">  data()&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">v-infinite-scroll</span>=<span class="string">"loadDataList"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">infinite-scroll-disabled</span>=<span class="string">"dataLoadStop"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">infinite-scroll-distance</span>=<span class="string">"50"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">v-for</span>=<span class="string">"(item, idx) in dataList"</span> &gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"comdata"</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span>&#123;&#123;item.name&#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"list-load-end"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">span</span>&gt;</span>&#123;&#123;dataNomore ? "--我也是有底线的--" : "加载中..."&#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h1><table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>infinite-scroll-disabled</td>
+<td>如果此属性的值为 true，则将禁用无限滚动。</td>
+</tr>
+<tr>
+<td>infinite-scroll-distance</td>
+<td>Number(default = 0) - 在执行 v-infinite-scroll 方法之前元素底部和视口底部之间的最小距离。</td>
+</tr>
+<tr>
+<td>infinite-scroll-immediate-check</td>
+<td>Boolean(default = true) - 指示指令应在绑定后立即检查。如果内容不够高而无法填满可滚动容器，则很有用。</td>
+</tr>
+<tr>
+<td>infinite-scroll-listen-for-event</td>
+<td>当事件在 Vue 实例中发出时，无限滚动将再次检查。</td>
+</tr>
+<tr>
+<td>infinite-scroll-throttle-delay</td>
+<td>Number(default = 200) - 下次检查和这次之间的间隔(ms)</td>
+</tr>
+</tbody></table>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/07/05/%E6%97%A0%E9%99%90%E6%BB%9A%E5%8A%A8%E6%8F%92%E4%BB%B6/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-移动端适配与常见问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1526,128 +1648,6 @@
 
 
   
-    <article id="post-babel的原理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/06/08/babel%E7%9A%84%E5%8E%9F%E7%90%86/" target="_blank">babel的原理</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/06/08/babel%E7%9A%84%E5%8E%9F%E7%90%86/" class="archive-article-date">
-        <time datetime="2021-06-08T12:05:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-08</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>好奇于babel如何把高版本代码向低版本的代码转换，因此特地去了解一下</p>
-<h1 id="基本的思路"><a href="#基本的思路" class="headerlink" title="基本的思路"></a>基本的思路</h1><p>babel 的主要编译流程是 parse、transform、generate</p>
-<h3 id="parse"><a href="#parse" class="headerlink" title="parse"></a>parse</h3><p>把源码转成AST</p>
-<h3 id="transform"><a href="#transform" class="headerlink" title="transform"></a>transform</h3><p>对AST做增删改</p>
-<h3 id="generate"><a href="#generate" class="headerlink" title="generate"></a>generate</h3><p>打印AST成目标代码并生成sourcemap</p>
-<h1 id="babel各个包"><a href="#babel各个包" class="headerlink" title="babel各个包"></a>babel各个包</h1><p>babel7的包</p>
-<p><code>@babel/parser</code> 解析源码成 AST，对应 parse 阶段</p>
-<p><code>@babel/traverse</code> 遍历 AST 并调用 visitor 函数，对应 transform 阶段</p>
-<p><code>@babel/generate</code> 打印 AST，生成目标代码和 sorucemap，对应 generate 阶段</p>
-<p>其中</p>
-<p><code>@babel/types</code> 创建、判断 AST</p>
-<p><code>@babel/template</code> 根据模块批量创建 AST</p>
-<p>整体的入口</p>
-<p><code>@babel/core</code> 解析配置、应用 plugin、preset，整体编译流程</p>
-<p>编译期转换的公共函数</p>
-<p><code>@babel/helpers</code> 用于转换 es next 代码需要的通过模板创建的 AST，比如 _typeof、_defineProperties 等</p>
-<p><code>@babel/helper-xxx</code> 其他的插件之间共享的用于操作 AST 的公共函数</p>
-<p>运行期转换的公共函数</p>
-<p><code>@babel/runtime</code> 主要是包含 corejs、helpers、regenerator 这 3 部分：</p>
-<p>helper： helper 函数的运行时版本（不是通过 AST 注入了，而是运行时引入代码）</p>
-<p>corejs： es next 的 api 的实现，corejs 2 只支持静态方法，corejs 3 还支持实例方法</p>
-<p>regenerator：async await 的实现，由 facebook 维护</p>
-<h1 id="什么是AST"><a href="#什么是AST" class="headerlink" title="什么是AST"></a>什么是AST</h1><p>抽象语法树(Abstract Syntax Tree)</p>
-<p>现有如下代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function add(a, b) &#123;</span><br><span class="line">    return a + b</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>AST解析成三大块</p>
-<p>一个id，就是它的名字，即add</p>
-<p>两个params，就是它的参数，即[a, b]</p>
-<p>一块body，也就是大括号内的一堆东西</p>
-<p>body可以继续向下拆分</p>
-<h3 id="recast"><a href="#recast" class="headerlink" title="recast"></a>recast</h3><p>通过recast改装</p>
-<h5 id="recast-run-——-命令行文件读取"><a href="#recast-run-——-命令行文件读取" class="headerlink" title="recast.run —— 命令行文件读取"></a>recast.run —— 命令行文件读取</h5><h5 id="recast-visit-——-AST节点遍历"><a href="#recast-visit-——-AST节点遍历" class="headerlink" title="recast.visit —— AST节点遍历"></a>recast.visit —— AST节点遍历</h5><h5 id="TNT-——-判断AST对象类型"><a href="#TNT-——-判断AST对象类型" class="headerlink" title="TNT —— 判断AST对象类型"></a>TNT —— 判断AST对象类型</h5><p>TNT，即recast.types.namedTypes，它用来判断AST对象是否为指定的类型</p>
-<h1 id="修改源码"><a href="#修改源码" class="headerlink" title="修改源码"></a>修改源码</h1><p>笨拙的方法</p>
-<p>fs.read读取文件、正则匹配替换文本、fs.write写入文件</p>
-<p>使用AST</p>
-<p>AST对象的拆分组装，具体有待深究</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">基础</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/06/08/babel%E7%9A%84%E5%8E%9F%E7%90%86/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1789,11 +1789,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+                <a href="javascript:void(0)" class="js-tag color3">基础</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">基础</a>
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1801,7 +1801,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1813,11 +1813,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
+                <a href="javascript:void(0)" class="js-tag color4">小程序</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">小程序</a>
+                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
               </li>
              
               <li class="article-tag-list-item">

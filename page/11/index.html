@@ -202,6 +202,106 @@
             
 
   
+    <article id="post-一个简单的时钟" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/03/15/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E6%97%B6%E9%92%9F/" target="_blank">一个简单的时钟</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/03/15/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E6%97%B6%E9%92%9F/" class="archive-article-date">
+        <time datetime="2020-03-15T07:19:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-15</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="一个简单的时钟"><a href="#一个简单的时钟" class="headerlink" title="一个简单的时钟"></a>一个简单的时钟</h1><p>由本地时间控制的指针时钟，用的是最原始的代码，利用setInterval方法每过一秒读取一次本地时间，随之改变指针角度的方法</p>
+<p>代码如下：</p>
+<p>index.html</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"zh"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">	&lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">	&lt;meta name=<span class="string">"viewport"</span> content=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span><br><span class="line">	&lt;meta http-equiv=<span class="string">"X-UA-Compatible"</span> content=<span class="string">"ie=edge"</span>&gt;</span><br><span class="line">	&lt;title&gt;&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">	&lt;link rel="stylesheet" href="./</span>style.css<span class="string">"&gt;</span></span><br><span class="line"><span class="string">&lt;/head&gt;</span></span><br><span class="line"><span class="string">&lt;body&gt;</span></span><br><span class="line"><span class="string">	&lt;div class="</span>outer<span class="string">"&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>num one<span class="string">"&gt;1&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>num two<span class="string">"&gt;2&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>num three<span class="string">"&gt;3&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>num four<span class="string">"&gt;4&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>num five<span class="string">"&gt;5&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>num six<span class="string">"&gt;6&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>num seven<span class="string">"&gt;7&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>num eight<span class="string">"&gt;8&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>num nine<span class="string">"&gt;9&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>num ten<span class="string">"&gt;10&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>num eleven<span class="string">"&gt;11&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>num twelve<span class="string">"&gt;12&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>origin<span class="string">"&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>pointer<span class="string">"&gt;	</span></span><br><span class="line"><span class="string">			&lt;div class="</span>hour<span class="string">"&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">			&lt;div class="</span>minute<span class="string">"&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">			&lt;div class="</span>second<span class="string">"&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;/div&gt;</span></span><br><span class="line"><span class="string">	&lt;/div&gt;</span></span><br><span class="line"><span class="string">	&lt;script src="</span>./index.js<span class="string">"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="string">&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>style.css</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br></pre></td><td class="code"><pre><span class="line">*&#123;</span><br><span class="line">	margin :<span class="number">0</span>;</span><br><span class="line">	padding:<span class="number">0</span>;</span><br><span class="line">	font-family: <span class="string">"microsoft yahei"</span>,<span class="string">"microsoft sans serif"</span>;</span><br><span class="line">	font-size: <span class="number">45</span>px;</span><br><span class="line">	box-sizing: border-box;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.outer&#123;</span><br><span class="line">	width:<span class="number">650</span>px;</span><br><span class="line">	height:<span class="number">650</span>px;</span><br><span class="line">	border:solid <span class="number">5</span>px black;</span><br><span class="line">	position:absolute;</span><br><span class="line">	top:<span class="number">50</span>%;</span><br><span class="line">	left:<span class="number">50</span>%;</span><br><span class="line">	transform: translate(<span class="number">-50</span>%,<span class="number">-50</span>%);</span><br><span class="line">	border-radius: <span class="number">50</span>%;</span><br><span class="line">	background-color: #dfdfcd;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.num&#123;</span><br><span class="line">	display: block;</span><br><span class="line">	width:<span class="number">70</span>px;</span><br><span class="line">	height:<span class="number">70</span>px;</span><br><span class="line">	color:#aa0000;</span><br><span class="line">	position: absolute;</span><br><span class="line">	top:<span class="number">50</span>%;</span><br><span class="line">	left:<span class="number">50</span>%;</span><br><span class="line">	margin-top: <span class="number">-35</span>px;</span><br><span class="line">	margin-left: <span class="number">-35</span>px;</span><br><span class="line">	text-align: center;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.num.one&#123;</span><br><span class="line">	transform: rotate(<span class="number">30</span>deg) translateY(<span class="number">-290</span>px);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.num.two&#123;</span><br><span class="line">	transform: rotate(<span class="number">60</span>deg) translateY(<span class="number">-290</span>px);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.num.three&#123;</span><br><span class="line">	transform: rotate(<span class="number">90</span>deg) translateY(<span class="number">-290</span>px);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.num.four&#123;</span><br><span class="line">	transform: rotate(<span class="number">120</span>deg) translateY(<span class="number">-290</span>px);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.num.five&#123;</span><br><span class="line">	transform: rotate(<span class="number">150</span>deg) translateY(<span class="number">-290</span>px);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.num.six&#123;</span><br><span class="line">	transform: rotate(<span class="number">180</span>deg) translateY(<span class="number">-290</span>px);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.num.seven&#123;</span><br><span class="line">	transform: rotate(<span class="number">210</span>deg) translateY(<span class="number">-290</span>px);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.num.eight&#123;</span><br><span class="line">	transform: rotate(<span class="number">240</span>deg) translateY(<span class="number">-290</span>px);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.num.nine&#123;</span><br><span class="line">	transform: rotate(<span class="number">270</span>deg) translateY(<span class="number">-290</span>px);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.num.ten&#123;</span><br><span class="line">	transform: rotate(<span class="number">300</span>deg) translateY(<span class="number">-290</span>px);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.num.eleven&#123;</span><br><span class="line">	transform: rotate(<span class="number">330</span>deg) translateY(<span class="number">-290</span>px);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.num.twelve&#123;</span><br><span class="line">	transform: translateY(<span class="number">-290</span>px);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">.origin&#123;</span><br><span class="line">	width: <span class="number">50</span>px;</span><br><span class="line">	height: <span class="number">50</span>px;</span><br><span class="line">	position: absolute;</span><br><span class="line">	top:<span class="number">50</span>%;</span><br><span class="line">	left:<span class="number">50</span>%;</span><br><span class="line">	background-color: #AA0000;</span><br><span class="line">	border-radius: <span class="number">50</span>%;</span><br><span class="line">	margin-top: <span class="number">-25</span>px;</span><br><span class="line">	margin-left:<span class="number">-25</span>px;</span><br><span class="line">	z-index: <span class="number">500</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 指针部分 */</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">.hour&#123;</span><br><span class="line">	width:<span class="number">32</span>px;</span><br><span class="line">	height: <span class="number">200</span>px;</span><br><span class="line">	background-color: #ff0000;</span><br><span class="line">	border-radius: <span class="number">40</span>px;</span><br><span class="line">	position: absolute;</span><br><span class="line">	top:<span class="number">50</span>%;</span><br><span class="line">	left:<span class="number">50</span>%;</span><br><span class="line">	margin-top:<span class="number">-200</span>px;</span><br><span class="line">	margin-left: <span class="number">-16</span>px;</span><br><span class="line">	transform-origin:center bottom;</span><br><span class="line">	z-index: <span class="number">100</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.minute&#123;</span><br><span class="line">	width:<span class="number">25</span>px;</span><br><span class="line">	height:<span class="number">230</span>px;</span><br><span class="line">	background-color: aqua;</span><br><span class="line">	border-radius: <span class="number">30</span>px;</span><br><span class="line">	position: absolute;</span><br><span class="line">	top:<span class="number">50</span>%;</span><br><span class="line">	left:<span class="number">50</span>%;</span><br><span class="line">	margin-top: <span class="number">-230</span>px;</span><br><span class="line">	margin-left: <span class="number">-12.5</span>px;</span><br><span class="line">	transform-origin:center bottom;</span><br><span class="line">	z-index: <span class="number">50</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.second&#123;</span><br><span class="line">	width:<span class="number">15</span>px;</span><br><span class="line">	height:<span class="number">250</span>px;</span><br><span class="line">	background-color: chartreuse;</span><br><span class="line">	border-radius: <span class="number">20</span>px;</span><br><span class="line">	position: absolute;</span><br><span class="line">	top:<span class="number">50</span>%;</span><br><span class="line">	left:<span class="number">50</span>%;</span><br><span class="line">	margin-top:<span class="number">-250</span>px;</span><br><span class="line">	margin-left:<span class="number">-7.5</span>px;</span><br><span class="line">	transform-origin:center bottom;</span><br><span class="line">	z-index: <span class="number">10</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>index.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>.setInterval(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">	</span><br><span class="line"><span class="keyword">var</span> now=<span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line"><span class="keyword">var</span> h=now.getHours();</span><br><span class="line"><span class="keyword">var</span> m=now.getMinutes();</span><br><span class="line"><span class="keyword">var</span> s=now.getSeconds();</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> hourEl=<span class="built_in">document</span>.querySelector(<span class="string">".hour"</span>);</span><br><span class="line"><span class="keyword">const</span> minuteEl=<span class="built_in">document</span>.querySelector(<span class="string">".minute"</span>);</span><br><span class="line"><span class="keyword">const</span> secondEl=<span class="built_in">document</span>.querySelector(<span class="string">".second"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(h&lt;=<span class="number">12</span>)&#123;</span><br><span class="line">	<span class="keyword">var</span> angleH=(h+m/<span class="number">60</span>+s/<span class="number">3600</span>)*<span class="number">30</span>;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> angleH=((h+m/<span class="number">60</span>+s/<span class="number">3600</span>)<span class="number">-12</span>)*<span class="number">30</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> angleM=(m+s/<span class="number">60</span>)*<span class="number">6</span>;</span><br><span class="line">	<span class="keyword">var</span> angleS=s*<span class="number">6</span>;</span><br><span class="line">	hourEl.style.transform=<span class="string">"rotate("</span>+angleH+<span class="string">"deg)"</span>;<span class="comment">//为什么一定要加+好呢</span></span><br><span class="line">	minuteEl.style.transform=<span class="string">"rotate("</span>+angleM+<span class="string">"deg)"</span>;</span><br><span class="line">	secondEl.style.transform=<span class="string">"rotate("</span>+angleS+<span class="string">"deg)"</span>;</span><br><span class="line">&#125;,<span class="number">1000</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="代码链接"><a href="#代码链接" class="headerlink" title="代码链接"></a><a href="https://github.com/yuchenbin1/web-design" target="_blank" rel="noopener">代码链接</a></h3><p>在制作过程中遇到的问题：</p>
+<p>主要集中在js中，（1） 为什么用变量去更改css中的样式，变量两边要用+并且用引号括起来</p>
+<p>（2）在改变样式过程中我用obj.style.transform改变transform成功了，而我想使用obj.setAttribute(“transform”,……)时失败了</p>
+<p>这两个问题我希望我以后知识多了之后能明白</p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">页面项目</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/03/15/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E6%97%B6%E9%92%9F/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-客户端javascript时间线" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1480,139 +1580,6 @@
 
 
   
-    <article id="post-for-in以及标签语句" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/03/06/for-in%E4%BB%A5%E5%8F%8A%E6%A0%87%E7%AD%BE%E8%AF%AD%E5%8F%A5/" target="_blank">for/in以及标签语句</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/03/06/for-in%E4%BB%A5%E5%8F%8A%E6%A0%87%E7%AD%BE%E8%AF%AD%E5%8F%A5/" class="archive-article-date">
-        <time datetime="2020-03-06T11:41:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-06</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="for-in语句"><a href="#for-in语句" class="headerlink" title="for/in语句"></a>for/in语句</h1><p>for/in语句一般用来枚举对象的属性，特别是不知道数据或者json中包含哪些元素时</p>
-<h4 id="用法："><a href="#用法：" class="headerlink" title="用法："></a>用法：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for(variable in object)&#123;</span><br><span class="line">	statement;  &#x2F;&#x2F;执行语句</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>其中variable为定义的变量，object为对象</p>
-<p>例如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var o&#x3D;&#123;x:&quot;hello&quot;,y:&quot;world&quot;,z:&quot;nihao&quot;&#125;;</span><br><span class="line">var a;</span><br><span class="line">for(a in o)&#x2F;*empty*&#x2F;; &#x2F;&#x2F;这里的空语句最好注释一下</span><br><span class="line">console.log(a);</span><br></pre></td></tr></table></figure>
-
-<p>这里会输出z这个属性名，因为对象o中的属性名一个一个赋值给a，最终输出为z</p>
-<p>如果想一一枚举出o中的属性名可以把上述代码中的console.log(a)放在for循环中如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var o&#x3D;&#123;x:&quot;hello&quot;,y:&quot;world&quot;,z:&quot;nihao&quot;&#125;;</span><br><span class="line">var a;</span><br><span class="line">for(a in o)&#123;</span><br><span class="line">console.log(a);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这里输出:</p>
-<p>x</p>
-<p>y</p>
-<p>z</p>
-<h5 id="如果想要枚举出属性名对应的索引"><a href="#如果想要枚举出属性名对应的索引" class="headerlink" title="如果想要枚举出属性名对应的索引"></a>如果想要枚举出属性名对应的索引</h5><p>代码如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var o&#x3D;&#123;x:&quot;hello&quot;,y:&quot;world&quot;,z:&quot;nihao&quot;&#125;;</span><br><span class="line">			var a&#x3D;[];</span><br><span class="line">			var i&#x3D;0;</span><br><span class="line">			for(a[i++] in o) &#x2F;*empty*&#x2F;;&#x2F;&#x2F;这里的空语句最好注释一下</span><br><span class="line">			for(i in a) </span><br><span class="line">			console.log(i);</span><br></pre></td></tr></table></figure>
-
-<p>这里输出：</p>
-<p>0</p>
-<p>1</p>
-<p>2</p>
-<h4 id="以上我们已知遍历属性名，因此我们可以通过-对象-属性名-或者-对象-属性名"><a href="#以上我们已知遍历属性名，因此我们可以通过-对象-属性名-或者-对象-属性名" class="headerlink" title="以上我们已知遍历属性名，因此我们可以通过  对象.属性名  或者  对象[属性名]"></a>以上我们已知遍历属性名，因此我们可以通过  对象.属性名  或者  对象[属性名]</h4><h4 id="对属性值进行遍历"><a href="#对属性值进行遍历" class="headerlink" title="对属性值进行遍历"></a>对属性值进行遍历</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var o&#x3D;&#123;x:&quot;hello&quot;,y:&quot;world&quot;,z:&quot;nihao&quot;&#125;;</span><br><span class="line">var a;</span><br><span class="line">for(a in o)&#123;</span><br><span class="line">console.log(o[a]);&#x2F;&#x2F;或者o.a进行输出</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>结果：</p>
-<p>hello</p>
-<p>world</p>
-<p>nihao</p>
-<h4 id="链接："><a href="#链接：" class="headerlink" title="链接："></a>链接：</h4><p><a href="https://blog.csdn.net/wangpenglonton/article/details/79095011" target="_blank" rel="noopener">for/in遍历的bug</a></p>
-<h4 id="for循环我们很熟悉，在额外探讨一下in的用法"><a href="#for循环我们很熟悉，在额外探讨一下in的用法" class="headerlink" title="for循环我们很熟悉，在额外探讨一下in的用法"></a>for循环我们很熟悉，在额外探讨一下in的用法</h4><p>in的右侧对象拥有一个名为左侧类型的属性名是返回true，否则返回false</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var obj&#x3D;&#123;x:123,y:456&#125;;</span><br><span class="line">&quot;x&quot; in obj &#x2F;&#x2F;true，obj对象中有名为x的属性名</span><br><span class="line">&quot;z&quot; in obj &#x2F;&#x2F;false</span><br><span class="line">&quot;toString&quot; in obj &#x2F;&#x2F;true,toString属性除了null和undefined没有，其余类型都有</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var arr&#x3D;[7,8,9];</span><br><span class="line">&quot;0&quot; in arr &#x2F;&#x2F;true，有数组下标为0的7在</span><br><span class="line">2 in arr &#x2F;&#x2F;true,2这里js自动转化为字符串，下标为2的9在</span><br><span class="line">3 in arr &#x2F;&#x2F;false</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="标签语句"><a href="#标签语句" class="headerlink" title="标签语句"></a>标签语句</h1><p>给语句定义标签，那么可以在程序的任何地方通过标签名引用这条语句或者循环体</p>
-<p>break和continue是js中唯二可以使用标签的语句</p>
-<p>break：跳出最内层的循环语句</p>
-<p>continue：跳过当次循环</p>
-<h4 id="当我们希望break不是跳出最内层循环时可以用标签语句，或者在switch语句中也可以用。"><a href="#当我们希望break不是跳出最内层循环时可以用标签语句，或者在switch语句中也可以用。" class="headerlink" title="当我们希望break不是跳出最内层循环时可以用标签语句，或者在switch语句中也可以用。"></a>当我们希望break不是跳出最内层循环时可以用标签语句，或者在switch语句中也可以用。</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var num&#x3D;0;</span><br><span class="line">iden:for(var i&#x3D;0;i&lt;10;i++)&#123;</span><br><span class="line">		for(var j&#x3D;0;j&lt;10;j++)&#123;</span><br><span class="line">			while(i&#x3D;&#x3D;5&amp;&amp;j&#x3D;&#x3D;5)&#123;</span><br><span class="line">			break iden ;&#x2F;&#x2F;标签名只能在同一行上</span><br><span class="line">			&#125;</span><br><span class="line">			num++;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">alert(num);</span><br></pre></td></tr></table></figure>
-
-<p>解：num值为55，如果没有用标签名break只能退出j相关的那个循环，用标签可以直接退到外部</p>
-<p>如果没有标签如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">		var num&#x3D;0;</span><br><span class="line">		for(var i&#x3D;0;i&lt;10;i++)&#123;</span><br><span class="line">			for(var j&#x3D;0;j&lt;10;j++)&#123;</span><br><span class="line">				while(i&#x3D;&#x3D;5&amp;&amp;j&#x3D;&#x3D;5)&#123;</span><br><span class="line">				break ;&#x2F;&#x2F;标签名只能在同一行上</span><br><span class="line">				&#125;</span><br><span class="line">			num++;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">alert(num);</span><br></pre></td></tr></table></figure>
-
-<p>解：num的值为100，break仅仅出了while的循环</p>
-<h4 id="标签用在continue中与break类似，当我们在嵌套的循环体中想跳到外部循环体时可以用，但是要注意continue不管带不带标签都只能在循环体内使用"><a href="#标签用在continue中与break类似，当我们在嵌套的循环体中想跳到外部循环体时可以用，但是要注意continue不管带不带标签都只能在循环体内使用" class="headerlink" title="标签用在continue中与break类似，当我们在嵌套的循环体中想跳到外部循环体时可以用，但是要注意continue不管带不带标签都只能在循环体内使用."></a>标签用在continue中与break类似，当我们在嵌套的循环体中想跳到外部循环体时可以用，但是要注意continue不管带不带标签都只能在循环体内使用.</h4><p>continue就不举例了（~~）</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/03/06/for-in%E4%BB%A5%E5%8F%8A%E6%A0%87%E7%AD%BE%E8%AF%AD%E5%8F%A5/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/10/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/12/">Next &amp;raquo;</a>
@@ -1754,11 +1721,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+                <a href="javascript:void(0)" class="js-tag color3">基础</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">基础</a>
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1766,7 +1733,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1778,11 +1745,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
+                <a href="javascript:void(0)" class="js-tag color4">小程序</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">小程序</a>
+                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
               </li>
              
               <li class="article-tag-list-item">

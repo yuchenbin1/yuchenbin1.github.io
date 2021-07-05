@@ -202,6 +202,99 @@
             
 
   
+    <article id="post-20年11月4日" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/11/04/20%E5%B9%B411%E6%9C%884%E6%97%A5/" target="_blank">20年11月4日</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/11/04/20%E5%B9%B411%E6%9C%884%E6%97%A5/" class="archive-article-date">
+        <time datetime="2020-11-04T12:03:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-04</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>今天的工作主要是修改bug，还有余下几个问题，第一个就是加快页面的加载速度，这个可以使用懒加载，还有就是登陆状态失效，这个问题还没有解决。</p>
+<h4 id="养成良好的代码习惯"><a href="#养成良好的代码习惯" class="headerlink" title="养成良好的代码习惯"></a>养成良好的代码习惯</h4><p>1.命名语义化，命名函数使用驼峰式的，要语义化，不要出现shuaka这种拼音，要具体明白是干什么的。</p>
+<p>2.组件化开发，组件化开发可以使得代码简洁，组件可以复用，父子组件间的传值，可以使用json和watch传</p>
+<p>3.声明一个状态或者事件的时候，一定要考虑到这个东西的销毁，很多的bug都是在内存未清除造成的</p>
+<p>4.console.log类似的测试，使用后要记得删除</p>
+<p>5.代码需要reflew，需要第二个人检查</p>
+<p>6.难点需要换一种思维方式或者是尝试把这个黑盒拆开</p>
+<p>7.养成良好的代码习惯</p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日志</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/11/04/20%E5%B9%B411%E6%9C%884%E6%97%A5/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-20年11月3日" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1048,95 +1141,6 @@
 
 
   
-    <article id="post-对象的遍历" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/05/08/%E5%AF%B9%E8%B1%A1%E7%9A%84%E9%81%8D%E5%8E%86/" target="_blank">对象的遍历</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/05/08/%E5%AF%B9%E8%B1%A1%E7%9A%84%E9%81%8D%E5%8E%86/" class="archive-article-date">
-        <time datetime="2020-05-08T07:50:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-08</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="对象属性的提取方法"><a href="#对象属性的提取方法" class="headerlink" title="对象属性的提取方法"></a>对象属性的提取方法</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">    <span class="keyword">var</span> obj=&#123;</span></span><br><span class="line"><span class="actionscript">        name:<span class="string">"小明同学"</span>,</span></span><br><span class="line">        age:18</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(obj.name);</span></span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(obj[<span class="string">"age"</span>]);</span></span><br><span class="line"><span class="actionscript">    <span class="comment">//两者的区别</span></span></span><br><span class="line"><span class="actionscript">    <span class="comment">//点的方式比较方便</span></span></span><br><span class="line"><span class="actionscript">    <span class="comment">//如果key是一个变量的话，就不能使用点这种方式来取值</span></span></span><br><span class="line"></span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(<span class="built_in">Object</span>.keys(obj))<span class="comment">//返回一个数组类型的数据，它得知是对象中的键（key）</span></span></span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(<span class="built_in">Object</span>.values(obj))<span class="comment">//返回一个数组类型的数据，返回的内容是对象的值（value）</span></span></span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(<span class="built_in">Object</span>.entries(obj))<span class="comment">//返回的是键值对形式的数组类型的数据，这里返回[["name","小明同学"],["age",18]]</span></span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="对象的遍历"><a href="#对象的遍历" class="headerlink" title="对象的遍历"></a>对象的遍历</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>环境的搭建<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../00-01环境的搭建/node_modules/react/umd/react.development.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../00-01环境的搭建/node_modules/react-dom/umd/react-dom.development.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../00-01环境的搭建/node_modules/babel-standalone/babel.min.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"demoReact"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/babel"</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">let</span> obj=&#123;</span></span><br><span class="line"><span class="actionscript">        name:<span class="string">"zhangsan"</span>,</span></span><br><span class="line">        age:18,</span><br><span class="line"><span class="actionscript">        sex:<span class="string">"男"</span></span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="actionscript">    <span class="comment">//console.log(Object.keys(obj))//返回一个数组类型的数据，它得知是对象中的键（key）</span></span></span><br><span class="line"><span class="actionscript">    <span class="comment">//console.log(Object.values(obj))//返回一个数组类型的数据，返回的内容是对象的值（value）</span></span></span><br><span class="line"><span class="actionscript">    <span class="comment">//console.log(Object.entries(obj))//返回的是键值对形式的数组类型的数据，这里返回[["name","小明同学"],["age",18]]</span></span></span><br><span class="line"><span class="javascript">    <span class="keyword">let</span> myDom=<span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span></span><br><span class="line"><span class="javascript">            &#123;<span class="built_in">Object</span>.keys(obj).map(<span class="function">(<span class="params">v,i</span>)=&gt;</span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">p</span> <span class="attr">key</span>=<span class="string">&#123;i&#125;</span>&gt;</span>遍历的属性是:&#123;v&#125;------遍历出来的值是:&#123;obj[v]&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span></span><br><span class="line">        &#125;)&#125;</span><br><span class="line"><span class="actionscript">    &lt;/div&gt;<span class="comment">//注意最好要有key</span></span></span><br><span class="line"><span class="javascript">        ReactDOM.render(myDom,<span class="built_in">document</span>.getElementById(<span class="string">'demoReact'</span>));</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">react</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/05/08/%E5%AF%B9%E8%B1%A1%E7%9A%84%E9%81%8D%E5%8E%86/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/4/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/6/">Next &amp;raquo;</a>
@@ -1278,11 +1282,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+                <a href="javascript:void(0)" class="js-tag color3">基础</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">基础</a>
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1290,7 +1294,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1302,11 +1306,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
+                <a href="javascript:void(0)" class="js-tag color4">小程序</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">小程序</a>
+                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
               </li>
              
               <li class="article-tag-list-item">
