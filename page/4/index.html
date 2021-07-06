@@ -202,6 +202,102 @@
             
 
   
+    <article id="post-21年1月27日" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/01/27/21%E5%B9%B41%E6%9C%8827%E6%97%A5/" target="_blank">21年1月27日</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/01/27/21%E5%B9%B41%E6%9C%8827%E6%97%A5/" class="archive-article-date">
+        <time datetime="2021-01-27T12:18:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-27</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="微信小程序兼容性问题"><a href="#微信小程序兼容性问题" class="headerlink" title="微信小程序兼容性问题"></a>微信小程序兼容性问题</h1><p>今天把微信小程序上线到了正式版本，安卓端很正常，但是ios苹果端出现了一些异常，比较明显的是，ios的页面允许上下拖动，这个在一些没有列表的页面可以设置</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">"disableScroll":true</span><br></pre></td></tr></table></figure>
+
+<p>来禁止</p>
+<p>还有一个问题是ios中不支持position的fixed属性，在ios中的浮动就只能通过传统的绝对定位来实现了</p>
+<p>祖先元素</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">position:&#39;relative&#39;</span><br></pre></td></tr></table></figure>
+
+<p>要浮动的元素</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">position:&#39;absolute&#39;</span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日志</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/01/27/21%E5%B9%B41%E6%9C%8827%E6%97%A5/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-21年1月26日" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1103,97 +1199,6 @@
 
 
   
-    <article id="post-20年11月5日" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/11/05/20%E5%B9%B411%E6%9C%885%E6%97%A5/" target="_blank">20年11月5日</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/11/05/20%E5%B9%B411%E6%9C%885%E6%97%A5/" class="archive-article-date">
-        <time datetime="2020-11-05T12:55:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-05</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="calc的使用"><a href="#calc的使用" class="headerlink" title="calc的使用"></a>calc的使用</h1><p>今天在在使用calc的时候，总是出现问题</p>
-<p><code>calc(100%-220px)</code></p>
-<p>这个问题在哪呢，后来发现原来在空格</p>
-<p><code>calc(100% - 220px)</code></p>
-<p>这样就行了</p>
-<h1 id="vue中表达式的使用"><a href="#vue中表达式的使用" class="headerlink" title="vue中表达式的使用"></a>vue中表达式的使用</h1><p>在react中经常会用到表达式用大括号就行了，但是在vue中不能直接用，要定义一个表达式的名字，表达式赋值给它才行</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日志</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/11/05/20%E5%B9%B411%E6%9C%885%E6%97%A5/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/3/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/5/">Next &amp;raquo;</a>
@@ -1331,11 +1336,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">webpack</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">基础</a>
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1344,10 +1353,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">css</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
