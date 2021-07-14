@@ -202,6 +202,109 @@
             
 
   
+    <article id="post-react中的state" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/05/13/react%E4%B8%AD%E7%9A%84state/" target="_blank">react中的state</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/05/13/react%E4%B8%AD%E7%9A%84state/" class="archive-article-date">
+        <time datetime="2020-05-13T08:22:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-13</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="state是状态"><a href="#state是状态" class="headerlink" title="state是状态"></a>state是状态</h1><p>state是状态</p>
+<p>state是组件对外的接口，上层组件需要下层组件的数据</p>
+<p>props是组件对内的接口，下层组件需要上层组件的数据</p>
+<p>组件除了使用上层组件的数据之外，他自身也可能有需要管理的数据，这个对内的数据管理属性就是state </p>
+<p> 主要的区别：</p>
+<p>  1.state是可变的</p>
+<p>  2.props对于当前页面的组件来说，他是只读的</p>
+<p>   如果我们要修改传递给当前组件数据的父组件中的内容</p>
+<p>  react中我们只需要关心的问题是数据，当数据改变的时候页面就会自动发生变化</p>
+<p>  状态等同于页面中的数据，状态/数据改变了—页面中对应的数据绑定内容就会被react自动的进行改变</p>
+<p>​    </p>
+<p>  声明式渲染—一切的数据改变操作都不用我们的关心，只需要我们的声明好数据，</p>
+<p>  react就会自动的对于数据进行相应的改变</p>
+<p>  如果想使用状态，那么不能使用无状态组件（函数组件）</p>
+<h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../00-01环境的搭建/node_modules/react/umd/react.development.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../00-01环境的搭建/node_modules/react-dom/umd/react-dom.development.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../00-01环境的搭建/node_modules/babel-standalone/babel.min.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"demoReact"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/babel"</span>&gt;</span></span><br><span class="line"><span class="actionscript">    <span class="comment">//state是状态</span></span></span><br><span class="line"><span class="actionscript">    <span class="comment">//state是组件对外的接口，上层组件需要下层组件的数据</span></span></span><br><span class="line"><span class="actionscript">    <span class="comment">//props是组件对内的接口，下层组件需要上层组件的数据</span></span></span><br><span class="line"><span class="actionscript">    <span class="comment">//组件除了使用上层组件的数据之外，他自身也可能有需要管理的数据，这个对内的数据管理属性就是state  </span></span></span><br><span class="line"></span><br><span class="line"><span class="actionscript">    <span class="comment">//   主要的区别：</span></span></span><br><span class="line"><span class="actionscript">    <span class="comment">//    1.state是可变的</span></span></span><br><span class="line"><span class="actionscript">    <span class="comment">//    2.props对于当前页面的组件来说，他是只读的</span></span></span><br><span class="line"><span class="actionscript">    <span class="comment">//    如果我们要修改传递给当前组件数据的父组件中的内容</span></span></span><br><span class="line"></span><br><span class="line"><span class="actionscript">    <span class="comment">//react中我们只需要关心的问题是数据，当数据改变的时候页面就会自动发生变化</span></span></span><br><span class="line"><span class="actionscript">    <span class="comment">//状态等同于页面中的数据，状态/数据改变了---页面中对应的数据绑定内容就会被react自动的进行改变</span></span></span><br><span class="line">        </span><br><span class="line"><span class="actionscript">    <span class="comment">//声明式渲染---一切的数据改变操作都不用我们的关心，只需要我们的声明好数据，</span></span></span><br><span class="line"><span class="actionscript">    <span class="comment">//react就会自动的对于数据进行相应的改变</span></span></span><br><span class="line"></span><br><span class="line"><span class="actionscript">    <span class="comment">// 如果想使用状态，那么不能使用无状态组件（函数组件）</span></span></span><br><span class="line"></span><br><span class="line"><span class="actionscript">        <span class="class"><span class="keyword">class</span> <span class="title">Com</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">            <span class="comment">//在ES6中不管子类写不写constructor 在new实例的时候都会补上它</span></span></span><br><span class="line"><span class="actionscript">            <span class="comment">//可以不写（默认会补上）,一旦写了constructor之后必须写上super(),指向父类的构造方法</span></span></span><br><span class="line"><span class="javascript">            <span class="keyword">constructor</span>(props)&#123;</span></span><br><span class="line"><span class="actionscript">                <span class="comment">//如果想在组件中使用props，那么super中必须写上props</span></span></span><br><span class="line"><span class="actionscript">                <span class="keyword">super</span>(props);</span></span><br><span class="line"><span class="actionscript">                <span class="comment">//定义state</span></span></span><br><span class="line"><span class="actionscript">                <span class="keyword">this</span>.state=&#123;</span></span><br><span class="line"><span class="actionscript">                        name:<span class="string">"哈哈"</span></span></span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">            render()&#123;</span><br><span class="line"><span class="actionscript">                <span class="keyword">return</span>(</span></span><br><span class="line"><span class="actionscript">                    <span class="comment">//setState是异步的，使用的时候react会自动的触发render进行数据的渲染</span></span></span><br><span class="line"><span class="actionscript">                    <span class="comment">//注意父元素一定要包裹</span></span></span><br><span class="line"><span class="handlebars"><span class="xml">                    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">                    <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;()</span>=&gt;</span>&#123;this.setState(&#123;name:"嘻嘻"&#125;)&#125;&#125;&gt;点我改变state的数据<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">                    <span class="tag">&lt;<span class="name">div</span>&gt;</span>我是一个组件&#123;this.state.name&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">                    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span></span><br><span class="line">                )</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"><span class="javascript">        ReactDOM.render(<span class="xml"><span class="tag">&lt;<span class="name">Com</span>/&gt;</span></span>,<span class="built_in">document</span>.getElementById(<span class="string">"demoReact"</span>));</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="进阶使用"><a href="#进阶使用" class="headerlink" title="进阶使用"></a>进阶使用</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../00-01环境的搭建/node_modules/react/umd/react.development.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../00-01环境的搭建/node_modules/react-dom/umd/react-dom.development.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../00-01环境的搭建/node_modules/babel-standalone/babel.min.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"demoReact"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/babel"</span>&gt;</span></span><br><span class="line"><span class="actionscript">        <span class="comment">//this.setState()是异步的</span></span></span><br><span class="line"><span class="actionscript">        <span class="class"><span class="keyword">class</span> <span class="title">Com</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span></span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">constructor</span>(props)&#123;</span></span><br><span class="line"><span class="actionscript">                <span class="keyword">super</span>(props)</span></span><br><span class="line"><span class="actionscript">                <span class="keyword">this</span>.state=&#123;</span></span><br><span class="line"><span class="actionscript">                    name:<span class="string">"嘻嘻"</span>,</span></span><br><span class="line"><span class="handlebars"><span class="xml">                    newHtml:"<span class="tag">&lt;<span class="name">p</span>&gt;</span>我是state中的内容<span class="tag">&lt;/<span class="name">p</span>&gt;</span>"</span></span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"><span class="javascript">            fun=<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span></span><br><span class="line"><span class="actionscript">                <span class="keyword">this</span>.setState(&#123;<span class="comment">//这是异步的</span></span></span><br><span class="line"><span class="actionscript">                    name:<span class="string">"哈哈"</span></span></span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;</span><br><span class="line">            render()&#123;</span><br><span class="line"><span class="actionscript">                <span class="keyword">return</span> (</span></span><br><span class="line"><span class="handlebars"><span class="xml">                    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">                        <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;this.fun&#125;</span>&gt;</span>点击修改<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span></span><br><span class="line"><span class="actionscript">                        &#123;<span class="keyword">this</span>.state.name&#125;</span></span><br><span class="line"><span class="actionscript">                        &#123;<span class="keyword">this</span>.state.newHtml&#125;</span></span><br><span class="line"><span class="actionscript">                        &#123;<span class="comment">/*字符串标签的插入 dangerouslySetInnerHTML=&#123;&#123;__HTML:你要插入的字符串&#125;&#125;*/</span>&#125;</span></span><br><span class="line"><span class="handlebars"><span class="xml">                        <span class="tag">&lt;<span class="name">div</span> <span class="attr">dangerouslySetInnerHTML</span>=</span></span><span class="template-variable">&#123;&#123;__html:this.state.newHtml&#125;&#125;</span><span class="xml"><span class="tag">&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span></span><br><span class="line"></span><br><span class="line"><span class="handlebars"><span class="xml">                    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span></span><br><span class="line">                )</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"><span class="javascript">        ReactDOM.render(<span class="xml"><span class="tag">&lt;<span class="name">Com</span>/&gt;</span></span>,<span class="built_in">document</span>.getElementById(<span class="string">"demoReact"</span>));</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">react</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/05/13/react%E4%B8%AD%E7%9A%84state/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-props" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1057,118 +1160,6 @@
 
 
   
-    <article id="post-继承" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/04/29/%E7%BB%A7%E6%89%BF/" target="_blank">继承</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/04/29/%E7%BB%A7%E6%89%BF/" class="archive-article-date">
-        <time datetime="2020-04-29T09:45:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-29</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><h5 id="假设父类："><a href="#假设父类：" class="headerlink" title="假设父类："></a>假设父类：</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.name=name;</span><br><span class="line">	<span class="keyword">this</span>.sum=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		alert(<span class="keyword">this</span>.name);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="原型链继承"><a href="#原型链继承" class="headerlink" title="原型链继承"></a>原型链继承</h3><p>让新实例的原型等于父类的实例</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Per</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.name=<span class="string">"ker"</span>;</span><br><span class="line">&#125;</span><br><span class="line">Per.prototype=<span class="keyword">new</span> Person();</span><br><span class="line"><span class="keyword">var</span> Per1=<span class="keyword">new</span> Per();</span><br></pre></td></tr></table></figure>
-
-<p> 特点：1、实例可继承的属性有：实例的构造函数的属性，父类构造函数属性，父类原型的属性。（新实例不会继承父类实例的属性！）<br>　　　　缺点：1、新实例无法向父类构造函数传参。<br>　　　　　　　2、继承单一。<br>　　　　　　　3、所有新实例都会共享父类实例的属性。（原型上的属性是共享的，一个实例修改了原型属性，另一个实例的原型属性也会被修改！） </p>
-<h3 id="构造函数继承"><a href="#构造函数继承" class="headerlink" title="构造函数继承"></a>构造函数继承</h3><p> 用.call()和.apply()将父类构造函数引入子类函数（在子类函数中做了父类函数的自执行（复制）） </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Con</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	Person.call(<span class="keyword">this</span>,<span class="string">"jer"</span>);<span class="comment">//引入</span></span><br><span class="line">	<span class="keyword">this</span>.age=<span class="number">12</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> con1=<span class="keyword">new</span> Con();</span><br></pre></td></tr></table></figure>
-
-<p> 特点：1、只继承了父类构造函数的属性，没有继承父类原型的属性。<br>　　　　　　　2、解决了原型链继承缺点1、2、3。<br>　　　　　　　3、可以继承多个构造函数属性（call多个）。<br>　　　　　　　4、在子实例中可向父实例传参。<br>　　　　缺点：1、只能继承父类构造函数的属性。<br>　　　　　　　2、无法实现构造函数的复用。（每次用每次都要重新调用）<br>　　　　　　　3、每个新实例都有父类构造函数的副本，臃肿。 </p>
-<h3 id="组合继承（组合原型链和构造函数的继承）"><a href="#组合继承（组合原型链和构造函数的继承）" class="headerlink" title="组合继承（组合原型链和构造函数的继承）"></a>组合继承（组合原型链和构造函数的继承）</h3><p> 重点：结合了两种模式的优点，传参和复用 </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">subType</span>(<span class="params">name</span>)</span>&#123;</span><br><span class="line">	Person.call(<span class="keyword">this</span>,name);</span><br><span class="line">&#125;</span><br><span class="line">subType.prototype=<span class="keyword">new</span> Person();</span><br><span class="line"><span class="keyword">var</span> sub=<span class="keyword">new</span> subType(<span class="string">"gar"</span>);</span><br></pre></td></tr></table></figure>
-
-<p> 特点：1、可以继承父类原型上的属性，可以传参，可复用。<br>　　　　　　　2、每个新实例引入的构造函数属性是私有的。<br>　　　　缺点：调用了两次父类构造函数（耗内存），子类的构造函数会代替原型上的那个父类构造函数。 </p>
-<h3 id="原型式继承"><a href="#原型式继承" class="headerlink" title="原型式继承"></a>原型式继承</h3><p>重点：用一个函数包装一个对象，然后返回这个函数的调用，这个函数就变成了个可以随意增添属性的实例或对象。<code>object.create()</code>就是这个原理 </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">content</span>(<span class="params">obj</span>)</span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params"></span>)</span>&#123;&#125;;</span><br><span class="line">	F.prototype=obj;<span class="comment">//继承传入的参数</span></span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">new</span> F();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> sup=<span class="keyword">new</span> Person();</span><br><span class="line"><span class="keyword">var</span> sup1=content(sup);</span><br></pre></td></tr></table></figure>
-
-<p> 特点：类似于复制一个对象，用函数来包装。<br>　　　　缺点：1、所有实例都会继承原型上的属性。<br>　　　　　　　2、无法实现复用。（新实例属性都是后面添加的） </p>
-<h3 id="寄生式继承"><a href="#寄生式继承" class="headerlink" title="寄生式继承"></a>寄生式继承</h3><p>重点：就是给原型式继承外面套了个壳子。 </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">content</span>(<span class="params">obj</span>)</span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params"></span>)</span>&#123;&#125;;</span><br><span class="line">	F.prototype=obj;<span class="comment">//继承传入的参数</span></span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">new</span> F();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> sup=<span class="keyword">new</span> Person();</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">subobject</span>(<span class="params">sup</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> sub=content(obj);</span><br><span class="line">    sub.name=<span class="string">"gar"</span>;</span><br><span class="line">    <span class="keyword">return</span> sub;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> sub2=subobject(sup);</span><br></pre></td></tr></table></figure>
-
-<p> 优点：没有创建自定义类型，因为只是套了个壳子返回对象（这个），这个函数顺理成章就成了创建的新对象。<br>　　　　缺点：没用到原型，无法复用。 </p>
-<h3 id="寄生组合式继承（常用）"><a href="#寄生组合式继承（常用）" class="headerlink" title="寄生组合式继承（常用）"></a>寄生组合式继承（常用）</h3><p> 寄生：在函数内返回对象然后调用<br>　　　　组合：1、函数的原型等于另一个实例。2、在函数中用apply或者call引入另一个构造函数，可传参　 </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">content</span>(<span class="params">obj</span>)</span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params"></span>)</span>&#123;&#125;;</span><br><span class="line">    F.prototype=obj;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> F();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> con=content(Person.prototype);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Sub</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    Person.call(<span class="keyword">this</span>);</span><br><span class="line">&#125;</span><br><span class="line">Sub.prototype=con;</span><br><span class="line">con.constructor=Sub;<span class="comment">//一定要修复实例</span></span><br><span class="line"><span class="keyword">var</span> sub1=<span class="keyword">new</span> Sub();</span><br></pre></td></tr></table></figure>
-
-
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/04/29/%E7%BB%A7%E6%89%BF/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/5/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/7/">Next &amp;raquo;</a>
@@ -1306,10 +1297,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">基础</a>
               </li>
              
@@ -1326,15 +1313,19 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">react</a>
+                <a href="javascript:void(0)" class="js-tag color3">react native</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">react native</a>
+                <a href="javascript:void(0)" class="js-tag color1">react</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1347,6 +1338,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">尝试搭建</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">鸡汤</a>
               </li>
             
             <div class="clearfix"></div>

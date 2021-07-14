@@ -202,6 +202,96 @@
             
 
   
+    <article id="post-20年11月14日" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/11/14/20%E5%B9%B411%E6%9C%8814%E6%97%A5/" target="_blank">20年11月14日</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/11/14/20%E5%B9%B411%E6%9C%8814%E6%97%A5/" class="archive-article-date">
+        <time datetime="2020-11-14T15:37:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-14</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="proxy代理配置解决跨域"><a href="#proxy代理配置解决跨域" class="headerlink" title="proxy代理配置解决跨域"></a>proxy代理配置解决跨域</h1><p>使用的脚手架是vue-cli3.0，vue的配置文件是vue.config.js文件，需要自己在根目录创建该文件夹，proxy代理配置解决跨域的问题思路：浏览器访问服务器两者的域名不一样会有同源策略的保护，使用proxy在本地配置服务器，本地前端请求本地服务器一般就是localhost，然后本地服务器指向target属性的服务器</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">devServer=&#123;</span><br><span class="line">	<span class="string">'/api'</span>:&#123;<span class="comment">//匹配以此开头的请求</span></span><br><span class="line">		target:<span class="string">''</span>，<span class="comment">//要指向的服务器</span></span><br><span class="line">		changeOrigin：<span class="literal">true</span>,<span class="comment">//为true时转换origin</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h5><p>遇到一个很坑的问题，就是在开启代理之后，我们需要本地的请求指向本地，一般不用设置默认就是本地localhost，但是我设置了axios.defaults.baseUrl，那么就指向这个地址了，所以最好的解决办法是能判断是开发环境还是生产环境，生产环境中没有跨域，不需要指向localhost</p>
+<h1 id="post请求方式"><a href="#post请求方式" class="headerlink" title="post请求方式"></a>post请求方式</h1><p>遇到了很奇怪的问题，接口对，域名对，但是前端给后端传数据，后端就是接受不了，后来终于发现，原来后端把post请求的参数放在url的后面，前端可以把参数从data放在params中实现放在url后面，但是一般来说post不能这么放，让后端改了，问题解决。</p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日志</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/11/14/20%E5%B9%B411%E6%9C%8814%E6%97%A5/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-20年11月9日" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1026,109 +1116,6 @@
 
 
   
-    <article id="post-react中的state" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/05/13/react%E4%B8%AD%E7%9A%84state/" target="_blank">react中的state</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/05/13/react%E4%B8%AD%E7%9A%84state/" class="archive-article-date">
-        <time datetime="2020-05-13T08:22:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-05-13</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="state是状态"><a href="#state是状态" class="headerlink" title="state是状态"></a>state是状态</h1><p>state是状态</p>
-<p>state是组件对外的接口，上层组件需要下层组件的数据</p>
-<p>props是组件对内的接口，下层组件需要上层组件的数据</p>
-<p>组件除了使用上层组件的数据之外，他自身也可能有需要管理的数据，这个对内的数据管理属性就是state </p>
-<p> 主要的区别：</p>
-<p>  1.state是可变的</p>
-<p>  2.props对于当前页面的组件来说，他是只读的</p>
-<p>   如果我们要修改传递给当前组件数据的父组件中的内容</p>
-<p>  react中我们只需要关心的问题是数据，当数据改变的时候页面就会自动发生变化</p>
-<p>  状态等同于页面中的数据，状态/数据改变了—页面中对应的数据绑定内容就会被react自动的进行改变</p>
-<p>​    </p>
-<p>  声明式渲染—一切的数据改变操作都不用我们的关心，只需要我们的声明好数据，</p>
-<p>  react就会自动的对于数据进行相应的改变</p>
-<p>  如果想使用状态，那么不能使用无状态组件（函数组件）</p>
-<h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../00-01环境的搭建/node_modules/react/umd/react.development.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../00-01环境的搭建/node_modules/react-dom/umd/react-dom.development.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../00-01环境的搭建/node_modules/babel-standalone/babel.min.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"demoReact"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/babel"</span>&gt;</span></span><br><span class="line"><span class="actionscript">    <span class="comment">//state是状态</span></span></span><br><span class="line"><span class="actionscript">    <span class="comment">//state是组件对外的接口，上层组件需要下层组件的数据</span></span></span><br><span class="line"><span class="actionscript">    <span class="comment">//props是组件对内的接口，下层组件需要上层组件的数据</span></span></span><br><span class="line"><span class="actionscript">    <span class="comment">//组件除了使用上层组件的数据之外，他自身也可能有需要管理的数据，这个对内的数据管理属性就是state  </span></span></span><br><span class="line"></span><br><span class="line"><span class="actionscript">    <span class="comment">//   主要的区别：</span></span></span><br><span class="line"><span class="actionscript">    <span class="comment">//    1.state是可变的</span></span></span><br><span class="line"><span class="actionscript">    <span class="comment">//    2.props对于当前页面的组件来说，他是只读的</span></span></span><br><span class="line"><span class="actionscript">    <span class="comment">//    如果我们要修改传递给当前组件数据的父组件中的内容</span></span></span><br><span class="line"></span><br><span class="line"><span class="actionscript">    <span class="comment">//react中我们只需要关心的问题是数据，当数据改变的时候页面就会自动发生变化</span></span></span><br><span class="line"><span class="actionscript">    <span class="comment">//状态等同于页面中的数据，状态/数据改变了---页面中对应的数据绑定内容就会被react自动的进行改变</span></span></span><br><span class="line">        </span><br><span class="line"><span class="actionscript">    <span class="comment">//声明式渲染---一切的数据改变操作都不用我们的关心，只需要我们的声明好数据，</span></span></span><br><span class="line"><span class="actionscript">    <span class="comment">//react就会自动的对于数据进行相应的改变</span></span></span><br><span class="line"></span><br><span class="line"><span class="actionscript">    <span class="comment">// 如果想使用状态，那么不能使用无状态组件（函数组件）</span></span></span><br><span class="line"></span><br><span class="line"><span class="actionscript">        <span class="class"><span class="keyword">class</span> <span class="title">Com</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">            <span class="comment">//在ES6中不管子类写不写constructor 在new实例的时候都会补上它</span></span></span><br><span class="line"><span class="actionscript">            <span class="comment">//可以不写（默认会补上）,一旦写了constructor之后必须写上super(),指向父类的构造方法</span></span></span><br><span class="line"><span class="javascript">            <span class="keyword">constructor</span>(props)&#123;</span></span><br><span class="line"><span class="actionscript">                <span class="comment">//如果想在组件中使用props，那么super中必须写上props</span></span></span><br><span class="line"><span class="actionscript">                <span class="keyword">super</span>(props);</span></span><br><span class="line"><span class="actionscript">                <span class="comment">//定义state</span></span></span><br><span class="line"><span class="actionscript">                <span class="keyword">this</span>.state=&#123;</span></span><br><span class="line"><span class="actionscript">                        name:<span class="string">"哈哈"</span></span></span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">            render()&#123;</span><br><span class="line"><span class="actionscript">                <span class="keyword">return</span>(</span></span><br><span class="line"><span class="actionscript">                    <span class="comment">//setState是异步的，使用的时候react会自动的触发render进行数据的渲染</span></span></span><br><span class="line"><span class="actionscript">                    <span class="comment">//注意父元素一定要包裹</span></span></span><br><span class="line"><span class="handlebars"><span class="xml">                    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">                    <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;()</span>=&gt;</span>&#123;this.setState(&#123;name:"嘻嘻"&#125;)&#125;&#125;&gt;点我改变state的数据<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">                    <span class="tag">&lt;<span class="name">div</span>&gt;</span>我是一个组件&#123;this.state.name&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">                    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span></span><br><span class="line">                )</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"><span class="javascript">        ReactDOM.render(<span class="xml"><span class="tag">&lt;<span class="name">Com</span>/&gt;</span></span>,<span class="built_in">document</span>.getElementById(<span class="string">"demoReact"</span>));</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="进阶使用"><a href="#进阶使用" class="headerlink" title="进阶使用"></a>进阶使用</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../00-01环境的搭建/node_modules/react/umd/react.development.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../00-01环境的搭建/node_modules/react-dom/umd/react-dom.development.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"../00-01环境的搭建/node_modules/babel-standalone/babel.min.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"demoReact"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/babel"</span>&gt;</span></span><br><span class="line"><span class="actionscript">        <span class="comment">//this.setState()是异步的</span></span></span><br><span class="line"><span class="actionscript">        <span class="class"><span class="keyword">class</span> <span class="title">Com</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span></span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">constructor</span>(props)&#123;</span></span><br><span class="line"><span class="actionscript">                <span class="keyword">super</span>(props)</span></span><br><span class="line"><span class="actionscript">                <span class="keyword">this</span>.state=&#123;</span></span><br><span class="line"><span class="actionscript">                    name:<span class="string">"嘻嘻"</span>,</span></span><br><span class="line"><span class="handlebars"><span class="xml">                    newHtml:"<span class="tag">&lt;<span class="name">p</span>&gt;</span>我是state中的内容<span class="tag">&lt;/<span class="name">p</span>&gt;</span>"</span></span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"><span class="javascript">            fun=<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span></span><br><span class="line"><span class="actionscript">                <span class="keyword">this</span>.setState(&#123;<span class="comment">//这是异步的</span></span></span><br><span class="line"><span class="actionscript">                    name:<span class="string">"哈哈"</span></span></span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;</span><br><span class="line">            render()&#123;</span><br><span class="line"><span class="actionscript">                <span class="keyword">return</span> (</span></span><br><span class="line"><span class="handlebars"><span class="xml">                    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">                        <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;this.fun&#125;</span>&gt;</span>点击修改<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span></span><br><span class="line"><span class="actionscript">                        &#123;<span class="keyword">this</span>.state.name&#125;</span></span><br><span class="line"><span class="actionscript">                        &#123;<span class="keyword">this</span>.state.newHtml&#125;</span></span><br><span class="line"><span class="actionscript">                        &#123;<span class="comment">/*字符串标签的插入 dangerouslySetInnerHTML=&#123;&#123;__HTML:你要插入的字符串&#125;&#125;*/</span>&#125;</span></span><br><span class="line"><span class="handlebars"><span class="xml">                        <span class="tag">&lt;<span class="name">div</span> <span class="attr">dangerouslySetInnerHTML</span>=</span></span><span class="template-variable">&#123;&#123;__html:this.state.newHtml&#125;&#125;</span><span class="xml"><span class="tag">&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span></span><br><span class="line"></span><br><span class="line"><span class="handlebars"><span class="xml">                    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span></span><br><span class="line">                )</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"><span class="javascript">        ReactDOM.render(<span class="xml"><span class="tag">&lt;<span class="name">Com</span>/&gt;</span></span>,<span class="built_in">document</span>.getElementById(<span class="string">"demoReact"</span>));</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">react</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/05/13/react%E4%B8%AD%E7%9A%84state/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/4/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/6/">Next &amp;raquo;</a>
@@ -1266,10 +1253,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">基础</a>
               </li>
              
@@ -1286,15 +1269,19 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">react</a>
+                <a href="javascript:void(0)" class="js-tag color3">react native</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">react native</a>
+                <a href="javascript:void(0)" class="js-tag color1">react</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1307,6 +1294,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">尝试搭建</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">鸡汤</a>
               </li>
             
             <div class="clearfix"></div>
