@@ -202,6 +202,136 @@
             
 
   
+    <article id="post-h5页面拉起第三方app" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/08/01/h5%E9%A1%B5%E9%9D%A2%E6%8B%89%E8%B5%B7%E7%AC%AC%E4%B8%89%E6%96%B9app/" target="_blank">h5页面拉起第三方app</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/08/01/h5%E9%A1%B5%E9%9D%A2%E6%8B%89%E8%B5%B7%E7%AC%AC%E4%B8%89%E6%96%B9app/" class="archive-article-date">
+        <time datetime="2021-08-01T08:43:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-01</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="H5页面拉起第三方app"><a href="#H5页面拉起第三方app" class="headerlink" title="H5页面拉起第三方app"></a>H5页面拉起第三方app</h1><h2 id="核心"><a href="#核心" class="headerlink" title="核心"></a>核心</h2><p>调起app是操作系统(iOS、Android)的机制，在h5页面，我们可以做的不多。</p>
+<p><strong>在调起之前，h5页面无法判断当前手机是否安装了对应的app，我们只能去尝试调起，并且用一些方法来处理没有调起的情况。</strong></p>
+<p>调起的原理就不介绍了，网上一搜一大堆。直接上核心代码。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(iOS9) &#123;</span><br><span class="line">    <span class="built_in">window</span>.location.href = $&#123;universalLink&#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">	<span class="keyword">var</span> ifr = <span class="built_in">document</span>.createElement(<span class="string">'iframe'</span>);</span><br><span class="line">    ifr.src = $&#123;scheme&#125;;</span><br><span class="line">    ifr.style.display = <span class="string">'none'</span>;</span><br><span class="line">    <span class="built_in">document</span>.body.appendChild(ifr);</span><br><span class="line">    <span class="built_in">window</span>.setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">       <span class="built_in">document</span>.body.removeChild(ifr);</span><br><span class="line">    &#125;, <span class="number">300</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">举个栗子：</span><br><span class="line">$&#123;universalLink&#125; = <span class="string">'http://myapp.com'</span></span><br><span class="line">$&#123;scheme&#125; = <span class="string">'myapp://index'</span></span><br></pre></td></tr></table></figure>
+
+<p>解释一下上面的代码，如果是iOS9及以上的iOS系统，直接跳转到调起app的universal link。如果是安卓或者iOS9一下的iOS系统，就新建一个iframe，把这个iframe的src弄成调起app的scheme，然后把这个iframe直接塞到页面的DOM树上，然后『听天由命』就行。</p>
+<h2 id="iOS的调起"><a href="#iOS的调起" class="headerlink" title="iOS的调起"></a>iOS的调起</h2><p>iOS是使用universalLink(下面简称ulink)的方式来进行调起。具体系统内部的机制就不说了，网上一堆文章，随便搜一下就行。</p>
+<p>universalLink其实就是一个正常的http请求的url。我们在h5页面使用 location.href=XX进行调起的时候，<strong>如果说调起成功了，那么其实这个url是不会被访问的，抓包也抓不到。换句话说，如果我们访问到这个url了，说明我们的调起失败了。</strong></p>
+<h3 id="iOS如何实现【安装了调起，没有安装跳下载页】"><a href="#iOS如何实现【安装了调起，没有安装跳下载页】" class="headerlink" title="iOS如何实现【安装了调起，没有安装跳下载页】"></a>iOS如何实现【安装了调起，没有安装跳下载页】</h3><p>上面说了，iOS下调起失败后，会访问到一个url。要实现没有安转跳下载页，那么就直接把ulink对应的链接做成下载页就好了。根据需求，我们还可以将ulink对应的url做成任何页面。但是，如果我们不想要跳转到这个页面，还是想停留在之前的页面呢？很简单，叫RD哥哥在通链那个url的服务端加一个302重定向服务就行。</p>
+<p>举个栗子，我们使用下面的ulink来调起App。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:<span class="comment">//myapp.com/index?target=encodeURIComponent('http://www.baidu.com');</span></span><br></pre></td></tr></table></figure>
+
+<p>调起失败后，上面那个ulink会被浏览器访问到，我们在服务端加了重定向服务，我们最终会访问到target对应的地址，即 <a href="http://www.baidu.com/" target="_blank" rel="noopener">http://www.baidu.com</a> 。这样，我们就实现了【调起失败时，跳转到自己想要的页面】。</p>
+<h3 id="iOS如何实现【安装了调起，没有安装时，在当前页面继续进行其他操作】"><a href="#iOS如何实现【安装了调起，没有安装时，在当前页面继续进行其他操作】" class="headerlink" title="iOS如何实现【安装了调起，没有安装时，在当前页面继续进行其他操作】"></a>iOS如何实现【安装了调起，没有安装时，在当前页面继续进行其他操作】</h3><p>两种方法：</p>
+<p>一、需要后端重定向服务，我们只需要把上面重定向的链接换成一个scheme就行了。这种方法适用于页面必须要用户点击才能触发的交互，比如视频、音频的播放等。（另：微信下可以通过监听jsbridge ready的事件，自动播放视频、音频）</p>
+<p>这个scheme需要满足以下的要求：</p>
+<ul>
+<li>可以被当前浏览器识别</li>
+<li>浏览器识别了这个scheme，但是不会进行任何其他操作。</li>
+</ul>
+<p>如果这个scheme同时满足了上述两个条件，那么体验就是最好的。否则，可能就会出现浏览器弹框等问题。</p>
+<p>举几个scheme的例子</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">facetime:<span class="comment">// （iOS11以下体验完美，之后的版本会直接拉起facetime--）</span></span><br><span class="line">ucbrowser:<span class="comment">// </span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>二、需要后端重定向服务，我们需要把重定向链接换成【当前链接后加一个特殊参数】的链接。这样在前端代码里就可以判断url里面的特殊参数，从而得知当前页面是拉起app失败时进入的。</p>
+<h3 id="iOS调起的注意事项"><a href="#iOS调起的注意事项" class="headerlink" title="iOS调起的注意事项"></a>iOS调起的注意事项</h3><ul>
+<li>2018年初，iOS微信下全面封禁了universalLink，所以在微信下是调不起app的，暂时是没有什么办法。这种时候，一般可以提示用户，从浏览器打开。当然，也可以找微信开白名单，直接用微信的能力去拉起。</li>
+<li>其实iOS下用scheme也是可以调起的，比如<br>window.location.href = scheme<br>但是这样有个问题，如果说没有安装对应的app，在safari下会弹窗：无法识别该链接，并且就算安装了该app，也会弹一个窗让你确认是否调起 。</li>
+<li>虽说iOS的通链是一个url，但是也不是直接粘贴到safari等浏览器下访问就能直接调起app。因为iOS的通链调起必须要求有用户操作，比如点击等行为。可以将链接粘贴到iOS的备忘录上，点击这个链接就可以直接调起了。</li>
+</ul>
+<h2 id="Android的调起"><a href="#Android的调起" class="headerlink" title="Android的调起"></a>Android的调起</h2><p>安卓的调起是用iframe的方式(其实现在的高版本安卓也可以直接window.location.href=scheme)。</p>
+<p>安卓调起的最大的特点就是，<strong>安卓无法知道是否成功调起了app</strong>。安卓下的调起一般都会有自带的兜底策略，比如下载。代码也很简单</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ifr = <span class="built_in">document</span>.createElement(<span class="string">'iframe'</span>);</span><br><span class="line">ifr.src = $&#123;scheme&#125;;</span><br><span class="line">ifr.style.display = <span class="string">'none'</span>;</span><br><span class="line"><span class="built_in">document</span>.body.appendChild(ifr);</span><br><span class="line"><span class="built_in">window</span>.setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">   <span class="built_in">document</span>.body.removeChild(ifr);</span><br><span class="line">   <span class="comment">// 这里写兜底策略的逻辑，比如下载。</span></span><br><span class="line">   <span class="comment">// 当然，也可以不加任何的兜底策略，调不起就算了。</span></span><br><span class="line">   <span class="built_in">window</span>.location.href = $&#123;下载地址&#125;</span><br><span class="line">&#125;, <span class="number">300</span>);</span><br></pre></td></tr></table></figure>
+
+<p>如果想要实现【安装了app调起，没有安装app下载】的功能，那么肯定会调起和下载的逻辑同时执行，因为安卓无法知道是否成功调起app。</p>
+<p>安卓的调起是很灵活的，你可以任意控制兜底策略的逻辑，想干嘛干嘛。只是说，兜底策略是几乎一定会执行的，不管你调起成功还是失败。</p>
+<h3 id="Android调起注意事项"><a href="#Android调起注意事项" class="headerlink" title="Android调起注意事项"></a>Android调起注意事项</h3><h4 id="各种浏览器的屏蔽"><a href="#各种浏览器的屏蔽" class="headerlink" title="各种浏览器的屏蔽"></a>各种浏览器的屏蔽</h4><p>很多浏览器都对scheme做了屏蔽。所以安卓下调不起app是一件十分正常的事情。</p>
+<h4 id="微信下调起"><a href="#微信下调起" class="headerlink" title="微信下调起"></a>微信下调起</h4><p>微信太封闭了，自然屏蔽了非自家app的调起。只新建一个iframe的方式在微信下是不能调起的。微信针对webview调起app的策略也一直在修改。最新(2018年3月19日)的想要在微信的webview下调起app的方式是：</p>
+<ul>
+<li>手机上必须安装应用宝</li>
+<li>使用下面的方式，跳转到应用宝页面进行调起。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.location.href = <span class="string">'http://a.app.qq.com/o/simple.jsp?pkgname=$&#123;pkgname&#125;&amp;android_scheme= encodeURIComponent($&#123;scheme&#125;)'</span></span><br><span class="line"></span><br><span class="line">$&#123;pkgname&#125;表示app的包名，比如 <span class="string">'com.myapp'</span>，$&#123;scheme&#125;表示调起的scheme</span><br></pre></td></tr></table></figure>
+
+<h3 id="安卓下判断是否调起成功"><a href="#安卓下判断是否调起成功" class="headerlink" title="安卓下判断是否调起成功"></a>安卓下判断是否调起成功</h3><p>其实有一种方法可以判断安卓下是否调起成功。执行调起逻辑后，设一定的延时判断当前页面是否可见，若不可见了，几乎就可以确定是调起成功了。但是只对小部分浏览器有效(比如安卓下的chrome)。对大多数浏览器而言，调起成功后，会有一个弹框，需要用户点击确定后，才能唤起app。由于这个弹框的存在，就无法通过页面是否可见的方法来判断调起成功与否了。而chrome下，调起成功直接唤起app，是不会弹窗的，所以chrome下可以用延时+页面是否可见的方式来判断调起成功与否。</p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/08/01/h5%E9%A1%B5%E9%9D%A2%E6%8B%89%E8%B5%B7%E7%AC%AC%E4%B8%89%E6%96%B9app/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-鸡汤一则" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1255,116 +1385,6 @@
 
 
   
-    <article id="post-node-connect模块" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/06/16/node-connect%E6%A8%A1%E5%9D%97/" target="_blank">node connect模块</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/06/16/node-connect%E6%A8%A1%E5%9D%97/" class="archive-article-date">
-        <time datetime="2021-06-16T13:19:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-16</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>根据《了不起的node.js》在node环境中使用一个简单的中间件</p>
-<p>1.新建文件夹node-demo</p>
-<p>2.在文件夹中新建package.json文件</p>
-<p>描述一下项目的相关信息</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"name"</span>: <span class="string">"node-demo"</span>,</span><br><span class="line">  <span class="attr">"version"</span>: <span class="string">"0.0.1"</span>,</span><br><span class="line">  <span class="attr">"description"</span>: <span class="string">"demo"</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>3.使用npm install看是否生效，会生成lock锁文件</p>
-<p>4.安装中间件所需要的connect模块<code>npm install connect</code></p>
-<p>5.新建require-time.js文件来放置检查请求时间的中间件模块,写入如下代码</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span> (<span class="params">opts</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> time = opts.time || <span class="number">100</span>;<span class="comment">//超时的阈值，默认为100</span></span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">req, res, next</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> timer = setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'\033[90m%s %s\033[39m \033[91mis taking too long!\033[39m'</span>, req.method, req.url);</span><br><span class="line">    &#125;, time);</span><br><span class="line">    <span class="keyword">var</span> end = res.end;</span><br><span class="line">    res.end = <span class="function"><span class="keyword">function</span> (<span class="params">chunk, encoding</span>) </span>&#123;</span><br><span class="line">      res.end = end;</span><br><span class="line">      res.end(chunk, encoding);</span><br><span class="line">      clearTimeout(timer);</span><br><span class="line">    &#125;;</span><br><span class="line">    next();<span class="comment">//用于流控制，让其他的中间件可以处理</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>6.新建server.js文件来写响应的代码</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> connect = <span class="built_in">require</span>(<span class="string">'connect'</span>), morgan = <span class="built_in">require</span>(<span class="string">'morgan'</span>), time = <span class="built_in">require</span>(<span class="string">'./require-time.js'</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> server = connect.createServer();</span><br><span class="line"></span><br><span class="line">server.use(connect.logger(<span class="string">'dev'</span>));</span><br><span class="line"></span><br><span class="line">server.use(time(&#123; <span class="attr">time</span>: <span class="number">500</span> &#125;));</span><br><span class="line"></span><br><span class="line"><span class="comment">//快速响应</span></span><br><span class="line">server.use(<span class="function"><span class="keyword">function</span> (<span class="params">req, res, next</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="string">'/a'</span> == req.url) &#123;</span><br><span class="line">    res.writeHead(<span class="number">200</span>);</span><br><span class="line">    res.end(<span class="string">'Fast!'</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    next();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">//慢速响应</span></span><br><span class="line">server.use(<span class="function"><span class="keyword">function</span> (<span class="params">req, res, next</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="string">'/b'</span> == req.url) &#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      res.writeHead(<span class="number">200</span>);</span><br><span class="line">      res.end(<span class="string">'Slow!'</span>);</span><br><span class="line">    &#125;,<span class="number">1000</span>)</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    next();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">server.listen(<span class="number">3000</span>)</span><br></pre></td></tr></table></figure>
-
-<p>7.使用node server命令出现报错</p>
-<p>经过查看相关的线上文档，发现<code>connect.createServer()</code>直接改写为<code>connect()</code>就可以了</p>
-<p>再跑一遍，又出现了报错<code>connect.logger is not a function</code></p>
-<p>大概率是版本的问题，国内的文档大多比较老旧，最后查看connect的npm包，发现现在的connect模块不自带内置的中间件了，之前的logger中间件，现在单独有一个morgan包，需要<code>npm install morgan</code>,这里给一个<a href="https://www.npmjs.com/package/connect" target="_blank" rel="noopener">链接</a></p>
-<p>s现在的代码如下</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> connect = <span class="built_in">require</span>(<span class="string">'connect'</span>), morgan = <span class="built_in">require</span>(<span class="string">'morgan'</span>), time = <span class="built_in">require</span>(<span class="string">'./require-time.js'</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> server = connect();<span class="comment">//书中使用connect.createServer()</span></span><br><span class="line"></span><br><span class="line">server.use(morgan(<span class="string">'dev'</span>));<span class="comment">//书中connect的logger的这个日志中间件改了</span></span><br><span class="line"></span><br><span class="line">server.use(time(&#123; <span class="attr">time</span>: <span class="number">500</span> &#125;));</span><br><span class="line"></span><br><span class="line"><span class="comment">//快速响应</span></span><br><span class="line">server.use(<span class="function"><span class="keyword">function</span> (<span class="params">req, res, next</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="string">'/a'</span> == req.url) &#123;</span><br><span class="line">    res.writeHead(<span class="number">200</span>);</span><br><span class="line">    res.end(<span class="string">'Fast!'</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    next();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">//慢速响应</span></span><br><span class="line">server.use(<span class="function"><span class="keyword">function</span> (<span class="params">req, res, next</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="string">'/b'</span> == req.url) &#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      res.writeHead(<span class="number">200</span>);</span><br><span class="line">      res.end(<span class="string">'Slow!'</span>);</span><br><span class="line">    &#125;,<span class="number">1000</span>)</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    next();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">server.listen(<span class="number">3000</span>)</span><br></pre></td></tr></table></figure>
-
-<p>8.在本地可以查看</p>
-<p><code>http://localhost:3000/a</code>(快速响应）</p>
-<p><code>http://localhost:3000/b</code>(慢速响应)</p>
-<p>在控制台有警告日志</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">node</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/06/16/node-connect%E6%A8%A1%E5%9D%97/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1502,19 +1522,19 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">webpack</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
+                <a href="javascript:void(0)" class="js-tag color3">基础</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">css</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
