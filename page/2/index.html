@@ -202,6 +202,450 @@
             
 
   
+    <article id="post-teleport、多根节点与触发组件" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/06/24/teleport%E3%80%81%E5%A4%9A%E6%A0%B9%E8%8A%82%E7%82%B9%E4%B8%8E%E8%A7%A6%E5%8F%91%E7%BB%84%E4%BB%B6/" target="_blank">teleport、多根节点与触发组件</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/06/24/teleport%E3%80%81%E5%A4%9A%E6%A0%B9%E8%8A%82%E7%82%B9%E4%B8%8E%E8%A7%A6%E5%8F%91%E7%BB%84%E4%BB%B6/" class="archive-article-date">
+        <time datetime="2021-06-24T11:14:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-24</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="Teleport"><a href="#Teleport" class="headerlink" title="Teleport"></a>Teleport</h1><p>允许我们控制在 DOM 中哪个父节点下渲染了 HTML，而不必求助于全局状态或将其拆分为两个组件</p>
+<p>用法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> app = Vue.createApp(&#123;&#125;);</span><br><span class="line"></span><br><span class="line">app.component(<span class="string">'modal-button'</span>, &#123;</span><br><span class="line">  template: <span class="string">`</span></span><br><span class="line"><span class="string">    &lt;button @click="modalOpen = true"&gt;</span></span><br><span class="line"><span class="string">        Open full screen modal!</span></span><br><span class="line"><span class="string">    &lt;/button&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &lt;teleport to="body"&gt;</span></span><br><span class="line"><span class="string">      &lt;div v-if="modalOpen" class="modal"&gt;</span></span><br><span class="line"><span class="string">        &lt;div&gt;</span></span><br><span class="line"><span class="string">          I'm a teleported modal! </span></span><br><span class="line"><span class="string">          (My parent is "body")</span></span><br><span class="line"><span class="string">          &lt;button @click="modalOpen = false"&gt;</span></span><br><span class="line"><span class="string">            Close</span></span><br><span class="line"><span class="string">          &lt;/button&gt;</span></span><br><span class="line"><span class="string">        &lt;/div&gt;</span></span><br><span class="line"><span class="string">      &lt;/div&gt;</span></span><br><span class="line"><span class="string">    &lt;/teleport&gt;</span></span><br><span class="line"><span class="string">  `</span>,</span><br><span class="line">  data() &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123; </span><br><span class="line">      modalOpen: <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>一旦我们单击按钮打开模态框，Vue 将正确地将模态框内容渲染为 <code>body</code> 标签的子级</p>
+<h1 id="多根节点"><a href="#多根节点" class="headerlink" title="多根节点"></a>多根节点</h1><p>2.X版本不支持多根节点，3.X支持多根节点，但是需要Attribute开发者显式定义，如果未显式绑定 <code>$attrs</code>，将发出运行时警告</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">header</span>&gt;</span>...<span class="tag">&lt;/<span class="name">header</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">main</span> <span class="attr">v-bind</span>=<span class="string">"$attrs"</span>&gt;</span>...<span class="tag">&lt;/<span class="name">main</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">footer</span>&gt;</span>...<span class="tag">&lt;/<span class="name">footer</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这种就不会报错了</p>
+<h1 id="触发组件选项"><a href="#触发组件选项" class="headerlink" title="触发组件选项"></a>触发组件选项</h1><p>通常子传父</p>
+<p>在子组件中</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.$emit(<span class="string">'myEvent'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>在父组件中可以监听到</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">my-component</span> @<span class="attr">my-event</span>=<span class="string">"doSomething"</span>&gt;</span><span class="tag">&lt;/<span class="name">my-component</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="定义自定义事件"><a href="#定义自定义事件" class="headerlink" title="定义自定义事件"></a>定义自定义事件</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.component(<span class="string">'custom-form'</span>, &#123;</span><br><span class="line">  emits: [<span class="string">'inFocus'</span>, <span class="string">'submit'</span>]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>当在 <code>emits</code> 选项中定义了原生事件 (如 <code>click</code>) 时，将使用组件中的事件<strong>替代</strong>原生事件侦听器。</p>
+<h3 id="验证抛出的事件"><a href="#验证抛出的事件" class="headerlink" title="验证抛出的事件"></a>验证抛出的事件</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">app.component(<span class="string">'custom-form'</span>, &#123;</span><br><span class="line">  emits: &#123;</span><br><span class="line">    <span class="comment">// 没有验证</span></span><br><span class="line">    click: <span class="literal">null</span>,</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 验证submit 事件</span></span><br><span class="line">    submit: <span class="function">(<span class="params">&#123; email, password &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (email &amp;&amp; password) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.warn(<span class="string">'Invalid submit event payload!'</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    submitForm(email, password) &#123;</span><br><span class="line">      <span class="keyword">this</span>.$emit(<span class="string">'submit'</span>, &#123; email, password &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/06/24/teleport%E3%80%81%E5%A4%9A%E6%A0%B9%E8%8A%82%E7%82%B9%E4%B8%8E%E8%A7%A6%E5%8F%91%E7%BB%84%E4%BB%B6/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-promise-polyfill码源解析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/06/23/promise-polyfill%E7%A0%81%E6%BA%90%E8%A7%A3%E6%9E%90/" target="_blank">promise-polyfill码源解析</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/06/23/promise-polyfill%E7%A0%81%E6%BA%90%E8%A7%A3%E6%9E%90/" class="archive-article-date">
+        <time datetime="2021-06-23T12:27:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-23</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>promise-polyfill实现</p>
+<p>Polypill:兜底，为有些旧浏览器客户端没有的功能实现</p>
+<p>官方源码</p>
+<p>index.js</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> promiseFinally <span class="keyword">from</span> <span class="string">'./finally'</span>;</span><br><span class="line"><span class="keyword">import</span> allSettled <span class="keyword">from</span> <span class="string">'./allSettled'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Store setTimeout reference so promise-polyfill will be unaffected by</span></span><br><span class="line"><span class="comment">// other code modifying setTimeout (like sinon.useFakeTimers())</span></span><br><span class="line"><span class="keyword">var</span> setTimeoutFunc = setTimeout;</span><br><span class="line"><span class="comment">// @ts-ignore</span></span><br><span class="line"><span class="keyword">var</span> setImmediateFunc = <span class="keyword">typeof</span> setImmediate !== <span class="string">'undefined'</span> ? setImmediate : <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isArray</span>(<span class="params">x</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Boolean</span>(x &amp;&amp; <span class="keyword">typeof</span> x.length !== <span class="string">'undefined'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">noop</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Polyfill for Function.prototype.bind</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bind</span>(<span class="params">fn, thisArg</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    fn.apply(thisArg, <span class="built_in">arguments</span>);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@constructor</span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;Function&#125;</span> <span class="variable">fn</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Promise</span>(<span class="params">fn</span>) </span>&#123;<span class="comment">//核心构造函数</span></span><br><span class="line">  <span class="keyword">if</span> (!(<span class="keyword">this</span> <span class="keyword">instanceof</span> <span class="built_in">Promise</span>))<span class="comment">//Promise必须是以构造函数的方式进行调用</span></span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">'Promises must be constructed via new'</span>);</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> fn !== <span class="string">'function'</span>) <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">'not a function'</span>);<span class="comment">//传入的参数必须是函数</span></span><br><span class="line">  <span class="comment">/** <span class="doctag">@type <span class="type">&#123;!number&#125;</span> </span>*/</span></span><br><span class="line">  <span class="keyword">this</span>._state = <span class="number">0</span>;<span class="comment">//定义promise的状态，0，1，2分别对应的是pending、fulfilled、rejected三种状态，3是对应一个内部状态</span></span><br><span class="line">  <span class="comment">/** <span class="doctag">@type <span class="type">&#123;!boolean&#125;</span> </span>*/</span></span><br><span class="line">  <span class="keyword">this</span>._handled = <span class="literal">false</span>;<span class="comment">//定义Promise是否被处理</span></span><br><span class="line">  <span class="comment">/** <span class="doctag">@type <span class="type">&#123;Promise|undefined&#125;</span> </span>*/</span></span><br><span class="line">  <span class="keyword">this</span>._value = <span class="literal">undefined</span>;<span class="comment">//value的类型有Promise或者是undefined</span></span><br><span class="line">  <span class="comment">/** <span class="doctag">@type <span class="type">&#123;!Array&lt;!Function&gt;&#125;</span> </span>*/</span></span><br><span class="line">  <span class="keyword">this</span>._deferreds = [];</span><br><span class="line"></span><br><span class="line">  doResolve(fn, <span class="keyword">this</span>);<span class="comment">//主要处理的函数</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">handle</span>(<span class="params">self, deferred</span>) </span>&#123;<span class="comment">//handle函数根据当前promise的状态做处理</span></span><br><span class="line">  <span class="keyword">while</span> (self._state === <span class="number">3</span>) &#123;<span class="comment">//self指的是当前Promise对象，_value属性值为Promise对象，则结果取决于嵌套最内层Promise的状态</span></span><br><span class="line">    self = self._value;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (self._state === <span class="number">0</span>) &#123;<span class="comment">//如果当前状态为pending，then不知道要调用哪个回调函数，所以要先保存起来，这里存在数组里面，因为可能有多个</span></span><br><span class="line">    self._deferreds.push(deferred);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  self._handled = <span class="literal">true</span>;<span class="comment">//当前的promise对象已经被处理过了</span></span><br><span class="line">  <span class="built_in">Promise</span>._immediateFn(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> cb = self._state === <span class="number">1</span> ? deferred.onFulfilled : deferred.onRejected;<span class="comment">//根据状态，把对应的回调赋值给cb</span></span><br><span class="line">    <span class="keyword">if</span> (cb === <span class="literal">null</span>) &#123;<span class="comment">//如果传入的then方法不是函数类型，会执行resolve或者reject函数，传入的参数使得用Promise的值去改变内部创建的Promise对象的状态，简而言之，then方法未传入对应的回调，那么Promise的值会被传递到下一次then方法中</span></span><br><span class="line">      (self._state === <span class="number">1</span> ? resolve : reject)(deferred.promise, self._value);</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> ret;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      ret = cb(self._value);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">      reject(deferred.promise, e);</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    resolve(deferred.promise, ret);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">resolve</span>(<span class="params">self, newValue</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="comment">// Promise Resolution Procedure: https://github.com/promises-aplus/promises-spec#the-promise-resolution-procedure</span></span><br><span class="line">    <span class="keyword">if</span> (newValue === self)<span class="comment">//完成的值不能是自身Promise对象</span></span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">'A promise cannot be resolved with itself.'</span>);</span><br><span class="line">    <span class="keyword">if</span> (</span><br><span class="line">      newValue &amp;&amp;</span><br><span class="line">      (<span class="keyword">typeof</span> newValue === <span class="string">'object'</span> || <span class="keyword">typeof</span> newValue === <span class="string">'function'</span>)</span><br><span class="line">    ) &#123;</span><br><span class="line">      <span class="keyword">var</span> then = newValue.then;</span><br><span class="line">      <span class="keyword">if</span> (newValue <span class="keyword">instanceof</span> <span class="built_in">Promise</span>) &#123;<span class="comment">//Promise也是有then方法的，先判断值是否是纯粹的Promise对象</span></span><br><span class="line">        self._state = <span class="number">3</span>;</span><br><span class="line">        self._value = newValue;</span><br><span class="line">        finale(self);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> then === <span class="string">'function'</span>) &#123;<span class="comment">//在判断了值不是Promise对象之后判断then的类型是否是函数</span></span><br><span class="line">        doResolve(bind(then, newValue), self);<span class="comment">//bind函数是Function.prototype.bind的polyfill</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    self._state = <span class="number">1</span>;<span class="comment">//状态变为fulfilled</span></span><br><span class="line">    self._value = newValue;</span><br><span class="line">    finale(self);<span class="comment">//finale函数主要为then方法做准备</span></span><br><span class="line">  &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">    reject(self, e);<span class="comment">//如果resolve出现异常，则状态变为rejected</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">reject</span>(<span class="params">self, newValue</span>) </span>&#123;</span><br><span class="line">  self._state = <span class="number">2</span>;</span><br><span class="line">  self._value = newValue;</span><br><span class="line">  finale(self);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">finale</span>(<span class="params">self</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (self._state === <span class="number">2</span> &amp;&amp; self._deferreds.length === <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="built_in">Promise</span>._immediateFn(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (!self._handled) &#123;</span><br><span class="line">        <span class="built_in">Promise</span>._unhandledRejectionFn(self._value);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, len = self._deferreds.length; i &lt; len; i++) &#123;</span><br><span class="line">    handle(self, self._deferreds[i]);</span><br><span class="line">  &#125;</span><br><span class="line">  self._deferreds = <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@constructor</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Handler</span>(<span class="params">onFulfilled, onRejected, promise</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.onFulfilled = <span class="keyword">typeof</span> onFulfilled === <span class="string">'function'</span> ? onFulfilled : <span class="literal">null</span>;<span class="comment">//如果不是函数，会赋值为null，所以传入给then方法的两个参数可以不为函数类型，其内部会调整为null</span></span><br><span class="line">  <span class="keyword">this</span>.onRejected = <span class="keyword">typeof</span> onRejected === <span class="string">'function'</span> ? onRejected : <span class="literal">null</span>;</span><br><span class="line">  <span class="keyword">this</span>.promise = promise;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Take a potentially misbehaving resolver function and make sure</span></span><br><span class="line"><span class="comment"> * onFulfilled and onRejected are only called once.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * Makes no guarantees about asynchrony.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doResolve</span>(<span class="params">fn, self</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> done = <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    fn(</span><br><span class="line">      <span class="function"><span class="keyword">function</span>(<span class="params">value</span>) </span>&#123;<span class="comment">//第一个参数resolve</span></span><br><span class="line">        <span class="keyword">if</span> (done) <span class="keyword">return</span>;<span class="comment">//done参数为true的时候直接退出函数，防止resolve()与reject()同时被调用</span></span><br><span class="line">        done = <span class="literal">true</span>;</span><br><span class="line">        resolve(self, value);</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="function"><span class="keyword">function</span>(<span class="params">reason</span>) </span>&#123;<span class="comment">//第二个参数reject</span></span><br><span class="line">        <span class="keyword">if</span> (done) <span class="keyword">return</span>;</span><br><span class="line">        done = <span class="literal">true</span>;</span><br><span class="line">        reject(self, reason);</span><br><span class="line">      &#125;</span><br><span class="line">    );</span><br><span class="line">  &#125; <span class="keyword">catch</span> (ex) &#123;</span><br><span class="line">    <span class="keyword">if</span> (done) <span class="keyword">return</span>;</span><br><span class="line">    done = <span class="literal">true</span>;</span><br><span class="line">    reject(self, ex);<span class="comment">//如果Promise构造函数抛出异常，则状态变为rejected</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Promise</span>.prototype[<span class="string">'catch'</span>] = <span class="function"><span class="keyword">function</span>(<span class="params">onRejected</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.then(<span class="literal">null</span>, onRejected);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Promise</span>.prototype.then = <span class="function"><span class="keyword">function</span>(<span class="params">onFulfilled, onRejected</span>) </span>&#123;<span class="comment">//then属于每个Promise对象，这说明then方法应该定义在Promise的原型链上</span></span><br><span class="line">  <span class="comment">// @ts-ignore</span></span><br><span class="line">  <span class="keyword">var</span> prom = <span class="keyword">new</span> <span class="keyword">this</span>.constructor(noop);<span class="comment">//this.constructor指向Promise构造函数，noop为空函数，这里实例化了一个新的Promise</span></span><br><span class="line"></span><br><span class="line">  handle(<span class="keyword">this</span>, <span class="keyword">new</span> Handler(onFulfilled, onRejected, prom));</span><br><span class="line">  <span class="keyword">return</span> prom;<span class="comment">//返回一个Promise对象，由此可以链式调用</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Promise</span>.prototype[<span class="string">'finally'</span>] = promiseFinally;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Promise</span>.all = <span class="function"><span class="keyword">function</span>(<span class="params">arr</span>) </span>&#123;<span class="comment">//promise都执行完了才ok，promise作为参数数组传入</span></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!isArray(arr)) &#123;</span><br><span class="line">      <span class="keyword">return</span> reject(<span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">'Promise.all accepts an array'</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> args = <span class="built_in">Array</span>.prototype.slice.call(arr);</span><br><span class="line">    <span class="keyword">if</span> (args.length === <span class="number">0</span>) <span class="keyword">return</span> resolve([]);</span><br><span class="line">    <span class="keyword">var</span> remaining = args.length;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">res</span>(<span class="params">i, val</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (val &amp;&amp; (<span class="keyword">typeof</span> val === <span class="string">'object'</span> || <span class="keyword">typeof</span> val === <span class="string">'function'</span>)) &#123;</span><br><span class="line">          <span class="keyword">var</span> then = val.then;</span><br><span class="line">          <span class="keyword">if</span> (<span class="keyword">typeof</span> then === <span class="string">'function'</span>) &#123;</span><br><span class="line">            then.call(</span><br><span class="line">              val,</span><br><span class="line">              <span class="function"><span class="keyword">function</span>(<span class="params">val</span>) </span>&#123;</span><br><span class="line">                res(i, val);</span><br><span class="line">              &#125;,</span><br><span class="line">              reject</span><br><span class="line">            );</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        args[i] = val;</span><br><span class="line">        <span class="keyword">if</span> (--remaining === <span class="number">0</span>) &#123;</span><br><span class="line">          resolve(args);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125; <span class="keyword">catch</span> (ex) &#123;</span><br><span class="line">        reject(ex);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; args.length; i++) &#123;</span><br><span class="line">      res(i, args[i]);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Promise</span>.allSettled = allSettled;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Promise</span>.resolve = <span class="function"><span class="keyword">function</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (value &amp;&amp; <span class="keyword">typeof</span> value === <span class="string">'object'</span> &amp;&amp; value.constructor === <span class="built_in">Promise</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> value;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve</span>) </span>&#123;</span><br><span class="line">    resolve(value);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Promise</span>.reject = <span class="function"><span class="keyword">function</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">    reject(value);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Promise</span>.race = <span class="function"><span class="keyword">function</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!isArray(arr)) &#123;</span><br><span class="line">      <span class="keyword">return</span> reject(<span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">'Promise.race accepts an array'</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, len = arr.length; i &lt; len; i++) &#123;</span><br><span class="line">      <span class="built_in">Promise</span>.resolve(arr[i]).then(resolve, reject);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Use polyfill for setImmediate for performance gains</span></span><br><span class="line"><span class="built_in">Promise</span>._immediateFn =<span class="comment">//setImmediate是Node.js里的global对象的属性，而setTimeout是浏览器环境里window对象的属性，所以Promise._immediate是兼容两个环境所做处理的代码</span></span><br><span class="line">  <span class="comment">// @ts-ignore//setImmediateFunc就是setImmediate</span></span><br><span class="line">  (<span class="keyword">typeof</span> setImmediateFunc === <span class="string">'function'</span> &amp;&amp;</span><br><span class="line">    <span class="function"><span class="keyword">function</span>(<span class="params">fn</span>) </span>&#123;</span><br><span class="line">      <span class="comment">// @ts-ignore</span></span><br><span class="line">      setImmediateFunc(fn);</span><br><span class="line">    &#125;) ||</span><br><span class="line">  <span class="function"><span class="keyword">function</span>(<span class="params">fn</span>) </span>&#123;</span><br><span class="line">    setTimeoutFunc(fn, <span class="number">0</span>);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Promise</span>._unhandledRejectionFn = <span class="function"><span class="keyword">function</span> <span class="title">_unhandledRejectionFn</span>(<span class="params">err</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">console</span> !== <span class="string">'undefined'</span> &amp;&amp; <span class="built_in">console</span>) &#123;</span><br><span class="line">    <span class="built_in">console</span>.warn(<span class="string">'Possible Unhandled Promise Rejection:'</span>, err); <span class="comment">// eslint-disable-line no-console</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="built_in">Promise</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">基础</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/06/23/promise-polyfill%E7%A0%81%E6%BA%90%E8%A7%A3%E6%9E%90/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-vue3-0组合式setup" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/06/21/vue3-0%E7%BB%84%E5%90%88%E5%BC%8Fsetup/" target="_blank">vue3.0组合式setup</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/06/21/vue3-0%E7%BB%84%E5%90%88%E5%BC%8Fsetup/" class="archive-article-date">
+        <time datetime="2021-06-21T12:04:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-21</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="组合式API"><a href="#组合式API" class="headerlink" title="组合式API"></a>组合式API</h1><p>Why？</p>
+<p>碎片化使得理解和维护复杂组件变得困难。选项的分离掩盖了潜在的逻辑问题。此外，在处理单个逻辑关注点时，我们必须不断地“跳转”相关代码的选项块。</p>
+<p>如果能够将同一个逻辑关注点相关代码收集在一起会更好。而这正是组合式 API 使我们能够做到的。</p>
+<h2 id="setup组件选项"><a href="#setup组件选项" class="headerlink" title="setup组件选项"></a>setup组件选项</h2><p><strong>setup在组件创建之前执行</strong>，props被解析之后就会作为组合式API的入口。</p>
+<p>因为是在组件创建之前执行的，因此没有this，this是找不到组件实例的。</p>
+<p>setup是一个接收props和context的函数</p>
+<p>setup需要把内容暴露出去（return出去）</p>
+<p>官方示例</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/components/UserRepositories.vue `setup` function</span></span><br><span class="line"><span class="keyword">import</span> &#123; fetchUserRepositories &#125; <span class="keyword">from</span> <span class="string">'@/api/repositories'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 在我们的组件内</span></span><br><span class="line">setup (props) &#123;</span><br><span class="line">  <span class="keyword">let</span> repositories = []</span><br><span class="line">  <span class="keyword">const</span> getUserRepositories = <span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">    repositories = <span class="keyword">await</span> fetchUserRepositories(props.user)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    repositories,</span><br><span class="line">    getUserRepositories <span class="comment">// 返回的函数与方法的行为相同</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这是出发点，但是并没有生效，它是非响应式的，需要使用ref的响应式引用。</p>
+<p>官方示例</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/components/UserRepositories.vue</span></span><br><span class="line"><span class="keyword">import</span> &#123; fetchUserRepositories &#125; <span class="keyword">from</span> <span class="string">'@/api/repositories'</span></span><br><span class="line"><span class="keyword">import</span> &#123; ref &#125; <span class="keyword">from</span> <span class="string">'vue'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  components: &#123; RepositoriesFilters, RepositoriesSortBy, RepositoriesList &#125;,</span><br><span class="line">  props: &#123;</span><br><span class="line">    user: &#123;</span><br><span class="line">      type: <span class="built_in">String</span>,</span><br><span class="line">      required: <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  setup (props) &#123;</span><br><span class="line">    <span class="keyword">const</span> repositories = ref([])</span><br><span class="line">    <span class="keyword">const</span> getUserRepositories = <span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">      repositories.value = <span class="keyword">await</span> fetchUserRepositories(props.user)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      repositories,</span><br><span class="line">      getUserRepositories</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  data () &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      filters: &#123; ... &#125;, <span class="comment">// 3</span></span><br><span class="line">      searchQuery: <span class="string">''</span> <span class="comment">// 2</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  computed: &#123;</span><br><span class="line">    filteredRepositories () &#123; ... &#125;, <span class="comment">// 3</span></span><br><span class="line">    repositoriesMatchingSearchQuery () &#123; ... &#125;, <span class="comment">// 2</span></span><br><span class="line">  &#125;,</span><br><span class="line">  watch: &#123;</span><br><span class="line">    user: <span class="string">'getUserRepositories'</span> <span class="comment">// 1</span></span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    updateFilters () &#123; ... &#125;, <span class="comment">// 3</span></span><br><span class="line">  &#125;,</span><br><span class="line">  mounted () &#123;</span><br><span class="line">    <span class="keyword">this</span>.getUserRepositories() <span class="comment">// 1</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样创建了repositories的响应式变量，每当我们调用 <code>getUserRepositories</code> 时，<code>repositories</code> 都将发生变化，视图也会更新以反映变化</p>
+<p>在setup内部使用生命周期钩子</p>
+<p>onMounted</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/components/UserRepositories.vue `setup` function</span></span><br><span class="line"><span class="keyword">import</span> &#123; fetchUserRepositories &#125; <span class="keyword">from</span> <span class="string">'@/api/repositories'</span></span><br><span class="line"><span class="keyword">import</span> &#123; ref, onMounted &#125; <span class="keyword">from</span> <span class="string">'vue'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 在我们的组件中</span></span><br><span class="line">setup (props) &#123;</span><br><span class="line">  <span class="keyword">const</span> repositories = ref([])</span><br><span class="line">  <span class="keyword">const</span> getUserRepositories = <span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">    repositories.value = <span class="keyword">await</span> fetchUserRepositories(props.user)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  onMounted(getUserRepositories) <span class="comment">// 在 `mounted` 时调用 `getUserRepositories`</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    repositories,</span><br><span class="line">    getUserRepositories</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在setup中使用watch监听器以及计算属性computed</p>
+<p>watch的用法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; ref, watch &#125; <span class="keyword">from</span> <span class="string">'vue'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> counter = ref(<span class="number">0</span>)</span><br><span class="line">watch(counter, (newValue, oldValue) =&gt; &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'The new counter value is: '</span> + counter.value)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>官方示例</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/components/UserRepositories.vue `setup` function</span></span><br><span class="line"><span class="keyword">import</span> &#123; fetchUserRepositories &#125; <span class="keyword">from</span> <span class="string">'@/api/repositories'</span></span><br><span class="line"><span class="keyword">import</span> &#123; ref, onMounted, watch, toRefs &#125; <span class="keyword">from</span> <span class="string">'vue'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 在我们组件中</span></span><br><span class="line">setup (props) &#123;</span><br><span class="line">  <span class="comment">// 使用 `toRefs` 创建对prop的 `user` property 的响应式引用</span></span><br><span class="line">  <span class="keyword">const</span> &#123; user &#125; = toRefs(props)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> repositories = ref([])</span><br><span class="line">  <span class="keyword">const</span> getUserRepositories = <span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">    <span class="comment">// 更新 `prop.user` 到 `user.value` 访问引用值</span></span><br><span class="line">    repositories.value = <span class="keyword">await</span> fetchUserRepositories(user.value)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  onMounted(getUserRepositories)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 在 user prop 的响应式引用上设置一个侦听器</span></span><br><span class="line">  watch(user, getUserRepositories)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    repositories,</span><br><span class="line">    getUserRepositories</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> <code>toRefs</code>这是为了确保我们的侦听器能够根据 <code>user</code> prop 的变化做出反应</p>
+<p>computed的用法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/components/UserRepositories.vue `setup` function</span></span><br><span class="line"><span class="keyword">import</span> &#123; fetchUserRepositories &#125; <span class="keyword">from</span> <span class="string">'@/api/repositories'</span></span><br><span class="line"><span class="keyword">import</span> &#123; ref, onMounted, watch, toRefs, computed &#125; <span class="keyword">from</span> <span class="string">'vue'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 在我们的组件中</span></span><br><span class="line">setup (props) &#123;</span><br><span class="line">  <span class="comment">// 使用 `toRefs` 创建对 props 中的 `user` property 的响应式引用</span></span><br><span class="line">  <span class="keyword">const</span> &#123; user &#125; = toRefs(props)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> repositories = ref([])</span><br><span class="line">  <span class="keyword">const</span> getUserRepositories = <span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">    <span class="comment">// 更新 `props.user ` 到 `user.value` 访问引用值</span></span><br><span class="line">    repositories.value = <span class="keyword">await</span> fetchUserRepositories(user.value)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  onMounted(getUserRepositories)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 在 user prop 的响应式引用上设置一个侦听器</span></span><br><span class="line">  watch(user, getUserRepositories)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> searchQuery = ref(<span class="string">''</span>)</span><br><span class="line">  <span class="keyword">const</span> repositoriesMatchingSearchQuery = computed(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> repositories.value.filter(</span><br><span class="line">      repository =&gt; repository.name.includes(searchQuery.value)</span><br><span class="line">    )</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    repositories,</span><br><span class="line">    getUserRepositories,</span><br><span class="line">    searchQuery,</span><br><span class="line">    repositoriesMatchingSearchQuery</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/06/21/vue3-0%E7%BB%84%E5%90%88%E5%BC%8Fsetup/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-created与mounted" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/06/21/created%E4%B8%8Emounted/" target="_blank">created与mounted</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/06/21/created%E4%B8%8Emounted/" class="archive-article-date">
+        <time datetime="2021-06-21T12:03:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-21</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>在vue实际的应用中，数据的获取与修改，通常在created或者是mounted中，但是两者之间是有很大区别的</p>
+<table>
+<thead>
+<tr>
+<th align="center">生命周期</th>
+<th align="center">是否获取dom节点</th>
+<th align="center">是否可以获取data</th>
+<th align="center">是否获取methods</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">beforeCreate</td>
+<td align="center">否</td>
+<td align="center">否</td>
+<td align="center">否</td>
+</tr>
+<tr>
+<td align="center">created</td>
+<td align="center">否</td>
+<td align="center">是</td>
+<td align="center">是</td>
+</tr>
+<tr>
+<td align="center">beforeMount</td>
+<td align="center">否</td>
+<td align="center">是</td>
+<td align="center">是</td>
+</tr>
+<tr>
+<td align="center">mounted</td>
+<td align="center">是</td>
+<td align="center">是</td>
+<td align="center">是</td>
+</tr>
+</tbody></table>
+<p>可以看到有一个很大的区别是获取dom节点</p>
+<p>created:在模板渲染成html前调用，即通常初始化某些属性值，然后再渲染成视图。</p>
+<p>mounted:在模板渲染成html后调用，通常是初始化页面完成后，再对html的dom节点进行一些需要的操作</p>
+<p>在使用echarts的时候数据的操作就必须是mounted了，还有使用ref获取dom节点的时候</p>
+<p>但是有时候在mounted的时候也不一定会获取到真实的dom节点，因此在需要使用dom节点的时候可以用$nextTick</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.nextTick(<span class="function"><span class="params">()</span>=&gt;</span>&#123;&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>nextTick()的源码分析</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Defer a task to execute it asynchronously.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> nextTick = (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> callbacks = []<span class="comment">//存储需要执行的回调函数</span></span><br><span class="line">  <span class="keyword">let</span> pending = <span class="literal">false</span><span class="comment">//标志是否执行回调</span></span><br><span class="line">  <span class="keyword">let</span> timerFunc<span class="comment">//用于触发执行回调函数</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">nextTickHandler</span> (<span class="params"></span>) </span>&#123;<span class="comment">//该函数用来执行存储在callbacks中的回调函数</span></span><br><span class="line">    pending = <span class="literal">false</span></span><br><span class="line">    <span class="keyword">const</span> copies = callbacks.slice(<span class="number">0</span>)</span><br><span class="line">    callbacks.length = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; copies.length; i++) &#123;</span><br><span class="line">      copies[i]()</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// the nextTick behavior leverages the microtask queue, which can be accessed</span></span><br><span class="line">  <span class="comment">// via either native Promise.then or MutationObserver.</span></span><br><span class="line">  <span class="comment">// MutationObserver has wider support, however it is seriously bugged in</span></span><br><span class="line">  <span class="comment">// UIWebView in iOS &gt;= 9.3.3 when triggered in touch event handlers. It</span></span><br><span class="line">  <span class="comment">// completely stops working after triggering a few times... so, if native</span></span><br><span class="line">  <span class="comment">// Promise is available, we will use it:</span></span><br><span class="line">  <span class="comment">/* istanbul ignore if */</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">Promise</span> !== <span class="string">'undefined'</span> &amp;&amp; isNative(<span class="built_in">Promise</span>)) &#123;<span class="comment">//isNative检查一个值是否是原生function，是否支持原生promise</span></span><br><span class="line">    <span class="keyword">var</span> p = <span class="built_in">Promise</span>.resolve()</span><br><span class="line">    <span class="keyword">var</span> logError = <span class="function"><span class="params">err</span> =&gt;</span> &#123; <span class="built_in">console</span>.error(err) &#125;</span><br><span class="line">    timerFunc = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      p.then(nextTickHandler).catch(logError)</span><br><span class="line">      <span class="comment">// in problematic UIWebViews, Promise.then doesn't completely break, but</span></span><br><span class="line">      <span class="comment">// it can get stuck in a weird state where callbacks are pushed into the</span></span><br><span class="line">      <span class="comment">// microtask queue but the queue isn't being flushed, until the browser</span></span><br><span class="line">      <span class="comment">// needs to do some other work, e.g. handle a timer. Therefore we can</span></span><br><span class="line">      <span class="comment">// "force" the microtask queue to be flushed by adding an empty timer.</span></span><br><span class="line">      <span class="keyword">if</span> (isIOS) setTimeout(noop)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!isIE &amp;&amp; <span class="keyword">typeof</span> MutationObserver !== <span class="string">'undefined'</span> &amp;&amp; (</span><br><span class="line">    isNative(MutationObserver) ||</span><br><span class="line">    <span class="comment">// PhantomJS and iOS 7.x</span></span><br><span class="line">    MutationObserver.toString() === <span class="string">'[object MutationObserverConstructor]'</span></span><br><span class="line">  )) &#123;<span class="comment">//检查是否支持MutationObserver</span></span><br><span class="line">    <span class="comment">// use MutationObserver where native Promise is not available,</span></span><br><span class="line">    <span class="comment">// e.g. PhantomJS, iOS7, Android 4.4</span></span><br><span class="line">    <span class="keyword">var</span> counter = <span class="number">1</span></span><br><span class="line">    <span class="keyword">var</span> observer = <span class="keyword">new</span> MutationObserver(nextTickHandler)</span><br><span class="line">    <span class="keyword">var</span> textNode = <span class="built_in">document</span>.createTextNode(<span class="built_in">String</span>(counter))</span><br><span class="line">    observer.observe(textNode, &#123;</span><br><span class="line">      characterData: <span class="literal">true</span></span><br><span class="line">    &#125;)<span class="comment">//observe观察者会观察textNode节点的变化，变化的时候执行timerFunc，characterData设为 true 以监视指定目标节点或子节点树中节点所包含的字符数据的变化</span></span><br><span class="line">    timerFunc = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      counter = (counter + <span class="number">1</span>) % <span class="number">2</span></span><br><span class="line">      textNode.data = <span class="built_in">String</span>(counter)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// fallback to setTimeout</span></span><br><span class="line">    <span class="comment">/* istanbul ignore next */</span></span><br><span class="line">    timerFunc = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      setTimeout(nextTickHandler, <span class="number">0</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">queueNextTick</span> (<span class="params">cb?: Function, ctx?: Object</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> _resolve</span><br><span class="line">    callbacks.push(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (cb) &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">          cb.call(ctx)</span><br><span class="line">        &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">          handleError(e, ctx, <span class="string">'nextTick'</span>)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (_resolve) &#123;</span><br><span class="line">        _resolve(ctx)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">if</span> (!pending) &#123;</span><br><span class="line">      pending = <span class="literal">true</span></span><br><span class="line">      timerFunc()</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!cb &amp;&amp; <span class="keyword">typeof</span> <span class="built_in">Promise</span> !== <span class="string">'undefined'</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">        _resolve = resolve</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)()<span class="comment">//立即执行函数</span></span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/06/21/created%E4%B8%8Emounted/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-node-connect模块" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1199,447 +1643,6 @@
 
 
   
-    <article id="post-npm包的发布以及yarn" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/06/04/npm%E5%8C%85%E7%9A%84%E5%8F%91%E5%B8%83%E4%BB%A5%E5%8F%8Ayarn/" target="_blank">npm包的发布以及yarn</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/06/04/npm%E5%8C%85%E7%9A%84%E5%8F%91%E5%B8%83%E4%BB%A5%E5%8F%8Ayarn/" class="archive-article-date">
-        <time datetime="2021-06-04T13:23:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-04</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="构建个人npm包"><a href="#构建个人npm包" class="headerlink" title="构建个人npm包"></a>构建个人npm包</h1><p>1.构建个人npm包，新建文件夹</p>
-<p>2.命令行定位到该文件夹</p>
-<p>3.新建index.js文件</p>
-<p>4.npm init，生成package.json文件</p>
-<p>5.然后需要注意的检查本地的npm配置， npm config list</p>
-<p>6.把源设置成<a href="https://links.jianshu.com/go?to=https%3A%2F%2Fregistry.npmjs.org%2F" target="_blank" rel="noopener">https://registry.npmjs.org/</a></p>
-<p>​    npm set registry <a href="https://links.jianshu.com/go?to=https%3A%2F%2Fregistry.npmjs.org%2F" target="_blank" rel="noopener">https://registry.npmjs.org/</a></p>
-<p>7.npm login登录一下自己的账户密码邮箱，注意邮箱一定要验证过的，否则就会报错403</p>
-<p>8.npm publish，注意不要重名，否则也是会报错的</p>
-<h1 id="yarn与npm"><a href="#yarn与npm" class="headerlink" title="yarn与npm"></a>yarn与npm</h1><h3 id="yarn的优点："><a href="#yarn的优点：" class="headerlink" title="yarn的优点："></a>yarn的优点：</h3><ol>
-<li>并行安装：无论 npm 还是 Yarn 在执行包的安装时，都会执行一系列任务。npm 是按照队列执行每个 package，也就是说必须要等到当前 package 安装完成之后，才能继续后面的安装。而 Yarn 是同步执行所有任务，提高了性能。</li>
-<li>离线模式：如果之前已经安装过一个软件包，用Yarn再次安装时之间从缓存中获取，就不用像npm那样再从网络下载了。</li>
-</ol>
-<ul>
-<li>安装<strong>版本统一</strong>：为了防止拉取到不同的版本，Yarn 有一个锁定文件 (lock file) 记录了被确切安装上的模块的版本号。每次只要新增了一个模块，Yarn 就会创建（或更新）yarn.lock 这个文件。这么做就保证了，每一次拉取同一个项目依赖时，使用的都是一样的模块版本。npm 其实也有办法实现处处使用相同版本的 packages，但需要开发者执行 npm shrinkwrap 命令。这个命令将会生成一个锁定文件，在执行 npm install 的时候，该锁定文件会先被读取，和 Yarn 读取 yarn.lock 文件一个道理。npm 和 Yarn 两者的不同之处在于，Yarn 默认会生成这样的锁定文件，而 npm 要通过 shrinkwrap 命令生成 npm-shrinkwrap.json 文件，只有当这个文件存在的时候，packages 版本信息才会被记录和更新。</li>
-<li><strong>更简洁的输出</strong>：npm 的输出信息比较冗长。在执行 npm install <package> 的时候，命令行里会不断地打印出所有被安装上的依赖。相比之下，Yarn 简洁太多：默认情况下，结合了 emoji直观且直接地打印出必要的信息，也提供了一些命令供开发者查询额外的安装信息。</li>
-<li><strong>多注册来源处理：</strong>所有的依赖包，不管他被不同的库间接关联引用多少次，安装这个包时，只会从一个注册来源去装，要么是 npm 要么是 bower, 防止出现混乱不一致。</li>
-<li><strong>更好的语义化</strong>： yarn改变了一些npm命令的名称，比如 yarn add/remove，感觉上比 npm 原本的 install/uninstall 要更清晰。</li>
-</ul>
-<h3 id="命令对比"><a href="#命令对比" class="headerlink" title="命令对比"></a>命令对比</h3><table>
-<thead>
-<tr>
-<th align="right">npm</th>
-<th align="left">yarn</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="right">npm install</td>
-<td align="left">yarn</td>
-</tr>
-<tr>
-<td align="right">npm install react –save</td>
-<td align="left">yarn add react</td>
-</tr>
-<tr>
-<td align="right">npm uninstall react –save</td>
-<td align="left">yarn remove react</td>
-</tr>
-<tr>
-<td align="right">npm install react –save-dev</td>
-<td align="left">yarn add react –dev</td>
-</tr>
-<tr>
-<td align="right">npm update –save</td>
-<td align="left">yarn upgrade</td>
-</tr>
-</tbody></table>
-<h1 id="npm5-0"><a href="#npm5-0" class="headerlink" title="npm5.0"></a>npm5.0</h1><p>默认新增了类似yarn.lock的 package-lock.json；</p>
-<p>git 依赖支持优化：这个特性在需要安装大量内部项目（例如在没有自建源的内网开发），或需要使用某些依赖的未发布版本时很有用。在这之前可能需要使用指定 commit_id 的方式来控制版本。</p>
-<p>文件依赖优化：在之前的版本，如果将本地目录作为依赖来安装，将会把文件目录作为副本拷贝到 node_modules 中。而在 npm5 中，将改为使用创建 symlinks 的方式来实现（使用本地 tarball 包除外），而不再执行文件拷贝。这将会提升安装速度。目前yarn还不支持。</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">基础</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/06/04/npm%E5%8C%85%E7%9A%84%E5%8F%91%E5%B8%83%E4%BB%A5%E5%8F%8Ayarn/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-for-of" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/06/03/for-of/" target="_blank">for of</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/06/03/for-of/" class="archive-article-date">
-        <time datetime="2021-06-03T12:26:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-03</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>for of经常用来遍历数组，除此之外还可以遍历类数组对象、Set、Map等。但是不能遍历普通的对象</p>
-<p>如下遍历在浏览器环境中</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(item <span class="keyword">of</span> &#123;<span class="attr">name</span>:<span class="number">123</span>,<span class="attr">age</span>:<span class="number">123</span>&#125;)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(item)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>会报错:某某不是可迭代</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;(intermediate value)(intermediate value)&#125; is not iterable</span><br></pre></td></tr></table></figure>
-
-<p>for of 底层是通过<code>Symbol.iterator</code> 来实现遍历的，因此</p>
-<p>通过定义一个有<code>Symbol.iterator</code> 属性的对象来实现for of 的遍历</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">for(item of &#123;name:123,age:123,[Symbol.iterator]&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>浏览器并没有报错吗，而是输出的是undefinded</p>
-<p>如下定义对象</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const obj &#x3D; &#123;</span><br><span class="line">  0: &#39;a&#39;,</span><br><span class="line">  1: &#39;b&#39;,</span><br><span class="line">  length: 2,</span><br><span class="line">  [Symbol.iterator]: Array.prototype[Symbol.iterator]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>对应输出</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for (const item of obj) &#123;</span><br><span class="line">  console.log(item) &#x2F;&#x2F; a b</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>对象会遍历出a、b</p>
-<p>什么是迭代器，其实所谓的迭代器就是具有 next() 方法的对象，每次调用 next() 都会返回一个结果对象，该结果对象有两个属性，value 表示当前的值，done 表示遍历是否结束</p>
-<p>自定义迭代器</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">forof</span>(<span class="params">arr, cb</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> iterator = arr[<span class="built_in">Symbol</span>.iterator]()</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> result = iterator.next()</span><br><span class="line">  <span class="keyword">while</span> (!result.done) &#123;</span><br><span class="line">    cb(result.value)</span><br><span class="line">    result = iterator.next()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">forof(arr, <span class="function"><span class="keyword">function</span> (<span class="params">item</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(item)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>改造普通对象为可迭代对象</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createIterator</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> arr = <span class="built_in">Object</span>.entries(obj)<span class="comment">//Object.entries()方法返回一个给定对象自身可枚举属性的键值对数组，其排列与使用 for...in 循环遍历该对象时返回的顺序一致（区别在于 for-in 循环还会枚举原型链中的属性）</span></span><br><span class="line">  <span class="keyword">let</span> i = <span class="number">0</span></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    next() &#123;</span><br><span class="line">      <span class="keyword">let</span> done = i &gt;= arr.length ? <span class="literal">true</span> : <span class="literal">false</span></span><br><span class="line">      <span class="keyword">let</span> value = !done ? arr[i++] : <span class="literal">undefined</span></span><br><span class="line">      <span class="keyword">return</span> &#123;</span><br><span class="line">        done,</span><br><span class="line">        value</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">基础</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/06/03/for-of/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-promise的race和all的实现" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/05/27/promise%E7%9A%84race%E5%92%8Call%E7%9A%84%E5%AE%9E%E7%8E%B0/" target="_blank">promise的race和all的原理</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/05/27/promise%E7%9A%84race%E5%92%8Call%E7%9A%84%E5%AE%9E%E7%8E%B0/" class="archive-article-date">
-        <time datetime="2021-05-27T13:10:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-27</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>promise all手动封装实现</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Promise</span>.prototype.all = <span class="function"><span class="keyword">function</span>(<span class="params">promises</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> results = [];</span><br><span class="line">  <span class="keyword">let</span> promiseCount = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">let</span> promisesLength = promises.length;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> val <span class="keyword">of</span> promises) &#123;</span><br><span class="line">      <span class="built_in">Promise</span>.resolve(val).then(<span class="function"><span class="keyword">function</span>(<span class="params">res</span>) </span>&#123;</span><br><span class="line">        promiseCount++;</span><br><span class="line">        <span class="comment">// results.push(res);</span></span><br><span class="line">        results[i] = res;</span><br><span class="line">        <span class="comment">// 当所有函数都正确执行了，resolve输出所有返回结果。</span></span><br><span class="line">        <span class="keyword">if</span> (promiseCount === promisesLength) &#123;</span><br><span class="line">          <span class="keyword">return</span> resolve(results);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;, <span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> reject(err);</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>Promise race手动封装实现</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Promise</span>.prototype.race = <span class="function"><span class="keyword">function</span>(<span class="params">promise</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">let</span> promises = <span class="built_in">Array</span>.from(promise)</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; promises.length; i++) &#123;</span><br><span class="line">       		 <span class="built_in">Promise</span>.resolve(promises[i]).then(<span class="function"><span class="params">data</span> =&gt;</span> &#123;</span><br><span class="line">				resolve(data);</span><br><span class="line">       			 &#125;, err =&gt; &#123;</span><br><span class="line">          			<span class="keyword">return</span> reject(err)</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">基础</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/05/27/promise%E7%9A%84race%E5%92%8Call%E7%9A%84%E5%AE%9E%E7%8E%B0/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-栅格布局原理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/05/20/%E6%A0%85%E6%A0%BC%E5%B8%83%E5%B1%80%E5%8E%9F%E7%90%86/" target="_blank">栅格布局原理</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/05/20/%E6%A0%85%E6%A0%BC%E5%B8%83%E5%B1%80%E5%8E%9F%E7%90%86/" class="archive-article-date">
-        <time datetime="2021-05-20T12:46:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-20</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>珊格布局是日常开发中经常会使用到的，于是想了解一下珊格布局的实现原理。</p>
-<p>最后发现不同的类库，甚至是不同的版本，其实实现的方式都是不太一样的</p>
-<h2 id="bootstrap"><a href="#bootstrap" class="headerlink" title="bootstrap"></a>bootstrap</h2><p><a href="mailto:bootstrap@3.x">bootstrap@3.x</a>版本为了兼容IE8，采用的是浮动方式来实现栅格系统</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-attr">[class |= col]</span> &#123; <span class="attribute">float</span>: left; &#125;</span><br><span class="line"><span class="selector-class">.col-md-1</span> &#123; <span class="attribute">width</span>: <span class="number">8.33333333%</span>; &#125;</span><br><span class="line"><span class="selector-class">.col-md-2</span> &#123; <span class="attribute">width</span>: <span class="number">16.66666667%</span>; &#125;</span><br><span class="line"><span class="selector-class">.col-md-3</span> &#123; <span class="attribute">width</span>: <span class="number">25%</span>; &#125;</span><br><span class="line"><span class="selector-class">.col-md-4</span> &#123; <span class="attribute">width</span>: <span class="number">33.33333333%</span>; &#125;</span><br><span class="line"><span class="selector-class">.col-md-5</span> &#123; <span class="attribute">width</span>: <span class="number">41.66666667%</span>; &#125;</span><br><span class="line"><span class="selector-class">.col-md-6</span> &#123; <span class="attribute">width</span>: <span class="number">50%</span>; &#125;</span><br><span class="line"><span class="selector-class">.col-md-7</span> &#123; <span class="attribute">width</span>: <span class="number">58.33333333%</span>; &#125;</span><br><span class="line"><span class="selector-class">.col-md-8</span> &#123; <span class="attribute">width</span>: <span class="number">66.66666667%</span>; &#125;</span><br><span class="line"><span class="selector-class">.col-md-9</span> &#123; <span class="attribute">width</span>: <span class="number">75%</span>; &#125;</span><br><span class="line"><span class="selector-class">.col-md-10</span> &#123; <span class="attribute">width</span>: <span class="number">83.33333333%</span>; &#125;</span><br><span class="line"><span class="selector-class">.col-md-11</span> &#123; <span class="attribute">width</span>: <span class="number">91.66666667%</span>; &#125;</span><br><span class="line"><span class="selector-class">.col-md-12</span> &#123; <span class="attribute">width</span>: <span class="number">100%</span>; &#125;</span><br></pre></td></tr></table></figure>
-
-<p>每一个容器根据左浮动加上百分比的方式来排版，当拆窗口开始改变的时候，对应改变container容器的宽度，对应的珊格根据百分比也是会自适应的改变。</p>
-<p><a href="mailto:bootstrap@4.0">bootstrap@4.0</a>版本放弃了对版本IE的支持，栅格系统采用的是最新的伸缩布局(flex布局)方式</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.row</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">flex-wrap</span>: wrap;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.col-1</span> &#123; <span class="attribute">flex</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">8.333333%</span>; &#125;</span><br><span class="line"><span class="selector-class">.col-2</span> &#123; <span class="attribute">flex</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">16.666667%</span>; &#125;</span><br><span class="line"><span class="selector-class">.col-3</span> &#123; <span class="attribute">flex</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">25%</span>; &#125;</span><br><span class="line"><span class="selector-class">.col-4</span> &#123; <span class="attribute">flex</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">33.333333%</span>; &#125;</span><br><span class="line"><span class="selector-class">.col-5</span> &#123; <span class="attribute">flex</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">41.666667%</span>; &#125;</span><br><span class="line"><span class="selector-class">.col-6</span> &#123; <span class="attribute">flex</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">50%</span>; &#125;</span><br><span class="line"><span class="selector-class">.col-7</span> &#123; <span class="attribute">flex</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">58.333333%</span>; &#125;</span><br><span class="line"><span class="selector-class">.col-8</span> &#123; <span class="attribute">flex</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">66.666667%</span>; &#125;</span><br><span class="line"><span class="selector-class">.col-9</span> &#123; <span class="attribute">flex</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">75%</span>; &#125;</span><br><span class="line"><span class="selector-class">.col-10</span> &#123; <span class="attribute">flex</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">83.333333%</span>; &#125;</span><br><span class="line"><span class="selector-class">.col-11</span> &#123; <span class="attribute">flex</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">91.666667%</span>; &#125;</span><br><span class="line"><span class="selector-class">.col-12</span> &#123; <span class="attribute">flex</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">100%</span>; &#125;</span><br></pre></td></tr></table></figure>
-
-<p><a href="mailto:bootstrap@3.x">bootstrap@3.x</a>版本与<a href="mailto:bootstrap@4.0">bootstrap@4.0</a>版本的珊格布局的原理也有一样的地方，就是offset偏移量都是通过margin-left设置百分比来实现的。</p>
-<h2 id="Foundation、Element与AntD"><a href="#Foundation、Element与AntD" class="headerlink" title="Foundation、Element与AntD"></a>Foundation、Element与AntD</h2><p>与bootstrap@4.0版本一样采用的是flex布局的方式</p>
-<h2 id="雅虎的pure"><a href="#雅虎的pure" class="headerlink" title="雅虎的pure"></a>雅虎的pure</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pure-g"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pure-u-1-3"</span>&gt;</span>1/3<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pure-u-1-3"</span>&gt;</span>1/3<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pure-u-1-3"</span>&gt;</span>1/3<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pure-g"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pure-u-1-8"</span>&gt;</span>1/8<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pure-u-1-8"</span>&gt;</span>1/8<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pure-u-1-8"</span>&gt;</span>1/8<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pure-g"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pure-u-1-24"</span>&gt;</span>1/24<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pure-u-1-24"</span>&gt;</span>1/24<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pure-u-1-24"</span>&gt;</span>1/24<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>采用的是伸缩与行内结合的方式</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.pure-g</span> &#123;</span><br><span class="line">        <span class="attribute">display</span>: -webkit-box;</span><br><span class="line">        <span class="attribute">display</span>: -webkit-flex;</span><br><span class="line">        <span class="attribute">display</span>: -ms-flexbox;</span><br><span class="line">        <span class="attribute">display</span>: flex;</span><br><span class="line">        <span class="attribute">flex-flow</span>: row wrap;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-attr">[class|=pure-u]</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: inline-block;</span><br><span class="line">    *display: inline;   /*iE &lt; 8*/</span><br><span class="line">    <span class="selector-tag">zoom</span>: 1;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.pure-u-1-24</span> &#123; <span class="attribute">width</span>: <span class="number">4.1667%</span>; &#125;</span><br><span class="line"><span class="selector-class">.pure-u-2-24</span>,<span class="selector-class">.pure-u-1-12</span> &#123; <span class="attribute">width</span>: <span class="number">8.3333%</span>; &#125;</span><br><span class="line"><span class="selector-class">.pure-u-3-24</span>,<span class="selector-class">.pure-u-1-8</span> &#123; <span class="attribute">width</span>: <span class="number">12.5000%</span>; &#125;</span><br><span class="line"><span class="selector-class">.pure-u-4-24</span>,<span class="selector-class">.pure-u-1-6</span> &#123; <span class="attribute">width</span>: <span class="number">16.6667%</span>; &#125;</span><br><span class="line"><span class="selector-class">.pure-u-5-24</span> &#123; <span class="attribute">width</span>: <span class="number">20.8333%</span>; &#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-
-<p>不支持偏移量与制定顺序的排序</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">基础</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/05/20/%E6%A0%85%E6%A0%BC%E5%B8%83%E5%B1%80%E5%8E%9F%E7%90%86/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
@@ -1777,19 +1780,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1797,15 +1788,27 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">react native</a>
+                <a href="javascript:void(0)" class="js-tag color1">react</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">react</a>
+                <a href="javascript:void(0)" class="js-tag color3">react native</a>
               </li>
              
               <li class="article-tag-list-item">

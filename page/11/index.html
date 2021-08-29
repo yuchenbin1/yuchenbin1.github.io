@@ -202,6 +202,392 @@
             
 
   
+    <article id="post-vue表单域的修饰符" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/03/31/vue%E8%A1%A8%E5%8D%95%E5%9F%9F%E7%9A%84%E4%BF%AE%E9%A5%B0%E7%AC%A6/" target="_blank">vue表单域的修饰符</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/03/31/vue%E8%A1%A8%E5%8D%95%E5%9F%9F%E7%9A%84%E4%BF%AE%E9%A5%B0%E7%AC%A6/" class="archive-article-date">
+        <time datetime="2020-03-31T10:05:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-31</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="vue的表单域的修饰符"><a href="#vue的表单域的修饰符" class="headerlink" title="vue的表单域的修饰符"></a>vue的表单域的修饰符</h1><p>number:转化为数组</p>
+<p>trim:去掉开始和结尾的空格</p>
+<p>lazy:将input事件切换为change事件 </p>
+<p>​        <strong>input事件每次输入都会触发，change事件会在失去焦点的时候触发</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=<span class="string">"utf-8"</span>&gt;</span><br><span class="line">		&lt;title&gt;&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;!-- number:转化为数组</span><br><span class="line">		     trim:去掉开始和结尾的空格</span><br><span class="line">		     lazy:将input事件切换为change事件 --&gt;</span><br><span class="line">		&lt;!-- input事件每次输入都会触发，change事件会在失去焦点的时候触发--&gt;</span><br><span class="line">		&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">			&lt;input type=<span class="string">"text"</span> v-model.number=<span class="string">"age"</span>&gt;&lt;!-- number转化为数字,没有number会变成字符串的拼接 --&gt;</span><br><span class="line">			&lt;button @click=<span class="string">"handle1"</span>&gt;点击&lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp">			&lt;input type="text" v-model.trim="info"&gt;&lt;!-- trim忽略字符串前后的空格 --&gt;</span></span><br><span class="line"><span class="regexp">			&lt;button @click="handle2"&gt;点击&lt;/</span>button&gt;</span><br><span class="line">			&lt;input type=<span class="string">"text"</span> v-model.lazy=<span class="string">"msg"</span>&gt;&lt;!-- lazy会延迟显示 --&gt;</span><br><span class="line">			&lt;div&gt;&#123;&#123;msg&#125;&#125;&lt;<span class="regexp">/div&gt;&lt;!-- 常用于用户名的验证，在输完后提交验证 --&gt;</span></span><br><span class="line"><span class="regexp">			&lt;button @click="handle3"&gt;点击&lt;/</span>button&gt;</span><br><span class="line">		&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">		&lt;script src="https:/</span><span class="regexp">/cdn.jsdelivr.net/</span>npm/vue/dist/vue.js<span class="string">"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="string">		&lt;script type="</span>text/javascript<span class="string">"&gt;</span></span><br><span class="line"><span class="string">			var app=new Vue(&#123;</span></span><br><span class="line">				el:"#app",</span><br><span class="line">				data:&#123;</span><br><span class="line">					age:<span class="string">''</span>,</span><br><span class="line">					info:<span class="string">''</span>,</span><br><span class="line">					msg:<span class="string">''</span></span><br><span class="line">				&#125;,</span><br><span class="line">				methods:&#123;</span><br><span class="line">					handle1:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">						<span class="built_in">console</span>.log(<span class="keyword">this</span>.age+<span class="number">13</span>)</span><br><span class="line">					&#125;,</span><br><span class="line">					handle2:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">						<span class="built_in">console</span>.log(<span class="keyword">this</span>.info.length)</span><br><span class="line">					&#125;,</span><br><span class="line">					handle3:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">						</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;)</span><br><span class="line">		&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>body&gt;</span><br><span class="line">&lt;<span class="regexp">/html&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/03/31/vue%E8%A1%A8%E5%8D%95%E5%9F%9F%E7%9A%84%E4%BF%AE%E9%A5%B0%E7%AC%A6/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-vue的表单操作" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/03/31/vue%E7%9A%84%E8%A1%A8%E5%8D%95%E6%93%8D%E4%BD%9C/" target="_blank">vue的表单操作</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/03/31/vue%E7%9A%84%E8%A1%A8%E5%8D%95%E6%93%8D%E4%BD%9C/" class="archive-article-date">
+        <time datetime="2020-03-31T09:23:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-31</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="vue的表单操作"><a href="#vue的表单操作" class="headerlink" title="vue的表单操作"></a>vue的表单操作</h1><p>input      单行文本</p>
+<p>textarea   多行文本</p>
+<p> select     下拉多选</p>
+<p> radio      单选框</p>
+<p> checkbox   多选框</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=<span class="string">"utf-8"</span>&gt;</span><br><span class="line">		&lt;title&gt;&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;!-- input      单行文本</span><br><span class="line">		     textarea   多行文本</span><br><span class="line">		     select     下拉多选</span><br><span class="line">		     radio      单选框</span><br><span class="line">		     checkbox   多选框   --&gt;</span><br><span class="line">		&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">			&lt;form action=<span class="string">"http://www.baidu.com"</span>&gt;</span><br><span class="line">				&lt;div&gt;</span><br><span class="line">					&lt;span&gt;姓名：&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">					&lt;span&gt;</span></span><br><span class="line"><span class="regexp">						&lt;input type="text" v-model="uname"&gt;&lt;!-- 直接v-model绑定 --&gt;</span></span><br><span class="line"><span class="regexp">					&lt;/</span>span&gt;</span><br><span class="line">				&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">				&lt;div&gt;</span></span><br><span class="line"><span class="regexp">					&lt;span&gt;性别：&lt;/</span>span&gt;</span><br><span class="line">					&lt;span&gt;</span><br><span class="line">						&lt;input type=<span class="string">"radio"</span> id=<span class="string">"male"</span> value=<span class="string">"1"</span> v-model=<span class="string">"gender"</span>&gt;&lt;!-- v-model绑定以及当value值与v-model中值一样时显示 --&gt;</span><br><span class="line">						&lt;label <span class="keyword">for</span>=<span class="string">"male"</span>&gt;男&lt;<span class="regexp">/label&gt;</span></span><br><span class="line"><span class="regexp">						&lt;input type="radio" id="female" value="2" v-model="gender"&gt;</span></span><br><span class="line"><span class="regexp">						&lt;label for="female"&gt;女&lt;/</span>label&gt;</span><br><span class="line">					&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">				&lt;/</span>div&gt;</span><br><span class="line">				&lt;div&gt;</span><br><span class="line">					&lt;span&gt;爱好：&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">					&lt;input type="checkbox" id="ball" value="1" v-model="hobby"&gt;&lt;!-- 与radio同理但是hobby是一个数组，可多选 --&gt;</span></span><br><span class="line"><span class="regexp">					&lt;label for="ball"&gt;篮球&lt;/</span>label&gt;</span><br><span class="line">					&lt;input type=<span class="string">"checkbox"</span> id=<span class="string">"sing"</span> value=<span class="string">"2"</span> v-model=<span class="string">"hobby"</span>&gt;</span><br><span class="line">					&lt;label <span class="keyword">for</span>=<span class="string">"sing"</span>&gt;唱歌&lt;<span class="regexp">/label&gt;</span></span><br><span class="line"><span class="regexp">					&lt;input type="checkbox" id="code" value="3" v-model="hobby"&gt;</span></span><br><span class="line"><span class="regexp">					&lt;label for="code"&gt;写代码&lt;/</span>label&gt;</span><br><span class="line">				&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">				&lt;div&gt;</span></span><br><span class="line"><span class="regexp">					&lt;span&gt;职业：&lt;/</span>span&gt;             &lt;!-- multiple是多选的属性 --&gt;&lt;!-- 按住shift可以多选 --&gt;</span><br><span class="line">					&lt;select v-model=<span class="string">"occupation"</span> multiple=<span class="string">"true"</span>&gt;&lt;!-- v-model绑定在select标签中 --&gt;</span><br><span class="line">						&lt;option value=<span class="string">"0"</span>&gt;请选择职业...&lt;<span class="regexp">/option&gt;</span></span><br><span class="line"><span class="regexp">						&lt;option value="1"&gt;教师&lt;/</span>option&gt;</span><br><span class="line">						&lt;option value=<span class="string">"2"</span>&gt;软件工程师&lt;<span class="regexp">/option&gt;</span></span><br><span class="line"><span class="regexp">						&lt;option value="3"&gt;律师&lt;/</span>option&gt;</span><br><span class="line">					&lt;<span class="regexp">/select&gt;</span></span><br><span class="line"><span class="regexp">				&lt;/</span>div&gt;</span><br><span class="line">				&lt;div&gt;</span><br><span class="line">					&lt;span&gt;个人简介：&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">					&lt;textarea v-model="desc"&gt;&lt;/</span>textarea&gt;&lt;!-- 多行文本与单行文本用法一样 --&gt;</span><br><span class="line">				&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">				&lt;div&gt;</span></span><br><span class="line"><span class="regexp">					&lt;input type="submit" value="提交" @click.prevent="handle"&gt;&lt;!-- input的summit按钮会在提交时跳转form的action属性地址 --&gt;</span></span><br><span class="line"><span class="regexp">					&lt;!-- 一般要用自定义事件提交，并把默认的行为禁止掉，用prevent --&gt;</span></span><br><span class="line"><span class="regexp">				&lt;/</span>div&gt;</span><br><span class="line">			&lt;<span class="regexp">/form&gt;</span></span><br><span class="line"><span class="regexp">		&lt;/</span>div&gt;</span><br><span class="line">		&lt;script src=<span class="string">"https://cdn.jsdelivr.net/npm/vue/dist/vue.js"</span>&gt;&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">		&lt;script&gt;</span></span><br><span class="line"><span class="regexp">			var vm=new Vue(&#123;</span></span><br><span class="line"><span class="regexp">				el:"#app",</span></span><br><span class="line"><span class="regexp">				data:&#123;</span></span><br><span class="line"><span class="regexp">					uname:'',</span></span><br><span class="line"><span class="regexp">					gender:1,</span></span><br><span class="line"><span class="regexp">					hobby:[1,2],</span></span><br><span class="line"><span class="regexp">					occupation:[2,3]  ,/</span><span class="regexp">/单选用单一值多选用数组</span></span><br><span class="line"><span class="regexp">					desc:'你好'</span></span><br><span class="line"><span class="regexp">				&#125;,</span></span><br><span class="line"><span class="regexp">				methods:&#123;</span></span><br><span class="line"><span class="regexp">					handle:function()&#123;</span></span><br><span class="line"><span class="regexp">						console.log(this.gender)</span></span><br><span class="line"><span class="regexp">						/</span><span class="regexp">/ 实际上调用ajax接口</span></span><br><span class="line"><span class="regexp">					&#125;</span></span><br><span class="line"><span class="regexp">				&#125;,</span></span><br><span class="line"><span class="regexp">			&#125;)</span></span><br><span class="line"><span class="regexp">		&lt;/</span>script&gt;</span><br><span class="line">	&lt;<span class="regexp">/body&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>html&gt;</span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/03/31/vue%E7%9A%84%E8%A1%A8%E5%8D%95%E6%93%8D%E4%BD%9C/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-天知道" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/03/30/%E5%A4%A9%E7%9F%A5%E9%81%93/" target="_blank">天知道</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/03/30/%E5%A4%A9%E7%9F%A5%E9%81%93/" class="archive-article-date">
+        <time datetime="2020-03-30T14:10:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-30</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="天知道"><a href="#天知道" class="headerlink" title="天知道"></a>天知道</h1><p>利用<a href="http://wthrcdn.etouch.cn/weather_mini的axios天气接口，运用vue.js构建逻辑层" target="_blank" rel="noopener">http://wthrcdn.etouch.cn/weather_mini的axios天气接口，运用vue.js构建逻辑层</a></p>
+<p><a href=" https://gitee.com/yuchenbin/weatherKnow " target="_blank" rel="noopener">源码链接</a></p>
+<p><a href="http://yuchenbin.gitee.io/weatherknow" target="_blank" rel="noopener">项目链接</a></p>
+<h3 id="功能："><a href="#功能：" class="headerlink" title="功能："></a>功能：</h3><p>查询各个城市近五天的天气，点击热门城市直接查询</p>
+<h2 id="遇到的难点"><a href="#遇到的难点" class="headerlink" title="遇到的难点"></a>遇到的难点</h2><ol>
+<li>v-for的运用，使得数组遍历</li>
+<li>html中用a标签同时绑定事件时，我一开始没注意href的值，导致点击事件的同时链接一直触发，使得达不到理想的效果，找了好久把href中的值改为”javascript:;”这样的空js语句就行了，这样把a的链接跳转功能忽视了，还有一种办法是改为”#”也行</li>
+</ol>
+<h3 id="html文件"><a href="#html文件" class="headerlink" title="html文件"></a>html文件</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"zh"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">	&lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">	&lt;meta name=<span class="string">"viewport"</span> content=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span><br><span class="line">	&lt;meta http-equiv=<span class="string">"X-UA-Compatible"</span> content=<span class="string">"ie=edge"</span>&gt;</span><br><span class="line">	&lt;title&gt;&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">	&lt;link rel="stylesheet" href="./</span>style.css<span class="string">"&gt;</span></span><br><span class="line"><span class="string">&lt;/head&gt;</span></span><br><span class="line"><span class="string">&lt;body&gt;</span></span><br><span class="line"><span class="string">	&lt;div id="</span>outer<span class="string">"&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>head<span class="string">"&gt;天知道&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>search<span class="string">"&gt;</span></span><br><span class="line"><span class="string">			&lt;input type="</span>text<span class="string">" v-model="</span>city<span class="string">" @keyup.enter="</span>searchWeather<span class="string">" class="</span>input_txt<span class="string">" placeholder="</span>请输入要查询的城市<span class="string">"&gt;</span></span><br><span class="line"><span class="string">			&lt;button class="</span>input_sub<span class="string">" @click="</span>searchWeather<span class="string">"&gt;搜索&lt;/button&gt;</span></span><br><span class="line"><span class="string">		&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>city<span class="string">"&gt;</span></span><br><span class="line"><span class="string">			&lt;a href="</span>javascript:;<span class="string">" @click="</span>changeCity(<span class="string">'北京'</span>)<span class="string">"&gt;北京&lt;/a&gt;&lt;!-- href中的内容不可少 --&gt;</span></span><br><span class="line"><span class="string">			&lt;a href="</span>javascript:;<span class="string">" @click="</span>changeCity(<span class="string">'上海'</span>)<span class="string">"&gt;上海&lt;/a&gt;</span></span><br><span class="line"><span class="string">			&lt;a href="</span>javascript:;<span class="string">" @click="</span>changeCity(<span class="string">'广州'</span>)<span class="string">"&gt;广州&lt;/a&gt;</span></span><br><span class="line"><span class="string">			&lt;a href="</span>javascript:;<span class="string">" @click="</span>changeCity(<span class="string">'深圳'</span>)<span class="string">"&gt;深圳&lt;/a&gt;</span></span><br><span class="line"><span class="string">			&lt;a href="</span>javascript:;<span class="string">" @click="</span>changeCity(<span class="string">'杭州'</span>)<span class="string">"&gt;杭州&lt;/a&gt;</span></span><br><span class="line"><span class="string">		&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>output<span class="string">" &gt;</span></span><br><span class="line"><span class="string">			&lt;div class="</span><span class="built_in">module</span><span class="string">" v-for="</span>item <span class="keyword">in</span> weatherList<span class="string">"&gt;</span></span><br><span class="line"><span class="string">				&lt;div class="</span>weather<span class="string">"&gt;&lt;span v-cloak&gt;&#123;&#123;item.type&#125;&#125;&lt;/span&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">				&lt;div class="</span>temp<span class="string">"&gt;&lt;b v-cloak&gt;&#123;&#123;item.low&#125;&#125;~&lt;/b&gt;&lt;b v-cloak&gt;&#123;&#123;item.high&#125;&#125;&lt;/b&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">				&lt;div class="</span>wind<span class="string">"&gt;&lt;span v-cloak&gt;&#123;&#123;item.fengxiang&#125;&#125;&lt;/span&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">				&lt;div class="</span>date<span class="string">"&gt;&lt;span v-cloak&gt;&#123;&#123;item.date&#125;&#125;&lt;/span&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">			&lt;/div&gt;</span></span><br><span class="line"><span class="string">			</span></span><br><span class="line"><span class="string">		&lt;/div&gt;</span></span><br><span class="line"><span class="string">	&lt;/div&gt;</span></span><br><span class="line"><span class="string">	&lt;script src="</span>https:<span class="comment">//cdn.jsdelivr.net/npm/vue/dist/vue.js"&gt;&lt;/script&gt;</span></span><br><span class="line">	&lt;script src=<span class="string">"https://unpkg.com/axios/dist/axios.min.js"</span>&gt;&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">	&lt;script src="./i</span>ndex.js<span class="string">"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="string">&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="js文件"><a href="#js文件" class="headerlink" title="js文件"></a>js文件</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 请求接口: http://wthrcdn.etouch.cn/weather_mini</span></span><br><span class="line">		<span class="comment">// 请求方法: get</span></span><br><span class="line">		<span class="comment">// 请求参数: city(查询城市名)</span></span><br><span class="line">		<span class="comment">// 响应内容: 天气信息</span></span><br><span class="line">		<span class="keyword">var</span> app=<span class="keyword">new</span> Vue(&#123;</span><br><span class="line">			el:<span class="string">"#outer"</span>,</span><br><span class="line">			data:&#123;</span><br><span class="line">				city:<span class="string">''</span>,</span><br><span class="line">				weatherList:[]</span><br><span class="line">			</span><br><span class="line">			&#125;,</span><br><span class="line">			methods:&#123;</span><br><span class="line">				searchWeather:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">					<span class="comment">//调用接口</span></span><br><span class="line">					<span class="keyword">var</span> that=<span class="keyword">this</span>;</span><br><span class="line">					axios.get(<span class="string">'http://wthrcdn.etouch.cn/weather_mini?city='</span></span><br><span class="line">					+<span class="keyword">this</span>.city)</span><br><span class="line">					.then(<span class="function"><span class="keyword">function</span>(<span class="params">response</span>)</span>&#123;</span><br><span class="line">						that.weatherList=response.data.data.forecast;</span><br><span class="line">					&#125;,</span><br><span class="line">					<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;&#125;)</span><br><span class="line">				&#125;,</span><br><span class="line">				changeCity:<span class="function"><span class="keyword">function</span>(<span class="params">where</span>)</span>&#123;</span><br><span class="line">					<span class="keyword">this</span>.city=where;</span><br><span class="line">					<span class="keyword">this</span>.searchWeather();</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;,</span><br><span class="line">		&#125;)</span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">页面项目</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/03/30/%E5%A4%A9%E7%9F%A5%E9%81%93/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-simple-calculator" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/03/29/simple-calculator/" target="_blank">simple calculator</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/03/29/simple-calculator/" class="archive-article-date">
+        <time datetime="2020-03-29T11:19:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-29</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="一个简易的计算机"><a href="#一个简易的计算机" class="headerlink" title="一个简易的计算机"></a>一个简易的计算机</h1><h3 id="演示链接"><a href="#演示链接" class="headerlink" title="演示链接"></a><a href="http://yuchenbin.gitee.io/calculator" target="_blank" rel="noopener">演示链接</a></h3><p><strong>利用vue.js实现</strong></p>
+<h2 id="实现功能："><a href="#实现功能：" class="headerlink" title="实现功能："></a>实现功能：</h2><ol>
+<li>简单的计算，包括正数、负数、小数、加减乘除的运算</li>
+<li>三个显示屏，右下角为输入屏，左下角为结果屏，上面是公式屏，下方为按键</li>
+<li>处理一些用户操作问题：<ol>
+<li>用户在按数字前按运算符+、-、*、/这些，操作无效</li>
+<li>用户在没有数字的时候按小数点，默认为前面是0</li>
+<li>用户在一个数字中按多次小数点，之后按的小数点无效</li>
+<li>用户在数字中按负号，重复按负号，按的负号无效且必须在数字最前面</li>
+<li>除以0默认为无穷大</li>
+</ol>
+</li>
+</ol>
+<h3 id="js文件"><a href="#js文件" class="headerlink" title="js文件"></a>js文件</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> counter=<span class="keyword">new</span> Vue(&#123;</span><br><span class="line">				el:<span class="string">'#outer'</span>,</span><br><span class="line">				data:&#123;</span><br><span class="line">					inputMsg:<span class="string">''</span>,</span><br><span class="line">					nextFunction:<span class="string">''</span>,</span><br><span class="line">					result:<span class="string">''</span>,</span><br><span class="line">					mainShow:<span class="string">''</span>,</span><br><span class="line">					icon:<span class="string">''</span></span><br><span class="line">				&#125;,</span><br><span class="line">				methods:&#123;</span><br><span class="line">					showNum7:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">this</span>.inputMsg+=<span class="string">'7'</span>;<span class="keyword">this</span>.mainChange()&#125;,</span><br><span class="line">					showNum8:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">this</span>.inputMsg+=<span class="string">'8'</span>;<span class="keyword">this</span>.mainChange()&#125;,</span><br><span class="line">					showNum9:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">this</span>.inputMsg+=<span class="string">'9'</span>;<span class="keyword">this</span>.mainChange()&#125;,</span><br><span class="line">					showNum4:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">this</span>.inputMsg+=<span class="string">'4'</span>;<span class="keyword">this</span>.mainChange()&#125;,</span><br><span class="line">					showNum5:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">this</span>.inputMsg+=<span class="string">'5'</span>;<span class="keyword">this</span>.mainChange()&#125;,</span><br><span class="line">					showNum6:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">this</span>.inputMsg+=<span class="string">'6'</span>;<span class="keyword">this</span>.mainChange()&#125;,</span><br><span class="line">					showNum1:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">this</span>.inputMsg+=<span class="string">'1'</span>;<span class="keyword">this</span>.mainChange()&#125;,</span><br><span class="line">					showNum2:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">this</span>.inputMsg+=<span class="string">'2'</span>;<span class="keyword">this</span>.mainChange()&#125;,</span><br><span class="line">					showNum3:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">this</span>.inputMsg+=<span class="string">'3'</span>;<span class="keyword">this</span>.mainChange()&#125;,</span><br><span class="line">					showNum_:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">						<span class="keyword">if</span>(<span class="keyword">this</span>.inputMsg==<span class="string">''</span>)&#123;<span class="keyword">this</span>.inputMsg+=<span class="string">'-'</span>;<span class="keyword">this</span>.mainChange()</span><br><span class="line">						&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">							<span class="keyword">this</span>.mainChange();</span><br><span class="line">						&#125;</span><br><span class="line">					&#125;,	</span><br><span class="line">					showNum0:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">this</span>.inputMsg+=<span class="string">'0'</span>;<span class="keyword">this</span>.mainChange()&#125;,</span><br><span class="line">					showNumDot:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">						<span class="keyword">if</span>(<span class="keyword">this</span>.inputMsg.lastIndexOf(<span class="string">'.'</span>)==<span class="number">-1</span>)&#123;</span><br><span class="line">							<span class="keyword">if</span>(<span class="keyword">this</span>.inputMsg==<span class="string">''</span>)&#123;</span><br><span class="line">								<span class="keyword">this</span>.inputMsg=<span class="string">'0.'</span>;</span><br><span class="line">							&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">							<span class="keyword">this</span>.inputMsg+=<span class="string">'.'</span>&#125;</span><br><span class="line">						&#125;;</span><br><span class="line">						<span class="keyword">this</span>.mainChange();</span><br><span class="line">					&#125;,</span><br><span class="line">					</span><br><span class="line">					Mul:<span class="function"><span class="keyword">function</span>(<span class="params">x,y</span>)</span>&#123;</span><br><span class="line">						<span class="keyword">return</span> <span class="built_in">parseFloat</span>(x)*<span class="built_in">parseFloat</span>(y)</span><br><span class="line">					&#125;,</span><br><span class="line">					Div:<span class="function"><span class="keyword">function</span>(<span class="params">x,y</span>)</span>&#123;</span><br><span class="line">						<span class="keyword">return</span> <span class="built_in">parseFloat</span>(x)/<span class="built_in">parseFloat</span>(y)</span><br><span class="line">					&#125;,</span><br><span class="line">					Add:<span class="function"><span class="keyword">function</span>(<span class="params">x,y</span>)</span>&#123;</span><br><span class="line">						<span class="keyword">return</span> <span class="built_in">parseFloat</span>(x)+<span class="built_in">parseFloat</span>(y)</span><br><span class="line">					&#125;,</span><br><span class="line">					Min:<span class="function"><span class="keyword">function</span>(<span class="params">x,y</span>)</span>&#123;</span><br><span class="line">						<span class="keyword">return</span> <span class="built_in">parseFloat</span>(x)-<span class="built_in">parseFloat</span>(y)</span><br><span class="line">					&#125;,</span><br><span class="line">					</span><br><span class="line">					btnMul:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">						<span class="keyword">if</span>(<span class="keyword">this</span>.inputMsg==<span class="string">''</span>)&#123;</span><br><span class="line">							<span class="keyword">if</span>(<span class="keyword">this</span>.result==<span class="string">''</span>)&#123;</span><br><span class="line">								<span class="keyword">this</span>.nextFunction=<span class="string">''</span>;</span><br><span class="line">							&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">								<span class="keyword">this</span>.nextFunction=<span class="string">'mul'</span>;</span><br><span class="line">							&#125;;</span><br><span class="line">						&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">							<span class="keyword">switch</span>(<span class="keyword">this</span>.nextFunction)&#123;</span><br><span class="line">								<span class="keyword">case</span> <span class="string">''</span>:<span class="keyword">this</span>.result=<span class="keyword">this</span>.inputMsg;<span class="keyword">break</span>;</span><br><span class="line">								<span class="keyword">case</span> <span class="string">'mul'</span> : <span class="keyword">this</span>.result=<span class="keyword">this</span>.Mul(<span class="keyword">this</span>.result,<span class="keyword">this</span>.inputMsg);<span class="keyword">break</span>;</span><br><span class="line">								<span class="keyword">case</span> <span class="string">'div'</span> : <span class="keyword">this</span>.result=<span class="keyword">this</span>.Div(<span class="keyword">this</span>.result,<span class="keyword">this</span>.inputMsg);<span class="keyword">break</span>;</span><br><span class="line">								<span class="keyword">case</span> <span class="string">'add'</span> : <span class="keyword">this</span>.result=<span class="keyword">this</span>.Add(<span class="keyword">this</span>.result,<span class="keyword">this</span>.inputMsg);<span class="keyword">break</span>;</span><br><span class="line">								<span class="keyword">case</span> <span class="string">'min'</span> : <span class="keyword">this</span>.result=<span class="keyword">this</span>.Min(<span class="keyword">this</span>.result,<span class="keyword">this</span>.inputMsg);<span class="keyword">break</span>;</span><br><span class="line">							&#125;</span><br><span class="line">						<span class="keyword">this</span>.nextFunction=<span class="string">'mul'</span>;</span><br><span class="line">						<span class="keyword">this</span>.inputMsg=<span class="string">''</span>;</span><br><span class="line">						&#125;</span><br><span class="line">						<span class="keyword">this</span>.mainChange();</span><br><span class="line">					&#125;,</span><br><span class="line">					btnDiv:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">						<span class="keyword">if</span>(<span class="keyword">this</span>.inputMsg==<span class="string">''</span>)&#123;</span><br><span class="line">							<span class="keyword">if</span>(<span class="keyword">this</span>.result==<span class="string">''</span>)&#123;</span><br><span class="line">								<span class="keyword">this</span>.nextFunction=<span class="string">''</span>;</span><br><span class="line">							&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">								<span class="keyword">this</span>.nextFunction=<span class="string">'div'</span>;</span><br><span class="line">							&#125;;</span><br><span class="line">						&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">							<span class="keyword">switch</span>(<span class="keyword">this</span>.nextFunction)&#123;</span><br><span class="line">								<span class="keyword">case</span> <span class="string">''</span>:<span class="keyword">this</span>.result=<span class="keyword">this</span>.inputMsg;<span class="keyword">break</span>;</span><br><span class="line">								<span class="keyword">case</span> <span class="string">'mul'</span> : <span class="keyword">this</span>.result=<span class="keyword">this</span>.Mul(<span class="keyword">this</span>.result,<span class="keyword">this</span>.inputMsg);<span class="keyword">break</span>;</span><br><span class="line">								<span class="keyword">case</span> <span class="string">'div'</span> : <span class="keyword">this</span>.result=<span class="keyword">this</span>.Div(<span class="keyword">this</span>.result,<span class="keyword">this</span>.inputMsg);<span class="keyword">break</span>;</span><br><span class="line">								<span class="keyword">case</span> <span class="string">'add'</span> : <span class="keyword">this</span>.result=<span class="keyword">this</span>.Add(<span class="keyword">this</span>.result,<span class="keyword">this</span>.inputMsg);<span class="keyword">break</span>;</span><br><span class="line">								<span class="keyword">case</span> <span class="string">'min'</span> : <span class="keyword">this</span>.result=<span class="keyword">this</span>.Min(<span class="keyword">this</span>.result,<span class="keyword">this</span>.inputMsg);<span class="keyword">break</span>;</span><br><span class="line">							&#125;</span><br><span class="line">						<span class="keyword">this</span>.nextFunction=<span class="string">'div'</span>;</span><br><span class="line">						<span class="keyword">this</span>.inputMsg=<span class="string">''</span>;</span><br><span class="line">						&#125;</span><br><span class="line">						<span class="keyword">this</span>.mainChange();</span><br><span class="line">					&#125;,</span><br><span class="line">					btnAdd:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">						<span class="keyword">if</span>(<span class="keyword">this</span>.inputMsg==<span class="string">''</span>)&#123;</span><br><span class="line">							<span class="keyword">if</span>(<span class="keyword">this</span>.result==<span class="string">''</span>)&#123;</span><br><span class="line">								<span class="keyword">this</span>.nextFunction=<span class="string">''</span>;</span><br><span class="line">							&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">								<span class="keyword">this</span>.nextFunction=<span class="string">'add'</span>;</span><br><span class="line">							&#125;;</span><br><span class="line">						&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">							<span class="keyword">switch</span>(<span class="keyword">this</span>.nextFunction)&#123;</span><br><span class="line">								<span class="keyword">case</span> <span class="string">''</span>:<span class="keyword">this</span>.result=<span class="keyword">this</span>.inputMsg;<span class="keyword">break</span>;</span><br><span class="line">								<span class="keyword">case</span> <span class="string">'mul'</span> : <span class="keyword">this</span>.result=<span class="keyword">this</span>.Mul(<span class="keyword">this</span>.result,<span class="keyword">this</span>.inputMsg);<span class="keyword">break</span>;</span><br><span class="line">								<span class="keyword">case</span> <span class="string">'div'</span> : <span class="keyword">this</span>.result=<span class="keyword">this</span>.Div(<span class="keyword">this</span>.result,<span class="keyword">this</span>.inputMsg);<span class="keyword">break</span>;</span><br><span class="line">								<span class="keyword">case</span> <span class="string">'add'</span> : <span class="keyword">this</span>.result=<span class="keyword">this</span>.Add(<span class="keyword">this</span>.result,<span class="keyword">this</span>.inputMsg);<span class="keyword">break</span>;</span><br><span class="line">								<span class="keyword">case</span> <span class="string">'min'</span> : <span class="keyword">this</span>.result=<span class="keyword">this</span>.Min(<span class="keyword">this</span>.result,<span class="keyword">this</span>.inputMsg);<span class="keyword">break</span>;</span><br><span class="line">							&#125;</span><br><span class="line">						<span class="keyword">this</span>.nextFunction=<span class="string">'add'</span>;</span><br><span class="line">						<span class="keyword">this</span>.inputMsg=<span class="string">''</span>;</span><br><span class="line">						&#125;</span><br><span class="line">						<span class="keyword">this</span>.mainChange();</span><br><span class="line">					&#125;,</span><br><span class="line">					btnMin:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">						<span class="keyword">if</span>(<span class="keyword">this</span>.inputMsg==<span class="string">''</span>)&#123;</span><br><span class="line">							<span class="keyword">if</span>(<span class="keyword">this</span>.result==<span class="string">''</span>)&#123;</span><br><span class="line">								<span class="keyword">this</span>.nextFunction=<span class="string">''</span>;</span><br><span class="line">							&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">								<span class="keyword">this</span>.nextFunction=<span class="string">'min'</span>;</span><br><span class="line">							&#125;;</span><br><span class="line">						&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">							<span class="keyword">switch</span>(<span class="keyword">this</span>.nextFunction)&#123;</span><br><span class="line">								<span class="keyword">case</span> <span class="string">''</span>:<span class="keyword">this</span>.result=<span class="keyword">this</span>.inputMsg;<span class="keyword">break</span>;</span><br><span class="line">								<span class="keyword">case</span> <span class="string">'mul'</span> : <span class="keyword">this</span>.result=<span class="keyword">this</span>.Mul(<span class="keyword">this</span>.result,<span class="keyword">this</span>.inputMsg);<span class="keyword">break</span>;</span><br><span class="line">								<span class="keyword">case</span> <span class="string">'div'</span> : <span class="keyword">this</span>.result=<span class="keyword">this</span>.Div(<span class="keyword">this</span>.result,<span class="keyword">this</span>.inputMsg);<span class="keyword">break</span>;</span><br><span class="line">								<span class="keyword">case</span> <span class="string">'add'</span> : <span class="keyword">this</span>.result=<span class="keyword">this</span>.Add(<span class="keyword">this</span>.result,<span class="keyword">this</span>.inputMsg);<span class="keyword">break</span>;</span><br><span class="line">								<span class="keyword">case</span> <span class="string">'min'</span> : <span class="keyword">this</span>.result=<span class="keyword">this</span>.Min(<span class="keyword">this</span>.result,<span class="keyword">this</span>.inputMsg);<span class="keyword">break</span>;</span><br><span class="line">							&#125;</span><br><span class="line">						<span class="keyword">this</span>.nextFunction=<span class="string">'min'</span>;</span><br><span class="line">						<span class="keyword">this</span>.inputMsg=<span class="string">''</span>;</span><br><span class="line">						&#125;</span><br><span class="line">						<span class="keyword">this</span>.mainChange();</span><br><span class="line">					&#125;,</span><br><span class="line">					btnCal:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">						<span class="keyword">switch</span>(<span class="keyword">this</span>.nextFunction)&#123;</span><br><span class="line">							<span class="keyword">case</span> <span class="string">''</span>:<span class="keyword">if</span>(<span class="keyword">this</span>.inputMsg!=<span class="string">''</span>)&#123;<span class="keyword">this</span>.result=<span class="keyword">this</span>.inputMsg;&#125;<span class="keyword">else</span>&#123;<span class="keyword">this</span>.result=<span class="keyword">this</span>.result;&#125;<span class="keyword">break</span>;</span><br><span class="line">							<span class="keyword">case</span> <span class="string">'mul'</span> : <span class="keyword">this</span>.result=<span class="keyword">this</span>.Mul(<span class="keyword">this</span>.result,<span class="keyword">this</span>.inputMsg);<span class="keyword">break</span>;</span><br><span class="line">							<span class="keyword">case</span> <span class="string">'div'</span> : <span class="keyword">this</span>.result=<span class="keyword">this</span>.Div(<span class="keyword">this</span>.result,<span class="keyword">this</span>.inputMsg);<span class="keyword">break</span>;</span><br><span class="line">							<span class="keyword">case</span> <span class="string">'add'</span> : <span class="keyword">this</span>.result=<span class="keyword">this</span>.Add(<span class="keyword">this</span>.result,<span class="keyword">this</span>.inputMsg);<span class="keyword">break</span>;</span><br><span class="line">							<span class="keyword">case</span> <span class="string">'min'</span> : <span class="keyword">this</span>.result=<span class="keyword">this</span>.Min(<span class="keyword">this</span>.result,<span class="keyword">this</span>.inputMsg);<span class="keyword">break</span>;</span><br><span class="line">						&#125;</span><br><span class="line">						</span><br><span class="line">						<span class="keyword">this</span>.nextFunction=<span class="string">''</span>;</span><br><span class="line">						<span class="keyword">this</span>.inputMsg=<span class="string">''</span>;</span><br><span class="line">						<span class="keyword">this</span>.mainChange();</span><br><span class="line">					&#125;,</span><br><span class="line">					btnCle:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">						<span class="keyword">this</span>.inputMsg=<span class="string">''</span>,</span><br><span class="line">						<span class="keyword">this</span>.nextFunction=<span class="string">''</span>,</span><br><span class="line">						<span class="keyword">this</span>.result=<span class="string">''</span>,</span><br><span class="line">						<span class="keyword">this</span>.mainShow=<span class="string">''</span></span><br><span class="line">					&#125;,</span><br><span class="line">					btnBac:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">						<span class="keyword">this</span>.inputMsg=<span class="keyword">this</span>.inputMsg.slice(<span class="number">0</span>,<span class="keyword">this</span>.inputMsg.length<span class="number">-1</span>);</span><br><span class="line">						<span class="keyword">this</span>.mainChange();</span><br><span class="line">					&#125;,</span><br><span class="line">					</span><br><span class="line">					</span><br><span class="line">					mainChange:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">						<span class="keyword">switch</span>(<span class="keyword">this</span>.nextFunction)&#123;</span><br><span class="line">							<span class="keyword">case</span> <span class="string">''</span> : <span class="keyword">this</span>.icon=<span class="string">''</span>;<span class="keyword">break</span>;</span><br><span class="line">							<span class="keyword">case</span> <span class="string">'mul'</span> : <span class="keyword">this</span>.icon=<span class="string">'*'</span>;<span class="keyword">break</span>;</span><br><span class="line">							<span class="keyword">case</span> <span class="string">'div'</span> : <span class="keyword">this</span>.icon=<span class="string">'/'</span>;<span class="keyword">break</span>;</span><br><span class="line">							<span class="keyword">case</span> <span class="string">'add'</span> : <span class="keyword">this</span>.icon=<span class="string">'+'</span>;<span class="keyword">break</span>;</span><br><span class="line">							<span class="keyword">case</span> <span class="string">'min'</span> : <span class="keyword">this</span>.icon=<span class="string">'-'</span>;<span class="keyword">break</span>;</span><br><span class="line">						&#125;;</span><br><span class="line">						<span class="keyword">if</span>(<span class="keyword">this</span>.result==<span class="string">''</span>)&#123;</span><br><span class="line">							<span class="keyword">this</span>.icon=<span class="string">''</span>;</span><br><span class="line">						&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">						<span class="keyword">this</span>.mainShow=<span class="string">`<span class="subst">$&#123;<span class="keyword">this</span>.result&#125;</span><span class="subst">$&#123;<span class="keyword">this</span>.icon&#125;</span><span class="subst">$&#123;<span class="keyword">this</span>.inputMsg&#125;</span>`</span>;</span><br><span class="line">						&#125;</span><br><span class="line">					&#125;,</span><br><span class="line">					</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">页面项目</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/03/29/simple-calculator/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-百度热搜实现" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -804,474 +1190,6 @@
 
 
   
-    <article id="post-响应式页面布局" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/03/13/%E5%93%8D%E5%BA%94%E5%BC%8F%E9%A1%B5%E9%9D%A2%E5%B8%83%E5%B1%80/" target="_blank">响应式页面布局</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/03/13/%E5%93%8D%E5%BA%94%E5%BC%8F%E9%A1%B5%E9%9D%A2%E5%B8%83%E5%B1%80/" class="archive-article-date">
-        <time datetime="2020-03-13T13:58:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-13</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="页面实现功能"><a href="#页面实现功能" class="headerlink" title="页面实现功能"></a>页面实现功能</h1><ol>
-<li><p>第一部分：导航区</p>
-<p>导航区始终在页面上方，点击导航到达相应的区域</p>
-</li>
-<li><p>第二部分：内容区</p>
-<p>（1)首页：首页是个轮播图，采用库函数glide，其中视频自动播放，图片视频采用遮罩，探索更多按钮转到关于我们部分</p>
-<p>（2）关于我们和服务流程：当页面出现时各模块一一出现，采用库函数scrollReveal</p>
-<p>（3）成功案例：有可供筛选的按钮，采用库函数isotope</p>
-<p>（4）团队介绍和公司动态：鼠标悬浮动画</p>
-<p>（5）数据部分：当页面移到这时，数字从0开始涨的动画，背景图在滚动时有视差</p>
-</li>
-<li><p>第三部分：页脚</p>
-<p>栅格布局，有返回顶部按钮</p>
-</li>
-<li><p>其他</p>
-<p>响应式布局：media</p>
-<p>顺畅滑动：库函数smooth-scroll</p>
-</li>
-</ol>
-<h3 id="详情代码链接"><a href="#详情代码链接" class="headerlink" title="详情代码链接"></a><a href="https://github.com/yuchenbin1/web-design.git" target="_blank" rel="noopener">详情代码链接</a></h3><p>javascript部分代码</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> headerEl=<span class="built_in">document</span>.querySelector(<span class="string">"header"</span>);</span><br><span class="line"><span class="keyword">const</span> scrollTOTop=<span class="built_in">document</span>.querySelector(<span class="string">".scrollToTop"</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">"scroll"</span>,()=&gt;&#123;<span class="comment">//滚动事件</span></span><br><span class="line">	<span class="keyword">let</span> height=headerEl.getBoundingClientRect().height;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span>(<span class="built_in">window</span>.pageYOffset-height&gt;<span class="number">800</span>)&#123;<span class="comment">//设置顶部导航出现的位置</span></span><br><span class="line">		<span class="keyword">if</span>(!headerEl.classList.contains(<span class="string">"sticky"</span>))&#123;</span><br><span class="line">			headerEl.classList.add(<span class="string">"sticky"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">		<span class="keyword">else</span>&#123;</span><br><span class="line">			headerEl.classList.remove(<span class="string">"sticky"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span>(<span class="built_in">window</span>.pageYOffset&gt;<span class="number">2000</span>)&#123;<span class="comment">//设置返回顶部的按钮出现的位置</span></span><br><span class="line">		scrollTOTop.style.display=<span class="string">"block"</span>;</span><br><span class="line">	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">		scrollTOTop.style.display=<span class="string">"none"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> glide=<span class="keyword">new</span> Glide(<span class="string">".glide"</span>);  <span class="comment">//捕获轮播组件</span></span><br><span class="line"><span class="keyword">const</span> captionsEl=<span class="built_in">document</span>.querySelectorAll(<span class="string">".slide-caption"</span>);  <span class="comment">//获取标题的容器</span></span><br><span class="line"></span><br><span class="line">glide.on([<span class="string">"mount.after"</span>,<span class="string">"run.after"</span>],()=&gt;&#123;  <span class="comment">//监听函数 mount.after是加载后，run.after是轮播后</span></span><br><span class="line">	<span class="keyword">const</span> caption=captionsEl[glide.index];  <span class="comment">//获取到能看见的元素的下标</span></span><br><span class="line">	anime(&#123;</span><br><span class="line">		targets:caption.children,  <span class="comment">//caption下的直接子元素块依次出现</span></span><br><span class="line">		opacity:[<span class="number">0</span>,<span class="number">1</span>],  <span class="comment">//透明度0到1</span></span><br><span class="line">		duration:<span class="number">400</span>,  <span class="comment">//动画执行时间400毫秒</span></span><br><span class="line">		easing:<span class="string">"linear"</span>,  <span class="comment">//动画执行函数，线性的</span></span><br><span class="line">		delay:anime.stagger(<span class="number">400</span>,&#123;<span class="attr">start</span>:<span class="number">300</span>&#125;),  <span class="comment">//第一个300毫秒后出现，对caption下的children，第一个出现后等400毫秒出现</span></span><br><span class="line">		tranlateY:[anime.stagger([<span class="number">40</span>,<span class="number">10</span>]),<span class="number">0</span>]  <span class="comment">//h1移动40到0，h3移动中间数到0，按钮移动10到0</span></span><br><span class="line">	&#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">glide.on(<span class="string">"run.before"</span>,()=&gt;&#123;  <span class="comment">//坚听到run.before轮播前</span></span><br><span class="line">	<span class="built_in">document</span>.querySelectorAll(<span class="string">".slide-caption&gt;*"</span>).forEach(<span class="function"><span class="params">el</span>=&gt;</span>&#123;  <span class="comment">//选取到caption下面的每个元素</span></span><br><span class="line">		el.style.opacity=<span class="number">0</span>;  <span class="comment">//每次切换都把有透明度重置为0</span></span><br><span class="line">	&#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">glide.mount();  <span class="comment">//下载轮播组件</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> isotope=<span class="keyword">new</span> Isotope(<span class="string">".cases"</span>,&#123;  <span class="comment">//捕获成功案例的容器</span></span><br><span class="line">	layoutMode:<span class="string">"fitRows"</span>,  <span class="comment">//根据行模式布局</span></span><br><span class="line">	itemSelector:<span class="string">".case-item"</span>  <span class="comment">//各个子元素图片</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> filterBtns=<span class="built_in">document</span>.querySelector(<span class="string">".filter-btns"</span>);  <span class="comment">//获取筛选按钮父元素</span></span><br><span class="line"></span><br><span class="line">filterBtns.addEventListener(<span class="string">"click"</span>,e=&gt;&#123;  <span class="comment">//监听事件</span></span><br><span class="line">	<span class="keyword">let</span>&#123;target&#125;=e;</span><br><span class="line">	<span class="keyword">const</span> filterOption=target.getAttribute(<span class="string">"data-filter"</span>);</span><br><span class="line">	<span class="keyword">if</span>(filterOption)&#123;</span><br><span class="line">		<span class="built_in">document</span></span><br><span class="line">			.querySelectorAll(<span class="string">".filter-btn.active"</span>)</span><br><span class="line">			.forEach(<span class="function"><span class="params">btn</span>=&gt;</span>btn.classList.remove(<span class="string">"active"</span>));  <span class="comment">//取消所有active</span></span><br><span class="line">		target.classList.add(<span class="string">"active"</span>);  <span class="comment">//当前点击的按钮增加active</span></span><br><span class="line">		</span><br><span class="line">		isotope.arrange(&#123;<span class="attr">filter</span>:filterOption&#125;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> staggeringOption=&#123;</span><br><span class="line">	delay:<span class="number">300</span>,  <span class="comment">//延迟300毫秒</span></span><br><span class="line">	distance:<span class="string">"50px"</span>,  <span class="comment">//移动50像素</span></span><br><span class="line">	duration:<span class="number">500</span>,  <span class="comment">//动画执行500毫秒</span></span><br><span class="line">	easing:<span class="string">"ease-in-out"</span>,</span><br><span class="line">	origin:<span class="string">"bottom"</span>  <span class="comment">//从下到上</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ScrollReveal().reveal(<span class="string">".feature"</span>,&#123;...staggeringOption,<span class="attr">interval</span>:<span class="number">350</span>&#125;);<span class="comment">//三个点的意思是把staggeringOption中的属性拿出来和后面interval拼成一个新的对象并返回</span></span><br><span class="line">ScrollReveal().reveal(<span class="string">".service-item"</span>,&#123;...staggeringOption,<span class="attr">interval</span>:<span class="number">350</span>&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> dataSectionEl=<span class="built_in">document</span>.querySelector(<span class="string">".data-section"</span>);<span class="comment">//捕获数据的部分，数字增长动画</span></span><br><span class="line">ScrollReveal().reveal(<span class="string">".data-section"</span>,&#123;</span><br><span class="line">	beforeReveal:<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">		anime(&#123;</span><br><span class="line">			targets:<span class="string">".data-piece .num"</span>,<span class="comment">//捕获数字区域</span></span><br><span class="line">			innerHTML:<span class="function"><span class="params">el</span>=&gt;</span>&#123;</span><br><span class="line">				<span class="keyword">return</span> [<span class="number">0</span>,el.innerHTML];</span><br><span class="line">			&#125;,</span><br><span class="line">			duration:<span class="number">2000</span>,<span class="comment">//执行时间</span></span><br><span class="line">			round:<span class="number">1</span>,<span class="comment">//数字按1增长，去掉那么按小数增长</span></span><br><span class="line">			easing:<span class="string">"easeInExpo"</span><span class="comment">//越来越快的动画效果</span></span><br><span class="line">		&#125;);</span><br><span class="line">		dataSectionEl.style.backgroundPosition=<span class="string">`center cale(50%-<span class="subst">$&#123;dataSectionEl.getBoundingClientRect().bottom<span class="regexp">/5&#125;px)`;/</span><span class="regexp">/在出现之前更新背景位置，防止在页面中心是重新加载导致被设为默认</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">	&#125;,</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">&#125;);</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp"></span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp"></span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">window.addEventListener("scroll",()=&gt;&#123;/</span><span class="regexp">/监听滚动事件，用于数据部分背景图的视差效果</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">	const bottom=dataSectionEl.getBoundingClientRect().bottom;/</span><span class="regexp">/当前底部距离浏览器距离</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">	const top=dataSectionEl.getBoundingClientRect().top;/</span><span class="regexp">/当前顶部距离浏览器距离</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">	</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">	if(bottom&gt;=0&amp;&amp;top&lt;=window.innerHeight)&#123;/</span><span class="regexp">/是否在可见区域</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">		dataSectionEl.style.backgroundPosition=`center cale(50%-$&#123;bottom/</span><span class="number">5</span>&#125;</span>px)`</span>;<span class="comment">//水平居中不动，但是垂直方向上随滚动移动</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> scroll=<span class="keyword">new</span> SmoothScroll(<span class="string">'nav a[href*="#"],.scrollToTop a[href*="#"]'</span>,&#123;</span><br><span class="line">	header:<span class="string">"header"</span>,</span><br><span class="line">	offset:<span class="number">80</span></span><br><span class="line">&#125;)  <span class="comment">//对跳转的按钮进行监听</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">document</span>.addEventListener(<span class="string">"scrollStart"</span>,()=&gt;&#123;</span><br><span class="line">	<span class="keyword">if</span>(headerEl.classList.contains(<span class="string">"open"</span>))&#123;</span><br><span class="line">		headerEl.classList.remove(<span class="string">"open"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> exploreBtnEl=<span class="built_in">document</span>.querySelectorAll(<span class="string">".explore-btn"</span>);<span class="comment">//探索更多跳转到关于我们</span></span><br><span class="line">exploreBtnEl.forEach(<span class="function"><span class="params">exploreBtnEl</span>=&gt;</span>&#123;</span><br><span class="line">	exploreBtnEl.addEventListener(<span class="string">"click"</span>,()=&gt;&#123;</span><br><span class="line">		scroll.animateScroll(<span class="built_in">document</span>.querySelector(<span class="string">"#about-us"</span>));</span><br><span class="line">	&#125;);	</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">//折叠按钮</span></span><br><span class="line"><span class="keyword">const</span> burgerEl=<span class="built_in">document</span>.querySelector(<span class="string">".burger"</span>);</span><br><span class="line">burgerEl.addEventListener(<span class="string">"click"</span>,()=&gt;&#123;</span><br><span class="line">	headerEl.classList.toggle(<span class="string">"open"</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">页面项目</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/03/13/%E5%93%8D%E5%BA%94%E5%BC%8F%E9%A1%B5%E9%9D%A2%E5%B8%83%E5%B1%80/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-20年3月12日" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/03/12/20%E5%B9%B43%E6%9C%8812%E6%97%A5/" target="_blank">20年3月12日</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/03/12/20%E5%B9%B43%E6%9C%8812%E6%97%A5/" class="archive-article-date">
-        <time datetime="2020-03-12T09:29:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-12</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>​        最近我并没有更新新的js学习记录，因为在练习响应式布局，想通过着手一个小项目来提高自己的能力，在实践过程中，学习的内容有些很常用，比如css的伪元素、伪类、弹性盒和栅格布局，而像图像渐变这种用的比较少甚至没有，一般会用到常用的库来代替。</p>
-<p>​        除此之外，我要开始着手毕业设计了，虽然现在回不了学校，但是可以找一些资料了。</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日志</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/03/12/20%E5%B9%B43%E6%9C%8812%E6%97%A5/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-函数的创建和应用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/03/10/%E5%87%BD%E6%95%B0%E7%9A%84%E5%88%9B%E5%BB%BA%E5%92%8C%E5%BA%94%E7%94%A8/" target="_blank">函数的创建和应用</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/03/10/%E5%87%BD%E6%95%B0%E7%9A%84%E5%88%9B%E5%BB%BA%E5%92%8C%E5%BA%94%E7%94%A8/" class="archive-article-date">
-        <time datetime="2020-03-10T09:06:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-10</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h1><p>函数function</p>
-<p>方法：函数挂载在对象上，即作为对象的一个属性，这样的函数叫方法</p>
-<p>构造函数：初始化一个新建的对象的函数</p>
-<p>函数也是一种对象，即可以把函数赋值给变量，函数也可以有自己的属性</p>
-<h3 id="函数定义"><a href="#函数定义" class="headerlink" title="函数定义"></a>函数定义</h3><p>函数的声明提前，与变量的声明提前有点类似，</p>
-<p>函数如果在嵌套函数中，只能在嵌套函数的顶部，与变量提前类似</p>
-<h3 id="函数的调用"><a href="#函数的调用" class="headerlink" title="函数的调用"></a>函数的调用</h3><ol>
-<li><p>作为函数（this在非严格模式下指向全局对象，在严格模式下指向undefined）</p>
-<p>例：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">x,y</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> x+y</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(add(<span class="number">10</span>,<span class="number">45</span>));</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>作为方法（this指向调用它的对象）</p>
-<p>例：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">a=&#123;</span><br><span class="line">	name:<span class="string">"hello"</span>,</span><br><span class="line">	add:<span class="function"><span class="keyword">function</span>(<span class="params">x,y</span>)</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> x+y</span><br><span class="line">	&#125; </span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(a.add(<span class="number">10</span>,<span class="number">45</span>));</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>作为构造函数（this指向新创建的prototype对象）</p>
-<p>在函数或方法调用之前带有new则为构造函数调用( 构造函数可以包含返回语句<strong>不推荐</strong>，但返回值必须是this，或者其它非对象类型的值 )</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">student</span>(<span class="params">name,number</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.name=name,</span><br><span class="line">	<span class="keyword">this</span>.number=number</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">this</span>.name+<span class="keyword">this</span>.number</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a=<span class="keyword">new</span> student(<span class="string">"zhangsan"</span>,<span class="number">45</span>);</span><br><span class="line"><span class="built_in">console</span>.log(a.name);<span class="comment">//zhangsan</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>构造函数的中的return</strong></p>
-<p>​    默认情况下，没有return的函数的返回值为undefined（即没有定义返回值），如果定义了return，则返回指定对象。<br>但是构造函数比较t特殊，new构造函数在没有return的情况下默认返回新创建的对象。在有return的情况下，需要分为两个情况考虑：</p>
-<p>（1）如果返回值为基本数据类型（string，number，boolean，undefined，null），那么返回值为新建对象实例，即this。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="function"><span class="keyword">function</span> <span class="title">S</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">　　<span class="keyword">this</span>.x=<span class="number">3</span>;</span><br><span class="line">　　<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> b = <span class="keyword">new</span> a();</span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">//&#123;x:3&#125;</span></span><br></pre></td></tr></table></figure>
-<pre><code>（2）如果返回值为一个非基本数据类型的对象，函数的返回值为指定的对象，this值所引用的对象被丢弃。</code></pre><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="function"><span class="keyword">function</span> <span class="title">S</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">　　<span class="keyword">this</span>.x=<span class="number">3</span>;</span><br><span class="line">　　<span class="keyword">return</span> a;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> b = <span class="keyword">new</span> a();</span><br><span class="line"><span class="built_in">console</span>.log(b); <span class="comment">//S()&#123;this.x=3;return a &#125;</span></span><br></pre></td></tr></table></figure>
-<p>直观的例子：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="function"><span class="keyword">function</span> <span class="title">User</span>(<span class="params"> name, age</span>)</span>&#123;</span><br><span class="line">　　<span class="keyword">this</span>.name = name;</span><br><span class="line">　　<span class="keyword">this</span>.age = age;</span><br><span class="line"></span><br><span class="line">　　<span class="comment">// return; // 返回 this</span></span><br><span class="line">　　<span class="comment">// return null; // 返回 this</span></span><br><span class="line">　　<span class="comment">// return this; // 返回 this</span></span><br><span class="line">　　<span class="comment">// return true; // 返回 this</span></span><br><span class="line">　　<span class="comment">// return 'string'; // 返回 this</span></span><br><span class="line">　　<span class="comment">// return 1; // 返回 this</span></span><br><span class="line">　　<span class="comment">// 以上都返回&#123;name:"哈哈",age:18&#125;</span></span><br><span class="line">　　<span class="comment">// return []; // 返回 新建的 []</span></span><br><span class="line">　　<span class="comment">// return function()&#123;&#125;; // 返回 新建的 function，抛弃 this</span></span><br><span class="line">　　<span class="comment">// return new Boolean( false); // 返回 新建的 boolean，抛弃 this</span></span><br><span class="line">　　<span class="comment">// return new String( 'hello world'); // 返回 新建的 string，抛弃 this</span></span><br><span class="line">　　<span class="comment">// return new Number( 32); // 返回新的 number，抛弃 this</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> b=<span class="keyword">new</span> a(<span class="string">"哈哈"</span>,<span class="number">18</span>)</span><br><span class="line"><span class="built_in">console</span>.log(b);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>通过call()和apply()方法调用</p>
-<p>第一个参数：调用的函数母对象</p>
-<p>第二个参数： （1）call是许多参数</p>
-<p>​                        （2）apply是许多参数的一个整体数组</p>
-<p>例如：<code>A.fun.call(B)</code>这里调用A中的函数fun，但this指向B</p>
-</li>
-</ol>
-<h3 id="实参对象-arguments"><a href="#实参对象-arguments" class="headerlink" title="实参对象(arguments)"></a>实参对象(arguments)</h3><p>arguments是一个类数组</p>
-<p>有属性length(指传入的实参数，而函数的length指本身的形参数)</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">student</span>(<span class="params">name,number</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(<span class="built_in">arguments</span>.length!=<span class="number">2</span>)&#123;</span><br><span class="line">		alert(<span class="string">"传入参数数量不对"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">this</span>.name=name,</span><br><span class="line">	<span class="keyword">this</span>.number=number,</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">this</span>.name+<span class="keyword">this</span>.number</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">new</span> student(<span class="string">"zhangsan"</span>));</span><br></pre></td></tr></table></figure>
-
-<p>这里可以检验传入参数是否正确</p>
-<p>arguments可以在函数修改参数，参数与arguments相互影响</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params">x</span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(x);<span class="comment">//1</span></span><br><span class="line">	<span class="built_in">arguments</span>[<span class="number">0</span>]=<span class="literal">null</span>;<span class="comment">//把第一个参数改为null</span></span><br><span class="line">	<span class="built_in">console</span>.log(x);<span class="comment">//null</span></span><br><span class="line">&#125;</span><br><span class="line">f(<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
-
-<h5 id="callee和caller属性（在严格模式下为类型错误）"><a href="#callee和caller属性（在严格模式下为类型错误）" class="headerlink" title="callee和caller属性（在严格模式下为类型错误）"></a>callee和caller属性（在严格模式下为类型错误）</h5><p>callee指代当前正在执行的函数（常用于递归的调用自身）</p>
-<p>caller属性可以访问调用栈</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num=<span class="number">1</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params">x</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(x&gt;<span class="number">5</span>)&#123;</span><br><span class="line">		<span class="keyword">return</span> num;</span><br><span class="line">	&#125;</span><br><span class="line">	num++;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">arguments</span>.callee(x+<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(f(<span class="number">1</span>));<span class="comment">//6</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="var和let区别"><a href="#var和let区别" class="headerlink" title="var和let区别"></a>var和let区别</h3><p>在大括号和小括号中定义后值能否在外面取到（if语句、while语句、for语句等）</p>
-<p>var能取到，let不行</p>
-<h3 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> greeting=<span class="function"><span class="params">()</span>=&gt;</span>&#123;<span class="comment">//()内是参数</span></span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">"hello"</span>);</span><br><span class="line">&#125;</span><br><span class="line">greeting();</span><br></pre></td></tr></table></figure>
-
-<h3 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h3><p>函数对象可以通过作用域链相互关联起来，函数体内部的变量都可以保存在函数作用域内，这种特性叫闭包（可以捕捉到局部变量和参数，并一直保留下来），如果不读取外部函数，函数内部的函数被隐藏。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> word=<span class="string">"hello world"</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">check</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> word=<span class="string">"good job"</span>;</span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">ok</span>(<span class="params"></span>)</span>&#123;<span class="keyword">return</span> word&#125;;</span><br><span class="line">	<span class="keyword">return</span> ok;</span><br><span class="line">&#125;</span><br><span class="line">alert(check()());<span class="comment">//good job</span></span><br></pre></td></tr></table></figure>
-
-<p>运行ok这个函数前，它被外部函数check返回</p>
-<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Closures" target="_blank" rel="noopener">链接</a></p>
-<h3 id="bind-方法"><a href="#bind-方法" class="headerlink" title="bind()方法"></a>bind()方法</h3><p>将函数绑定至某个对象</p>
-<p>f.bind(o)把函数f绑定到对象o上</p>
-<p><strong>柯里化</strong></p>
-<p>把一个接受多个参数的函数变成一系列接受一个参数的内部函数，这样内部函数的值可以保留</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addThreeNumber</span>(<span class="params">x,y,z</span>)</span>&#123;</span><br><span class="line"><span class="keyword">return</span> x+y+z;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(addThreeNumber(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>));<span class="comment">//6</span></span><br></pre></td></tr></table></figure>
-
-<p>柯里化后：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addThreeNumberCurry</span>(<span class="params">x</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">y</span>)</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">z</span>)</span>&#123;</span><br><span class="line">			<span class="keyword">return</span> x+y+z;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(addThreeNumberCurry(<span class="number">1</span>)(<span class="number">2</span>)(<span class="number">3</span>));<span class="comment">//6</span></span><br></pre></td></tr></table></figure>
-
-<p>这样处理后我想改变后面z的值时，可以把addThreeNumberCurry(1)(2)传给另一个变量，然后直接把z这个参数传给这个变量</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/03/10/%E5%87%BD%E6%95%B0%E7%9A%84%E5%88%9B%E5%BB%BA%E5%92%8C%E5%BA%94%E7%94%A8/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-简单的动画" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/03/10/%E7%AE%80%E5%8D%95%E7%9A%84%E5%8A%A8%E7%94%BB/" target="_blank">简单的动画</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/03/10/%E7%AE%80%E5%8D%95%E7%9A%84%E5%8A%A8%E7%94%BB/" class="archive-article-date">
-        <time datetime="2020-03-10T07:30:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-10</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="同时改变块的属性渐变"><a href="#同时改变块的属性渐变" class="headerlink" title="同时改变块的属性渐变"></a>同时改变块的属性渐变</h1><p>animation.js</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getStyle</span>(<span class="params">el,property</span>)</span>&#123;<span class="comment">//保证浏览器的兼容</span></span><br><span class="line">	<span class="keyword">if</span>(getComputedStyle)&#123;</span><br><span class="line">		<span class="keyword">return</span> getComputedStyle(el)[property]</span><br><span class="line">	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> el.currentStyle[property];</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">animate</span>(<span class="params">el,properties</span>)</span>&#123;<span class="comment">//el是元素，property为要改变的属性，target为改变的目标</span></span><br><span class="line">	clearInterval(el.timerId);</span><br><span class="line">	el.timerId=setInterval(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">var</span> property <span class="keyword">in</span> properties)&#123;</span><br><span class="line">		<span class="keyword">var</span> current;</span><br><span class="line">		<span class="keyword">var</span> target=properties[property];</span><br><span class="line">		<span class="keyword">if</span>(property===<span class="string">'opacity'</span>)&#123;</span><br><span class="line">			current=<span class="built_in">Math</span>.round(<span class="built_in">parseFloat</span>(getStyle(el,<span class="string">'opacity'</span>))*<span class="number">100</span>);</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			current=<span class="built_in">parseInt</span>(getStyle(el,property));</span><br><span class="line">		&#125;	</span><br><span class="line">			</span><br><span class="line">			<span class="keyword">var</span> speed=(target-current)/<span class="number">30</span>;</span><br><span class="line">		speed=speed&gt;<span class="number">0</span>?<span class="built_in">Math</span>.ceil(speed):<span class="built_in">Math</span>.floor(speed);</span><br><span class="line">		<span class="keyword">if</span>(property===<span class="string">'opacity'</span>)&#123;</span><br><span class="line">			el.style.opacity=(current+speed)/<span class="number">100</span>;</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">		el.style[property]=current+speed+<span class="string">'px'</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">	&#125;,<span class="number">20</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>animation.html</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=<span class="string">"utf-8"</span>&gt;</span><br><span class="line">		&lt;title&gt;&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">		&lt;style&gt;</span></span><br><span class="line"><span class="regexp">			*&#123;</span></span><br><span class="line"><span class="regexp">				margin:0px;</span></span><br><span class="line"><span class="regexp">				padding:0;</span></span><br><span class="line"><span class="regexp">			&#125;</span></span><br><span class="line"><span class="regexp">			div&#123;</span></span><br><span class="line"><span class="regexp">				width:100px;</span></span><br><span class="line"><span class="regexp">				height:100px;</span></span><br><span class="line"><span class="regexp">				background-color: black;</span></span><br><span class="line"><span class="regexp">				left:0;</span></span><br><span class="line"><span class="regexp">				top:0;</span></span><br><span class="line"><span class="regexp">				position:absolute;</span></span><br><span class="line"><span class="regexp">				opacity:1; /</span>* opacity为透明度 *<span class="regexp">/</span></span><br><span class="line"><span class="regexp">			&#125;</span></span><br><span class="line"><span class="regexp">		&lt;/</span>style&gt;</span><br><span class="line">	&lt;<span class="regexp">/head&gt;</span></span><br><span class="line"><span class="regexp">	&lt;body&gt;</span></span><br><span class="line"><span class="regexp">		&lt;div&gt;&lt;/</span>div&gt;</span><br><span class="line">		&lt;script src=<span class="string">"./animation.js"</span> &gt;&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">		&lt;script type="text/</span>javascript<span class="string">"&gt;</span></span><br><span class="line"><span class="string">			var div=document.querySelector('div');</span></span><br><span class="line"><span class="string">			animate(div,&#123;</span></span><br><span class="line"><span class="string">				opacity:20,</span></span><br><span class="line"><span class="string">				width:200,</span></span><br><span class="line"><span class="string">				left:500</span></span><br><span class="line"><span class="string">			&#125;);</span></span><br><span class="line"><span class="string">		&lt;/script&gt;</span></span><br><span class="line"><span class="string">	&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>效果如下：</p>
-<p><img src="%E5%B1%9E%E6%80%A7%E6%B8%90%E5%8F%98.gif" alt=""></p>
-<p>实现该块的位置、宽度、透明度的转变</p>
-<h1 id="透明度轮播"><a href="#透明度轮播" class="headerlink" title="透明度轮播"></a>透明度轮播</h1><p>animationjs</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getStyle</span>(<span class="params">el,property</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(getComputedStyle)&#123;</span><br><span class="line">		<span class="keyword">return</span> getComputedStyle(el)[property]</span><br><span class="line">	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> el.currentStyle[property];</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">animate</span>(<span class="params">el,properties</span>)</span>&#123;<span class="comment">//el是元素，property为要改变的属性，target为改变的目标</span></span><br><span class="line">	clearInterval(el.timerId);</span><br><span class="line">	el.timerId=setInterval(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">var</span> property <span class="keyword">in</span> properties)&#123;</span><br><span class="line">		<span class="keyword">var</span> current;</span><br><span class="line">		<span class="keyword">var</span> target=properties[property];</span><br><span class="line">		<span class="keyword">if</span>(property===<span class="string">'opacity'</span>)&#123;</span><br><span class="line">			current=<span class="built_in">Math</span>.round(<span class="built_in">parseFloat</span>(getStyle(el,<span class="string">'opacity'</span>))*<span class="number">100</span>);</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			current=<span class="built_in">parseInt</span>(getStyle(el,property));</span><br><span class="line">		&#125;	</span><br><span class="line">			</span><br><span class="line">			<span class="keyword">var</span> speed=(target-current)/<span class="number">30</span>;</span><br><span class="line">		speed=speed&gt;<span class="number">0</span>?<span class="built_in">Math</span>.ceil(speed):<span class="built_in">Math</span>.floor(speed);</span><br><span class="line">		<span class="keyword">if</span>(property===<span class="string">'opacity'</span>)&#123;</span><br><span class="line">			el.style.opacity=(current+speed)/<span class="number">100</span>;</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">		el.style[property]=current+speed+<span class="string">'px'</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">	&#125;,<span class="number">20</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>index.html</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=<span class="string">"utf-8"</span>&gt;</span><br><span class="line">		&lt;title&gt;&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">		&lt;style&gt;</span></span><br><span class="line"><span class="regexp">			*&#123;</span></span><br><span class="line"><span class="regexp">				margin:0;</span></span><br><span class="line"><span class="regexp">				padding:0;</span></span><br><span class="line"><span class="regexp">			&#125;</span></span><br><span class="line"><span class="regexp">			</span></span><br><span class="line"><span class="regexp">			ul&#123;</span></span><br><span class="line"><span class="regexp">				list-style:none;</span></span><br><span class="line"><span class="regexp">			&#125;</span></span><br><span class="line"><span class="regexp">			</span></span><br><span class="line"><span class="regexp">			.slider&#123;</span></span><br><span class="line"><span class="regexp">				width:500px;</span></span><br><span class="line"><span class="regexp">				height:313px;</span></span><br><span class="line"><span class="regexp">				border:5px solid crimson;</span></span><br><span class="line"><span class="regexp">				position:relative;</span></span><br><span class="line"><span class="regexp">			&#125;</span></span><br><span class="line"><span class="regexp">			</span></span><br><span class="line"><span class="regexp">			.slider .list .item&#123;</span></span><br><span class="line"><span class="regexp">				position:absolute;</span></span><br><span class="line"><span class="regexp">				left:0px;</span></span><br><span class="line"><span class="regexp">				top:0px;</span></span><br><span class="line"><span class="regexp">				opacity:0;</span></span><br><span class="line"><span class="regexp">			&#125;</span></span><br><span class="line"><span class="regexp">			</span></span><br><span class="line"><span class="regexp">			.slider .list .item:first-of-type &#123;</span></span><br><span class="line"><span class="regexp">				opacity:1;</span></span><br><span class="line"><span class="regexp">			&#125;</span></span><br><span class="line"><span class="regexp">			</span></span><br><span class="line"><span class="regexp">			.slider .list .item img &#123;</span></span><br><span class="line"><span class="regexp">				width:500px;</span></span><br><span class="line"><span class="regexp">				height:313px;</span></span><br><span class="line"><span class="regexp">				display:block;</span></span><br><span class="line"><span class="regexp">			&#125;</span></span><br><span class="line"><span class="regexp">			</span></span><br><span class="line"><span class="regexp">			.slider .next,.slider .prev &#123;</span></span><br><span class="line"><span class="regexp">				position:absolute;  </span></span><br><span class="line"><span class="regexp">				top:150px;</span></span><br><span class="line"><span class="regexp">			&#125;</span></span><br><span class="line"><span class="regexp">			</span></span><br><span class="line"><span class="regexp">			.slider .next&#123;</span></span><br><span class="line"><span class="regexp">				right:0;</span></span><br><span class="line"><span class="regexp">			&#125;</span></span><br><span class="line"><span class="regexp">			</span></span><br><span class="line"><span class="regexp">			.slider .pagination&#123;</span></span><br><span class="line"><span class="regexp">				position:relative;</span></span><br><span class="line"><span class="regexp">				top:260px;</span></span><br><span class="line"><span class="regexp">				left:195px;</span></span><br><span class="line"><span class="regexp">			&#125;</span></span><br><span class="line"><span class="regexp">			.slider .pagination .bullet&#123;</span></span><br><span class="line"><span class="regexp">				width:20px;</span></span><br><span class="line"><span class="regexp">				height:20px;</span></span><br><span class="line"><span class="regexp">				background-color: #000000;</span></span><br><span class="line"><span class="regexp">				margin-left:5px;</span></span><br><span class="line"><span class="regexp">				float:left;</span></span><br><span class="line"><span class="regexp">				border:2px solid yellow;</span></span><br><span class="line"><span class="regexp">				cursor: pointer;</span></span><br><span class="line"><span class="regexp">				color:white;</span></span><br><span class="line"><span class="regexp">				line-height:20px;</span></span><br><span class="line"><span class="regexp">				text-align: center;</span></span><br><span class="line"><span class="regexp">			&#125;</span></span><br><span class="line"><span class="regexp">			.slider .pagination .bullet.focus&#123;</span></span><br><span class="line"><span class="regexp">				background-color: hotpink;</span></span><br><span class="line"><span class="regexp">			&#125;</span></span><br><span class="line"><span class="regexp">		&lt;/</span>style&gt;</span><br><span class="line">	&lt;<span class="regexp">/head&gt;</span></span><br><span class="line"><span class="regexp">	&lt;body&gt;</span></span><br><span class="line"><span class="regexp">		&lt;div class="slider"&gt;</span></span><br><span class="line"><span class="regexp">			&lt;ul class="list"&gt;</span></span><br><span class="line"><span class="regexp">				&lt;li class="item"&gt;&lt;img src="./</span><span class="number">1.</span>jpg<span class="string">" alt="</span><span class="string">"&gt;&lt;/li&gt;</span></span><br><span class="line"><span class="string">				&lt;li class="</span>item<span class="string">"&gt;&lt;img src="</span>./<span class="number">2.</span>jpg<span class="string">" alt="</span><span class="string">"&gt;&lt;/li&gt;</span></span><br><span class="line"><span class="string">				&lt;li class="</span>item<span class="string">"&gt;&lt;img src="</span>./<span class="number">3.</span>jpg<span class="string">" alt="</span><span class="string">"&gt;&lt;/li&gt;</span></span><br><span class="line"><span class="string">				&lt;li class="</span>item<span class="string">"&gt;&lt;img src="</span>./<span class="number">4.</span>jpg<span class="string">" alt="</span><span class="string">"&gt;&lt;/li&gt;</span></span><br><span class="line"><span class="string">			&lt;/ul&gt;</span></span><br><span class="line"><span class="string">			&lt;button class="</span>prev<span class="string">"&gt;prev&lt;/button&gt;</span></span><br><span class="line"><span class="string">			&lt;button class="</span>next<span class="string">"&gt;next&lt;/button&gt;</span></span><br><span class="line"><span class="string">			&lt;ul class="</span>pagination<span class="string">"&gt;</span></span><br><span class="line"><span class="string">				&lt;li class="</span>bullet focus<span class="string">"&gt;1&lt;/li&gt;</span></span><br><span class="line"><span class="string">				&lt;li class="</span>bullet<span class="string">"&gt;2&lt;/li&gt;</span></span><br><span class="line"><span class="string">				&lt;li class="</span>bullet<span class="string">"&gt;3&lt;/li&gt;</span></span><br><span class="line"><span class="string">				&lt;li class="</span>bullet<span class="string">"&gt;4&lt;/li&gt;</span></span><br><span class="line"><span class="string">			&lt;/ul&gt;</span></span><br><span class="line"><span class="string">		&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;script src="</span>./animation.js<span class="string">"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="string">		&lt;script&gt;</span></span><br><span class="line"><span class="string">			(function() &#123;</span></span><br><span class="line"><span class="string">				var prevIndex,nextIndex;</span></span><br><span class="line"><span class="string">				var len;</span></span><br><span class="line"><span class="string">				var id;</span></span><br><span class="line"><span class="string">				init();</span></span><br><span class="line"><span class="string">				function init()&#123;</span></span><br><span class="line"><span class="string">					prevIndex=nextIndex=0;</span></span><br><span class="line"><span class="string">					len=document.querySelectorAll('.list .item').length;</span></span><br><span class="line"><span class="string">					document.querySelector('.prev').onclick=function()&#123;</span></span><br><span class="line"><span class="string">						sliderPrev();</span></span><br><span class="line"><span class="string">					&#125;</span></span><br><span class="line"><span class="string">					document.querySelector('.next').onclick=function()&#123;</span></span><br><span class="line"><span class="string">						sliderNext();</span></span><br><span class="line"><span class="string">					&#125;</span></span><br><span class="line"><span class="string">					var bullets=document.querySelectorAll('.slider .pagination .bullet');</span></span><br><span class="line"><span class="string">					for(var i=0;i&lt;bullets.length;i++)&#123;</span></span><br><span class="line"><span class="string">						bullets[i].index=i;</span></span><br><span class="line"><span class="string">						bullets[i].onclick=function()&#123;</span></span><br><span class="line"><span class="string">							prevIndex=nextIndex;</span></span><br><span class="line"><span class="string">							nextIndex=this.index;</span></span><br><span class="line"><span class="string">							slideTo(prevIndex,nextIndex);</span></span><br><span class="line"><span class="string">						&#125;</span></span><br><span class="line"><span class="string">					&#125;</span></span><br><span class="line"><span class="string">					var slider=document.querySelector('.slider');</span></span><br><span class="line"><span class="string">					slider.onmouseover=function()&#123;</span></span><br><span class="line"><span class="string">						stop();</span></span><br><span class="line"><span class="string">					&#125;</span></span><br><span class="line"><span class="string">					slider.onmouseout=function()&#123;</span></span><br><span class="line"><span class="string">						auto();</span></span><br><span class="line"><span class="string">					&#125;</span></span><br><span class="line"><span class="string">					auto();</span></span><br><span class="line"><span class="string">				&#125;</span></span><br><span class="line"><span class="string">				function sliderPrev()&#123;</span></span><br><span class="line"><span class="string">					prevIndex=nextIndex;</span></span><br><span class="line"><span class="string">					nextIndex--;</span></span><br><span class="line"><span class="string">					if(nextIndex === -1)&#123;</span></span><br><span class="line"><span class="string">						nextIndex=len-1;</span></span><br><span class="line"><span class="string">					&#125;</span></span><br><span class="line"><span class="string">					slideTo(prevIndex,nextIndex);</span></span><br><span class="line"><span class="string">				&#125;</span></span><br><span class="line"><span class="string">				</span></span><br><span class="line"><span class="string">				function sliderNext()&#123;</span></span><br><span class="line"><span class="string">					prevIndex=nextIndex;</span></span><br><span class="line"><span class="string">						nextIndex++;</span></span><br><span class="line"><span class="string">						if(nextIndex === len)&#123;</span></span><br><span class="line"><span class="string">							nextIndex=0;</span></span><br><span class="line"><span class="string">						&#125;</span></span><br><span class="line"><span class="string">						slideTo(prevIndex,nextIndex);</span></span><br><span class="line"><span class="string">				&#125;</span></span><br><span class="line"><span class="string">				</span></span><br><span class="line"><span class="string">				function slideTo(prev, next) &#123;</span></span><br><span class="line"><span class="string">					</span></span><br><span class="line"><span class="string">					var bullets=document.querySelectorAll('.slider .pagination .bullet')</span></span><br><span class="line"><span class="string">					var lis=document.querySelectorAll('.list .item');</span></span><br><span class="line"><span class="string">					</span></span><br><span class="line"><span class="string">					bullets[prev].className='bullet';</span></span><br><span class="line"><span class="string">					bullets[next].className='bullet focus';</span></span><br><span class="line"><span class="string">					</span></span><br><span class="line"><span class="string">					animate(lis[prev], &#123;opacity:0&#125;);</span></span><br><span class="line"><span class="string">					animate(lis[next], &#123;opacity:100&#125;);</span></span><br><span class="line"><span class="string">				&#125;</span></span><br><span class="line"><span class="string">				function auto()&#123;</span></span><br><span class="line"><span class="string">					clearInterval(id);</span></span><br><span class="line"><span class="string">				id=setInterval(function()&#123;</span></span><br><span class="line"><span class="string">				sliderNext();</span></span><br><span class="line"><span class="string">				&#125;,2000)</span></span><br><span class="line"><span class="string">				&#125;</span></span><br><span class="line"><span class="string">				function stop()&#123;</span></span><br><span class="line"><span class="string">				clearInterval(id);</span></span><br><span class="line"><span class="string">				&#125;</span></span><br><span class="line"><span class="string">			&#125;)()</span></span><br><span class="line"><span class="string">		&lt;/script&gt;</span></span><br><span class="line"><span class="string">	&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>这里导入的图片略</p>
-<p>效果如下：</p>
-<p><img src="%E9%80%8F%E6%98%8E%E5%BA%A6%E8%BD%AE%E6%92%AD.gif" alt=""></p>
-<ol>
-<li>实现自动轮播</li>
-<li>点击下方标签自动转到对应图片</li>
-<li>点击prev转到前一张点击next转到下一张</li>
-<li>鼠标移到图片上，停止自动轮播</li>
-</ol>
-<h1 id="碰撞检测"><a href="#碰撞检测" class="headerlink" title="碰撞检测"></a>碰撞检测</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=<span class="string">"utf-8"</span>&gt;</span><br><span class="line">		&lt;title&gt;&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">		&lt;style&gt;</span></span><br><span class="line"><span class="regexp">			*&#123;margin:0;</span></span><br><span class="line"><span class="regexp">			padding:0;</span></span><br><span class="line"><span class="regexp">			&#125;</span></span><br><span class="line"><span class="regexp">			body&#123;</span></span><br><span class="line"><span class="regexp">				overflow:hidden;/</span><span class="regexp">/这里避免了碰撞时出现滚动条</span></span><br><span class="line"><span class="regexp">			&#125;</span></span><br><span class="line"><span class="regexp">			div&#123;width:100px;</span></span><br><span class="line"><span class="regexp">			height:100px;</span></span><br><span class="line"><span class="regexp">			background-color:black;</span></span><br><span class="line"><span class="regexp">			position:absolute;</span></span><br><span class="line"><span class="regexp">			left:0;</span></span><br><span class="line"><span class="regexp">			right:0;</span></span><br><span class="line"><span class="regexp">			&#125;</span></span><br><span class="line"><span class="regexp">		&lt;/</span>style&gt;</span><br><span class="line">	&lt;<span class="regexp">/head&gt;</span></span><br><span class="line"><span class="regexp">	&lt;body&gt;</span></span><br><span class="line"><span class="regexp">		&lt;div&gt;&lt;/</span>div&gt;</span><br><span class="line">		&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">			<span class="keyword">var</span> speedx=<span class="number">3</span>;</span><br><span class="line">			<span class="keyword">var</span> speedy=<span class="number">5</span>;</span><br><span class="line">			<span class="keyword">var</span> div=<span class="built_in">document</span>.querySelector(<span class="string">'div'</span>);<span class="comment">//作用类似于getElementById,返回css的一个元素</span></span><br><span class="line">			<span class="function"><span class="keyword">function</span> <span class="title">move</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">				<span class="keyword">var</span> currentLeft=<span class="built_in">parseInt</span>(<span class="built_in">window</span>.getComputedStyle(div).left);</span><br><span class="line">				<span class="keyword">var</span> currentTop=<span class="built_in">parseInt</span>(<span class="built_in">window</span>.getComputedStyle(div).top);</span><br><span class="line">				check_border_collision(div);</span><br><span class="line">				<span class="keyword">var</span> left=currentLeft+speedx;</span><br><span class="line">				<span class="keyword">var</span> top=currentTop+speedy;</span><br><span class="line">				div.style.left=left+<span class="string">'px'</span>;</span><br><span class="line">				div.style.top=top+<span class="string">'px'</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			<span class="function"><span class="keyword">function</span> <span class="title">check_border_collision</span>(<span class="params">el</span>)</span>&#123;</span><br><span class="line">				<span class="keyword">var</span> style=<span class="built_in">window</span>.getComputedStyle(el);</span><br><span class="line">				<span class="keyword">var</span> left=<span class="built_in">parseInt</span>(style.left);</span><br><span class="line">				<span class="keyword">var</span> top=<span class="built_in">parseInt</span>(style.top);</span><br><span class="line">				<span class="keyword">var</span> w=<span class="built_in">parseInt</span>(style.width);</span><br><span class="line">				<span class="keyword">var</span> h=<span class="built_in">parseInt</span>(style.height);</span><br><span class="line">				<span class="keyword">if</span>(left&lt;<span class="number">0</span>)&#123;</span><br><span class="line">					left=<span class="number">0</span>;speedx*=<span class="number">-1</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">if</span>(left&gt;<span class="built_in">window</span>.innerWidth-w)&#123;<span class="comment">//window.innerwidth表示窗口总长</span></span><br><span class="line">					left=<span class="built_in">window</span>.innerWidth-w;</span><br><span class="line">					speedx*=<span class="number">-1</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">if</span>(top&lt;<span class="number">0</span>)&#123;</span><br><span class="line">					top=<span class="number">0</span>;speedy*=<span class="number">-1</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">if</span>(top&gt;<span class="built_in">window</span>.innerHeight-h)&#123;</span><br><span class="line">					top=<span class="built_in">window</span>.innerHeight-h;</span><br><span class="line">					speedy*=<span class="number">-1</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				el.style.top=top+<span class="string">'px'</span>;</span><br><span class="line">				el.style.left=left+<span class="string">'px'</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				setInterval( <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;move()&#125;,<span class="number">20</span>)</span><br><span class="line">		&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>body&gt;</span><br><span class="line">&lt;<span class="regexp">/html&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>效果如下：</p>
-<p><img src="%E7%A2%B0%E6%92%9E%E6%A3%80%E6%B5%8B.gif" alt=""></p>
-<p>实现碰到页面边距时反弹</p>
-<h1 id="块与块的碰撞"><a href="#块与块的碰撞" class="headerlink" title="块与块的碰撞"></a>块与块的碰撞</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=<span class="string">"utf-8"</span>&gt;</span><br><span class="line">		&lt;title&gt;&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">		&lt;style&gt;</span></span><br><span class="line"><span class="regexp">			*&#123;margin:0;</span></span><br><span class="line"><span class="regexp">			padding:0;</span></span><br><span class="line"><span class="regexp">			&#125;</span></span><br><span class="line"><span class="regexp">			body&#123;</span></span><br><span class="line"><span class="regexp">				overflow:hidden;/</span><span class="regexp">/这里避免了碰撞时出现滚动条</span></span><br><span class="line"><span class="regexp">			&#125;</span></span><br><span class="line"><span class="regexp">			div&#123;width:100px;</span></span><br><span class="line"><span class="regexp">			height:100px;</span></span><br><span class="line"><span class="regexp">			background-color:black;</span></span><br><span class="line"><span class="regexp">			position:absolute;</span></span><br><span class="line"><span class="regexp">			left:0;</span></span><br><span class="line"><span class="regexp">			right:0;</span></span><br><span class="line"><span class="regexp">			&#125;</span></span><br><span class="line"><span class="regexp">			div:nth-of-type(2)&#123;</span></span><br><span class="line"><span class="regexp">				left:500px;</span></span><br><span class="line"><span class="regexp">				top:500px;</span></span><br><span class="line"><span class="regexp">			&#125;</span></span><br><span class="line"><span class="regexp">		&lt;/</span>style&gt;</span><br><span class="line">	&lt;<span class="regexp">/head&gt;</span></span><br><span class="line"><span class="regexp">	&lt;body&gt;</span></span><br><span class="line"><span class="regexp">		&lt;div&gt;&lt;/</span>div&gt;</span><br><span class="line">		&lt;div&gt;&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">		&lt;script type="text/</span>javascript<span class="string">"&gt;</span></span><br><span class="line"><span class="string">			var div1=document.querySelector('div');//作用类似于getElementById,返回css的一个元素</span></span><br><span class="line"><span class="string">			var div2=document.querySelector('div:nth-of-type(2)');//nth_of_type表示同一类型的第二个块</span></span><br><span class="line"><span class="string">			div1.speedx=10;</span></span><br><span class="line"><span class="string">			div1.speedy=20;</span></span><br><span class="line"><span class="string">			div2.speedx=5;</span></span><br><span class="line"><span class="string">			div2.speedy=10;</span></span><br><span class="line"><span class="string">			function move(el)&#123;</span></span><br><span class="line"><span class="string">				var currentLeft=parseInt(window.getComputedStyle(el).left);</span></span><br><span class="line"><span class="string">				var currentTop=parseInt(window.getComputedStyle(el).top);</span></span><br><span class="line"><span class="string">				check_border_collision(el);</span></span><br><span class="line"><span class="string">				var tempx,tempy;</span></span><br><span class="line"><span class="string">				if(check_block_collision(div1,div2))&#123;</span></span><br><span class="line"><span class="string">					tempx=div1.speedx;</span></span><br><span class="line"><span class="string">					tempy=div1.speedy;</span></span><br><span class="line"><span class="string">					div1.speedx=div2.speedx;</span></span><br><span class="line"><span class="string">					div1.speedy=div2.speedy;</span></span><br><span class="line"><span class="string">					div2.speedx=tempx;</span></span><br><span class="line"><span class="string">					div2.speedy=tempy;</span></span><br><span class="line"><span class="string">					</span></span><br><span class="line"><span class="string">				&#125;</span></span><br><span class="line"><span class="string">				var left=currentLeft+el.speedx;</span></span><br><span class="line"><span class="string">				var top=currentTop+el.speedy;</span></span><br><span class="line"><span class="string">				el.style.left=left+'px';</span></span><br><span class="line"><span class="string">				el.style.top=top+'px';</span></span><br><span class="line"><span class="string">				&#125;</span></span><br><span class="line"><span class="string">			function check_border_collision(el)&#123;</span></span><br><span class="line"><span class="string">				var style=window.getComputedStyle(el);</span></span><br><span class="line"><span class="string">				var left=parseInt(style.left);</span></span><br><span class="line"><span class="string">				var top=parseInt(style.top);</span></span><br><span class="line"><span class="string">				var w=parseInt(style.width);</span></span><br><span class="line"><span class="string">				var h=parseInt(style.height);</span></span><br><span class="line"><span class="string">				if(left&lt;0)&#123;</span></span><br><span class="line"><span class="string">					left=0;</span></span><br><span class="line"><span class="string">					el.speedx*=-1;</span></span><br><span class="line"><span class="string">				&#125;</span></span><br><span class="line"><span class="string">				if(left&gt;window.innerWidth-w)&#123;//window.innerwidth表示窗口总长</span></span><br><span class="line"><span class="string">					left=window.innerWidth-w;</span></span><br><span class="line"><span class="string">					el.speedx*=-1;</span></span><br><span class="line"><span class="string">				&#125;</span></span><br><span class="line"><span class="string">				if(top&lt;0)&#123;</span></span><br><span class="line"><span class="string">					top=0;</span></span><br><span class="line"><span class="string">					el.speedy*=-1;</span></span><br><span class="line"><span class="string">				&#125;</span></span><br><span class="line"><span class="string">				if(top&gt;window.innerHeight-h)&#123;</span></span><br><span class="line"><span class="string">					top=window.innerHeight-h;</span></span><br><span class="line"><span class="string">					el.speedy*=-1;</span></span><br><span class="line"><span class="string">				&#125;</span></span><br><span class="line"><span class="string">				el.style.top=top+'px';</span></span><br><span class="line"><span class="string">				el.style.left=left+'px';</span></span><br><span class="line"><span class="string">				&#125;</span></span><br><span class="line"><span class="string">			function check_block_collision(block1,block2)&#123;</span></span><br><span class="line"><span class="string">				var left1=parseInt(window.getComputedStyle(block1).left);	</span></span><br><span class="line"><span class="string">				var left2=parseInt(window.getComputedStyle(block2).left);	</span></span><br><span class="line"><span class="string">				</span></span><br><span class="line"><span class="string">				var top1=parseInt(window.getComputedStyle(block1).top);	</span></span><br><span class="line"><span class="string">				var top2=parseInt(window.getComputedStyle(block2).top);	</span></span><br><span class="line"><span class="string">				</span></span><br><span class="line"><span class="string">				var width1=parseInt(window.getComputedStyle(block1).width);	</span></span><br><span class="line"><span class="string">				var width2=parseInt(window.getComputedStyle(block2).width);</span></span><br><span class="line"><span class="string">				</span></span><br><span class="line"><span class="string">				var height1=parseInt(window.getComputedStyle(block1).height);	</span></span><br><span class="line"><span class="string">				var height2=parseInt(window.getComputedStyle(block2).height);	</span></span><br><span class="line"><span class="string">				</span></span><br><span class="line"><span class="string">				var center1 = &#123;</span></span><br><span class="line"><span class="string">					x:left1+width1/2,</span></span><br><span class="line"><span class="string">					y:top1+height1/2</span></span><br><span class="line"><span class="string">				&#125;</span></span><br><span class="line"><span class="string">				var center2 = &#123;</span></span><br><span class="line"><span class="string">					x:left2+width2/2,</span></span><br><span class="line"><span class="string">					y:top2+height2/2</span></span><br><span class="line"><span class="string">				&#125;</span></span><br><span class="line"><span class="string">				var diffx=Math.abs(center1.x-center2.x);</span></span><br><span class="line"><span class="string">				var diffy=Math.abs(center1.y-center2.y);</span></span><br><span class="line"><span class="string">				</span></span><br><span class="line"><span class="string">				if(diffx&lt;(width1+width2)/2&amp;&amp;diffy&lt;(height1+height2)/2)&#123;</span></span><br><span class="line"><span class="string">					return true</span></span><br><span class="line"><span class="string">				&#125;return false</span></span><br><span class="line"><span class="string">				</span></span><br><span class="line"><span class="string">				&#125;</span></span><br><span class="line"><span class="string">				setInterval( function() &#123;</span></span><br><span class="line"><span class="string">				move(div1)</span></span><br><span class="line"><span class="string">				move(div2)&#125;,20)</span></span><br><span class="line"><span class="string">		&lt;/script&gt;</span></span><br><span class="line"><span class="string">	&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>效果如下：</p>
-<p><img src="%E5%9D%97%E4%B8%8E%E5%9D%97%E7%9A%84%E7%A2%B0%E6%92%9E.gif" alt=""></p>
-<ol>
-<li>实现了块与块碰撞时交换速度</li>
-<li>碰到页面边距时反弹</li>
-</ol>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/03/10/%E7%AE%80%E5%8D%95%E7%9A%84%E5%8A%A8%E7%94%BB/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/10/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/12/">Next &amp;raquo;</a>
@@ -1409,19 +1327,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1429,15 +1335,27 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">react native</a>
+                <a href="javascript:void(0)" class="js-tag color1">react</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">react</a>
+                <a href="javascript:void(0)" class="js-tag color3">react native</a>
               </li>
              
               <li class="article-tag-list-item">

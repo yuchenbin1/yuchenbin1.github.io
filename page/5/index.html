@@ -202,6 +202,412 @@
             
 
   
+    <article id="post-21年1月18日" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/01/18/21%E5%B9%B41%E6%9C%8818%E6%97%A5/" target="_blank">21年1月18日</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/01/18/21%E5%B9%B41%E6%9C%8818%E6%97%A5/" class="archive-article-date">
+        <time datetime="2021-01-18T14:49:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-18</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="微信小程序中的css"><a href="#微信小程序中的css" class="headerlink" title="微信小程序中的css"></a>微信小程序中的css</h1><p>微信小程序中的css样式覆盖，在page页对应的wxss只会作用于当前的page，而app.wxss就是全局的样式了。</p>
+<p>但是对于一些像vant这样的UI组件，他有提供一些比如custom-class这样的根元素的class来覆盖，或者在调试器中找到对应的class名，用！important来覆盖</p>
+<p>注意的是，如果是自定义组件，一定要有这个配置</p>
+<p>在js文件中加上</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">option:&#123;</span><br><span class="line">    styleIsolation:<span class="string">'shared'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样组件自定义样式可以覆盖，但是各个组件之间就会有样式污染的问题了。需要注意取名的时候不要重复。</p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日志</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/01/18/21%E5%B9%B41%E6%9C%8818%E6%97%A5/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-21年1月17日" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/01/17/21%E5%B9%B41%E6%9C%8817%E6%97%A5/" target="_blank">21年1月17日</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/01/17/21%E5%B9%B41%E6%9C%8817%E6%97%A5/" class="archive-article-date">
+        <time datetime="2021-01-17T10:57:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-17</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="微信小程序tabbar的配置"><a href="#微信小程序tabbar的配置" class="headerlink" title="微信小程序tabbar的配置"></a>微信小程序tabbar的配置</h1><p>微信小程序与一般的web开发不一样，一般web端就是导航栏，然后配置路由，可以在制定的区域进行路由的跳转，但是微信小程序总是一个一个的页面跳转的，官方以及vant给的tabbar是底部导航，它的配置有一定的要求。</p>
+<p>配置的步骤：</p>
+<p>1.下载相关的UI库</p>
+<p>官方的WEUI组件库或者是有赞的vant weapp</p>
+<p>2.配置app.json</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">"pages": [</span><br><span class="line">    "pages/index/index",</span><br><span class="line">    "pages/appcenter/appcenter",</span><br><span class="line">    "pages/mySetting/mySetting",</span><br><span class="line">    "pages/check/check",</span><br><span class="line">    <span class="string">"custom-tab-bar/index"</span></span><br><span class="line">  ],</span><br><span class="line">  "tabBar": &#123;</span><br><span class="line">    "custom": true,</span><br><span class="line">    "color": "#7A7E83",</span><br><span class="line">    "selectedColor": "#3cc51f",</span><br><span class="line">    "borderStyle": "black",</span><br><span class="line">    "backgroundColor": "#ffffff",</span><br><span class="line">    "list": [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">"pagePath"</span>: <span class="string">"pages/appcenter/appcenter"</span>,</span><br><span class="line">        <span class="attr">"text"</span>: <span class="string">"应用中心"</span></span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">"pagePath"</span>: <span class="string">"pages/mySetting/mySetting"</span>,</span><br><span class="line">        <span class="attr">"text"</span>: <span class="string">"我的"</span></span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+
+<p><strong>需要注意的是pages中的路径需要和pagePath一致</strong></p>
+<p>3.在项目的根目录创建custom-tab-bar目录，创建index组件</p>
+<p>注意在该目录的json文件中检查是否有<code>&quot;components&quot;：true</code>的配置，在js的文件中Page改为Component，然后在这个目录中放上tabbar的组件，还有一些相关的操作。</p>
+<p><strong>注意在page中没有methods：{}这样的方法</strong></p>
+<p>tabbar不会自动的切换路径，需要用到tab的切换方法<code>wx.swtichTab</code></p>
+<h1 id="阿里云http升级为https"><a href="#阿里云http升级为https" class="headerlink" title="阿里云http升级为https"></a>阿里云http升级为https</h1><p>http升级为https需要ssl证书，如果是阿里云的域名，每年可以申请20张免费的ssl证书，但是保护一个域名，比如：<a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a>, 但是它的子域名比如<a href="http://www.ay.baidu.com就不会保护，如果是保护该域名下的所有子域名是需要付费的。" target="_blank" rel="noopener">www.ay.baidu.com就不会保护，如果是保护该域名下的所有子域名是需要付费的。</a></p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日志</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/01/17/21%E5%B9%B41%E6%9C%8817%E6%97%A5/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-21年1月12日" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/01/12/21%E5%B9%B41%E6%9C%8812%E6%97%A5/" target="_blank">21年1月12日</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/01/12/21%E5%B9%B41%E6%9C%8812%E6%97%A5/" class="archive-article-date">
+        <time datetime="2021-01-12T13:24:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-12</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="穿梭框加上排序功能"><a href="#穿梭框加上排序功能" class="headerlink" title="穿梭框加上排序功能"></a>穿梭框加上排序功能</h1><p>使用element UI中的el-transfer穿梭框设置表格头，但是其没有排序的功能，为此在右侧加上两个按钮用于调整表格头的显示</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">el-row</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">el-col</span> <span class="attr">:span</span>=<span class="string">"20"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">     <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"chuanSuo"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">el-transfer</span></span></span><br><span class="line"><span class="tag">       <span class="attr">filterable</span></span></span><br><span class="line"><span class="tag">       <span class="attr">filter-placeholder</span>=<span class="string">"请输入表头名称"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">:titles</span>=<span class="string">"['未选字段', '已选字段']"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">v-model</span>=<span class="string">"value"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">:data</span>=<span class="string">"data"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">target-order</span>=<span class="string">"unshirt"</span> </span></span><br><span class="line"><span class="tag">       @<span class="attr">right-check-change</span>=<span class="string">"rightCheck"</span> //穿梭框右侧选择改变时触发</span></span><br><span class="line"><span class="tag">      \&gt;</span><span class="tag">&lt;/<span class="name">el-transfer</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">​    <span class="tag">&lt;/<span class="name">el-col</span>&gt;</span></span><br><span class="line">​    <span class="tag">&lt;<span class="name">el-col</span> <span class="attr">:span</span>=<span class="string">"2"</span>&gt;</span></span><br><span class="line">​     <span class="tag">&lt;<span class="name">el-button</span></span></span><br><span class="line"><span class="tag">​     <span class="attr">round</span></span></span><br><span class="line"><span class="tag">​      <span class="attr">class</span>=<span class="string">"el-icon-arrow-up sort_button"</span></span></span><br><span class="line"><span class="tag">​      <span class="attr">:disabled</span>=<span class="string">"upDisAbled"</span></span></span><br><span class="line"><span class="tag">​      @<span class="attr">click</span>=<span class="string">"handleToUp"</span> </span></span><br><span class="line"><span class="tag">​      <span class="attr">style</span>=<span class="string">"margin-top:110px"</span></span></span><br><span class="line"><span class="tag">​     \&gt;</span><span class="tag">&lt;/<span class="name">el-button</span>&gt;</span></span><br><span class="line">​     <span class="tag">&lt;<span class="name">el-button</span></span></span><br><span class="line"><span class="tag">​     <span class="attr">round</span></span></span><br><span class="line"><span class="tag">​      <span class="attr">class</span>=<span class="string">"el-icon-arrow-down sort_button"</span></span></span><br><span class="line"><span class="tag">​      <span class="attr">:disabled</span>=<span class="string">"downDisAbled"</span></span></span><br><span class="line"><span class="tag">​      @<span class="attr">click</span>=<span class="string">"handleToDown"</span></span></span><br><span class="line"><span class="tag">​      <span class="attr">style</span>=<span class="string">"margin:10px 0"</span></span></span><br><span class="line"><span class="tag">​     \&gt;</span><span class="tag">&lt;/<span class="name">el-button</span>&gt;</span></span><br><span class="line">​    <span class="tag">&lt;/<span class="name">el-col</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">el-row</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>data中的变量</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">data() &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">   tempSelectionKeys: [], <span class="comment">//右侧选中的项的数组</span></span><br><span class="line">   upDisAbled: <span class="literal">true</span>,</span><br><span class="line">   downDisAbled: <span class="literal">true</span>,</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>methods</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//穿梭框右侧选中改变触发的事件</span></span><br><span class="line">  rightCheck(selectionKeys, changeKeys) &#123;</span><br><span class="line">   <span class="keyword">this</span>.tempSelectionKeys = selectionKeys;</span><br><span class="line">   <span class="keyword">if</span> (selectionKeys.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">this</span>.upDisAbled = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">this</span>.downDisAbled = <span class="literal">false</span>;</span><br><span class="line">   &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">this</span>.upDisAbled = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">this</span>.downDisAbled = <span class="literal">true</span>;</span><br><span class="line">   &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  handleToUp() &#123;</span><br><span class="line">   <span class="keyword">if</span> (<span class="keyword">this</span>.tempSelectionKeys.length &gt; <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="keyword">this</span>.$Message.warning(<span class="string">'仅支持单选调顺序'</span>);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">let</span> indexNum = <span class="number">0</span>;</span><br><span class="line">   <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.tempSelectionKeys.length; i++) &#123;</span><br><span class="line">    indexNum = <span class="keyword">this</span>.value.indexOf(<span class="keyword">this</span>.tempSelectionKeys[i]);</span><br><span class="line">    <span class="keyword">if</span> (indexNum &gt; <span class="number">0</span>) &#123;</span><br><span class="line">     <span class="keyword">this</span>.value.splice(</span><br><span class="line">      indexNum - <span class="number">1</span>,</span><br><span class="line">      <span class="number">0</span>,</span><br><span class="line">      <span class="keyword">this</span>.tempSelectionKeys[i]</span><br><span class="line">     );</span><br><span class="line">     <span class="keyword">this</span>.value.splice(indexNum + <span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">   &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  handleToDown() &#123;</span><br><span class="line">   <span class="keyword">if</span> (<span class="keyword">this</span>.tempSelectionKeys.length &gt; <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="keyword">this</span>.$Message.warning(<span class="string">'仅支持单选调顺序'</span>);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">let</span> indexNum = <span class="number">0</span>;</span><br><span class="line">   <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.tempSelectionKeys.length; i++) &#123;</span><br><span class="line">    indexNum = <span class="keyword">this</span>.value.indexOf(<span class="keyword">this</span>.tempSelectionKeys[i]);</span><br><span class="line">    <span class="keyword">if</span> (indexNum &gt; <span class="number">-1</span> &amp;&amp; indexNum != <span class="keyword">this</span>.value.length - <span class="number">1</span>) &#123;</span><br><span class="line">     <span class="keyword">this</span>.value.splice(</span><br><span class="line">      indexNum + <span class="number">2</span>,</span><br><span class="line">      <span class="number">0</span>,</span><br><span class="line">      <span class="keyword">this</span>.tempSelectionKeys[i]</span><br><span class="line">     );</span><br><span class="line">     <span class="keyword">this</span>.value.splice(indexNum, <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">   &#125;</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+
+<p>最后调整一下按钮的样式</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.sort_button</span>&#123;</span><br><span class="line">  <span class="attribute">padding</span>:<span class="number">10px</span>;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意事项</strong></p>
+<p>el-transfer的属性target-order值为original功能失效 </p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日志</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/01/12/21%E5%B9%B41%E6%9C%8812%E6%97%A5/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-21年1月7日" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/01/07/21%E5%B9%B41%E6%9C%887%E6%97%A5/" target="_blank">21年1月7日</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/01/07/21%E5%B9%B41%E6%9C%887%E6%97%A5/" class="archive-article-date">
+        <time datetime="2021-01-07T13:09:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-07</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>时隔1个多月再次更新日志，这段时间12月份去出差了，半个多月的时间，在那边既要开发软件，又要安装硬件，好好学习的时间比较少。最近遇到的问题做一下总结：</p>
+<h1 id="echarts加上百度地图制作驾驶舱"><a href="#echarts加上百度地图制作驾驶舱" class="headerlink" title="echarts加上百度地图制作驾驶舱"></a>echarts加上百度地图制作驾驶舱</h1><p>平台的驾驶舱需要用到地图，于是乎想到用echarts加上百度地图的方式解决，有几个问题：</p>
+<h3 id="echarts样式接口有问题"><a href="#echarts样式接口有问题" class="headerlink" title="echarts样式接口有问题"></a>echarts样式接口有问题</h3><p>echarts4.9.0版本的mapStyle接口无法生效，这个接口是通过json的配置文件去更改百度地图的样式，后来没办法使用了5.0.0新版本的echarts，这个接口是没有问题的。通过在百度地图开发的个性编辑器设定样式，又有一些问题比如：国境线没法设置样式等</p>
+<h3 id="百度地图图标去除"><a href="#百度地图图标去除" class="headerlink" title="百度地图图标去除"></a>百度地图图标去除</h3><p>通过在<code>index.html</code>文件</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="css">	<span class="selector-class">.anchorBL</span>&#123;</span></span><br><span class="line"><span class="css">		<span class="selector-tag">display</span><span class="selector-pseudo">:none</span>;</span></span><br><span class="line">	&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="echarts的相关配置"><a href="#echarts的相关配置" class="headerlink" title="echarts的相关配置"></a>echarts的相关配置</h3><p>这个配置并不是很好理解的，但是简单来说，echarts的配置内容通过设定维度显示的，具体还是要看说明文档</p>
+<h3 id="驾驶舱全屏"><a href="#驾驶舱全屏" class="headerlink" title="驾驶舱全屏"></a>驾驶舱全屏</h3><p>全屏只能通过人机交互操作，放在mounted里面会有报错</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">fullScreen() &#123;</span><br><span class="line">      <span class="keyword">let</span> element = <span class="built_in">document</span>.getElementById(<span class="string">"screen_container"</span>);</span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">this</span>.fullscreen) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">document</span>.exitFullscreen) &#123;</span><br><span class="line">          <span class="built_in">document</span>.exitFullscreen();</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">document</span>.webkitCancelFullScreen) &#123;</span><br><span class="line">          <span class="built_in">document</span>.webkitCancelFullScreen();</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">document</span>.mozCancelFullScreen) &#123;</span><br><span class="line">          <span class="built_in">document</span>.mozCancelFullScreen();</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">document</span>.msExitFullscreen) &#123;</span><br><span class="line">          <span class="built_in">document</span>.msExitFullscreen();</span><br><span class="line">        &#125;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (element.requestFullscreen) &#123;</span><br><span class="line">          element.requestFullscreen();</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (element.webkitRequestFullScreen) &#123;</span><br><span class="line">          element.webkitRequestFullScreen();</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (element.mozRequestFullScreen) &#123;</span><br><span class="line">          element.mozRequestFullScreen();</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (element.msRequestFullscreen) &#123;</span><br><span class="line">          <span class="comment">// IE11</span></span><br><span class="line">          element.msRequestFullscreen();</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">this</span>.fullscreen = !<span class="keyword">this</span>.fullscreen;</span><br><span class="line">    &#125;,</span><br></pre></td></tr></table></figure>
+
+<h3 id="驾驶舱自适应"><a href="#驾驶舱自适应" class="headerlink" title="驾驶舱自适应"></a>驾驶舱自适应</h3><p>各个dom在设置宽高的时候，要计算好百分比</p>
+<h1 id="pad移动端的相关问题"><a href="#pad移动端的相关问题" class="headerlink" title="pad移动端的相关问题"></a>pad移动端的相关问题</h1><h3 id="全屏自适应"><a href="#全屏自适应" class="headerlink" title="全屏自适应"></a>全屏自适应</h3><p>同样在做全屏的时候，事先以为是800*600的宽高像素比，结果就是会有留白，最后测试实际的宽高比是915*686,通过@media screen媒体查询设置html的font-size，注意一定要加上<code>！important</code>,否则优先级不够，然后在需要响应式的地方用rem单位，比如设置的根元素font-size为16px，有一个div的宽为32px，那么可以改成2rem</p>
+<h3 id="有些字体不显示"><a href="#有些字体不显示" class="headerlink" title="有些字体不显示"></a>有些字体不显示</h3><p>不同的设备，有不同的字体库，没有匹配的字体库的时候不会显示，还遇到过继承的字体大小没有生效的问题，最后通过给他加上字体大小才解决的</p>
+<h3 id="keep-alive"><a href="#keep-alive" class="headerlink" title="keep-alive"></a>keep-alive</h3><p>使用vue的keep-alive，缓存页面，顾名思义就是页面只会加载第一次，路由跳转过来的时候就不会重新加载了，注意在created、mounted等生命周期函数中操作就不会再一次生效了，这需要有<code>activated</code>路由跳转过来的钩子函数，当然还有<code>deactivated</code>路由跳转走的钩子函数，特别的注意像是定时的一些操作需要再一次放在<code>activated</code>中</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">activated()&#123;</span><br><span class="line">    <span class="keyword">const</span> that = <span class="keyword">this</span></span><br><span class="line">    <span class="keyword">this</span>.getmenu()</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.menustatus === <span class="number">-1</span>) &#123;</span><br><span class="line">          <span class="keyword">this</span>.getdeviceInfoList1()</span><br><span class="line">          <span class="keyword">this</span>.setbgcolor()</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">this</span>.menustatus === <span class="number">0</span>) &#123;</span><br><span class="line">          <span class="keyword">this</span>.breakDownDeviceList()</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">this</span>.menustatus === <span class="number">1</span>) &#123;</span><br><span class="line">          <span class="keyword">this</span>.materialMissingList()</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">this</span>.menustatus === <span class="number">2</span>) &#123;</span><br><span class="line">          <span class="keyword">this</span>.runDeviceList()</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">this</span>.menustatus === <span class="number">3</span>) &#123;</span><br><span class="line">          <span class="keyword">this</span>.productPlanAdviceList()</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">this</span>.menustatus === <span class="number">4</span>) &#123;</span><br><span class="line">          <span class="keyword">this</span>.freeAdviceList()</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">this</span>.menustatus === <span class="number">5</span>) &#123;</span><br><span class="line">          <span class="keyword">this</span>.nomaintainList()</span><br><span class="line">        &#125;</span><br><span class="line">    that.getdeviceInfoListbyInterval()</span><br><span class="line">    <span class="built_in">document</span>.addEventListener(<span class="string">'keydown'</span>, that.readCardId)</span><br><span class="line">  &#125;,</span><br><span class="line">  deactivated()&#123;</span><br><span class="line">    <span class="keyword">const</span> that = <span class="keyword">this</span></span><br><span class="line">    <span class="built_in">document</span>.removeEventListener(<span class="string">'keydown'</span>, that.readCardId)</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+
+<h1 id="管理员端的报错与处理"><a href="#管理员端的报错与处理" class="headerlink" title="管理员端的报错与处理"></a>管理员端的报错与处理</h1><p>报错大致分为几类</p>
+<p>1.api特性报错，比如全屏只能人点击全屏，否则报错</p>
+<p>2.返回的接口没有该字段，需要先判断有没有这个字段，再赋值</p>
+<p>3.一些UI组件api的数据类型，默认值需要在data中设置</p>
+<p>4.修改bug的时候，只是把视图层的DOM去掉了，但是没有把一些对DOM的操作去掉</p>
+<p>……</p>
+<h1 id="按钮重复点击的问题"><a href="#按钮重复点击的问题" class="headerlink" title="按钮重复点击的问题"></a>按钮重复点击的问题</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Vue.directive(<span class="string">'preventReClick'</span>, &#123;</span><br><span class="line">  inserted: <span class="function"><span class="keyword">function</span> (<span class="params">el, binding</span>) </span>&#123;</span><br><span class="line">      el.addEventListener(<span class="string">'click'</span>, () =&gt; &#123;</span><br><span class="line">          <span class="keyword">if</span> (!el.disabled) &#123;</span><br><span class="line">              el.disabled = <span class="literal">true</span></span><br><span class="line">              setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">                  el.disabled = <span class="literal">false</span></span><br><span class="line">              &#125;, binding.value || <span class="number">3000</span>)</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>通过在html标签中加上<code>v-preventReClick</code>可以防止重复点击，这里默认为3s，也可以设置，但是经过测试，这方法只能用在button标签上，对其他的div什么的无效</p>
+<p>后来就只能用最笨的办法</p>
+<p>本地设置一个<code>delay=true</code></p>
+<p>在点击的时候<code>@click=&quot;handleClick&quot;</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">handleClick()&#123;</span><br><span class="line">	<span class="keyword">if</span>(<span class="keyword">this</span>.delay===<span class="literal">false</span>)&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">'不能发送点击事件'</span>)</span><br><span class="line">	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.clickMethod()</span><br><span class="line">	&#125;</span><br><span class="line">&#125;,</span><br><span class="line">clickMethod()&#123;</span><br><span class="line">	<span class="keyword">this</span>.delay=<span class="literal">false</span>;</span><br><span class="line">	setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.delay=<span class="literal">true</span></span><br><span class="line">	&#125;,<span class="number">3000</span>);</span><br><span class="line">	<span class="keyword">this</span>.axios......</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="平台ifarme的使用"><a href="#平台ifarme的使用" class="headerlink" title="平台ifarme的使用"></a>平台ifarme的使用</h1><p>因为要做跳转，但是不能直接window.open挑转，于是用到了ifarme这个标签</p>
+<p><code>&lt;iframe src=&quot;http://需要的地址&quot; scrolling=&quot;no&quot; frameborder=&quot;0&quot; width=&quot;100%&quot; height=&quot;100%&quot;&gt;&lt;/iframe&gt;</code></p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日志</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/01/07/21%E5%B9%B41%E6%9C%887%E6%97%A5/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-20年11月25日" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -764,375 +1170,6 @@
 
 
   
-    <article id="post-20年11月2日" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/11/02/20%E5%B9%B411%E6%9C%882%E6%97%A5/" target="_blank">20年11月2日</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/11/02/20%E5%B9%B411%E6%9C%882%E6%97%A5/" class="archive-article-date">
-        <time datetime="2020-11-02T13:55:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-02</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="vue异步数据传对象的问题"><a href="#vue异步数据传对象的问题" class="headerlink" title="vue异步数据传对象的问题"></a>vue异步数据传对象的问题</h1><p>异步vue中父传子对象的时候，因为vue中监听对象的一个属性是不可枚举的，导致不能用点或者是中括号取值。</p>
-<p>解决的办法：</p>
-<p>自己使用的是watch监听，不过页面的渲染有点延迟，传过来的数据先<code>JSON.stringity</code>，在子组件取到后<code>JSON.parse</code></p>
-<p><a href="https://www.cnblogs.com/epines/p/9518745.html" target="_blank" rel="noopener">https://www.cnblogs.com/epines/p/9518745.html</a></p>
-<h1 id="vue中v-if判断显示闪烁的问题"><a href="#vue中v-if判断显示闪烁的问题" class="headerlink" title="vue中v-if判断显示闪烁的问题"></a>vue中v-if判断显示闪烁的问题</h1><p>v-if直接判断true或者false会有闪烁的问题，但是在v-if=“a!==null”这样的形式的时候就没有问题了。</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日志</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/11/02/20%E5%B9%B411%E6%9C%882%E6%97%A5/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-20年10月30日" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/10/30/20%E5%B9%B410%E6%9C%8830%E6%97%A5/" target="_blank">20年10月30日</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/10/30/20%E5%B9%B410%E6%9C%8830%E6%97%A5/" class="archive-article-date">
-        <time datetime="2020-10-30T12:34:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-30</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="事件销毁"><a href="#事件销毁" class="headerlink" title="事件销毁"></a>事件销毁</h1><p>在<code>vue</code>处理<code>document.onkeydown</code>事件的时候需要把该事件在具体的某个页面进行实现，否则在<code>document</code>中是全局触发的，解决这个问题的方法</p>
-<p><strong>方法</strong>：</p>
-<p>用<code>vue</code>的生命周期<code>destoryed</code>销毁该监听事件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">destroyed()&#123;</span><br><span class="line">	const that&#x3D;this;</span><br><span class="line">	document.removeEventListener(&#39;keydown&#39;,that.readCardId)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日志</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/10/30/20%E5%B9%B410%E6%9C%8830%E6%97%A5/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-vue单文件组件与lock文件" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/10/29/vue%E5%8D%95%E6%96%87%E4%BB%B6%E7%BB%84%E4%BB%B6%E4%B8%8Elock%E6%96%87%E4%BB%B6/" target="_blank">vue单文件组件与lock文件</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/10/29/vue%E5%8D%95%E6%96%87%E4%BB%B6%E7%BB%84%E4%BB%B6%E4%B8%8Elock%E6%96%87%E4%BB%B6/" class="archive-article-date">
-        <time datetime="2020-10-29T13:08:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-29</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="vue单文件组件"><a href="#vue单文件组件" class="headerlink" title="vue单文件组件"></a>vue单文件组件</h1><p>格式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">	&#x2F;&#x2F;html标签</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  	&#x2F;&#x2F;状态数据，函数方法</span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line">&lt;style scoped&gt;</span><br><span class="line">    &#x2F;&#x2F;样式</span><br><span class="line">&lt;&#x2F;style&gt;</span><br></pre></td></tr></table></figure>
-
-<p><strong>其中的scoped的作用是css的样式仅限使用于当前组件的元素</strong></p>
-<p><strong>在style标签中指定lang属性的值可以使用scss或者less等预编译语言</strong></p>
-<h1 id="锁文件"><a href="#锁文件" class="headerlink" title="锁文件"></a>锁文件</h1><p>锁文件的主要作用是在于锁定每一个安装的依赖项的版本，确保不会获得不良的依赖，避免开发人员意外的更新或者是更改依赖，导致糟糕的情况发生</p>
-<h3 id="yarn-lock与package-lock-json的区别"><a href="#yarn-lock与package-lock-json的区别" class="headerlink" title="yarn.lock与package-lock.json的区别"></a>yarn.lock与package-lock.json的区别</h3><p>用npm包管理器可以生成package-lock.json的锁文件，但是它<strong>速度慢稳定性差</strong>，yarn.lock文件是yarn包管理器生成的文件</p>
-<h4 id="yarn的优点"><a href="#yarn的优点" class="headerlink" title="yarn的优点"></a>yarn的优点</h4><h6 id="速度快"><a href="#速度快" class="headerlink" title="速度快"></a>速度快</h6><p>1.并行安装（同步执行所有的任务）2.离线模式（如果重复安装直接从缓存中提取）</p>
-<h6 id="安装版本统一"><a href="#安装版本统一" class="headerlink" title="安装版本统一"></a>安装版本统一</h6><p>就是yarn.lock</p>
-<h6 id="更好的语义化"><a href="#更好的语义化" class="headerlink" title="更好的语义化"></a>更好的语义化</h6><p>比如yarn add命令</p>
-<h3 id="yarn-lock与package-lock-json相互转换"><a href="#yarn-lock与package-lock-json相互转换" class="headerlink" title="yarn.lock与package-lock.json相互转换"></a>yarn.lock与package-lock.json相互转换</h3><p>使用synp转化</p>
-<h4 id="安装synp"><a href="#安装synp" class="headerlink" title="安装synp"></a>安装synp</h4><p><code>npm install -g synp</code></p>
-<h5 id="yarn-lock-gt-package-lock-json"><a href="#yarn-lock-gt-package-lock-json" class="headerlink" title="yarn.lock==&gt;package-lock.json"></a>yarn.lock==&gt;package-lock.json</h5><p><code>yarn</code>确保node_modules存在并更新</p>
-<p><code>synp --source-file /path/to/yarn.lock</code>将会创建/path/to/yarn.lock文件</p>
-<h5 id="package-lock-json-gt-yarn-lock"><a href="#package-lock-json-gt-yarn-lock" class="headerlink" title="package-lock.json==&gt;yarn.lock"></a>package-lock.json==&gt;yarn.lock</h5><p><code>npm install</code>确保node_module存在并更新</p>
-<p><code>synp --source-file /path/to/package-lock.json</code></p>
-<p><strong>注意</strong>：如果只是需要从package-lock.json==&gt;yarn.lock，从1.7.0开始yarn从npm本机导入其依赖树不需要外部的工具，使用<code>yarn import</code>命令</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/10/29/vue%E5%8D%95%E6%96%87%E4%BB%B6%E7%BB%84%E4%BB%B6%E4%B8%8Elock%E6%96%87%E4%BB%B6/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-7月4日" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/07/04/7%E6%9C%884%E6%97%A5/" target="_blank">7月4日</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/07/04/7%E6%9C%884%E6%97%A5/" class="archive-article-date">
-        <time datetime="2020-07-04T13:35:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-04</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>好久没有更新了，因为工作的原因，我总结一下自己现在有哪些技术栈把，首先是html、css、JS，其中css中的canvas比较不熟悉，可视化有兴趣的可以去学习一下，之后我学习了vue和react，可以说是全家桶吧，包括了router和redux、vuex，还有hook。但是自己实际打的代码太少了，要多多的练习一下。个人之前也学了一些webpack的基本配置还有git的操作。还学了sass预处理器，包括了许多插件的使用。像是node.js最近刚开始学，但是感觉之前的东西抓的不是很熟练，因此有想要去放一放。</p>
-<p>​    这是我最近的想法，一定要记住的是，要永远保持一颗学徒的心吧，实际的项目开发才是最为关键的。加油！</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日志</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/07/04/7%E6%9C%884%E6%97%A5/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/4/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/6/">Next &amp;raquo;</a>
@@ -1270,19 +1307,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1290,15 +1315,27 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">react native</a>
+                <a href="javascript:void(0)" class="js-tag color1">react</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">react</a>
+                <a href="javascript:void(0)" class="js-tag color3">react native</a>
               </li>
              
               <li class="article-tag-list-item">
