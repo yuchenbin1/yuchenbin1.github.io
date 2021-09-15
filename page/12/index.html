@@ -202,6 +202,299 @@
             
 
   
+    <article id="post-图片与方法的惰性载入" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/03/18/%E5%9B%BE%E7%89%87%E4%B8%8E%E6%96%B9%E6%B3%95%E7%9A%84%E6%83%B0%E6%80%A7%E8%BD%BD%E5%85%A5/" target="_blank">图片与方法的惰性载入</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/03/18/%E5%9B%BE%E7%89%87%E4%B8%8E%E6%96%B9%E6%B3%95%E7%9A%84%E6%83%B0%E6%80%A7%E8%BD%BD%E5%85%A5/" class="archive-article-date">
+        <time datetime="2020-03-18T09:16:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-18</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="图片的惰性载入"><a href="#图片的惰性载入" class="headerlink" title="图片的惰性载入"></a>图片的惰性载入</h1><p>即推迟加载，用到的时候再加载，这样做可以使html页面快速载入，而图片最后载入</p>
+<p>通过先给所有需要懒加载的图片的src属性值设置一个同样的地址（一般为loading载入中样式的图片），这样载入第一张loading样式图后，会放在缓存中，这样读取快，随后真实图片的地址放在另一个属性中（例如data-origin），当满足条件时（如在可视范围内）利用事件监听函数把data-origin的属性值赋给src属性值(直接指向不太好，最好等图片加载完后指向)</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul&gt;</span><br><span class="line">  &lt;li <span class="class"><span class="keyword">class</span></span>=<span class="string">'lazy'</span>&gt;<span class="xml"><span class="tag">&lt;<span class="name">img</span> <span class="attr">data-origin</span>=<span class="string">'images/0.jpg'</span> <span class="attr">src</span>=<span class="string">'images/loading.gif'</span>/&gt;</span></span>&lt;<span class="regexp">/li&gt;</span></span><br><span class="line"><span class="regexp">  &lt;li class='lazy'&gt;&lt;img data-origin='images/</span><span class="number">1.</span>jpg<span class="string">' src='</span>images/loading.gif<span class="string">'/&gt;&lt;/li&gt;</span></span><br><span class="line"><span class="string">  &lt;li class='</span>lazy<span class="string">'&gt;&lt;img data-origin='</span>images/<span class="number">2.</span>jpg<span class="string">' src='</span>images/loading.gif<span class="string">'/&gt;&lt;/li&gt;</span></span><br><span class="line"><span class="string">  &lt;li class='</span>lazy<span class="string">'&gt;&lt;img data-origin='</span>images/<span class="number">3.</span>jpg<span class="string">' src='</span>images/loading.gif<span class="string">'/&gt;&lt;/li&gt;</span></span><br><span class="line"><span class="string">  &lt;li class='</span>lazy<span class="string">'&gt;&lt;img data-origin='</span>images/<span class="number">4.</span>jpg<span class="string">' src='</span>images/loading.gif<span class="string">'/&gt;&lt;/li&gt;</span></span><br><span class="line"><span class="string">  &lt;li class='</span>lazy<span class="string">'&gt;&lt;img data-origin='</span>images/<span class="number">5.</span>jpg<span class="string">' src='</span>images/loading.gif<span class="string">'/&gt;&lt;/li&gt;</span></span><br><span class="line"><span class="string">  &lt;li class='</span>lazy<span class="string">'&gt;&lt;img data-origin='</span>images/<span class="number">6.</span>jpg<span class="string">' src='</span>images/loading.gif<span class="string">'/&gt;&lt;/li&gt;</span></span><br><span class="line"><span class="string">  &lt;li class='</span>lazy<span class="string">'&gt;&lt;img data-origin='</span>images/<span class="number">7.</span>jpg<span class="string">' src='</span>images/loading.gif<span class="string">'/&gt;&lt;/li&gt;</span></span><br><span class="line"><span class="string">  &lt;li class='</span>lazy<span class="string">'&gt;&lt;img data-origin='</span>images/<span class="number">8.</span>jpg<span class="string">' src='</span>images/loading.gif<span class="string">'/&gt;&lt;/li&gt;</span></span><br><span class="line"><span class="string">  &lt;li class='</span>lazy<span class="string">'&gt;&lt;img data-origin='</span>images/<span class="number">9.</span>jpg<span class="string">' src='</span>images/loading.gif<span class="string">'/&gt;&lt;/li&gt;</span></span><br><span class="line"><span class="string">  &lt;li class='</span>lazy<span class="string">'&gt;&lt;img data-origin='</span>images/<span class="number">10.</span>jpg<span class="string">' src='</span>images/loading.gif<span class="string">'/&gt;&lt;/li&gt;</span></span><br><span class="line"><span class="string">  &lt;li class='</span>lazy<span class="string">'&gt;&lt;img data-origin='</span>images/<span class="number">11.</span>jpg<span class="string">' src='</span>images/loading.gif<span class="string">'/&gt;&lt;/li&gt;</span></span><br><span class="line"><span class="string">  &lt;li class='</span>lazy<span class="string">'&gt;&lt;img data-origin='</span>images/<span class="number">12.</span>jpg<span class="string">' src='</span>images/loading.gif<span class="string">'/&gt;&lt;/li&gt;</span></span><br><span class="line"><span class="string">&lt;/ul&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">init</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> images = <span class="built_in">document</span>.images;</span><br><span class="line">  <span class="comment">// 加载首屏图片</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, len = images.length; i &lt; len; i++) &#123;</span><br><span class="line">    <span class="keyword">var</span> obj = images[i];</span><br><span class="line">    <span class="comment">// 如果在可视区域并且还没被加载过</span></span><br><span class="line">    <span class="keyword">if</span> (obj.getBoundingClientRect().top &lt; <span class="built_in">document</span>.documentElement.clientHeight &amp;&amp; !obj.isLoad) &#123;</span><br><span class="line">      obj.isLoad = <span class="literal">true</span>;</span><br><span class="line">      <span class="comment">// 先调用 HTML5 方法</span></span><br><span class="line">      <span class="keyword">if</span> (obj.dataset) </span><br><span class="line">        imageLoaded(obj, obj.dataset.origin);</span><br><span class="line">      <span class="keyword">else</span> </span><br><span class="line">        imageLoaded(obj, obj.getAttribute(<span class="string">'data-origin'</span>));</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;  <span class="comment">// 假设图片标签在 HTML 中的顺序和实际页面中顺序一致</span></span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">imageLoaded</span>(<span class="params">obj, src</span>) </span>&#123;<span class="comment">//将真实的图片地址指向元素</span></span><br><span class="line">  <span class="keyword">var</span> img = <span class="keyword">new</span> Image();</span><br><span class="line">  img.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    obj.src = src;</span><br><span class="line">  &#125;;</span><br><span class="line">  img.src = src;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 如果直接将 data-original 属性值指向图片的 src 属性的话，看到的图片可能会一段一段出现，而先将图片完全加载，然后再赋值使图片出现的话，体验就好多了 </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onscroll = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  lazyload();</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">lazyload</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> lazy = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">var</span> images = <span class="built_in">document</span>.images;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, len = images.length; i &lt; len; i++) &#123;</span><br><span class="line">    <span class="keyword">var</span> obj = images[i];</span><br><span class="line">    <span class="keyword">if</span> (obj.getBoundingClientRect().top - lazy &lt; <span class="built_in">document</span>.documentElement.clientHeight &amp;&amp; !obj.isLoad) &#123;</span><br><span class="line">      obj.isLoad = <span class="literal">true</span>;</span><br><span class="line">      <span class="keyword">if</span> (obj.dataset) </span><br><span class="line">        imageLoaded(obj, obj.dataset.original);</span><br><span class="line">      <span class="keyword">else</span> </span><br><span class="line">        imageLoaded(obj, obj.getAttribute(<span class="string">'data-original'</span>));</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 惰性加载虽然好处多，但是也有一个 “非致命” 的缺点，影响 SEO。因为图片都被替换成假的图片，所以会影响图片的收录，<strong>所以这功能不建议在详情页使用</strong> </p>
+<h1 id="方法的惰性载入"><a href="#方法的惰性载入" class="headerlink" title="方法的惰性载入"></a>方法的惰性载入</h1><p>即重复判断的条件，无需再判断</p>
+<p>在判断条件的时候返回一个新的函数</p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/03/18/%E5%9B%BE%E7%89%87%E4%B8%8E%E6%96%B9%E6%B3%95%E7%9A%84%E6%83%B0%E6%80%A7%E8%BD%BD%E5%85%A5/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-一个简单的时钟" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/03/15/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E6%97%B6%E9%92%9F/" target="_blank">一个简单的时钟</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/03/15/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E6%97%B6%E9%92%9F/" class="archive-article-date">
+        <time datetime="2020-03-15T07:19:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-15</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="一个简单的时钟"><a href="#一个简单的时钟" class="headerlink" title="一个简单的时钟"></a>一个简单的时钟</h1><p>由本地时间控制的指针时钟，用的是最原始的代码，利用setInterval方法每过一秒读取一次本地时间，随之改变指针角度的方法</p>
+<p>代码如下：</p>
+<p>index.html</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"zh"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">	&lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">	&lt;meta name=<span class="string">"viewport"</span> content=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span><br><span class="line">	&lt;meta http-equiv=<span class="string">"X-UA-Compatible"</span> content=<span class="string">"ie=edge"</span>&gt;</span><br><span class="line">	&lt;title&gt;&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">	&lt;link rel="stylesheet" href="./</span>style.css<span class="string">"&gt;</span></span><br><span class="line"><span class="string">&lt;/head&gt;</span></span><br><span class="line"><span class="string">&lt;body&gt;</span></span><br><span class="line"><span class="string">	&lt;div class="</span>outer<span class="string">"&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>num one<span class="string">"&gt;1&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>num two<span class="string">"&gt;2&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>num three<span class="string">"&gt;3&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>num four<span class="string">"&gt;4&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>num five<span class="string">"&gt;5&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>num six<span class="string">"&gt;6&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>num seven<span class="string">"&gt;7&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>num eight<span class="string">"&gt;8&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>num nine<span class="string">"&gt;9&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>num ten<span class="string">"&gt;10&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>num eleven<span class="string">"&gt;11&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>num twelve<span class="string">"&gt;12&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>origin<span class="string">"&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;div class="</span>pointer<span class="string">"&gt;	</span></span><br><span class="line"><span class="string">			&lt;div class="</span>hour<span class="string">"&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">			&lt;div class="</span>minute<span class="string">"&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">			&lt;div class="</span>second<span class="string">"&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">		&lt;/div&gt;</span></span><br><span class="line"><span class="string">	&lt;/div&gt;</span></span><br><span class="line"><span class="string">	&lt;script src="</span>./index.js<span class="string">"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="string">&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>style.css</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br></pre></td><td class="code"><pre><span class="line">*&#123;</span><br><span class="line">	margin :<span class="number">0</span>;</span><br><span class="line">	padding:<span class="number">0</span>;</span><br><span class="line">	font-family: <span class="string">"microsoft yahei"</span>,<span class="string">"microsoft sans serif"</span>;</span><br><span class="line">	font-size: <span class="number">45</span>px;</span><br><span class="line">	box-sizing: border-box;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.outer&#123;</span><br><span class="line">	width:<span class="number">650</span>px;</span><br><span class="line">	height:<span class="number">650</span>px;</span><br><span class="line">	border:solid <span class="number">5</span>px black;</span><br><span class="line">	position:absolute;</span><br><span class="line">	top:<span class="number">50</span>%;</span><br><span class="line">	left:<span class="number">50</span>%;</span><br><span class="line">	transform: translate(<span class="number">-50</span>%,<span class="number">-50</span>%);</span><br><span class="line">	border-radius: <span class="number">50</span>%;</span><br><span class="line">	background-color: #dfdfcd;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.num&#123;</span><br><span class="line">	display: block;</span><br><span class="line">	width:<span class="number">70</span>px;</span><br><span class="line">	height:<span class="number">70</span>px;</span><br><span class="line">	color:#aa0000;</span><br><span class="line">	position: absolute;</span><br><span class="line">	top:<span class="number">50</span>%;</span><br><span class="line">	left:<span class="number">50</span>%;</span><br><span class="line">	margin-top: <span class="number">-35</span>px;</span><br><span class="line">	margin-left: <span class="number">-35</span>px;</span><br><span class="line">	text-align: center;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.num.one&#123;</span><br><span class="line">	transform: rotate(<span class="number">30</span>deg) translateY(<span class="number">-290</span>px);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.num.two&#123;</span><br><span class="line">	transform: rotate(<span class="number">60</span>deg) translateY(<span class="number">-290</span>px);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.num.three&#123;</span><br><span class="line">	transform: rotate(<span class="number">90</span>deg) translateY(<span class="number">-290</span>px);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.num.four&#123;</span><br><span class="line">	transform: rotate(<span class="number">120</span>deg) translateY(<span class="number">-290</span>px);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.num.five&#123;</span><br><span class="line">	transform: rotate(<span class="number">150</span>deg) translateY(<span class="number">-290</span>px);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.num.six&#123;</span><br><span class="line">	transform: rotate(<span class="number">180</span>deg) translateY(<span class="number">-290</span>px);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.num.seven&#123;</span><br><span class="line">	transform: rotate(<span class="number">210</span>deg) translateY(<span class="number">-290</span>px);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.num.eight&#123;</span><br><span class="line">	transform: rotate(<span class="number">240</span>deg) translateY(<span class="number">-290</span>px);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.num.nine&#123;</span><br><span class="line">	transform: rotate(<span class="number">270</span>deg) translateY(<span class="number">-290</span>px);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.num.ten&#123;</span><br><span class="line">	transform: rotate(<span class="number">300</span>deg) translateY(<span class="number">-290</span>px);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.num.eleven&#123;</span><br><span class="line">	transform: rotate(<span class="number">330</span>deg) translateY(<span class="number">-290</span>px);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.num.twelve&#123;</span><br><span class="line">	transform: translateY(<span class="number">-290</span>px);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">.origin&#123;</span><br><span class="line">	width: <span class="number">50</span>px;</span><br><span class="line">	height: <span class="number">50</span>px;</span><br><span class="line">	position: absolute;</span><br><span class="line">	top:<span class="number">50</span>%;</span><br><span class="line">	left:<span class="number">50</span>%;</span><br><span class="line">	background-color: #AA0000;</span><br><span class="line">	border-radius: <span class="number">50</span>%;</span><br><span class="line">	margin-top: <span class="number">-25</span>px;</span><br><span class="line">	margin-left:<span class="number">-25</span>px;</span><br><span class="line">	z-index: <span class="number">500</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 指针部分 */</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">.hour&#123;</span><br><span class="line">	width:<span class="number">32</span>px;</span><br><span class="line">	height: <span class="number">200</span>px;</span><br><span class="line">	background-color: #ff0000;</span><br><span class="line">	border-radius: <span class="number">40</span>px;</span><br><span class="line">	position: absolute;</span><br><span class="line">	top:<span class="number">50</span>%;</span><br><span class="line">	left:<span class="number">50</span>%;</span><br><span class="line">	margin-top:<span class="number">-200</span>px;</span><br><span class="line">	margin-left: <span class="number">-16</span>px;</span><br><span class="line">	transform-origin:center bottom;</span><br><span class="line">	z-index: <span class="number">100</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.minute&#123;</span><br><span class="line">	width:<span class="number">25</span>px;</span><br><span class="line">	height:<span class="number">230</span>px;</span><br><span class="line">	background-color: aqua;</span><br><span class="line">	border-radius: <span class="number">30</span>px;</span><br><span class="line">	position: absolute;</span><br><span class="line">	top:<span class="number">50</span>%;</span><br><span class="line">	left:<span class="number">50</span>%;</span><br><span class="line">	margin-top: <span class="number">-230</span>px;</span><br><span class="line">	margin-left: <span class="number">-12.5</span>px;</span><br><span class="line">	transform-origin:center bottom;</span><br><span class="line">	z-index: <span class="number">50</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.second&#123;</span><br><span class="line">	width:<span class="number">15</span>px;</span><br><span class="line">	height:<span class="number">250</span>px;</span><br><span class="line">	background-color: chartreuse;</span><br><span class="line">	border-radius: <span class="number">20</span>px;</span><br><span class="line">	position: absolute;</span><br><span class="line">	top:<span class="number">50</span>%;</span><br><span class="line">	left:<span class="number">50</span>%;</span><br><span class="line">	margin-top:<span class="number">-250</span>px;</span><br><span class="line">	margin-left:<span class="number">-7.5</span>px;</span><br><span class="line">	transform-origin:center bottom;</span><br><span class="line">	z-index: <span class="number">10</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>index.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>.setInterval(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">	</span><br><span class="line"><span class="keyword">var</span> now=<span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line"><span class="keyword">var</span> h=now.getHours();</span><br><span class="line"><span class="keyword">var</span> m=now.getMinutes();</span><br><span class="line"><span class="keyword">var</span> s=now.getSeconds();</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> hourEl=<span class="built_in">document</span>.querySelector(<span class="string">".hour"</span>);</span><br><span class="line"><span class="keyword">const</span> minuteEl=<span class="built_in">document</span>.querySelector(<span class="string">".minute"</span>);</span><br><span class="line"><span class="keyword">const</span> secondEl=<span class="built_in">document</span>.querySelector(<span class="string">".second"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(h&lt;=<span class="number">12</span>)&#123;</span><br><span class="line">	<span class="keyword">var</span> angleH=(h+m/<span class="number">60</span>+s/<span class="number">3600</span>)*<span class="number">30</span>;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> angleH=((h+m/<span class="number">60</span>+s/<span class="number">3600</span>)<span class="number">-12</span>)*<span class="number">30</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> angleM=(m+s/<span class="number">60</span>)*<span class="number">6</span>;</span><br><span class="line">	<span class="keyword">var</span> angleS=s*<span class="number">6</span>;</span><br><span class="line">	hourEl.style.transform=<span class="string">"rotate("</span>+angleH+<span class="string">"deg)"</span>;<span class="comment">//为什么一定要加+好呢</span></span><br><span class="line">	minuteEl.style.transform=<span class="string">"rotate("</span>+angleM+<span class="string">"deg)"</span>;</span><br><span class="line">	secondEl.style.transform=<span class="string">"rotate("</span>+angleS+<span class="string">"deg)"</span>;</span><br><span class="line">&#125;,<span class="number">1000</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="代码链接"><a href="#代码链接" class="headerlink" title="代码链接"></a><a href="https://github.com/yuchenbin1/web-design" target="_blank" rel="noopener">代码链接</a></h3><p>在制作过程中遇到的问题：</p>
+<p>主要集中在js中，（1） 为什么用变量去更改css中的样式，变量两边要用+并且用引号括起来</p>
+<p>（2）在改变样式过程中我用obj.style.transform改变transform成功了，而我想使用obj.setAttribute(“transform”,……)时失败了</p>
+<p>这两个问题我希望我以后知识多了之后能明白</p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">页面项目</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/03/15/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E6%97%B6%E9%92%9F/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-客户端javascript时间线" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/03/14/%E5%AE%A2%E6%88%B7%E7%AB%AFjavascript%E6%97%B6%E9%97%B4%E7%BA%BF/" target="_blank">客户端javascript时间线</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/03/14/%E5%AE%A2%E6%88%B7%E7%AB%AFjavascript%E6%97%B6%E9%97%B4%E7%BA%BF/" class="archive-article-date">
+        <time datetime="2020-03-14T11:15:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-14</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="客户端javascript时间线"><a href="#客户端javascript时间线" class="headerlink" title="客户端javascript时间线"></a>客户端javascript时间线</h1><ol>
+<li>浏览器先创建Document对象，并开始解析Web页面，解析器先解析HTML元素以及之后的元素（element）对象和文本（text）节点到文档中。document.readystate值为”loading“(读取中)。</li>
+<li>若解析器没有遇到async（异步）和defer（推迟）元素时，元素添加到文档中，并执行行内或外部脚本，这是若脚本在下载或者执行是，解析器是停止的。这样的脚本可以用document.write()来把文本插入到输入流中。当解析器恢复时这些文本已经成为文档内容了。同步脚本可以看到自己和之前的文档内容。</li>
+<li>当遇到async（异步）的script元素时，开始下载脚本，但解析器继续解析，脚本下完后会尽快执行，可以看到自己和之前的文档。禁止使用document.write()把文本插入到输入流。</li>
+<li>当这些都解析完成，document.readystate值为”interactive”(交互式的)。</li>
+<li>所有defer（推迟）的script元素按顺序执行，当然异步脚本可能没下载完，在这个时间执行<strong>（当script元素中既有defer又有async一般会忽略defer）</strong>，这些defer脚本可以访问完整的文档树，禁止使用document.write()把文本插入到输入流。</li>
+<li>浏览器在Document对象上触发DOMContentLoaded事件时，标志程序从同步脚本执行阶段到异步事件驱动阶段，当然这个时间异步脚本可能没有下载或执行完。</li>
+<li>文档解析完成，包括异步脚本完成载入和执行，<strong>但是浏览器可能还在等待其他内容（图片，视频等）的载入</strong>，这时document.readystate值为“complete”（完整的），web浏览器触发Window对象上的load事件。</li>
+<li>以后，可以调用异步事件了，如用户输入事件、网络事件、计数器事件等。</li>
+</ol>
+<p><strong>这条时间线没有指明什么时候文档开始对用户可见或什么时候web浏览器必须响应用户输入事件，有时文档很长或者网速较慢时，在脚本执行之前，浏览器会先绚染一部分文档，能允许用户开始和页面产生一些交互，这时的用户输入事件可能在程序执行事件驱动阶段开始之前触发。</strong></p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/03/14/%E5%AE%A2%E6%88%B7%E7%AB%AFjavascript%E6%97%B6%E9%97%B4%E7%BA%BF/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-响应式页面布局" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1245,411 +1538,6 @@
 
 
   
-    <article id="post-throw、with、debugger语句和use-strict" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/03/07/throw%E3%80%81with%E3%80%81debugger%E8%AF%AD%E5%8F%A5%E5%92%8Cuse-strict/" target="_blank">throw、with、debugger语句、异常处理机制和use strict</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/03/07/throw%E3%80%81with%E3%80%81debugger%E8%AF%AD%E5%8F%A5%E5%92%8Cuse-strict/" class="archive-article-date">
-        <time datetime="2020-03-07T07:00:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-07</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="throw语句"><a href="#throw语句" class="headerlink" title="throw语句"></a>throw语句</h1><p><strong>用法：</strong></p>
-<p>throw expression</p>
-<p> 一般会放在try语句中，用来抛出一个用户<strong>自定义的异常</strong>。当前函数的执行将被停止（<code>throw</code>之后的语句将不会执行），并且控制将被传递到调用堆栈中的第一个<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/try...catch" target="_blank" rel="noopener"><code>catch</code></a>块。如果调用者函数中没有<code>catch</code>块，程序将会终止。 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function factorial(x)&#123;</span><br><span class="line">	if(x&lt;&#x3D;0)&#123;</span><br><span class="line">	throw &quot;it not a positive number&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这里是自定义的异常，显示这个数不是一个正数，发生后程序会停止，跳转到就近的异常处理程序（try/catch/finally的catch从句）。</p>
-<p>如果没有catch从句，解释器会检查更高层的闭合代码块，看有没有异常处理程序，以此类推，找到为止。</p>
-<p>如果有catch从句但是没有处理这个异常函数的语句，异常会向上传播到调用该函数的代码。依照js的词法结构和调用栈向上传播。</p>
-<p>如果没有找到，js会把异常当成程序错误来处理，并报告给用户。</p>
-<h1 id="try-catch-finally语句"><a href="#try-catch-finally语句" class="headerlink" title="try/catch/finally语句"></a>try/catch/finally语句</h1><p><strong>try</strong>语句允许我们定义在执行时进行错误测试的代码块。（尝试执行的代码块）</p>
-<p><strong>catch</strong> 语句允许我们定义当 <strong>try</strong> 代码块发生错误时，所执行的代码块。（捕获错误的代码块）</p>
-<p><strong>finally</strong> 语句在 try 和 catch 之后无论有无异常都会执行。（无论如何都会执行的代码块）</p>
-<p><strong>注意：</strong> catch 和 finally 语句都是可选的，但你在使用 try 语句时必须至少使用一个。</p>
-<p>例1：(检测输入的值是否错误，如果错误则抛出异常)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;请输入 5 和 10 之间的一个数:&lt;&#x2F;p&gt;</span><br><span class="line"> </span><br><span class="line">&lt;input id&#x3D;&quot;demo&quot; type&#x3D;&quot;text&quot;&gt;</span><br><span class="line">&lt;button type&#x3D;&quot;button&quot; onclick&#x3D;&quot;myFunction()&quot;&gt;检测输入&lt;&#x2F;button&gt;</span><br><span class="line">&lt;p id&#x3D;&quot;message&quot;&gt;&lt;&#x2F;p&gt;</span><br><span class="line"> </span><br><span class="line">&lt;script&gt;</span><br><span class="line">function myFunction() &#123;</span><br><span class="line">    var message, x;</span><br><span class="line">    message &#x3D; document.getElementById(&quot;message&quot;);</span><br><span class="line">    message.innerHTML &#x3D; &quot;&quot;;</span><br><span class="line">    x &#x3D; document.getElementById(&quot;demo&quot;).value;</span><br><span class="line">    try &#123; </span><br><span class="line">        if(x &#x3D;&#x3D; &quot;&quot;)  throw &quot;为空&quot;;</span><br><span class="line">        if(isNaN(x)) throw &quot;不是一个数字&quot;;</span><br><span class="line">        if(x &gt; 10)   throw &quot;太大了&quot;;</span><br><span class="line">        if(x &lt; 5)    throw &quot;太小了&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">    catch(err) &#123;</span><br><span class="line">        message.innerHTML &#x3D; &quot;输入的值 &quot; + err;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
-
-<p>例2：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">function myFunction() &#123;</span><br><span class="line">    var message, x;</span><br><span class="line">    message &#x3D; document.getElementById(&quot;message&quot;);</span><br><span class="line">    message.innerHTML &#x3D; &quot;&quot;;</span><br><span class="line">    x &#x3D; document.getElementById(&quot;demo&quot;).value;</span><br><span class="line">    try &#123; </span><br><span class="line">        if(x &#x3D;&#x3D; &quot;&quot;)  throw &quot;为空&quot;;</span><br><span class="line">        if(isNaN(x)) throw &quot;不是一个数字&quot;;</span><br><span class="line">        if(x &gt; 10)   throw &quot;太大&quot;;</span><br><span class="line">        if(x &lt; 5)    throw &quot;太小&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">    catch(err) &#123;</span><br><span class="line">        message.innerHTML &#x3D; &quot;输入的值 &quot; + err;</span><br><span class="line">    &#125;</span><br><span class="line">    finally &#123;</span><br><span class="line">        document.getElementById(&quot;demo&quot;).value &#x3D; &quot;&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>finally语句无论如何都会执行。</p>
-<h4 id="几种情况"><a href="#几种情况" class="headerlink" title="几种情况"></a>几种情况</h4><ol>
-<li><p>通常情况下，解释器执行到try的尾部（没有异常时），再执行finally中的逻辑，但当有return（返回一个值）、continue（跳过当次循环）、break（跳过就近的循环体）使解释器跳出try语句块时，在执行性的目标代码时先执行finally中的语句。</p>
-</li>
-<li><p>try语句中出现异常时，如果有catch来处理，那么执行完catch再执行finally，如果没有catch来处理，那么执行完finally之后向上传播这个异常，直到找到为止。</p>
-</li>
-<li><p>如果finally使用了return（返回一个值）、continue（跳过当次循环）、break（跳过就近的循环体）或者throw语句使其跳转，又或是调用抛出异常的方法改变程序的执行流程，不管跳转使程序怎么样，解释器都会忽略跳转，正常执行，例如return就正常返回。</p>
-</li>
-</ol>
-<h1 id="with语句"><a href="#with语句" class="headerlink" title="with语句"></a>with语句</h1><p>严格模式禁止使用，非严格模式下也不推荐使用</p>
-<p>with语句难于优化，运行又慢</p>
-<p>用法：</p>
-<p>with（object）</p>
-<p>statement</p>
-<p>会用于在对象嵌套很深的情况下简化代码编写</p>
-<p>with（document.a[0]){</p>
-<p>name=””;</p>
-<p>address=””;</p>
-<p>email=””;</p>
-<p>}</p>
-<p>等同于</p>
-<p>f=document.a[0];</p>
-<p>f.name=””;</p>
-<p>f.address=””;</p>
-<p>f.email=””;</p>
-<p><strong>注意with只能用来读取，不能创建属性</strong></p>
-<h1 id="debugger"><a href="#debugger" class="headerlink" title="debugger"></a>debugger</h1><p>用于调试</p>
-<p>js会在debugger处执行停止</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function f(o)&#123;</span><br><span class="line">	if(o&#x3D;&#x3D;&#x3D;undefined) debugger;&#x2F;&#x2F;这里执行停止</span><br><span class="line">	... &#x2F;&#x2F;函数其余部分</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="“use-strict”"><a href="#“use-strict”" class="headerlink" title="“use strict”"></a>“use strict”</h1><p>有ECMAScript5标准的开启严格模式，没有的直接忽略。</p>
-<p>只能出现在脚本代码的开始或函数体的开始，或任何实体语句之前（并不一定在首行）</p>
-<p><a href="https://www.runoob.com/js/js-strict.html" target="_blank" rel="noopener">相关规则</a></p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/03/07/throw%E3%80%81with%E3%80%81debugger%E8%AF%AD%E5%8F%A5%E5%92%8Cuse-strict/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-for-in以及标签语句" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/03/06/for-in%E4%BB%A5%E5%8F%8A%E6%A0%87%E7%AD%BE%E8%AF%AD%E5%8F%A5/" target="_blank">for/in以及标签语句</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/03/06/for-in%E4%BB%A5%E5%8F%8A%E6%A0%87%E7%AD%BE%E8%AF%AD%E5%8F%A5/" class="archive-article-date">
-        <time datetime="2020-03-06T11:41:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-06</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="for-in语句"><a href="#for-in语句" class="headerlink" title="for/in语句"></a>for/in语句</h1><p>for/in语句一般用来枚举对象的属性，特别是不知道数据或者json中包含哪些元素时</p>
-<h4 id="用法："><a href="#用法：" class="headerlink" title="用法："></a>用法：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for(variable in object)&#123;</span><br><span class="line">	statement;  &#x2F;&#x2F;执行语句</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>其中variable为定义的变量，object为对象</p>
-<p>例如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var o&#x3D;&#123;x:&quot;hello&quot;,y:&quot;world&quot;,z:&quot;nihao&quot;&#125;;</span><br><span class="line">var a;</span><br><span class="line">for(a in o)&#x2F;*empty*&#x2F;; &#x2F;&#x2F;这里的空语句最好注释一下</span><br><span class="line">console.log(a);</span><br></pre></td></tr></table></figure>
-
-<p>这里会输出z这个属性名，因为对象o中的属性名一个一个赋值给a，最终输出为z</p>
-<p>如果想一一枚举出o中的属性名可以把上述代码中的console.log(a)放在for循环中如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var o&#x3D;&#123;x:&quot;hello&quot;,y:&quot;world&quot;,z:&quot;nihao&quot;&#125;;</span><br><span class="line">var a;</span><br><span class="line">for(a in o)&#123;</span><br><span class="line">console.log(a);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这里输出:</p>
-<p>x</p>
-<p>y</p>
-<p>z</p>
-<h5 id="如果想要枚举出属性名对应的索引"><a href="#如果想要枚举出属性名对应的索引" class="headerlink" title="如果想要枚举出属性名对应的索引"></a>如果想要枚举出属性名对应的索引</h5><p>代码如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var o&#x3D;&#123;x:&quot;hello&quot;,y:&quot;world&quot;,z:&quot;nihao&quot;&#125;;</span><br><span class="line">			var a&#x3D;[];</span><br><span class="line">			var i&#x3D;0;</span><br><span class="line">			for(a[i++] in o) &#x2F;*empty*&#x2F;;&#x2F;&#x2F;这里的空语句最好注释一下</span><br><span class="line">			for(i in a) </span><br><span class="line">			console.log(i);</span><br></pre></td></tr></table></figure>
-
-<p>这里输出：</p>
-<p>0</p>
-<p>1</p>
-<p>2</p>
-<h4 id="以上我们已知遍历属性名，因此我们可以通过-对象-属性名-或者-对象-属性名"><a href="#以上我们已知遍历属性名，因此我们可以通过-对象-属性名-或者-对象-属性名" class="headerlink" title="以上我们已知遍历属性名，因此我们可以通过  对象.属性名  或者  对象[属性名]"></a>以上我们已知遍历属性名，因此我们可以通过  对象.属性名  或者  对象[属性名]</h4><h4 id="对属性值进行遍历"><a href="#对属性值进行遍历" class="headerlink" title="对属性值进行遍历"></a>对属性值进行遍历</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var o&#x3D;&#123;x:&quot;hello&quot;,y:&quot;world&quot;,z:&quot;nihao&quot;&#125;;</span><br><span class="line">var a;</span><br><span class="line">for(a in o)&#123;</span><br><span class="line">console.log(o[a]);&#x2F;&#x2F;或者o.a进行输出</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>结果：</p>
-<p>hello</p>
-<p>world</p>
-<p>nihao</p>
-<h4 id="链接："><a href="#链接：" class="headerlink" title="链接："></a>链接：</h4><p><a href="https://blog.csdn.net/wangpenglonton/article/details/79095011" target="_blank" rel="noopener">for/in遍历的bug</a></p>
-<h4 id="for循环我们很熟悉，在额外探讨一下in的用法"><a href="#for循环我们很熟悉，在额外探讨一下in的用法" class="headerlink" title="for循环我们很熟悉，在额外探讨一下in的用法"></a>for循环我们很熟悉，在额外探讨一下in的用法</h4><p>in的右侧对象拥有一个名为左侧类型的属性名是返回true，否则返回false</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var obj&#x3D;&#123;x:123,y:456&#125;;</span><br><span class="line">&quot;x&quot; in obj &#x2F;&#x2F;true，obj对象中有名为x的属性名</span><br><span class="line">&quot;z&quot; in obj &#x2F;&#x2F;false</span><br><span class="line">&quot;toString&quot; in obj &#x2F;&#x2F;true,toString属性除了null和undefined没有，其余类型都有</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var arr&#x3D;[7,8,9];</span><br><span class="line">&quot;0&quot; in arr &#x2F;&#x2F;true，有数组下标为0的7在</span><br><span class="line">2 in arr &#x2F;&#x2F;true,2这里js自动转化为字符串，下标为2的9在</span><br><span class="line">3 in arr &#x2F;&#x2F;false</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="标签语句"><a href="#标签语句" class="headerlink" title="标签语句"></a>标签语句</h1><p>给语句定义标签，那么可以在程序的任何地方通过标签名引用这条语句或者循环体</p>
-<p>break和continue是js中唯二可以使用标签的语句</p>
-<p>break：跳出最内层的循环语句</p>
-<p>continue：跳过当次循环</p>
-<h4 id="当我们希望break不是跳出最内层循环时可以用标签语句，或者在switch语句中也可以用。"><a href="#当我们希望break不是跳出最内层循环时可以用标签语句，或者在switch语句中也可以用。" class="headerlink" title="当我们希望break不是跳出最内层循环时可以用标签语句，或者在switch语句中也可以用。"></a>当我们希望break不是跳出最内层循环时可以用标签语句，或者在switch语句中也可以用。</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var num&#x3D;0;</span><br><span class="line">iden:for(var i&#x3D;0;i&lt;10;i++)&#123;</span><br><span class="line">		for(var j&#x3D;0;j&lt;10;j++)&#123;</span><br><span class="line">			while(i&#x3D;&#x3D;5&amp;&amp;j&#x3D;&#x3D;5)&#123;</span><br><span class="line">			break iden ;&#x2F;&#x2F;标签名只能在同一行上</span><br><span class="line">			&#125;</span><br><span class="line">			num++;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">alert(num);</span><br></pre></td></tr></table></figure>
-
-<p>解：num值为55，如果没有用标签名break只能退出j相关的那个循环，用标签可以直接退到外部</p>
-<p>如果没有标签如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">		var num&#x3D;0;</span><br><span class="line">		for(var i&#x3D;0;i&lt;10;i++)&#123;</span><br><span class="line">			for(var j&#x3D;0;j&lt;10;j++)&#123;</span><br><span class="line">				while(i&#x3D;&#x3D;5&amp;&amp;j&#x3D;&#x3D;5)&#123;</span><br><span class="line">				break ;&#x2F;&#x2F;标签名只能在同一行上</span><br><span class="line">				&#125;</span><br><span class="line">			num++;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">alert(num);</span><br></pre></td></tr></table></figure>
-
-<p>解：num的值为100，break仅仅出了while的循环</p>
-<h4 id="标签用在continue中与break类似，当我们在嵌套的循环体中想跳到外部循环体时可以用，但是要注意continue不管带不带标签都只能在循环体内使用"><a href="#标签用在continue中与break类似，当我们在嵌套的循环体中想跳到外部循环体时可以用，但是要注意continue不管带不带标签都只能在循环体内使用" class="headerlink" title="标签用在continue中与break类似，当我们在嵌套的循环体中想跳到外部循环体时可以用，但是要注意continue不管带不带标签都只能在循环体内使用."></a>标签用在continue中与break类似，当我们在嵌套的循环体中想跳到外部循环体时可以用，但是要注意continue不管带不带标签都只能在循环体内使用.</h4><p>continue就不举例了（~~）</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/03/06/for-in%E4%BB%A5%E5%8F%8A%E6%A0%87%E7%AD%BE%E8%AF%AD%E5%8F%A5/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-函数与对象关系" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/03/06/%E5%87%BD%E6%95%B0%E4%B8%8E%E5%AF%B9%E8%B1%A1%E5%85%B3%E7%B3%BB/" target="_blank">函数与对象关系</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/03/06/%E5%87%BD%E6%95%B0%E4%B8%8E%E5%AF%B9%E8%B1%A1%E5%85%B3%E7%B3%BB/" class="archive-article-date">
-        <time datetime="2020-03-06T07:57:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-06</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="一、JavaScript-创建默认对象"><a href="#一、JavaScript-创建默认对象" class="headerlink" title="一、JavaScript-创建默认对象"></a>一、JavaScript-创建默认对象</h2><p>1.JavaScript中提供了一个默认的类Object, 我们可以通过这个类来创建对象;</p>
-<p>2.由于我们是使用系统默认的类创建的对象, 所以系统不知道我们想要什么属性和行为, 所以我们必须手动的添加我们想要的属性和行为;</p>
-<p>3.如何给一个对象添加属性 ;<br>对象名称.属性名称 = 值;</p>
-<p>4.如何给一个对象添加行为;<br>对象名称.行为名称 = 函数;</p>
-<p>例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">let obj &#x3D; &#123;</span><br><span class="line">    name: &quot;abc&quot;,</span><br><span class="line">    age: 23,</span><br><span class="line">    say: function () &#123;</span><br><span class="line">        console.log(&quot;hello world&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">console.log(obj.name);</span><br><span class="line">console.log(obj.age);</span><br><span class="line">obj.say();</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="二、JavaScript-函数和方法区别"><a href="#二、JavaScript-函数和方法区别" class="headerlink" title="二、JavaScript-函数和方法区别"></a>二、JavaScript-函数和方法区别</h2><p>1.什么是函数?<br>函数就是没有和其它的类显示的绑定在一起的, 我们就称之为函数；</p>
-<p>2.什么是方法?<br>方法就是显示的和其它的类绑定在一起的, 我们就称之为方法；</p>
-<p>3.函数和方法的区别 :<br>3.1函数可以直接调用, 但是方法不能直接调用, 只能通过对象来调用；<br>3.2函数内部的this输出的是window, 方法内部的this输出的是当前调用的那个对象；</p>
-<p>4.无论是函数还是方法, 内部都有一个叫做this的东东；<br>this是什么? 谁调用了当前的函数或者方法, 那么当前的this就是谁；</p>
-<h2 id="三、什么是工厂函数"><a href="#三、什么是工厂函数" class="headerlink" title="三、什么是工厂函数?"></a>三、什么是工厂函数?</h2><p>工厂函数就是专门用于创建对象的函数, 我们就称之为工厂函数；<br>例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">function createPerson(myName,myAge) &#123;           </span><br><span class="line">    let obj &#x3D; &#123;</span><br><span class="line">                name: myName,</span><br><span class="line">                age: myAge,</span><br><span class="line">                say: function () &#123;</span><br><span class="line">                    &quot;hello abc&quot;;</span><br><span class="line">                &#125;           </span><br><span class="line">&#125;;          </span><br><span class="line">return obj;       </span><br><span class="line">&#125; </span><br><span class="line">       </span><br><span class="line">let obj1 &#x3D; createPerson(&quot;cy&quot;,22);       </span><br><span class="line">let obj2 &#x3D; createPerson(&quot;yc&quot;,33);       </span><br><span class="line">console.log(obj1);;       </span><br><span class="line">console.log(obj2);</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="四、什么是构造函数"><a href="#四、什么是构造函数" class="headerlink" title="四、什么是构造函数"></a>四、什么是构造函数</h2><p>1.构造函数和工厂函数一样, 都是专门用于创建对象的；<br>构造函数本质上是工厂函数的简写；</p>
-<p>2.构造函数和工厂函数的区别；<br>2.1构造函数的函数名称首字母必须大写 ；<br>2.2构造函数只能够通过new来调用；<br>例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function Person(myName,myAge) &#123;</span><br><span class="line">                this.name&#x3D; myName;</span><br><span class="line">                this.age&#x3D;myAge;</span><br><span class="line">                this.say&#x3D; function () &#123;</span><br><span class="line">                    &quot;hello abc&quot;;</span><br><span class="line">                &#125;       </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>当我们new Person(“abc”, 44);系统做了什么事情 :<br>1.1会在构造函数中自动创建一个对象<br>1.2会自动将刚才创建的对象赋值给this<br>1.3会在构造函数的最后自动添加return this;</p>
-<p>补充：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function demo() &#123;</span><br><span class="line">            console.log(&quot;demo&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        &#x2F;&#x2F; 通过三个等号来判断两个函数名称, 表示判断两个函数是否都存储在同一块内存中</span><br><span class="line">        console.log(demo &#x3D;&#x3D;&#x3D; demo); &#x2F;&#x2F; true</span><br></pre></td></tr></table></figure>
-<p>构造函数的优化：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">function Person(myName, myAge) &#123;</span><br><span class="line">            </span><br><span class="line">            this.name &#x3D; myName;</span><br><span class="line">            this.age &#x3D; myAge;</span><br><span class="line">           </span><br><span class="line">        &#125;</span><br><span class="line">        &#x2F;&#x2F;prototype属性是专门用于保存对象中公共的函数和变量的</span><br><span class="line">        Person.prototype &#x3D; &#123;</span><br><span class="line">            say: function () &#123;</span><br><span class="line">                console.log(&quot;hello world&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        let obj1 &#x3D; new Person(&quot;lnj&quot;, 34);</span><br><span class="line">        obj1.say();</span><br><span class="line">        let obj2 &#x3D; new Person(&quot;zs&quot;, 44);</span><br><span class="line">        obj2.say();</span><br><span class="line">        console.log(obj1.say &#x3D;&#x3D;&#x3D; obj2.say); &#x2F;&#x2F; true</span><br></pre></td></tr></table></figure>
-
-<h2 id="五、JavaScript-prototype特点"><a href="#五、JavaScript-prototype特点" class="headerlink" title="五、JavaScript-prototype特点"></a>五、JavaScript-prototype特点</h2><h4 id="1-prototype特点"><a href="#1-prototype特点" class="headerlink" title="1.prototype特点"></a>1.prototype特点</h4><pre><code>1.1存储在prototype中的方法可以被对应构造函数创建出来的所有对象共享;
-1.2prototype中除了可以存储方法以外, 还可以存储属性;
-1.3prototype如果出现了和构造函数中同名的属性或者方法, 对象在访问的时候, 访问到的是构造函中的数据;
-
-2.prototype应用场景
-prototype中一般情况下用于存储所有对象都相同的一些属性以及方法;
-如果是对象特有的属性或者方法, 我们会存储到构造函数中;</code></pre><h4 id="2-JavaScript-对象三角恋关系"><a href="#2-JavaScript-对象三角恋关系" class="headerlink" title="2.JavaScript-对象三角恋关系"></a>2.JavaScript-对象三角恋关系</h4><p> 1.每个”构造函数”中都有一个默认的属性, 叫做prototype；<br>    prototype属性保存着一个对象, 这个对象我们称之为”原型对象”；<br>  2.每个”原型对象”中都有一个默认的属性, 叫做constructor；<br>     constructor指向当前原型对象对应的那个”构造函数”；<br>  3.通过构造函数创建出来的对象我们称之为”实例对象”；<br>    每个”实例对象”中都有一个默认的属性, 叫做<strong>proto</strong>；<br>    <strong>proto</strong>指向创建它的那个构造函数的”原型对象”；</p>
-<h2 id="六、JavaScript-Function函数"><a href="#六、JavaScript-Function函数" class="headerlink" title="六、JavaScript-Function函数"></a>六、JavaScript-Function函数</h2><p>1.JavaScript中函数是引用类型(对象类型), 既然是对象, 所以也是通过构造函数创建出来的,”所有函数”都是通过Function构造函数创建出来的对象；</p>
-<p>2.JavaScript中只要是”函数”就有prototype属性；<br>“Function函数”的prototype属性指向”Function原型对象”；</p>
-<p>3.JavaScript中只要”原型对象”就有constructor属性；<br>“Function原型对象”的constructor指向它对应的构造函数；</p>
-<p>4.Person构造函数是Function构造函数的实例对象, 所以也有<strong>proto</strong>属性；<br>Person构造函数的<strong>proto</strong>属性指向”Function原型对象”；</p>
-<p>JavaScript-Object函数<br>“Object构造函数”的<strong>proto</strong>属性指向创建它那个构造函数的”原型对象”；</p>
-<p>5.只要是构造函数都有一个默认的属性, 叫做prototype；<br>prototype属性保存着一个对象, 这个对象我们称之为”原型对象”；</p>
-<p>6.只要是原型对象都有一个默认的属性, 叫做constructor；<br>constructor指向当前原型对象对应的那个”构造函数”；</p>
-<h2 id="七、JavaScript-函数对象关系"><a href="#七、JavaScript-函数对象关系" class="headerlink" title="七、JavaScript-函数对象关系"></a>七、JavaScript-函数对象关系</h2><p>1.所有的构造函数都有一个prototype属性, 所有prototype属性都指向自己的原型对象；<br>2,所有的原型对象都有一个constructor属性, 所有constructor属性都指向自己的构造函数；<br>3.所有函数都是Function构造函数的实例对象；<br>4.所有函数都是对象, 包括Function构造函数；<br>5.所有对象都有<strong>proto</strong>属性；<br>6.普通对象的<strong>proto</strong>属性指向创建它的那个构造函数对应的”原型对象”；<br>7.所有对象的<strong>proto</strong>属性最终都会指向”Object原型对象”；<br>8.”Object原型对象”的<strong>proto</strong>属性指向NULL；</p>
-<h2 id="八、JavaScript-原型链"><a href="#八、JavaScript-原型链" class="headerlink" title="八、JavaScript-原型链"></a>八、JavaScript-原型链</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Person.prototype &#x3D; &#123;</span><br><span class="line">            &#x2F;&#x2F; 注意点: 为了不破坏原有的关系, 在给prototype赋值的时候, 需要在自定义的对象中手动的添加constructor属性, 手动的指定需要指向谁</span><br><span class="line">            constructor: Person,</span><br><span class="line">            &#x2F;&#x2F; currentType: &quot;人&quot;,</span><br><span class="line">            &#x2F;&#x2F; say: function () &#123;</span><br><span class="line">            &#x2F;&#x2F;     console.log(&quot;hello world&quot;);</span><br><span class="line">            &#x2F;&#x2F; &#125;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
-
-
-<p>对象中<strong>proto</strong>组成的链条我们称之为原型链;<br>对象在查找属性和方法的时候, 会先在当前对象查找, 如果当前对象中找不到想要的, 会依次去上一级原型对象中查找, 如果找到Object原型对象都没有找到, 就会报错;</p>
-<h2 id="九、JavaScript-属性注意点"><a href="#九、JavaScript-属性注意点" class="headerlink" title="九、JavaScript-属性注意点"></a>九、JavaScript-属性注意点</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">function Person(myName, myAge) &#123;</span><br><span class="line">    this.name &#x3D; myName;</span><br><span class="line">    this.age &#x3D; myAge;</span><br><span class="line">&#125;</span><br><span class="line">Person.prototype &#x3D; &#123;</span><br><span class="line">    constructor: Person,</span><br><span class="line">    currentType: &quot;人&quot;,</span><br><span class="line">    say: function () &#123;</span><br><span class="line">        console.log(&quot;hello world&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">let obj &#x3D; new Person(&quot;abc&quot;, 54);</span><br><span class="line">&#x2F;&#x2F; console.log(obj.currentType); &#x2F;&#x2F; &quot;人&quot;</span><br><span class="line">&#x2F;&#x2F; console.log(obj.__proto__.currentType); &#x2F;&#x2F; &quot;人&quot;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 注意点: 在给一个对象不存在的属性设置值的时候, 不会去原型对象中查找, 如果当前对象没有就会给当前对象新增一个不存在的属性</span><br><span class="line">obj.currentType &#x3D; &quot;新设置的值&quot;;</span><br><span class="line">console.log(obj.currentType); &#x2F;&#x2F; 新设置的值</span><br><span class="line">console.log(obj.__proto__.currentType); &#x2F;&#x2F; &quot;人&quot;</span><br></pre></td></tr></table></figure>
-<hr>
-<p>版权声明：本文为CSDN博主「小蚂蚁有力量」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/xxzjwyql/article/details/89327575" target="_blank" rel="noopener">https://blog.csdn.net/xxzjwyql/article/details/89327575</a></p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/03/06/%E5%87%BD%E6%95%B0%E4%B8%8E%E5%AF%B9%E8%B1%A1%E5%85%B3%E7%B3%BB/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/11/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/13/">Next &amp;raquo;</a>
@@ -1791,11 +1679,15 @@ prototype中一般情况下用于存储所有对象都相同的一些属性以�
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+                <a href="javascript:void(0)" class="js-tag color1">react</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1808,10 +1700,6 @@ prototype中一般情况下用于存储所有对象都相同的一些属性以�
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">node</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">react</a>
               </li>
              
               <li class="article-tag-list-item">

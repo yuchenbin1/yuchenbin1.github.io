@@ -202,6 +202,314 @@
             
 
   
+    <article id="post-21年1月27日" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/01/27/21%E5%B9%B41%E6%9C%8827%E6%97%A5/" target="_blank">21年1月27日</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/01/27/21%E5%B9%B41%E6%9C%8827%E6%97%A5/" class="archive-article-date">
+        <time datetime="2021-01-27T12:18:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-27</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="微信小程序兼容性问题"><a href="#微信小程序兼容性问题" class="headerlink" title="微信小程序兼容性问题"></a>微信小程序兼容性问题</h1><p>今天把微信小程序上线到了正式版本，安卓端很正常，但是ios苹果端出现了一些异常，比较明显的是，ios的页面允许上下拖动，这个在一些没有列表的页面可以设置</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">"disableScroll":true</span><br></pre></td></tr></table></figure>
+
+<p>来禁止</p>
+<p>还有一个问题是ios中不支持position的fixed属性，在ios中的浮动就只能通过传统的绝对定位来实现了</p>
+<p>祖先元素</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">position:&#39;relative&#39;</span><br></pre></td></tr></table></figure>
+
+<p>要浮动的元素</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">position:&#39;absolute&#39;</span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日志</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/01/27/21%E5%B9%B41%E6%9C%8827%E6%97%A5/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-21年1月26日" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/01/26/21%E5%B9%B41%E6%9C%8826%E6%97%A5/" target="_blank">21年1月26日</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/01/26/21%E5%B9%B41%E6%9C%8826%E6%97%A5/" class="archive-article-date">
+        <time datetime="2021-01-26T14:53:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-26</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="微信小程序父组件传值给子组件"><a href="#微信小程序父组件传值给子组件" class="headerlink" title="微信小程序父组件传值给子组件"></a>微信小程序父组件传值给子组件</h1><p>微信小程序中父组件传值给子组件与vue类似</p>
+<p>有子组件</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">child</span> <span class="attr">id</span>=<span class="string">"child"</span>&gt;</span><span class="tag">&lt;/<span class="name">child</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在微信小程序json的components中引入</p>
+<p>在父组件中</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">view</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">child</span> <span class="attr">id</span>=<span class="string">"child"</span> <span class="attr">shuxing</span>=<span class="string">"&#123;&#123;value&#125;&#125;"</span>&gt;</span><span class="tag">&lt;/<span class="name">child</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">data:&#123;</span><br><span class="line">	value:<span class="string">'hello'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在子组件中接受</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">properties:&#123;</span><br><span class="line">	shuxing:&#123;</span><br><span class="line">		type:<span class="built_in">String</span>,</span><br><span class="line">		value:<span class="string">''</span>,</span><br><span class="line">		observer:<span class="string">'handleSetData'</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">handleSetData()&#123;</span><br><span class="line">	<span class="keyword">this</span>.setData(&#123;<span class="attr">shuxing</span>:<span class="keyword">this</span>.properties.shuxing&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>关键在于observer，作用相当于vue中的watch，一开始子组件挂载完的时候还没有传值进来，observer监听改变</p>
+<h1 id="两个异步请求如何顺序执行"><a href="#两个异步请求如何顺序执行" class="headerlink" title="两个异步请求如何顺序执行"></a>两个异步请求如何顺序执行</h1><p>比如有ajax1和ajax2两个请求，这里ajax2用到ajax1中请求到的值，因为异步的关系，两者放在一起相当于同时请求。</p>
+<p>比较多的是用promise或者aynic和await解决</p>
+<p>这里我用回调函数解决</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">ajax1(callback)&#123;</span><br><span class="line">...</span><br><span class="line">success(res)&#123;</span><br><span class="line">...</span><br><span class="line">callback()</span><br><span class="line">&#125;</span><br><span class="line">...</span><br><span class="line">&#125;,</span><br><span class="line">ajax2()&#123;</span><br><span class="line">...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">onShow()&#123;</span><br><span class="line"><span class="keyword">this</span>.ajax1(<span class="keyword">this</span>.ajax2)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日志</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/01/26/21%E5%B9%B41%E6%9C%8826%E6%97%A5/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-21年1月21日" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/01/21/21%E5%B9%B41%E6%9C%8821%E6%97%A5/" target="_blank">21年1月21日</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/01/21/21%E5%B9%B41%E6%9C%8821%E6%97%A5/" class="archive-article-date">
+        <time datetime="2021-01-21T12:34:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-21</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="微信小程序中点击样式改变"><a href="#微信小程序中点击样式改变" class="headerlink" title="微信小程序中点击样式改变"></a>微信小程序中点击样式改变</h1><p>在传统的web端开发中我们可以通过更改class的名字或者是用style属性取修改，比较直接的就是获取节点之后用得到style属性修改，但是在微信小程序中无法直接获取到dom节点，在人机交互更改样式的时候，遇到问题怎么办。</p>
+<p>我采用的是常规的style属性定义成一个变量，因为是这个节点是遍历出来的，所以需要用到数组</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">bindtap</span>=<span class="string">"handleClick"</span> <span class="attr">style</span>=<span class="string">"&#123;&#123;styleArray[index]&#125;&#125;"</span> <span class="attr">data-params</span>=<span class="string">"params"</span>&gt;</span><span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这里有点击事件handleClick，传入参数params，这个参数可以由</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">handleClick(event)&#123;</span><br><span class="line">	console.log(event.currentTarget.dataset.params)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>取到，这里js中的params一定都是小写的，style的属性有变量styleArray决定</p>
+<h1 id="微信小程序中的赋值"><a href="#微信小程序中的赋值" class="headerlink" title="微信小程序中的赋值"></a>微信小程序中的赋值</h1><p>在微信小程序中给data赋值一般都是通过setData的</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.setData(&#123;<span class="attr">value</span>:<span class="string">'hello'</span>&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>如果是两个对象一定是要深拷贝，还是用计较传统的JSON办法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.setData(&#123;<span class="attr">Obj1</span>:<span class="built_in">JSON</span>.parse(<span class="built_in">JSON</span>.stringify(Obj2))&#125;)</span><br></pre></td></tr></table></figure>
+
+<h1 id="微信小程序中路由跳转"><a href="#微信小程序中路由跳转" class="headerlink" title="微信小程序中路由跳转"></a>微信小程序中路由跳转</h1><h3 id="wx-switchTab"><a href="#wx-switchTab" class="headerlink" title="wx.switchTab"></a>wx.switchTab</h3><p>跳转到有tabBar的页面，关闭所有非tabBar，一般就是跳转到主页会用到</p>
+<h3 id="wx-reLaunch"><a href="#wx-reLaunch" class="headerlink" title="wx.reLaunch"></a>wx.reLaunch</h3><p>关闭所有的页面，打开应用内的某个页面，一般用于登出跳转到登陆页</p>
+<h3 id="wx-redirectTo"><a href="#wx-redirectTo" class="headerlink" title="wx.redirectTo"></a>wx.redirectTo</h3><p>关闭当前页面，跳转到某个非tabBar的页面</p>
+<h3 id="wx-navigateTo"><a href="#wx-navigateTo" class="headerlink" title="wx.navigateTo"></a>wx.navigateTo</h3><p>保留当前页面，跳转到某个非tabBar的页面，可以使用wx.navigateBack返回</p>
+<p><strong>路由跳转携带参数</strong></p>
+<p>在路由url路径中加上<code>？name=&#39;hello&#39;</code>这样的形式,这个可以在跳转到的页面中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">onLoad:function(options)&#123;</span><br><span class="line">	console.log(options.name)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里可以获取到</p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日志</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/01/21/21%E5%B9%B41%E6%9C%8821%E6%97%A5/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-21年1月18日" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -891,285 +1199,6 @@
 
 
   
-    <article id="post-20年11月5日" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/11/05/20%E5%B9%B411%E6%9C%885%E6%97%A5/" target="_blank">20年11月5日</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/11/05/20%E5%B9%B411%E6%9C%885%E6%97%A5/" class="archive-article-date">
-        <time datetime="2020-11-05T12:55:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-05</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="calc的使用"><a href="#calc的使用" class="headerlink" title="calc的使用"></a>calc的使用</h1><p>今天在在使用calc的时候，总是出现问题</p>
-<p><code>calc(100%-220px)</code></p>
-<p>这个问题在哪呢，后来发现原来在空格</p>
-<p><code>calc(100% - 220px)</code></p>
-<p>这样就行了</p>
-<h1 id="vue中表达式的使用"><a href="#vue中表达式的使用" class="headerlink" title="vue中表达式的使用"></a>vue中表达式的使用</h1><p>在react中经常会用到表达式用大括号就行了，但是在vue中不能直接用，要定义一个表达式的名字，表达式赋值给它才行</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日志</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/11/05/20%E5%B9%B411%E6%9C%885%E6%97%A5/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-20年11月4日" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/11/04/20%E5%B9%B411%E6%9C%884%E6%97%A5/" target="_blank">20年11月4日</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/11/04/20%E5%B9%B411%E6%9C%884%E6%97%A5/" class="archive-article-date">
-        <time datetime="2020-11-04T12:03:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-04</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>今天的工作主要是修改bug，还有余下几个问题，第一个就是加快页面的加载速度，这个可以使用懒加载，还有就是登陆状态失效，这个问题还没有解决。</p>
-<h4 id="养成良好的代码习惯"><a href="#养成良好的代码习惯" class="headerlink" title="养成良好的代码习惯"></a>养成良好的代码习惯</h4><p>1.命名语义化，命名函数使用驼峰式的，要语义化，不要出现shuaka这种拼音，要具体明白是干什么的。</p>
-<p>2.组件化开发，组件化开发可以使得代码简洁，组件可以复用，父子组件间的传值，可以使用json和watch传</p>
-<p>3.声明一个状态或者事件的时候，一定要考虑到这个东西的销毁，很多的bug都是在内存未清除造成的</p>
-<p>4.console.log类似的测试，使用后要记得删除</p>
-<p>5.代码需要reflew，需要第二个人检查</p>
-<p>6.难点需要换一种思维方式或者是尝试把这个黑盒拆开</p>
-<p>7.养成良好的代码习惯</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日志</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/11/04/20%E5%B9%B411%E6%9C%884%E6%97%A5/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-20年11月3日" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/11/03/20%E5%B9%B411%E6%9C%883%E6%97%A5/" target="_blank">20年11月3日</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/11/03/20%E5%B9%B411%E6%9C%883%E6%97%A5/" class="archive-article-date">
-        <time datetime="2020-11-03T14:03:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-03</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="vue中父组件与子组件的生命周期"><a href="#vue中父组件与子组件的生命周期" class="headerlink" title="vue中父组件与子组件的生命周期"></a>vue中父组件与子组件的生命周期</h1><p>从上到下依次是：</p>
-<p>父组件的beforeCreate</p>
-<p>父组件的created</p>
-<p>父组件的beforeMount</p>
-<p>子组件的beforeCreate</p>
-<p>子组件的created</p>
-<p>子组件的beforeMount</p>
-<p>子组件的mounted</p>
-<p>父组件的mounted（异步数据获取到）</p>
-<h1 id="遇到的element-ui样式问题"><a href="#遇到的element-ui样式问题" class="headerlink" title="遇到的element ui样式问题"></a>遇到的element ui样式问题</h1><p>还未解决，在我的电脑上和别人的电脑上面同样的代码同样的浏览器，但是显示的样式不一样</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日志</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/11/03/20%E5%B9%B411%E6%9C%883%E6%97%A5/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/4/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/6/">Next &amp;raquo;</a>
@@ -1311,11 +1340,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+                <a href="javascript:void(0)" class="js-tag color1">react</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1328,10 +1361,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">node</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">react</a>
               </li>
              
               <li class="article-tag-list-item">
