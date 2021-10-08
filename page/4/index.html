@@ -202,6 +202,100 @@
             
 
   
+    <article id="post-进程与线程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/05/19/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/" target="_blank">进程与线程</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/05/19/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/" class="archive-article-date">
+        <time datetime="2021-05-19T13:20:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-19</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>进程与线程</p>
+<p><strong>进程和线程的主要差别在于它们是不同的操作系统资源管理方式。进程有独立的地址空间，一个进程崩溃后，在保护模式下不会对其它进程产生影响，而线程只是一个进程中的不同执行路径。线程有自己的堆栈和局部变量，但线程之间没有单独的地址空间，一个线程死掉就等于整个进程死掉，所以多进程的程序要比多线程的程序健壮，但在进程切换时，耗费资源较大，效率要差一些。但对于一些要求同时进行并且又要共享某些变量的并发操作，只能用线程，不能用进程。</strong></p>
+<p>一个线程包含以下内容：</p>
+<p>​    一个指向当前被执行指令的指令指针；</p>
+<p>​    一个栈；</p>
+<p>​    一个寄存器值的集合，定义了一部分描述正在执行线程的处理器状态的值；</p>
+<p>​    一个私有的数据区。</p>
+<p>浏览器设计成单线程的理由是，客户端的JS函数必须不能运行太长的时间，否则会导致循环事件，浏览器无法对用户输入作出响应。</p>
+<p>web worker创建代码的并行线程，不过web worker处在一个自包含的执行环境中，无法访问Window对象和Document对象，与主线程的通信只能通过异步消息传递机制来实现</p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">基础</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/05/19/%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-axios取消请求" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1219,110 +1313,6 @@
 
 
   
-    <article id="post-21年3月6日" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/03/06/21%E5%B9%B43%E6%9C%886%E6%97%A5/" target="_blank">21年3月6日</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/03/06/21%E5%B9%B43%E6%9C%886%E6%97%A5/" class="archive-article-date">
-        <time datetime="2021-03-06T04:14:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-06</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="localhost打不开"><a href="#localhost打不开" class="headerlink" title="localhost打不开"></a>localhost打不开</h1><p>在项目配置了host为localhost的时候，在浏览器的localhost打不开了，但是把host改为127.0.0.1的时候，就可以在127.0.0.1打开项目了</p>
-<h3 id="localhost与127-0-0-1的区别"><a href="#localhost与127-0-0-1的区别" class="headerlink" title="localhost与127.0.0.1的区别"></a>localhost与127.0.0.1的区别</h3><p>localhost是本地，不经过网卡传输，他不受到网络防火墙和网卡相关的限制</p>
-<p>127.0.0.1是本机，通过网卡传输，它依赖网卡，并受到网络防火墙和网卡相关的限制</p>
-<h3 id="原因与解决方法"><a href="#原因与解决方法" class="headerlink" title="原因与解决方法"></a>原因与解决方法</h3><p>后来经过思考我好像之前改了本地的host文件，通过软件SwitchHosts修改电脑的host文件，127.0.0.1 localhost ，<strong>注意需要重新启动电脑</strong></p>
-<h1 id="全局引入scss文件变量"><a href="#全局引入scss文件变量" class="headerlink" title="全局引入scss文件变量"></a>全局引入scss文件变量</h1><p>使用scss-resources-loader</p>
-<p>如果是vue-cli3</p>
-<p>根目录新建vue.config.js文件</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  chainWebpack: <span class="function"><span class="params">config</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> oneOfsMap = config.module.rule(<span class="string">'scss'</span>).oneOfs.store</span><br><span class="line">    oneOfsMap.forEach(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">      item</span><br><span class="line">        .use(<span class="string">'sass-resources-loader'</span>)</span><br><span class="line">        .loader(<span class="string">'sass-resources-loader'</span>)</span><br><span class="line">        .options(&#123;</span><br><span class="line">          <span class="comment">// Provide path to the file with resources</span></span><br><span class="line">          resources: <span class="string">'./path/to/resources.scss'</span>,</span><br><span class="line"> </span><br><span class="line">          <span class="comment">// Or array of paths</span></span><br><span class="line">          resources: [<span class="string">'./path/to/vars.scss'</span>, <span class="string">'./path/to/mixins.scss'</span>]</span><br><span class="line">        &#125;)</span><br><span class="line">        .end()</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>如果是vue-cli2</p>
-<p>you need to add the following code in <code>build/utils.js</code> after line 42 </p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (loader === <span class="string">'sass'</span>) &#123;</span><br><span class="line">  loaders.push(&#123;</span><br><span class="line">    loader: <span class="string">'sass-resources-loader'</span>,</span><br><span class="line">    options: &#123;</span><br><span class="line">      resources: <span class="string">'path/to/your/file.scss'</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>如果是webpack4</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>: &#123;</span><br><span class="line">    rules: [</span><br><span class="line">      &#123;</span><br><span class="line">        test: <span class="regexp">/\.vue$/</span>,</span><br><span class="line">        use: <span class="string">'vue-loader'</span></span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        test: <span class="regexp">/\.css$/</span>,</span><br><span class="line">        use: [</span><br><span class="line">          &#123; <span class="attr">loader</span>: <span class="string">'vue-style-loader'</span> &#125;,</span><br><span class="line">          &#123; <span class="attr">loader</span>: <span class="string">'css-loader'</span>, <span class="attr">options</span>: &#123; <span class="attr">sourceMap</span>: <span class="literal">true</span> &#125; &#125;,</span><br><span class="line">        ]</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        test: <span class="regexp">/\.scss$/</span>,</span><br><span class="line">        use: [</span><br><span class="line">          &#123; <span class="attr">loader</span>: <span class="string">'vue-style-loader'</span> &#125;,</span><br><span class="line">          &#123; <span class="attr">loader</span>: <span class="string">'css-loader'</span>, <span class="attr">options</span>: &#123; <span class="attr">sourceMap</span>: <span class="literal">true</span> &#125; &#125;,</span><br><span class="line">          &#123; <span class="attr">loader</span>: <span class="string">'sass-loader'</span>, <span class="attr">options</span>: &#123; <span class="attr">sourceMap</span>: <span class="literal">true</span> &#125; &#125;,</span><br><span class="line">          &#123; <span class="attr">loader</span>: <span class="string">'sass-resources-loader'</span>,</span><br><span class="line">            options: &#123;</span><br><span class="line">              sourceMap: <span class="literal">true</span>,</span><br><span class="line">              resources: [</span><br><span class="line">                resolveFromRootDir(<span class="string">'src/styles/variables.scss'</span>),</span><br><span class="line">              ]</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        ]</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<p>如果是webpack2或者3</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Webpack@2: webpack.config.js */</span></span><br><span class="line"> </span><br><span class="line"><span class="built_in">module</span>: &#123;</span><br><span class="line">  rules: [</span><br><span class="line">    <span class="comment">// Apply loader</span></span><br><span class="line">    &#123;</span><br><span class="line">      test: <span class="regexp">/\.scss$/</span>,</span><br><span class="line">      use: [</span><br><span class="line">        <span class="string">'style-loader'</span>,</span><br><span class="line">        <span class="string">'css-loader'</span>,</span><br><span class="line">        <span class="string">'postcss-loader'</span>,</span><br><span class="line">        <span class="string">'sass-loader'</span>,</span><br><span class="line">        &#123;</span><br><span class="line">          loader: <span class="string">'sass-resources-loader'</span>,</span><br><span class="line">          options: &#123;</span><br><span class="line">            <span class="comment">// Provide path to the file with resources</span></span><br><span class="line">            resources: <span class="string">'./path/to/resources.scss'</span>,</span><br><span class="line"> </span><br><span class="line">            <span class="comment">// Or array of paths</span></span><br><span class="line">            resources: [<span class="string">'./path/to/vars.scss'</span>, <span class="string">'./path/to/mixins.scss'</span>]</span><br><span class="line">          &#125;,</span><br><span class="line">        &#125;,</span><br><span class="line">      ],</span><br><span class="line">    &#125;,</span><br><span class="line">  ],</span><br><span class="line">&#125;,</span><br><span class="line"> </span><br><span class="line"><span class="comment">/* Webpack@1: webpack.config.js */</span></span><br><span class="line"> </span><br><span class="line"><span class="built_in">module</span>: &#123;</span><br><span class="line">  loaders: [</span><br><span class="line">    <span class="comment">// Apply loader</span></span><br><span class="line">    &#123; <span class="attr">test</span>: <span class="regexp">/\.scss$/</span>, <span class="attr">loader</span>: <span class="string">'style!css!sass!sass-resources'</span> &#125;,</span><br><span class="line">  ],</span><br><span class="line">&#125;,</span><br><span class="line"> </span><br><span class="line"><span class="comment">// Provide path to the file with resources</span></span><br><span class="line">sassResources: <span class="string">'./path/to/resources.scss'</span>,</span><br><span class="line"> </span><br><span class="line"><span class="comment">// Or array of paths</span></span><br><span class="line">sassResources: [<span class="string">'./path/to/vars.scss'</span>, <span class="string">'./path/to/mixins.scss'</span>],</span><br></pre></td></tr></table></figure>
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日志</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/03/06/21%E5%B9%B43%E6%9C%886%E6%97%A5/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/3/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/5/">Next &amp;raquo;</a>
@@ -1460,15 +1450,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">webpack</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">react</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1492,11 +1482,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">小程序</a>
+                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
+                <a href="javascript:void(0)" class="js-tag color4">小程序</a>
               </li>
              
               <li class="article-tag-list-item">
