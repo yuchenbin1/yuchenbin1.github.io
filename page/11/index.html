@@ -202,6 +202,99 @@
             
 
   
+    <article id="post-vue的局部组件化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/04/08/vue%E7%9A%84%E5%B1%80%E9%83%A8%E7%BB%84%E4%BB%B6%E5%8C%96/" target="_blank">vue的局部组件化</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/04/08/vue%E7%9A%84%E5%B1%80%E9%83%A8%E7%BB%84%E4%BB%B6%E5%8C%96/" class="archive-article-date">
+        <time datetime="2020-04-08T15:33:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-08</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="vue的局部组件化"><a href="#vue的局部组件化" class="headerlink" title="vue的局部组件化"></a>vue的局部组件化</h1><p>conponents{</p>
+<p>组件名1：组件对象1，</p>
+<p>组件名2：组件对象2</p>
+<p>}</p>
+<p>局部组件化只能在el所挂载的区域内</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=<span class="string">"utf-8"</span>&gt;</span><br><span class="line">		&lt;title&gt;&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">			&lt;hello-world&gt;&lt;<span class="regexp">/hello-world&gt;</span></span><br><span class="line"><span class="regexp">			&lt;hello-world&gt;&lt;/</span>hello-world&gt;</span><br><span class="line">		&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">		&lt;script src="https:/</span><span class="regexp">/cdn.jsdelivr.net/</span>npm/vue/dist/vue.js<span class="string">"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="string">		&lt;script&gt;</span></span><br><span class="line"><span class="string">			var HelloWorld=&#123;</span></span><br><span class="line"><span class="string">				data:function()&#123;</span></span><br><span class="line"><span class="string">					return &#123;</span></span><br><span class="line"><span class="string">						msg:'hello'</span></span><br><span class="line"><span class="string">					&#125;</span></span><br><span class="line"><span class="string">				&#125;,</span></span><br><span class="line"><span class="string">				template:'&lt;div&gt;&#123;&#123;msg&#125;&#125;&lt;/div&gt;'</span></span><br><span class="line"><span class="string">			&#125;</span></span><br><span class="line"><span class="string">			var vm=new Vue(&#123;</span></span><br><span class="line"><span class="string">				el:'#app',</span></span><br><span class="line"><span class="string">				data:&#123;</span></span><br><span class="line"><span class="string">					</span></span><br><span class="line"><span class="string">				&#125;,</span></span><br><span class="line"><span class="string">				components:&#123;</span></span><br><span class="line"><span class="string">					'hello-world':HelloWorld,</span></span><br><span class="line"><span class="string">				&#125;</span></span><br><span class="line"><span class="string">			&#125;)</span></span><br><span class="line"><span class="string">		&lt;/script&gt;</span></span><br><span class="line"><span class="string">	&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>与全局不同的点就在于components内部是用：分隔的，而全局是用，分隔。</p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/04/08/vue%E7%9A%84%E5%B1%80%E9%83%A8%E7%BB%84%E4%BB%B6%E5%8C%96/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-vue的全局组件化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1041,110 +1134,6 @@
 
 
   
-    <article id="post-simple-calculator" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/03/29/simple-calculator/" target="_blank">simple calculator</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/03/29/simple-calculator/" class="archive-article-date">
-        <time datetime="2020-03-29T11:19:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-29</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="一个简易的计算机"><a href="#一个简易的计算机" class="headerlink" title="一个简易的计算机"></a>一个简易的计算机</h1><h3 id="演示链接"><a href="#演示链接" class="headerlink" title="演示链接"></a><a href="http://yuchenbin.gitee.io/calculator" target="_blank" rel="noopener">演示链接</a></h3><p><strong>利用vue.js实现</strong></p>
-<h2 id="实现功能："><a href="#实现功能：" class="headerlink" title="实现功能："></a>实现功能：</h2><ol>
-<li>简单的计算，包括正数、负数、小数、加减乘除的运算</li>
-<li>三个显示屏，右下角为输入屏，左下角为结果屏，上面是公式屏，下方为按键</li>
-<li>处理一些用户操作问题：<ol>
-<li>用户在按数字前按运算符+、-、*、/这些，操作无效</li>
-<li>用户在没有数字的时候按小数点，默认为前面是0</li>
-<li>用户在一个数字中按多次小数点，之后按的小数点无效</li>
-<li>用户在数字中按负号，重复按负号，按的负号无效且必须在数字最前面</li>
-<li>除以0默认为无穷大</li>
-</ol>
-</li>
-</ol>
-<h3 id="js文件"><a href="#js文件" class="headerlink" title="js文件"></a>js文件</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> counter=<span class="keyword">new</span> Vue(&#123;</span><br><span class="line">				el:<span class="string">'#outer'</span>,</span><br><span class="line">				data:&#123;</span><br><span class="line">					inputMsg:<span class="string">''</span>,</span><br><span class="line">					nextFunction:<span class="string">''</span>,</span><br><span class="line">					result:<span class="string">''</span>,</span><br><span class="line">					mainShow:<span class="string">''</span>,</span><br><span class="line">					icon:<span class="string">''</span></span><br><span class="line">				&#125;,</span><br><span class="line">				methods:&#123;</span><br><span class="line">					showNum7:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">this</span>.inputMsg+=<span class="string">'7'</span>;<span class="keyword">this</span>.mainChange()&#125;,</span><br><span class="line">					showNum8:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">this</span>.inputMsg+=<span class="string">'8'</span>;<span class="keyword">this</span>.mainChange()&#125;,</span><br><span class="line">					showNum9:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">this</span>.inputMsg+=<span class="string">'9'</span>;<span class="keyword">this</span>.mainChange()&#125;,</span><br><span class="line">					showNum4:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">this</span>.inputMsg+=<span class="string">'4'</span>;<span class="keyword">this</span>.mainChange()&#125;,</span><br><span class="line">					showNum5:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">this</span>.inputMsg+=<span class="string">'5'</span>;<span class="keyword">this</span>.mainChange()&#125;,</span><br><span class="line">					showNum6:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">this</span>.inputMsg+=<span class="string">'6'</span>;<span class="keyword">this</span>.mainChange()&#125;,</span><br><span class="line">					showNum1:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">this</span>.inputMsg+=<span class="string">'1'</span>;<span class="keyword">this</span>.mainChange()&#125;,</span><br><span class="line">					showNum2:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">this</span>.inputMsg+=<span class="string">'2'</span>;<span class="keyword">this</span>.mainChange()&#125;,</span><br><span class="line">					showNum3:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">this</span>.inputMsg+=<span class="string">'3'</span>;<span class="keyword">this</span>.mainChange()&#125;,</span><br><span class="line">					showNum_:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">						<span class="keyword">if</span>(<span class="keyword">this</span>.inputMsg==<span class="string">''</span>)&#123;<span class="keyword">this</span>.inputMsg+=<span class="string">'-'</span>;<span class="keyword">this</span>.mainChange()</span><br><span class="line">						&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">							<span class="keyword">this</span>.mainChange();</span><br><span class="line">						&#125;</span><br><span class="line">					&#125;,	</span><br><span class="line">					showNum0:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">this</span>.inputMsg+=<span class="string">'0'</span>;<span class="keyword">this</span>.mainChange()&#125;,</span><br><span class="line">					showNumDot:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">						<span class="keyword">if</span>(<span class="keyword">this</span>.inputMsg.lastIndexOf(<span class="string">'.'</span>)==<span class="number">-1</span>)&#123;</span><br><span class="line">							<span class="keyword">if</span>(<span class="keyword">this</span>.inputMsg==<span class="string">''</span>)&#123;</span><br><span class="line">								<span class="keyword">this</span>.inputMsg=<span class="string">'0.'</span>;</span><br><span class="line">							&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">							<span class="keyword">this</span>.inputMsg+=<span class="string">'.'</span>&#125;</span><br><span class="line">						&#125;;</span><br><span class="line">						<span class="keyword">this</span>.mainChange();</span><br><span class="line">					&#125;,</span><br><span class="line">					</span><br><span class="line">					Mul:<span class="function"><span class="keyword">function</span>(<span class="params">x,y</span>)</span>&#123;</span><br><span class="line">						<span class="keyword">return</span> <span class="built_in">parseFloat</span>(x)*<span class="built_in">parseFloat</span>(y)</span><br><span class="line">					&#125;,</span><br><span class="line">					Div:<span class="function"><span class="keyword">function</span>(<span class="params">x,y</span>)</span>&#123;</span><br><span class="line">						<span class="keyword">return</span> <span class="built_in">parseFloat</span>(x)/<span class="built_in">parseFloat</span>(y)</span><br><span class="line">					&#125;,</span><br><span class="line">					Add:<span class="function"><span class="keyword">function</span>(<span class="params">x,y</span>)</span>&#123;</span><br><span class="line">						<span class="keyword">return</span> <span class="built_in">parseFloat</span>(x)+<span class="built_in">parseFloat</span>(y)</span><br><span class="line">					&#125;,</span><br><span class="line">					Min:<span class="function"><span class="keyword">function</span>(<span class="params">x,y</span>)</span>&#123;</span><br><span class="line">						<span class="keyword">return</span> <span class="built_in">parseFloat</span>(x)-<span class="built_in">parseFloat</span>(y)</span><br><span class="line">					&#125;,</span><br><span class="line">					</span><br><span class="line">					btnMul:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">						<span class="keyword">if</span>(<span class="keyword">this</span>.inputMsg==<span class="string">''</span>)&#123;</span><br><span class="line">							<span class="keyword">if</span>(<span class="keyword">this</span>.result==<span class="string">''</span>)&#123;</span><br><span class="line">								<span class="keyword">this</span>.nextFunction=<span class="string">''</span>;</span><br><span class="line">							&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">								<span class="keyword">this</span>.nextFunction=<span class="string">'mul'</span>;</span><br><span class="line">							&#125;;</span><br><span class="line">						&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">							<span class="keyword">switch</span>(<span class="keyword">this</span>.nextFunction)&#123;</span><br><span class="line">								<span class="keyword">case</span> <span class="string">''</span>:<span class="keyword">this</span>.result=<span class="keyword">this</span>.inputMsg;<span class="keyword">break</span>;</span><br><span class="line">								<span class="keyword">case</span> <span class="string">'mul'</span> : <span class="keyword">this</span>.result=<span class="keyword">this</span>.Mul(<span class="keyword">this</span>.result,<span class="keyword">this</span>.inputMsg);<span class="keyword">break</span>;</span><br><span class="line">								<span class="keyword">case</span> <span class="string">'div'</span> : <span class="keyword">this</span>.result=<span class="keyword">this</span>.Div(<span class="keyword">this</span>.result,<span class="keyword">this</span>.inputMsg);<span class="keyword">break</span>;</span><br><span class="line">								<span class="keyword">case</span> <span class="string">'add'</span> : <span class="keyword">this</span>.result=<span class="keyword">this</span>.Add(<span class="keyword">this</span>.result,<span class="keyword">this</span>.inputMsg);<span class="keyword">break</span>;</span><br><span class="line">								<span class="keyword">case</span> <span class="string">'min'</span> : <span class="keyword">this</span>.result=<span class="keyword">this</span>.Min(<span class="keyword">this</span>.result,<span class="keyword">this</span>.inputMsg);<span class="keyword">break</span>;</span><br><span class="line">							&#125;</span><br><span class="line">						<span class="keyword">this</span>.nextFunction=<span class="string">'mul'</span>;</span><br><span class="line">						<span class="keyword">this</span>.inputMsg=<span class="string">''</span>;</span><br><span class="line">						&#125;</span><br><span class="line">						<span class="keyword">this</span>.mainChange();</span><br><span class="line">					&#125;,</span><br><span class="line">					btnDiv:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">						<span class="keyword">if</span>(<span class="keyword">this</span>.inputMsg==<span class="string">''</span>)&#123;</span><br><span class="line">							<span class="keyword">if</span>(<span class="keyword">this</span>.result==<span class="string">''</span>)&#123;</span><br><span class="line">								<span class="keyword">this</span>.nextFunction=<span class="string">''</span>;</span><br><span class="line">							&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">								<span class="keyword">this</span>.nextFunction=<span class="string">'div'</span>;</span><br><span class="line">							&#125;;</span><br><span class="line">						&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">							<span class="keyword">switch</span>(<span class="keyword">this</span>.nextFunction)&#123;</span><br><span class="line">								<span class="keyword">case</span> <span class="string">''</span>:<span class="keyword">this</span>.result=<span class="keyword">this</span>.inputMsg;<span class="keyword">break</span>;</span><br><span class="line">								<span class="keyword">case</span> <span class="string">'mul'</span> : <span class="keyword">this</span>.result=<span class="keyword">this</span>.Mul(<span class="keyword">this</span>.result,<span class="keyword">this</span>.inputMsg);<span class="keyword">break</span>;</span><br><span class="line">								<span class="keyword">case</span> <span class="string">'div'</span> : <span class="keyword">this</span>.result=<span class="keyword">this</span>.Div(<span class="keyword">this</span>.result,<span class="keyword">this</span>.inputMsg);<span class="keyword">break</span>;</span><br><span class="line">								<span class="keyword">case</span> <span class="string">'add'</span> : <span class="keyword">this</span>.result=<span class="keyword">this</span>.Add(<span class="keyword">this</span>.result,<span class="keyword">this</span>.inputMsg);<span class="keyword">break</span>;</span><br><span class="line">								<span class="keyword">case</span> <span class="string">'min'</span> : <span class="keyword">this</span>.result=<span class="keyword">this</span>.Min(<span class="keyword">this</span>.result,<span class="keyword">this</span>.inputMsg);<span class="keyword">break</span>;</span><br><span class="line">							&#125;</span><br><span class="line">						<span class="keyword">this</span>.nextFunction=<span class="string">'div'</span>;</span><br><span class="line">						<span class="keyword">this</span>.inputMsg=<span class="string">''</span>;</span><br><span class="line">						&#125;</span><br><span class="line">						<span class="keyword">this</span>.mainChange();</span><br><span class="line">					&#125;,</span><br><span class="line">					btnAdd:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">						<span class="keyword">if</span>(<span class="keyword">this</span>.inputMsg==<span class="string">''</span>)&#123;</span><br><span class="line">							<span class="keyword">if</span>(<span class="keyword">this</span>.result==<span class="string">''</span>)&#123;</span><br><span class="line">								<span class="keyword">this</span>.nextFunction=<span class="string">''</span>;</span><br><span class="line">							&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">								<span class="keyword">this</span>.nextFunction=<span class="string">'add'</span>;</span><br><span class="line">							&#125;;</span><br><span class="line">						&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">							<span class="keyword">switch</span>(<span class="keyword">this</span>.nextFunction)&#123;</span><br><span class="line">								<span class="keyword">case</span> <span class="string">''</span>:<span class="keyword">this</span>.result=<span class="keyword">this</span>.inputMsg;<span class="keyword">break</span>;</span><br><span class="line">								<span class="keyword">case</span> <span class="string">'mul'</span> : <span class="keyword">this</span>.result=<span class="keyword">this</span>.Mul(<span class="keyword">this</span>.result,<span class="keyword">this</span>.inputMsg);<span class="keyword">break</span>;</span><br><span class="line">								<span class="keyword">case</span> <span class="string">'div'</span> : <span class="keyword">this</span>.result=<span class="keyword">this</span>.Div(<span class="keyword">this</span>.result,<span class="keyword">this</span>.inputMsg);<span class="keyword">break</span>;</span><br><span class="line">								<span class="keyword">case</span> <span class="string">'add'</span> : <span class="keyword">this</span>.result=<span class="keyword">this</span>.Add(<span class="keyword">this</span>.result,<span class="keyword">this</span>.inputMsg);<span class="keyword">break</span>;</span><br><span class="line">								<span class="keyword">case</span> <span class="string">'min'</span> : <span class="keyword">this</span>.result=<span class="keyword">this</span>.Min(<span class="keyword">this</span>.result,<span class="keyword">this</span>.inputMsg);<span class="keyword">break</span>;</span><br><span class="line">							&#125;</span><br><span class="line">						<span class="keyword">this</span>.nextFunction=<span class="string">'add'</span>;</span><br><span class="line">						<span class="keyword">this</span>.inputMsg=<span class="string">''</span>;</span><br><span class="line">						&#125;</span><br><span class="line">						<span class="keyword">this</span>.mainChange();</span><br><span class="line">					&#125;,</span><br><span class="line">					btnMin:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">						<span class="keyword">if</span>(<span class="keyword">this</span>.inputMsg==<span class="string">''</span>)&#123;</span><br><span class="line">							<span class="keyword">if</span>(<span class="keyword">this</span>.result==<span class="string">''</span>)&#123;</span><br><span class="line">								<span class="keyword">this</span>.nextFunction=<span class="string">''</span>;</span><br><span class="line">							&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">								<span class="keyword">this</span>.nextFunction=<span class="string">'min'</span>;</span><br><span class="line">							&#125;;</span><br><span class="line">						&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">							<span class="keyword">switch</span>(<span class="keyword">this</span>.nextFunction)&#123;</span><br><span class="line">								<span class="keyword">case</span> <span class="string">''</span>:<span class="keyword">this</span>.result=<span class="keyword">this</span>.inputMsg;<span class="keyword">break</span>;</span><br><span class="line">								<span class="keyword">case</span> <span class="string">'mul'</span> : <span class="keyword">this</span>.result=<span class="keyword">this</span>.Mul(<span class="keyword">this</span>.result,<span class="keyword">this</span>.inputMsg);<span class="keyword">break</span>;</span><br><span class="line">								<span class="keyword">case</span> <span class="string">'div'</span> : <span class="keyword">this</span>.result=<span class="keyword">this</span>.Div(<span class="keyword">this</span>.result,<span class="keyword">this</span>.inputMsg);<span class="keyword">break</span>;</span><br><span class="line">								<span class="keyword">case</span> <span class="string">'add'</span> : <span class="keyword">this</span>.result=<span class="keyword">this</span>.Add(<span class="keyword">this</span>.result,<span class="keyword">this</span>.inputMsg);<span class="keyword">break</span>;</span><br><span class="line">								<span class="keyword">case</span> <span class="string">'min'</span> : <span class="keyword">this</span>.result=<span class="keyword">this</span>.Min(<span class="keyword">this</span>.result,<span class="keyword">this</span>.inputMsg);<span class="keyword">break</span>;</span><br><span class="line">							&#125;</span><br><span class="line">						<span class="keyword">this</span>.nextFunction=<span class="string">'min'</span>;</span><br><span class="line">						<span class="keyword">this</span>.inputMsg=<span class="string">''</span>;</span><br><span class="line">						&#125;</span><br><span class="line">						<span class="keyword">this</span>.mainChange();</span><br><span class="line">					&#125;,</span><br><span class="line">					btnCal:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">						<span class="keyword">switch</span>(<span class="keyword">this</span>.nextFunction)&#123;</span><br><span class="line">							<span class="keyword">case</span> <span class="string">''</span>:<span class="keyword">if</span>(<span class="keyword">this</span>.inputMsg!=<span class="string">''</span>)&#123;<span class="keyword">this</span>.result=<span class="keyword">this</span>.inputMsg;&#125;<span class="keyword">else</span>&#123;<span class="keyword">this</span>.result=<span class="keyword">this</span>.result;&#125;<span class="keyword">break</span>;</span><br><span class="line">							<span class="keyword">case</span> <span class="string">'mul'</span> : <span class="keyword">this</span>.result=<span class="keyword">this</span>.Mul(<span class="keyword">this</span>.result,<span class="keyword">this</span>.inputMsg);<span class="keyword">break</span>;</span><br><span class="line">							<span class="keyword">case</span> <span class="string">'div'</span> : <span class="keyword">this</span>.result=<span class="keyword">this</span>.Div(<span class="keyword">this</span>.result,<span class="keyword">this</span>.inputMsg);<span class="keyword">break</span>;</span><br><span class="line">							<span class="keyword">case</span> <span class="string">'add'</span> : <span class="keyword">this</span>.result=<span class="keyword">this</span>.Add(<span class="keyword">this</span>.result,<span class="keyword">this</span>.inputMsg);<span class="keyword">break</span>;</span><br><span class="line">							<span class="keyword">case</span> <span class="string">'min'</span> : <span class="keyword">this</span>.result=<span class="keyword">this</span>.Min(<span class="keyword">this</span>.result,<span class="keyword">this</span>.inputMsg);<span class="keyword">break</span>;</span><br><span class="line">						&#125;</span><br><span class="line">						</span><br><span class="line">						<span class="keyword">this</span>.nextFunction=<span class="string">''</span>;</span><br><span class="line">						<span class="keyword">this</span>.inputMsg=<span class="string">''</span>;</span><br><span class="line">						<span class="keyword">this</span>.mainChange();</span><br><span class="line">					&#125;,</span><br><span class="line">					btnCle:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">						<span class="keyword">this</span>.inputMsg=<span class="string">''</span>,</span><br><span class="line">						<span class="keyword">this</span>.nextFunction=<span class="string">''</span>,</span><br><span class="line">						<span class="keyword">this</span>.result=<span class="string">''</span>,</span><br><span class="line">						<span class="keyword">this</span>.mainShow=<span class="string">''</span></span><br><span class="line">					&#125;,</span><br><span class="line">					btnBac:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">						<span class="keyword">this</span>.inputMsg=<span class="keyword">this</span>.inputMsg.slice(<span class="number">0</span>,<span class="keyword">this</span>.inputMsg.length<span class="number">-1</span>);</span><br><span class="line">						<span class="keyword">this</span>.mainChange();</span><br><span class="line">					&#125;,</span><br><span class="line">					</span><br><span class="line">					</span><br><span class="line">					mainChange:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">						<span class="keyword">switch</span>(<span class="keyword">this</span>.nextFunction)&#123;</span><br><span class="line">							<span class="keyword">case</span> <span class="string">''</span> : <span class="keyword">this</span>.icon=<span class="string">''</span>;<span class="keyword">break</span>;</span><br><span class="line">							<span class="keyword">case</span> <span class="string">'mul'</span> : <span class="keyword">this</span>.icon=<span class="string">'*'</span>;<span class="keyword">break</span>;</span><br><span class="line">							<span class="keyword">case</span> <span class="string">'div'</span> : <span class="keyword">this</span>.icon=<span class="string">'/'</span>;<span class="keyword">break</span>;</span><br><span class="line">							<span class="keyword">case</span> <span class="string">'add'</span> : <span class="keyword">this</span>.icon=<span class="string">'+'</span>;<span class="keyword">break</span>;</span><br><span class="line">							<span class="keyword">case</span> <span class="string">'min'</span> : <span class="keyword">this</span>.icon=<span class="string">'-'</span>;<span class="keyword">break</span>;</span><br><span class="line">						&#125;;</span><br><span class="line">						<span class="keyword">if</span>(<span class="keyword">this</span>.result==<span class="string">''</span>)&#123;</span><br><span class="line">							<span class="keyword">this</span>.icon=<span class="string">''</span>;</span><br><span class="line">						&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">						<span class="keyword">this</span>.mainShow=<span class="string">`<span class="subst">$&#123;<span class="keyword">this</span>.result&#125;</span><span class="subst">$&#123;<span class="keyword">this</span>.icon&#125;</span><span class="subst">$&#123;<span class="keyword">this</span>.inputMsg&#125;</span>`</span>;</span><br><span class="line">						&#125;</span><br><span class="line">					&#125;,</span><br><span class="line">					</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;)</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">页面项目</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/03/29/simple-calculator/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/10/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/12/">Next &amp;raquo;</a>
@@ -1290,19 +1279,19 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">基础</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">vue</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">

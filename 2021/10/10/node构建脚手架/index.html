@@ -6,21 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://yuchenbin1.github.io">
-  <title>选取文档元素 | ycb的博客</title>
+  <title>node构建脚手架 | ycb的博客</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="选取文档元素用指定的id选取document.getElementById()注意这是document的特定方法,返回一个对象 用指定的标签选取element.getElementsByTagName()返回一个对象类数组 用指定的class类选取element.getElementsByClassName()返回一个对象类数组 用指定的name属性选取element.getElementsByN">
+  <meta name="description" content="使用node搭建脚手架1.安装配置文件1git init  新建项目 2.修改文件，新增binbin的作用如果有某几个可执行文件想放置到全局，在bin这个字段导入路径就行，它会创建一个软链接到该文件 确保bin文件的里面开头要写上#!&#x2F;usr&#x2F;bin&#x2F;env node，否则文件脚本不会在Node环境下运行 3.新建一个bin的文件夹123456789101112131415161718192021">
 <meta property="og:type" content="article">
-<meta property="og:title" content="选取文档元素">
-<meta property="og:url" content="https://yuchenbin1.github.io/2020/03/21/%E9%80%89%E5%8F%96%E6%96%87%E6%A1%A3%E5%85%83%E7%B4%A0/index.html">
+<meta property="og:title" content="node构建脚手架">
+<meta property="og:url" content="https://yuchenbin1.github.io/2021/10/10/node%E6%9E%84%E5%BB%BA%E8%84%9A%E6%89%8B%E6%9E%B6/index.html">
 <meta property="og:site_name" content="ycb的博客">
-<meta property="og:description" content="选取文档元素用指定的id选取document.getElementById()注意这是document的特定方法,返回一个对象 用指定的标签选取element.getElementsByTagName()返回一个对象类数组 用指定的class类选取element.getElementsByClassName()返回一个对象类数组 用指定的name属性选取element.getElementsByN">
+<meta property="og:description" content="使用node搭建脚手架1.安装配置文件1git init  新建项目 2.修改文件，新增binbin的作用如果有某几个可执行文件想放置到全局，在bin这个字段导入路径就行，它会创建一个软链接到该文件 确保bin文件的里面开头要写上#!&#x2F;usr&#x2F;bin&#x2F;env node，否则文件脚本不会在Node环境下运行 3.新建一个bin的文件夹123456789101112131415161718192021">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-03-21T08:45:29.000Z">
-<meta property="article:modified_time" content="2020-03-21T09:04:30.201Z">
+<meta property="article:published_time" content="2021-10-10T08:15:53.000Z">
+<meta property="article:modified_time" content="2021-10-10T08:16:34.688Z">
 <meta property="article:author" content="ycb">
-<meta property="article:tag" content="js">
+<meta property="article:tag" content="node">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="ycb的博客" type="application/atom+xml">
@@ -198,14 +198,14 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-选取文档元素" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-node构建脚手架" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
     <h1 class="article-title" itemprop="name">
-      选取文档元素
+      node构建脚手架
     </h1>
   
 
@@ -217,8 +217,8 @@
               <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
         </span>
 
-<a href="/2020/03/21/%E9%80%89%E5%8F%96%E6%96%87%E6%A1%A3%E5%85%83%E7%B4%A0/" class="archive-article-date">
-        <time datetime="2020-03-21T08:45:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-21</time>
+<a href="/2021/10/10/node%E6%9E%84%E5%BB%BA%E8%84%9A%E6%89%8B%E6%9E%B6/" class="archive-article-date">
+        <time datetime="2021-10-10T08:15:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-10</time>
 </a>
 
   
@@ -231,7 +231,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">207字</span>
+      <span class="post-count">501字</span>
     </span>
   </span>
 
@@ -240,7 +240,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">1分</span>
+      <span class="post-count">2分</span>
     </span>
   </span>
 </div>
@@ -251,13 +251,42 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="选取文档元素"><a href="#选取文档元素" class="headerlink" title="选取文档元素"></a>选取文档元素</h1><p>用指定的id选取<code>document.getElementById()</code>注意这是document的特定方法,返回一个对象</p>
-<p>用指定的标签选取<code>element.getElementsByTagName()</code>返回一个对象类数组</p>
-<p>用指定的class类选取<code>element.getElementsByClassName()</code>返回一个对象类数组</p>
-<p>用指定的name属性选取<code>element.getElementsByName</code>返回一个对象类数组(常用于表单)</p>
-<p>通过css选择器选取<code>document.querySelectorAll()</code>返回一个对象类数组或<code>document.querySelector()</code>返回一个对象</p>
-<p><strong>通过css选择器与上述方法的区别</strong></p>
-<p>返回的类对象不是实时的，不会更新后续文档的变化，而且注意的是Css中的一些伪元素（如:first-line和first-letter)与之使用会导致这些伪元素不匹配，因为这些伪元素只匹配了文本文档的一部分。</p>
+    <h1 id="使用node搭建脚手架"><a href="#使用node搭建脚手架" class="headerlink" title="使用node搭建脚手架"></a>使用node搭建脚手架</h1><h2 id="1-安装配置文件"><a href="#1-安装配置文件" class="headerlink" title="1.安装配置文件"></a>1.安装配置文件</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
+
+<p>新建项目</p>
+<h2 id="2-修改文件，新增bin"><a href="#2-修改文件，新增bin" class="headerlink" title="2.修改文件，新增bin"></a>2.修改文件，新增bin</h2><h3 id="bin的作用"><a href="#bin的作用" class="headerlink" title="bin的作用"></a>bin的作用</h3><p>如果有某几个可执行文件想放置到全局，在bin这个字段导入路径就行，它会创建一个软链接到该文件</p>
+<p><strong>确保bin文件的里面开头要写上#!/usr/bin/env node</strong>，否则文件脚本不会在Node环境下运行</p>
+<h2 id="3-新建一个bin的文件夹"><a href="#3-新建一个bin的文件夹" class="headerlink" title="3.新建一个bin的文件夹"></a>3.新建一个bin的文件夹</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/usr/bin/env node</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> fs=<span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"><span class="keyword">const</span> path=<span class="built_in">require</span>(<span class="string">'path'</span>);</span><br><span class="line"><span class="comment">//命令行询问</span></span><br><span class="line"><span class="keyword">const</span> inquirer=<span class="built_in">require</span>(<span class="string">'inquirer'</span>);</span><br><span class="line"><span class="comment">//模版引擎</span></span><br><span class="line"><span class="keyword">const</span> ejs=<span class="built_in">require</span>(<span class="string">'ejs'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//发起命令行的询问</span></span><br><span class="line">inquirer.prompt([</span><br><span class="line">  &#123;</span><br><span class="line">    type:<span class="string">'input'</span>,<span class="comment">//问题的输入方式</span></span><br><span class="line">    name:<span class="string">'name'</span>,<span class="comment">//问题的返回的键</span></span><br><span class="line">    message:<span class="string">'Project name?'</span><span class="comment">//屏幕的提示</span></span><br><span class="line">  &#125;</span><br><span class="line">]).then(<span class="function"><span class="params">anwsers</span>=&gt;</span>&#123;</span><br><span class="line">  <span class="comment">//根据用户回答生成文件</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">//模版目录</span></span><br><span class="line">  <span class="keyword">const</span> tmpDir=path.join(__dirname,<span class="string">'templates'</span>)</span><br><span class="line">  </span><br><span class="line">  <span class="comment">//输出目录</span></span><br><span class="line">  <span class="keyword">const</span> destDir=process.cwd()</span><br><span class="line">  </span><br><span class="line">  <span class="comment">//将模块的全部文件转换到目标目录</span></span><br><span class="line">  fs.readdir(tepDir,(err,files)=&gt;&#123;</span><br><span class="line">    <span class="keyword">if</span>(err) <span class="keyword">throw</span> err</span><br><span class="line">    files.forEach(<span class="function"><span class="params">file</span>=&gt;</span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'templates下的具体文件'</span>,file)</span><br><span class="line">      <span class="comment">//通过模版引擎去渲染</span></span><br><span class="line">      ejs.renderFile(path.join(tmpDir,file),anwsers,(err,result)=&gt;&#123;</span><br><span class="line">        <span class="keyword">if</span>(err) <span class="keyword">throw</span> err</span><br><span class="line">        <span class="comment">//写入文件</span></span><br><span class="line">        fs.writeFileSync(path.join(destDir,file),result)</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-新建templates文件夹模版"><a href="#4-新建templates文件夹模版" class="headerlink" title="4.新建templates文件夹模版"></a>4.新建templates文件夹模版</h2><p>需要引入的模版</p>
+<p>生成</p>
+<p>index.js与style.css</p>
+<p>Index.js</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;<span class="name">%=name</span> %&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>Style.css</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.&lt;%=name%&gt;&#123;</span><br><span class="line">    color:pink;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>&lt;%=name%&gt;可以获取到来自inquirer.prompt的数据</p>
+<h2 id="4-将脚手架全局使用"><a href="#4-将脚手架全局使用" class="headerlink" title="4.将脚手架全局使用"></a>4.将脚手架全局使用</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn link或者npm link</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-测试脚手架全局是否可以"><a href="#5-测试脚手架全局是否可以" class="headerlink" title="5.测试脚手架全局是否可以"></a>5.测试脚手架全局是否可以</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ generator-make --help</span><br><span class="line"></span><br><span class="line"><span class="comment">//成功</span></span><br></pre></td></tr></table></figure>
+
+<p>如果失败可能是没有权限</p>
+<p>解决方法</p>
+<p>首先，返回上一级</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd ..</span><br></pre></td></tr></table></figure>
+
+<p>然后给该脚手架权限</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chmod -R <span class="number">777</span> generator-make</span><br></pre></td></tr></table></figure>
+
+<p>最后再次测试</p>
+<p>如果出现找不到的模块的错误，可以npm install对应的模块</p>
+<h2 id="6-脚手架搭建项目"><a href="#6-脚手架搭建项目" class="headerlink" title="6.脚手架搭建项目"></a>6.脚手架搭建项目</h2><p>新建文件夹</p>
+<p>在命令行中输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$generator-make?Project name?bar</span><br></pre></td></tr></table></figure>
+
+<p>bar文件生成成功</p>
 
     
 
@@ -304,7 +333,7 @@
         </li>
         <li>
           <strong>本文链接：</strong>
-          <a href="https:/yuchenbin1.github.io/2020/03/21/选取文档元素/" title="选取文档元素" target="_blank">https:/yuchenbin1.github.io/2020/03/21/选取文档元素/</a>
+          <a href="https:/yuchenbin1.github.io/2021/10/10/node构建脚手架/" title="node构建脚手架" target="_blank">https:/yuchenbin1.github.io/2021/10/10/node构建脚手架/</a>
         </li>
         
         <li>
@@ -326,7 +355,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">node</a>
         		</li>
       		
 		</ul>
@@ -382,7 +411,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://yuchenbin1.github.io/2020/03/21/%E9%80%89%E5%8F%96%E6%96%87%E6%A1%A3%E5%85%83%E7%B4%A0/" alt="微信分享二维码"> -->
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://yuchenbin1.github.io/2021/10/10/node%E6%9E%84%E5%BB%BA%E8%84%9A%E6%89%8B%E6%9E%B6/" alt="微信分享二维码"> -->
     </div>
 </div>
 
@@ -397,18 +426,9 @@
 
 <nav id="article-nav">
   
-    <a href="/2020/03/24/node-first-day/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          node first day
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/03/18/%E5%9B%BE%E7%89%87%E4%B8%8E%E6%96%B9%E6%B3%95%E7%9A%84%E6%83%B0%E6%80%A7%E8%BD%BD%E5%85%A5/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">图片与方法的惰性载入</div>
+    <a href="/2021/10/08/%E5%89%8D%E7%AB%AF%E6%8A%A5%E9%94%99%E6%94%B6%E9%9B%86/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">前端报错收集</div>
       <i class="icon-circle-right"></i>
     </a>
   
