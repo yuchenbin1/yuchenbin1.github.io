@@ -202,6 +202,99 @@
             
 
   
+    <article id="post-promise的race和all的实现" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/05/27/promise%E7%9A%84race%E5%92%8Call%E7%9A%84%E5%AE%9E%E7%8E%B0/" target="_blank">promise的race和all的原理</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/05/27/promise%E7%9A%84race%E5%92%8Call%E7%9A%84%E5%AE%9E%E7%8E%B0/" class="archive-article-date">
+        <time datetime="2021-05-27T13:10:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-27</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>promise all手动封装实现</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Promise</span>.prototype.all = <span class="function"><span class="keyword">function</span>(<span class="params">promises</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> results = [];</span><br><span class="line">  <span class="keyword">let</span> promiseCount = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">let</span> promisesLength = promises.length;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> val <span class="keyword">of</span> promises) &#123;</span><br><span class="line">      <span class="built_in">Promise</span>.resolve(val).then(<span class="function"><span class="keyword">function</span>(<span class="params">res</span>) </span>&#123;</span><br><span class="line">        promiseCount++;</span><br><span class="line">        <span class="comment">// results.push(res);</span></span><br><span class="line">        results[i] = res;</span><br><span class="line">        <span class="comment">// 当所有函数都正确执行了，resolve输出所有返回结果。</span></span><br><span class="line">        <span class="keyword">if</span> (promiseCount === promisesLength) &#123;</span><br><span class="line">          <span class="keyword">return</span> resolve(results);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;, <span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> reject(err);</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>Promise race手动封装实现</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Promise</span>.prototype.race = <span class="function"><span class="keyword">function</span>(<span class="params">promise</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">let</span> promises = <span class="built_in">Array</span>.from(promise)</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; promises.length; i++) &#123;</span><br><span class="line">       		 <span class="built_in">Promise</span>.resolve(promises[i]).then(<span class="function"><span class="params">data</span> =&gt;</span> &#123;</span><br><span class="line">				resolve(data);</span><br><span class="line">       			 &#125;, err =&gt; &#123;</span><br><span class="line">          			<span class="keyword">return</span> reject(err)</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">基础</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/05/27/promise%E7%9A%84race%E5%92%8Call%E7%9A%84%E5%AE%9E%E7%8E%B0/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-栅格布局原理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1211,123 +1304,6 @@
 
 
   
-    <article id="post-21年3月20日" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/03/20/21%E5%B9%B43%E6%9C%8820%E6%97%A5/" target="_blank">21年3月20日</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/03/20/21%E5%B9%B43%E6%9C%8820%E6%97%A5/" class="archive-article-date">
-        <time datetime="2021-03-20T06:25:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-20</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="ES7和ES8中可能会使用的方法"><a href="#ES7和ES8中可能会使用的方法" class="headerlink" title="ES7和ES8中可能会使用的方法"></a>ES7和ES8中可能会使用的方法</h1><h2 id="includes"><a href="#includes" class="headerlink" title="includes"></a>includes</h2><p><code>Array.prototype.includes</code>可以查询一个数组中是否有某个值返回是true或者false</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>].includes(<span class="string">'a'</span>)     <span class="comment">// true</span></span><br><span class="line">[<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>].includes(<span class="string">'d'</span>)     <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
-
-<p>两个参数，第一个是查询的参数，第二个是开始查询的索引</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>].includes(<span class="string">'b'</span>)         <span class="comment">// true</span></span><br><span class="line">[<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>].includes(<span class="string">'b'</span>, <span class="number">1</span>)      <span class="comment">// true</span></span><br><span class="line">[<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>].includes(<span class="string">'b'</span>, <span class="number">2</span>)      <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
-
-<p>与indexOf对比，indexOf返回的是索引，没有返回的是-1</p>
-<p>但是不能查询数组,比如</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, [<span class="number">2</span>, <span class="number">3</span>], <span class="number">4</span>]</span><br><span class="line">arr.includes([<span class="number">2</span>, <span class="number">3</span>])   <span class="comment">//false</span></span><br><span class="line">arr.indexOf([<span class="number">2</span>, <span class="number">3</span>])    <span class="comment">//-1</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="Object-entries"><a href="#Object-entries" class="headerlink" title="Object.entries()"></a>Object.entries()</h2><p>将一个对象中可枚举属性的键名和键值按照二维数组的方式返回。若对象是数组，则会将数组的下标作为键值返回。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.entries(&#123; <span class="attr">one</span>: <span class="number">1</span>, <span class="attr">two</span>: <span class="number">2</span> &#125;)    <span class="comment">//[['one', 1], ['two', 2]]</span></span><br><span class="line"><span class="built_in">Object</span>.entries([<span class="number">1</span>, <span class="number">2</span>])                <span class="comment">//[['0', 1], ['1', 2]]</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h3><p>1.键名是symbol的键值对会自动忽略</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.entries(&#123;[<span class="built_in">Symbol</span>()]:<span class="number">1</span>, <span class="attr">two</span>: <span class="number">2</span>&#125;)  <span class="comment">//[['two', 2]]</span></span><br></pre></td></tr></table></figure>
-
-<p>2.<code>entries()</code>返回的数组顺序和<code>for</code>循环一样，即如果对象的key值是数字，则返回值会对key值进行排序，返回的是排序后的结果 </p>
-   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Object.entries(&#123; 3: <span class="string">'a'</span>, 4: <span class="string">'b'</span>, 1: <span class="string">'c'</span> &#125;)    //[[<span class="string">'1'</span>, <span class="string">'c'</span>], [<span class="string">'3'</span>, <span class="string">'a'</span>], [<span class="string">'4'</span>, <span class="string">'b'</span>]]</span><br></pre></td></tr></table></figure>
-
-<p>3.利用<code>Object.entries()</code>创建一个真正的<code>Map</code> </p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123; <span class="attr">foo</span>: <span class="string">'bar'</span>, <span class="attr">baz</span>: <span class="number">42</span> &#125;;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">var</span> map1 = <span class="keyword">new</span> <span class="built_in">Map</span>([[<span class="string">'foo'</span>, <span class="string">'bar'</span>], [<span class="string">'baz'</span>, <span class="number">42</span>]]); <span class="comment">//原本的创建方式</span></span><br><span class="line">  <span class="keyword">var</span> map2 = <span class="keyword">new</span> <span class="built_in">Map</span>(<span class="built_in">Object</span>.entries(obj));    <span class="comment">//等同于map1</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">console</span>.log(map1);<span class="comment">// Map &#123; foo: "bar", baz: 42 &#125;</span></span><br><span class="line">  <span class="built_in">console</span>.log(map2);<span class="comment">// Map &#123; foo: "bar", baz: 42 &#125;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="Object-values"><a href="#Object-values" class="headerlink" title="Object.values()"></a>Object.values()</h2><p> 只返回自己的键值对中属性的值。它返回的数组顺序，也跟<code>Object.entries()</code>保持一致 </p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.values(&#123; <span class="attr">one</span>: <span class="number">1</span>, <span class="attr">two</span>: <span class="number">2</span> &#125;)            <span class="comment">//[1, 2]</span></span><br><span class="line"><span class="built_in">Object</span>.values(&#123; <span class="number">3</span>: <span class="string">'a'</span>, <span class="number">4</span>: <span class="string">'b'</span>, <span class="number">1</span>: <span class="string">'c'</span> &#125;)    <span class="comment">//['c', 'a', 'b']</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="ES6中的Object-keys"><a href="#ES6中的Object-keys" class="headerlink" title="ES6中的Object.keys()"></a>ES6中的Object.keys()</h2><p>只返回自己的键值对中属性的名</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123; <span class="attr">foo</span>: <span class="string">'bar'</span>, <span class="attr">baz</span>: <span class="number">42</span> &#125;;</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="built_in">Object</span>.keys(obj)) <span class="comment">//["foo", "baz"]</span></span><br><span class="line">   <span class="built_in">console</span>.log(<span class="built_in">Object</span>.values(obj)) <span class="comment">//["bar", 42]</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="字符串填充padStart和padEnd"><a href="#字符串填充padStart和padEnd" class="headerlink" title="字符串填充padStart和padEnd"></a>字符串填充padStart和padEnd</h2><p>String.padStart(targetLength, padding)</p>
-<p>参数：字符串目标长度和填充字段</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'Vue'</span>.padStart(<span class="number">10</span>)           <span class="comment">//'       Vue'</span></span><br><span class="line"><span class="string">'React'</span>.padStart(<span class="number">10</span>)         <span class="comment">//'     React'</span></span><br><span class="line"><span class="string">'JavaScript'</span>.padStart(<span class="number">10</span>)    <span class="comment">//'JavaScript'</span></span><br><span class="line"><span class="string">'Vue'</span>.padEnd(<span class="number">10</span>, <span class="string">'_*'</span>)           <span class="comment">//'Vue_*_*_*_'</span></span><br><span class="line"><span class="string">'React'</span>.padEnd(<span class="number">10</span>, <span class="string">'Hello'</span>)      <span class="comment">//'ReactHello'</span></span><br><span class="line"><span class="string">'JavaScript'</span>.padEnd(<span class="number">10</span>, <span class="string">'Hi'</span>)    <span class="comment">//'JavaScript'</span></span><br><span class="line"><span class="string">'JavaScript'</span>.padEnd(<span class="number">8</span>, <span class="string">'Hi'</span>)     <span class="comment">//'JavaScript'</span></span><br></pre></td></tr></table></figure>
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日志</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/03/20/21%E5%B9%B43%E6%9C%8820%E6%97%A5/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/3/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/5/">Next &amp;raquo;</a>
@@ -1473,11 +1449,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">基础</a>
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
+                <a href="javascript:void(0)" class="js-tag color3">基础</a>
               </li>
              
               <li class="article-tag-list-item">
