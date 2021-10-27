@@ -202,6 +202,112 @@
             
 
   
+    <article id="post-teleport、多根节点与触发组件" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/06/24/teleport%E3%80%81%E5%A4%9A%E6%A0%B9%E8%8A%82%E7%82%B9%E4%B8%8E%E8%A7%A6%E5%8F%91%E7%BB%84%E4%BB%B6/" target="_blank">teleport、多根节点与触发组件</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/06/24/teleport%E3%80%81%E5%A4%9A%E6%A0%B9%E8%8A%82%E7%82%B9%E4%B8%8E%E8%A7%A6%E5%8F%91%E7%BB%84%E4%BB%B6/" class="archive-article-date">
+        <time datetime="2021-06-24T11:14:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-24</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="Teleport"><a href="#Teleport" class="headerlink" title="Teleport"></a>Teleport</h1><p>允许我们控制在 DOM 中哪个父节点下渲染了 HTML，而不必求助于全局状态或将其拆分为两个组件</p>
+<p>用法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> app = Vue.createApp(&#123;&#125;);</span><br><span class="line"></span><br><span class="line">app.component(<span class="string">'modal-button'</span>, &#123;</span><br><span class="line">  template: <span class="string">`</span></span><br><span class="line"><span class="string">    &lt;button @click="modalOpen = true"&gt;</span></span><br><span class="line"><span class="string">        Open full screen modal!</span></span><br><span class="line"><span class="string">    &lt;/button&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &lt;teleport to="body"&gt;</span></span><br><span class="line"><span class="string">      &lt;div v-if="modalOpen" class="modal"&gt;</span></span><br><span class="line"><span class="string">        &lt;div&gt;</span></span><br><span class="line"><span class="string">          I'm a teleported modal! </span></span><br><span class="line"><span class="string">          (My parent is "body")</span></span><br><span class="line"><span class="string">          &lt;button @click="modalOpen = false"&gt;</span></span><br><span class="line"><span class="string">            Close</span></span><br><span class="line"><span class="string">          &lt;/button&gt;</span></span><br><span class="line"><span class="string">        &lt;/div&gt;</span></span><br><span class="line"><span class="string">      &lt;/div&gt;</span></span><br><span class="line"><span class="string">    &lt;/teleport&gt;</span></span><br><span class="line"><span class="string">  `</span>,</span><br><span class="line">  data() &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123; </span><br><span class="line">      modalOpen: <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>一旦我们单击按钮打开模态框，Vue 将正确地将模态框内容渲染为 <code>body</code> 标签的子级</p>
+<h1 id="多根节点"><a href="#多根节点" class="headerlink" title="多根节点"></a>多根节点</h1><p>2.X版本不支持多根节点，3.X支持多根节点，但是需要Attribute开发者显式定义，如果未显式绑定 <code>$attrs</code>，将发出运行时警告</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">header</span>&gt;</span>...<span class="tag">&lt;/<span class="name">header</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">main</span> <span class="attr">v-bind</span>=<span class="string">"$attrs"</span>&gt;</span>...<span class="tag">&lt;/<span class="name">main</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">footer</span>&gt;</span>...<span class="tag">&lt;/<span class="name">footer</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这种就不会报错了</p>
+<h1 id="触发组件选项"><a href="#触发组件选项" class="headerlink" title="触发组件选项"></a>触发组件选项</h1><p>通常子传父</p>
+<p>在子组件中</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.$emit(<span class="string">'myEvent'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>在父组件中可以监听到</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">my-component</span> @<span class="attr">my-event</span>=<span class="string">"doSomething"</span>&gt;</span><span class="tag">&lt;/<span class="name">my-component</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="定义自定义事件"><a href="#定义自定义事件" class="headerlink" title="定义自定义事件"></a>定义自定义事件</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.component(<span class="string">'custom-form'</span>, &#123;</span><br><span class="line">  emits: [<span class="string">'inFocus'</span>, <span class="string">'submit'</span>]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>当在 <code>emits</code> 选项中定义了原生事件 (如 <code>click</code>) 时，将使用组件中的事件<strong>替代</strong>原生事件侦听器。</p>
+<h3 id="验证抛出的事件"><a href="#验证抛出的事件" class="headerlink" title="验证抛出的事件"></a>验证抛出的事件</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">app.component(<span class="string">'custom-form'</span>, &#123;</span><br><span class="line">  emits: &#123;</span><br><span class="line">    <span class="comment">// 没有验证</span></span><br><span class="line">    click: <span class="literal">null</span>,</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 验证submit 事件</span></span><br><span class="line">    submit: <span class="function">(<span class="params">&#123; email, password &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (email &amp;&amp; password) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.warn(<span class="string">'Invalid submit event payload!'</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    submitForm(email, password) &#123;</span><br><span class="line">      <span class="keyword">this</span>.$emit(<span class="string">'submit'</span>, &#123; email, password &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/06/24/teleport%E3%80%81%E5%A4%9A%E6%A0%B9%E8%8A%82%E7%82%B9%E4%B8%8E%E8%A7%A6%E5%8F%91%E7%BB%84%E4%BB%B6/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-promise-polyfill码源解析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1537,141 +1643,6 @@
 
 
   
-    <article id="post-npm包的发布以及yarn" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/06/04/npm%E5%8C%85%E7%9A%84%E5%8F%91%E5%B8%83%E4%BB%A5%E5%8F%8Ayarn/" target="_blank">npm包的发布以及yarn</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/06/04/npm%E5%8C%85%E7%9A%84%E5%8F%91%E5%B8%83%E4%BB%A5%E5%8F%8Ayarn/" class="archive-article-date">
-        <time datetime="2021-06-04T13:23:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-04</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="构建个人npm包"><a href="#构建个人npm包" class="headerlink" title="构建个人npm包"></a>构建个人npm包</h1><p>1.构建个人npm包，新建文件夹</p>
-<p>2.命令行定位到该文件夹</p>
-<p>3.新建index.js文件</p>
-<p>4.npm init，生成package.json文件</p>
-<p>5.然后需要注意的检查本地的npm配置， npm config list</p>
-<p>6.把源设置成<a href="https://links.jianshu.com/go?to=https%3A%2F%2Fregistry.npmjs.org%2F" target="_blank" rel="noopener">https://registry.npmjs.org/</a></p>
-<p>​    npm set registry <a href="https://links.jianshu.com/go?to=https%3A%2F%2Fregistry.npmjs.org%2F" target="_blank" rel="noopener">https://registry.npmjs.org/</a></p>
-<p>7.npm login登录一下自己的账户密码邮箱，注意邮箱一定要验证过的，否则就会报错403</p>
-<p>8.npm publish，注意不要重名，否则也是会报错的</p>
-<h1 id="yarn与npm"><a href="#yarn与npm" class="headerlink" title="yarn与npm"></a>yarn与npm</h1><h3 id="yarn的优点："><a href="#yarn的优点：" class="headerlink" title="yarn的优点："></a>yarn的优点：</h3><ol>
-<li>并行安装：无论 npm 还是 Yarn 在执行包的安装时，都会执行一系列任务。npm 是按照队列执行每个 package，也就是说必须要等到当前 package 安装完成之后，才能继续后面的安装。而 Yarn 是同步执行所有任务，提高了性能。</li>
-<li>离线模式：如果之前已经安装过一个软件包，用Yarn再次安装时之间从缓存中获取，就不用像npm那样再从网络下载了。</li>
-</ol>
-<ul>
-<li>安装<strong>版本统一</strong>：为了防止拉取到不同的版本，Yarn 有一个锁定文件 (lock file) 记录了被确切安装上的模块的版本号。每次只要新增了一个模块，Yarn 就会创建（或更新）yarn.lock 这个文件。这么做就保证了，每一次拉取同一个项目依赖时，使用的都是一样的模块版本。npm 其实也有办法实现处处使用相同版本的 packages，但需要开发者执行 npm shrinkwrap 命令。这个命令将会生成一个锁定文件，在执行 npm install 的时候，该锁定文件会先被读取，和 Yarn 读取 yarn.lock 文件一个道理。npm 和 Yarn 两者的不同之处在于，Yarn 默认会生成这样的锁定文件，而 npm 要通过 shrinkwrap 命令生成 npm-shrinkwrap.json 文件，只有当这个文件存在的时候，packages 版本信息才会被记录和更新。</li>
-<li><strong>更简洁的输出</strong>：npm 的输出信息比较冗长。在执行 npm install <package> 的时候，命令行里会不断地打印出所有被安装上的依赖。相比之下，Yarn 简洁太多：默认情况下，结合了 emoji直观且直接地打印出必要的信息，也提供了一些命令供开发者查询额外的安装信息。</li>
-<li><strong>多注册来源处理：</strong>所有的依赖包，不管他被不同的库间接关联引用多少次，安装这个包时，只会从一个注册来源去装，要么是 npm 要么是 bower, 防止出现混乱不一致。</li>
-<li><strong>更好的语义化</strong>： yarn改变了一些npm命令的名称，比如 yarn add/remove，感觉上比 npm 原本的 install/uninstall 要更清晰。</li>
-</ul>
-<h3 id="命令对比"><a href="#命令对比" class="headerlink" title="命令对比"></a>命令对比</h3><table>
-<thead>
-<tr>
-<th align="right">npm</th>
-<th align="left">yarn</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="right">npm install</td>
-<td align="left">yarn</td>
-</tr>
-<tr>
-<td align="right">npm install react –save</td>
-<td align="left">yarn add react</td>
-</tr>
-<tr>
-<td align="right">npm uninstall react –save</td>
-<td align="left">yarn remove react</td>
-</tr>
-<tr>
-<td align="right">npm install react –save-dev</td>
-<td align="left">yarn add react –dev</td>
-</tr>
-<tr>
-<td align="right">npm update –save</td>
-<td align="left">yarn upgrade</td>
-</tr>
-</tbody></table>
-<h1 id="npm5-0"><a href="#npm5-0" class="headerlink" title="npm5.0"></a>npm5.0</h1><p>默认新增了类似yarn.lock的 package-lock.json；</p>
-<p>git 依赖支持优化：这个特性在需要安装大量内部项目（例如在没有自建源的内网开发），或需要使用某些依赖的未发布版本时很有用。在这之前可能需要使用指定 commit_id 的方式来控制版本。</p>
-<p>文件依赖优化：在之前的版本，如果将本地目录作为依赖来安装，将会把文件目录作为副本拷贝到 node_modules 中。而在 npm5 中，将改为使用创建 symlinks 的方式来实现（使用本地 tarball 包除外），而不再执行文件拷贝。这将会提升安装速度。目前yarn还不支持。</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">基础</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/06/04/npm%E5%8C%85%E7%9A%84%E5%8F%91%E5%B8%83%E4%BB%A5%E5%8F%8Ayarn/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/4/">Next &amp;raquo;</a>
@@ -1809,11 +1780,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">react</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1821,11 +1788,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
+                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">基础</a>
+                <a href="javascript:void(0)" class="js-tag color1">react</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1837,6 +1804,10 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
@@ -1845,11 +1816,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">小程序</a>
+                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
+                <a href="javascript:void(0)" class="js-tag color4">小程序</a>
               </li>
              
               <li class="article-tag-list-item">

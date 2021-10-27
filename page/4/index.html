@@ -202,6 +202,141 @@
             
 
   
+    <article id="post-npm包的发布以及yarn" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/06/04/npm%E5%8C%85%E7%9A%84%E5%8F%91%E5%B8%83%E4%BB%A5%E5%8F%8Ayarn/" target="_blank">npm包的发布以及yarn</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/06/04/npm%E5%8C%85%E7%9A%84%E5%8F%91%E5%B8%83%E4%BB%A5%E5%8F%8Ayarn/" class="archive-article-date">
+        <time datetime="2021-06-04T13:23:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-04</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="构建个人npm包"><a href="#构建个人npm包" class="headerlink" title="构建个人npm包"></a>构建个人npm包</h1><p>1.构建个人npm包，新建文件夹</p>
+<p>2.命令行定位到该文件夹</p>
+<p>3.新建index.js文件</p>
+<p>4.npm init，生成package.json文件</p>
+<p>5.然后需要注意的检查本地的npm配置， npm config list</p>
+<p>6.把源设置成<a href="https://links.jianshu.com/go?to=https%3A%2F%2Fregistry.npmjs.org%2F" target="_blank" rel="noopener">https://registry.npmjs.org/</a></p>
+<p>​    npm set registry <a href="https://links.jianshu.com/go?to=https%3A%2F%2Fregistry.npmjs.org%2F" target="_blank" rel="noopener">https://registry.npmjs.org/</a></p>
+<p>7.npm login登录一下自己的账户密码邮箱，注意邮箱一定要验证过的，否则就会报错403</p>
+<p>8.npm publish，注意不要重名，否则也是会报错的</p>
+<h1 id="yarn与npm"><a href="#yarn与npm" class="headerlink" title="yarn与npm"></a>yarn与npm</h1><h3 id="yarn的优点："><a href="#yarn的优点：" class="headerlink" title="yarn的优点："></a>yarn的优点：</h3><ol>
+<li>并行安装：无论 npm 还是 Yarn 在执行包的安装时，都会执行一系列任务。npm 是按照队列执行每个 package，也就是说必须要等到当前 package 安装完成之后，才能继续后面的安装。而 Yarn 是同步执行所有任务，提高了性能。</li>
+<li>离线模式：如果之前已经安装过一个软件包，用Yarn再次安装时之间从缓存中获取，就不用像npm那样再从网络下载了。</li>
+</ol>
+<ul>
+<li>安装<strong>版本统一</strong>：为了防止拉取到不同的版本，Yarn 有一个锁定文件 (lock file) 记录了被确切安装上的模块的版本号。每次只要新增了一个模块，Yarn 就会创建（或更新）yarn.lock 这个文件。这么做就保证了，每一次拉取同一个项目依赖时，使用的都是一样的模块版本。npm 其实也有办法实现处处使用相同版本的 packages，但需要开发者执行 npm shrinkwrap 命令。这个命令将会生成一个锁定文件，在执行 npm install 的时候，该锁定文件会先被读取，和 Yarn 读取 yarn.lock 文件一个道理。npm 和 Yarn 两者的不同之处在于，Yarn 默认会生成这样的锁定文件，而 npm 要通过 shrinkwrap 命令生成 npm-shrinkwrap.json 文件，只有当这个文件存在的时候，packages 版本信息才会被记录和更新。</li>
+<li><strong>更简洁的输出</strong>：npm 的输出信息比较冗长。在执行 npm install <package> 的时候，命令行里会不断地打印出所有被安装上的依赖。相比之下，Yarn 简洁太多：默认情况下，结合了 emoji直观且直接地打印出必要的信息，也提供了一些命令供开发者查询额外的安装信息。</li>
+<li><strong>多注册来源处理：</strong>所有的依赖包，不管他被不同的库间接关联引用多少次，安装这个包时，只会从一个注册来源去装，要么是 npm 要么是 bower, 防止出现混乱不一致。</li>
+<li><strong>更好的语义化</strong>： yarn改变了一些npm命令的名称，比如 yarn add/remove，感觉上比 npm 原本的 install/uninstall 要更清晰。</li>
+</ul>
+<h3 id="命令对比"><a href="#命令对比" class="headerlink" title="命令对比"></a>命令对比</h3><table>
+<thead>
+<tr>
+<th align="right">npm</th>
+<th align="left">yarn</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="right">npm install</td>
+<td align="left">yarn</td>
+</tr>
+<tr>
+<td align="right">npm install react –save</td>
+<td align="left">yarn add react</td>
+</tr>
+<tr>
+<td align="right">npm uninstall react –save</td>
+<td align="left">yarn remove react</td>
+</tr>
+<tr>
+<td align="right">npm install react –save-dev</td>
+<td align="left">yarn add react –dev</td>
+</tr>
+<tr>
+<td align="right">npm update –save</td>
+<td align="left">yarn upgrade</td>
+</tr>
+</tbody></table>
+<h1 id="npm5-0"><a href="#npm5-0" class="headerlink" title="npm5.0"></a>npm5.0</h1><p>默认新增了类似yarn.lock的 package-lock.json；</p>
+<p>git 依赖支持优化：这个特性在需要安装大量内部项目（例如在没有自建源的内网开发），或需要使用某些依赖的未发布版本时很有用。在这之前可能需要使用指定 commit_id 的方式来控制版本。</p>
+<p>文件依赖优化：在之前的版本，如果将本地目录作为依赖来安装，将会把文件目录作为副本拷贝到 node_modules 中。而在 npm5 中，将改为使用创建 symlinks 的方式来实现（使用本地 tarball 包除外），而不再执行文件拷贝。这将会提升安装速度。目前yarn还不支持。</p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">基础</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/06/04/npm%E5%8C%85%E7%9A%84%E5%8F%91%E5%B8%83%E4%BB%A5%E5%8F%8Ayarn/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-for-of" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1078,180 +1213,6 @@
 
 
   
-    <article id="post-21年4月7日" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/04/07/21%E5%B9%B44%E6%9C%887%E6%97%A5/" target="_blank">21年4月7日</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/04/07/21%E5%B9%B44%E6%9C%887%E6%97%A5/" class="archive-article-date">
-        <time datetime="2021-04-07T13:02:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-07</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="可维护性"><a href="#可维护性" class="headerlink" title="可维护性"></a>可维护性</h1><h4 id="可理解性"><a href="#可理解性" class="headerlink" title="可理解性"></a>可理解性</h4><h4 id="直观性"><a href="#直观性" class="headerlink" title="直观性"></a>直观性</h4><h4 id="可适应性"><a href="#可适应性" class="headerlink" title="可适应性"></a>可适应性</h4><h4 id="可扩展性"><a href="#可扩展性" class="headerlink" title="可扩展性"></a>可扩展性</h4><h4 id="可调试性"><a href="#可调试性" class="headerlink" title="可调试性"></a>可调试性</h4><h1 id="代码约定"><a href="#代码约定" class="headerlink" title="代码约定"></a>代码约定</h1><h2 id="可读性"><a href="#可读性" class="headerlink" title="可读性"></a>可读性</h2><p>需要注释：</p>
-<p>​    函数与方法</p>
-<p>​    大段代码</p>
-<p>​    复杂的算法</p>
-<p>​    Hack：浏览器差异，对浏览器的不同的操作</p>
-<h2 id="变量和函数命名"><a href="#变量和函数命名" class="headerlink" title="变量和函数命名"></a>变量和函数命名</h2><p>变量名与函数名必须语义化，函数名一般以动词命名，比如getName(),返回布尔值的函数一般以is开头，比如：isEnable()</p>
-<h2 id="变量类型透明"><a href="#变量类型透明" class="headerlink" title="变量类型透明"></a>变量类型透明</h2><p>方式一：初始化，通过初始化指明变量的类型</p>
-<p>方式二：匈牙利标记法</p>
-<p>方式三：使用类型注释</p>
-<h1 id="松散耦合"><a href="#松散耦合" class="headerlink" title="松散耦合"></a>松散耦合</h1><p>应用的某一个部分过分依赖于另一部分，代码就是耦合过紧，难于维护</p>
-<p>典型的问题：对象直接引用另一个对象，并且当修改其中一个的同时需要修改另外一个</p>
-<h2 id="解耦HTML-JavaScript"><a href="#解耦HTML-JavaScript" class="headerlink" title="解耦HTML/JavaScript"></a>解耦HTML/JavaScript</h2><p>HTML是数据，JS是行为，他们天生需要交互，有许多的方法会使他们紧密的耦合、</p>
-<p>避免在用JS直接插入生成一段html代码，，动态生成的代码不易查找维护</p>
-<h2 id="解耦CSS-JavaScript"><a href="#解耦CSS-JavaScript" class="headerlink" title="解耦CSS/JavaScript"></a>解耦CSS/JavaScript</h2><p>通过JS直接修改CSS，同样会比较难以找到源头，一般需要在CSS命名一个class，通过动态的更改class来修改</p>
-<h2 id="解耦应用逻辑-事件处理程序"><a href="#解耦应用逻辑-事件处理程序" class="headerlink" title="解耦应用逻辑/事件处理程序"></a>解耦应用逻辑/事件处理程序</h2><p>web应用会包含比较多的事件处理函数，监听着许多的事件。</p>
-<p>应用逻辑与事件处理程序相分离，拆分成两个函数</p>
-<h1 id="编程实践"><a href="#编程实践" class="headerlink" title="编程实践"></a>编程实践</h1><h2 id="尊重对象所有权"><a href="#尊重对象所有权" class="headerlink" title="尊重对象所有权"></a>尊重对象所有权</h2><p>简言之，就是不能修改不属于你的对象，换句话说，如果你不负责创建或者维护某个对象、它的对象或者它的方法，那么你就不能对它们进行修改。</p>
-<p>不要为实例或者原型添加属性</p>
-<p>不要为实例或者原型添加方法</p>
-<p>不要重定义已存在的方法</p>
-<p>我们不能预期浏览器的提供者在未来怎么的更改原生对象</p>
-<p>方法：永远不要修改不由自己所有（创建）的对象，可以创建所需功能对象，并用它们与相关对象进行交互，创建自定义类型，继承需要进行修改的类型，然后用自定义的类型添加额外的功能</p>
-<h2 id="避免全局量"><a href="#避免全局量" class="headerlink" title="避免全局量"></a>避免全局量</h2><p>可以创建一个全局量，把所有需要的全局量放在该全局量中。避免覆盖一些默认的全局的属性</p>
-<h2 id="避免与null进行比较"><a href="#避免与null进行比较" class="headerlink" title="避免与null进行比较"></a>避免与null进行比较</h2><p>直接将值与null比较是使用过度的，并且常常是因为是不充分的类型检查导致错误</p>
-<p>使用以下方案替换：</p>
-<p>如果值是一个引用类型，使用instanceof操作符检查其构造函数</p>
-<p>如果值是一个基本类型，使用typeof检查其类型</p>
-<p>如果是希望对象包含某个特定的方法名，则使用typeof操作符确保指定名字的方法存在于对象</p>
-<p>代码中null比较少，就越容易确定代码的目的，并清除不必要的错误</p>
-<h2 id="使用常量"><a href="#使用常量" class="headerlink" title="使用常量"></a>使用常量</h2><p>常量可以单独定义一个文件</p>
-<h1 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h1><h2 id="注意作用域"><a href="#注意作用域" class="headerlink" title="注意作用域"></a>注意作用域</h2><h3 id="避免全局查找"><a href="#避免全局查找" class="headerlink" title="避免全局查找"></a>避免全局查找</h3><p>全局的查找涉及到作用域链，会有比较大的开销</p>
-<p>优化:查找的时候把document对象先存在本地的对象中，这样就只有一次全局查找</p>
-<h3 id="避免with语句"><a href="#避免with语句" class="headerlink" title="避免with语句"></a>避免with语句</h3><p>和函数类似，with语句会创建自己的作用域，会增加执行代码的作用域链的长度，由于额外的作用域链查找，在with语句中执行的代码会比外面的代码要慢。</p>
-<h2 id="选择正确方法"><a href="#选择正确方法" class="headerlink" title="选择正确方法"></a>选择正确方法</h2><h3 id="避免不必要的属性查找"><a href="#避免不必要的属性查找" class="headerlink" title="避免不必要的属性查找"></a>避免不必要的属性查找</h3><p>对象属性查找比变量与数组要慢</p>
-<p>多次用到的属性可以先存在局部变量中</p>
-<h3 id="优化循环"><a href="#优化循环" class="headerlink" title="优化循环"></a>优化循环</h3><p>优化方案：</p>
-<p>1.减值迭代，在大多数情况下，从最大值开始，减值遍历循环更加的高效</p>
-<p>2.简化终止条件，每次循环都会计算终止条件，终止条件避免属性查找和其他的复杂操作</p>
-<p>3.简化循环体</p>
-<p>4.使用后测试循环，可以用do-while循环</p>
-<h3 id="展开循环"><a href="#展开循环" class="headerlink" title="展开循环"></a>展开循环</h3><p>当循环的次数是确定的时候，消除循环并使用多次函数调用更加的快</p>
-<p>duff装置技术</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//process为要执行的函数，value传入函数的参数（数组）</span></span><br><span class="line"><span class="keyword">let</span> iterations=<span class="built_in">Math</span>.floor(values.length/<span class="number">8</span>)</span><br><span class="line"><span class="keyword">let</span> leftover=values.length%<span class="number">8</span>;</span><br><span class="line"><span class="keyword">let</span> i=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">if</span>(leftover&gt;<span class="number">0</span>)&#123;</span><br><span class="line">  <span class="keyword">do</span>&#123;</span><br><span class="line">    process(values[i++]);</span><br><span class="line">  &#125;<span class="keyword">while</span>(--leftover&gt;<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">do</span>&#123;</span><br><span class="line">  process(values[i++]);</span><br><span class="line">  process(values[i++]);</span><br><span class="line">  process(values[i++]);</span><br><span class="line">  process(values[i++]);</span><br><span class="line">  process(values[i++]);</span><br><span class="line">  process(values[i++]);</span><br><span class="line">  process(values[i++]);</span><br><span class="line">  process(values[i++]);</span><br><span class="line">&#125;<span class="keyword">while</span>(--iterations&gt;<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-
-<h3 id="避免双重解释"><a href="#避免双重解释" class="headerlink" title="避免双重解释"></a>避免双重解释</h3><p>当JS代码想解析JS的时候就会存在双重解释惩罚</p>
-<p>避免：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">eval</span>(<span class="string">"alert('Hello World')"</span>);</span><br><span class="line"><span class="keyword">var</span> sayHi=<span class="keyword">new</span> <span class="built_in">Function</span>(<span class="string">"alert('Hello World')"</span>);</span><br><span class="line">setTimeout(<span class="string">"alert('Hello World')"</span>,<span class="number">500</span>)</span><br></pre></td></tr></table></figure>
-
-<p>优化为：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">alert(<span class="string">'Hello World'</span>);</span><br><span class="line"><span class="keyword">var</span> sayHi=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;alert(<span class="string">'Hello World'</span>)&#125;;</span><br><span class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;alert(<span class="string">'Hello World'</span>)&#125;,<span class="number">500</span>)</span><br></pre></td></tr></table></figure>
-
-<h3 id="性能其他的注意事项"><a href="#性能其他的注意事项" class="headerlink" title="性能其他的注意事项"></a>性能其他的注意事项</h3><p>原生方法较快，比如：MATH中的方法</p>
-<p>Switch语句较快</p>
-<p>位运算符较快</p>
-<h1 id="最小化语句数"><a href="#最小化语句数" class="headerlink" title="最小化语句数"></a>最小化语句数</h1><h2 id="多个变量声明"><a href="#多个变量声明" class="headerlink" title="多个变量声明"></a>多个变量声明</h2><p>写在同一个语句中用逗号分隔</p>
-<h2 id="插入迭代值"><a href="#插入迭代值" class="headerlink" title="插入迭代值"></a>插入迭代值</h2><p>避免</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name=values[i];</span><br><span class="line">i++;</span><br></pre></td></tr></table></figure>
-
-<p>优化为</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name=values[i++];</span><br></pre></td></tr></table></figure>
-
-<h2 id="使用数组与对象字面量"><a href="#使用数组与对象字面量" class="headerlink" title="使用数组与对象字面量"></a>使用数组与对象字面量</h2><p>避免</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> values=<span class="keyword">new</span> <span class="built_in">Array</span>();</span><br><span class="line">values[<span class="number">0</span>]=<span class="number">123</span>;</span><br><span class="line">values[<span class="number">1</span>]=<span class="number">456</span>;</span><br><span class="line">values[<span class="number">2</span>]=<span class="number">789</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person=<span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line">person.name=<span class="string">"zhansan"</span>;</span><br><span class="line">person.age=<span class="number">29</span>;</span><br><span class="line">person.sayName=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  alert(<span class="keyword">this</span>.name);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>优化为</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> values=[<span class="number">123</span>,<span class="number">456</span>,<span class="number">789</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person=&#123;</span><br><span class="line">	name:<span class="string">"zhansan"</span>,</span><br><span class="line">	age:<span class="number">29</span>,</span><br><span class="line">	sayName=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		alert(<span class="keyword">this</span>.name);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="优化DOM交互"><a href="#优化DOM交互" class="headerlink" title="优化DOM交互"></a>优化DOM交互</h2><p>DOM交互需要花费大量的时间</p>
-<h3 id="最小化现场更新"><a href="#最小化现场更新" class="headerlink" title="最小化现场更新"></a>最小化现场更新</h3><p>在使用appendChild等插入DOM节点的时候，插入一次会更新一次</p>
-<p>如果太多的情况下可以使用文档片段（createDocumentFragment）</p>
-<p>避免</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> list=<span class="built_in">document</span>.getElementById(<span class="string">"myList"</span>),item,i;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)&#123;</span><br><span class="line">	item.document.createElement(<span class="string">"li"</span>)</span><br><span class="line">	list.appendChild(item);</span><br><span class="line">	item.appendChild(<span class="built_in">document</span>.createTextNode(<span class="string">"Item"</span>+i))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>优化为</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> list=<span class="built_in">document</span>.getElementById(<span class="string">"myList"</span>),</span><br><span class="line">    fragment=<span class="built_in">document</span>.createDocumentFragment(),</span><br><span class="line">    item,i;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)&#123;</span><br><span class="line">	item.document.createElement(<span class="string">"li"</span>)</span><br><span class="line">	fragment.appendChild(item);</span><br><span class="line">	item.appendChild(<span class="built_in">document</span>.createTextNode(<span class="string">"Item"</span>+i))</span><br><span class="line">&#125;</span><br><span class="line">list.appendChild(fragment)</span><br></pre></td></tr></table></figure>
-
-<h3 id="使用innerHTML"><a href="#使用innerHTML" class="headerlink" title="使用innerHTML"></a>使用innerHTML</h3><p>两种在页面创建DOM节点的方法，createElement（）和appendChild（）之类的DOM方法，以及使用innerHTML。对于小的DOM更改而言，两种方法查不到，对于大的DOM更改，innerHTML更快。</p>
-<h3 id="使用事件代理"><a href="#使用事件代理" class="headerlink" title="使用事件代理"></a>使用事件代理</h3><p>利用事件冒泡，使用事件委托代理</p>
-<h3 id="注意HTMLCollection"><a href="#注意HTMLCollection" class="headerlink" title="注意HTMLCollection"></a>注意HTMLCollection</h3><p>HTMLCollection对于WEB应用的性能是巨大的损害，表示 HTML 元素的集合，它提供了可以遍历列表的方法和属性</p>
-<h1 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h1><h2 id="构建过程"><a href="#构建过程" class="headerlink" title="构建过程"></a>构建过程</h2><p>知识产权问题：不要把完整的代码注释放在线上</p>
-<p>文件大小：书写代码为了方便阅读的空白字符与冗长的函数名与变量名对性能是不利的</p>
-<p>代码组织</p>
-<p>推荐在WEB应用中尽可能的使用最少的JS文件，是因为HTTP请求是web中的主要的性能瓶颈之一。通过<code>&lt;script&gt;</code>标签引用JS文件是一个阻塞操作，当代码下载并运行的时候会停止其他所有的下载</p>
-<p>ANT构建工具</p>
-<h2 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h2><p>JSLint、esLint</p>
-<h2 id="压缩"><a href="#压缩" class="headerlink" title="压缩"></a>压缩</h2><p>代码长度：浏览器所需解析的字节数</p>
-<p>配重：实际从服务器传送到浏览器的字节数</p>
-<h3 id="文件压缩"><a href="#文件压缩" class="headerlink" title="文件压缩"></a>文件压缩</h3><p>压缩工具：YUI</p>
-<h3 id="HTTP压缩"><a href="#HTTP压缩" class="headerlink" title="HTTP压缩"></a>HTTP压缩</h3><p>大部分的浏览器都会有HTTP压缩功能，可以查看浏览器的文档说明。</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日志</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/04/07/21%E5%B9%B44%E6%9C%887%E6%97%A5/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/3/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/5/">Next &amp;raquo;</a>
@@ -1389,11 +1350,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">react</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1401,11 +1358,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
+                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">基础</a>
+                <a href="javascript:void(0)" class="js-tag color1">react</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1417,6 +1374,10 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
@@ -1425,11 +1386,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">小程序</a>
+                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
+                <a href="javascript:void(0)" class="js-tag color4">小程序</a>
               </li>
              
               <li class="article-tag-list-item">
