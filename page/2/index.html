@@ -202,6 +202,213 @@
             
 
   
+    <article id="post-Portals和Profiler" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/09/15/Portals%E5%92%8CProfiler/" target="_blank">Portals和Profiler</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/09/15/Portals%E5%92%8CProfiler/" class="archive-article-date">
+        <time datetime="2021-09-15T15:39:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-15</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="什么是protals？"><a href="#什么是protals？" class="headerlink" title="什么是protals？"></a>什么是protals？</h1><p>protals提供将一个子节点选择存在与父组件以外的DOM节点的优秀的方法，常用于对话框、悬浮卡以及提示框。</p>
+<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">import reactDOM from &#39;react&#39;;</span><br><span class="line"></span><br><span class="line">reactDOM.createProtals(child,container)&#123;</span><br><span class="line">  &#x2F;&#x2F;child是任意一个字节点</span><br><span class="line">  &#x2F;&#x2F;container是需要放置位置的新容器</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用实例"><a href="#使用实例" class="headerlink" title="使用实例"></a>使用实例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">render()&#123;</span><br><span class="line">  return (</span><br><span class="line">  	&lt;div&gt;</span><br><span class="line">  		&#123;this.props.children&#125;</span><br><span class="line">  	&lt;&#x2F;div&gt;	</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用protals</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">render()&#123;</span><br><span class="line">  return reactDOM.createProtals(</span><br><span class="line">    	this.props.children</span><br><span class="line">    ,domNode</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="冒泡"><a href="#冒泡" class="headerlink" title="冒泡"></a>冒泡</h2><p>虽然使用protals使得子节点可以挂载在不是父节点的地方，但是他的冒泡是能在父组件捕获</p>
+<h1 id="什么是Profiler？"><a href="#什么是Profiler？" class="headerlink" title="什么是Profiler？"></a>什么是Profiler？</h1><p>生产环境禁用，适用于React渲染一次的代价，简而言之用于性能测试，性能优化</p>
+<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><p>Profiler能用于任何想调优的地方</p>
+<p>有两个api</p>
+<p>第一个api是id</p>
+<p>第二个api是组件更新的时候触发的回调函数</p>
+<h2 id="用法示例"><a href="#用法示例" class="headerlink" title="用法示例"></a>用法示例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">render()&#123;</span><br><span class="line">  return (</span><br><span class="line">    &lt;Profiler id&#x3D;&quot;Nativation&quot; onRender&#x3D;&quot;&#123;callback&#125;&quot;&gt;</span><br><span class="line">      &lt;Nativation &#123;...props&#125;&#x2F;&gt;</span><br><span class="line">    &lt;&#x2F;Profiler&gt;</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="回调"><a href="#回调" class="headerlink" title="回调"></a>回调</h2><p>Profiler的回调会在其包含的组件中“更新”这个组件树的时候会返回渲染了什么和花费了多久</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">onRenderCallback</span>(<span class="params"></span></span></span><br><span class="line"><span class="function"><span class="params">    id,<span class="regexp">//</span>发生树的id，分辨树的哪一部分发生了更新</span></span></span><br><span class="line"><span class="function"><span class="params">    phase,<span class="regexp">//m</span>ount(组件初次渲染</span>)和<span class="title">update</span>(<span class="params">组件重新渲染更新</span>)</span></span><br><span class="line"><span class="function">    <span class="title">actualDuration</span>,//本次渲染更新的时间，这个数值表明使用 <span class="title">memoization</span> 之后能表现得多好</span></span><br><span class="line"><span class="function">    <span class="title">baseDuration</span>,//不使用<span class="title">memoization</span>的最差的估计的渲染时间</span></span><br><span class="line"><span class="function">    <span class="title">startTime</span>,//开始渲染的时间戳</span></span><br><span class="line"><span class="function">    <span class="title">commitTime</span>,//本次更新中<span class="title">commit</span>的时间</span></span><br><span class="line"><span class="function">    <span class="title">interactions</span>// 当更新被制定时，“<span class="title">interactions</span>” 的集合会被追踪</span></span><br><span class="line"><span class="function">)</span>&#123;</span><br><span class="line">  	<span class="comment">//查看、计算等等操作</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意Profiler一定要慎用，上线前一定要去掉，会影响性能。</p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">react</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/09/15/Portals%E5%92%8CProfiler/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-node连接mySQL" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/09/12/node%E8%BF%9E%E6%8E%A5mySQL/" target="_blank">node连接mySQL</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/09/12/node%E8%BF%9E%E6%8E%A5mySQL/" class="archive-article-date">
+        <time datetime="2021-09-12T15:38:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-12</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="使用node连接mySQL实现增删改查"><a href="#使用node连接mySQL实现增删改查" class="headerlink" title="使用node连接mySQL实现增删改查"></a>使用node连接mySQL实现增删改查</h1><h2 id="创建服务，连接数据库"><a href="#创建服务，连接数据库" class="headerlink" title="创建服务，连接数据库"></a>创建服务，连接数据库</h2><p>app.js</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express=<span class="built_in">require</span>(<span class="string">"express"</span>);</span><br><span class="line"><span class="keyword">const</span> app=express();<span class="comment">//实例化express</span></span><br><span class="line"><span class="keyword">const</span> mysql=<span class="built_in">require</span>(<span class="string">"mysql"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建服务</span></span><br><span class="line">app.listen(<span class="number">3000</span>,()=&gt;&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"服务器在3000端口开通..."</span>);</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">//创建连接</span></span><br><span class="line"><span class="keyword">const</span> db=mysql.createConnection(&#123;</span><br><span class="line">  host:<span class="string">"localhost"</span>,</span><br><span class="line">  user:<span class="string">"root"</span>,</span><br><span class="line">  password:<span class="string">"toot"</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">//连接</span></span><br><span class="line">db.connect(<span class="function">(<span class="params">err</span>)=&gt;</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(err)&#123;<span class="keyword">throw</span> err&#125;;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'连接成功'</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="query"><a href="#query" class="headerlink" title="query"></a>query</h2><p>使用<code>db.query(sql,function())</code>操作数据库，第一个参数是SQL语句，第二个参数是回调函数，回调函数中的有返回error也有返回的信息</p>
+<p>app.js</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">app.get(<span class="string">"createdb"</span>,(req,res)=&gt;&#123;</span><br><span class="line">	<span class="keyword">let</span> sql=<span class="string">"CREATE DATABASE nodesql"</span>;</span><br><span class="line">	db.query(sql,(err,resquest)=&gt;&#123;</span><br><span class="line">		<span class="keyword">if</span>(err)&#123;</span><br><span class="line">			<span class="built_in">console</span>.log(err);</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			<span class="built_in">console</span>.log(result);</span><br><span class="line">			res.send(<span class="string">"DATABASE CREATE SUCCESS..."</span>)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>创建数据库成功可以在连接数据库的时候加上该数据库了</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> db=createConnection(&#123;</span><br><span class="line">  host:<span class="string">"localhost"</span>,</span><br><span class="line">  user:<span class="string">"root"</span>,</span><br><span class="line">  password:<span class="string">"root"</span>,</span><br><span class="line">  datebase:<span class="string">"nodesql"</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>接下去的所有增删改查，通过不同的SQL语句，用query在调用就行了</p>
+<p>注意的是插入数据时,参数多一个</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">app.get(<span class="string">'insertdb'</span>,(req,res)=&gt;&#123;</span><br><span class="line">  <span class="keyword">let</span> post=&#123;<span class="attr">title</span>:<span class="string">"post one"</span>,<span class="attr">body</span>:<span class="string">"earth"</span>&#125;;</span><br><span class="line">  <span class="keyword">let</span> sql=<span class="string">"INSERT INTO posts SET ?"</span>;</span><br><span class="line">  db.query(sql,post,(err,result)=&gt;&#123;</span><br><span class="line">    <span class="keyword">if</span>(err)&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(err);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(result);</span><br><span class="line">      res.send(<span class="string">"post add ..."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>写个问号，防止sql注入的时候，会在执行的时候把post传入sql语句</p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">node</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/09/12/node%E8%BF%9E%E6%8E%A5mySQL/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-方法的链式调用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1114,231 +1321,6 @@
 
 
   
-    <article id="post-无限滚动插件" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/07/05/%E6%97%A0%E9%99%90%E6%BB%9A%E5%8A%A8%E6%8F%92%E4%BB%B6/" target="_blank">无限滚动插件</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/07/05/%E6%97%A0%E9%99%90%E6%BB%9A%E5%8A%A8%E6%8F%92%E4%BB%B6/" class="archive-article-date">
-        <time datetime="2021-07-05T14:44:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-05</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>学习使用vue-infinite-scroll这个插件，</p>
-<h1 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h1><p>容器内部无限滚动</p>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>使用<code>npm install vue-infinite-scroll --save</code></p>
-<h1 id="导入"><a href="#导入" class="headerlink" title="导入"></a>导入</h1><p>引入插件</p>
-<p><code>import infiniteScroll from &quot;vue-infinite-scroll&quot;</code><br>导入指令</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;  </span><br><span class="line">	name: "ComFlowList",</span><br><span class="line">  directives: &#123;infiniteScroll&#125;,</span><br><span class="line">  data()&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">v-infinite-scroll</span>=<span class="string">"loadDataList"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">infinite-scroll-disabled</span>=<span class="string">"dataLoadStop"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">infinite-scroll-distance</span>=<span class="string">"50"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">v-for</span>=<span class="string">"(item, idx) in dataList"</span> &gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"comdata"</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span>&#123;&#123;item.name&#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"list-load-end"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">span</span>&gt;</span>&#123;&#123;dataNomore ? "--我也是有底线的--" : "加载中..."&#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h1><table>
-<thead>
-<tr>
-<th>Option</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>infinite-scroll-disabled</td>
-<td>如果此属性的值为 true，则将禁用无限滚动。</td>
-</tr>
-<tr>
-<td>infinite-scroll-distance</td>
-<td>Number(default = 0) - 在执行 v-infinite-scroll 方法之前元素底部和视口底部之间的最小距离。</td>
-</tr>
-<tr>
-<td>infinite-scroll-immediate-check</td>
-<td>Boolean(default = true) - 指示指令应在绑定后立即检查。如果内容不够高而无法填满可滚动容器，则很有用。</td>
-</tr>
-<tr>
-<td>infinite-scroll-listen-for-event</td>
-<td>当事件在 Vue 实例中发出时，无限滚动将再次检查。</td>
-</tr>
-<tr>
-<td>infinite-scroll-throttle-delay</td>
-<td>Number(default = 200) - 下次检查和这次之间的间隔(ms)</td>
-</tr>
-</tbody></table>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/07/05/%E6%97%A0%E9%99%90%E6%BB%9A%E5%8A%A8%E6%8F%92%E4%BB%B6/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-移动端适配与常见问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/06/29/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E9%80%82%E9%85%8D%E4%B8%8E%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" target="_blank">移动端适配与常见问题</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/06/29/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E9%80%82%E9%85%8D%E4%B8%8E%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" class="archive-article-date">
-        <time datetime="2021-06-29T01:40:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-29</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="常见浏览器"><a href="#常见浏览器" class="headerlink" title="常见浏览器"></a>常见浏览器</h1><h3 id="pc端"><a href="#pc端" class="headerlink" title="pc端"></a>pc端</h3><p>360浏览器、谷歌浏览器、火狐浏览器、qq浏览器、百度浏览器、搜狗浏览器、IE浏览器等</p>
-<h3 id="移动端"><a href="#移动端" class="headerlink" title="移动端"></a>移动端</h3><p>UC浏览器、qq浏览器、欧朋浏览器、百度手机浏览器、360安全浏览器、谷歌浏览器、搜狗手机浏览器、猎豹浏览器等</p>
-<p>移动端浏览器主要是Webkit内核的</p>
-<h1 id="常见分辨率"><a href="#常见分辨率" class="headerlink" title="常见分辨率"></a>常见分辨率</h1><h3 id="Android"><a href="#Android" class="headerlink" title="Android"></a>Android</h3><p>480x800、480X854、540x960、720x1280、1080x1920等</p>
-<h3 id="IOS"><a href="#IOS" class="headerlink" title="IOS"></a>IOS</h3><p>640x960、640x1136、750x1334、1242x2208等</p>
-<h1 id="主流方案"><a href="#主流方案" class="headerlink" title="主流方案"></a>主流方案</h1><h3 id="主流"><a href="#主流" class="headerlink" title="主流"></a>主流</h3><p>单独制作移动端的页面</p>
-<p>通常的网站域名前面加上m（mobile）可以打开移动端，通过判断设备，如果是移动端的设备打开的，就跳转到移动端页面</p>
-<p>流式布局（百分比布局）</p>
-<p>flex弹性布局（推荐）</p>
-<p>less+rem+媒体查询布局</p>
-<p>混合布局</p>
-<h3 id="次流"><a href="#次流" class="headerlink" title="次流"></a>次流</h3><p>响应式页面兼容移动端</p>
-<p>媒体查询</p>
-<p>bootstrap等第三方库</p>
-<h1 id="CSS初始化"><a href="#CSS初始化" class="headerlink" title="CSS初始化"></a>CSS初始化</h1><p>normallize.css</p>
-<p>css初始化，让不同的浏览器在渲染网页元素的时候形式更加的统一</p>
-<h1 id="特殊样式"><a href="#特殊样式" class="headerlink" title="特殊样式"></a>特殊样式</h1><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*css3盒模型*/</span></span><br><span class="line"><span class="selector-tag">box-sizing</span><span class="selector-pseudo">:border-box</span>;</span><br><span class="line"><span class="selector-tag">-webkit-box-sizing</span><span class="selector-pseudo">:border-box</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*点击高亮 清除高亮*/</span></span><br><span class="line"><span class="selector-tag">-webkit-tap-highlight-color</span><span class="selector-pseudo">:transparent</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*ios浏览器默认的外观 按钮输入框自定义样式*/</span></span><br><span class="line"><span class="selector-tag">-webkit-appearance</span><span class="selector-pseudo">:none</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*禁用长按页面时的弹出弹窗*/</span></span><br><span class="line"><span class="selector-tag">img</span>,<span class="selector-tag">a</span>&#123;</span><br><span class="line">	<span class="attribute">-webkit-touch-callout</span>:node;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">基础</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/06/29/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E9%80%82%E9%85%8D%E4%B8%8E%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
@@ -1480,11 +1462,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">RN</a>
+                <a href="javascript:void(0)" class="js-tag color1">react</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">react</a>
+                <a href="javascript:void(0)" class="js-tag color3">RN</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1492,15 +1474,19 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">基础</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">css</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">mobx</a>
               </li>
              
               <li class="article-tag-list-item">
