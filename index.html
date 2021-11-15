@@ -202,6 +202,97 @@
             
 
   
+    <article id="post-前端资源路径不对" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/11/15/%E5%89%8D%E7%AB%AF%E8%B5%84%E6%BA%90%E8%B7%AF%E5%BE%84%E4%B8%8D%E5%AF%B9/" target="_blank">前端资源路径不对</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/11/15/%E5%89%8D%E7%AB%AF%E8%B5%84%E6%BA%90%E8%B7%AF%E5%BE%84%E4%B8%8D%E5%AF%B9/" class="archive-article-date">
+        <time datetime="2021-11-15T11:51:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-15</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>前端打包后部署在测试环境，打开页面获取资源路径报错,在资源路径手动加上项目名可以访问资源</p>
+<p>正确的路径：f2e.souche-inc.com/projects/xxx/xxx/js/xxx.js</p>
+<p>现在的路径： f2e.souche-inc.com/js/xxx.js</p>
+<h1 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h1><p>工程效率部对前端流水线进行改造，对项目的构建有较大的影响</p>
+<p>在流水线运行时会自动安装@souche-vue/vue-cli-plugin-build-extend(可能你会问，你没有用到这个插件，为什么他会自动应用？因为在 vue-vli-service 的服务中，它会自动分析 dependencies，特殊的插件名会被应用，具体可以参考 <a href="https://cli.vuejs.org/zh/dev-guide/plugin-dev.html#命名和可发现性" target="_blank" rel="noopener">vue-cli-service 插件官方文档</a>），<strong>该插件会修改每个项目的 publicPath，遂无论项目中配置的 publichPath 是什么，都会被替换，这个行为对于用户来说太过黑盒</strong>，并且对于管理 lock 文件也不方便，遂要将此插件从流程中移出</p>
+<h1 id="如何修改"><a href="#如何修改" class="headerlink" title="如何修改"></a>如何修改</h1><p><strong>打开项目的 vue.config.js 文件，修改 publicPath 为：’./‘ 或者 ‘’（空）</strong></p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/11/15/%E5%89%8D%E7%AB%AF%E8%B5%84%E6%BA%90%E8%B7%AF%E5%BE%84%E4%B8%8D%E5%AF%B9/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-new实例函数" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1280,128 +1371,9 @@
 
 
   
-    <article id="post-webVR" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/09/27/webVR/" target="_blank">webVR</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/09/27/webVR/" class="archive-article-date">
-        <time datetime="2021-09-27T15:37:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-27</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="体验方式"><a href="#体验方式" class="headerlink" title="体验方式"></a>体验方式</h1><p>webVR的体验方式主要有两种一种是裸眼模式，还有是VR模式</p>
-<h2 id="VR模式"><a href="#VR模式" class="headerlink" title="VR模式"></a>VR模式</h2><p>VR模式主要有移动端的VR与PC端的VR</p>
-<h3 id="移动端的VR"><a href="#移动端的VR" class="headerlink" title="移动端的VR"></a>移动端的VR</h3><p>使用VR眼镜看VR，通过移动端的水平陀螺仪来获取用户头部的倾斜与转向，并告知页面要渲染哪一个朝向的场景。</p>
-<h3 id="PC端的VR"><a href="#PC端的VR" class="headerlink" title="PC端的VR"></a>PC端的VR</h3><p>通过分离式的头显获取对应的头部倾斜与转向，并告知页面要渲染哪一个朝向的场景。</p>
-<h2 id="裸眼模式"><a href="#裸眼模式" class="headerlink" title="裸眼模式"></a>裸眼模式</h2><p>裸眼模式下，浏览网页时使用鼠标来拖攥页面，移动端则是通过手触摸，movetouch或者是手机的旋转倾斜来改变场景视角。</p>
-<h1 id="3D场景"><a href="#3D场景" class="headerlink" title="3D场景"></a>3D场景</h1><p>使用three.js实现简单的3D场景</p>
-<p>需要引入插件<code>three.min.js</code>和<code>webvr-polyfill.js</code></p>
-<p><code>weber-polyfill.js</code>是webVR API的兜底，因为VR的api还没有被各大主流浏览器支持，它提供了大量的VR相关的API接口</p>
-<h2 id="1-创建场景"><a href="#1-创建场景" class="headerlink" title="1.创建场景"></a>1.创建场景</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> scene = <span class="keyword">new</span> THREE.Scene</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-添加相机"><a href="#2-添加相机" class="headerlink" title="2.添加相机"></a>2.添加相机</h2><p>Three.js中camera相机相当于用户的眼睛</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//定义一个60度的视角，视线范围为1到1000的透明相机</span></span><br><span class="line"><span class="keyword">let</span> camera = <span class="keyword">new</span> THREE.PerspectiveCamera(<span class="number">60</span>,<span class="built_in">window</span>.innerWidth/<span class="built_in">window</span>.innerHeight,<span class="number">1</span>,<span class="number">1000</span>);</span><br><span class="line">scene.add(camera);</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-添加渲染器"><a href="#3-添加渲染器" class="headerlink" title="3.添加渲染器"></a>3.添加渲染器</h2><p>渲染器是用来渲染相机所看到的画面</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> renderer = <span class="keyword">new</span> THREE.WebGLRenderer(&#123;<span class="attr">antialias</span>:<span class="literal">true</span>&#125;);<span class="comment">//antialias为true表示的是开启抗锯齿策略</span></span><br><span class="line">renderer.setSize(<span class="built_in">window</span>.innerWidth,<span class="built_in">window</span>.innerHeight);<span class="comment">//设置渲染器渲染的尺寸</span></span><br><span class="line">renderer.setClearColor(<span class="number">0Xeeeeee</span>);<span class="comment">//设置渲染的背景为白色</span></span><br><span class="line"><span class="built_in">document</span>.body.appendChild(renderer.domElement);<span class="comment">//将渲染场景的canvas放入body标签中</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="4-添加一个立方体网格"><a href="#4-添加一个立方体网格" class="headerlink" title="4.添加一个立方体网格"></a>4.添加一个立方体网格</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> geometry = <span class="keyword">new</span> THREE.CubeGeometry(<span class="number">10</span>,<span class="number">10</span>,<span class="number">10</span>);</span><br><span class="line"><span class="keyword">let</span> material = <span class="keyword">new</span> THREE.MeshLamberMaterial(&#123;<span class="attr">color</span>:<span class="number">0Xef6500</span>,<span class="attr">needsUpdate</span>:<span class="literal">true</span>,<span class="attr">opacity</span>:<span class="number">1</span>,<span class="attr">transparent</span>:<span class="literal">true</span>&#125;);</span><br><span class="line"><span class="keyword">let</span> cube = <span class="keyword">new</span> THREE.Mesh(geometry,material);</span><br><span class="line">cube.position.set(<span class="number">0</span>,<span class="number">100</span>,<span class="number">-50</span>);</span><br><span class="line">cube.rotation.set(<span class="built_in">Math</span>.PI/<span class="number">6</span>,<span class="built_in">Math</span>.PI/<span class="number">4</span>,<span class="number">0</span>);</span><br><span class="line">scene.add(cube);</span><br></pre></td></tr></table></figure>
-
-<h2 id="5-启动动画"><a href="#5-启动动画" class="headerlink" title="5.启动动画"></a>5.启动动画</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">update</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  cube.rotation.y += <span class="number">0.01</span>;<span class="comment">//立方体旋转</span></span><br><span class="line">  renderer.render(scene,camera);<span class="comment">//渲染器渲染场景</span></span><br><span class="line">&#125;</span><br><span class="line">render.animate(update);<span class="comment">//启动动画</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="VR"><a href="#VR" class="headerlink" title="VR"></a>VR</h1><p>以上创建了一个3D场景</p>
-<p>现在开发VR的场景</p>
-<p>首先需要初始化一下VR，通过<code>navigator.getVRDisplays</code>获取vr设备实例vrdisplay，把它传送给当前运行的renderer渲染器，当点击按钮时可以进入VR模式，再次点击退出VR模式</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">initVR</span>(<span class="params">renderer</span>)</span>&#123;</span><br><span class="line">  renderer.vr.enabled=<span class="literal">true</span>;</span><br><span class="line">  navigator.getVRDisplays().then(<span class="function"><span class="keyword">function</span>(<span class="params">display</span>)</span>&#123;</span><br><span class="line">    renderer.vr.setDevice(display[<span class="number">0</span>]);</span><br><span class="line">    <span class="keyword">const</span> button=<span class="built_in">document</span>.querySelector(<span class="string">'.vr-btn'</span>);</span><br><span class="line">    VRbutton(display[<span class="number">0</span>],renderer,button,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      button.textContent=<span class="string">'退出VR'</span>;</span><br><span class="line">    &#125;,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      button.textContent=<span class="string">'进入VR'</span>;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;).catch(<span class="function"><span class="params">err</span>=&gt;</span><span class="built_in">console</span>.warn(err));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>通过按钮控制当前的渲染模式逻辑</p>
-<p>1.当点击按钮时，根据display.isPresenting判断当前是否时使用VR设备下进行渲染，如果false，进入VR模式，否则进入非VR模式</p>
-<p>2.从非VR模式进入VR模式，此时调用display.requestPresent()，display.isPresenting被设置为true,触发window的vrdisplaypresentchange事件</p>
-<p>3.从VR模式进入非VR模式，此时调用display.exitPresent()，display.isPresenting被设置为false,触发window的vrdisplaypresentchange事件</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//VR按钮控制</span></span><br><span class="line"><span class="comment">//@params &#123;display&#125; VRDisplay实例</span></span><br><span class="line"><span class="comment">//@params &#123;THREE.WebGLRenderer&#125; renderer渲染器</span></span><br><span class="line"><span class="comment">//@params &#123;HTMLElement&#125; button VR控制按钮</span></span><br><span class="line"><span class="comment">//@params &#123;Function&#125; enterVR 点击进入VR模式时回调</span></span><br><span class="line"><span class="comment">//@params &#123;Function&#125; exitVR 点击退出VR模式时回调</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">VRbutton</span>(<span class="params">display,renderer,button,enterVR,exitVR</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(display)&#123;</span><br><span class="line">    button.addEventListener(<span class="string">'click'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      display.isPresenting?display.exitPresent():display.requestPresent([&#123;<span class="attr">source</span>:renderer.domElement&#125;]);</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="built_in">window</span>.addEventListener(<span class="string">'vrdisplaypresentchange'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      display.isPresenting?enterVR():exitVR();</span><br><span class="line">    &#125;,<span class="literal">false</span>);</span><br><span class="line">  &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="comment">//没有VR实例则移除按钮</span></span><br><span class="line">    button.remove();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>可以根据vrdisplaypresentchange事件中根据isPresenting的值来改变按钮的UI，而three.js根据isPresenting的值来决定是常规渲染还是vr模式，而在vr模式下，three.js将创建两个camera进行渲染。</p>
-<h1 id="ES6写法"><a href="#ES6写法" class="headerlink" title="ES6写法"></a>ES6写法</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">WebVRApp</span></span>&#123;</span><br><span class="line">	<span class="keyword">constructor</span>()&#123;</span><br><span class="line">		<span class="comment">//初始化场景</span></span><br><span class="line">    <span class="keyword">this</span>.scene = <span class="keyword">new</span> THREE.Scene();</span><br><span class="line">    <span class="comment">//初始化相机</span></span><br><span class="line">    <span class="keyword">this</span>.camera = <span class="keyword">new</span> THREE.PerspectiveCamera(<span class="number">60</span>,<span class="built_in">window</span>.innerWidth/<span class="built_in">window</span>.innerHeight,<span class="number">0.1</span>,<span class="number">1000</span>);</span><br><span class="line">    <span class="keyword">this</span>.scene.add(<span class="keyword">this</span>.camera);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//初始化渲染器</span></span><br><span class="line">    <span class="keyword">this</span>.renderer = <span class="keyword">new</span> THREE.WebGLRRenderer(&#123;<span class="attr">antialias</span>:<span class="literal">true</span>&#125;);</span><br><span class="line">    <span class="keyword">this</span>.renderer.setSize(<span class="built_in">window</span>.innerWidth,<span class="built_in">window</span>.innerHeight);</span><br><span class="line">    <span class="keyword">this</span>.renderer.setClearColor(oX519EcB);</span><br><span class="line">    <span class="keyword">this</span>.renderer.setPixelRatio(<span class="built_in">window</span>.devicePixelRatio);</span><br><span class="line">    <span class="built_in">document</span>.querySelector(<span class="string">'.main-page'</span>).appendChild(<span class="keyword">this</span>.renderer.domElement);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">this</span>.clock = <span class="keyword">new</span> THREE.Clock();</span><br><span class="line">    <span class="comment">//VR初始化</span></span><br><span class="line">    <span class="keyword">this</span>._initVR();</span><br><span class="line">    <span class="comment">//添加3D场景</span></span><br><span class="line">    <span class="keyword">this</span>.start();</span><br><span class="line">		<span class="comment">//窗口大小调整监听</span></span><br><span class="line">    <span class="built_in">window</span>.addEventListener(<span class="string">'resize'</span>,<span class="keyword">this</span>._resize.bind(<span class="keyword">this</span>),<span class="literal">false</span>);</span><br><span class="line">    <span class="comment">//渲染动画</span></span><br><span class="line">    <span class="keyword">this</span>.renderer.animate(<span class="keyword">this</span>.update.bind(<span class="keyword">this</span>));</span><br><span class="line">	&#125;</span><br><span class="line">  <span class="comment">//创建3d物体</span></span><br><span class="line">  start()&#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; scene, camera &#125; = <span class="keyword">this</span>;</span><br><span class="line">    <span class="comment">//创建光线、地面等</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="comment">//创建立方体</span></span><br><span class="line">    <span class="keyword">const</span> geometry = <span class="keyword">new</span> THREE.CubeGeometry(<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>);</span><br><span class="line">    <span class="keyword">const</span> material = <span class="keyword">new</span> THREE.MeshLambertMaterial(&#123;</span><br><span class="line">      color: <span class="number">0Xef6500</span>,</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">this</span>.cube = <span class="keyword">new</span> THREE.Mesh(geometry,material);</span><br><span class="line">    <span class="keyword">this</span>.cube.position.set(&#123;<span class="attr">x</span>:<span class="number">0</span>,<span class="attr">y</span>:<span class="number">0</span>,<span class="attr">z</span>:<span class="number">-4</span>&#125;);</span><br><span class="line">    scene.add(<span class="keyword">this</span>.cube);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//动画更新</span></span><br><span class="line">  update()&#123;</span><br><span class="line">    <span class="keyword">const</span> &#123;scene,camera,renderer,clock&#125;=<span class="keyword">this</span>;</span><br><span class="line">    <span class="keyword">const</span> delta=clock.getDelta()*<span class="number">60</span>;</span><br><span class="line">    <span class="comment">//启动渲染</span></span><br><span class="line">    <span class="keyword">this</span>.cube.rotation.y += <span class="number">0.1</span>*delta;</span><br><span class="line">    renderer.render(scene,camera);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//VR模式初始化</span></span><br><span class="line">  _initVR()&#123;</span><br><span class="line">		<span class="keyword">const</span> &#123; renderer &#125; = <span class="keyword">this</span>;</span><br><span class="line">    renderer.vr.enabled = <span class="literal">true</span>;</span><br><span class="line">    <span class="comment">//获取VRDisplay实例</span></span><br><span class="line">    navigator.getVRDisplays().then(<span class="function"><span class="params">display</span>=&gt;</span>&#123;</span><br><span class="line">      renderer.vr.setDevice(display[<span class="number">0</span>]);</span><br><span class="line">      <span class="keyword">const</span> button = <span class="built_in">document</span>.querySelector(<span class="string">'.vr-btn'</span>);</span><br><span class="line">      VRButton.init(display[<span class="number">0</span>],renderer,button,()=&gt;button.textContent=<span class="string">'退出VR'</span>，()=&gt;button.textContent=<span class="string">'进入VR'</span>);</span><br><span class="line">    &#125;).catch(<span class="function"><span class="params">err</span>=&gt;</span><span class="built_in">console</span>.warn(err));</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">//窗口调整监听</span></span><br><span class="line">  _resize()&#123;</span><br><span class="line">    <span class="keyword">const</span> &#123;camera,renderer&#125;=<span class="keyword">this</span>;</span><br><span class="line">    camera.aspect=<span class="built_in">window</span>.innerWidth/<span class="built_in">window</span>.innerHeight;</span><br><span class="line">    camera.updateProjectionMatrix();</span><br><span class="line">    renderer.setSize(<span class="built_in">window</span>.innerWidth,<span class="built_in">window</span>.innerHeight);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">new</span> WebVRApp();</span><br></pre></td></tr></table></figure>
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/09/27/webVR/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -1552,15 +1524,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">基础</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">css</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
