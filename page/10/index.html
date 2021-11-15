@@ -202,6 +202,146 @@
             
 
   
+    <article id="post-webpack的简单使用与动态打包" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/04/19/webpack%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%8A%A8%E6%80%81%E6%89%93%E5%8C%85/" target="_blank">webpack的简单使用与动态打包</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/04/19/webpack%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%8A%A8%E6%80%81%E6%89%93%E5%8C%85/" class="archive-article-date">
+        <time datetime="2020-04-19T14:11:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-19</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="webpack的简单使用"><a href="#webpack的简单使用" class="headerlink" title="webpack的简单使用"></a>webpack的简单使用</h1><ol>
+<li><p>新建项目空白目录，并运行npm init -y 命令，初始化包管理配置文件package.json</p>
+</li>
+<li><p>新建src源代码目录</p>
+</li>
+<li><p>新建src-&gt;index.html首页</p>
+</li>
+<li><p>初始化首页基本的结构</p>
+</li>
+</ol>
+<h3 id="webpack转化代码实现模块化"><a href="#webpack转化代码实现模块化" class="headerlink" title="webpack转化代码实现模块化"></a>webpack转化代码实现模块化</h3><ol>
+<li><p>运行npm install webpack webpack-cli -D命令，安装webpack相关的包</p>
+</li>
+<li><p>在项目的根目录中，创建名为webpack.config.js的webpack配置文件</p>
+</li>
+<li><p>在webpack配置文件webpack.config.js中，初始化如下的基本配置:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports=&#123;</span><br><span class="line">    mode:<span class="string">'development'</span> <span class="comment">//mode用来指定构建模式，development为开发模式,production为压缩版本</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="4">
+<li>在package.json配置文件中的scripts节点下，新增dev脚本如下:</li>
+</ol>
+<p>​     “scripts”:{<br>​         “dev”:”webpack”//script节点下的脚本，可以通过npm run执行<br>​     }</p>
+<ol start="5">
+<li>在终端中运行npm run dev 命令，启动webpack进行项目的打包</li>
+</ol>
+<h3 id="改变打包的入口（默认为src-gt-index-js）和出口（默认为dist-gt-main-js）"><a href="#改变打包的入口（默认为src-gt-index-js）和出口（默认为dist-gt-main-js）" class="headerlink" title="改变打包的入口（默认为src-&gt;index.js）和出口（默认为dist-&gt;main.js）"></a>改变打包的入口（默认为src-&gt;index.js）和出口（默认为dist-&gt;main.js）</h3><p>在配置文件webpack.config.js中改为:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path=<span class="built_in">require</span>(<span class="string">'path'</span>)                          <span class="comment">//导入node.js中的path模块来指定路线</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports=&#123;</span><br><span class="line">    mode:<span class="string">'development'</span>,                             <span class="comment">//模式指定</span></span><br><span class="line">    entry:path.join(__dirname,<span class="string">'./src/index.js'</span>),    <span class="comment">//__dirname表示当前目录下</span></span><br><span class="line">    output:&#123;</span><br><span class="line">        path:path.join(__dirname,<span class="string">'./dist'</span>),         <span class="comment">//path表示路径</span></span><br><span class="line">        filename:<span class="string">'bundle.js'</span>                        <span class="comment">//filename表示输出的文件名</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="动态打包"><a href="#动态打包" class="headerlink" title="动态打包"></a>动态打包</h1><p>在前面基本使用(初始化webpack，npm webpack相关库，创建webpack.config.js的配置文件)的基础上<br>配置自动打包的功能：</p>
+<p>1.运行npm install webpack-dev-server -D命令，安装支持项目自动打包的工具</p>
+<p>2.修改package.json-&gt;scripts中的dev命令如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"scripts"</span>:&#123;</span><br><span class="line">    <span class="string">"dev"</span>:<span class="string">"webpack-dev-server"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>3.将src-&gt;index.html中的，script脚本的引用路径”../dist/buldle.js”，修改为根目录下的文件”/buldle.js”</p>
+<p>4.运行npm run dev命令，重新进行打包</p>
+<p>5.在浏览器中访问 <a href="http://lacalhost:8080" target="_blank" rel="noopener">http://lacalhost:8080</a> 地址可以查看打包的效果</p>
+<p>6.ctrl+c 退出</p>
+<h1 id="生成预览页面"><a href="#生成预览页面" class="headerlink" title="生成预览页面"></a>生成预览页面</h1><p>1.运行npm install html-webpack-plugin -D命令，安装生成预览页面的插件<br>2.修改webpack.config.js文件头部区域，添加</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> HtmlWebpackPlugin=<span class="built_in">require</span>(<span class="string">'html-webpack-plugin'</span>)</span><br><span class="line"><span class="keyword">const</span> htmlPlugin=<span class="keyword">new</span> HtmlWebpackPlugin(&#123;</span><br><span class="line">    template:<span class="string">'./src/index.html'</span>,<span class="comment">//指定的主页地址</span></span><br><span class="line">    filename:<span class="string">'index.html'</span><span class="comment">//命名生成的文件，该文件不显示，只在内存中</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>3.修改webpack.config,js文件中向外暴露的配置对象，新增加如下配置节点：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports=&#123;</span><br><span class="line">    plugins:[htmlPlugin]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="配置完成自动打开页面，并且配置服务器参数"><a href="#配置完成自动打开页面，并且配置服务器参数" class="headerlink" title="配置完成自动打开页面，并且配置服务器参数"></a>配置完成自动打开页面，并且配置服务器参数</h1><p>package.json中的配置<br>–open 打包完成后自动打开浏览器的页面<br>–host 配置IP地址<br>–port 配置端口</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"scripts"</span>:&#123;</span><br><span class="line">    <span class="string">"dev"</span>:<span class="string">"webpack-dev-server --open --host 127.0.0.1 --port 8888"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">webpack</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/04/19/webpack%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%8A%A8%E6%80%81%E6%89%93%E5%8C%85/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-for-in与for-of的区别" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1153,106 +1293,6 @@
 
 
   
-    <article id="post-悦听播放器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/04/12/%E6%82%A6%E5%90%AC%E6%92%AD%E6%94%BE%E5%99%A8/" target="_blank">悦听播放器</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/04/12/%E6%82%A6%E5%90%AC%E6%92%AD%E6%94%BE%E5%99%A8/" class="archive-article-date">
-        <time datetime="2020-04-12T07:07:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-12</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="悦听播放器"><a href="#悦听播放器" class="headerlink" title="悦听播放器"></a>悦听播放器</h1><p>利用vue构建逻辑层</p>
-<p><a href=" https://yuchenbin1.github.io/listener/" >链接地址</a></p>
-<p><a href=" https://github.com/yuchenbin1/listener " target="_blank" rel="noopener">码源地址</a></p>
-<p>达到搜索歌曲，点击放歌，中心图片旋转，以及MV播放的功能。</p>
-<h3 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h3><ol>
-<li><p>vue闪动问题</p>
-<p><a href=" [https://yuchenbin1.github.io/2020/04/12/vue%E9%97%AA%E5%8A%A8%E7%9A%84%E9%97%AE%E9%A2%98/](https://yuchenbin1.github.io/2020/04/12/vue闪动的问题/) ">解决方法的链接</a></p>
-</li>
-<li><p>css背景图透明度问题</p>
-<p><a href=" [https://yuchenbin1.github.io/2020/04/12/css%E4%B8%AD%E9%80%8F%E6%98%8E%E5%BA%A6%E7%BB%A7%E6%89%BF%E7%9A%84%E9%97%AE%E9%A2%98/](https://yuchenbin1.github.io/2020/04/12/css中透明度继承的问题/) ">解决方法的链接</a></p>
-</li>
-</ol>
-<p>悦听播放器html部分</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line"></span><br><span class="line">&lt;head&gt;</span><br><span class="line">  &lt;meta charset=<span class="string">"UTF-8"</span> /&gt;</span><br><span class="line">  &lt;meta name=<span class="string">"viewport"</span> content=<span class="string">"width=device-width, initial-scale=1.0"</span> /&gt;</span><br><span class="line">  &lt;meta http-equiv=<span class="string">"X-UA-Compatible"</span> content=<span class="string">"ie=edge"</span> /&gt;</span><br><span class="line">  &lt;title&gt;悦听播放器&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">  &lt;!-- 样式 --&gt;</span></span><br><span class="line"><span class="regexp">  &lt;link rel="stylesheet" href="./</span>style.css<span class="string">"&gt;</span></span><br><span class="line"><span class="string">&lt;/head&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&lt;body&gt;</span></span><br><span class="line"><span class="string">  &lt;div class="</span>wrap<span class="string">" style="</span>display:none<span class="string">" :style="</span>&#123;<span class="attr">display</span>:<span class="string">'block'</span>&#125;<span class="string">"&gt;</span></span><br><span class="line"><span class="string">    &lt;div class="</span>wrap2<span class="string">" :style="</span>&#123;<span class="attr">backgroundImage</span>: <span class="string">'url('</span> +bg+ <span class="string">')'</span>&#125;<span class="string">"&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">    &lt;!-- 播放器主体区域 --&gt;</span></span><br><span class="line"><span class="string">    &lt;div class="</span>play_wrap<span class="string">" id="</span>player<span class="string">"&gt;</span></span><br><span class="line"><span class="string">      &lt;div class="</span>search_bar<span class="string">"&gt;</span></span><br><span class="line"><span class="string">        &lt;img src="</span>./imgs/player_title.png<span class="string">" alt="</span><span class="string">" /&gt;</span></span><br><span class="line"><span class="string">        &lt;!-- 搜索歌曲 --&gt;</span></span><br><span class="line"><span class="string">        &lt;input type="</span>text<span class="string">" autocomplete="</span>off<span class="string">" v-model="</span>query<span class="string">" @keyup.enter="</span>searchMusic<span class="string">" /&gt;</span></span><br><span class="line"><span class="string">      &lt;/div&gt;</span></span><br><span class="line"><span class="string">      &lt;div class="</span>center_con<span class="string">"&gt;</span></span><br><span class="line"><span class="string">        &lt;!-- 搜索歌曲列表 --&gt;</span></span><br><span class="line"><span class="string">        &lt;div class='song_wrapper'&gt;</span></span><br><span class="line"><span class="string">          &lt;ul class="</span>song_list<span class="string">"&gt;</span></span><br><span class="line"><span class="string">           &lt;li v-for="</span>item <span class="keyword">in</span> musicList<span class="string">"&gt;</span></span><br><span class="line"><span class="string">             &lt;a href="</span>javascript:;<span class="string">" @click="</span>playMusic(item.id),changePicture(item.id),getComment(item.id)<span class="string">"&gt;&lt;/a&gt; </span></span><br><span class="line"><span class="string">             &lt;b v-cloak&gt;&#123;&#123;item.name&#125;&#125;&lt;/b&gt;</span></span><br><span class="line"><span class="string">             &lt;span v-cloak v-if="</span>item.mvid!=<span class="number">0</span><span class="string">" @click="</span>playMv(item.mvid)<span class="string">"&gt;&lt;i&gt;&lt;/i&gt;&lt;/span&gt;</span></span><br><span class="line"><span class="string">           &lt;/li&gt;</span></span><br><span class="line"><span class="string">          &lt;/ul&gt;</span></span><br><span class="line"><span class="string">          &lt;img src="</span>./imgs/line.png<span class="string">" v-cloak class="</span>switch_btn<span class="string">" alt="</span><span class="string">"&gt;</span></span><br><span class="line"><span class="string">        &lt;/div&gt;</span></span><br><span class="line"><span class="string">        &lt;!-- 歌曲信息容器 --&gt;</span></span><br><span class="line"><span class="string">        &lt;div class="</span>player_con<span class="string">" :class="</span>&#123;<span class="attr">playing</span>:isPlaying&#125;<span class="string">"&gt;</span></span><br><span class="line"><span class="string">          &lt;img src="</span>./imgs/player_bar.png<span class="string">" class="</span>play_bar<span class="string">" /&gt;</span></span><br><span class="line"><span class="string">          &lt;!-- 黑胶碟片 --&gt;</span></span><br><span class="line"><span class="string">          &lt;img src="</span>./imgs/disc.png<span class="string">" class="</span>disc autoRotate<span class="string">" /&gt;</span></span><br><span class="line"><span class="string">          &lt;img :src="</span>pictureId<span class="string">" class="</span>cover autoRotate<span class="string">" /&gt;</span></span><br><span class="line"><span class="string">        &lt;/div&gt;</span></span><br><span class="line"><span class="string">        &lt;!-- 评论容器 --&gt;</span></span><br><span class="line"><span class="string">        &lt;div class="</span>comment_wrapper<span class="string">"&gt;</span></span><br><span class="line"><span class="string">          &lt;h5 class='title'&gt;热门留言&lt;/h5&gt;</span></span><br><span class="line"><span class="string">          &lt;div class='comment_list' &gt;</span></span><br><span class="line"><span class="string">            &lt;dl v-for="</span>item <span class="keyword">in</span> localHotComments<span class="string">"&gt;</span></span><br><span class="line"><span class="string">              &lt;dt&gt;&lt;img :src="</span>item.user.avatarUrl<span class="string">" alt="</span><span class="string">"&gt;&lt;/dt&gt;</span></span><br><span class="line"><span class="string">              &lt;dd class="</span>name<span class="string">" v-cloak&gt;&#123;&#123;item.user.nickname&#125;&#125;&lt;/dd&gt;</span></span><br><span class="line"><span class="string">              &lt;dd class="</span>detail<span class="string">" v-cloak&gt;</span></span><br><span class="line"><span class="string">                &#123;&#123;item.content&#125;&#125;</span></span><br><span class="line"><span class="string">              &lt;/dd&gt;</span></span><br><span class="line"><span class="string">            &lt;/dl&gt;</span></span><br><span class="line"><span class="string">          &lt;/div&gt;</span></span><br><span class="line"><span class="string">          &lt;img src="</span>./imgs/line.png<span class="string">" class="</span>right_line<span class="string">"&gt;</span></span><br><span class="line"><span class="string">        &lt;/div&gt;</span></span><br><span class="line"><span class="string">      &lt;/div&gt;</span></span><br><span class="line"><span class="string">      &lt;div class="</span>audio_con<span class="string">"&gt;</span></span><br><span class="line"><span class="string">        &lt;audio ref='audio'  @play="</span>play<span class="string">" @pause="</span>pause<span class="string">" :src="</span>musicUrl<span class="string">" controls autoplay loop class="</span>myaudio<span class="string">"&gt;&lt;/audio&gt;</span></span><br><span class="line"><span class="string">      &lt;/div&gt;</span></span><br><span class="line"><span class="string">      &lt;div class="</span>video_con<span class="string">" v-show="</span>isShow<span class="string">"  style="</span>display: none;<span class="string">"&gt;</span></span><br><span class="line"><span class="string">        &lt;video :src="</span>mvUrl<span class="string">" controls="</span>controls<span class="string">"&gt;&lt;/video&gt;</span></span><br><span class="line"><span class="string">        &lt;div class="</span>mask<span class="string">" @click="</span>hide<span class="string">"&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">      &lt;/div&gt;</span></span><br><span class="line"><span class="string">    &lt;/div&gt;</span></span><br><span class="line"><span class="string">  &lt;/div&gt;</span></span><br><span class="line"><span class="string">  &lt;!-- 开发环境版本，包含了有帮助的命令行警告 --&gt;</span></span><br><span class="line"><span class="string">  &lt;script src="</span>https:<span class="comment">//cdn.jsdelivr.net/npm/vue/dist/vue.js"&gt;&lt;/script&gt;</span></span><br><span class="line">  &lt;!-- 官网提供的 axios 在线地址 --&gt;</span><br><span class="line">  &lt;script src=<span class="string">"https://unpkg.com/axios/dist/axios.min.js"</span>&gt;&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">	&lt;script src="./i</span>ndex.js<span class="string">"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="string">&lt;/body&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">页面项目</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/04/12/%E6%82%A6%E5%90%AC%E6%92%AD%E6%94%BE%E5%99%A8/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/9/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/11/">Next &amp;raquo;</a>
@@ -1390,11 +1430,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
+                <a href="javascript:void(0)" class="js-tag color1">react</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">react</a>
+                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1410,11 +1450,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">

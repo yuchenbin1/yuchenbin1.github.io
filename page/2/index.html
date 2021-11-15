@@ -202,6 +202,98 @@
             
 
   
+    <article id="post-app底部按钮被顶起" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/09/21/app%E5%BA%95%E9%83%A8%E6%8C%89%E9%92%AE%E8%A2%AB%E9%A1%B6%E8%B5%B7/" target="_blank">app底部按钮被顶起</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/09/21/app%E5%BA%95%E9%83%A8%E6%8C%89%E9%92%AE%E8%A2%AB%E9%A1%B6%E8%B5%B7/" class="archive-article-date">
+        <time datetime="2021-09-21T10:31:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-21</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>经常有一些页面在底部有按钮，底部的按钮一般是用</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">position</span><span class="selector-pseudo">:fixed</span>;</span><br><span class="line"><span class="selector-tag">bottom</span><span class="selector-pseudo">:0</span>;</span><br></pre></td></tr></table></figure>
+
+<p>但是如果是在移动端，键盘弹出之后，由于整个视图的缩小，按钮还是会被顶到上面，于是做一个处理，视图缩小就使得按钮消失</p>
+<p>以vue为例</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">data()&#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    docmHeight:<span class="built_in">document</span>.documentElement.clientHeight,<span class="comment">//默认的视图高度</span></span><br><span class="line">    showHeight:<span class="built_in">document</span>.documentElement.clientHeight,<span class="comment">//修改后的视图高度</span></span><br><span class="line">    isButtonShow:<span class="literal">true</span><span class="comment">//按钮是否被显示</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br><span class="line">mount()&#123;</span><br><span class="line">  <span class="comment">//监听视图的改变</span></span><br><span class="line">  <span class="built_in">window</span>.onresize=<span class="function"><span class="params">()</span>=&gt;</span>(</span><br><span class="line">  	(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.showHeight=<span class="built_in">document</span>.documentElement.clientHeight;</span><br><span class="line">    &#125;)()</span><br><span class="line">  )</span><br><span class="line">&#125;,</span><br><span class="line">watch:&#123;</span><br><span class="line">  <span class="comment">//如果修改后的视图高度小于最初的高度则按钮不显示</span></span><br><span class="line">  showHeight:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">this</span>.docmHeight&gt;<span class="keyword">this</span>.showHeight)&#123;</span><br><span class="line">      <span class="keyword">this</span>.isButtonShow=<span class="literal">false</span></span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.isButtonShow=<span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/09/21/app%E5%BA%95%E9%83%A8%E6%8C%89%E9%92%AE%E8%A2%AB%E9%A1%B6%E8%B5%B7/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Portals和Profiler" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1189,138 +1281,6 @@
 
 
   
-    <article id="post-px转化为rem" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/07/06/px%E8%BD%AC%E5%8C%96%E4%B8%BArem/" target="_blank">px转化为rem</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/07/06/px%E8%BD%AC%E5%8C%96%E4%B8%BArem/" class="archive-article-date">
-        <time datetime="2021-07-06T12:46:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-06</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>学习使用postcss-pxtorem插件</p>
-<h1 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h1><p>使得在代码中的px转变为rem</p>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install postcss postcss-pxtorem --save-dev</span><br></pre></td></tr></table></figure>
-
-<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">css: &#123;</span><br><span class="line">    loaderOptions: &#123;</span><br><span class="line">      postcss: &#123;</span><br><span class="line">        plugins: [</span><br><span class="line">          <span class="built_in">require</span>(<span class="string">'postcss-pxtorem'</span>)(&#123;</span><br><span class="line">            exclude: <span class="regexp">/node_modules/</span>,</span><br><span class="line">            propList: [<span class="string">'*'</span>],</span><br><span class="line">            rootValue: <span class="number">100</span>,<span class="comment">//结果为设计稿的尺寸/100，如果宽度为100px,会被换算成为1rem</span></span><br><span class="line">          &#125;),</span><br><span class="line">        ],</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
-
-<p>配置属性作用：</p>
-<p>1）<code>rootValue</code>（Number | Function）表示根元素字体大小或根据<code>input</code>参数返回根元素字体大小。</p>
-<p>2）<code>unitPrecision</code> （Number）允许REM单位增加的十进制数字。</p>
-<p>3）<code>propList</code> （Array）可以从px更改为rem的属性。</p>
-<ul>
-<li>值必须完全匹配。</li>
-<li>使用通配符<code>*</code>启用所有属性。例：<code>[&#39;*&#39;]</code></li>
-<li><code>*</code>在单词的开头或结尾使用。（<code>[&#39;*position*&#39;]</code>将匹配<code>background-position-y</code>）</li>
-<li>使用<code>!</code>不匹配的属性。例：<code>[&#39;*&#39;, &#39;!letter-spacing&#39;]</code></li>
-<li>将“ not”前缀与其他前缀组合。例：<code>[&#39;*&#39;, &#39;!font*&#39;]</code></li>
-</ul>
-<p>4）<code>selectorBlackList</code> （Array）要忽略的选择器，保留为px。</p>
-<ul>
-<li>如果value是字符串，它将检查选择器是否包含字符串。<ul>
-<li><code>[&#39;body&#39;]</code> 将匹配 <code>.body-class</code></li>
-</ul>
-</li>
-<li>如果value是regexp，它将检查选择器是否匹配regexp。<ul>
-<li><code>[/^body$/]</code>将匹配<code>body</code>但不匹配<code>.body</code></li>
-</ul>
-</li>
-</ul>
-<p><code>5）replace</code> （Boolean）替换包含rems的规则。</p>
-<p>6）<code>mediaQuery</code> （Boolean）允许在媒体查询中转换px。</p>
-<p>7）<code>minPixelValue</code>（Number）设置要替换的最小像素值。</p>
-<p>8）<code>exclude</code>（String, Regexp, Function）要忽略并保留为px的文件路径。</p>
-<ul>
-<li>如果value是字符串，它将检查文件路径是否包含字符串。<ul>
-<li><code>&#39;exclude&#39;</code> 将匹配 <code>\project\postcss-pxtorem\exclude\path</code></li>
-</ul>
-</li>
-<li>如果value是regexp，它将检查文件路径是否与regexp相匹配。<ul>
-<li><code>/exclude/i</code> 将匹配 <code>\project\postcss-pxtorem\exclude\path</code></li>
-</ul>
-</li>
-<li>如果value是function，则可以使用exclude function返回true，该文件将被忽略。<ul>
-<li>回调函数会将文件路径作为参数传递，它应该返回一个布尔结果。</li>
-<li><code>function (file) { return file.indexOf(&#39;exclude&#39;) !== -1; }</code></li>
-</ul>
-</li>
-</ul>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/07/06/px%E8%BD%AC%E5%8C%96%E4%B8%BArem/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
@@ -1458,11 +1418,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
+                <a href="javascript:void(0)" class="js-tag color1">react</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">react</a>
+                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1478,11 +1438,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
