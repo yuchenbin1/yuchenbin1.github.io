@@ -202,6 +202,101 @@
             
 
   
+    <article id="post-axios取消请求" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/05/13/axios%E5%8F%96%E6%B6%88%E8%AF%B7%E6%B1%82/" target="_blank">axios取消请求</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/05/13/axios%E5%8F%96%E6%B6%88%E8%AF%B7%E6%B1%82/" class="archive-article-date">
+        <time datetime="2021-05-13T13:12:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-13</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p><strong>abort</strong></p>
+<p>取消请求</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;page&quot; id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">    &lt;button  class&#x3D;&quot;get-msg&quot;&gt;获取数据&lt;&#x2F;button&gt;</span><br><span class="line">    &lt;button  class&#x3D;&quot;cancel&quot;&gt;取消获取&lt;&#x2F;button&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  var currentAjax &#x3D; null</span><br><span class="line">    $(&#39;.get-msg&#39;).click(function () &#123;</span><br><span class="line">      currentAjax &#x3D; $.ajax(&#123;</span><br><span class="line">        type: &#39;GET&#39;,</span><br><span class="line">        url: &#39;http:&#x2F;&#x2F;jsonplaceholder.typicode.com&#x2F;comments&#39;,</span><br><span class="line">        success: function (res) &#123;</span><br><span class="line">          console.log(res)</span><br><span class="line">        &#125;,</span><br><span class="line">        error: function (err) &#123;</span><br><span class="line">          console.log(&quot;获取失败&quot;)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">    $(&#39;.cancel&#39;).click(function () &#123;</span><br><span class="line">      if (currentAjax) &#123;</span><br><span class="line">        currentAjax.abort()取消请求</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>axios取消请求,CancelToken</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">  &lt;div class&#x3D;&quot;page&quot; id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">    &lt;button @click&#x3D;&quot;getMsg&quot; class&#x3D;&quot;get-msg&quot;&gt;获取数据&lt;&#x2F;button&gt;</span><br><span class="line">    &lt;button @click&#x3D;&quot;cancelGetMsg&quot; class&#x3D;&quot;cancel&quot;&gt;取消获取&lt;&#x2F;button&gt;</span><br><span class="line">    &lt;ul&gt;</span><br><span class="line">      &lt;li v-for&#x3D;&quot;item in items&quot;&gt;&#123;&#123;item.name&#125;&#125;&lt;&#x2F;li&gt;</span><br><span class="line">    &lt;&#x2F;ul&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">  &lt;script&gt;</span><br><span class="line">  var app &#x3D; new Vue(&#123;</span><br><span class="line">    el: &#39;#app&#39;,</span><br><span class="line">    data: &#123;</span><br><span class="line">      message: &#39;Hello Vue!&#39;,</span><br><span class="line">      items: [],</span><br><span class="line">      cancel: null</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">      getMsg () &#123;</span><br><span class="line">        let CancelToken &#x3D; axios.CancelToken</span><br><span class="line">        let self &#x3D; this</span><br><span class="line">        axios.get(&#39;http:&#x2F;&#x2F;jsonplaceholder.typicode.com&#x2F;comments&#39;, &#123;</span><br><span class="line">          cancelToken: new CancelToken(function executor(c) &#123;</span><br><span class="line">            self.cancel &#x3D; c</span><br><span class="line">            console.log(c)</span><br><span class="line">            &#x2F;&#x2F; 这个参数 c 就是CancelToken构造函数里面自带的取消请求的函数，这里把该函数当参数用</span><br><span class="line">          &#125;)</span><br><span class="line">        &#125;).then(res &#x3D;&gt; &#123;</span><br><span class="line">          this.items &#x3D; res.data</span><br><span class="line">        &#125;).catch(err &#x3D;&gt; &#123;</span><br><span class="line">          console.log(err)</span><br><span class="line">        &#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;手速够快就不用写这个定时器了，点击取消获取就可以看到效果了</span><br><span class="line">        setTimeout(function () &#123;</span><br><span class="line">          &#x2F;&#x2F;只要我们去调用了这个cancel()方法，没有完成请求的接口便会停止请求</span><br><span class="line">          self.cancel()</span><br><span class="line">        &#125;, 100)</span><br><span class="line">      &#125;,</span><br><span class="line">      &#x2F;&#x2F;cancelGetMsg 方法跟上面的setTimeout函数是一样的效果，因为手速不够快，哦不，是因为网速太快，导致我来不及点取消获取按钮，数据就获取成功了</span><br><span class="line">      cancelGetMsg () &#123;</span><br><span class="line">        &#x2F;&#x2F; 在这里去判断你的id 1 2 3，你默认是展示的tab1，点击的时候不管你上一个请求有没有执行完都去调用这个cancel()，</span><br><span class="line">        this.cancel()</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">  &lt;&#x2F;script&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br></pre></td></tr></table></figure>
+
+<p>封装axios解决重复点击的问题</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">import axios from &#39;axios&#39;;</span><br><span class="line">   </span><br><span class="line">   axios.defaults.timeout &#x3D; 5000;</span><br><span class="line">   axios.defaults.baseURL &#x3D;&#39;&#39;;</span><br><span class="line"></span><br><span class="line">   let pending &#x3D; []; &#x2F;&#x2F;声明一个数组用于存储每个ajax请求的取消函数和ajax标识</span><br><span class="line">   let cancelToken &#x3D; axios.CancelToken;</span><br><span class="line">   let removePending &#x3D; (ever) &#x3D;&gt; &#123;</span><br><span class="line">       for(let p in pending)&#123;</span><br><span class="line">           if(pending[p].u &#x3D;&#x3D;&#x3D; ever.url + &#39;&amp;&#39; + ever.method) &#123; &#x2F;&#x2F;当当前请求在数组中存在时执行函数体</span><br><span class="line">               pending[p].f(); &#x2F;&#x2F;执行取消操作</span><br><span class="line">               pending.splice(p, 1); &#x2F;&#x2F;把这条记录从数组中移除</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   </span><br><span class="line">   &#x2F;&#x2F;http request 拦截器</span><br><span class="line">   axios.interceptors.request.use(</span><br><span class="line">   config &#x3D;&gt; &#123;</span><br><span class="line">     config.data &#x3D; JSON.stringify(config.data);</span><br><span class="line">     config.headers &#x3D; &#123;</span><br><span class="line">       &#39;Content-Type&#39;:&#39;application&#x2F;x-www-form-urlencoded&#39;</span><br><span class="line">     &#125;</span><br><span class="line">     &#x2F;&#x2F; ------------------------------------------------------------------------------------</span><br><span class="line">     removePending(config); &#x2F;&#x2F;在一个ajax发送前执行一下取消操作</span><br><span class="line">     config.cancelToken &#x3D; new cancelToken((c)&#x3D;&gt;&#123;</span><br><span class="line">        &#x2F;&#x2F; 这里的ajax标识我是用请求地址&amp;请求方式拼接的字符串，当然你可以选择其他的一些方式</span><br><span class="line">        pending.push(&#123; u: config.url + &#39;&amp;&#39; + config.method, f: c &#125;);  </span><br><span class="line">     &#125;);</span><br><span class="line">     &#x2F;&#x2F; -----------------------------------------------------------------------------------------</span><br><span class="line">     return config;</span><br><span class="line">   &#125;,</span><br><span class="line">   error &#x3D;&gt; &#123;</span><br><span class="line">     return Promise.reject(err);</span><br><span class="line">   &#125;</span><br><span class="line"> );</span><br><span class="line"> &#x2F;&#x2F;http response 拦截器</span><br><span class="line"> axios.interceptors.response.use(</span><br><span class="line">   response &#x3D;&gt; &#123;</span><br><span class="line">     &#x2F;&#x2F; ------------------------------------------------------------------------------------------</span><br><span class="line">     removePending(res.config);  &#x2F;&#x2F;在一个ajax响应后再执行一下取消操作，把已经完成的请求从pending中移除</span><br><span class="line">     &#x2F;&#x2F; -------------------------------------------------------------------------------------------</span><br><span class="line">     if(response.data.errCode &#x3D;&#x3D;2)&#123;</span><br><span class="line">       router.push(&#123;</span><br><span class="line">         path:&quot;&#x2F;login&quot;,</span><br><span class="line">         querry:&#123;redirect:router.currentRoute.fullPath&#125;&#x2F;&#x2F;从哪个页面跳转</span><br><span class="line">       &#125;)</span><br><span class="line">     &#125;</span><br><span class="line">     return response;</span><br><span class="line">   &#125;,</span><br><span class="line">   error &#x3D;&gt; &#123;</span><br><span class="line">     return Promise.reject(error)</span><br><span class="line">   &#125;</span><br><span class="line"> )</span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/05/13/axios%E5%8F%96%E6%B6%88%E8%AF%B7%E6%B1%82/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-triggerEvent" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1228,96 +1323,6 @@
 
 
   
-    <article id="post-21年2月22日" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/02/22/21%E5%B9%B42%E6%9C%8822%E6%97%A5/" target="_blank">21年2月22日</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/02/22/21%E5%B9%B42%E6%9C%8822%E6%97%A5/" class="archive-article-date">
-        <time datetime="2021-02-22T13:57:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-02-22</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="驾驶舱自适应"><a href="#驾驶舱自适应" class="headerlink" title="驾驶舱自适应"></a>驾驶舱自适应</h1><p>在设计稿上面的页面是1920*1080，但是考虑到不同的电脑屏幕不一样，于是一般会使得宽度自适应，这也是最常规的办法。但是能不能高度也自适应呢。</p>
-<p>答案是完全自适应不行，以为在padding以及margin属性使用百分比的时候，百分比相对于的是父元素的宽度。</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.partent</span>&#123;</span><br><span class="line"><span class="attribute">width</span>:<span class="number">100px</span>;</span><br><span class="line"><span class="attribute">height</span>:<span class="number">50px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.child</span>&#123;</span><br><span class="line">width:50%;//50px</span><br><span class="line">height:50%;//25px;</span><br><span class="line">margin:50%;//50px;</span><br><span class="line">padding:50%;//50px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>所以在高度自适应中不能使用margin和padding，但是也可以这样，当高度改变的时候，组件内部布局不变，但是组件之间的间隙改变。</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日志</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/02/22/21%E5%B9%B42%E6%9C%8822%E6%97%A5/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/4/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/6/">Next &amp;raquo;</a>
@@ -1455,15 +1460,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">react</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">webpack</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">RN</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1471,7 +1468,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+                <a href="javascript:void(0)" class="js-tag color3">RN</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1479,7 +1476,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">css</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">react</a>
               </li>
              
               <li class="article-tag-list-item">

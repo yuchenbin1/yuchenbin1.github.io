@@ -202,6 +202,109 @@
             
 
   
+    <article id="post-打包modern" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/11/22/%E6%89%93%E5%8C%85modern/" target="_blank">打包modern</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/11/22/%E6%89%93%E5%8C%85modern/" class="archive-article-date">
+        <time datetime="2021-11-22T11:37:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-22</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>个别低版本浏览器的手机访问页面报错</p>
+<p><code>globalThis is not defined</code></p>
+<p>但是在页面中本地代码并没有使用globalThis</p>
+<h1 id="globalThis"><a href="#globalThis" class="headerlink" title="globalThis"></a>globalThis</h1><p>这在ES10之前， globalThis 还没有标准化。</p>
+<p>在产品代码中，你可以自己编写这个怪物，在多个平台上“标准化”它:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> getGlobal = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> self !== <span class="string">'undefined'</span>) &#123; <span class="keyword">return</span> self; &#125;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">window</span> !== <span class="string">'undefined'</span>) &#123; <span class="keyword">return</span> <span class="built_in">window</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> global !== <span class="string">'undefined'</span>) &#123; <span class="keyword">return</span> global; &#125;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'unable to locate global object'</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>但即使这样也不总是奏效。因此，ES10 添加了 <strong>globalThis</strong> 对象，从现在开始，该对象用于在任何平台上访问全局作用域:</p>
+<figure class="highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 访问全局数组构造函数</span></span><br><span class="line">globalThis.Array(<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line">⇨ [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">// 类似于 ES5 之前的 window.v = &#123; flag: true &#125;</span></span><br><span class="line">globalThis.v = &#123; <span class="built_in">flag</span>: <span class="literal">true</span> &#125;;</span><br><span class="line"></span><br><span class="line">console.<span class="built_in">log</span>(globalThis.v);</span><br><span class="line">⇨ &#123; <span class="built_in">flag</span>: <span class="literal">true</span> &#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="原因查询"><a href="#原因查询" class="headerlink" title="原因查询"></a>原因查询</h1><p>一开始以为是node的版本的问题，但是使用了多个版本之后还是这样报错，使用别的手机，以及本地代码多次的尝试以后排除其他原因，只可能是该手机的浏览器内核版本过低不支持globalThis。</p>
+<p>想办法升级手机浏览器，但是android一些低端的手机，一段时间之后厂商就不支持升级了。</p>
+<h1 id="–modern"><a href="#–modern" class="headerlink" title="–modern"></a>–modern</h1><p>项目打包方式是使用<code>vue-cli-service build --modern</code></p>
+<p>注意到modern查询官方文档</p>
+<p><code>--modern</code> 使用<a href="https://cli.vuejs.org/zh/guide/browser-compatibility.html#现代模式" target="_blank" rel="noopener">现代模式</a>构建应用，为现代浏览器交付原生支持的 ES2015 代码，并生成一个兼容老浏览器的包用来自动回退</p>
+<p>modern主要是用来为现代浏览器做兼容性的优化，可能是这个原因导致，问题手机的浏览器版本过低。</p>
+<p>去掉之后，问题得到了解决。</p>
+<h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><p>项目打包方式去掉–modern</p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/11/22/%E6%89%93%E5%8C%85modern/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-前端资源路径不对" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1235,142 +1338,6 @@
 
 
   
-    <article id="post-package-json属性" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/10/07/package-json%E5%B1%9E%E6%80%A7/" target="_blank">package.json属性</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/10/07/package-json%E5%B1%9E%E6%80%A7/" class="archive-article-date">
-        <time datetime="2021-10-07T10:26:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-07</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="Package-json中的属性"><a href="#Package-json中的属性" class="headerlink" title="Package.json中的属性"></a>Package.json中的属性</h1><h2 id="name"><a href="#name" class="headerlink" title="name"></a>name</h2><p>名字</p>
-<h2 id="version"><a href="#version" class="headerlink" title="version"></a>version</h2><p>版本号，如”1.0.0”</p>
-<h2 id="description"><a href="#description" class="headerlink" title="description"></a>description</h2><p>包的描述信息，将会在npm search的结果中显示</p>
-<h2 id="keywords"><a href="#keywords" class="headerlink" title="keywords"></a>keywords</h2><p>包的关键词信息，是一个字符串数组，将会在npm search的结果中显示</p>
-<h2 id="homepage"><a href="#homepage" class="headerlink" title="homepage"></a>homepage</h2><p>包的主页地址</p>
-<h2 id="bugs"><a href="#bugs" class="headerlink" title="bugs"></a>bugs</h2><p>包的bug跟踪主页地址</p>
-<h2 id="license"><a href="#license" class="headerlink" title="license"></a>license</h2><p>包的开源协议名称</p>
-<h2 id="author"><a href="#author" class="headerlink" title="author"></a>author</h2><p>作者</p>
-<h2 id="contributors，maintainers"><a href="#contributors，maintainers" class="headerlink" title="contributors，maintainers"></a>contributors，maintainers</h2><p>包的贡献者，是一个数组</p>
-<h2 id="files（少用）"><a href="#files（少用）" class="headerlink" title="files（少用）"></a>files（少用）</h2><p>包所包含的所有文件，可以取值为文件夹，通常我们还是使用<code>.npmignore</code>来去除不想要包含到包里的文件</p>
-<h2 id="main"><a href="#main" class="headerlink" title="main"></a>main</h2><p>常用于依赖包的开发，mian指定的路径，在工程中可以直接引入依赖包</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">"main":"./src/CitySelect.js"</span><br></pre></td></tr></table></figure>
-
-<h2 id="bin（少用）"><a href="#bin（少用）" class="headerlink" title="bin（少用）"></a>bin（少用）</h2><p>如果你的包里包含可执行文件，通过设置这个字段可以将它包含到系统的<code>PATH</code>中，这样直接就可以运行，很方便</p>
-<h2 id="man（少用）"><a href="#man（少用）" class="headerlink" title="man（少用）"></a>man（少用）</h2><p>为系统的<code>man</code>命令提供帮助文档，帮值文档的文件名必须以数字结尾，如果是压缩的，需要以<code>.gz</code>结尾</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">"man":["./man/foo.1","./man/foo.2"]</span><br></pre></td></tr></table></figure>
-
-<h2 id="directories-少用"><a href="#directories-少用" class="headerlink" title="directories(少用)"></a>directories(少用)</h2><p>CommonJS包所要求的目录结构信息，展示项目的目录结构信息，字段可以是：lib、bin、man、doc、example。值都是字符串。</p>
-<h2 id="repository"><a href="#repository" class="headerlink" title="repository"></a>repository</h2><p>包的仓库地址</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">"repository":&#123;</span><br><span class="line">  "type":"git",</span><br><span class="line">  "url":"github.com/CitySelect.git"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="scripts"><a href="#scripts" class="headerlink" title="scripts"></a>scripts</h2><p>通过这个设置NPM调用的命令脚本，封装一些功能。</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">"scripts":&#123;</span><br><span class="line">  "build":"webpack-dev-server --config config/webpack.config.js"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="config"><a href="#config" class="headerlink" title="config"></a>config</h2><p>添加一些设置，可以供scripts读取用，同时这里的值也会被添加到系统的环境变量中</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">"config":&#123;</span><br><span class="line">  "port":8080</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>npm start</code> 的时候会读取到<code>npm_package_config_port</code></p>
-<h2 id="dependencies"><a href="#dependencies" class="headerlink" title="dependencies"></a>dependencies</h2><p>指定依赖的其他包，这些依赖是指包发布后正常执行时所需要的，也是线上需要的包</p>
-<p>使用下面的命令来安装</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save packagename</span><br></pre></td></tr></table></figure>
-
-<h2 id="devDependencies"><a href="#devDependencies" class="headerlink" title="devDependencies"></a>devDependencies</h2><p>只有在开发时候才需要的依赖包</p>
-<p>使用下面的命令安装</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev packageName</span><br></pre></td></tr></table></figure>
-
-<h2 id="peerDependencies"><a href="#peerDependencies" class="headerlink" title="peerDependencies"></a>peerDependencies</h2><p>相关的依赖，如果你的包是插件，而用户在使用你的包的时候，通常也会需要这些依赖（插件），那么可以将依赖列在这里。</p>
-<p>比如<code>karma</code>,它的<code>package.json</code>中有设置，依赖下面这些插件：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">"peerDependencies":&#123;</span><br><span class="line">  "karma-jasmine":"~0.1.0",</span><br><span class="line">  "karma-requirejs":"~0.2.0",</span><br><span class="line">  "karma-coffee-preprocessor":"~0.1.0",</span><br><span class="line">  "karma-html2js-preprocessor":"~0.1.0",</span><br><span class="line">  "karma-chrome-launcher":"~0.1.0",</span><br><span class="line">  "karma-firefox-launcher":"~0.1.0",</span><br><span class="line">  "karma-phantomjs-launcher":"~0.1.0",</span><br><span class="line">  "karma-script-launcher":"~0.1.0"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="bundledDependencies"><a href="#bundledDependencies" class="headerlink" title="bundledDependencies"></a>bundledDependencies</h2><p>绑定的依赖包，发布的时候这些绑定包也会被一同发布</p>
-<h2 id="optionalDependencies（少用）"><a href="#optionalDependencies（少用）" class="headerlink" title="optionalDependencies（少用）"></a>optionalDependencies（少用）</h2><p>即使这些依赖没有，也可以正常安装使用</p>
-<h2 id="engines（少用）"><a href="#engines（少用）" class="headerlink" title="engines（少用）"></a>engines（少用）</h2><p>指定包运行的环境</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">"engines":&#123;  "node":"&gt;=0.10.3 &lt; 0.12",  "npm":"~1.0.20"&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="os（少用）"><a href="#os（少用）" class="headerlink" title="os（少用）"></a>os（少用）</h2><p>指定你的包可以在哪些平台下运行</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">"os":["darwin","linux","!win32"]</span><br></pre></td></tr></table></figure>
-
-<h2 id="cpu（少用）"><a href="#cpu（少用）" class="headerlink" title="cpu（少用）"></a>cpu（少用）</h2><p>可以指定包运行的cpu架构</p>
-<h2 id="private"><a href="#private" class="headerlink" title="private"></a>private</h2><p>设置为true，这个包就不会发布到npm平台下</p>
-<h2 id="publishConfig（少用）"><a href="#publishConfig（少用）" class="headerlink" title="publishConfig（少用）"></a>publishConfig（少用）</h2><p>这个字段用于设置发布时的一些设定，尤其方便希望发布前设定指定的tag和registry</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/10/07/package-json%E5%B1%9E%E6%80%A7/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1508,15 +1475,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">react</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">webpack</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">RN</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1524,7 +1483,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+                <a href="javascript:void(0)" class="js-tag color3">RN</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1532,7 +1491,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">css</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">react</a>
               </li>
              
               <li class="article-tag-list-item">
