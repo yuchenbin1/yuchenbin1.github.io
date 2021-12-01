@@ -202,6 +202,136 @@
             
 
   
+    <article id="post-created与mounted" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/06/21/created%E4%B8%8Emounted/" target="_blank">created与mounted</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/06/21/created%E4%B8%8Emounted/" class="archive-article-date">
+        <time datetime="2021-06-21T12:03:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-21</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>在vue实际的应用中，数据的获取与修改，通常在created或者是mounted中，但是两者之间是有很大区别的</p>
+<table>
+<thead>
+<tr>
+<th align="center">生命周期</th>
+<th align="center">是否获取dom节点</th>
+<th align="center">是否可以获取data</th>
+<th align="center">是否获取methods</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">beforeCreate</td>
+<td align="center">否</td>
+<td align="center">否</td>
+<td align="center">否</td>
+</tr>
+<tr>
+<td align="center">created</td>
+<td align="center">否</td>
+<td align="center">是</td>
+<td align="center">是</td>
+</tr>
+<tr>
+<td align="center">beforeMount</td>
+<td align="center">否</td>
+<td align="center">是</td>
+<td align="center">是</td>
+</tr>
+<tr>
+<td align="center">mounted</td>
+<td align="center">是</td>
+<td align="center">是</td>
+<td align="center">是</td>
+</tr>
+</tbody></table>
+<p>可以看到有一个很大的区别是获取dom节点</p>
+<p>created:在模板渲染成html前调用，即通常初始化某些属性值，然后再渲染成视图。</p>
+<p>mounted:在模板渲染成html后调用，通常是初始化页面完成后，再对html的dom节点进行一些需要的操作</p>
+<p>在使用echarts的时候数据的操作就必须是mounted了，还有使用ref获取dom节点的时候</p>
+<p>但是有时候在mounted的时候也不一定会获取到真实的dom节点，因此在需要使用dom节点的时候可以用$nextTick</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.nextTick(<span class="function"><span class="params">()</span>=&gt;</span>&#123;&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>nextTick()的源码分析</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Defer a task to execute it asynchronously.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> nextTick = (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> callbacks = []<span class="comment">//存储需要执行的回调函数</span></span><br><span class="line">  <span class="keyword">let</span> pending = <span class="literal">false</span><span class="comment">//标志是否执行回调</span></span><br><span class="line">  <span class="keyword">let</span> timerFunc<span class="comment">//用于触发执行回调函数</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">nextTickHandler</span> (<span class="params"></span>) </span>&#123;<span class="comment">//该函数用来执行存储在callbacks中的回调函数</span></span><br><span class="line">    pending = <span class="literal">false</span></span><br><span class="line">    <span class="keyword">const</span> copies = callbacks.slice(<span class="number">0</span>)</span><br><span class="line">    callbacks.length = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; copies.length; i++) &#123;</span><br><span class="line">      copies[i]()</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// the nextTick behavior leverages the microtask queue, which can be accessed</span></span><br><span class="line">  <span class="comment">// via either native Promise.then or MutationObserver.</span></span><br><span class="line">  <span class="comment">// MutationObserver has wider support, however it is seriously bugged in</span></span><br><span class="line">  <span class="comment">// UIWebView in iOS &gt;= 9.3.3 when triggered in touch event handlers. It</span></span><br><span class="line">  <span class="comment">// completely stops working after triggering a few times... so, if native</span></span><br><span class="line">  <span class="comment">// Promise is available, we will use it:</span></span><br><span class="line">  <span class="comment">/* istanbul ignore if */</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">Promise</span> !== <span class="string">'undefined'</span> &amp;&amp; isNative(<span class="built_in">Promise</span>)) &#123;<span class="comment">//isNative检查一个值是否是原生function，是否支持原生promise</span></span><br><span class="line">    <span class="keyword">var</span> p = <span class="built_in">Promise</span>.resolve()</span><br><span class="line">    <span class="keyword">var</span> logError = <span class="function"><span class="params">err</span> =&gt;</span> &#123; <span class="built_in">console</span>.error(err) &#125;</span><br><span class="line">    timerFunc = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      p.then(nextTickHandler).catch(logError)</span><br><span class="line">      <span class="comment">// in problematic UIWebViews, Promise.then doesn't completely break, but</span></span><br><span class="line">      <span class="comment">// it can get stuck in a weird state where callbacks are pushed into the</span></span><br><span class="line">      <span class="comment">// microtask queue but the queue isn't being flushed, until the browser</span></span><br><span class="line">      <span class="comment">// needs to do some other work, e.g. handle a timer. Therefore we can</span></span><br><span class="line">      <span class="comment">// "force" the microtask queue to be flushed by adding an empty timer.</span></span><br><span class="line">      <span class="keyword">if</span> (isIOS) setTimeout(noop)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!isIE &amp;&amp; <span class="keyword">typeof</span> MutationObserver !== <span class="string">'undefined'</span> &amp;&amp; (</span><br><span class="line">    isNative(MutationObserver) ||</span><br><span class="line">    <span class="comment">// PhantomJS and iOS 7.x</span></span><br><span class="line">    MutationObserver.toString() === <span class="string">'[object MutationObserverConstructor]'</span></span><br><span class="line">  )) &#123;<span class="comment">//检查是否支持MutationObserver</span></span><br><span class="line">    <span class="comment">// use MutationObserver where native Promise is not available,</span></span><br><span class="line">    <span class="comment">// e.g. PhantomJS, iOS7, Android 4.4</span></span><br><span class="line">    <span class="keyword">var</span> counter = <span class="number">1</span></span><br><span class="line">    <span class="keyword">var</span> observer = <span class="keyword">new</span> MutationObserver(nextTickHandler)</span><br><span class="line">    <span class="keyword">var</span> textNode = <span class="built_in">document</span>.createTextNode(<span class="built_in">String</span>(counter))</span><br><span class="line">    observer.observe(textNode, &#123;</span><br><span class="line">      characterData: <span class="literal">true</span></span><br><span class="line">    &#125;)<span class="comment">//observe观察者会观察textNode节点的变化，变化的时候执行timerFunc，characterData设为 true 以监视指定目标节点或子节点树中节点所包含的字符数据的变化</span></span><br><span class="line">    timerFunc = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      counter = (counter + <span class="number">1</span>) % <span class="number">2</span></span><br><span class="line">      textNode.data = <span class="built_in">String</span>(counter)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// fallback to setTimeout</span></span><br><span class="line">    <span class="comment">/* istanbul ignore next */</span></span><br><span class="line">    timerFunc = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      setTimeout(nextTickHandler, <span class="number">0</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">queueNextTick</span> (<span class="params">cb?: Function, ctx?: Object</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> _resolve</span><br><span class="line">    callbacks.push(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (cb) &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">          cb.call(ctx)</span><br><span class="line">        &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">          handleError(e, ctx, <span class="string">'nextTick'</span>)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (_resolve) &#123;</span><br><span class="line">        _resolve(ctx)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">if</span> (!pending) &#123;</span><br><span class="line">      pending = <span class="literal">true</span></span><br><span class="line">      timerFunc()</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!cb &amp;&amp; <span class="keyword">typeof</span> <span class="built_in">Promise</span> !== <span class="string">'undefined'</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">        _resolve = resolve</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)()<span class="comment">//立即执行函数</span></span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/06/21/created%E4%B8%8Emounted/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-node-connect模块" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1538,108 +1668,6 @@
 
 
   
-    <article id="post-栅格布局原理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/05/20/%E6%A0%85%E6%A0%BC%E5%B8%83%E5%B1%80%E5%8E%9F%E7%90%86/" target="_blank">栅格布局原理</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/05/20/%E6%A0%85%E6%A0%BC%E5%B8%83%E5%B1%80%E5%8E%9F%E7%90%86/" class="archive-article-date">
-        <time datetime="2021-05-20T12:46:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-20</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>珊格布局是日常开发中经常会使用到的，于是想了解一下珊格布局的实现原理。</p>
-<p>最后发现不同的类库，甚至是不同的版本，其实实现的方式都是不太一样的</p>
-<h2 id="bootstrap"><a href="#bootstrap" class="headerlink" title="bootstrap"></a>bootstrap</h2><p><a href="mailto:bootstrap@3.x">bootstrap@3.x</a>版本为了兼容IE8，采用的是浮动方式来实现栅格系统</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-attr">[class |= col]</span> &#123; <span class="attribute">float</span>: left; &#125;</span><br><span class="line"><span class="selector-class">.col-md-1</span> &#123; <span class="attribute">width</span>: <span class="number">8.33333333%</span>; &#125;</span><br><span class="line"><span class="selector-class">.col-md-2</span> &#123; <span class="attribute">width</span>: <span class="number">16.66666667%</span>; &#125;</span><br><span class="line"><span class="selector-class">.col-md-3</span> &#123; <span class="attribute">width</span>: <span class="number">25%</span>; &#125;</span><br><span class="line"><span class="selector-class">.col-md-4</span> &#123; <span class="attribute">width</span>: <span class="number">33.33333333%</span>; &#125;</span><br><span class="line"><span class="selector-class">.col-md-5</span> &#123; <span class="attribute">width</span>: <span class="number">41.66666667%</span>; &#125;</span><br><span class="line"><span class="selector-class">.col-md-6</span> &#123; <span class="attribute">width</span>: <span class="number">50%</span>; &#125;</span><br><span class="line"><span class="selector-class">.col-md-7</span> &#123; <span class="attribute">width</span>: <span class="number">58.33333333%</span>; &#125;</span><br><span class="line"><span class="selector-class">.col-md-8</span> &#123; <span class="attribute">width</span>: <span class="number">66.66666667%</span>; &#125;</span><br><span class="line"><span class="selector-class">.col-md-9</span> &#123; <span class="attribute">width</span>: <span class="number">75%</span>; &#125;</span><br><span class="line"><span class="selector-class">.col-md-10</span> &#123; <span class="attribute">width</span>: <span class="number">83.33333333%</span>; &#125;</span><br><span class="line"><span class="selector-class">.col-md-11</span> &#123; <span class="attribute">width</span>: <span class="number">91.66666667%</span>; &#125;</span><br><span class="line"><span class="selector-class">.col-md-12</span> &#123; <span class="attribute">width</span>: <span class="number">100%</span>; &#125;</span><br></pre></td></tr></table></figure>
-
-<p>每一个容器根据左浮动加上百分比的方式来排版，当拆窗口开始改变的时候，对应改变container容器的宽度，对应的珊格根据百分比也是会自适应的改变。</p>
-<p><a href="mailto:bootstrap@4.0">bootstrap@4.0</a>版本放弃了对版本IE的支持，栅格系统采用的是最新的伸缩布局(flex布局)方式</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.row</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">flex-wrap</span>: wrap;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.col-1</span> &#123; <span class="attribute">flex</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">8.333333%</span>; &#125;</span><br><span class="line"><span class="selector-class">.col-2</span> &#123; <span class="attribute">flex</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">16.666667%</span>; &#125;</span><br><span class="line"><span class="selector-class">.col-3</span> &#123; <span class="attribute">flex</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">25%</span>; &#125;</span><br><span class="line"><span class="selector-class">.col-4</span> &#123; <span class="attribute">flex</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">33.333333%</span>; &#125;</span><br><span class="line"><span class="selector-class">.col-5</span> &#123; <span class="attribute">flex</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">41.666667%</span>; &#125;</span><br><span class="line"><span class="selector-class">.col-6</span> &#123; <span class="attribute">flex</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">50%</span>; &#125;</span><br><span class="line"><span class="selector-class">.col-7</span> &#123; <span class="attribute">flex</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">58.333333%</span>; &#125;</span><br><span class="line"><span class="selector-class">.col-8</span> &#123; <span class="attribute">flex</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">66.666667%</span>; &#125;</span><br><span class="line"><span class="selector-class">.col-9</span> &#123; <span class="attribute">flex</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">75%</span>; &#125;</span><br><span class="line"><span class="selector-class">.col-10</span> &#123; <span class="attribute">flex</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">83.333333%</span>; &#125;</span><br><span class="line"><span class="selector-class">.col-11</span> &#123; <span class="attribute">flex</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">91.666667%</span>; &#125;</span><br><span class="line"><span class="selector-class">.col-12</span> &#123; <span class="attribute">flex</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">100%</span>; &#125;</span><br></pre></td></tr></table></figure>
-
-<p><a href="mailto:bootstrap@3.x">bootstrap@3.x</a>版本与<a href="mailto:bootstrap@4.0">bootstrap@4.0</a>版本的珊格布局的原理也有一样的地方，就是offset偏移量都是通过margin-left设置百分比来实现的。</p>
-<h2 id="Foundation、Element与AntD"><a href="#Foundation、Element与AntD" class="headerlink" title="Foundation、Element与AntD"></a>Foundation、Element与AntD</h2><p>与bootstrap@4.0版本一样采用的是flex布局的方式</p>
-<h2 id="雅虎的pure"><a href="#雅虎的pure" class="headerlink" title="雅虎的pure"></a>雅虎的pure</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pure-g"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pure-u-1-3"</span>&gt;</span>1/3<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pure-u-1-3"</span>&gt;</span>1/3<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pure-u-1-3"</span>&gt;</span>1/3<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pure-g"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pure-u-1-8"</span>&gt;</span>1/8<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pure-u-1-8"</span>&gt;</span>1/8<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pure-u-1-8"</span>&gt;</span>1/8<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pure-g"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pure-u-1-24"</span>&gt;</span>1/24<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pure-u-1-24"</span>&gt;</span>1/24<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pure-u-1-24"</span>&gt;</span>1/24<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>采用的是伸缩与行内结合的方式</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.pure-g</span> &#123;</span><br><span class="line">        <span class="attribute">display</span>: -webkit-box;</span><br><span class="line">        <span class="attribute">display</span>: -webkit-flex;</span><br><span class="line">        <span class="attribute">display</span>: -ms-flexbox;</span><br><span class="line">        <span class="attribute">display</span>: flex;</span><br><span class="line">        <span class="attribute">flex-flow</span>: row wrap;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-attr">[class|=pure-u]</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: inline-block;</span><br><span class="line">    *display: inline;   /*iE &lt; 8*/</span><br><span class="line">    <span class="selector-tag">zoom</span>: 1;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.pure-u-1-24</span> &#123; <span class="attribute">width</span>: <span class="number">4.1667%</span>; &#125;</span><br><span class="line"><span class="selector-class">.pure-u-2-24</span>,<span class="selector-class">.pure-u-1-12</span> &#123; <span class="attribute">width</span>: <span class="number">8.3333%</span>; &#125;</span><br><span class="line"><span class="selector-class">.pure-u-3-24</span>,<span class="selector-class">.pure-u-1-8</span> &#123; <span class="attribute">width</span>: <span class="number">12.5000%</span>; &#125;</span><br><span class="line"><span class="selector-class">.pure-u-4-24</span>,<span class="selector-class">.pure-u-1-6</span> &#123; <span class="attribute">width</span>: <span class="number">16.6667%</span>; &#125;</span><br><span class="line"><span class="selector-class">.pure-u-5-24</span> &#123; <span class="attribute">width</span>: <span class="number">20.8333%</span>; &#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-
-<p>不支持偏移量与制定顺序的排序</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">基础</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/05/20/%E6%A0%85%E6%A0%BC%E5%B8%83%E5%B1%80%E5%8E%9F%E7%90%86/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/3/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/5/">Next &amp;raquo;</a>
@@ -1793,7 +1821,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+                <a href="javascript:void(0)" class="js-tag color3">基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1801,7 +1829,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">基础</a>
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1817,11 +1845,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
+                <a href="javascript:void(0)" class="js-tag color4">小程序</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">小程序</a>
+                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
               </li>
              
               <li class="article-tag-list-item">

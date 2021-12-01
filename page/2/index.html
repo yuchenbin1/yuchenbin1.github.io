@@ -202,6 +202,127 @@
             
 
   
+    <article id="post-node构建脚手架" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/10/10/node%E6%9E%84%E5%BB%BA%E8%84%9A%E6%89%8B%E6%9E%B6/" target="_blank">node构建脚手架</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/10/10/node%E6%9E%84%E5%BB%BA%E8%84%9A%E6%89%8B%E6%9E%B6/" class="archive-article-date">
+        <time datetime="2021-10-10T08:15:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-10</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="使用node搭建脚手架"><a href="#使用node搭建脚手架" class="headerlink" title="使用node搭建脚手架"></a>使用node搭建脚手架</h1><h2 id="1-安装配置文件"><a href="#1-安装配置文件" class="headerlink" title="1.安装配置文件"></a>1.安装配置文件</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
+
+<p>新建项目</p>
+<h2 id="2-修改文件，新增bin"><a href="#2-修改文件，新增bin" class="headerlink" title="2.修改文件，新增bin"></a>2.修改文件，新增bin</h2><h3 id="bin的作用"><a href="#bin的作用" class="headerlink" title="bin的作用"></a>bin的作用</h3><p>如果有某几个可执行文件想放置到全局，在bin这个字段导入路径就行，它会创建一个软链接到该文件</p>
+<p><strong>确保bin文件的里面开头要写上#!/usr/bin/env node</strong>，否则文件脚本不会在Node环境下运行</p>
+<h2 id="3-新建一个bin的文件夹"><a href="#3-新建一个bin的文件夹" class="headerlink" title="3.新建一个bin的文件夹"></a>3.新建一个bin的文件夹</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/usr/bin/env node</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> fs=<span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"><span class="keyword">const</span> path=<span class="built_in">require</span>(<span class="string">'path'</span>);</span><br><span class="line"><span class="comment">//命令行询问</span></span><br><span class="line"><span class="keyword">const</span> inquirer=<span class="built_in">require</span>(<span class="string">'inquirer'</span>);</span><br><span class="line"><span class="comment">//模版引擎</span></span><br><span class="line"><span class="keyword">const</span> ejs=<span class="built_in">require</span>(<span class="string">'ejs'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//发起命令行的询问</span></span><br><span class="line">inquirer.prompt([</span><br><span class="line">  &#123;</span><br><span class="line">    type:<span class="string">'input'</span>,<span class="comment">//问题的输入方式</span></span><br><span class="line">    name:<span class="string">'name'</span>,<span class="comment">//问题的返回的键</span></span><br><span class="line">    message:<span class="string">'Project name?'</span><span class="comment">//屏幕的提示</span></span><br><span class="line">  &#125;</span><br><span class="line">]).then(<span class="function"><span class="params">anwsers</span>=&gt;</span>&#123;</span><br><span class="line">  <span class="comment">//根据用户回答生成文件</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">//模版目录</span></span><br><span class="line">  <span class="keyword">const</span> tmpDir=path.join(__dirname,<span class="string">'templates'</span>)</span><br><span class="line">  </span><br><span class="line">  <span class="comment">//输出目录</span></span><br><span class="line">  <span class="keyword">const</span> destDir=process.cwd()</span><br><span class="line">  </span><br><span class="line">  <span class="comment">//将模块的全部文件转换到目标目录</span></span><br><span class="line">  fs.readdir(tepDir,(err,files)=&gt;&#123;</span><br><span class="line">    <span class="keyword">if</span>(err) <span class="keyword">throw</span> err</span><br><span class="line">    files.forEach(<span class="function"><span class="params">file</span>=&gt;</span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'templates下的具体文件'</span>,file)</span><br><span class="line">      <span class="comment">//通过模版引擎去渲染</span></span><br><span class="line">      ejs.renderFile(path.join(tmpDir,file),anwsers,(err,result)=&gt;&#123;</span><br><span class="line">        <span class="keyword">if</span>(err) <span class="keyword">throw</span> err</span><br><span class="line">        <span class="comment">//写入文件</span></span><br><span class="line">        fs.writeFileSync(path.join(destDir,file),result)</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-新建templates文件夹模版"><a href="#4-新建templates文件夹模版" class="headerlink" title="4.新建templates文件夹模版"></a>4.新建templates文件夹模版</h2><p>需要引入的模版</p>
+<p>生成</p>
+<p>index.js与style.css</p>
+<p>Index.js</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;<span class="name">%=name</span> %&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>Style.css</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.&lt;%=name%&gt;&#123;</span><br><span class="line">    color:pink;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>&lt;%=name%&gt;可以获取到来自inquirer.prompt的数据</p>
+<h2 id="4-将脚手架全局使用"><a href="#4-将脚手架全局使用" class="headerlink" title="4.将脚手架全局使用"></a>4.将脚手架全局使用</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn link或者npm link</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-测试脚手架全局是否可以"><a href="#5-测试脚手架全局是否可以" class="headerlink" title="5.测试脚手架全局是否可以"></a>5.测试脚手架全局是否可以</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ generator-make --help</span><br><span class="line"></span><br><span class="line"><span class="comment">//成功</span></span><br></pre></td></tr></table></figure>
+
+<p>如果失败可能是没有权限</p>
+<p>解决方法</p>
+<p>首先，返回上一级</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd ..</span><br></pre></td></tr></table></figure>
+
+<p>然后给该脚手架权限</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chmod -R <span class="number">777</span> generator-make</span><br></pre></td></tr></table></figure>
+
+<p>最后再次测试</p>
+<p>如果出现找不到的模块的错误，可以npm install对应的模块</p>
+<h2 id="6-脚手架搭建项目"><a href="#6-脚手架搭建项目" class="headerlink" title="6.脚手架搭建项目"></a>6.脚手架搭建项目</h2><p>新建文件夹</p>
+<p>在命令行中输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$generator-make?Project name?bar</span><br></pre></td></tr></table></figure>
+
+<p>bar文件生成成功</p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">node</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/10/10/node%E6%9E%84%E5%BB%BA%E8%84%9A%E6%89%8B%E6%9E%B6/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-前端报错收集" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1186,117 +1307,6 @@
 
 
   
-    <article id="post-react-fiber" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/08/07/react-fiber/" target="_blank">react fiber</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/08/07/react-fiber/" class="archive-article-date">
-        <time datetime="2021-08-07T12:53:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-07</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="痛点"><a href="#痛点" class="headerlink" title="痛点"></a>痛点</h1><p>react15及之前，页面元素很多的情况之下，频繁刷新的情况之下会出现掉帧的情况。</p>
-<p>根本原因：同步计算任务阻塞了浏览器的UI渲染，默认情况下，JS运算、页面布局和页面绘制都是在浏览器的主线程中，是互斥的关系。当我们通过setState更新页面的时候，会遍历所有的节点，计算出差异，整个过程是连贯的，不能被打断。会一直执行到函数调用栈是空为止，如果页面的元素过多就会导致过程的占用时间会超过16毫秒，就会出现掉帧的现象。</p>
-<h1 id="Fiber（纤维）"><a href="#Fiber（纤维）" class="headerlink" title="Fiber（纤维）"></a>Fiber（纤维）</h1><p>fiber是一种数据结构，使用纯JS对象表示的是</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fiber = &#123;</span><br><span class="line">    stateNode,    <span class="comment">// 节点实例</span></span><br><span class="line">    child,        <span class="comment">// 子节点</span></span><br><span class="line">    sibling,      <span class="comment">// 兄弟节点</span></span><br><span class="line">    <span class="keyword">return</span>,       <span class="comment">// 父节点</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h1><p>Fiber Reconciler每次执行一段时间将控制权交给浏览器，进行分段执行。</p>
-<p>新增调度器（Scheduler）,优先级高的可以打断优先级低的任务提前执行。</p>
-<p>有如下优先级：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">synchronous，与之前的Stack Reconciler操作一样，同步执行</span><br><span class="line">task，在next tick之前执行</span><br><span class="line">animation，下一帧之前执行</span><br><span class="line">high，在不久的将来立即执行</span><br><span class="line">low，稍微延迟执行也没关系</span><br><span class="line">offscreen，下一次render时或scroll时才执行</span><br></pre></td></tr></table></figure>
-
-<p>Fiber Reconciler执行过程主要是2个阶段</p>
-<p>阶段一（render渲染/reconciliation调和）：</p>
-<p>生成Fiber树，得出需要更新的节点信息，可以被打断</p>
-<p>​    componentWillMount</p>
-<p>​    componentWillReceiveProps</p>
-<p>​    shouldComponentUpdate</p>
-<p>​    componentWillUpdate</p>
-<p>阶段二（commit承诺）：</p>
-<p>将需要更新的节点一次性批量更新，不能被打断</p>
-<p>​    componentDidMount</p>
-<p>​    componentDidUpdate</p>
-<p>​    componentWillUnmount</p>
-<h1 id="Fiber树"><a href="#Fiber树" class="headerlink" title="Fiber树"></a>Fiber树</h1><p>Fiber Reconciler 在阶段一进行 Diff 计算的时候，会生成一棵 Fiber 树。这棵树是在 Virtual DOM 树的基础上增加额外的信息来生成的，它本质来说是一个链表。</p>
-<p>Fiber 树在首次渲染的时候会一次过生成。在后续需要 Diff 的时候，会根据已有树和最新 Virtual DOM 的信息，生成一棵新的树。这颗新树每生成一个新的节点，都会将控制权交回给主线程，去检查有没有优先级更高的任务需要执行。如果没有，则继续构建树的过程</p>
-<p>如果过程中有优先级更高的任务需要进行，则 Fiber Reconciler 会丢弃正在生成的树，在空闲的时候再重新执行一遍。</p>
-<p>在构造 Fiber 树的过程中，Fiber Reconciler 会将需要更新的节点信息保存在<code>Effect List</code>当中，在阶段二执行的时候，会批量更新相应的节点。</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">react</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/08/07/react-fiber/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
@@ -1450,7 +1460,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+                <a href="javascript:void(0)" class="js-tag color3">基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1458,7 +1468,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">基础</a>
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1474,11 +1484,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
+                <a href="javascript:void(0)" class="js-tag color4">小程序</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">小程序</a>
+                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
               </li>
              
               <li class="article-tag-list-item">

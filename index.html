@@ -202,6 +202,110 @@
             
 
   
+    <article id="post-react-hooks的闭包陷阱" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/12/01/react-hooks%E7%9A%84%E9%97%AD%E5%8C%85%E9%99%B7%E9%98%B1/" target="_blank">react hooks的闭包陷阱</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/12/01/react-hooks%E7%9A%84%E9%97%AD%E5%8C%85%E9%99%B7%E9%98%B1/" class="archive-article-date">
+        <time datetime="2021-12-01T13:15:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-01</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="useEffect的异步带来的问题"><a href="#useEffect的异步带来的问题" class="headerlink" title="useEffect的异步带来的问题"></a>useEffect的异步带来的问题</h1><h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><p>有三个按钮</p>
+<p>start：开启一个定时器interval，显示器每一秒都会加一</p>
+<p>stop：停止定时器interval</p>
+<p>clear：清除定时器interval，显示器清除为0</p>
+<h3 id="实际情况"><a href="#实际情况" class="headerlink" title="实际情况"></a>实际情况</h3><p>会出现一个问题，在interval开启的情况下，显示器不会清除为0</p>
+<h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><p><code>useEffect</code> 是异步的，也就是说我们执行 <code>useEffect</code> 中绑定的函数或者是解绑的函数，<strong>都不是在一次 <code>setState</code> 产生的更新中被同步执行的。</strong></p>
+<h3 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h3><p>正常的同步流程：</p>
+<p>点击来 <code>clear</code> 之后，我们调用了设置显示器函数和设置定时器函数，这两个方法是用来更新 state 的，所以他们会标记组件更新，然后通知 React 我们需要重新渲染，于是执行到对应的组件进行解绑</p>
+<p>实际的流程：</p>
+<p>在执行到对应的组件更新之后，因为useEffect是异步的，于是设置显示器函数会再次触发，导致这个问题</p>
+<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p>使用<code>useLayoutEffect</code></p>
+<p>useLayoutEffect可以看成useEffect的同步版本，但是大量的使用会导致浏览器的卡顿</p>
+<p>不使用<code>useLayoutEffect</code></p>
+<p>从根本上解决这个问题，主要原因是在更新组件之后，定时器的设置显示器函数再次执行导致的。</p>
+<p>第一反应在setInterval中加入回调，但是这个方法是不行的，setInterval中回调方法保存了他的闭包，回调中的running永远都是true的，于是使用useReducer，逃出闭包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">const [state,dispatch]&#x3D;React.useState(stateReducer,&#123;</span><br><span class="line">  lapse:0,</span><br><span class="line">  running:false</span><br><span class="line">&#125;)</span><br><span class="line">function updateState(action)&#123;</span><br><span class="line">  setState(state&#x3D;&gt;&#123;</span><br><span class="line">    switch (action.type)&#123;</span><br><span class="line">      case TOGGLE:</span><br><span class="line">        return &#123;...state,running:!state.running&#125;</span><br><span class="line">      case TICK:</span><br><span class="line">        if(state.running)&#123;</span><br><span class="line">          return &#123;...state,lapse:action.lapse&#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return state</span><br><span class="line">      case CLEAR:</span><br><span class="line">        return &#123;running:false,lapse:0&#125;</span><br><span class="line">      default:</span><br><span class="line">        return state</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">react</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/12/01/react-hooks%E7%9A%84%E9%97%AD%E5%8C%85%E9%99%B7%E9%98%B1/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-vue-cli-service" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1190,127 +1294,6 @@
 
 
   
-    <article id="post-node构建脚手架" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/10/10/node%E6%9E%84%E5%BB%BA%E8%84%9A%E6%89%8B%E6%9E%B6/" target="_blank">node构建脚手架</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/10/10/node%E6%9E%84%E5%BB%BA%E8%84%9A%E6%89%8B%E6%9E%B6/" class="archive-article-date">
-        <time datetime="2021-10-10T08:15:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-10</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="使用node搭建脚手架"><a href="#使用node搭建脚手架" class="headerlink" title="使用node搭建脚手架"></a>使用node搭建脚手架</h1><h2 id="1-安装配置文件"><a href="#1-安装配置文件" class="headerlink" title="1.安装配置文件"></a>1.安装配置文件</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
-
-<p>新建项目</p>
-<h2 id="2-修改文件，新增bin"><a href="#2-修改文件，新增bin" class="headerlink" title="2.修改文件，新增bin"></a>2.修改文件，新增bin</h2><h3 id="bin的作用"><a href="#bin的作用" class="headerlink" title="bin的作用"></a>bin的作用</h3><p>如果有某几个可执行文件想放置到全局，在bin这个字段导入路径就行，它会创建一个软链接到该文件</p>
-<p><strong>确保bin文件的里面开头要写上#!/usr/bin/env node</strong>，否则文件脚本不会在Node环境下运行</p>
-<h2 id="3-新建一个bin的文件夹"><a href="#3-新建一个bin的文件夹" class="headerlink" title="3.新建一个bin的文件夹"></a>3.新建一个bin的文件夹</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/usr/bin/env node</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> fs=<span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"><span class="keyword">const</span> path=<span class="built_in">require</span>(<span class="string">'path'</span>);</span><br><span class="line"><span class="comment">//命令行询问</span></span><br><span class="line"><span class="keyword">const</span> inquirer=<span class="built_in">require</span>(<span class="string">'inquirer'</span>);</span><br><span class="line"><span class="comment">//模版引擎</span></span><br><span class="line"><span class="keyword">const</span> ejs=<span class="built_in">require</span>(<span class="string">'ejs'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//发起命令行的询问</span></span><br><span class="line">inquirer.prompt([</span><br><span class="line">  &#123;</span><br><span class="line">    type:<span class="string">'input'</span>,<span class="comment">//问题的输入方式</span></span><br><span class="line">    name:<span class="string">'name'</span>,<span class="comment">//问题的返回的键</span></span><br><span class="line">    message:<span class="string">'Project name?'</span><span class="comment">//屏幕的提示</span></span><br><span class="line">  &#125;</span><br><span class="line">]).then(<span class="function"><span class="params">anwsers</span>=&gt;</span>&#123;</span><br><span class="line">  <span class="comment">//根据用户回答生成文件</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">//模版目录</span></span><br><span class="line">  <span class="keyword">const</span> tmpDir=path.join(__dirname,<span class="string">'templates'</span>)</span><br><span class="line">  </span><br><span class="line">  <span class="comment">//输出目录</span></span><br><span class="line">  <span class="keyword">const</span> destDir=process.cwd()</span><br><span class="line">  </span><br><span class="line">  <span class="comment">//将模块的全部文件转换到目标目录</span></span><br><span class="line">  fs.readdir(tepDir,(err,files)=&gt;&#123;</span><br><span class="line">    <span class="keyword">if</span>(err) <span class="keyword">throw</span> err</span><br><span class="line">    files.forEach(<span class="function"><span class="params">file</span>=&gt;</span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'templates下的具体文件'</span>,file)</span><br><span class="line">      <span class="comment">//通过模版引擎去渲染</span></span><br><span class="line">      ejs.renderFile(path.join(tmpDir,file),anwsers,(err,result)=&gt;&#123;</span><br><span class="line">        <span class="keyword">if</span>(err) <span class="keyword">throw</span> err</span><br><span class="line">        <span class="comment">//写入文件</span></span><br><span class="line">        fs.writeFileSync(path.join(destDir,file),result)</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<h2 id="4-新建templates文件夹模版"><a href="#4-新建templates文件夹模版" class="headerlink" title="4.新建templates文件夹模版"></a>4.新建templates文件夹模版</h2><p>需要引入的模版</p>
-<p>生成</p>
-<p>index.js与style.css</p>
-<p>Index.js</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;<span class="name">%=name</span> %&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>Style.css</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.&lt;%=name%&gt;&#123;</span><br><span class="line">    color:pink;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>&lt;%=name%&gt;可以获取到来自inquirer.prompt的数据</p>
-<h2 id="4-将脚手架全局使用"><a href="#4-将脚手架全局使用" class="headerlink" title="4.将脚手架全局使用"></a>4.将脚手架全局使用</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn link或者npm link</span><br></pre></td></tr></table></figure>
-
-<h2 id="5-测试脚手架全局是否可以"><a href="#5-测试脚手架全局是否可以" class="headerlink" title="5.测试脚手架全局是否可以"></a>5.测试脚手架全局是否可以</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ generator-make --help</span><br><span class="line"></span><br><span class="line"><span class="comment">//成功</span></span><br></pre></td></tr></table></figure>
-
-<p>如果失败可能是没有权限</p>
-<p>解决方法</p>
-<p>首先，返回上一级</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd ..</span><br></pre></td></tr></table></figure>
-
-<p>然后给该脚手架权限</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chmod -R <span class="number">777</span> generator-make</span><br></pre></td></tr></table></figure>
-
-<p>最后再次测试</p>
-<p>如果出现找不到的模块的错误，可以npm install对应的模块</p>
-<h2 id="6-脚手架搭建项目"><a href="#6-脚手架搭建项目" class="headerlink" title="6.脚手架搭建项目"></a>6.脚手架搭建项目</h2><p>新建文件夹</p>
-<p>在命令行中输入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$generator-make?Project name?bar</span><br></pre></td></tr></table></figure>
-
-<p>bar文件生成成功</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">node</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/10/10/node%E6%9E%84%E5%BB%BA%E8%84%9A%E6%89%8B%E6%9E%B6/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1464,7 +1447,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+                <a href="javascript:void(0)" class="js-tag color3">基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1472,7 +1455,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">基础</a>
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1488,11 +1471,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
+                <a href="javascript:void(0)" class="js-tag color4">小程序</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">小程序</a>
+                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
               </li>
              
               <li class="article-tag-list-item">

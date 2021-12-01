@@ -202,6 +202,117 @@
             
 
   
+    <article id="post-react-fiber" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/08/07/react-fiber/" target="_blank">react fiber</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/08/07/react-fiber/" class="archive-article-date">
+        <time datetime="2021-08-07T12:53:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-07</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="痛点"><a href="#痛点" class="headerlink" title="痛点"></a>痛点</h1><p>react15及之前，页面元素很多的情况之下，频繁刷新的情况之下会出现掉帧的情况。</p>
+<p>根本原因：同步计算任务阻塞了浏览器的UI渲染，默认情况下，JS运算、页面布局和页面绘制都是在浏览器的主线程中，是互斥的关系。当我们通过setState更新页面的时候，会遍历所有的节点，计算出差异，整个过程是连贯的，不能被打断。会一直执行到函数调用栈是空为止，如果页面的元素过多就会导致过程的占用时间会超过16毫秒，就会出现掉帧的现象。</p>
+<h1 id="Fiber（纤维）"><a href="#Fiber（纤维）" class="headerlink" title="Fiber（纤维）"></a>Fiber（纤维）</h1><p>fiber是一种数据结构，使用纯JS对象表示的是</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fiber = &#123;</span><br><span class="line">    stateNode,    <span class="comment">// 节点实例</span></span><br><span class="line">    child,        <span class="comment">// 子节点</span></span><br><span class="line">    sibling,      <span class="comment">// 兄弟节点</span></span><br><span class="line">    <span class="keyword">return</span>,       <span class="comment">// 父节点</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h1><p>Fiber Reconciler每次执行一段时间将控制权交给浏览器，进行分段执行。</p>
+<p>新增调度器（Scheduler）,优先级高的可以打断优先级低的任务提前执行。</p>
+<p>有如下优先级：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">synchronous，与之前的Stack Reconciler操作一样，同步执行</span><br><span class="line">task，在next tick之前执行</span><br><span class="line">animation，下一帧之前执行</span><br><span class="line">high，在不久的将来立即执行</span><br><span class="line">low，稍微延迟执行也没关系</span><br><span class="line">offscreen，下一次render时或scroll时才执行</span><br></pre></td></tr></table></figure>
+
+<p>Fiber Reconciler执行过程主要是2个阶段</p>
+<p>阶段一（render渲染/reconciliation调和）：</p>
+<p>生成Fiber树，得出需要更新的节点信息，可以被打断</p>
+<p>​    componentWillMount</p>
+<p>​    componentWillReceiveProps</p>
+<p>​    shouldComponentUpdate</p>
+<p>​    componentWillUpdate</p>
+<p>阶段二（commit承诺）：</p>
+<p>将需要更新的节点一次性批量更新，不能被打断</p>
+<p>​    componentDidMount</p>
+<p>​    componentDidUpdate</p>
+<p>​    componentWillUnmount</p>
+<h1 id="Fiber树"><a href="#Fiber树" class="headerlink" title="Fiber树"></a>Fiber树</h1><p>Fiber Reconciler 在阶段一进行 Diff 计算的时候，会生成一棵 Fiber 树。这棵树是在 Virtual DOM 树的基础上增加额外的信息来生成的，它本质来说是一个链表。</p>
+<p>Fiber 树在首次渲染的时候会一次过生成。在后续需要 Diff 的时候，会根据已有树和最新 Virtual DOM 的信息，生成一棵新的树。这颗新树每生成一个新的节点，都会将控制权交回给主线程，去检查有没有优先级更高的任务需要执行。如果没有，则继续构建树的过程</p>
+<p>如果过程中有优先级更高的任务需要进行，则 Fiber Reconciler 会丢弃正在生成的树，在空闲的时候再重新执行一遍。</p>
+<p>在构造 Fiber 树的过程中，Fiber Reconciler 会将需要更新的节点信息保存在<code>Effect List</code>当中，在阶段二执行的时候，会批量更新相应的节点。</p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">react</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/08/07/react-fiber/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-h5页面拉起第三方app" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1255,136 +1366,6 @@
 
 
   
-    <article id="post-created与mounted" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/06/21/created%E4%B8%8Emounted/" target="_blank">created与mounted</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/06/21/created%E4%B8%8Emounted/" class="archive-article-date">
-        <time datetime="2021-06-21T12:03:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-21</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>在vue实际的应用中，数据的获取与修改，通常在created或者是mounted中，但是两者之间是有很大区别的</p>
-<table>
-<thead>
-<tr>
-<th align="center">生命周期</th>
-<th align="center">是否获取dom节点</th>
-<th align="center">是否可以获取data</th>
-<th align="center">是否获取methods</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">beforeCreate</td>
-<td align="center">否</td>
-<td align="center">否</td>
-<td align="center">否</td>
-</tr>
-<tr>
-<td align="center">created</td>
-<td align="center">否</td>
-<td align="center">是</td>
-<td align="center">是</td>
-</tr>
-<tr>
-<td align="center">beforeMount</td>
-<td align="center">否</td>
-<td align="center">是</td>
-<td align="center">是</td>
-</tr>
-<tr>
-<td align="center">mounted</td>
-<td align="center">是</td>
-<td align="center">是</td>
-<td align="center">是</td>
-</tr>
-</tbody></table>
-<p>可以看到有一个很大的区别是获取dom节点</p>
-<p>created:在模板渲染成html前调用，即通常初始化某些属性值，然后再渲染成视图。</p>
-<p>mounted:在模板渲染成html后调用，通常是初始化页面完成后，再对html的dom节点进行一些需要的操作</p>
-<p>在使用echarts的时候数据的操作就必须是mounted了，还有使用ref获取dom节点的时候</p>
-<p>但是有时候在mounted的时候也不一定会获取到真实的dom节点，因此在需要使用dom节点的时候可以用$nextTick</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.nextTick(<span class="function"><span class="params">()</span>=&gt;</span>&#123;&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>nextTick()的源码分析</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Defer a task to execute it asynchronously.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> nextTick = (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> callbacks = []<span class="comment">//存储需要执行的回调函数</span></span><br><span class="line">  <span class="keyword">let</span> pending = <span class="literal">false</span><span class="comment">//标志是否执行回调</span></span><br><span class="line">  <span class="keyword">let</span> timerFunc<span class="comment">//用于触发执行回调函数</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">nextTickHandler</span> (<span class="params"></span>) </span>&#123;<span class="comment">//该函数用来执行存储在callbacks中的回调函数</span></span><br><span class="line">    pending = <span class="literal">false</span></span><br><span class="line">    <span class="keyword">const</span> copies = callbacks.slice(<span class="number">0</span>)</span><br><span class="line">    callbacks.length = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; copies.length; i++) &#123;</span><br><span class="line">      copies[i]()</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// the nextTick behavior leverages the microtask queue, which can be accessed</span></span><br><span class="line">  <span class="comment">// via either native Promise.then or MutationObserver.</span></span><br><span class="line">  <span class="comment">// MutationObserver has wider support, however it is seriously bugged in</span></span><br><span class="line">  <span class="comment">// UIWebView in iOS &gt;= 9.3.3 when triggered in touch event handlers. It</span></span><br><span class="line">  <span class="comment">// completely stops working after triggering a few times... so, if native</span></span><br><span class="line">  <span class="comment">// Promise is available, we will use it:</span></span><br><span class="line">  <span class="comment">/* istanbul ignore if */</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">Promise</span> !== <span class="string">'undefined'</span> &amp;&amp; isNative(<span class="built_in">Promise</span>)) &#123;<span class="comment">//isNative检查一个值是否是原生function，是否支持原生promise</span></span><br><span class="line">    <span class="keyword">var</span> p = <span class="built_in">Promise</span>.resolve()</span><br><span class="line">    <span class="keyword">var</span> logError = <span class="function"><span class="params">err</span> =&gt;</span> &#123; <span class="built_in">console</span>.error(err) &#125;</span><br><span class="line">    timerFunc = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      p.then(nextTickHandler).catch(logError)</span><br><span class="line">      <span class="comment">// in problematic UIWebViews, Promise.then doesn't completely break, but</span></span><br><span class="line">      <span class="comment">// it can get stuck in a weird state where callbacks are pushed into the</span></span><br><span class="line">      <span class="comment">// microtask queue but the queue isn't being flushed, until the browser</span></span><br><span class="line">      <span class="comment">// needs to do some other work, e.g. handle a timer. Therefore we can</span></span><br><span class="line">      <span class="comment">// "force" the microtask queue to be flushed by adding an empty timer.</span></span><br><span class="line">      <span class="keyword">if</span> (isIOS) setTimeout(noop)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!isIE &amp;&amp; <span class="keyword">typeof</span> MutationObserver !== <span class="string">'undefined'</span> &amp;&amp; (</span><br><span class="line">    isNative(MutationObserver) ||</span><br><span class="line">    <span class="comment">// PhantomJS and iOS 7.x</span></span><br><span class="line">    MutationObserver.toString() === <span class="string">'[object MutationObserverConstructor]'</span></span><br><span class="line">  )) &#123;<span class="comment">//检查是否支持MutationObserver</span></span><br><span class="line">    <span class="comment">// use MutationObserver where native Promise is not available,</span></span><br><span class="line">    <span class="comment">// e.g. PhantomJS, iOS7, Android 4.4</span></span><br><span class="line">    <span class="keyword">var</span> counter = <span class="number">1</span></span><br><span class="line">    <span class="keyword">var</span> observer = <span class="keyword">new</span> MutationObserver(nextTickHandler)</span><br><span class="line">    <span class="keyword">var</span> textNode = <span class="built_in">document</span>.createTextNode(<span class="built_in">String</span>(counter))</span><br><span class="line">    observer.observe(textNode, &#123;</span><br><span class="line">      characterData: <span class="literal">true</span></span><br><span class="line">    &#125;)<span class="comment">//observe观察者会观察textNode节点的变化，变化的时候执行timerFunc，characterData设为 true 以监视指定目标节点或子节点树中节点所包含的字符数据的变化</span></span><br><span class="line">    timerFunc = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      counter = (counter + <span class="number">1</span>) % <span class="number">2</span></span><br><span class="line">      textNode.data = <span class="built_in">String</span>(counter)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// fallback to setTimeout</span></span><br><span class="line">    <span class="comment">/* istanbul ignore next */</span></span><br><span class="line">    timerFunc = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      setTimeout(nextTickHandler, <span class="number">0</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">queueNextTick</span> (<span class="params">cb?: Function, ctx?: Object</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> _resolve</span><br><span class="line">    callbacks.push(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (cb) &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">          cb.call(ctx)</span><br><span class="line">        &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">          handleError(e, ctx, <span class="string">'nextTick'</span>)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (_resolve) &#123;</span><br><span class="line">        _resolve(ctx)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">if</span> (!pending) &#123;</span><br><span class="line">      pending = <span class="literal">true</span></span><br><span class="line">      timerFunc()</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!cb &amp;&amp; <span class="keyword">typeof</span> <span class="built_in">Promise</span> !== <span class="string">'undefined'</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">        _resolve = resolve</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)()<span class="comment">//立即执行函数</span></span><br></pre></td></tr></table></figure>
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/06/21/created%E4%B8%8Emounted/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/4/">Next &amp;raquo;</a>
@@ -1538,7 +1519,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+                <a href="javascript:void(0)" class="js-tag color3">基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1546,7 +1527,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">基础</a>
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1562,11 +1543,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
+                <a href="javascript:void(0)" class="js-tag color4">小程序</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">小程序</a>
+                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
               </li>
              
               <li class="article-tag-list-item">
