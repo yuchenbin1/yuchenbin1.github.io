@@ -202,6 +202,93 @@
             
 
   
+    <article id="post-实现数据响应式的类" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/10/15/%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E5%93%8D%E5%BA%94%E5%BC%8F%E7%9A%84%E7%B1%BB/" target="_blank">实现数据响应式的类</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/10/15/%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E5%93%8D%E5%BA%94%E5%BC%8F%E7%9A%84%E7%B1%BB/" class="archive-article-date">
+        <time datetime="2021-10-15T11:28:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-15</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">nvue</span></span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(options)&#123;</span><br><span class="line">    <span class="keyword">this</span>.$options=options;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//数据响应式</span></span><br><span class="line">    <span class="keyword">this</span>.$data=options.data;</span><br><span class="line">    <span class="keyword">this</span>.observe(<span class="keyword">this</span>.$data);</span><br><span class="line">  &#125;</span><br><span class="line">  observe(val)&#123;</span><br><span class="line">    <span class="keyword">if</span>(!val&amp;&amp;<span class="keyword">typeof</span> val !==<span class="string">'object'</span>)&#123;</span><br><span class="line">      <span class="keyword">return</span>; </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">Object</span>.keys(val).foreach(<span class="function">(<span class="params">key</span>)=&gt;</span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.defineReactive(value,key,value[key]);</span><br><span class="line">    &#125;)</span><br><span class="line">    defineReactive(obj,key,val)&#123;</span><br><span class="line">      <span class="keyword">if</span>(<span class="keyword">typeof</span> val===<span class="string">'object'</span>)&#123;</span><br><span class="line">        <span class="keyword">this</span>.observe(val);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="built_in">Object</span>.defineProperty(obj,key,&#123;</span><br><span class="line">        <span class="keyword">get</span>()&#123;</span><br><span class="line">          <span class="keyword">return</span> val;</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="keyword">set</span>(newVal)&#123;</span><br><span class="line">          <span class="keyword">if</span>(newVal===val)&#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">          &#125;</span><br><span class="line">          val=newVal;</span><br><span class="line">          <span class="built_in">console</span>.log(<span class="string">"更新了"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/10/15/%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E5%93%8D%E5%BA%94%E5%BC%8F%E7%9A%84%E7%B1%BB/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-node构建脚手架" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1213,100 +1300,6 @@
 
 
   
-    <article id="post-pureComponent与component" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/08/15/pureComponent%E4%B8%8Ecomponent/" target="_blank">pureComponent与component</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/08/15/pureComponent%E4%B8%8Ecomponent/" class="archive-article-date">
-        <time datetime="2021-08-15T12:56:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-15</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="PureComponent"><a href="#PureComponent" class="headerlink" title="PureComponent"></a>PureComponent</h1><p><code>React.pureComponent</code>与<code>React.component</code>之间几乎没有什么区别</p>
-<p>但是PureComponent使用props与state的浅对比来实现shouldComponentUpdate</p>
-<p>判断的顺序</p>
-<p>首先判断是否有shouldComponentUpdate生命周期，如果则执行里面的代码；</p>
-<p>如果没有shouldComponentUpdate生命周期，那么就会判断是否是PureComponent，如果是PureComponent那么就会实行浅对比</p>
-<h1 id="什么是浅对比？"><a href="#什么是浅对比？" class="headerlink" title="什么是浅对比？"></a>什么是浅对比？</h1><p>通过遍历对象上的键值的相等性，如果相等就会返回true，如果有一点点不相等，就会返回false。</p>
-<h1 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h1><p>有存在深层的键值不一致产生了错误的判断，从而shouldComponentUpdate返回false，界面得不到更新。</p>
-<h1 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h1><p>不需要开发者自己实现shouldComponentUpdate，就可以进行简单的判断实现界面的更新。</p>
-<h1 id="为什么会出现缺点中产生的错误的判断？"><a href="#为什么会出现缺点中产生的错误的判断？" class="headerlink" title="为什么会出现缺点中产生的错误的判断？"></a>为什么会出现缺点中产生的错误的判断？</h1><p>在js中通常会使用<code>===</code>来判断两者是否相等，但是其实是不太严谨的，比如+0与-0其实是相等的，Infinity与-Infinity其实是相等的。</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">react</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/08/15/pureComponent%E4%B8%8Ecomponent/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
@@ -1444,6 +1437,10 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">react</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">webpack</a>
               </li>
              
@@ -1452,7 +1449,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">react</a>
+                <a href="javascript:void(0)" class="js-tag color3">基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1460,15 +1457,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">基础</a>
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">css</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1484,11 +1477,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">小程序</a>
+                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
+                <a href="javascript:void(0)" class="js-tag color4">小程序</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -202,6 +202,109 @@
             
 
   
+    <article id="post-options预检请求" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/12/18/options%E9%A2%84%E6%A3%80%E8%AF%B7%E6%B1%82/" target="_blank">options预检请求</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/12/18/options%E9%A2%84%E6%A3%80%E8%AF%B7%E6%B1%82/" class="archive-article-date">
+        <time datetime="2021-12-18T15:07:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-18</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="options"><a href="#options" class="headerlink" title="options"></a>options</h1><p>在实际的开发过程中，又遇到过许多的跨域问题，基本都是通过跨域资源共享解决的，遇到过有一次是options的预检请求。于是想了解一下什么时候会发options的预检请求，并且在实际的请求过程中，它做了什么，意义是什么？</p>
+<h2 id="CORS"><a href="#CORS" class="headerlink" title="CORS"></a>CORS</h2><p>跨域资源共享</p>
+<p>CORS是一种网络浏览器的技术规范，它为Web服务器定义了一种方式，允许网页从不同的域访问其资源。而这种访问是被同源策略所禁止的。CORS系统定义了一种浏览器和服务器交互的方式来确定是否允许跨域请求。</p>
+<p>前端：</p>
+<p>客户端使用XmlHttpRequest发起Ajax请求，当前绝大部分浏览器已经支持CORS方式，且主流浏览器均提供了对跨域资源共享的支持</p>
+<p>服务器端：</p>
+<p>服务器端未做任何配置，会得到CORS Access Deny，即跨域访问被拒绝</p>
+<p>需要配置Access-Control-Allow-Origin</p>
+<h2 id="预检请求"><a href="#预检请求" class="headerlink" title="预检请求"></a>预检请求</h2><p>预检请求首先需要向另外一个域名的资源发送一个 HTTP OPTIONS 请求头，其目的就是为了判断实际发送的请求是否是安全的</p>
+<h3 id="什么时候会发送"><a href="#什么时候会发送" class="headerlink" title="什么时候会发送"></a>什么时候会发送</h3><p>1.非简单请求，比如使用Content-Type 为 application/xml 或 text/xml 的 POST 请求；</p>
+<p>详细一些：（满足一下三个条件的是简单请求，否则是非简单请求）</p>
+<p>条件一：请求方式只能是：GET、POST、HEAD</p>
+<p>条件二：HTTP请求头限制这几种字段：Accept、Accept-Language、Content-Language、Content-Type、Last-Event-ID</p>
+<p>条件三：Content-type只能取：application/x-www-form-urlencoded、multipart/form-data、text/plain</p>
+<p>2.中设置自定义头，比如 X-JSON、X-MENGXIANHUI 等。</p>
+<h3 id="做了什么"><a href="#做了什么" class="headerlink" title="做了什么"></a>做了什么</h3><p>OPTIONS方法是用于请求获得由Request-URI标识的资源在请求/响应的通信过程中可以使用的功能选项。通过这个方法，客户端可以在采取具体资源请求之前，决定对该资源采取何种必要措施，或者了解服务器的性能。</p>
+<p>1.获取服务器支持的HTTP请求方法</p>
+<p>2.用来检查服务器的性能。例如：AJAX进行跨域请求时的预检，需要向另外一个域名的资源发送一个HTTP OPTIONS请求头，用以判断实际发送的请求是否安全</p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/12/18/options%E9%A2%84%E6%A3%80%E8%AF%B7%E6%B1%82/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-react-hooks的闭包陷阱" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1207,93 +1310,6 @@
 
 
   
-    <article id="post-实现数据响应式的类" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/10/15/%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E5%93%8D%E5%BA%94%E5%BC%8F%E7%9A%84%E7%B1%BB/" target="_blank">实现数据响应式的类</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/10/15/%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E5%93%8D%E5%BA%94%E5%BC%8F%E7%9A%84%E7%B1%BB/" class="archive-article-date">
-        <time datetime="2021-10-15T11:28:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-15</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">nvue</span></span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(options)&#123;</span><br><span class="line">    <span class="keyword">this</span>.$options=options;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//数据响应式</span></span><br><span class="line">    <span class="keyword">this</span>.$data=options.data;</span><br><span class="line">    <span class="keyword">this</span>.observe(<span class="keyword">this</span>.$data);</span><br><span class="line">  &#125;</span><br><span class="line">  observe(val)&#123;</span><br><span class="line">    <span class="keyword">if</span>(!val&amp;&amp;<span class="keyword">typeof</span> val !==<span class="string">'object'</span>)&#123;</span><br><span class="line">      <span class="keyword">return</span>; </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">Object</span>.keys(val).foreach(<span class="function">(<span class="params">key</span>)=&gt;</span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.defineReactive(value,key,value[key]);</span><br><span class="line">    &#125;)</span><br><span class="line">    defineReactive(obj,key,val)&#123;</span><br><span class="line">      <span class="keyword">if</span>(<span class="keyword">typeof</span> val===<span class="string">'object'</span>)&#123;</span><br><span class="line">        <span class="keyword">this</span>.observe(val);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="built_in">Object</span>.defineProperty(obj,key,&#123;</span><br><span class="line">        <span class="keyword">get</span>()&#123;</span><br><span class="line">          <span class="keyword">return</span> val;</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="keyword">set</span>(newVal)&#123;</span><br><span class="line">          <span class="keyword">if</span>(newVal===val)&#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">          &#125;</span><br><span class="line">          val=newVal;</span><br><span class="line">          <span class="built_in">console</span>.log(<span class="string">"更新了"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/10/15/%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E5%93%8D%E5%BA%94%E5%BC%8F%E7%9A%84%E7%B1%BB/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1431,6 +1447,10 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">react</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">webpack</a>
               </li>
              
@@ -1439,7 +1459,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">react</a>
+                <a href="javascript:void(0)" class="js-tag color3">基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1447,15 +1467,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">基础</a>
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">css</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1471,11 +1487,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">小程序</a>
+                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
+                <a href="javascript:void(0)" class="js-tag color4">小程序</a>
               </li>
              
               <li class="article-tag-list-item">
