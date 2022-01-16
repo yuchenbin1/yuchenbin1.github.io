@@ -202,6 +202,107 @@
             
 
   
+    <article id="post-RN存在的问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/10/25/RN%E5%AD%98%E5%9C%A8%E7%9A%84%E9%97%AE%E9%A2%98/" target="_blank">RN存在的问题</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/10/25/RN%E5%AD%98%E5%9C%A8%E7%9A%84%E9%97%AE%E9%A2%98/" class="archive-article-date">
+        <time datetime="2021-10-25T11:36:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-25</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="性能优化"><a href="#性能优化" class="headerlink" title="性能优化"></a>性能优化</h1><p>1.异步逐层渲染（ScrollView和ListView相当于Web的table布局，Web的table会再内部渲染完成之后再展示，RN白屏时间过长也是内部的渲染时间过长），使用requestAnimationFrame（在下一帧有空闲的时候做一些事情）或者setTimeout定时将单个组件push进ScrollView容器。（react-progressive做了这一件事）</p>
+<p>2.shouldComponentUpdate</p>
+<p>子组件的属性改变，会通知到父组件，父组件会先进行DOMDIFF，之后全部重新渲染子组件</p>
+<p>3.立即修改可能会增加渲染的压力，直接修改State使用requestAnimationFrame(fn),使用setNativeProps方法可以理解为Web的直接修改dom，性能分析工具React.addons.Perf</p>
+<p>4.首屏不要有太多的组件，区分动态组件和静态组件，最小化结构</p>
+<p>5.最小化ListView，子选项不可见的时候减小list（react-native-sglistview，CRNlistView）</p>
+<h1 id="开发"><a href="#开发" class="headerlink" title="开发"></a>开发</h1><p>RN接近于原生，用户体验极佳，接口完备，什么都可以做</p>
+<p>但是开发、测试成本高，开发效率一般，版本发布不灵活</p>
+<p>H5开发体验好，发布版本灵活，但是用户体验较差，优化成本较高</p>
+<h1 id="上线"><a href="#上线" class="headerlink" title="上线"></a>上线</h1><p>生成增量包上线</p>
+<p>google-diff-match-patch</p>
+<p>bsdiff生成差异</p>
+<p>bspath生成差异</p>
+<h1 id="版本并存方案"><a href="#版本并存方案" class="headerlink" title="版本并存方案"></a>版本并存方案</h1><p>1.搭个动态server，提供个接口，接收表达客户端情况的几个参数，根据这些参数的不同输出不同的配置信息，客户端读取配置信息时，都通过访问server上的这个接口</p>
+<p>2.写一个js文件，写一个函数，接收表达客户端情况的几个参数，根据这些参数的不同输出不同的配置信息，把这个JS文件作为静态资源部署到server，客户端读取配置信息时，都通过访问server拉取这个JS文件，然后将其中的内容作为JavaScriptCore的code执行一下，然后调用其中的函数来获取配置信息</p>
+<p>3.其他工具，react-native-code-push版本发布的工具，moles-packer帮助拆分bundle的工具</p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">RN</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/10/25/RN%E5%AD%98%E5%9C%A8%E7%9A%84%E9%97%AE%E9%A2%98/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-实现数据响应式的类" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1203,103 +1304,6 @@
 
 
   
-    <article id="post-主题色切换" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/08/21/%E4%B8%BB%E9%A2%98%E8%89%B2%E5%88%87%E6%8D%A2/" target="_blank">主题色切换</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/08/21/%E4%B8%BB%E9%A2%98%E8%89%B2%E5%88%87%E6%8D%A2/" class="archive-article-date">
-        <time datetime="2021-08-21T12:58:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-21</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>以less为例，使用css实现主题色的切换</p>
-<p>1.设置默认的主题色</p>
-<p>在项目common或者是reset样式文件里设置默认的主题色</p>
-<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">body</span>&#123;</span><br><span class="line">	<span class="attribute">--themeColor</span>:<span class="number">#0ff</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>2.可以调用js来控制主题色的切换</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.body.style.setProperty(<span class="string">'--themeColor'</span>, <span class="keyword">this</span>.$store.state.home.themeColor)</span><br></pre></td></tr></table></figure>
-
-<p>其中主题色可以存储在公共管理器</p>
-<p>3.在对应需要改变颜色的组件中需要</p>
-<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.conform</span>&#123;</span><br><span class="line">  <span class="attribute">background-color</span>: var(--themeColor);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">css</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/08/21/%E4%B8%BB%E9%A2%98%E8%89%B2%E5%88%87%E6%8D%A2/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
@@ -1314,7 +1318,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2020-2021 <a href="https:/yuchenbin1.github.io/" target="_blank">ycb</a>
+    		&copy; 2020-2022 <a href="https:/yuchenbin1.github.io/" target="_blank">ycb</a>
     	</div>
       	<div class="footer-right">
 			
@@ -1437,7 +1441,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">react</a>
+                <a href="javascript:void(0)" class="js-tag color3">RN</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1445,7 +1449,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">RN</a>
+                <a href="javascript:void(0)" class="js-tag color1">react</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1457,11 +1461,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">

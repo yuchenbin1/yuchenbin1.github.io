@@ -202,6 +202,117 @@
             
 
   
+    <article id="post-for-of" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/06/03/for-of/" target="_blank">for of</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/06/03/for-of/" class="archive-article-date">
+        <time datetime="2021-06-03T12:26:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-03</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>for of经常用来遍历数组，除此之外还可以遍历类数组对象、Set、Map等。但是不能遍历普通的对象</p>
+<p>如下遍历在浏览器环境中</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(item <span class="keyword">of</span> &#123;<span class="attr">name</span>:<span class="number">123</span>,<span class="attr">age</span>:<span class="number">123</span>&#125;)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(item)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>会报错:某某不是可迭代</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;(intermediate value)(intermediate value)&#125; is not iterable</span><br></pre></td></tr></table></figure>
+
+<p>for of 底层是通过<code>Symbol.iterator</code> 来实现遍历的，因此</p>
+<p>通过定义一个有<code>Symbol.iterator</code> 属性的对象来实现for of 的遍历</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">for(item of &#123;name:123,age:123,[Symbol.iterator]&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>浏览器并没有报错吗，而是输出的是undefinded</p>
+<p>如下定义对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const obj &#x3D; &#123;</span><br><span class="line">  0: &#39;a&#39;,</span><br><span class="line">  1: &#39;b&#39;,</span><br><span class="line">  length: 2,</span><br><span class="line">  [Symbol.iterator]: Array.prototype[Symbol.iterator]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对应输出</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for (const item of obj) &#123;</span><br><span class="line">  console.log(item) &#x2F;&#x2F; a b</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对象会遍历出a、b</p>
+<p>什么是迭代器，其实所谓的迭代器就是具有 next() 方法的对象，每次调用 next() 都会返回一个结果对象，该结果对象有两个属性，value 表示当前的值，done 表示遍历是否结束</p>
+<p>自定义迭代器</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">forof</span>(<span class="params">arr, cb</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> iterator = arr[<span class="built_in">Symbol</span>.iterator]()</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> result = iterator.next()</span><br><span class="line">  <span class="keyword">while</span> (!result.done) &#123;</span><br><span class="line">    cb(result.value)</span><br><span class="line">    result = iterator.next()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">forof(arr, <span class="function"><span class="keyword">function</span> (<span class="params">item</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(item)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>改造普通对象为可迭代对象</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createIterator</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> arr = <span class="built_in">Object</span>.entries(obj)<span class="comment">//Object.entries()方法返回一个给定对象自身可枚举属性的键值对数组，其排列与使用 for...in 循环遍历该对象时返回的顺序一致（区别在于 for-in 循环还会枚举原型链中的属性）</span></span><br><span class="line">  <span class="keyword">let</span> i = <span class="number">0</span></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    next() &#123;</span><br><span class="line">      <span class="keyword">let</span> done = i &gt;= arr.length ? <span class="literal">true</span> : <span class="literal">false</span></span><br><span class="line">      <span class="keyword">let</span> value = !done ? arr[i++] : <span class="literal">undefined</span></span><br><span class="line">      <span class="keyword">return</span> &#123;</span><br><span class="line">        done,</span><br><span class="line">        value</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">基础</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/06/03/for-of/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-promise的race和all的实现" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1141,169 +1252,6 @@
 
 
   
-    <article id="post-21年3月24日" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/03/24/21%E5%B9%B43%E6%9C%8824%E6%97%A5/" target="_blank">21年3月24日</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/03/24/21%E5%B9%B43%E6%9C%8824%E6%97%A5/" class="archive-article-date">
-        <time datetime="2021-03-24T09:09:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-24</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="DOCTYPE"><a href="#DOCTYPE" class="headerlink" title="DOCTYPE"></a>DOCTYPE</h1><p>DOCTYPE(Document Type)，该声明位于文档中最前面的位置，处于 <code>html</code> 标签之前，此标签告知浏览器文档使用哪种 HTML 或者 XHTML 规范。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span><span class="comment">&lt;!--使用html5 doctype，不区分大小写--&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="charset"><a href="#charset" class="headerlink" title="charset"></a>charset</h1><p>声明文档使用的字符编码</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>相当于html5之前的写法</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Content-Type"</span> <span class="attr">content</span>=<span class="string">"text/html; charset=utf-8"</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="lang"><a href="#lang" class="headerlink" title="lang"></a>lang</h1><p>简体中文</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"zh-cmn-Hans"</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>繁体中文</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"zh-cmn-Hant"</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="优先使用IE最新版本和Chromn"><a href="#优先使用IE最新版本和Chromn" class="headerlink" title="优先使用IE最新版本和Chromn"></a>优先使用IE最新版本和Chromn</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span><span class="attr">content</span>=<span class="string">"IE=edge,chrome=1"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="360使用Google-Chrome-Frame"><a href="#360使用Google-Chrome-Frame" class="headerlink" title="360使用Google Chrome Frame"></a>360使用Google Chrome Frame</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"renderer"</span><span class="attr">content</span>=<span class="string">"webkit"</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>360 浏览器就会在读取到这个标签后，立即切换对应的极速核。 另外为了保险起见再加</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span><span class="attr">content</span>=<span class="string">"IE=Edge,chrome=1"</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>这样写可以达到的效果是如果安装了 Google Chrome Frame，则使用 GCF 来渲染页面，如果没有安装 GCF，则使用最高版本的 IE 内核进行渲染。</p>
-<h1 id="百度禁止转码"><a href="#百度禁止转码" class="headerlink" title="百度禁止转码"></a>百度禁止转码</h1><p>通过百度手机打开网页时，百度可能会对你的网页进行转码，脱下你的衣服，往你的身上贴狗皮膏药的广告，为此可在 head 内添加</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Cache-Control"</span><span class="attr">content</span>=<span class="string">"no-siteapp"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="SEO优化"><a href="#SEO优化" class="headerlink" title="SEO优化"></a>SEO优化</h1><h2 id="页面标题"><a href="#页面标题" class="headerlink" title="页面标题"></a>页面标题</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>your title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="页面关键词"><a href="#页面关键词" class="headerlink" title="页面关键词"></a>页面关键词</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"keywords"</span><span class="attr">content</span>=<span class="string">"your keywords"</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="页面描述内容"><a href="#页面描述内容" class="headerlink" title="页面描述内容"></a>页面描述内容</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"description"</span><span class="attr">content</span>=<span class="string">"your description"</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="定义网页作者"><a href="#定义网页作者" class="headerlink" title="定义网页作者"></a>定义网页作者</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"author"</span><span class="attr">content</span>=<span class="string">"author,email address"</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="定义网页搜索引擎索引方式"><a href="#定义网页搜索引擎索引方式" class="headerlink" title="定义网页搜索引擎索引方式"></a>定义网页搜索引擎索引方式</h2><p>robotterms 是一组使用英文逗号「,」分割的值，通常有如下几种取值：none，noindex，nofollow，all，index和follow。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"robots"</span><span class="attr">content</span>=<span class="string">"index,follow"</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="为移动设备添加viewport"><a href="#为移动设备添加viewport" class="headerlink" title="为移动设备添加viewport"></a>为移动设备添加viewport</h1><p><code>viewport</code> 可以让布局在移动浏览器上显示的更好</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span><span class="attr">content</span>=<span class="string">"initial-scale=1"</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>content的参数</p>
-<ul>
-<li><p>width viewport 宽度(数值/device-width)</p>
-</li>
-<li><p>height viewport 高度(数值/device-height)</p>
-</li>
-<li><p>initial-scale 初始缩放比例</p>
-</li>
-<li><p>maximum-scale 最大缩放比例</p>
-</li>
-<li><p>minimum-scale 最小缩放比例</p>
-</li>
-<li><p>user-scalable 是否允许用户缩放(yes/no)</p>
-</li>
-<li><p>minimal-ui iOS 7.1 beta 2 中新增属性（注意：iOS8 中已经删除），可以在页面加载时最小化上下状态栏。这是一个布尔值</p>
-</li>
-</ul>
-<p><strong>而如果你的网站不是响应式的，请不要使用 initial-scale 或者禁用缩放。</strong></p>
-<h2 id="适配iPhone6和iPhone-6plus"><a href="#适配iPhone6和iPhone-6plus" class="headerlink" title="适配iPhone6和iPhone 6plus"></a>适配iPhone6和iPhone 6plus</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span><span class="attr">content</span>=<span class="string">"width=375"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span><span class="attr">content</span>=<span class="string">"width=414"</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>大部分 4.7~5 寸的安卓设备的 viewport 宽设为 360px，iPhone 6 上却是 375px，大部分 5.5 寸安卓机器（比如说三星 Note）的 viewport 宽为 400，iPhone 6 plus 上是 414px</p>
-<h2 id="ios设备"><a href="#ios设备" class="headerlink" title="ios设备"></a>ios设备</h2><h3 id="添加到主屏后的标题（iOS-6-新增）"><a href="#添加到主屏后的标题（iOS-6-新增）" class="headerlink" title="添加到主屏后的标题（iOS 6 新增）"></a>添加到主屏后的标题（iOS 6 新增）</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"apple-mobile-web-app-title"</span><span class="attr">content</span>=<span class="string">"标题"</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="是否启用-WebApp-全屏模式"><a href="#是否启用-WebApp-全屏模式" class="headerlink" title="是否启用 WebApp 全屏模式"></a>是否启用 WebApp 全屏模式</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"apple-mobile-web-app-capable"</span><span class="attr">content</span>=<span class="string">"yes"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="设置状态栏的背景颜色"><a href="#设置状态栏的背景颜色" class="headerlink" title="设置状态栏的背景颜色"></a>设置状态栏的背景颜色</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"apple-mobile-web-app-status-bar-style"</span><span class="attr">content</span>=<span class="string">"black-translucent"</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>只有在 “apple-mobile-web-app-capable” content=”yes” 时生效</p>
-<p>content 参数：</p>
-<ul>
-<li>default 默认值。</li>
-<li>black 状态栏背景是黑色。</li>
-<li>black-translucent 状态栏背景是黑色半透明。 如果设置为 default 或 black ,网页内容从状态栏底部开始。 如果设置为 black-translucent ,网页内容充满整个屏幕，顶部会被状态栏遮挡。</li>
-</ul>
-<h3 id="禁止数字自动识别为电话号码"><a href="#禁止数字自动识别为电话号码" class="headerlink" title="禁止数字自动识别为电话号码"></a>禁止数字自动识别为电话号码</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"format-detection"</span><span class="attr">content</span>=<span class="string">"telephone=no"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="移动端的头部标签和meta"><a href="#移动端的头部标签和meta" class="headerlink" title="移动端的头部标签和meta"></a>移动端的头部标签和meta</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span><span class="comment">&lt;!-- 使用 HTML5 doctype，不区分大小写 --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">htmllang="zh-cmn-Hans"</span>&gt;</span><span class="comment">&lt;!-- 更加标准的 lang 属性写法 http://zhi.hu/XyIa --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 声明文档使用的字符编码 --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">metacharset='utf-8'</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 优先使用 IE 最新版本和 Chrome --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">metahttp-equiv="X-UA-Compatible"content="IE=edge,chrome=1"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 页面描述 --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">metaname="description"content="不超过150个字符"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 页面关键词 --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">metaname="keywords"content=""</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 网页作者 --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">metaname="author"content="name,</span> <span class="attr">email</span>@<span class="attr">gmail.com</span>"/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 搜索引擎抓取 --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">metaname="robots"content="index,follow"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 为移动设备添加 viewport --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">metaname="viewport"content="initial-scale=1,</span> <span class="attr">maximum-scale</span>=<span class="string">3,</span> <span class="attr">minimum-scale</span>=<span class="string">1,</span> <span class="attr">user-scalable</span>=<span class="string">no</span>"&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- `width=device-width` 会导致 iPhone 5 添加到主屏后以 WebApp 全屏模式打开页面时出现黑边 http://bigc.at/ios-webapp-viewport-meta.orz --&gt;</span></span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- iOS 设备 begin --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">metaname="apple-mobile-web-app-title"content="标题"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 添加到主屏后的标题（iOS 6 新增） --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">metaname="apple-mobile-web-app-capable"content="yes"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 是否启用 WebApp 全屏模式，删除苹果默认的工具栏和菜单栏 --&gt;</span></span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">metaname="apple-itunes-app"content="app-id=myAppStoreID,</span> <span class="attr">affiliate-data</span>=<span class="string">myAffiliateData,</span> <span class="attr">app-argument</span>=<span class="string">myURL</span>"&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 添加智能 App 广告条 Smart App Banner（iOS 6+ Safari） --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">metaname="apple-mobile-web-app-status-bar-style"content="black"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 设置苹果工具栏颜色 --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">metaname="format-detection"content="telphone=no,</span> <span class="attr">email</span>=<span class="string">no</span>"/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 忽略页面中的数字识别为电话，忽略email识别 --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 启用360浏览器的极速模式(webkit) --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">metaname="renderer"content="webkit"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 避免IE使用兼容模式 --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">metahttp-equiv="X-UA-Compatible"content="IE=edge"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 针对手持设备优化，主要是针对一些老的不识别viewport的浏览器，比如黑莓 --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">metaname="HandheldFriendly"content="true"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 微软的老式浏览器 --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">metaname="MobileOptimized"content="320"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- uc强制竖屏 --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">metaname="screen-orientation"content="portrait"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- QQ强制竖屏 --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">metaname="x5-orientation"content="portrait"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- UC强制全屏 --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">metaname="full-screen"content="yes"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- QQ强制全屏 --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">metaname="x5-fullscreen"content="true"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- UC应用模式 --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">metaname="browsermode"content="application"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- QQ应用模式 --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">metaname="x5-page-mode"content="app"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- windows phone 点击无高光 --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">metaname="msapplication-tap-highlight"content="no"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- iOS 图标 begin --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">linkrel="apple-touch-icon-precomposed"href="</span>/<span class="attr">apple-touch-icon-57x57-precomposed.png</span>"/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- iPhone 和 iTouch，默认 57x57 像素，必须有 --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">linkrel="apple-touch-icon-precomposed"sizes="114x114"href="</span>/<span class="attr">apple-touch-icon-114x114-precomposed.png</span>"/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- Retina iPhone 和 Retina iTouch，114x114 像素，可以没有，但推荐有 --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">linkrel="apple-touch-icon-precomposed"sizes="144x144"href="</span>/<span class="attr">apple-touch-icon-144x144-precomposed.png</span>"/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- Retina iPad，144x144 像素，可以没有，但推荐有 --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- iOS 图标 end --&gt;</span></span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- iOS 启动画面 begin --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">linkrel="apple-touch-startup-image"sizes="768x1004"href="</span>/<span class="attr">splash-screen-768x1004.png</span>"/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- iPad 竖屏 768 x 1004（标准分辨率） --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">linkrel="apple-touch-startup-image"sizes="1536x2008"href="</span>/<span class="attr">splash-screen-1536x2008.png</span>"/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- iPad 竖屏 1536x2008（Retina） --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">linkrel="apple-touch-startup-image"sizes="1024x748"href="</span>/<span class="attr">Default-Portrait-1024x748.png</span>"/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- iPad 横屏 1024x748（标准分辨率） --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">linkrel="apple-touch-startup-image"sizes="2048x1496"href="</span>/<span class="attr">splash-screen-2048x1496.png</span>"/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- iPad 横屏 2048x1496（Retina） --&gt;</span></span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">linkrel="apple-touch-startup-image"href="</span>/<span class="attr">splash-screen-320x480.png</span>"/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- iPhone/iPod Touch 竖屏 320x480 (标准分辨率) --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">linkrel="apple-touch-startup-image"sizes="640x960"href="</span>/<span class="attr">splash-screen-640x960.png</span>"/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- iPhone/iPod Touch 竖屏 640x960 (Retina) --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">linkrel="apple-touch-startup-image"sizes="640x1136"href="</span>/<span class="attr">splash-screen-640x1136.png</span>"/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- iPhone 5/iPod Touch 5 竖屏 640x1136 (Retina) --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- iOS 启动画面 end --&gt;</span></span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- iOS 设备 end --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">metaname="msapplication-TileColor"content="#000"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- Windows 8 磁贴颜色 --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">metaname="msapplication-TileImage"content="icon.png"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- Windows 8 磁贴图标 --&gt;</span></span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">linkrel="alternate"type="application</span>/<span class="attr">rss</span>+<span class="attr">xml</span>"<span class="attr">title</span>=<span class="string">"RSS"</span><span class="attr">href</span>=<span class="string">"/rss.xml"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 添加 RSS 订阅 --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">linkrel="shortcut</span> <span class="attr">icon</span>"<span class="attr">type</span>=<span class="string">"image/ico"</span><span class="attr">href</span>=<span class="string">"/favicon.ico"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 添加 favicon icon --&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日志</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/03/24/21%E5%B9%B43%E6%9C%8824%E6%97%A5/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/4/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/6/">Next &amp;raquo;</a>
@@ -1318,7 +1266,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2020-2021 <a href="https:/yuchenbin1.github.io/" target="_blank">ycb</a>
+    		&copy; 2020-2022 <a href="https:/yuchenbin1.github.io/" target="_blank">ycb</a>
     	</div>
       	<div class="footer-right">
 			
@@ -1441,7 +1389,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">react</a>
+                <a href="javascript:void(0)" class="js-tag color3">RN</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1449,7 +1397,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">RN</a>
+                <a href="javascript:void(0)" class="js-tag color1">react</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1461,11 +1409,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">

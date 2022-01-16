@@ -202,6 +202,122 @@
             
 
   
+    <article id="post-es2021" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2022/01/16/es2021/" target="_blank">es2021</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2022/01/16/es2021/" class="archive-article-date">
+        <time datetime="2022-01-16T13:26:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-01-16</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h1><h2 id="amp-amp"><a href="#amp-amp" class="headerlink" title="??= &amp;&amp;= ||="></a>??= &amp;&amp;= ||=</h2><p><code>??=</code>的判断逻辑与<code>??</code>是一致的，左值为<code>null</code>或<code>undefined</code>时返回右值，否则返回左值</p>
+<p>不同的是<code>??=</code>还附带了赋值的操作,<code>&amp;&amp;=</code>和<code>||=</code>类似</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 旧</span></span><br><span class="line"><span class="keyword">let</span> a = <span class="literal">null</span>;</span><br><span class="line">a = a ?? <span class="string">'daotin'</span>;</span><br><span class="line">a = a &amp;&amp; <span class="string">'daotin'</span>;</span><br><span class="line">a = a || <span class="string">'daotin'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 新</span></span><br><span class="line"><span class="keyword">let</span> a = <span class="literal">null</span>;</span><br><span class="line">a ??= <span class="string">'daotin'</span>;</span><br><span class="line">a &amp;&amp;= <span class="string">'daotin'</span>;</span><br><span class="line">a ||= <span class="string">'daotin'</span>;</span><br></pre></td></tr></table></figure>
+
+<h1 id="数字分隔符"><a href="#数字分隔符" class="headerlink" title="数字分隔符"></a>数字分隔符</h1><p>允许数字字面量中间加入不连续的<code>_</code>,以提高可读性</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>_000_000_000           <span class="comment">// Ah, so a billion</span></span><br><span class="line"><span class="number">101</span>_475_938<span class="number">.38</span>          <span class="comment">// And this is hundreds of millions</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> a = <span class="number">1</span>_1; <span class="comment">// 11</span></span><br><span class="line"><span class="keyword">let</span> a = <span class="number">1</span>__1 <span class="comment">// 错误，只允许一个下划线作为数字分隔符</span></span><br><span class="line"><span class="keyword">let</span> a = <span class="number">1</span>_;  <span class="comment">// 错误，分隔符不能在尾部 </span></span><br><span class="line"><span class="keyword">let</span> a = _1;  <span class="comment">// 错误，分隔符不能在头部 </span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Number</span>(<span class="number">1</span>_1); <span class="comment">// 11</span></span><br><span class="line"><span class="built_in">Number</span>(<span class="string">'1_1'</span>); <span class="comment">// NaN</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>注意</strong>：分隔符不能在尾部和头部，<strong>只能在数字之间，只允许一个下划线作为数字分隔符，不可连续。</strong>分隔符不影响数值的类型转换值，也无法在字符串转数值时被识别</p>
+<h2 id="Promise-any-amp-AggregateError"><a href="#Promise-any-amp-AggregateError" class="headerlink" title="Promise.any &amp; AggregateError"></a>Promise.any &amp; AggregateError</h2><p>any 接受 Promise 数组作为参数，返回合成的 Promise。只要给定的迭代中的一个 <code>promise</code> 成功，就采用第一个 <code>promise</code> 的值作为它的返回值</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> promises = [</span><br><span class="line">  fetch(<span class="string">'/endpoint-a'</span>).then(<span class="function"><span class="params">()</span> =&gt;</span> <span class="string">'a'</span>),</span><br><span class="line">  fetch(<span class="string">'/endpoint-b'</span>).then(<span class="function"><span class="params">()</span> =&gt;</span> <span class="string">'b'</span>),</span><br><span class="line">  fetch(<span class="string">'/endpoint-c'</span>).then(<span class="function"><span class="params">()</span> =&gt;</span> <span class="string">'c'</span>),</span><br><span class="line">];</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> first = <span class="keyword">await</span> <span class="built_in">Promise</span>.any(promises);</span><br><span class="line">  <span class="comment">// Any of the promises was fulfilled.</span></span><br><span class="line">  <span class="built_in">console</span>.log(first);</span><br><span class="line">  <span class="comment">// → e.g. 'b'</span></span><br><span class="line">&#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">  <span class="comment">// All of the promises were rejected.</span></span><br><span class="line">  <span class="built_in">console</span>.assert(error <span class="keyword">instanceof</span> AggregateError);</span><br><span class="line">  <span class="comment">// Log the rejection values:</span></span><br><span class="line">  <span class="built_in">console</span>.log(error.errors);</span><br><span class="line">  <span class="comment">// → [</span></span><br><span class="line">  <span class="comment">//     &lt;TypeError: Failed to fetch /endpoint-a&gt;,</span></span><br><span class="line">  <span class="comment">//     &lt;TypeError: Failed to fetch /endpoint-b&gt;,</span></span><br><span class="line">  <span class="comment">//     &lt;TypeError: Failed to fetch /endpoint-c&gt;</span></span><br><span class="line">  <span class="comment">//   ]</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>只有当 所有 请求都失败时，我们才最终进入代码 <code>catch</code> 块，然后在其中处理错误。</p>
+<h2 id="String-prototype-replaceAll"><a href="#String-prototype-replaceAll" class="headerlink" title="String.prototype.replaceAll"></a>String.prototype.replaceAll</h2><p>与<code>String.prototype.replace</code>相比，如果不使用全局的正则表达式匹配，只会替换匹配到的第一个，<code>String.prototype.replaceAll</code>可以替换所有的匹配项</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'hello world'</span>.replace(<span class="string">'o'</span>, <span class="string">'_'</span>); <span class="comment">// hell_ world</span></span><br><span class="line"></span><br><span class="line"><span class="string">'hello world'</span>.replace(<span class="regexp">/o/g</span>, <span class="string">'_'</span>); <span class="comment">// hell_ w_rld</span></span><br><span class="line"></span><br><span class="line"><span class="string">'hello world'</span>.replaceAll(<span class="string">'o'</span>, <span class="string">'_'</span>); <span class="comment">// hell_ w_rld</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="WeakRefs-amp-FinalizationRegistry对象"><a href="#WeakRefs-amp-FinalizationRegistry对象" class="headerlink" title="WeakRefs &amp; FinalizationRegistry对象"></a>WeakRefs &amp; FinalizationRegistry对象</h1><p>一般来说，在JavaScript中，对象的引用是强引用的，这意味着只要持有对象的引用，它就不会被垃圾回收。只有当该对象没有任何的强引用时， js引擎垃圾回收器才会销毁该对象并且回收该对象所占的内存空间。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;<span class="attr">a</span>:<span class="number">1</span>, <span class="attr">b</span>:<span class="number">2</span>&#125;; <span class="comment">// 只要我们访问 obj 对象，这个对象就不会被垃圾回收</span></span><br></pre></td></tr></table></figure>
+
+<p>但是 WeakRefs 可以创建一个弱引用，对象的弱引用是指当该对象应该被 js引擎垃圾回收器回收时不会阻止垃圾回收器的回收行为。</p>
+<p>Weakref 实例具有一个方法 deref，该方法返回被引用的原始对象，如果原始对象已被收集，则返回 undefined 对象。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> ref = <span class="keyword">new</span> WeakRef(&#123; <span class="attr">name</span>: <span class="string">'zhangsan'</span> &#125;);</span><br><span class="line"><span class="keyword">let</span> obj = ref.deref();</span><br><span class="line"><span class="keyword">if</span> (obj) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(obj.name);<span class="comment">//zhangsan</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用 <code>FinalizationRegistry</code> 对象可以在垃圾回收器回收对象时执行回调函数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> registry = <span class="keyword">new</span> FinalizationRegistry(<span class="function"><span class="params">heldValue</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'----'</span>, heldValue);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> obj = &#123;&#125;;</span><br><span class="line"><span class="keyword">const</span> token = &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 注册监听</span></span><br><span class="line">registry.register(obj, <span class="string">"obj deleted!"</span>, token);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 取消监听</span></span><br><span class="line">registry.unregister(token);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 可能很久以后，回调执行</span></span><br><span class="line"><span class="comment">// ---- obj deleted!</span></span><br></pre></td></tr></table></figure>
+
+<p>register的参数</p>
+<ul>
+<li>需要监听的对象</li>
+<li>执行回调函数的参数</li>
+<li>取消监听用的标识符</li>
+</ul>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2022/01/16/es2021/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-options预检请求" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1209,107 +1325,6 @@
 
 
   
-    <article id="post-RN存在的问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/10/25/RN%E5%AD%98%E5%9C%A8%E7%9A%84%E9%97%AE%E9%A2%98/" target="_blank">RN存在的问题</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/10/25/RN%E5%AD%98%E5%9C%A8%E7%9A%84%E9%97%AE%E9%A2%98/" class="archive-article-date">
-        <time datetime="2021-10-25T11:36:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-25</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="性能优化"><a href="#性能优化" class="headerlink" title="性能优化"></a>性能优化</h1><p>1.异步逐层渲染（ScrollView和ListView相当于Web的table布局，Web的table会再内部渲染完成之后再展示，RN白屏时间过长也是内部的渲染时间过长），使用requestAnimationFrame（在下一帧有空闲的时候做一些事情）或者setTimeout定时将单个组件push进ScrollView容器。（react-progressive做了这一件事）</p>
-<p>2.shouldComponentUpdate</p>
-<p>子组件的属性改变，会通知到父组件，父组件会先进行DOMDIFF，之后全部重新渲染子组件</p>
-<p>3.立即修改可能会增加渲染的压力，直接修改State使用requestAnimationFrame(fn),使用setNativeProps方法可以理解为Web的直接修改dom，性能分析工具React.addons.Perf</p>
-<p>4.首屏不要有太多的组件，区分动态组件和静态组件，最小化结构</p>
-<p>5.最小化ListView，子选项不可见的时候减小list（react-native-sglistview，CRNlistView）</p>
-<h1 id="开发"><a href="#开发" class="headerlink" title="开发"></a>开发</h1><p>RN接近于原生，用户体验极佳，接口完备，什么都可以做</p>
-<p>但是开发、测试成本高，开发效率一般，版本发布不灵活</p>
-<p>H5开发体验好，发布版本灵活，但是用户体验较差，优化成本较高</p>
-<h1 id="上线"><a href="#上线" class="headerlink" title="上线"></a>上线</h1><p>生成增量包上线</p>
-<p>google-diff-match-patch</p>
-<p>bsdiff生成差异</p>
-<p>bspath生成差异</p>
-<h1 id="版本并存方案"><a href="#版本并存方案" class="headerlink" title="版本并存方案"></a>版本并存方案</h1><p>1.搭个动态server，提供个接口，接收表达客户端情况的几个参数，根据这些参数的不同输出不同的配置信息，客户端读取配置信息时，都通过访问server上的这个接口</p>
-<p>2.写一个js文件，写一个函数，接收表达客户端情况的几个参数，根据这些参数的不同输出不同的配置信息，把这个JS文件作为静态资源部署到server，客户端读取配置信息时，都通过访问server拉取这个JS文件，然后将其中的内容作为JavaScriptCore的code执行一下，然后调用其中的函数来获取配置信息</p>
-<p>3.其他工具，react-native-code-push版本发布的工具，moles-packer帮助拆分bundle的工具</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">RN</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/10/25/RN%E5%AD%98%E5%9C%A8%E7%9A%84%E9%97%AE%E9%A2%98/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1324,7 +1339,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2020-2021 <a href="https:/yuchenbin1.github.io/" target="_blank">ycb</a>
+    		&copy; 2020-2022 <a href="https:/yuchenbin1.github.io/" target="_blank">ycb</a>
     	</div>
       	<div class="footer-right">
 			
@@ -1447,7 +1462,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">react</a>
+                <a href="javascript:void(0)" class="js-tag color3">RN</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1455,7 +1470,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">RN</a>
+                <a href="javascript:void(0)" class="js-tag color1">react</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1467,11 +1482,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
