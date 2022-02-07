@@ -202,6 +202,165 @@
             
 
   
+    <article id="post-web3" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2022/02/07/web3/" target="_blank">web3</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2022/02/07/web3/" class="archive-article-date">
+        <time datetime="2022-02-07T10:13:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-07</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Web3.js框架允许开发人员使用JS、Node和以太坊智能合约（smart contract）进行交互，该框架有以下几个模块组成</p>
+<h4 id="web3-eth"><a href="#web3-eth" class="headerlink" title="web3-eth"></a>web3-eth</h4><p>适用于区块链与智能合约</p>
+<h4 id="web3-shh"><a href="#web3-shh" class="headerlink" title="web3-shh"></a>web3-shh</h4><p>用于<code>whisper</code>协议，用于p2p和广播通信</p>
+<h4 id="web3-bzz"><a href="#web3-bzz" class="headerlink" title="web3-bzz"></a>web3-bzz</h4><p>针对<code>swarm</code>协议，是一种去中心化的文件存储</p>
+<h4 id="web3-utils"><a href="#web3-utils" class="headerlink" title="web3-utils"></a>web3-utils</h4><p>包含对 DApp（去中心化应用程序）开发人员有用的帮助函数</p>
+<h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><p>nodejs必须为特定的操作系统安装它，强烈建议使用LTS版本（Linux、MacOS、Windows）版本都是可以用的</p>
+<p>web3.js终端npm或yarn安装web3.js</p>
+<p>连接到以太坊节点——这需要一个本地节点（例如<a href="https://www.trufflesuite.com/ganache" target="_blank" rel="noopener">Ganache</a>）或连接到网络上的实时节点（例如<a href="https://infura.io/" target="_blank" rel="noopener">Infura</a>），想在网络上测试的，建议使用infura</p>
+<h1 id="Web3对象"><a href="#Web3对象" class="headerlink" title="Web3对象"></a>Web3对象</h1><p>web3对象是框架中的主要类，要调用任何的函数，必须使用web3对象。首先需要实例化对象。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Web3 = <span class="built_in">require</span>(<span class="string">'web3'</span>);</span><br><span class="line"></span><br><span class="line">Web3.&lt;方法名&gt;</span><br></pre></td></tr></table></figure>
+
+<p>现在我已经实例化了一个对象，还需要创建一个提供者来创建一个连接到以太坊网络的Web3对象的实例。这里有几种网络类型：</p>
+<ul>
+<li><p><strong>以太坊</strong>主网或主网络（用于 ETH 的实时区块链）</p>
+</li>
+<li><p><strong>测试网络</strong>（例如 Kovan、Rinkeby、Ropsten、Goerli）</p>
+</li>
+<li><p><strong>Web3 提供程序</strong>（例如在本地主机或远程服务器上使用端口 7545）</p>
+</li>
+<li><p><strong>注入的 Web3</strong>（例如 Infura 网关）</p>
+<p>这里示例使用Infura端点，这是Infura在创建项目时提供的URL，这必须在发出url之前创建</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> web3 = <span class="keyword">new</span> Web3(<span class="string">'https://ropsten.infura.io/v3/76162cfy074u522fa49be7ca11cc9a33'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>当调用Web3对象的时候，会返回对象的功能</p>
+<p>继续向下翻会看到unitMap</p>
+</li>
+</ul>
+<p>这显示了库模块的内容。以太坊区块链中使用了一些功能和支持的单位（例如：wei），这些事开发人员必须遵守的才能和区块链进行交互。这些规则类似于智能合约的交易规则。</p>
+<h1 id="使用以太坊账号"><a href="#使用以太坊账号" class="headerlink" title="使用以太坊账号"></a>使用以太坊账号</h1><p>Web3.js的基本用途之一是使用账户</p>
+<p>比如：</p>
+<p>创建以太坊新账户</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;    Web3.eth.accounts.create();</span><br><span class="line">&#123;</span><br><span class="line">  地址:<span class="string">"0xb8CE9ab6943e1eCED004cDe8e3bBed6568c2Fv01"</span>,</span><br><span class="line"> privateKey:<span class="string">"0x348ce564d427a3311b6546bbcff9390d69395b06ed6c486954e971d860fe8709"</span>,</span><br><span class="line">   加密函数：......</span><br><span class="line">   ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>创建了一个账户</p>
+<p><strong>0xb8CE9ab6943e1eCED004cDe8e3bBed6568c2Fv01</strong></p>
+<p>此账户只能在提供商的网络上面使用</p>
+<p>还有私钥</p>
+<p>0x348ce564d427a3311b6546bbcff9390d69395b06ed6c486954e971d860fe8709</p>
+<p>这很重要，私钥匙授予用户对账户的授权，任何人获得到私钥都可以登录该账户</p>
+<p>如果丢失，除非有备份的私钥，否则账户上的余额就丢失了</p>
+<h4 id="privateKeyToAccount"><a href="#privateKeyToAccount" class="headerlink" title="privateKeyToAccount"></a>privateKeyToAccount</h4><p>同样可以使用<strong>privateKeyToAccount()</strong>函数从私钥派生出地址</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;    web3.eth.accounts.privateKeyToAccount(<span class="string">'0x348ce564d427a3311b6546bbcff9390d69395b06ed6c486954e971d860fe8709'</span>);</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  address: <span class="string">'0xb8CE9ab6943e1eCED004cDe8e3bBed6568c2Fv01'</span>,</span><br><span class="line">    privateKey: <span class="string">'0x348ce564d427a3311b6546bbcff9390d69395b06ed6c486954e971d860fe8709'</span>,</span><br><span class="line">    signTransaction: <span class="function"><span class="keyword">function</span>(<span class="params">tx</span>)</span>&#123;...&#125;,</span><br><span class="line">    sign: <span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;...&#125;,</span><br><span class="line">    encrypt: <span class="function"><span class="keyword">function</span>(<span class="params">password</span>)</span>&#123;...&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="查询区块链"><a href="#查询区块链" class="headerlink" title="查询区块链"></a>查询区块链</h1><p>开发者可以使用<strong>web3-eth</strong>包从区块链中查询信息。这个不需要gas（油）的成本。</p>
+<h4 id="getBalance"><a href="#getBalance" class="headerlink" title="getBalance"></a><strong>getBalance</strong></h4><p><strong>getBalance</strong>从账户中获取余额，使用getBalance函数并将地址作为参数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;    web3.eth.getBalance(<span class="string">'0x6e35A20a740bC7288bdec5d4E138a253D4A72660'</span>).then(<span class="built_in">console</span>.log(<span class="string">'hello'</span>))</span><br><span class="line"></span><br><span class="line">&gt;    <span class="number">5984521207000000000</span></span><br></pre></td></tr></table></figure>
+
+<p>账户的余额是以wei为单位返回，这个是ether的最低面额</p>
+<h4 id="utils"><a href="#utils" class="headerlink" title="utils"></a><strong>utils</strong></h4><p>可以使用utils来转换单位</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;    web3.eth.getBalance(<span class="string">'0x6e35A20a740bC7288bdec5d4E138a253D4A72660'</span>,(call,wei)=&gt;&#123;balance=web3.utils.fromWei(wei,<span class="string">'ether'</span>)&#125;)</span><br><span class="line">&gt;    <span class="string">'5.984521207'</span></span><br></pre></td></tr></table></figure>
+
+<p>换算成了以太币计价了</p>
+<h1 id="运行事务（交易）"><a href="#运行事务（交易）" class="headerlink" title="运行事务（交易）"></a>运行事务（交易）</h1><p>需要gas（油）成本</p>
+<p>使用的函数来自于<a href="https://github.com/ethereumjs/ethereumjs-tx" target="_blank" rel="noopener"><strong>EthereumJS</strong></a>库，确保已经安装了<strong>ethereumjs-tx</strong></p>
+<p>首先，创建一个app.js文件作为前端的程序，用于于区块链对话</p>
+<p>例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Tx = <span class="built_in">require</span>(<span class="string">'ethereumjs-tx'</span>).Transaction</span><br><span class="line"><span class="keyword">const</span> Web3 = <span class="built_in">require</span>(<span class="string">'web3'</span>)</span><br><span class="line"><span class="keyword">const</span> web3 = <span class="keyword">new</span> Web3(<span class="string">'&lt;endpoint&gt;'</span>)</span><br><span class="line"><span class="keyword">const</span> account1 = <span class="string">'&lt;address 1&gt;'</span></span><br><span class="line"><span class="keyword">const</span> account2 = <span class="string">'&lt;address 2&gt;'</span></span><br><span class="line"><span class="keyword">const</span> privateKey1 = Buffer.from(<span class="string">'&lt;private key 1&gt;'</span>, <span class="string">'hex'</span>)</span><br><span class="line"><span class="keyword">const</span> privateKey2 = Buffer.from(<span class="string">'&lt;private key 2&gt;'</span>, <span class="string">'hex'</span>)</span><br><span class="line">web3.eth.getTransactionCount(account1, (err, txCount) =&gt; &#123;</span><br><span class="line"><span class="comment">// Build a transaction建立一个事务</span></span><br><span class="line"><span class="keyword">const</span> txObject = &#123;</span><br><span class="line">     nonce: web3.utils.toHex(txCount),</span><br><span class="line">     to: account2,</span><br><span class="line">     value: web3.utils.toHex(web3.utils.toWei(<span class="string">'1'</span>, <span class="string">'ether'</span>)),</span><br><span class="line">     gasLimit: web3.utils.toHex(<span class="number">21000</span>),</span><br><span class="line">     gasPrice: web3.utils.toHex(web3.utils.toWei(<span class="string">'10'</span>, <span class="string">'gwei'</span>))</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Sign the transaction签署交易</span></span><br><span class="line"><span class="keyword">const</span> tx = <span class="keyword">new</span> Tx(txObject, &#123; <span class="attr">chain</span>: <span class="string">'ropsten'</span> &#125;)</span><br><span class="line">tx.sign(privateKey1)</span><br><span class="line"><span class="keyword">const</span> serializedTransaction = tx.serialize()</span><br><span class="line"><span class="keyword">const</span> raw = <span class="string">'0x'</span> + serializedTransaction.toString(<span class="string">'hex'</span>)</span><br><span class="line"><span class="comment">// Broadcast the transaction广播交易</span></span><br><span class="line">web3.eth.sendSignedTransaction(raw, (err, txHash) =&gt; &#123;</span><br><span class="line">     <span class="built_in">console</span>.log(<span class="string">'txHash: '</span>, txHash)</span><br><span class="line">     <span class="built_in">console</span>.log(err)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>应用程序做的事将用户account1向account2转移一笔1以太币（1ETH）</p>
+<p>该交易花了10gwei的gas成本和21000wei的限制。nonce表示事务计数值。这些值必须转化为十六进制。<code>web3.utils.toHex()</code>函数就是转化为这个函数。</p>
+<p>这里有三个部分创建了交易</p>
+<h5 id="构建事务"><a href="#构建事务" class="headerlink" title="构建事务"></a>构建事务</h5><p>首先，必须先构建事务</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Build a transaction建立一个事务</span></span><br><span class="line"><span class="keyword">const</span> txObject = &#123;</span><br><span class="line">     nonce: web3.utils.toHex(txCount),</span><br><span class="line">     to: account2,</span><br><span class="line">     value: web3.utils.toHex(web3.utils.toWei(<span class="string">'1'</span>, <span class="string">'ether'</span>)),</span><br><span class="line">     gasLimit: web3.utils.toHex(<span class="number">21000</span>),</span><br><span class="line">     gasPrice: web3.utils.toHex(web3.utils.toWei(<span class="string">'10'</span>, <span class="string">'gwei'</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个就是我们要发到以太坊的交易对象</p>
+<h5 id="发送签名"><a href="#发送签名" class="headerlink" title="发送签名"></a>发送签名</h5><p>然后，交易必须要发送account1用户的签名</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tx.sign(privateKey1)</span><br></pre></td></tr></table></figure>
+
+<p>privateKey1就是用户1的私钥，用于授权交易。</p>
+<h5 id="广播交易"><a href="#广播交易" class="headerlink" title="广播交易"></a>广播交易</h5><p>最后，是用于广播交易，需要被矿工识取并打包到一个需要进行挖掘和验证的区块中</p>
+<p>需要添加一个控制台日志，我们可以看到返回的结果</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Broadcast the transaction广播交易</span></span><br><span class="line">web3.eth.sendSignedTransaction(raw, (err, txHash) =&gt; &#123;</span><br><span class="line">     <span class="built_in">console</span>.log(<span class="string">'txHash: '</span>, txHash)</span><br><span class="line">     <span class="built_in">console</span>.log(err)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>如果得到了txHash值，那么就是成功了，否则，代码就是有问题的</p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">web3</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2022/02/07/web3/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-模块引入" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1198,185 +1357,6 @@
 
 
   
-    <article id="post-html中插入svg" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/11/06/html%E4%B8%AD%E6%8F%92%E5%85%A5svg/" target="_blank">html中插入svg</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/11/06/html%E4%B8%AD%E6%8F%92%E5%85%A5svg/" class="archive-article-date">
-        <time datetime="2021-11-06T04:00:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-06</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="html插入svg"><a href="#html插入svg" class="headerlink" title="html插入svg"></a>html插入svg</h1><p>首先看到在网页上有树状思维导图，好奇是怎么做的</p>
-<p>于是了解了一下</p>
-<p>是一个svg标签的文档</p>
-<p>新建一个思维导图，可以使用xmind（付费）或者百度脑图，之后导出svg格式</p>
-<p>在html中插入svg（可缩放矢量图）</p>
-<h2 id="svg"><a href="#svg" class="headerlink" title="svg"></a>svg</h2><p>svg是可缩放矢量图</p>
-<h3 id="svg的优势"><a href="#svg的优势" class="headerlink" title="svg的优势"></a>svg的优势</h3><ul>
-<li>SVG 可被非常多的工具读取和修改（比如记事本）</li>
-<li>SVG 与 JPEG 和 GIF 图像比起来，尺寸更小，且可压缩性更强。</li>
-<li>SVG 是可伸缩的</li>
-<li>SVG 图像可在任何的分辨率下被高质量地打印</li>
-<li>SVG 可在图像质量不下降的情况下被放大</li>
-<li>SVG 图像中的文本是可选的，同时也是可搜索的（很适合制作地图）</li>
-<li>SVG 可以与 Java 技术一起运行</li>
-<li>SVG 是开放的标准</li>
-<li>SVG 文件是纯粹的 XML</li>
-</ul>
-<p>SVG 的主要竞争者是 Flash。</p>
-<p>与 Flash 相比，SVG 最大的优势是与其他标准（比如 XSL 和 DOM）相兼容。而 Flash 则是未开源的私有技术</p>
-<h3 id="svg嵌入html"><a href="#svg嵌入html" class="headerlink" title="svg嵌入html"></a>svg嵌入html</h3><h4 id="embed"><a href="#embed" class="headerlink" title="embed"></a>embed</h4><p>使用<code>&lt;embed&gt;</code>标签</p>
-<h5 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h5><p>所有主要浏览器都支持，并允许使用脚本</p>
-<h5 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h5><p>不推荐在HTML4和XHTML中使用（但在HTML5允许）</p>
-<h5 id="语法示例"><a href="#语法示例" class="headerlink" title="语法示例"></a>语法示例</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">embed</span> <span class="attr">src</span>=<span class="string">"circle1.svg"</span> <span class="attr">type</span>=<span class="string">"image/svg+xml"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="object"><a href="#object" class="headerlink" title="object"></a>object</h4><p>使用<code>&lt;object&gt;</code>标签 </p>
-<h5 id="优势-1"><a href="#优势-1" class="headerlink" title="优势"></a>优势</h5><p>所有主要浏览器都支持，并支持HTML4，XHTML和HTML5标准</p>
-<h5 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h5><p>不允许使用脚本</p>
-<h5 id="语法示例-1"><a href="#语法示例-1" class="headerlink" title="语法示例"></a>语法示例</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">object</span> <span class="attr">data</span>=<span class="string">"circle1.svg"</span> <span class="attr">type</span>=<span class="string">"image/svg+xml"</span>&gt;</span><span class="tag">&lt;/<span class="name">object</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="iframe"><a href="#iframe" class="headerlink" title="iframe"></a>iframe</h4><p>使用<code>iframe</code>标签</p>
-<h5 id="优势-2"><a href="#优势-2" class="headerlink" title="优势"></a>优势</h5><p>所有主要浏览器都支持，并允许使用脚本</p>
-<h5 id="缺点-2"><a href="#缺点-2" class="headerlink" title="缺点"></a>缺点</h5><p>不推荐在HTML4和XHTML中使用（但在HTML5允许）</p>
-<h5 id="语法示例-2"><a href="#语法示例-2" class="headerlink" title="语法示例"></a>语法示例</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">src</span>=<span class="string">"circle1.svg"</span>&gt;</span><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="直接svg"><a href="#直接svg" class="headerlink" title="直接svg"></a>直接svg</h4><p>在Firefox、Internet Explorer9、谷歌Chrome和Safari中，可以直接在HTML嵌入SVG代码</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">svg</span> <span class="attr">xmlns</span>=<span class="string">"http://www.w3.org/2000/svg"</span> <span class="attr">version</span>=<span class="string">"1.1"</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">circle</span> <span class="attr">cx</span>=<span class="string">"100"</span> <span class="attr">cy</span>=<span class="string">"50"</span> <span class="attr">r</span>=<span class="string">"40"</span> <span class="attr">stroke</span>=<span class="string">"black"</span> <span class="attr">stroke-width</span>=<span class="string">"2"</span> <span class="attr">fill</span>=<span class="string">"red"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="svg的预定义的形状"><a href="#svg的预定义的形状" class="headerlink" title="svg的预定义的形状"></a>svg的预定义的形状</h3><p><a href="https://www.runoob.com/svg/svg-rect.html" target="_blank" rel="noopener">矩形</a> <code>&lt;rect&gt;</code></p>
-<p><a href="https://www.runoob.com/svg/svg-circle.html" target="_blank" rel="noopener">圆形</a> <code>&lt;circle&gt;</code></p>
-<p><a href="https://www.runoob.com/svg/svg-ellipse.html" target="_blank" rel="noopener">椭圆</a> <code>&lt;ellipse&gt;</code></p>
-<p><a href="https://www.runoob.com/svg/svg-line.html" target="_blank" rel="noopener">直线</a><code>&lt;line&gt;</code></p>
-<p><a href="https://www.runoob.com/svg/svg-polyline.html" target="_blank" rel="noopener">折线</a> <code>&lt;polyline&gt;</code></p>
-<p><a href="https://www.runoob.com/svg/svg-polygon.html" target="_blank" rel="noopener">多边形</a><code>&lt;polygon&gt;</code></p>
-<p><a href="https://www.runoob.com/svg/svg-path.html" target="_blank" rel="noopener">路径</a> <code>&lt;path&gt;</code></p>
-<p><a href="https://www.runoob.com/svg/svg-text.html" target="_blank" rel="noopener">文本</a><code>&lt;text&gt;</code></p>
-<h3 id="stroke属性"><a href="#stroke属性" class="headerlink" title="stroke属性"></a>stroke属性</h3><p>Stroke属性定义一条线，文本或元素轮廓颜色</p>
-<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">svg</span> <span class="attr">xmlns</span>=<span class="string">"http://www.w3.org/2000/svg"</span> <span class="attr">version</span>=<span class="string">"1.1"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">g</span> <span class="attr">fill</span>=<span class="string">"none"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">path</span> <span class="attr">stroke</span>=<span class="string">"red"</span> <span class="attr">d</span>=<span class="string">"M5 20 l215 0"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">path</span> <span class="attr">stroke</span>=<span class="string">"blue"</span> <span class="attr">d</span>=<span class="string">"M5 40 l215 0"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">path</span> <span class="attr">stroke</span>=<span class="string">"black"</span> <span class="attr">d</span>=<span class="string">"M5 60 l215 0"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">g</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="stroke-width属性"><a href="#stroke-width属性" class="headerlink" title="stroke-width属性"></a>stroke-width属性</h3><p>stroke- width属性定义了一条线，文本或元素轮廓厚度</p>
-<h4 id="示例-1"><a href="#示例-1" class="headerlink" title="示例"></a>示例</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">svg</span> <span class="attr">xmlns</span>=<span class="string">"http://www.w3.org/2000/svg"</span> <span class="attr">version</span>=<span class="string">"1.1"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">g</span> <span class="attr">fill</span>=<span class="string">"none"</span> <span class="attr">stroke</span>=<span class="string">"black"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">path</span> <span class="attr">stroke-width</span>=<span class="string">"2"</span> <span class="attr">d</span>=<span class="string">"M5 20 l215 0"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">path</span> <span class="attr">stroke-width</span>=<span class="string">"4"</span> <span class="attr">d</span>=<span class="string">"M5 40 l215 0"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">path</span> <span class="attr">stroke-width</span>=<span class="string">"6"</span> <span class="attr">d</span>=<span class="string">"M5 60 l215 0"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">g</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="stroke-linecap属性"><a href="#stroke-linecap属性" class="headerlink" title="stroke-linecap属性"></a>stroke-linecap属性</h3><p>strokelinecap属性定义不同类型的开放路径的终结，比如线段两端是圆形还是平形的</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">svg</span> <span class="attr">xmlns</span>=<span class="string">"http://www.w3.org/2000/svg"</span> <span class="attr">version</span>=<span class="string">"1.1"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">g</span> <span class="attr">fill</span>=<span class="string">"none"</span> <span class="attr">stroke</span>=<span class="string">"black"</span> <span class="attr">stroke-width</span>=<span class="string">"6"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">path</span> <span class="attr">stroke-linecap</span>=<span class="string">"butt"</span> <span class="attr">d</span>=<span class="string">"M5 20 l215 0"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">path</span> <span class="attr">stroke-linecap</span>=<span class="string">"round"</span> <span class="attr">d</span>=<span class="string">"M5 40 l215 0"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">path</span> <span class="attr">stroke-linecap</span>=<span class="string">"square"</span> <span class="attr">d</span>=<span class="string">"M5 60 l215 0"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">g</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="stroke-dasharray-属性"><a href="#stroke-dasharray-属性" class="headerlink" title="stroke-dasharray 属性"></a>stroke-dasharray 属性</h3><p>strokedasharray属性用于创建虚线</p>
-<h4 id="示例-2"><a href="#示例-2" class="headerlink" title="示例"></a>示例</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">svg</span> <span class="attr">xmlns</span>=<span class="string">"http://www.w3.org/2000/svg"</span> <span class="attr">version</span>=<span class="string">"1.1"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">g</span> <span class="attr">fill</span>=<span class="string">"none"</span> <span class="attr">stroke</span>=<span class="string">"black"</span> <span class="attr">stroke-width</span>=<span class="string">"4"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">path</span> <span class="attr">stroke-dasharray</span>=<span class="string">"5,5"</span> <span class="attr">d</span>=<span class="string">"M5 20 l215 0"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">path</span> <span class="attr">stroke-dasharray</span>=<span class="string">"10,10"</span> <span class="attr">d</span>=<span class="string">"M5 40 l215 0"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">path</span> <span class="attr">stroke-dasharray</span>=<span class="string">"20,10,5,5,5,10"</span> <span class="attr">d</span>=<span class="string">"M5 60 l215 0"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">g</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="svg滤镜"><a href="#svg滤镜" class="headerlink" title="svg滤镜"></a>svg滤镜</h3><ul>
-<li>feBlend - 与图像相结合的滤镜</li>
-<li>feColorMatrix - 用于彩色滤光片转换</li>
-<li>feComponentTransfer</li>
-<li>feComposite</li>
-<li>feConvolveMatrix</li>
-<li>feDiffuseLighting</li>
-<li>feDisplacementMap</li>
-<li>feFlood</li>
-<li>feGaussianBlur</li>
-<li>feImage</li>
-<li>feMerge</li>
-<li>feMorphology</li>
-<li>feOffset - 过滤阴影</li>
-<li>feSpecularLighting</li>
-<li>feTile</li>
-<li>feTurbulence</li>
-<li>feDistantLight - 用于照明过滤</li>
-<li>fePointLight - 用于照明过滤</li>
-<li>feSpotLight - 用于照明过滤</li>
-</ul>
-<h3 id="svg模糊效果"><a href="#svg模糊效果" class="headerlink" title="svg模糊效果"></a>svg模糊效果</h3><p>Internet Explorer和Safari不支持SVG滤镜</p>
-<p>所有互联网的SVG滤镜定义在<code>&lt;defs&gt;</code>元素中。<code>&lt;defs&gt;</code>元素定义短并含有特殊元素（如滤镜）定义。<code>&lt;feGaussianBlur&gt;</code>创建模糊效果。</p>
-<p><code>&lt;filter&gt;</code>标签用来定义SVG滤镜</p>
-<h4 id="示例-3"><a href="#示例-3" class="headerlink" title="示例"></a>示例</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">svg</span> <span class="attr">xmlns</span>=<span class="string">"http://www.w3.org/2000/svg"</span> <span class="attr">version</span>=<span class="string">"1.1"</span>&gt;</span>  <span class="tag">&lt;<span class="name">defs</span>&gt;</span>    <span class="tag">&lt;<span class="name">filter</span> <span class="attr">id</span>=<span class="string">"f1"</span> <span class="attr">x</span>=<span class="string">"0"</span> <span class="attr">y</span>=<span class="string">"0"</span>&gt;</span>      <span class="tag">&lt;<span class="name">feGaussianBlur</span> <span class="attr">in</span>=<span class="string">"SourceGraphic"</span> <span class="attr">stdDeviation</span>=<span class="string">"15"</span> /&gt;</span>    <span class="tag">&lt;/<span class="name">filter</span>&gt;</span>  <span class="tag">&lt;/<span class="name">defs</span>&gt;</span>  <span class="tag">&lt;<span class="name">rect</span> <span class="attr">width</span>=<span class="string">"90"</span> <span class="attr">height</span>=<span class="string">"90"</span> <span class="attr">stroke</span>=<span class="string">"green"</span> <span class="attr">stroke-width</span>=<span class="string">"3"</span>  <span class="attr">fill</span>=<span class="string">"yellow"</span> <span class="attr">filter</span>=<span class="string">"url(#f1)"</span> /&gt;</span><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="svg阴影"><a href="#svg阴影" class="headerlink" title="svg阴影"></a>svg阴影</h3><p><code>&lt;feOffset&gt;</code>创建阴影</p>
-<h4 id="示例-4"><a href="#示例-4" class="headerlink" title="示例"></a>示例</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">svg</span> <span class="attr">xmlns</span>=<span class="string">"http://www.w3.org/2000/svg"</span> <span class="attr">version</span>=<span class="string">"1.1"</span>&gt;</span>  <span class="tag">&lt;<span class="name">defs</span>&gt;</span>    <span class="tag">&lt;<span class="name">filter</span> <span class="attr">id</span>=<span class="string">"f1"</span> <span class="attr">x</span>=<span class="string">"0"</span> <span class="attr">y</span>=<span class="string">"0"</span> <span class="attr">width</span>=<span class="string">"200%"</span> <span class="attr">height</span>=<span class="string">"200%"</span>&gt;</span>      <span class="tag">&lt;<span class="name">feOffset</span> <span class="attr">result</span>=<span class="string">"offOut"</span> <span class="attr">in</span>=<span class="string">"SourceGraphic"</span> <span class="attr">dx</span>=<span class="string">"20"</span> <span class="attr">dy</span>=<span class="string">"20"</span> /&gt;</span>      <span class="tag">&lt;<span class="name">feBlend</span> <span class="attr">in</span>=<span class="string">"SourceGraphic"</span> <span class="attr">in2</span>=<span class="string">"offOut"</span> <span class="attr">mode</span>=<span class="string">"normal"</span> /&gt;</span>    <span class="tag">&lt;/<span class="name">filter</span>&gt;</span>  <span class="tag">&lt;/<span class="name">defs</span>&gt;</span>  <span class="tag">&lt;<span class="name">rect</span> <span class="attr">width</span>=<span class="string">"90"</span> <span class="attr">height</span>=<span class="string">"90"</span> <span class="attr">stroke</span>=<span class="string">"green"</span> <span class="attr">stroke-width</span>=<span class="string">"3"</span>  <span class="attr">fill</span>=<span class="string">"yellow"</span> <span class="attr">filter</span>=<span class="string">"url(#f1)"</span> /&gt;</span><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="线性渐变"><a href="#线性渐变" class="headerlink" title="线性渐变"></a>线性渐变</h3><p><code>&lt;linearGradient&gt;</code>元素用于定义线性渐变</p>
-<p><code>&lt;linearGradient&gt;</code>标签必须嵌套在<code>&lt;defs&gt;</code>的内部</p>
-<h4 id="示例-5"><a href="#示例-5" class="headerlink" title="示例"></a>示例</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">svg</span> <span class="attr">xmlns</span>=<span class="string">"http://www.w3.org/2000/svg"</span> <span class="attr">version</span>=<span class="string">"1.1"</span>&gt;</span>  <span class="tag">&lt;<span class="name">defs</span>&gt;</span>    <span class="tag">&lt;<span class="name">linearGradient</span> <span class="attr">id</span>=<span class="string">"grad1"</span> <span class="attr">x1</span>=<span class="string">"0%"</span> <span class="attr">y1</span>=<span class="string">"0%"</span> <span class="attr">x2</span>=<span class="string">"100%"</span> <span class="attr">y2</span>=<span class="string">"0%"</span>&gt;</span>      <span class="tag">&lt;<span class="name">stop</span> <span class="attr">offset</span>=<span class="string">"0%"</span> <span class="attr">style</span>=<span class="string">"stop-color:rgb(255,255,0);stop-opacity:1"</span> /&gt;</span>      <span class="tag">&lt;<span class="name">stop</span> <span class="attr">offset</span>=<span class="string">"100%"</span> <span class="attr">style</span>=<span class="string">"stop-color:rgb(255,0,0);stop-opacity:1"</span> /&gt;</span>    <span class="tag">&lt;/<span class="name">linearGradient</span>&gt;</span>  <span class="tag">&lt;/<span class="name">defs</span>&gt;</span>  <span class="tag">&lt;<span class="name">ellipse</span> <span class="attr">cx</span>=<span class="string">"200"</span> <span class="attr">cy</span>=<span class="string">"70"</span> <span class="attr">rx</span>=<span class="string">"85"</span> <span class="attr">ry</span>=<span class="string">"55"</span> <span class="attr">fill</span>=<span class="string">"url(#grad1)"</span> /&gt;</span><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="放射性渐变"><a href="#放射性渐变" class="headerlink" title="放射性渐变"></a>放射性渐变</h3><p><code>&lt;radialGradient&gt;</code>元素用于定义放射性渐变。</p>
-<p><code>&lt;radialGradient&gt;</code>标签必须嵌套在<code>&lt;defs&gt;</code>的内部</p>
-<h4 id="示例-6"><a href="#示例-6" class="headerlink" title="示例"></a>示例</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">svg</span> <span class="attr">xmlns</span>=<span class="string">"http://www.w3.org/2000/svg"</span> <span class="attr">version</span>=<span class="string">"1.1"</span>&gt;</span>  <span class="tag">&lt;<span class="name">defs</span>&gt;</span>    <span class="tag">&lt;<span class="name">radialGradient</span> <span class="attr">id</span>=<span class="string">"grad1"</span> <span class="attr">cx</span>=<span class="string">"50%"</span> <span class="attr">cy</span>=<span class="string">"50%"</span> <span class="attr">r</span>=<span class="string">"50%"</span> <span class="attr">fx</span>=<span class="string">"50%"</span> <span class="attr">fy</span>=<span class="string">"50%"</span>&gt;</span>      <span class="tag">&lt;<span class="name">stop</span> <span class="attr">offset</span>=<span class="string">"0%"</span> <span class="attr">style</span>=<span class="string">"stop-color:rgb(255,255,255);      stop-opacity:0"</span> /&gt;</span>      <span class="tag">&lt;<span class="name">stop</span> <span class="attr">offset</span>=<span class="string">"100%"</span> <span class="attr">style</span>=<span class="string">"stop-color:rgb(0,0,255);stop-opacity:1"</span> /&gt;</span>    <span class="tag">&lt;/<span class="name">radialGradient</span>&gt;</span>  <span class="tag">&lt;/<span class="name">defs</span>&gt;</span>  <span class="tag">&lt;<span class="name">ellipse</span> <span class="attr">cx</span>=<span class="string">"200"</span> <span class="attr">cy</span>=<span class="string">"70"</span> <span class="attr">rx</span>=<span class="string">"85"</span> <span class="attr">ry</span>=<span class="string">"55"</span> <span class="attr">fill</span>=<span class="string">"url(#grad1)"</span> /&gt;</span><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/11/06/html%E4%B8%AD%E6%8F%92%E5%85%A5svg/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1514,11 +1494,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
+                <a href="javascript:void(0)" class="js-tag color1">react</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">react</a>
+                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1530,7 +1510,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1538,15 +1518,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">node</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">mobx</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1559,6 +1539,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">小程序</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">web3</a>
               </li>
              
               <li class="article-tag-list-item">

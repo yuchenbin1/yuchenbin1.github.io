@@ -202,6 +202,110 @@
             
 
   
+    <article id="post-21年1月26日" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/01/26/21%E5%B9%B41%E6%9C%8826%E6%97%A5/" target="_blank">21年1月26日</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/01/26/21%E5%B9%B41%E6%9C%8826%E6%97%A5/" class="archive-article-date">
+        <time datetime="2021-01-26T14:53:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-26</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="微信小程序父组件传值给子组件"><a href="#微信小程序父组件传值给子组件" class="headerlink" title="微信小程序父组件传值给子组件"></a>微信小程序父组件传值给子组件</h1><p>微信小程序中父组件传值给子组件与vue类似</p>
+<p>有子组件</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">child</span> <span class="attr">id</span>=<span class="string">"child"</span>&gt;</span><span class="tag">&lt;/<span class="name">child</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在微信小程序json的components中引入</p>
+<p>在父组件中</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">view</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">child</span> <span class="attr">id</span>=<span class="string">"child"</span> <span class="attr">shuxing</span>=<span class="string">"&#123;&#123;value&#125;&#125;"</span>&gt;</span><span class="tag">&lt;/<span class="name">child</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">data:&#123;</span><br><span class="line">	value:<span class="string">'hello'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在子组件中接受</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">properties:&#123;</span><br><span class="line">	shuxing:&#123;</span><br><span class="line">		type:<span class="built_in">String</span>,</span><br><span class="line">		value:<span class="string">''</span>,</span><br><span class="line">		observer:<span class="string">'handleSetData'</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">handleSetData()&#123;</span><br><span class="line">	<span class="keyword">this</span>.setData(&#123;<span class="attr">shuxing</span>:<span class="keyword">this</span>.properties.shuxing&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>关键在于observer，作用相当于vue中的watch，一开始子组件挂载完的时候还没有传值进来，observer监听改变</p>
+<h1 id="两个异步请求如何顺序执行"><a href="#两个异步请求如何顺序执行" class="headerlink" title="两个异步请求如何顺序执行"></a>两个异步请求如何顺序执行</h1><p>比如有ajax1和ajax2两个请求，这里ajax2用到ajax1中请求到的值，因为异步的关系，两者放在一起相当于同时请求。</p>
+<p>比较多的是用promise或者aynic和await解决</p>
+<p>这里我用回调函数解决</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">ajax1(callback)&#123;</span><br><span class="line">...</span><br><span class="line">success(res)&#123;</span><br><span class="line">...</span><br><span class="line">callback()</span><br><span class="line">&#125;</span><br><span class="line">...</span><br><span class="line">&#125;,</span><br><span class="line">ajax2()&#123;</span><br><span class="line">...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">onShow()&#123;</span><br><span class="line"><span class="keyword">this</span>.ajax1(<span class="keyword">this</span>.ajax2)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日志</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/01/26/21%E5%B9%B41%E6%9C%8826%E6%97%A5/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-21年1月21日" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1090,99 +1194,6 @@
 
 
   
-    <article id="post-20年11月4日" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/11/04/20%E5%B9%B411%E6%9C%884%E6%97%A5/" target="_blank">20年11月4日</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/11/04/20%E5%B9%B411%E6%9C%884%E6%97%A5/" class="archive-article-date">
-        <time datetime="2020-11-04T12:03:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-11-04</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>今天的工作主要是修改bug，还有余下几个问题，第一个就是加快页面的加载速度，这个可以使用懒加载，还有就是登陆状态失效，这个问题还没有解决。</p>
-<h4 id="养成良好的代码习惯"><a href="#养成良好的代码习惯" class="headerlink" title="养成良好的代码习惯"></a>养成良好的代码习惯</h4><p>1.命名语义化，命名函数使用驼峰式的，要语义化，不要出现shuaka这种拼音，要具体明白是干什么的。</p>
-<p>2.组件化开发，组件化开发可以使得代码简洁，组件可以复用，父子组件间的传值，可以使用json和watch传</p>
-<p>3.声明一个状态或者事件的时候，一定要考虑到这个东西的销毁，很多的bug都是在内存未清除造成的</p>
-<p>4.console.log类似的测试，使用后要记得删除</p>
-<p>5.代码需要reflew，需要第二个人检查</p>
-<p>6.难点需要换一种思维方式或者是尝试把这个黑盒拆开</p>
-<p>7.养成良好的代码习惯</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日志</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/11/04/20%E5%B9%B411%E6%9C%884%E6%97%A5/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/6/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/8/">Next &amp;raquo;</a>
@@ -1320,11 +1331,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
+                <a href="javascript:void(0)" class="js-tag color1">react</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">react</a>
+                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1336,7 +1347,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1344,15 +1355,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">node</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">mobx</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1365,6 +1376,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">小程序</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">web3</a>
               </li>
              
               <li class="article-tag-list-item">
