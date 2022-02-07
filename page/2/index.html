@@ -202,6 +202,94 @@
             
 
   
+    <article id="post-mobx的autorun与computed" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/11/06/mobx%E7%9A%84autorun%E4%B8%8Ecomputed/" target="_blank">mobx的autorun与computed</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/11/06/mobx%E7%9A%84autorun%E4%B8%8Ecomputed/" class="archive-article-date">
+        <time datetime="2021-11-06T03:59:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-06</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>computed是计算值：根据现在的状态或者其他计算值衍生出来的值</p>
+<p>autorun与computed类似，但是有区别，如果是响应式的产生一个新的值，那么就使用computed，如果不想产生一个新的值，需要的达到同样的效果</p>
+<p>computed如果观察的对象ui不在了，可以自动的垃圾回收，但是autorun需要手动的回收</p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">mobx</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/11/06/mobx%E7%9A%84autorun%E4%B8%8Ecomputed/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-shadow" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1217,108 +1305,6 @@
 
 
   
-    <article id="post-node连接mySQL" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/09/12/node%E8%BF%9E%E6%8E%A5mySQL/" target="_blank">node连接mySQL</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/09/12/node%E8%BF%9E%E6%8E%A5mySQL/" class="archive-article-date">
-        <time datetime="2021-09-12T15:38:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-12</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="使用node连接mySQL实现增删改查"><a href="#使用node连接mySQL实现增删改查" class="headerlink" title="使用node连接mySQL实现增删改查"></a>使用node连接mySQL实现增删改查</h1><h2 id="创建服务，连接数据库"><a href="#创建服务，连接数据库" class="headerlink" title="创建服务，连接数据库"></a>创建服务，连接数据库</h2><p>app.js</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express=<span class="built_in">require</span>(<span class="string">"express"</span>);</span><br><span class="line"><span class="keyword">const</span> app=express();<span class="comment">//实例化express</span></span><br><span class="line"><span class="keyword">const</span> mysql=<span class="built_in">require</span>(<span class="string">"mysql"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建服务</span></span><br><span class="line">app.listen(<span class="number">3000</span>,()=&gt;&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"服务器在3000端口开通..."</span>);</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">//创建连接</span></span><br><span class="line"><span class="keyword">const</span> db=mysql.createConnection(&#123;</span><br><span class="line">  host:<span class="string">"localhost"</span>,</span><br><span class="line">  user:<span class="string">"root"</span>,</span><br><span class="line">  password:<span class="string">"toot"</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">//连接</span></span><br><span class="line">db.connect(<span class="function">(<span class="params">err</span>)=&gt;</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(err)&#123;<span class="keyword">throw</span> err&#125;;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'连接成功'</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="query"><a href="#query" class="headerlink" title="query"></a>query</h2><p>使用<code>db.query(sql,function())</code>操作数据库，第一个参数是SQL语句，第二个参数是回调函数，回调函数中的有返回error也有返回的信息</p>
-<p>app.js</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">app.get(<span class="string">"createdb"</span>,(req,res)=&gt;&#123;</span><br><span class="line">	<span class="keyword">let</span> sql=<span class="string">"CREATE DATABASE nodesql"</span>;</span><br><span class="line">	db.query(sql,(err,resquest)=&gt;&#123;</span><br><span class="line">		<span class="keyword">if</span>(err)&#123;</span><br><span class="line">			<span class="built_in">console</span>.log(err);</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			<span class="built_in">console</span>.log(result);</span><br><span class="line">			res.send(<span class="string">"DATABASE CREATE SUCCESS..."</span>)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>创建数据库成功可以在连接数据库的时候加上该数据库了</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> db=createConnection(&#123;</span><br><span class="line">  host:<span class="string">"localhost"</span>,</span><br><span class="line">  user:<span class="string">"root"</span>,</span><br><span class="line">  password:<span class="string">"root"</span>,</span><br><span class="line">  datebase:<span class="string">"nodesql"</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>接下去的所有增删改查，通过不同的SQL语句，用query在调用就行了</p>
-<p>注意的是插入数据时,参数多一个</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">app.get(<span class="string">'insertdb'</span>,(req,res)=&gt;&#123;</span><br><span class="line">  <span class="keyword">let</span> post=&#123;<span class="attr">title</span>:<span class="string">"post one"</span>,<span class="attr">body</span>:<span class="string">"earth"</span>&#125;;</span><br><span class="line">  <span class="keyword">let</span> sql=<span class="string">"INSERT INTO posts SET ?"</span>;</span><br><span class="line">  db.query(sql,post,(err,result)=&gt;&#123;</span><br><span class="line">    <span class="keyword">if</span>(err)&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(err);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(result);</span><br><span class="line">      res.send(<span class="string">"post add ..."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>写个问号，防止sql注入的时候，会在执行的时候把post传入sql语句</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">node</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/09/12/node%E8%BF%9E%E6%8E%A5mySQL/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
@@ -1456,11 +1442,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">RN</a>
+                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
+                <a href="javascript:void(0)" class="js-tag color1">react</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">RN</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1468,7 +1458,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">react</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1480,15 +1470,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">mobx</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">

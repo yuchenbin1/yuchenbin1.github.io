@@ -202,6 +202,108 @@
             
 
   
+    <article id="post-node连接mySQL" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/09/12/node%E8%BF%9E%E6%8E%A5mySQL/" target="_blank">node连接mySQL</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/09/12/node%E8%BF%9E%E6%8E%A5mySQL/" class="archive-article-date">
+        <time datetime="2021-09-12T15:38:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-12</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="使用node连接mySQL实现增删改查"><a href="#使用node连接mySQL实现增删改查" class="headerlink" title="使用node连接mySQL实现增删改查"></a>使用node连接mySQL实现增删改查</h1><h2 id="创建服务，连接数据库"><a href="#创建服务，连接数据库" class="headerlink" title="创建服务，连接数据库"></a>创建服务，连接数据库</h2><p>app.js</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express=<span class="built_in">require</span>(<span class="string">"express"</span>);</span><br><span class="line"><span class="keyword">const</span> app=express();<span class="comment">//实例化express</span></span><br><span class="line"><span class="keyword">const</span> mysql=<span class="built_in">require</span>(<span class="string">"mysql"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建服务</span></span><br><span class="line">app.listen(<span class="number">3000</span>,()=&gt;&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"服务器在3000端口开通..."</span>);</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">//创建连接</span></span><br><span class="line"><span class="keyword">const</span> db=mysql.createConnection(&#123;</span><br><span class="line">  host:<span class="string">"localhost"</span>,</span><br><span class="line">  user:<span class="string">"root"</span>,</span><br><span class="line">  password:<span class="string">"toot"</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">//连接</span></span><br><span class="line">db.connect(<span class="function">(<span class="params">err</span>)=&gt;</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(err)&#123;<span class="keyword">throw</span> err&#125;;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'连接成功'</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="query"><a href="#query" class="headerlink" title="query"></a>query</h2><p>使用<code>db.query(sql,function())</code>操作数据库，第一个参数是SQL语句，第二个参数是回调函数，回调函数中的有返回error也有返回的信息</p>
+<p>app.js</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">app.get(<span class="string">"createdb"</span>,(req,res)=&gt;&#123;</span><br><span class="line">	<span class="keyword">let</span> sql=<span class="string">"CREATE DATABASE nodesql"</span>;</span><br><span class="line">	db.query(sql,(err,resquest)=&gt;&#123;</span><br><span class="line">		<span class="keyword">if</span>(err)&#123;</span><br><span class="line">			<span class="built_in">console</span>.log(err);</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			<span class="built_in">console</span>.log(result);</span><br><span class="line">			res.send(<span class="string">"DATABASE CREATE SUCCESS..."</span>)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>创建数据库成功可以在连接数据库的时候加上该数据库了</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> db=createConnection(&#123;</span><br><span class="line">  host:<span class="string">"localhost"</span>,</span><br><span class="line">  user:<span class="string">"root"</span>,</span><br><span class="line">  password:<span class="string">"root"</span>,</span><br><span class="line">  datebase:<span class="string">"nodesql"</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>接下去的所有增删改查，通过不同的SQL语句，用query在调用就行了</p>
+<p>注意的是插入数据时,参数多一个</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">app.get(<span class="string">'insertdb'</span>,(req,res)=&gt;&#123;</span><br><span class="line">  <span class="keyword">let</span> post=&#123;<span class="attr">title</span>:<span class="string">"post one"</span>,<span class="attr">body</span>:<span class="string">"earth"</span>&#125;;</span><br><span class="line">  <span class="keyword">let</span> sql=<span class="string">"INSERT INTO posts SET ?"</span>;</span><br><span class="line">  db.query(sql,post,(err,result)=&gt;&#123;</span><br><span class="line">    <span class="keyword">if</span>(err)&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(err);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(result);</span><br><span class="line">      res.send(<span class="string">"post add ..."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>写个问号，防止sql注入的时候，会在执行的时候把post传入sql语句</p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">node</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/09/12/node%E8%BF%9E%E6%8E%A5mySQL/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-方法的链式调用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1236,109 +1338,6 @@
 
 
   
-    <article id="post-移动端适配与常见问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/06/29/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E9%80%82%E9%85%8D%E4%B8%8E%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" target="_blank">移动端适配与常见问题</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/06/29/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E9%80%82%E9%85%8D%E4%B8%8E%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" class="archive-article-date">
-        <time datetime="2021-06-29T01:40:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-29</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="常见浏览器"><a href="#常见浏览器" class="headerlink" title="常见浏览器"></a>常见浏览器</h1><h3 id="pc端"><a href="#pc端" class="headerlink" title="pc端"></a>pc端</h3><p>360浏览器、谷歌浏览器、火狐浏览器、qq浏览器、百度浏览器、搜狗浏览器、IE浏览器等</p>
-<h3 id="移动端"><a href="#移动端" class="headerlink" title="移动端"></a>移动端</h3><p>UC浏览器、qq浏览器、欧朋浏览器、百度手机浏览器、360安全浏览器、谷歌浏览器、搜狗手机浏览器、猎豹浏览器等</p>
-<p>移动端浏览器主要是Webkit内核的</p>
-<h1 id="常见分辨率"><a href="#常见分辨率" class="headerlink" title="常见分辨率"></a>常见分辨率</h1><h3 id="Android"><a href="#Android" class="headerlink" title="Android"></a>Android</h3><p>480x800、480X854、540x960、720x1280、1080x1920等</p>
-<h3 id="IOS"><a href="#IOS" class="headerlink" title="IOS"></a>IOS</h3><p>640x960、640x1136、750x1334、1242x2208等</p>
-<h1 id="主流方案"><a href="#主流方案" class="headerlink" title="主流方案"></a>主流方案</h1><h3 id="主流"><a href="#主流" class="headerlink" title="主流"></a>主流</h3><p>单独制作移动端的页面</p>
-<p>通常的网站域名前面加上m（mobile）可以打开移动端，通过判断设备，如果是移动端的设备打开的，就跳转到移动端页面</p>
-<p>流式布局（百分比布局）</p>
-<p>flex弹性布局（推荐）</p>
-<p>less+rem+媒体查询布局</p>
-<p>混合布局</p>
-<h3 id="次流"><a href="#次流" class="headerlink" title="次流"></a>次流</h3><p>响应式页面兼容移动端</p>
-<p>媒体查询</p>
-<p>bootstrap等第三方库</p>
-<h1 id="CSS初始化"><a href="#CSS初始化" class="headerlink" title="CSS初始化"></a>CSS初始化</h1><p>normallize.css</p>
-<p>css初始化，让不同的浏览器在渲染网页元素的时候形式更加的统一</p>
-<h1 id="特殊样式"><a href="#特殊样式" class="headerlink" title="特殊样式"></a>特殊样式</h1><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*css3盒模型*/</span></span><br><span class="line"><span class="selector-tag">box-sizing</span><span class="selector-pseudo">:border-box</span>;</span><br><span class="line"><span class="selector-tag">-webkit-box-sizing</span><span class="selector-pseudo">:border-box</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*点击高亮 清除高亮*/</span></span><br><span class="line"><span class="selector-tag">-webkit-tap-highlight-color</span><span class="selector-pseudo">:transparent</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*ios浏览器默认的外观 按钮输入框自定义样式*/</span></span><br><span class="line"><span class="selector-tag">-webkit-appearance</span><span class="selector-pseudo">:none</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*禁用长按页面时的弹出弹窗*/</span></span><br><span class="line"><span class="selector-tag">img</span>,<span class="selector-tag">a</span>&#123;</span><br><span class="line">	<span class="attribute">-webkit-touch-callout</span>:node;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">基础</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/06/29/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E9%80%82%E9%85%8D%E4%B8%8E%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/4/">Next &amp;raquo;</a>
@@ -1476,11 +1475,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">RN</a>
+                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
+                <a href="javascript:void(0)" class="js-tag color1">react</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">RN</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1488,7 +1491,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">react</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1500,15 +1503,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">mobx</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">

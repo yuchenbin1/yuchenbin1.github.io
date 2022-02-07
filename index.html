@@ -202,6 +202,110 @@
             
 
   
+    <article id="post-模块引入" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2022/02/07/%E6%A8%A1%E5%9D%97%E5%BC%95%E5%85%A5/" target="_blank">模块引入</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2022/02/07/%E6%A8%A1%E5%9D%97%E5%BC%95%E5%85%A5/" class="archive-article-date">
+        <time datetime="2022-02-07T10:09:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-07</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="commonjs与es模块"><a href="#commonjs与es模块" class="headerlink" title="commonjs与es模块"></a>commonjs与es模块</h1><table>
+<thead>
+<tr>
+<th></th>
+<th>commonjs</th>
+<th>es module</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>值</td>
+<td>1.基本类型：值复制，不共享<br>2.引用类型：浅拷贝，共享<br>3.工作空间可以引入修改的值</td>
+<td>1.只读导入，动态读取<br>2.不可在外部修改引用，但是可以调用引用中包含的方法</td>
+</tr>
+<tr>
+<td>执行顺序</td>
+<td>1.检查是否有该模块的缓存<br>2.如果有，可以使用缓存<br>3.如果没有，则执行该模块代码，并缓存</td>
+<td>1.检查模块是否引用过？<br>2.是，暂时识别该模块为{}<br>3.否，进入该模块并执行代码（不做缓存）<br>import会被提升到最先执行</td>
+</tr>
+</tbody></table>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2022/02/07/%E6%A8%A1%E5%9D%97%E5%BC%95%E5%85%A5/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-pnpm" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1273,94 +1377,6 @@
 
 
   
-    <article id="post-mobx的autorun与computed" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/11/06/mobx%E7%9A%84autorun%E4%B8%8Ecomputed/" target="_blank">mobx的autorun与computed</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/11/06/mobx%E7%9A%84autorun%E4%B8%8Ecomputed/" class="archive-article-date">
-        <time datetime="2021-11-06T03:59:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-06</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>computed是计算值：根据现在的状态或者其他计算值衍生出来的值</p>
-<p>autorun与computed类似，但是有区别，如果是响应式的产生一个新的值，那么就使用computed，如果不想产生一个新的值，需要的达到同样的效果</p>
-<p>computed如果观察的对象ui不在了，可以自动的垃圾回收，但是autorun需要手动的回收</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">mobx</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/11/06/mobx%E7%9A%84autorun%E4%B8%8Ecomputed/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1498,11 +1514,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">RN</a>
+                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
+                <a href="javascript:void(0)" class="js-tag color1">react</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">RN</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1510,7 +1530,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">react</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1522,15 +1542,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">mobx</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">

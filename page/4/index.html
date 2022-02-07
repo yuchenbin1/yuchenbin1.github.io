@@ -202,6 +202,109 @@
             
 
   
+    <article id="post-移动端适配与常见问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/06/29/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E9%80%82%E9%85%8D%E4%B8%8E%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" target="_blank">移动端适配与常见问题</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/06/29/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E9%80%82%E9%85%8D%E4%B8%8E%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/" class="archive-article-date">
+        <time datetime="2021-06-29T01:40:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-29</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="常见浏览器"><a href="#常见浏览器" class="headerlink" title="常见浏览器"></a>常见浏览器</h1><h3 id="pc端"><a href="#pc端" class="headerlink" title="pc端"></a>pc端</h3><p>360浏览器、谷歌浏览器、火狐浏览器、qq浏览器、百度浏览器、搜狗浏览器、IE浏览器等</p>
+<h3 id="移动端"><a href="#移动端" class="headerlink" title="移动端"></a>移动端</h3><p>UC浏览器、qq浏览器、欧朋浏览器、百度手机浏览器、360安全浏览器、谷歌浏览器、搜狗手机浏览器、猎豹浏览器等</p>
+<p>移动端浏览器主要是Webkit内核的</p>
+<h1 id="常见分辨率"><a href="#常见分辨率" class="headerlink" title="常见分辨率"></a>常见分辨率</h1><h3 id="Android"><a href="#Android" class="headerlink" title="Android"></a>Android</h3><p>480x800、480X854、540x960、720x1280、1080x1920等</p>
+<h3 id="IOS"><a href="#IOS" class="headerlink" title="IOS"></a>IOS</h3><p>640x960、640x1136、750x1334、1242x2208等</p>
+<h1 id="主流方案"><a href="#主流方案" class="headerlink" title="主流方案"></a>主流方案</h1><h3 id="主流"><a href="#主流" class="headerlink" title="主流"></a>主流</h3><p>单独制作移动端的页面</p>
+<p>通常的网站域名前面加上m（mobile）可以打开移动端，通过判断设备，如果是移动端的设备打开的，就跳转到移动端页面</p>
+<p>流式布局（百分比布局）</p>
+<p>flex弹性布局（推荐）</p>
+<p>less+rem+媒体查询布局</p>
+<p>混合布局</p>
+<h3 id="次流"><a href="#次流" class="headerlink" title="次流"></a>次流</h3><p>响应式页面兼容移动端</p>
+<p>媒体查询</p>
+<p>bootstrap等第三方库</p>
+<h1 id="CSS初始化"><a href="#CSS初始化" class="headerlink" title="CSS初始化"></a>CSS初始化</h1><p>normallize.css</p>
+<p>css初始化，让不同的浏览器在渲染网页元素的时候形式更加的统一</p>
+<h1 id="特殊样式"><a href="#特殊样式" class="headerlink" title="特殊样式"></a>特殊样式</h1><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*css3盒模型*/</span></span><br><span class="line"><span class="selector-tag">box-sizing</span><span class="selector-pseudo">:border-box</span>;</span><br><span class="line"><span class="selector-tag">-webkit-box-sizing</span><span class="selector-pseudo">:border-box</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*点击高亮 清除高亮*/</span></span><br><span class="line"><span class="selector-tag">-webkit-tap-highlight-color</span><span class="selector-pseudo">:transparent</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*ios浏览器默认的外观 按钮输入框自定义样式*/</span></span><br><span class="line"><span class="selector-tag">-webkit-appearance</span><span class="selector-pseudo">:none</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*禁用长按页面时的弹出弹窗*/</span></span><br><span class="line"><span class="selector-tag">img</span>,<span class="selector-tag">a</span>&#123;</span><br><span class="line">	<span class="attribute">-webkit-touch-callout</span>:node;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">基础</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/06/29/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E9%80%82%E9%85%8D%E4%B8%8E%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-teleport、多根节点与触发组件" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1545,104 +1648,6 @@
 
 
   
-    <article id="post-canvas基础与构造函数" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/06/07/canvas%E5%9F%BA%E7%A1%80%E4%B8%8E%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/" target="_blank">canvas基础与构造函数</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/06/07/canvas%E5%9F%BA%E7%A1%80%E4%B8%8E%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/" class="archive-article-date">
-        <time datetime="2021-06-07T14:43:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-07</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="Flash"><a href="#Flash" class="headerlink" title="Flash"></a>Flash</h1><p>长久以来的web端的动画都是Flash，比如动画广告、游戏等等，基本都是Flash，运行它必须安装Adobe Flash Player，漏洞多，重量大，会卡顿和不流畅等</p>
-<h1 id="canvas"><a href="#canvas" class="headerlink" title="canvas"></a>canvas</h1><p>HTML5提出canvas，颠覆Flash的地位，无论是广告与游戏都是可以使用canvas实现，他是一个轻量级的画布，使用canvas进行js的编程不需要额外的插件</p>
-<h1 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">canvas</span> <span class="attr">width</span>=<span class="string">"600"</span> <span class="attr">height</span>=<span class="string">"300"</span>&gt;</span></span><br><span class="line">	当前的浏览器版本不支持，请升级浏览器</span><br><span class="line"><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>在canvas中的文字只有在浏览器不支持canvas时才会显示，canvas的标签属性只有width与height，尽量使用标签属性设置宽高，使用css设置会拉伸变形失真</p>
-<h1 id="简单的绘制"><a href="#简单的绘制" class="headerlink" title="简单的绘制"></a>简单的绘制</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">canvas</span> <span class="attr">width</span>=<span class="string">"600"</span> <span class="attr">height</span>=<span class="string">"300"</span> <span class="attr">id</span>=<span class="string">"myCanvas"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">	<span class="comment">//得到canvas的画布</span></span></span><br><span class="line"><span class="javascript">	<span class="keyword">var</span> canvas=<span class="built_in">document</span>.getElementById(<span class="string">'myCanvas'</span>)</span></span><br><span class="line"><span class="actionscript">	<span class="comment">//得到画布的上下文，只有2d与3d</span></span></span><br><span class="line"><span class="actionscript">	<span class="keyword">var</span> ctx=canvas.getContent(<span class="string">'2d'</span>)</span></span><br><span class="line"><span class="actionscript">    <span class="comment">//设置画笔为绿色</span></span></span><br><span class="line"><span class="actionscript">    ctx.fillStyle=<span class="string">"green"</span></span></span><br><span class="line"><span class="actionscript">    <span class="comment">//绘制矩形，在距离画板左上角的x轴100，y轴150的地方绘制宽为200，高为50的矩形</span></span></span><br><span class="line">    ctx.fillRect(100,150,200,50)</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="canvas的像素化"><a href="#canvas的像素化" class="headerlink" title="canvas的像素化"></a>canvas的像素化</h1><p>canvas绘制成功就会像素化了，没有能力再去得到这个图形，也没有能力去修改画布上的内容</p>
-<p>canvas动画：清屏–&gt;更新–&gt;渲染</p>
-<h1 id="canvas的简单动画"><a href="#canvas的简单动画" class="headerlink" title="canvas的简单动画"></a>canvas的简单动画</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">canvas</span> <span class="attr">width</span>=<span class="string">"600"</span> <span class="attr">height</span>=<span class="string">"300"</span> <span class="attr">id</span>=<span class="string">"myCanvas"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">	<span class="keyword">var</span> canvas=<span class="built_in">document</span>.getElementById(<span class="string">'myCanvas'</span>)</span></span><br><span class="line"><span class="actionscript">	<span class="keyword">var</span> ctx=canvas.getContent(<span class="string">'2d'</span>)</span></span><br><span class="line"><span class="actionscript">    ctx.fillStyle=<span class="string">"green"</span></span></span><br><span class="line"><span class="actionscript">    <span class="keyword">var</span> left=<span class="number">100</span></span></span><br><span class="line">    ctx.fillRect(left,150,200,50)</span><br><span class="line"><span class="actionscript">    setInterval(<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">        <span class="comment">//清除画布</span></span></span><br><span class="line">        ctx.clearRect(0,0,600,300)</span><br><span class="line">        left++</span><br><span class="line">        ctx.fillRect(left,150,200,50)</span><br><span class="line">    &#125;,10)</span><br><span class="line">    </span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="canvas构造函数"><a href="#canvas构造函数" class="headerlink" title="canvas构造函数"></a>canvas构造函数</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">canvas</span> <span class="attr">width</span>=<span class="string">"600"</span> <span class="attr">height</span>=<span class="string">"300"</span> <span class="attr">id</span>=<span class="string">"myCanvas"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> canvas=<span class="built_in">document</span>.getElementById(<span class="string">'myCanvas'</span>)</span></span><br><span class="line"><span class="actionscript">    <span class="keyword">var</span> ctx=canvas.getContent(<span class="string">'2d'</span>)</span></span><br><span class="line"><span class="actionscript">    <span class="function"><span class="keyword">function</span> <span class="title">Rect</span><span class="params">(x,y,w,h,color)</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">this</span>.x=x</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">this</span>.y=y</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">this</span>.w=w</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">this</span>.h=h</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">this</span>.color=color</span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="actionscript">    <span class="comment">//更新</span></span></span><br><span class="line"><span class="actionscript">    Rect.prototype.update=<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">this</span>.x++</span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="actionscript">    <span class="comment">//渲染</span></span></span><br><span class="line"><span class="actionscript">    Rect.prototype.render=<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">        ctx.fillStyle=<span class="keyword">this</span>.color</span></span><br><span class="line"><span class="actionscript">        ctx.fillRect(<span class="keyword">this</span>.x,<span class="keyword">this</span>.y,<span class="keyword">this</span>.w,<span class="keyword">this</span>.h)</span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="actionscript">    <span class="comment">//实例化</span></span></span><br><span class="line"><span class="actionscript">    <span class="keyword">var</span> r1=<span class="keyword">new</span> Rect(<span class="number">100</span>,<span class="number">100</span>,<span class="number">50</span>,<span class="number">50</span>,<span class="string">'blue'</span>)</span></span><br><span class="line"><span class="actionscript">    <span class="keyword">var</span> r2=<span class="keyword">new</span> Rect(<span class="number">200</span>,<span class="number">200</span>,<span class="number">50</span>,<span class="number">50</span>,<span class="string">'green'</span>)</span></span><br><span class="line"><span class="actionscript">    <span class="comment">//动画过程</span></span></span><br><span class="line"><span class="actionscript">    setInterval(<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">       <span class="comment">//清屏</span></span></span><br><span class="line">        ctx.clearRect(0,0,canvas.width,canvas.height)</span><br><span class="line"><span class="actionscript">        <span class="comment">//更新方法</span></span></span><br><span class="line">       	r1.update()</span><br><span class="line"><span class="actionscript">        <span class="comment">//渲染方法</span></span></span><br><span class="line">        r1.render()</span><br><span class="line">        </span><br><span class="line"><span class="actionscript">         <span class="comment">//更新方法</span></span></span><br><span class="line">       	r2.update()</span><br><span class="line"><span class="actionscript">        <span class="comment">//渲染方法</span></span></span><br><span class="line">        r2.render()</span><br><span class="line">        </span><br><span class="line">    &#125;,10)</span><br><span class="line">	</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">基础</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/06/07/canvas%E5%9F%BA%E7%A1%80%E4%B8%8E%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/3/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/5/">Next &amp;raquo;</a>
@@ -1780,11 +1785,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">RN</a>
+                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
+                <a href="javascript:void(0)" class="js-tag color1">react</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">RN</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1792,7 +1801,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">react</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1804,15 +1813,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">mobx</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">

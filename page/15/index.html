@@ -202,6 +202,139 @@
             
 
   
+    <article id="post-函数与对象关系" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/03/06/%E5%87%BD%E6%95%B0%E4%B8%8E%E5%AF%B9%E8%B1%A1%E5%85%B3%E7%B3%BB/" target="_blank">函数与对象关系</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/03/06/%E5%87%BD%E6%95%B0%E4%B8%8E%E5%AF%B9%E8%B1%A1%E5%85%B3%E7%B3%BB/" class="archive-article-date">
+        <time datetime="2020-03-06T07:57:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-06</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h2 id="一、JavaScript-创建默认对象"><a href="#一、JavaScript-创建默认对象" class="headerlink" title="一、JavaScript-创建默认对象"></a>一、JavaScript-创建默认对象</h2><p>1.JavaScript中提供了一个默认的类Object, 我们可以通过这个类来创建对象;</p>
+<p>2.由于我们是使用系统默认的类创建的对象, 所以系统不知道我们想要什么属性和行为, 所以我们必须手动的添加我们想要的属性和行为;</p>
+<p>3.如何给一个对象添加属性 ;<br>对象名称.属性名称 = 值;</p>
+<p>4.如何给一个对象添加行为;<br>对象名称.行为名称 = 函数;</p>
+<p>例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">let obj &#x3D; &#123;</span><br><span class="line">    name: &quot;abc&quot;,</span><br><span class="line">    age: 23,</span><br><span class="line">    say: function () &#123;</span><br><span class="line">        console.log(&quot;hello world&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">console.log(obj.name);</span><br><span class="line">console.log(obj.age);</span><br><span class="line">obj.say();</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="二、JavaScript-函数和方法区别"><a href="#二、JavaScript-函数和方法区别" class="headerlink" title="二、JavaScript-函数和方法区别"></a>二、JavaScript-函数和方法区别</h2><p>1.什么是函数?<br>函数就是没有和其它的类显示的绑定在一起的, 我们就称之为函数；</p>
+<p>2.什么是方法?<br>方法就是显示的和其它的类绑定在一起的, 我们就称之为方法；</p>
+<p>3.函数和方法的区别 :<br>3.1函数可以直接调用, 但是方法不能直接调用, 只能通过对象来调用；<br>3.2函数内部的this输出的是window, 方法内部的this输出的是当前调用的那个对象；</p>
+<p>4.无论是函数还是方法, 内部都有一个叫做this的东东；<br>this是什么? 谁调用了当前的函数或者方法, 那么当前的this就是谁；</p>
+<h2 id="三、什么是工厂函数"><a href="#三、什么是工厂函数" class="headerlink" title="三、什么是工厂函数?"></a>三、什么是工厂函数?</h2><p>工厂函数就是专门用于创建对象的函数, 我们就称之为工厂函数；<br>例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">function createPerson(myName,myAge) &#123;           </span><br><span class="line">    let obj &#x3D; &#123;</span><br><span class="line">                name: myName,</span><br><span class="line">                age: myAge,</span><br><span class="line">                say: function () &#123;</span><br><span class="line">                    &quot;hello abc&quot;;</span><br><span class="line">                &#125;           </span><br><span class="line">&#125;;          </span><br><span class="line">return obj;       </span><br><span class="line">&#125; </span><br><span class="line">       </span><br><span class="line">let obj1 &#x3D; createPerson(&quot;cy&quot;,22);       </span><br><span class="line">let obj2 &#x3D; createPerson(&quot;yc&quot;,33);       </span><br><span class="line">console.log(obj1);;       </span><br><span class="line">console.log(obj2);</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="四、什么是构造函数"><a href="#四、什么是构造函数" class="headerlink" title="四、什么是构造函数"></a>四、什么是构造函数</h2><p>1.构造函数和工厂函数一样, 都是专门用于创建对象的；<br>构造函数本质上是工厂函数的简写；</p>
+<p>2.构造函数和工厂函数的区别；<br>2.1构造函数的函数名称首字母必须大写 ；<br>2.2构造函数只能够通过new来调用；<br>例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function Person(myName,myAge) &#123;</span><br><span class="line">                this.name&#x3D; myName;</span><br><span class="line">                this.age&#x3D;myAge;</span><br><span class="line">                this.say&#x3D; function () &#123;</span><br><span class="line">                    &quot;hello abc&quot;;</span><br><span class="line">                &#125;       </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当我们new Person(“abc”, 44);系统做了什么事情 :<br>1.1会在构造函数中自动创建一个对象<br>1.2会自动将刚才创建的对象赋值给this<br>1.3会在构造函数的最后自动添加return this;</p>
+<p>补充：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function demo() &#123;</span><br><span class="line">            console.log(&quot;demo&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        &#x2F;&#x2F; 通过三个等号来判断两个函数名称, 表示判断两个函数是否都存储在同一块内存中</span><br><span class="line">        console.log(demo &#x3D;&#x3D;&#x3D; demo); &#x2F;&#x2F; true</span><br></pre></td></tr></table></figure>
+<p>构造函数的优化：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">function Person(myName, myAge) &#123;</span><br><span class="line">            </span><br><span class="line">            this.name &#x3D; myName;</span><br><span class="line">            this.age &#x3D; myAge;</span><br><span class="line">           </span><br><span class="line">        &#125;</span><br><span class="line">        &#x2F;&#x2F;prototype属性是专门用于保存对象中公共的函数和变量的</span><br><span class="line">        Person.prototype &#x3D; &#123;</span><br><span class="line">            say: function () &#123;</span><br><span class="line">                console.log(&quot;hello world&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        let obj1 &#x3D; new Person(&quot;lnj&quot;, 34);</span><br><span class="line">        obj1.say();</span><br><span class="line">        let obj2 &#x3D; new Person(&quot;zs&quot;, 44);</span><br><span class="line">        obj2.say();</span><br><span class="line">        console.log(obj1.say &#x3D;&#x3D;&#x3D; obj2.say); &#x2F;&#x2F; true</span><br></pre></td></tr></table></figure>
+
+<h2 id="五、JavaScript-prototype特点"><a href="#五、JavaScript-prototype特点" class="headerlink" title="五、JavaScript-prototype特点"></a>五、JavaScript-prototype特点</h2><h4 id="1-prototype特点"><a href="#1-prototype特点" class="headerlink" title="1.prototype特点"></a>1.prototype特点</h4><pre><code>1.1存储在prototype中的方法可以被对应构造函数创建出来的所有对象共享;
+1.2prototype中除了可以存储方法以外, 还可以存储属性;
+1.3prototype如果出现了和构造函数中同名的属性或者方法, 对象在访问的时候, 访问到的是构造函中的数据;
+
+2.prototype应用场景
+prototype中一般情况下用于存储所有对象都相同的一些属性以及方法;
+如果是对象特有的属性或者方法, 我们会存储到构造函数中;</code></pre><h4 id="2-JavaScript-对象三角恋关系"><a href="#2-JavaScript-对象三角恋关系" class="headerlink" title="2.JavaScript-对象三角恋关系"></a>2.JavaScript-对象三角恋关系</h4><p> 1.每个”构造函数”中都有一个默认的属性, 叫做prototype；<br>    prototype属性保存着一个对象, 这个对象我们称之为”原型对象”；<br>  2.每个”原型对象”中都有一个默认的属性, 叫做constructor；<br>     constructor指向当前原型对象对应的那个”构造函数”；<br>  3.通过构造函数创建出来的对象我们称之为”实例对象”；<br>    每个”实例对象”中都有一个默认的属性, 叫做<strong>proto</strong>；<br>    <strong>proto</strong>指向创建它的那个构造函数的”原型对象”；</p>
+<h2 id="六、JavaScript-Function函数"><a href="#六、JavaScript-Function函数" class="headerlink" title="六、JavaScript-Function函数"></a>六、JavaScript-Function函数</h2><p>1.JavaScript中函数是引用类型(对象类型), 既然是对象, 所以也是通过构造函数创建出来的,”所有函数”都是通过Function构造函数创建出来的对象；</p>
+<p>2.JavaScript中只要是”函数”就有prototype属性；<br>“Function函数”的prototype属性指向”Function原型对象”；</p>
+<p>3.JavaScript中只要”原型对象”就有constructor属性；<br>“Function原型对象”的constructor指向它对应的构造函数；</p>
+<p>4.Person构造函数是Function构造函数的实例对象, 所以也有<strong>proto</strong>属性；<br>Person构造函数的<strong>proto</strong>属性指向”Function原型对象”；</p>
+<p>JavaScript-Object函数<br>“Object构造函数”的<strong>proto</strong>属性指向创建它那个构造函数的”原型对象”；</p>
+<p>5.只要是构造函数都有一个默认的属性, 叫做prototype；<br>prototype属性保存着一个对象, 这个对象我们称之为”原型对象”；</p>
+<p>6.只要是原型对象都有一个默认的属性, 叫做constructor；<br>constructor指向当前原型对象对应的那个”构造函数”；</p>
+<h2 id="七、JavaScript-函数对象关系"><a href="#七、JavaScript-函数对象关系" class="headerlink" title="七、JavaScript-函数对象关系"></a>七、JavaScript-函数对象关系</h2><p>1.所有的构造函数都有一个prototype属性, 所有prototype属性都指向自己的原型对象；<br>2,所有的原型对象都有一个constructor属性, 所有constructor属性都指向自己的构造函数；<br>3.所有函数都是Function构造函数的实例对象；<br>4.所有函数都是对象, 包括Function构造函数；<br>5.所有对象都有<strong>proto</strong>属性；<br>6.普通对象的<strong>proto</strong>属性指向创建它的那个构造函数对应的”原型对象”；<br>7.所有对象的<strong>proto</strong>属性最终都会指向”Object原型对象”；<br>8.”Object原型对象”的<strong>proto</strong>属性指向NULL；</p>
+<h2 id="八、JavaScript-原型链"><a href="#八、JavaScript-原型链" class="headerlink" title="八、JavaScript-原型链"></a>八、JavaScript-原型链</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Person.prototype &#x3D; &#123;</span><br><span class="line">            &#x2F;&#x2F; 注意点: 为了不破坏原有的关系, 在给prototype赋值的时候, 需要在自定义的对象中手动的添加constructor属性, 手动的指定需要指向谁</span><br><span class="line">            constructor: Person,</span><br><span class="line">            &#x2F;&#x2F; currentType: &quot;人&quot;,</span><br><span class="line">            &#x2F;&#x2F; say: function () &#123;</span><br><span class="line">            &#x2F;&#x2F;     console.log(&quot;hello world&quot;);</span><br><span class="line">            &#x2F;&#x2F; &#125;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>对象中<strong>proto</strong>组成的链条我们称之为原型链;<br>对象在查找属性和方法的时候, 会先在当前对象查找, 如果当前对象中找不到想要的, 会依次去上一级原型对象中查找, 如果找到Object原型对象都没有找到, 就会报错;</p>
+<h2 id="九、JavaScript-属性注意点"><a href="#九、JavaScript-属性注意点" class="headerlink" title="九、JavaScript-属性注意点"></a>九、JavaScript-属性注意点</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">function Person(myName, myAge) &#123;</span><br><span class="line">    this.name &#x3D; myName;</span><br><span class="line">    this.age &#x3D; myAge;</span><br><span class="line">&#125;</span><br><span class="line">Person.prototype &#x3D; &#123;</span><br><span class="line">    constructor: Person,</span><br><span class="line">    currentType: &quot;人&quot;,</span><br><span class="line">    say: function () &#123;</span><br><span class="line">        console.log(&quot;hello world&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">let obj &#x3D; new Person(&quot;abc&quot;, 54);</span><br><span class="line">&#x2F;&#x2F; console.log(obj.currentType); &#x2F;&#x2F; &quot;人&quot;</span><br><span class="line">&#x2F;&#x2F; console.log(obj.__proto__.currentType); &#x2F;&#x2F; &quot;人&quot;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 注意点: 在给一个对象不存在的属性设置值的时候, 不会去原型对象中查找, 如果当前对象没有就会给当前对象新增一个不存在的属性</span><br><span class="line">obj.currentType &#x3D; &quot;新设置的值&quot;;</span><br><span class="line">console.log(obj.currentType); &#x2F;&#x2F; 新设置的值</span><br><span class="line">console.log(obj.__proto__.currentType); &#x2F;&#x2F; &quot;人&quot;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>版权声明：本文为CSDN博主「小蚂蚁有力量」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/xxzjwyql/article/details/89327575" target="_blank" rel="noopener">https://blog.csdn.net/xxzjwyql/article/details/89327575</a></p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/03/06/%E5%87%BD%E6%95%B0%E4%B8%8E%E5%AF%B9%E8%B1%A1%E5%85%B3%E7%B3%BB/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-常用的数字对象函数" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1034,11 +1167,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">RN</a>
+                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
+                <a href="javascript:void(0)" class="js-tag color1">react</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">RN</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1046,7 +1183,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">react</a>
+                <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1058,15 +1195,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">css</a>
+                <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">mobx</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">node</a>
               </li>
              
               <li class="article-tag-list-item">
