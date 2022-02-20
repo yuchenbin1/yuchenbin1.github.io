@@ -202,6 +202,186 @@
             
 
   
+    <article id="post-pc端设备识别" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2022/02/20/pc%E7%AB%AF%E8%AE%BE%E5%A4%87%E8%AF%86%E5%88%AB/" target="_blank">pc端设备识别</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2022/02/20/pc%E7%AB%AF%E8%AE%BE%E5%A4%87%E8%AF%86%E5%88%AB/" class="archive-article-date">
+        <time datetime="2022-02-20T10:48:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-20</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="获取设备信息（pc）"><a href="#获取设备信息（pc）" class="headerlink" title="获取设备信息（pc）"></a>获取设备信息（pc）</h1><h1 id="物理地址"><a href="#物理地址" class="headerlink" title="物理地址"></a>物理地址</h1><p>首先想到的是硬件信息，比如主板序列号、cpu的id、网卡的mac地址之类的信息作为识别设备的唯一id</p>
+<p>但是通过浏览器，<strong>前端无法获取该信息</strong>，而且不建议使用mac地址作为唯一id，例如连接有线宽带的台式机是没有网卡的，也就没有mac地址的。</p>
+<h1 id="ip地址"><a href="#ip地址" class="headerlink" title="ip地址"></a>ip地址</h1><p>IP分为内网IP与外网IP。外网IP是全世界唯一的IP地址,仅分配给一个网络设备。而内网IP是由路由器分配给每一部内部使用的IP地址,而内网的所有用户都是通过同一个外网IP地址进行上网的,而内网的IP地址每个人的都不一样。</p>
+<p>一台电脑可以在不同地点不同时间段可以有多个外网ip，这里的外网ip可以作为踪迹记录。</p>
+<p>前端获取外网ip的方法：</p>
+<p>1.通过调用第三方的ip查询接口，比如</p>
+<p><a href="https://www.ip.cn/api/index?ip=&amp;type=0" target="_blank" rel="noopener">https://www.ip.cn/api/index?ip=&amp;type=0</a></p>
+<p>淘宝获取ip</p>
+<p><a href="http://www.taobao.com/help/getip.php" target="_blank" rel="noopener">http://www.taobao.com/help/getip.php</a></p>
+<p>淘宝获取ip详细信息</p>
+<p><a href="http://ip.taobao.com/service/getIpInfo.php" target="_blank" rel="noopener">http://ip.taobao.com/service/getIpInfo.php</a></p>
+<p>但是，缺点是涉及到用户ip的泄露，以及依托于第三方的不稳定性</p>
+<p>2.RTCPeerConnection</p>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/RTCPeerConnection/RTCPeerConnection" target="_blank" rel="noopener">RTCPeerConnection</a>目前是一个实验性的api，某些浏览器还是不支持的，比如IE、edge等，这里简单介绍一下</p>
+<p>原理是构建一个RTCPeerConnection实例，代表了本地端机器与远端机器的一条连接，这里可以拿到本机的ip以及它的详细的信息</p>
+<p>3.后端拿</p>
+<p>后端说可以拿到</p>
+<h1 id="navigator"><a href="#navigator" class="headerlink" title="navigator"></a>navigator</h1><p>通常前端的设备环境等相关信息都是在这个对象里的，实际也是可以拿到浏览器信息以及操作系统信息等</p>
+<p>示例：</p>
+<p>navigator.userAgent属性</p>
+<p>macbook+谷歌浏览器</p>
+<p>5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.80 Safari/537.36</p>
+<p>这里有Intel Mac OS X 10_15_7的操作系统信息和Chrome/98.0.4758.80的浏览器版本信息</p>
+<p>macbook+火狐浏览器</p>
+<p>Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:96.0) Gecko/20100101 Firefox/96.0</p>
+<p>华为p30+自带默认浏览器</p>
+<p>5.0( LinuX ; Android 10; HarmonyOS ; VOG -AL10; HMSCore 6.3.0.327; GMSCore 21.48.15) ApplewebKit /537.36( KHTML . like Gecko )Chrome92.0.4515.105 HuaweiBrowser /12.0.3.310 Mobile Safari /537.36</p>
+<h1 id="canvas指纹"><a href="#canvas指纹" class="headerlink" title="canvas指纹"></a>canvas指纹</h1><p>同样有存在canvas在某些低版本的浏览器是不支持的</p>
+<p>Mozilla 程序从 Gecko 1.8 (<a href="https://developer.mozilla.org/zh-CN/docs/Firefox_1.5_for_developers" target="_blank" rel="noopener">Firefox 1.5</a>) 开始支持</p>
+<p>、IE9+、Opera 9+、Chrome都是支持的</p>
+<p>原理是每一种浏览器会有不同的图片处理引擎、不同的导出选项与压缩等级，所以生成的图片是不同的</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bin2hex</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> i,</span><br><span class="line">    l,</span><br><span class="line">    o = <span class="string">""</span>,</span><br><span class="line">    n;</span><br><span class="line"></span><br><span class="line">  s += <span class="string">""</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (i = <span class="number">0</span>, l = s.length; i &lt; l; i++) &#123;</span><br><span class="line">    n = s.charCodeAt(i).toString(<span class="number">16</span>);</span><br><span class="line">    o += n.length &lt; <span class="number">2</span> ? <span class="string">"0"</span> + n : n;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> o;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getUUID</span>(<span class="params">domain</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> canvas = <span class="built_in">document</span>.createElement(<span class="string">"canvas"</span>);</span><br><span class="line">  <span class="keyword">var</span> ctx = canvas.getContext(<span class="string">"2d"</span>);</span><br><span class="line">  <span class="keyword">var</span> txt = domain;</span><br><span class="line">  ctx.textBaseline = <span class="string">"top"</span>;</span><br><span class="line">  ctx.font = <span class="string">"14px 'Arial'"</span>;</span><br><span class="line">  ctx.textBaseline = <span class="string">"tencent"</span>;</span><br><span class="line">  ctx.fillStyle = <span class="string">"#f60"</span>;</span><br><span class="line">  ctx.fillRect(<span class="number">125</span>, <span class="number">1</span>, <span class="number">62</span>, <span class="number">20</span>);</span><br><span class="line">  ctx.fillStyle = <span class="string">"#069"</span>;</span><br><span class="line">  ctx.fillText(txt, <span class="number">2</span>, <span class="number">15</span>);</span><br><span class="line">  ctx.fillStyle = <span class="string">"rgba(102, 204, 0, 0.7)"</span>;</span><br><span class="line">  ctx.fillText(txt, <span class="number">4</span>, <span class="number">17</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> b64 = canvas.toDataURL().replace(<span class="string">"data:image/png;base64,"</span>, <span class="string">""</span>);</span><br><span class="line">  <span class="comment">// window.atob 用于解码使用 base-64 编码的字符串</span></span><br><span class="line">  <span class="built_in">console</span>.log(b64)</span><br><span class="line">  <span class="keyword">var</span> bin = atob(b64);</span><br><span class="line">  <span class="built_in">console</span>.log(bin)</span><br><span class="line">  <span class="keyword">var</span> crc = bin2hex(bin.slice(<span class="number">-16</span>, <span class="number">-12</span>));</span><br><span class="line">  <span class="keyword">return</span> crc;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(getUUID(<span class="string">"dasouche"</span>));</span><br></pre></td></tr></table></figure>
+
+<p>最后得到结果示例</p>
+<p>macOS BigSur 11.5.2+谷歌浏览器98.0.4758.80 识别码:f3d7f543</p>
+<p>macOS BigSur 11.5.2+火狐浏览器96.0.3 识别码:ef1b926c</p>
+<p>macOS Monterey 12.0.1+谷歌浏览器98.0.4758.80 识别码:0cde937e</p>
+<p>华为p30+默认自带浏览器 识别码:ce35d92d</p>
+<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>pc端设备识别是无法准确识别的，主要原因是pc端操作系统安全限制，无法获取设备的硬件信息</p>
+<p>浏览器信息是可识别的，配合操作系统环境可作为识别的id，目前市面上基本都是这样识别pc端设备的</p>
+<p>所以会存在这样的问题，浏览器升级版本就会识别成另一个设备了，相同操作系统版本相同浏览器版本识别为一个设备</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/2799077/1644400685004-61be6424-d3f6-4a06-9e23-ce0d2b821548.png" alt="img"></p>
+<p>某不知名网页授权设备，在更新操作系统版本后被是被为另一个设备了。</p>
+<h1 id="最终方案"><a href="#最终方案" class="headerlink" title="最终方案"></a>最终方案</h1><p>风车的用户在使用时，同一个店铺电脑与浏览器基本都是一样的，通过操作系统与浏览器版本生成设备id会是一样的，这样的方案并不可取。</p>
+<p>最终采用随机生成设备id，并存储在cookie与localStorage（本机存储），每次登录都去检查cookie和localStorage是否有设备id，有则使用，没有重新生成设备id的方案。</p>
+<p>风车的用户基本不会去刻意清楚缓存与存储，该方案目前是最优的。</p>
+<h1 id="user-agent对照表示例"><a href="#user-agent对照表示例" class="headerlink" title="user-agent对照表示例"></a>user-agent对照表示例</h1><p>查询地址<a href="http://useragent.kuzhazha.com/" target="_blank" rel="noopener">http://useragent.kuzhazha.com/</a></p>
+<h1 id="获取设备信息（pc）-1"><a href="#获取设备信息（pc）-1" class="headerlink" title="获取设备信息（pc）"></a>获取设备信息（pc）</h1><p>2022年1月需求<a href="https://souche.yuque.com/dafengche-txqsr/plvzta/pguhuf" target="_blank" rel="noopener">账户数据安全迭代</a>，需要记录登录的设备信息，对pc端浏览器获取设备信息进行调研</p>
+<h1 id="物理地址-1"><a href="#物理地址-1" class="headerlink" title="物理地址"></a>物理地址</h1><p>首先想到的是硬件信息，比如主板序列号、cpu的id、网卡的mac地址之类的信息作为识别设备的唯一id</p>
+<p>但是通过浏览器，<strong>前端无法获取该信息</strong>，而且不建议使用mac地址作为唯一id，例如连接有线宽带的台式机是没有网卡的，也就没有mac地址的。</p>
+<h1 id="ip地址-1"><a href="#ip地址-1" class="headerlink" title="ip地址"></a>ip地址</h1><p>IP分为内网IP与外网IP。外网IP是全世界唯一的IP地址,仅分配给一个网络设备。而内网IP是由路由器分配给每一部内部使用的IP地址,而内网的所有用户都是通过同一个外网IP地址进行上网的,而内网的IP地址每个人的都不一样。</p>
+<p>一台电脑可以在不同地点不同时间段可以有多个外网ip，这里的外网ip可以作为踪迹记录。</p>
+<p>前端获取外网ip的方法：</p>
+<p>1.通过调用第三方的ip查询接口，比如</p>
+<p><a href="https://www.ip.cn/api/index?ip=&amp;type=0" target="_blank" rel="noopener">https://www.ip.cn/api/index?ip=&amp;type=0</a></p>
+<p>淘宝获取ip</p>
+<p><a href="http://www.taobao.com/help/getip.php" target="_blank" rel="noopener">http://www.taobao.com/help/getip.php</a></p>
+<p>淘宝获取ip详细信息</p>
+<p><a href="http://ip.taobao.com/service/getIpInfo.php" target="_blank" rel="noopener">http://ip.taobao.com/service/getIpInfo.php</a></p>
+<p>但是，缺点是涉及到用户ip的泄露，以及依托于第三方的不稳定性</p>
+<p>2.RTCPeerConnection</p>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/RTCPeerConnection/RTCPeerConnection" target="_blank" rel="noopener">RTCPeerConnection</a>目前是一个实验性的api，某些浏览器还是不支持的，比如IE、edge等，这里简单介绍一下</p>
+<p>原理是构建一个RTCPeerConnection实例，代表了本地端机器与远端机器的一条连接，这里可以拿到本机的ip以及它的详细的信息</p>
+<p>3.后端拿</p>
+<p>后端说可以拿到</p>
+<h1 id="navigator-1"><a href="#navigator-1" class="headerlink" title="navigator"></a>navigator</h1><p>通常前端的设备环境等相关信息都是在这个对象里的，实际也是可以拿到浏览器信息以及操作系统信息等</p>
+<p>示例：</p>
+<p>navigator.userAgent属性</p>
+<p>macbook+谷歌浏览器</p>
+<p>5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.80 Safari/537.36</p>
+<p>这里有Intel Mac OS X 10_15_7的操作系统信息和Chrome/98.0.4758.80的浏览器版本信息</p>
+<p>macbook+火狐浏览器</p>
+<p>Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:96.0) Gecko/20100101 Firefox/96.0</p>
+<p>华为p30+自带默认浏览器</p>
+<p>5.0( LinuX ; Android 10; HarmonyOS ; VOG -AL10; HMSCore 6.3.0.327; GMSCore 21.48.15) ApplewebKit /537.36( KHTML . like Gecko )Chrome92.0.4515.105 HuaweiBrowser /12.0.3.310 Mobile Safari /537.36</p>
+<h1 id="canvas指纹-1"><a href="#canvas指纹-1" class="headerlink" title="canvas指纹"></a>canvas指纹</h1><p>同样有存在canvas在某些低版本的浏览器是不支持的</p>
+<p>Mozilla 程序从 Gecko 1.8 (<a href="https://developer.mozilla.org/zh-CN/docs/Firefox_1.5_for_developers" target="_blank" rel="noopener">Firefox 1.5</a>) 开始支持</p>
+<p>、IE9+、Opera 9+、Chrome都是支持的</p>
+<p>原理是每一种浏览器会有不同的图片处理引擎、不同的导出选项与压缩等级，所以生成的图片是不同的</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bin2hex</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> i,</span><br><span class="line">    l,</span><br><span class="line">    o = <span class="string">""</span>,</span><br><span class="line">    n;</span><br><span class="line"></span><br><span class="line">  s += <span class="string">""</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (i = <span class="number">0</span>, l = s.length; i &lt; l; i++) &#123;</span><br><span class="line">    n = s.charCodeAt(i).toString(<span class="number">16</span>);</span><br><span class="line">    o += n.length &lt; <span class="number">2</span> ? <span class="string">"0"</span> + n : n;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> o;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getUUID</span>(<span class="params">domain</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> canvas = <span class="built_in">document</span>.createElement(<span class="string">"canvas"</span>);</span><br><span class="line">  <span class="keyword">var</span> ctx = canvas.getContext(<span class="string">"2d"</span>);</span><br><span class="line">  <span class="keyword">var</span> txt = domain;</span><br><span class="line">  ctx.textBaseline = <span class="string">"top"</span>;</span><br><span class="line">  ctx.font = <span class="string">"14px 'Arial'"</span>;</span><br><span class="line">  ctx.textBaseline = <span class="string">"tencent"</span>;</span><br><span class="line">  ctx.fillStyle = <span class="string">"#f60"</span>;</span><br><span class="line">  ctx.fillRect(<span class="number">125</span>, <span class="number">1</span>, <span class="number">62</span>, <span class="number">20</span>);</span><br><span class="line">  ctx.fillStyle = <span class="string">"#069"</span>;</span><br><span class="line">  ctx.fillText(txt, <span class="number">2</span>, <span class="number">15</span>);</span><br><span class="line">  ctx.fillStyle = <span class="string">"rgba(102, 204, 0, 0.7)"</span>;</span><br><span class="line">  ctx.fillText(txt, <span class="number">4</span>, <span class="number">17</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> b64 = canvas.toDataURL().replace(<span class="string">"data:image/png;base64,"</span>, <span class="string">""</span>);</span><br><span class="line">  <span class="comment">// window.atob 用于解码使用 base-64 编码的字符串</span></span><br><span class="line">  <span class="built_in">console</span>.log(b64)</span><br><span class="line">  <span class="keyword">var</span> bin = atob(b64);</span><br><span class="line">  <span class="built_in">console</span>.log(bin)</span><br><span class="line">  <span class="keyword">var</span> crc = bin2hex(bin.slice(<span class="number">-16</span>, <span class="number">-12</span>));</span><br><span class="line">  <span class="keyword">return</span> crc;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(getUUID(<span class="string">"dasouche"</span>));</span><br></pre></td></tr></table></figure>
+
+<p>最后得到结果示例</p>
+<p>macOS BigSur 11.5.2+谷歌浏览器98.0.4758.80 识别码:f3d7f543</p>
+<p>macOS BigSur 11.5.2+火狐浏览器96.0.3 识别码:ef1b926c</p>
+<p>macOS Monterey 12.0.1+谷歌浏览器98.0.4758.80 识别码:0cde937e</p>
+<p>华为p30+默认自带浏览器 识别码:ce35d92d</p>
+<h1 id="结论-1"><a href="#结论-1" class="headerlink" title="结论"></a>结论</h1><p>pc端设备识别是无法准确识别的，主要原因是pc端操作系统安全限制，无法获取设备的硬件信息</p>
+<p>浏览器信息是可识别的，配合操作系统环境可作为识别的id，目前市面上基本都是这样识别pc端设备的</p>
+<p>所以会存在这样的问题，浏览器升级版本就会识别成另一个设备了，相同操作系统版本相同浏览器版本识别为一个设备</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/2799077/1644400685004-61be6424-d3f6-4a06-9e23-ce0d2b821548.png" alt="img"></p>
+<p>某不知名网页授权设备，在更新操作系统版本后被是被为另一个设备了。</p>
+<h1 id="最终方案-1"><a href="#最终方案-1" class="headerlink" title="最终方案"></a>最终方案</h1><p>风车的用户在使用时，同一个店铺电脑与浏览器基本都是一样的，通过操作系统与浏览器版本生成设备id会是一样的，这样的方案并不可取。</p>
+<p>最终采用随机生成设备id，并存储在cookie与localStorage（本机存储），每次登录都去检查cookie和localStorage是否有设备id，有则使用，没有重新生成设备id的方案。</p>
+<p>风车的用户基本不会去刻意清楚缓存与存储，该方案目前是最优的。</p>
+<h1 id="user-agent对照表示例-1"><a href="#user-agent对照表示例-1" class="headerlink" title="user-agent对照表示例"></a>user-agent对照表示例</h1><p>查询地址<a href="http://useragent.kuzhazha.com/" target="_blank" rel="noopener">http://useragent.kuzhazha.com/</a></p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2022/02/20/pc%E7%AB%AF%E8%AE%BE%E5%A4%87%E8%AF%86%E5%88%AB/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-web3" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1245,118 +1425,6 @@
 
 
   
-    <article id="post-new实例函数" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/11/15/new%E5%AE%9E%E4%BE%8B%E5%87%BD%E6%95%B0/" target="_blank">new实例对象</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/11/15/new%E5%AE%9E%E4%BE%8B%E5%87%BD%E6%95%B0/" class="archive-article-date">
-        <time datetime="2021-11-15T11:45:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-15</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="基本实例"><a href="#基本实例" class="headerlink" title="基本实例"></a>基本实例</h1><p>New 直接实例函数</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name=<span class="string">"zhangsan"</span>;</span><br><span class="line">  <span class="keyword">this</span>.age=<span class="number">18</span>;</span><br><span class="line">  <span class="keyword">this</span>.say=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'hello'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> p=<span class="keyword">new</span> Person();</span><br><span class="line"><span class="built_in">console</span>.log(p);</span><br><span class="line"><span class="comment">//Person&#123;</span></span><br><span class="line">	<span class="comment">//name="zhangsan";</span></span><br><span class="line">	<span class="comment">//age=18;</span></span><br><span class="line">	<span class="comment">//say=function()&#123;</span></span><br><span class="line">  	<span class="comment">//console.log('hello');</span></span><br><span class="line">	<span class="comment">//&#125;</span></span><br><span class="line"><span class="comment">//&#125;;</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> p);</span><br><span class="line"><span class="comment">//object</span></span><br><span class="line"><span class="keyword">const</span> pp=Person()</span><br><span class="line"><span class="built_in">console</span>.log(pp);</span><br><span class="line"><span class="comment">//undefined</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> pp);</span><br><span class="line"><span class="comment">//undefined</span></span><br></pre></td></tr></table></figure>
-
-<p>函数没有return直接运行函数是没有返回的</p>
-<h1 id="return一个基本类型"><a href="#return一个基本类型" class="headerlink" title="return一个基本类型"></a>return一个基本类型</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name=<span class="string">"zhangsan"</span>;</span><br><span class="line">  <span class="keyword">this</span>.age=<span class="number">18</span>;</span><br><span class="line">  <span class="keyword">this</span>.say=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'hello'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">'gggggg'</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> p=<span class="keyword">new</span> Person();</span><br><span class="line"><span class="built_in">console</span>.log(p);</span><br><span class="line"><span class="comment">//Person&#123;</span></span><br><span class="line">	<span class="comment">//name="zhangsan";</span></span><br><span class="line">	<span class="comment">//age=18;</span></span><br><span class="line">	<span class="comment">//say=function()&#123;</span></span><br><span class="line">  	<span class="comment">//console.log('hello');</span></span><br><span class="line">	<span class="comment">//&#125;</span></span><br><span class="line"><span class="comment">//&#125;;</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> p);</span><br><span class="line"><span class="comment">//object</span></span><br><span class="line"><span class="keyword">const</span> pp=Person()</span><br><span class="line"><span class="built_in">console</span>.log(pp);</span><br><span class="line"><span class="comment">//gggggg</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> pp);</span><br><span class="line"><span class="comment">//string</span></span><br></pre></td></tr></table></figure>
-
-<p>有基本类型的返回，new实例还是返回的是内部的数据，直接运行返回就是return中的数据了</p>
-<h1 id="return-一个对象"><a href="#return-一个对象" class="headerlink" title="return 一个对象"></a>return 一个对象</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name=<span class="string">"zhangsan"</span>;</span><br><span class="line">  <span class="keyword">this</span>.age=<span class="number">18</span>;</span><br><span class="line">  <span class="keyword">this</span>.say=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'hello'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    job: <span class="string">'teacher'</span>,</span><br><span class="line">    hobby: <span class="string">'basketball'</span></span><br><span class="line">  &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> p=<span class="keyword">new</span> Person();</span><br><span class="line"><span class="built_in">console</span>.log(p);</span><br><span class="line"><span class="comment">//&#123;</span></span><br><span class="line">  <span class="comment">//job: 'teacher',</span></span><br><span class="line">  <span class="comment">//hobby: 'basketball'</span></span><br><span class="line"><span class="comment">//&#125;;</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> p);</span><br><span class="line"><span class="comment">//object</span></span><br><span class="line"><span class="keyword">const</span> pp=Person()</span><br><span class="line"><span class="built_in">console</span>.log(pp);</span><br><span class="line"><span class="comment">//&#123;</span></span><br><span class="line">  <span class="comment">//job: 'teacher',</span></span><br><span class="line">  <span class="comment">//hobby: 'basketball'</span></span><br><span class="line"><span class="comment">//&#125;;</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> pp);</span><br><span class="line"><span class="comment">//object</span></span><br></pre></td></tr></table></figure>
-
-<p>return返回一个对象的时候就new实例不会返回内部的数据了，而是返回return的对象了，与直接运行函数一样</p>
-<h1 id="加上prototype"><a href="#加上prototype" class="headerlink" title="加上prototype"></a>加上prototype</h1><p>return一个对象，有prototype时的情况</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name=<span class="string">"zhangsan"</span>;</span><br><span class="line">  <span class="keyword">this</span>.age=<span class="number">18</span>;</span><br><span class="line">  <span class="keyword">this</span>.say=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'hello'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    job: <span class="string">'teacher'</span>,</span><br><span class="line">    hobby: <span class="string">'basketball'</span></span><br><span class="line">  &#125;;</span><br><span class="line">&#125;;</span><br><span class="line">Person.prototype=&#123;</span><br><span class="line">  address: <span class="string">'hangzhou'</span>,</span><br><span class="line">  say:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'world'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> p=<span class="keyword">new</span> Person();</span><br><span class="line"><span class="built_in">console</span>.log(p);</span><br><span class="line"><span class="comment">//&#123;</span></span><br><span class="line">  <span class="comment">//job: 'teacher',</span></span><br><span class="line">  <span class="comment">//hobby: 'basketball'</span></span><br><span class="line"><span class="comment">//&#125;;</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> p);</span><br><span class="line"><span class="comment">//object</span></span><br><span class="line"><span class="keyword">const</span> pp=Person()</span><br><span class="line"><span class="built_in">console</span>.log(pp);</span><br><span class="line"><span class="comment">//&#123;</span></span><br><span class="line">  <span class="comment">//job: 'teacher',</span></span><br><span class="line">  <span class="comment">//hobby: 'basketball'</span></span><br><span class="line"><span class="comment">//&#125;;</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> pp);</span><br><span class="line"><span class="comment">//object</span></span><br></pre></td></tr></table></figure>
-
-<p>如果是return对象是没有变的</p>
-<p>如果return不是一个对象而是一个基本类型呢？</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name=<span class="string">"zhangsan"</span>;</span><br><span class="line">  <span class="keyword">this</span>.age=<span class="number">18</span>;</span><br><span class="line">  <span class="keyword">this</span>.say=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'hello'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">'gggggg'</span></span><br><span class="line">&#125;;</span><br><span class="line">Person.prototype=&#123;</span><br><span class="line">  address: <span class="string">'hangzhou'</span>,</span><br><span class="line">  say:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'world'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> p=<span class="keyword">new</span> Person();</span><br><span class="line"><span class="built_in">console</span>.log(p);</span><br><span class="line"><span class="comment">//Person&#123;</span></span><br><span class="line">  <span class="comment">//name="zhangsan";</span></span><br><span class="line">  <span class="comment">//age=18;</span></span><br><span class="line">  <span class="comment">//say=function()&#123;</span></span><br><span class="line">    <span class="comment">//console.log('hello');</span></span><br><span class="line">  <span class="comment">//&#125;</span></span><br><span class="line"><span class="comment">//prototype=&#123;</span></span><br><span class="line">  <span class="comment">//address: 'hangzhou',</span></span><br><span class="line">  <span class="comment">//say:function()&#123;</span></span><br><span class="line">    <span class="comment">//console.log('world');</span></span><br><span class="line">  <span class="comment">//&#125;</span></span><br><span class="line"><span class="comment">//&#125;</span></span><br><span class="line"><span class="comment">//&#125;;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> p);</span><br><span class="line"><span class="comment">//object</span></span><br><span class="line"><span class="keyword">const</span> pp=Person()</span><br><span class="line"><span class="built_in">console</span>.log(pp);</span><br><span class="line"><span class="comment">//gggggg</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> pp);</span><br><span class="line"><span class="comment">//string</span></span><br></pre></td></tr></table></figure>
-
-<p>发现内部的数据都是可以返回的，包括prototype中的属性</p>
-<h1 id="return其他类型"><a href="#return其他类型" class="headerlink" title="return其他类型"></a>return其他类型</h1><h2 id="return一个函数function"><a href="#return一个函数function" class="headerlink" title="return一个函数function"></a>return一个函数function</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Fun</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">'start function'</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name=<span class="string">"zhangsan"</span>;</span><br><span class="line">  <span class="keyword">this</span>.age=<span class="number">18</span>;</span><br><span class="line">  <span class="keyword">this</span>.say=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'hello'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> Fun;</span><br><span class="line">&#125;;</span><br><span class="line">Person.prototype=&#123;</span><br><span class="line">  address: <span class="string">'hangzhou'</span>,</span><br><span class="line">  say:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'world'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> p=<span class="keyword">new</span> Person();</span><br><span class="line"><span class="built_in">console</span>.log(p);</span><br><span class="line"><span class="comment">//Fun()&#123;</span></span><br><span class="line">	<span class="comment">//console.log('start function')</span></span><br><span class="line"><span class="comment">//&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> p);</span><br><span class="line"><span class="comment">//function</span></span><br><span class="line"><span class="keyword">const</span> pp=Person()</span><br><span class="line"><span class="built_in">console</span>.log(pp);</span><br><span class="line"><span class="comment">//Fun()&#123;</span></span><br><span class="line">	<span class="comment">//console.log('start function')</span></span><br><span class="line"><span class="comment">//&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> pp);</span><br><span class="line"><span class="comment">//function</span></span><br></pre></td></tr></table></figure>
-
-<p>可以发现与return对象一样</p>
-<h2 id="return一个Date对象"><a href="#return一个Date对象" class="headerlink" title="return一个Date对象"></a>return一个Date对象</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name=<span class="string">"zhangsan"</span>;</span><br><span class="line">  <span class="keyword">this</span>.age=<span class="number">18</span>;</span><br><span class="line">  <span class="keyword">this</span>.say=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'hello'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="string">'123'</span>);</span><br><span class="line">&#125;;</span><br><span class="line">Person.prototype=&#123;</span><br><span class="line">  address: <span class="string">'hangzhou'</span>,</span><br><span class="line">  say:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'world'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> p=<span class="keyword">new</span> Person();</span><br><span class="line"><span class="built_in">console</span>.log(p);</span><br><span class="line"><span class="comment">//Fri Jan 01 0123 00:00:00 GMT+0805 (中国标准时间)</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> p);</span><br><span class="line"><span class="comment">//object</span></span><br><span class="line"><span class="keyword">const</span> pp=Person()</span><br><span class="line"><span class="built_in">console</span>.log(pp);</span><br><span class="line"><span class="comment">//Fri Jan 01 0123 00:00:00 GMT+0805 (中国标准时间)</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> pp);</span><br><span class="line"><span class="comment">//object</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="return-this"><a href="#return-this" class="headerlink" title="return this"></a>return this</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name=<span class="string">"zhangsan"</span>;</span><br><span class="line">  <span class="keyword">this</span>.age=<span class="number">18</span>;</span><br><span class="line">  <span class="keyword">this</span>.say=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'hello'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">&#125;;</span><br><span class="line">Person.prototype=&#123;</span><br><span class="line">  address: <span class="string">'hangzhou'</span>,</span><br><span class="line">  say:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'world'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> p=<span class="keyword">new</span> Person();</span><br><span class="line"><span class="built_in">console</span>.log(p);</span><br><span class="line"><span class="comment">//Person&#123;</span></span><br><span class="line">  <span class="comment">//name="zhangsan";</span></span><br><span class="line">  <span class="comment">//age=18;</span></span><br><span class="line">  <span class="comment">//say=function()&#123;</span></span><br><span class="line">    <span class="comment">//console.log('hello');</span></span><br><span class="line">  <span class="comment">//&#125;</span></span><br><span class="line"><span class="comment">//prototype=&#123;</span></span><br><span class="line">  <span class="comment">//address: 'hangzhou',</span></span><br><span class="line">  <span class="comment">//say:function()&#123;</span></span><br><span class="line">    <span class="comment">//console.log('world');</span></span><br><span class="line">  <span class="comment">//&#125;</span></span><br><span class="line"><span class="comment">//&#125;</span></span><br><span class="line"><span class="comment">//&#125;;</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> p);</span><br><span class="line"><span class="comment">//object</span></span><br><span class="line"><span class="keyword">const</span> pp=Person()</span><br><span class="line"><span class="built_in">console</span>.log(pp);</span><br><span class="line"><span class="comment">//Window对象</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> pp);</span><br><span class="line"><span class="comment">//object</span></span><br></pre></td></tr></table></figure>
-
-<p>如果是返回的this，实例化之后就是本身，但是直接运行，返回的this指向window</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>经过多方的测试发现return的是引用数据类型就会返回return中的值，而如果是基本的数据类型（string、number、undefined、null、boolean、Symbol、bigNum）则会返回内部的数据类型</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/11/15/new%E5%AE%9E%E4%BE%8B%E5%87%BD%E6%95%B0/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1506,6 +1574,10 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
@@ -1514,15 +1586,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">css</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">mobx</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1530,15 +1594,19 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">mobx</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">react native</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
+                <a href="javascript:void(0)" class="js-tag color4">小程序</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">小程序</a>
+                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -202,6 +202,118 @@
             
 
   
+    <article id="post-new实例函数" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/11/15/new%E5%AE%9E%E4%BE%8B%E5%87%BD%E6%95%B0/" target="_blank">new实例对象</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/11/15/new%E5%AE%9E%E4%BE%8B%E5%87%BD%E6%95%B0/" class="archive-article-date">
+        <time datetime="2021-11-15T11:45:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-15</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="基本实例"><a href="#基本实例" class="headerlink" title="基本实例"></a>基本实例</h1><p>New 直接实例函数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name=<span class="string">"zhangsan"</span>;</span><br><span class="line">  <span class="keyword">this</span>.age=<span class="number">18</span>;</span><br><span class="line">  <span class="keyword">this</span>.say=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'hello'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> p=<span class="keyword">new</span> Person();</span><br><span class="line"><span class="built_in">console</span>.log(p);</span><br><span class="line"><span class="comment">//Person&#123;</span></span><br><span class="line">	<span class="comment">//name="zhangsan";</span></span><br><span class="line">	<span class="comment">//age=18;</span></span><br><span class="line">	<span class="comment">//say=function()&#123;</span></span><br><span class="line">  	<span class="comment">//console.log('hello');</span></span><br><span class="line">	<span class="comment">//&#125;</span></span><br><span class="line"><span class="comment">//&#125;;</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> p);</span><br><span class="line"><span class="comment">//object</span></span><br><span class="line"><span class="keyword">const</span> pp=Person()</span><br><span class="line"><span class="built_in">console</span>.log(pp);</span><br><span class="line"><span class="comment">//undefined</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> pp);</span><br><span class="line"><span class="comment">//undefined</span></span><br></pre></td></tr></table></figure>
+
+<p>函数没有return直接运行函数是没有返回的</p>
+<h1 id="return一个基本类型"><a href="#return一个基本类型" class="headerlink" title="return一个基本类型"></a>return一个基本类型</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name=<span class="string">"zhangsan"</span>;</span><br><span class="line">  <span class="keyword">this</span>.age=<span class="number">18</span>;</span><br><span class="line">  <span class="keyword">this</span>.say=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'hello'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">'gggggg'</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> p=<span class="keyword">new</span> Person();</span><br><span class="line"><span class="built_in">console</span>.log(p);</span><br><span class="line"><span class="comment">//Person&#123;</span></span><br><span class="line">	<span class="comment">//name="zhangsan";</span></span><br><span class="line">	<span class="comment">//age=18;</span></span><br><span class="line">	<span class="comment">//say=function()&#123;</span></span><br><span class="line">  	<span class="comment">//console.log('hello');</span></span><br><span class="line">	<span class="comment">//&#125;</span></span><br><span class="line"><span class="comment">//&#125;;</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> p);</span><br><span class="line"><span class="comment">//object</span></span><br><span class="line"><span class="keyword">const</span> pp=Person()</span><br><span class="line"><span class="built_in">console</span>.log(pp);</span><br><span class="line"><span class="comment">//gggggg</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> pp);</span><br><span class="line"><span class="comment">//string</span></span><br></pre></td></tr></table></figure>
+
+<p>有基本类型的返回，new实例还是返回的是内部的数据，直接运行返回就是return中的数据了</p>
+<h1 id="return-一个对象"><a href="#return-一个对象" class="headerlink" title="return 一个对象"></a>return 一个对象</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name=<span class="string">"zhangsan"</span>;</span><br><span class="line">  <span class="keyword">this</span>.age=<span class="number">18</span>;</span><br><span class="line">  <span class="keyword">this</span>.say=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'hello'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    job: <span class="string">'teacher'</span>,</span><br><span class="line">    hobby: <span class="string">'basketball'</span></span><br><span class="line">  &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> p=<span class="keyword">new</span> Person();</span><br><span class="line"><span class="built_in">console</span>.log(p);</span><br><span class="line"><span class="comment">//&#123;</span></span><br><span class="line">  <span class="comment">//job: 'teacher',</span></span><br><span class="line">  <span class="comment">//hobby: 'basketball'</span></span><br><span class="line"><span class="comment">//&#125;;</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> p);</span><br><span class="line"><span class="comment">//object</span></span><br><span class="line"><span class="keyword">const</span> pp=Person()</span><br><span class="line"><span class="built_in">console</span>.log(pp);</span><br><span class="line"><span class="comment">//&#123;</span></span><br><span class="line">  <span class="comment">//job: 'teacher',</span></span><br><span class="line">  <span class="comment">//hobby: 'basketball'</span></span><br><span class="line"><span class="comment">//&#125;;</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> pp);</span><br><span class="line"><span class="comment">//object</span></span><br></pre></td></tr></table></figure>
+
+<p>return返回一个对象的时候就new实例不会返回内部的数据了，而是返回return的对象了，与直接运行函数一样</p>
+<h1 id="加上prototype"><a href="#加上prototype" class="headerlink" title="加上prototype"></a>加上prototype</h1><p>return一个对象，有prototype时的情况</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name=<span class="string">"zhangsan"</span>;</span><br><span class="line">  <span class="keyword">this</span>.age=<span class="number">18</span>;</span><br><span class="line">  <span class="keyword">this</span>.say=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'hello'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    job: <span class="string">'teacher'</span>,</span><br><span class="line">    hobby: <span class="string">'basketball'</span></span><br><span class="line">  &#125;;</span><br><span class="line">&#125;;</span><br><span class="line">Person.prototype=&#123;</span><br><span class="line">  address: <span class="string">'hangzhou'</span>,</span><br><span class="line">  say:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'world'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> p=<span class="keyword">new</span> Person();</span><br><span class="line"><span class="built_in">console</span>.log(p);</span><br><span class="line"><span class="comment">//&#123;</span></span><br><span class="line">  <span class="comment">//job: 'teacher',</span></span><br><span class="line">  <span class="comment">//hobby: 'basketball'</span></span><br><span class="line"><span class="comment">//&#125;;</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> p);</span><br><span class="line"><span class="comment">//object</span></span><br><span class="line"><span class="keyword">const</span> pp=Person()</span><br><span class="line"><span class="built_in">console</span>.log(pp);</span><br><span class="line"><span class="comment">//&#123;</span></span><br><span class="line">  <span class="comment">//job: 'teacher',</span></span><br><span class="line">  <span class="comment">//hobby: 'basketball'</span></span><br><span class="line"><span class="comment">//&#125;;</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> pp);</span><br><span class="line"><span class="comment">//object</span></span><br></pre></td></tr></table></figure>
+
+<p>如果是return对象是没有变的</p>
+<p>如果return不是一个对象而是一个基本类型呢？</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name=<span class="string">"zhangsan"</span>;</span><br><span class="line">  <span class="keyword">this</span>.age=<span class="number">18</span>;</span><br><span class="line">  <span class="keyword">this</span>.say=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'hello'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">'gggggg'</span></span><br><span class="line">&#125;;</span><br><span class="line">Person.prototype=&#123;</span><br><span class="line">  address: <span class="string">'hangzhou'</span>,</span><br><span class="line">  say:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'world'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> p=<span class="keyword">new</span> Person();</span><br><span class="line"><span class="built_in">console</span>.log(p);</span><br><span class="line"><span class="comment">//Person&#123;</span></span><br><span class="line">  <span class="comment">//name="zhangsan";</span></span><br><span class="line">  <span class="comment">//age=18;</span></span><br><span class="line">  <span class="comment">//say=function()&#123;</span></span><br><span class="line">    <span class="comment">//console.log('hello');</span></span><br><span class="line">  <span class="comment">//&#125;</span></span><br><span class="line"><span class="comment">//prototype=&#123;</span></span><br><span class="line">  <span class="comment">//address: 'hangzhou',</span></span><br><span class="line">  <span class="comment">//say:function()&#123;</span></span><br><span class="line">    <span class="comment">//console.log('world');</span></span><br><span class="line">  <span class="comment">//&#125;</span></span><br><span class="line"><span class="comment">//&#125;</span></span><br><span class="line"><span class="comment">//&#125;;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> p);</span><br><span class="line"><span class="comment">//object</span></span><br><span class="line"><span class="keyword">const</span> pp=Person()</span><br><span class="line"><span class="built_in">console</span>.log(pp);</span><br><span class="line"><span class="comment">//gggggg</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> pp);</span><br><span class="line"><span class="comment">//string</span></span><br></pre></td></tr></table></figure>
+
+<p>发现内部的数据都是可以返回的，包括prototype中的属性</p>
+<h1 id="return其他类型"><a href="#return其他类型" class="headerlink" title="return其他类型"></a>return其他类型</h1><h2 id="return一个函数function"><a href="#return一个函数function" class="headerlink" title="return一个函数function"></a>return一个函数function</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Fun</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">'start function'</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name=<span class="string">"zhangsan"</span>;</span><br><span class="line">  <span class="keyword">this</span>.age=<span class="number">18</span>;</span><br><span class="line">  <span class="keyword">this</span>.say=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'hello'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> Fun;</span><br><span class="line">&#125;;</span><br><span class="line">Person.prototype=&#123;</span><br><span class="line">  address: <span class="string">'hangzhou'</span>,</span><br><span class="line">  say:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'world'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> p=<span class="keyword">new</span> Person();</span><br><span class="line"><span class="built_in">console</span>.log(p);</span><br><span class="line"><span class="comment">//Fun()&#123;</span></span><br><span class="line">	<span class="comment">//console.log('start function')</span></span><br><span class="line"><span class="comment">//&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> p);</span><br><span class="line"><span class="comment">//function</span></span><br><span class="line"><span class="keyword">const</span> pp=Person()</span><br><span class="line"><span class="built_in">console</span>.log(pp);</span><br><span class="line"><span class="comment">//Fun()&#123;</span></span><br><span class="line">	<span class="comment">//console.log('start function')</span></span><br><span class="line"><span class="comment">//&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> pp);</span><br><span class="line"><span class="comment">//function</span></span><br></pre></td></tr></table></figure>
+
+<p>可以发现与return对象一样</p>
+<h2 id="return一个Date对象"><a href="#return一个Date对象" class="headerlink" title="return一个Date对象"></a>return一个Date对象</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name=<span class="string">"zhangsan"</span>;</span><br><span class="line">  <span class="keyword">this</span>.age=<span class="number">18</span>;</span><br><span class="line">  <span class="keyword">this</span>.say=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'hello'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="string">'123'</span>);</span><br><span class="line">&#125;;</span><br><span class="line">Person.prototype=&#123;</span><br><span class="line">  address: <span class="string">'hangzhou'</span>,</span><br><span class="line">  say:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'world'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> p=<span class="keyword">new</span> Person();</span><br><span class="line"><span class="built_in">console</span>.log(p);</span><br><span class="line"><span class="comment">//Fri Jan 01 0123 00:00:00 GMT+0805 (中国标准时间)</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> p);</span><br><span class="line"><span class="comment">//object</span></span><br><span class="line"><span class="keyword">const</span> pp=Person()</span><br><span class="line"><span class="built_in">console</span>.log(pp);</span><br><span class="line"><span class="comment">//Fri Jan 01 0123 00:00:00 GMT+0805 (中国标准时间)</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> pp);</span><br><span class="line"><span class="comment">//object</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="return-this"><a href="#return-this" class="headerlink" title="return this"></a>return this</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name=<span class="string">"zhangsan"</span>;</span><br><span class="line">  <span class="keyword">this</span>.age=<span class="number">18</span>;</span><br><span class="line">  <span class="keyword">this</span>.say=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'hello'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">&#125;;</span><br><span class="line">Person.prototype=&#123;</span><br><span class="line">  address: <span class="string">'hangzhou'</span>,</span><br><span class="line">  say:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'world'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> p=<span class="keyword">new</span> Person();</span><br><span class="line"><span class="built_in">console</span>.log(p);</span><br><span class="line"><span class="comment">//Person&#123;</span></span><br><span class="line">  <span class="comment">//name="zhangsan";</span></span><br><span class="line">  <span class="comment">//age=18;</span></span><br><span class="line">  <span class="comment">//say=function()&#123;</span></span><br><span class="line">    <span class="comment">//console.log('hello');</span></span><br><span class="line">  <span class="comment">//&#125;</span></span><br><span class="line"><span class="comment">//prototype=&#123;</span></span><br><span class="line">  <span class="comment">//address: 'hangzhou',</span></span><br><span class="line">  <span class="comment">//say:function()&#123;</span></span><br><span class="line">    <span class="comment">//console.log('world');</span></span><br><span class="line">  <span class="comment">//&#125;</span></span><br><span class="line"><span class="comment">//&#125;</span></span><br><span class="line"><span class="comment">//&#125;;</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> p);</span><br><span class="line"><span class="comment">//object</span></span><br><span class="line"><span class="keyword">const</span> pp=Person()</span><br><span class="line"><span class="built_in">console</span>.log(pp);</span><br><span class="line"><span class="comment">//Window对象</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> pp);</span><br><span class="line"><span class="comment">//object</span></span><br></pre></td></tr></table></figure>
+
+<p>如果是返回的this，实例化之后就是本身，但是直接运行，返回的this指向window</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>经过多方的测试发现return的是引用数据类型就会返回return中的值，而如果是基本的数据类型（string、number、undefined、null、boolean、Symbol、bigNum）则会返回内部的数据类型</p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/11/15/new%E5%AE%9E%E4%BE%8B%E5%87%BD%E6%95%B0/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-html中插入svg" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1287,98 +1399,6 @@
 
 
   
-    <article id="post-app底部按钮被顶起" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/09/21/app%E5%BA%95%E9%83%A8%E6%8C%89%E9%92%AE%E8%A2%AB%E9%A1%B6%E8%B5%B7/" target="_blank">app底部按钮被顶起</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/09/21/app%E5%BA%95%E9%83%A8%E6%8C%89%E9%92%AE%E8%A2%AB%E9%A1%B6%E8%B5%B7/" class="archive-article-date">
-        <time datetime="2021-09-21T10:31:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-21</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>经常有一些页面在底部有按钮，底部的按钮一般是用</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">position</span><span class="selector-pseudo">:fixed</span>;</span><br><span class="line"><span class="selector-tag">bottom</span><span class="selector-pseudo">:0</span>;</span><br></pre></td></tr></table></figure>
-
-<p>但是如果是在移动端，键盘弹出之后，由于整个视图的缩小，按钮还是会被顶到上面，于是做一个处理，视图缩小就使得按钮消失</p>
-<p>以vue为例</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">data()&#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    docmHeight:<span class="built_in">document</span>.documentElement.clientHeight,<span class="comment">//默认的视图高度</span></span><br><span class="line">    showHeight:<span class="built_in">document</span>.documentElement.clientHeight,<span class="comment">//修改后的视图高度</span></span><br><span class="line">    isButtonShow:<span class="literal">true</span><span class="comment">//按钮是否被显示</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br><span class="line">mount()&#123;</span><br><span class="line">  <span class="comment">//监听视图的改变</span></span><br><span class="line">  <span class="built_in">window</span>.onresize=<span class="function"><span class="params">()</span>=&gt;</span>(</span><br><span class="line">  	(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.showHeight=<span class="built_in">document</span>.documentElement.clientHeight;</span><br><span class="line">    &#125;)()</span><br><span class="line">  )</span><br><span class="line">&#125;,</span><br><span class="line">watch:&#123;</span><br><span class="line">  <span class="comment">//如果修改后的视图高度小于最初的高度则按钮不显示</span></span><br><span class="line">  showHeight:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">this</span>.docmHeight&gt;<span class="keyword">this</span>.showHeight)&#123;</span><br><span class="line">      <span class="keyword">this</span>.isButtonShow=<span class="literal">false</span></span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.isButtonShow=<span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/09/21/app%E5%BA%95%E9%83%A8%E6%8C%89%E9%92%AE%E8%A2%AB%E9%A1%B6%E8%B5%B7/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
@@ -1528,6 +1548,10 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
@@ -1536,15 +1560,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">css</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">mobx</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1552,15 +1568,19 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">mobx</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">react native</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
+                <a href="javascript:void(0)" class="js-tag color4">小程序</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">小程序</a>
+                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
               </li>
              
               <li class="article-tag-list-item">
