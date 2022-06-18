@@ -202,6 +202,201 @@
             
 
   
+    <article id="post-自定义合同" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2022/06/18/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%90%88%E5%90%8C/" target="_blank">自定义合同</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2022/06/18/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%90%88%E5%90%8C/" class="archive-article-date">
+        <time datetime="2022-06-18T13:49:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-06-18</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="基本方案"><a href="#基本方案" class="headerlink" title="基本方案"></a>基本方案</h1><p>在pc端编辑合同模版，生成控件，记录控件的相对大小和位置信息，之后通过移动端解析样式信息，展示在移动端，通过插件<a href="http://html2canvas.hertzen.com/" target="_blank" rel="noopener">html2canvas</a>由html生成canvas，再由<a href="http://raw.githack.com/MrRio/jsPDF/master/docs/index.html" target="_blank" rel="noopener">jspdf</a>由canvas生成pdf，pdf上传oss，签署区由合同中心合到pdf上（传给它们签署的图片base64和位置信息）。</p>
+<h3 id="文件目录"><a href="#文件目录" class="headerlink" title="文件目录"></a>文件目录</h3><p>custom 自定义合同相关</p>
+<p>—components 组件</p>
+<p>—singleText.vue 单行文本控件</p>
+<p>—idCardText.vue 身份证控件</p>
+<p>—nameText.vue 姓名控件</p>
+<p>—phoneText.vue 手机号控件</p>
+<p>—optionSetMultiple.vue 多选控件</p>
+<p>—optionSetSingle.vue 单选控件</p>
+<p>—option.vue 多选与单选的选项</p>
+<p>—signAreaText.vue 签署区控件</p>
+<p>—setting.vue 编辑器右侧的设置</p>
+<p>—constant.js 常量</p>
+<p>—template.vue 编辑器主页面</p>
+<h3 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h3><p>基于vue2.0，充分利用MVVM的特性，先在前端实现视图层与数据层的绑定，把开发重心转移到数据层的控制</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&lt;component</span><br><span class="line">           ref&#x3D;&quot;components&quot;</span><br><span class="line">           class&#x3D;&quot;components&quot;</span><br><span class="line">           v-for&#x3D;&quot;(item, index) in componentArray&quot;</span><br><span class="line">           :is&#x3D;&quot;item.moduleType ? item.moduleType : &#39;&#39;&quot;</span><br><span class="line">           :required&#x3D;&quot;item.required&quot;</span><br><span class="line">           :selected&#x3D;&quot;selectedIndex &#x3D;&#x3D;&#x3D; index&quot;</span><br><span class="line">           :index&#x3D;&quot;index&quot;</span><br><span class="line">           :key&#x3D;&quot;item.id&quot;</span><br><span class="line">           :ImgToA4Zoom&#x3D;&quot;ImgToA4Zoom&quot;</span><br><span class="line">           :error&#x3D;&quot;item.error || &#39;&#39;&quot;</span><br><span class="line">           :w&#x3D;&quot;item.width&quot;</span><br><span class="line">           :h&#x3D;&quot;item.height&quot;</span><br><span class="line">           :x&#x3D;&quot;item.x&quot;</span><br><span class="line">           :y&#x3D;&quot;item.y&quot;</span><br><span class="line">           :eContractOwnerEnum&#x3D;&quot;item.eContractOwnerEnum || &#39;&#39;&quot;</span><br><span class="line">           :valueList&#x3D;&quot;item.valueList || []&quot;</span><br><span class="line">           :fontSize&#x3D;&quot;item.fontSize || &#39;&#39;&quot;</span><br><span class="line">           :containerWidth&#x3D;&quot;imgWidthAndHeight.width&quot;</span><br><span class="line">           :containerHeight&#x3D;&quot;imgWidthAndHeight.height&quot;</span><br><span class="line">           @changeComponentSetting&#x3D;&quot;changeComponentSetting&quot;</span><br><span class="line">           @mousedown.native&#x3D;&quot;handleSelectComponent(index)&quot;</span><br><span class="line">           @handleUp&#x3D;&quot;showPositionAndStyle&quot;</span><br><span class="line">           @handleOptionUp&#x3D;&quot;showOptionPositionAndStyle&quot;</span><br><span class="line">           @handleComponentDelete&#x3D;&quot;</span><br><span class="line">                                   handleComponentDelete(index)</span><br><span class="line">                                   &quot;</span><br><span class="line">           &gt;</span><br><span class="line">&lt;&#x2F;component&gt;</span><br></pre></td></tr></table></figure>
+
+<p>通过动态组件匹配对应的控件，控制componentArray这个对象数组可以控制整个视图</p>
+<p>componentArray示例：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">"eContractOwnerEnum"</span>: <span class="string">"partyA"</span>,</span><br><span class="line">    <span class="attr">"fieldSize"</span>: <span class="number">9</span>,</span><br><span class="line">    <span class="attr">"fontSize"</span>: <span class="number">16</span>,</span><br><span class="line">    <span class="attr">"fontSizeName"</span>: <span class="string">"小四"</span>,</span><br><span class="line">    <span class="attr">"height"</span>: <span class="number">18</span>,</span><br><span class="line">    <span class="attr">"moduleCode"</span>: <span class="string">"name_module"</span>,</span><br><span class="line">    <span class="attr">"moduleIcon"</span>: <span class="string">"http://img.souche.com/f2e/382f74ac6f732d797770d95e6067c6ba.png"</span>,</span><br><span class="line">    <span class="attr">"moduleName"</span>: <span class="string">"姓名"</span>,</span><br><span class="line">    <span class="attr">"moduleType"</span>: <span class="string">"NAME_TEXT"</span>,</span><br><span class="line">    <span class="attr">"page"</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="attr">"required"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"value"</span>: <span class="string">""</span>,</span><br><span class="line">    <span class="attr">"width"</span>: <span class="number">153</span>,</span><br><span class="line">    <span class="attr">"x"</span>: <span class="number">106.68033</span>,</span><br><span class="line">    <span class="attr">"y"</span>: <span class="number">75.1291</span></span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">"fontSize"</span>: <span class="number">16</span>,</span><br><span class="line">    <span class="attr">"fontSizeName"</span>: <span class="string">"小四"</span>,</span><br><span class="line">    <span class="attr">"height"</span>: <span class="number">88</span>,</span><br><span class="line">    <span class="attr">"moduleCode"</span>: <span class="string">"single_module"</span>,</span><br><span class="line">    <span class="attr">"moduleIcon"</span>: <span class="string">"http://img.souche.com/f2e/8c2129395b7b4e80caccfe7ef74ac0fe.png"</span>,</span><br><span class="line">    <span class="attr">"moduleName"</span>: <span class="string">"单选"</span>,</span><br><span class="line">    <span class="attr">"moduleType"</span>: <span class="string">"OPTION_SET_SINGLE"</span>,</span><br><span class="line">    <span class="attr">"page"</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="attr">"required"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"valueList"</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">"height"</span>: <span class="number">18</span>,</span><br><span class="line">        <span class="attr">"id"</span>: <span class="number">1</span>,</span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"选项一"</span>,</span><br><span class="line">        <span class="attr">"value"</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="attr">"width"</span>: <span class="number">50</span>,</span><br><span class="line">        <span class="attr">"x"</span>: <span class="number">227.63217</span>,</span><br><span class="line">        <span class="attr">"y"</span>: <span class="number">264.72568</span></span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">"height"</span>: <span class="number">18</span>,</span><br><span class="line">        <span class="attr">"id"</span>: <span class="number">2</span>,</span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"选项二"</span>,</span><br><span class="line">        <span class="attr">"value"</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="attr">"width"</span>: <span class="number">50</span>,</span><br><span class="line">        <span class="attr">"x"</span>: <span class="number">227.63217</span>,</span><br><span class="line">        <span class="attr">"y"</span>: <span class="number">290.72568</span></span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">"height"</span>: <span class="number">18</span>,</span><br><span class="line">        <span class="attr">"id"</span>: <span class="number">3</span>,</span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"选项三"</span>,</span><br><span class="line">        <span class="attr">"value"</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="attr">"width"</span>: <span class="number">50</span>,</span><br><span class="line">        <span class="attr">"x"</span>: <span class="number">227.63217</span>,</span><br><span class="line">        <span class="attr">"y"</span>: <span class="number">316.72568</span></span><br><span class="line">      &#125;</span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">"width"</span>: <span class="number">94</span>,</span><br><span class="line">    <span class="attr">"x"</span>: <span class="number">192.63217</span>,</span><br><span class="line">    <span class="attr">"y"</span>: <span class="number">255.7257</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<h3 id="编辑器初始化"><a href="#编辑器初始化" class="headerlink" title="编辑器初始化"></a>编辑器初始化</h3><p>编辑器页面有三种状态（新建、编辑、预览）</p>
+<p>新建：获取用户填写的数据、初始化底图、初始化事件监听</p>
+<p>编辑：获取服务端传的数据、初始化底图、初始化事件监听</p>
+<p>预览：获取服务端传的数据、初始化底图</p>
+<h4 id="初始化底图"><a href="#初始化底图" class="headerlink" title="初始化底图"></a>初始化底图</h4><p>用户上传的图片大小不一，统一在A4的宽（595px）的容器中等比缩放展示，前端初始化铺满，对应的缩放率为100%</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">ImgToA4Zoom: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;<span class="comment">//当前容器宽度/A4的宽</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.isMounted) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.imgWidthAndHeight.width / A4SIZE.width;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br><span class="line"></span><br><span class="line">zoom: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;<span class="comment">//图片的真实缩放比例</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.isMounted) &#123;</span><br><span class="line">        <span class="keyword">let</span> viewWidth = <span class="keyword">this</span>.getDomWidth(<span class="string">'view'</span>);</span><br><span class="line">        <span class="keyword">return</span> viewWidth / <span class="keyword">this</span>.imgRealWidthAndHeight.width;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br><span class="line"></span><br><span class="line">imgWidthAndHeight: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;<span class="comment">//当前图片的宽高</span></span><br><span class="line">  <span class="comment">//imgRealWidthAndHeight图片的真实宽高</span></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        width:</span><br><span class="line">            <span class="built_in">Math</span>.round(</span><br><span class="line">                <span class="keyword">this</span>.sliderValue *</span><br><span class="line">                    <span class="keyword">this</span>.imgRealWidthAndHeight.width *</span><br><span class="line">                    <span class="keyword">this</span>.zoom</span><br><span class="line">            ) / <span class="number">100</span>,</span><br><span class="line">        height:</span><br><span class="line">            <span class="built_in">Math</span>.round(</span><br><span class="line">                <span class="keyword">this</span>.sliderValue *</span><br><span class="line">                    <span class="keyword">this</span>.imgRealWidthAndHeight.height *</span><br><span class="line">                    <span class="keyword">this</span>.zoom</span><br><span class="line">            ) / <span class="number">100</span></span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="拖攥定位"><a href="#拖攥定位" class="headerlink" title="拖攥定位"></a>拖攥定位</h3><p><img src="https://cdn.nlark.com/yuque/0/2022/gif/2799077/1651116475780-ad4963e3-c388-4210-8a66-257f3ab1a06f.gif" alt="img"></p>
+<p>以x坐标为例</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/2799077/1651135558174-2f0eb98d-37c8-4ac9-a266-ac9d8f2f4d27.png" alt="img"></p>
+<h2 id="html转pdf"><a href="#html转pdf" class="headerlink" title="html转pdf"></a>html转pdf</h2><p>在移动端解析对应的canvas之后，使用html2canvas转为canvas，使用jspdf把canvas转pdf</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> (<span class="params">ele, getBlobCallBack, imgArr</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; defaultWidth, defaultHeight &#125; = <span class="keyword">await</span> checkImgWidthAndHeight(imgArr[<span class="number">0</span>]);<span class="comment">//获取图片的宽高</span></span><br><span class="line">  <span class="comment">//2022年4月19日，原底图为多宽生成对应的宽的pdf，合同中心签署区被写死为96px，因此无奈固定生成宽为595px的合同</span></span><br><span class="line">  <span class="keyword">const</span> defaultPdfWidth = <span class="number">595</span>;<span class="comment">//设置生成的pdf的宽</span></span><br><span class="line">  <span class="keyword">const</span> defaultPdfHeight = (<span class="number">595</span> / defaultWidth) * defaultHeight;</span><br><span class="line">  <span class="keyword">let</span> scale = <span class="number">2</span>;<span class="comment">//放大提高pdf的清晰度</span></span><br><span class="line">  ele.style.transform = <span class="string">`scale(<span class="subst">$&#123;scale&#125;</span>)`</span>;</span><br><span class="line">  <span class="keyword">let</span> eleW = ele.offsetWidth * scale; <span class="comment">// 获得该容器的宽</span></span><br><span class="line">  <span class="keyword">let</span> eleH = ele.scrollHeight * scale; <span class="comment">// 获得该容器的高</span></span><br><span class="line">  <span class="keyword">let</span> eleOffsetTop = ele.offsetTop * scale; <span class="comment">// 获得该容器到文档顶部的距离</span></span><br><span class="line">  <span class="keyword">let</span> eleOffsetLeft = ele.offsetLeft * scale; <span class="comment">// 获得该容器到文档最左的距离</span></span><br><span class="line">  <span class="keyword">var</span> canvas = <span class="built_in">document</span>.createElement(<span class="string">'canvas'</span>);</span><br><span class="line">  <span class="keyword">var</span> abs = <span class="number">0</span>;</span><br><span class="line">  canvas.width = defaultPdfWidth;</span><br><span class="line">  canvas.height = (defaultPdfWidth / eleW) * eleH;</span><br><span class="line">  <span class="keyword">let</span> canvasHeight = canvas.height;</span><br><span class="line">  <span class="keyword">var</span> context = canvas.getContext(<span class="string">'2d'</span>);</span><br><span class="line">  context.scale(<span class="number">2</span>, <span class="number">2</span>); <span class="comment">// 增强图片清晰度</span></span><br><span class="line">  context.translate(-eleOffsetLeft - abs, -eleOffsetTop);</span><br><span class="line">  html2canvas(ele, &#123;</span><br><span class="line">      dpi: <span class="number">300</span>,</span><br><span class="line">      scale: <span class="number">2</span>,</span><br><span class="line">      useCORS: <span class="literal">true</span>, <span class="comment">//允许canvas画布内可以跨域请求外部链接图片, 允许跨域请求。</span></span><br><span class="line">      height: eleH,</span><br><span class="line">      windowHeight: eleH</span><br><span class="line">  &#125;).then(<span class="keyword">async</span> (canvas) =&gt; &#123;</span><br><span class="line">      <span class="comment">//一页pdf显示html页面生成的canvas高度;</span></span><br><span class="line">      <span class="keyword">var</span> pageHeight = defaultPdfHeight;</span><br><span class="line">      <span class="comment">//未生成pdf的html页面高度</span></span><br><span class="line">      <span class="keyword">var</span> leftHeight = canvasHeight;</span><br><span class="line">      <span class="comment">//页面偏移</span></span><br><span class="line">      <span class="keyword">var</span> position = <span class="number">0</span>;</span><br><span class="line">      <span class="keyword">var</span> imgWidth = defaultPdfWidth;</span><br><span class="line">      <span class="keyword">var</span> imgHeight = defaultPdfHeight;</span><br><span class="line">      <span class="keyword">var</span> pageData = canvas.toDataURL(<span class="string">'image/png'</span>, <span class="number">1.0</span>);</span><br><span class="line">      <span class="keyword">var</span> pdf = <span class="keyword">new</span> JsPDF(<span class="string">''</span>, <span class="string">'pt'</span>, [defaultPdfWidth, defaultPdfHeight], <span class="literal">true</span>);</span><br><span class="line">      <span class="comment">//有两个高度需要区分，一个是html页面的实际高度，和生成pdf的页面高度(841.89)</span></span><br><span class="line">      <span class="comment">//当内容未超过pdf一页显示的范围，无需分页</span></span><br><span class="line">      <span class="keyword">if</span> (leftHeight &lt; pageHeight) &#123;</span><br><span class="line">          <span class="comment">//在pdf.addImage(pageData, 'JPEG', 左，上，宽度，高度)设置在pdf中显示；</span></span><br><span class="line">          pdf.addImage(pageData, <span class="string">'png'</span>, <span class="number">0</span>, <span class="number">0</span>, defaultPdfWidth, defaultPdfHeight, <span class="string">''</span>, <span class="string">'FAST'</span>);</span><br><span class="line">          <span class="comment">// pdf.addImage(pageData, 'JPEG', 20, 40, imgWidth, imgHeight);</span></span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="comment">// 分页</span></span><br><span class="line">          <span class="keyword">while</span> (leftHeight &gt; <span class="number">0</span>) &#123;</span><br><span class="line">              pdf.addImage(</span><br><span class="line">                  pageData,</span><br><span class="line">                  <span class="string">'png'</span>,</span><br><span class="line">                  <span class="number">5</span>,</span><br><span class="line">                  position,</span><br><span class="line">                  imgWidth,</span><br><span class="line">                  imgHeight * imgArr.length,</span><br><span class="line">                  <span class="string">''</span>,</span><br><span class="line">                  <span class="string">'FAST'</span></span><br><span class="line">              );</span><br><span class="line">              leftHeight -= pageHeight;</span><br><span class="line">              position -= defaultPdfHeight;</span><br><span class="line">              <span class="comment">//避免添加空白页</span></span><br><span class="line">              <span class="keyword">if</span> (leftHeight &gt; <span class="number">100</span>) &#123;</span><br><span class="line">                  pdf.addPage();</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">let</span> blobPDF = <span class="keyword">new</span> File([pdf.output(<span class="string">'blob'</span>)], <span class="string">'电子合同.pdf'</span>);<span class="comment">//生成pdf</span></span><br><span class="line">      getBlobCallBack(blobPDF);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+
+<p>多页合同示例</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/2799077/1651113048350-bb06d20b-818f-47fc-a150-28b88df48383.jpeg" alt="img"></p>
+<h1 id="问题与解决方法"><a href="#问题与解决方法" class="headerlink" title="问题与解决方法"></a>问题与解决方法</h1><h2 id="与合同中心定位不一致"><a href="#与合同中心定位不一致" class="headerlink" title="与合同中心定位不一致"></a>与合同中心定位不一致</h2><p>签署区的姓名签署需要传给合同中心，合同pdf与签署区以及位置，合同中心的定位基于pdf文件的左下角且基点是签署区的中心，但是合同在前端的定位使用的是左上角且基点是签署区的中心。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/2799077/1652087623057-37f7a22e-24f4-4dc2-b3a7-0874e5a71d0d.jpeg" alt="img"></p>
+<p>解决方法：</p>
+<p>前端在保存合同模板的时候给后端提供一个合同高度的字段pdfHeight</p>
+<p>那么可以计算传给合同中心的位置</p>
+<p>x（合同中心）= x + width / 2</p>
+<p>y（合同中心）= pdfHeight - y + height / 2</p>
+<h2 id="生成pdf的尺寸"><a href="#生成pdf的尺寸" class="headerlink" title="生成pdf的尺寸"></a>生成pdf的尺寸</h2><p>生成pdf的大小在保证清晰度的情况下，大小不应该太大，通过调试校准，合同pdf一页为300+KB。</p>
+<p>在传给合同中心前的pdf宽高，因为合同中心签署区的宽高在嵌入到pdf的时候，宽高写死为96px。</p>
+<p>因此在编辑合同的时候签署区被迫写死为96px，同时生成的pdf也是一个与签署区相对较为合适的尺寸595px。</p>
+<h2 id="字体大小"><a href="#字体大小" class="headerlink" title="字体大小"></a>字体大小</h2><p>字体大小由小五、五号、小四……初号</p>
+<p>对应的像素是12px、14px、16px……56px</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/2799077/1652089191340-7d0339b3-e0ed-4eef-bbbb-f21db7066d35.png" alt="img"></p>
+<p>字体的大小会影响控件的高和字数，加上一般浏览器和移动端h5会有默认最小字体12px，那么用户在缩放合同的时候如何展示字体小于12px的情况？</p>
+<p>解决方法：</p>
+<p>字体需要一套标准，相对于595px的宽，如何理解？</p>
+<p>假设现在设置字体为小四，合同底图容器的宽为595px，那么字体设置为16px。</p>
+<p>假设现在设置字体为小四，合同底图容器的宽为297.5px，那么字体设置为16px，同时合同底图容器scale(0.5),整个容器缩小了一倍。</p>
+<p>假设现在设置字体为小四，合同底图容器的宽为1190px，那么字体设置为16px，同时合同底图容器scale(2),整个容器放大了一倍。</p>
+<p>这样既解决了小于12px的展示的问题，同时保证了pd端与移动端、pc端与pc端、移动端与移动端的字体样式的一致性，同时也解决用户在生成合同底图时选择不同宽高导致字体的差异性。</p>
+<p>总结：采用就是相对于A4的字体标准</p>
+<h2 id="html2canvas的兼容性"><a href="#html2canvas的兼容性" class="headerlink" title="html2canvas的兼容性"></a>html2canvas的兼容性</h2><p>html2canvas对input输入框的兼容性不太好，对其line-height属性并不敏感。最终生成的pdf的文字会有偏差。</p>
+<p>解决方法：</p>
+<p>方案一</p>
+<p>div的contenteditable属性，可以让文本处于可以编辑状态</p>
+<p>所有主流浏览器都支持 contenteditable 属性</p>
+<p>缺点：但是在文本的不换行属性white-space:nowrap失效，无法控制输入的换行</p>
+<p>方案二（采用）</p>
+<p>使用input在生成canvas的时候把input替换为div</p>
+<p>缺点：生成pdf时间会变长，损耗一定的性能</p>
+<h2 id="多页pdf生成"><a href="#多页pdf生成" class="headerlink" title="多页pdf生成"></a>多页pdf生成</h2><p>当用户pdf有很多页的时候，生成的pdf会出现空白页。</p>
+<p>出现这种情况的原因是因为canvas宽高有上限</p>
+<table>
+<thead>
+<tr>
+<th>浏览器</th>
+<th>最大宽度（px）</th>
+<th>最大高度（px）</th>
+<th>最大面积</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Chrome</td>
+<td>32767</td>
+<td>32767</td>
+<td>268435456（16384*16384）</td>
+</tr>
+<tr>
+<td>Firefox</td>
+<td>32767</td>
+<td>32767</td>
+<td>472907776（22528*20992）</td>
+</tr>
+<tr>
+<td>IE</td>
+<td>8192</td>
+<td>8192</td>
+<td></td>
+</tr>
+<tr>
+<td>移动端</td>
+<td>一般4,096</td>
+<td>一般4,096</td>
+<td></td>
+</tr>
+<tr>
+<td>微信小程序</td>
+<td>1365</td>
+<td>1365</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>多页合同生成一个canvas再切割成pdf的方案替换成</p>
+<p>每一页都生成单独的canvas，再合成一个pdf（pdf页面设置上限为15页）</p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">页面项目</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2022/06/18/%E8%87%AA%E5%AE%9A%E4%B9%89%E5%90%88%E5%90%8C/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-es7装饰器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1349,109 +1544,6 @@
 
 
   
-    <article id="post-打包modern" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/11/22/%E6%89%93%E5%8C%85modern/" target="_blank">打包modern</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/11/22/%E6%89%93%E5%8C%85modern/" class="archive-article-date">
-        <time datetime="2021-11-22T11:37:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-22</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>个别低版本浏览器的手机访问页面报错</p>
-<p><code>globalThis is not defined</code></p>
-<p>但是在页面中本地代码并没有使用globalThis</p>
-<h1 id="globalThis"><a href="#globalThis" class="headerlink" title="globalThis"></a>globalThis</h1><p>这在ES10之前， globalThis 还没有标准化。</p>
-<p>在产品代码中，你可以自己编写这个怪物，在多个平台上“标准化”它:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> getGlobal = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> self !== <span class="string">'undefined'</span>) &#123; <span class="keyword">return</span> self; &#125;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">window</span> !== <span class="string">'undefined'</span>) &#123; <span class="keyword">return</span> <span class="built_in">window</span>; &#125;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> global !== <span class="string">'undefined'</span>) &#123; <span class="keyword">return</span> global; &#125;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'unable to locate global object'</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>但即使这样也不总是奏效。因此，ES10 添加了 <strong>globalThis</strong> 对象，从现在开始，该对象用于在任何平台上访问全局作用域:</p>
-<figure class="highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 访问全局数组构造函数</span></span><br><span class="line">globalThis.Array(<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line">⇨ [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">// 类似于 ES5 之前的 window.v = &#123; flag: true &#125;</span></span><br><span class="line">globalThis.v = &#123; <span class="built_in">flag</span>: <span class="literal">true</span> &#125;;</span><br><span class="line"></span><br><span class="line">console.<span class="built_in">log</span>(globalThis.v);</span><br><span class="line">⇨ &#123; <span class="built_in">flag</span>: <span class="literal">true</span> &#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="原因查询"><a href="#原因查询" class="headerlink" title="原因查询"></a>原因查询</h1><p>一开始以为是node的版本的问题，但是使用了多个版本之后还是这样报错，使用别的手机，以及本地代码多次的尝试以后排除其他原因，只可能是该手机的浏览器内核版本过低不支持globalThis。</p>
-<p>想办法升级手机浏览器，但是android一些低端的手机，一段时间之后厂商就不支持升级了。</p>
-<h1 id="–modern"><a href="#–modern" class="headerlink" title="–modern"></a>–modern</h1><p>项目打包方式是使用<code>vue-cli-service build --modern</code></p>
-<p>注意到modern查询官方文档</p>
-<p><code>--modern</code> 使用<a href="https://cli.vuejs.org/zh/guide/browser-compatibility.html#现代模式" target="_blank" rel="noopener">现代模式</a>构建应用，为现代浏览器交付原生支持的 ES2015 代码，并生成一个兼容老浏览器的包用来自动回退</p>
-<p>modern主要是用来为现代浏览器做兼容性的优化，可能是这个原因导致，问题手机的浏览器版本过低。</p>
-<p>去掉之后，问题得到了解决。</p>
-<h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><p>项目打包方式去掉–modern</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/11/22/%E6%89%93%E5%8C%85modern/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1589,10 +1681,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">RN</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">webpack</a>
               </li>
              
@@ -1601,7 +1689,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
+                <a href="javascript:void(0)" class="js-tag color3">RN</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1610,6 +1698,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1629,11 +1721,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">小程序</a>
+                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
+                <a href="javascript:void(0)" class="js-tag color4">小程序</a>
               </li>
              
               <li class="article-tag-list-item">
