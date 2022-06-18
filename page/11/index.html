@@ -202,6 +202,121 @@
             
 
   
+    <article id="post-webpack加载器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/04/20/webpack%E5%8A%A0%E8%BD%BD%E5%99%A8/" target="_blank">webpack加载器</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/04/20/webpack%E5%8A%A0%E8%BD%BD%E5%99%A8/" class="archive-article-date">
+        <time datetime="2020-04-20T12:35:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-20</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="通过loader打包非js模块"><a href="#通过loader打包非js模块" class="headerlink" title="通过loader打包非js模块"></a>通过loader打包非js模块</h1><p>在实际开发过程中，webpack默认只能打包处理以.js后缀名结尾的模块，其他的<br>非.js后缀名结尾的模块，webpack打包不了，需要调用loader加载器才可以正常打包，否则会报错</p>
+<p>loader加载器可以协助webpack打包处理特定的文件模块，比如：<br>less-loader可以打包处理.less相关的文件<br>sass-loader可以打包处理.scss相关的文件<br>url-loader可以打包处理css中与url路径相关的文件</p>
+<h2 id="打包处理css文件"><a href="#打包处理css文件" class="headerlink" title="打包处理css文件"></a>打包处理css文件</h2><p>1.npm i style-loader css-loader -D命令，安装处理css文件的loader<br>2.webpack.config.js的module-&gt;rules数组中，添加loader规则如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>:&#123;</span><br><span class="line">       rules:[</span><br><span class="line">           &#123;<span class="attr">test</span>:<span class="regexp">/\.css$/</span>,<span class="attr">use</span>:[<span class="string">'style-loader'</span>,<span class="string">'css-loader'</span>]&#125;</span><br><span class="line">       ]<span class="comment">//其中test表示匹配的文件类型，use表示对应要调用的loader</span></span><br><span class="line">   &#125;<span class="comment">//其中use的顺序是固定的，多个loader是从后面往前面调用</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="打包处理less文件"><a href="#打包处理less文件" class="headerlink" title="打包处理less文件"></a>打包处理less文件</h2><p>确保style-loader和css-loader安装完成<br>1.运行npm i less-loader less -D命令<br>2.在webpack.config.js中的module-&gt;rules数组中，添加loader规则如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>:&#123;</span><br><span class="line">    rules:[</span><br><span class="line">        &#123;<span class="attr">test</span>:<span class="regexp">/\.less$/</span>,<span class="attr">use</span>:[<span class="string">'style-loader'</span>,<span class="string">'css-loader'</span>,<span class="string">'less-loader'</span>]&#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="打包处理scss文件"><a href="#打包处理scss文件" class="headerlink" title="打包处理scss文件"></a>打包处理scss文件</h2><p>确保style-loader和css-loader安装完成<br>1.运行npm i sass-loader node-sass -D命令<br>2.在webpack.config.js中的module-&gt;rules数组中，添加loader规则如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>:&#123;</span><br><span class="line">    rules:[</span><br><span class="line">        &#123;<span class="attr">test</span>:<span class="regexp">/\.scss$/</span>,<span class="attr">use</span>:[<span class="string">'style-loader'</span>,<span class="string">'css-loader'</span>,<span class="string">'sass-loader'</span>]&#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="配置postCSS自动添加css的兼容-厂商-前缀"><a href="#配置postCSS自动添加css的兼容-厂商-前缀" class="headerlink" title="配置postCSS自动添加css的兼容(厂商)前缀"></a>配置postCSS自动添加css的兼容(厂商)前缀</h2><p>1.运行npm i postcss-loader autoprefixer -D命令<br>2.在项目根目录中创建postcss的配置文件postcss.config.js,并初始化如下配置：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> autoprefixer=<span class="built_in">require</span>(<span class="string">'autoprefixer'</span>)</span><br><span class="line"><span class="built_in">module</span>.exports=&#123;</span><br><span class="line">    plugins:[autoprefixer]<span class="comment">//挂载插件</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>3.在webpack.config.js的module-&gt;rules数组中，修改css的loader规则如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>:&#123;</span><br><span class="line">    rules:[</span><br><span class="line">        &#123;<span class="attr">test</span>:<span class="regexp">/\.css$/</span>,<span class="attr">use</span>:[<span class="string">'style-loader'</span>,<span class="string">'css-loader'</span>,<span class="string">'postcss-loader'</span>]&#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="打包样式表中的图片和字体文件"><a href="#打包样式表中的图片和字体文件" class="headerlink" title="打包样式表中的图片和字体文件"></a>打包样式表中的图片和字体文件</h2><p>1.运行npm i url-loader file-loader -D命令<br>2.在webpack.config.js中的module-&gt;rules数组中，添加loader规则如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>:&#123;</span><br><span class="line">    rules:[</span><br><span class="line">        &#123;</span><br><span class="line">            test:<span class="regexp">/\.jpg|png|gif|bmp|ttf|eot|svg|woff|woff2$/</span>,</span><br><span class="line">            use:<span class="string">'url-loader?limit=16940'</span><span class="comment">//?后面是参数项，</span></span><br><span class="line">            <span class="comment">//limit表示图片大小，单位字节，小于该值，才会转化为base64图片</span></span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="打包处理js文件中的高级语法"><a href="#打包处理js文件中的高级语法" class="headerlink" title="打包处理js文件中的高级语法"></a>打包处理js文件中的高级语法</h2><p>1.安装babel转换器相关的包:npm i babel-loader @babel/core @babel/runtime -D<br>2.安装babel语法插件相关的包:npm i @babel/preset-env @babel/plugin-transform-runtime @babel/plugin-proposal-class-properties -D<br>3.在项目根目录中，创建babel配置文件babel.config.js并初始化基本配置如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports=&#123;</span><br><span class="line">    presets:[<span class="string">'@babel/preset-env'</span>],</span><br><span class="line">    plugins:[<span class="string">'@babel/plugin-transform-runtime'</span>,<span class="string">'@babel/plugin-proposal-class-properties'</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>4.在webpack.config.js的module-&gt;rules数组中，添加loader规则如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">test</span>:<span class="regexp">/\.js$/</span>,<span class="attr">use</span>:<span class="string">'babel-loader'</span>,<span class="attr">exclude</span>:<span class="regexp">/node_modules/</span>&#125;</span><br><span class="line"><span class="comment">//exclude为排除项，表示babel-loader不处理node_modules中的js文件</span></span><br></pre></td></tr></table></figure>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">webpack</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/04/20/webpack%E5%8A%A0%E8%BD%BD%E5%99%A8/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-webpack的简单使用与动态打包" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1206,96 +1321,9 @@
 
 
   
-    <article id="post-20年4月13日" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/04/13/20%E5%B9%B44%E6%9C%8813%E6%97%A5/" target="_blank">20年4月13日</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/04/13/20%E5%B9%B44%E6%9C%8813%E6%97%A5/" class="archive-article-date">
-        <time datetime="2020-04-13T15:04:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-13</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>着手做一个键盘导航的单页面，实现键盘按键导航设定的网页，或者鼠标单击，这是我目前已经完成的，之后的任务是实现自定义网址绑定某个按键。</p>
-<p>在做的过程中遇到许多的困难，其中对我而言最难的是键盘事件，因为新版vue没有keycode这个功能，我只能从原生js去写，网上找了一些资料，在键盘事件中还要注意的是焦点，这个是最麻烦的，今天刚检查一遍，发现了这个情况，在input时同时会触发键盘事件，这个我要处理一下。</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">日志</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/04/13/20%E5%B9%B44%E6%9C%8813%E6%97%A5/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/10/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/12/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/10/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/12/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -1430,6 +1458,10 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">RN</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">webpack</a>
               </li>
              
@@ -1438,15 +1470,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">RN</a>
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">vue</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1470,11 +1498,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
+                <a href="javascript:void(0)" class="js-tag color4">小程序</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">小程序</a>
+                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
               </li>
              
               <li class="article-tag-list-item">

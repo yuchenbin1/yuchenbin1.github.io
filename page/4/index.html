@@ -202,6 +202,172 @@
             
 
   
+    <article id="post-react-native-核心组件与跨平台复用方案" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/07/08/react-native-%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6%E4%B8%8E%E8%B7%A8%E5%B9%B3%E5%8F%B0%E5%A4%8D%E7%94%A8%E6%96%B9%E6%A1%88/" target="_blank">react native 核心组件与跨平台复用方案</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/07/08/react-native-%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6%E4%B8%8E%E8%B7%A8%E5%B9%B3%E5%8F%B0%E5%A4%8D%E7%94%A8%E6%96%B9%E6%A1%88/" class="archive-article-date">
+        <time datetime="2021-07-08T12:25:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-07-08</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>使用React Native使用React与应用平台原生功能来构建Android与iOS的开源框架。通过React Native可以使用JavaScript来访问移动端的API</p>
+<h1 id="核心组件"><a href="#核心组件" class="headerlink" title="核心组件"></a>核心组件</h1><table>
+<thead>
+<tr>
+<th align="left">REACT NATIVE</th>
+<th align="left">ANDROID</th>
+<th align="left">IOS</th>
+<th align="left">WEB</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>&lt;View&gt;</code></td>
+<td align="left"><code>&lt;ViewGroup&gt;</code></td>
+<td align="left"><code>&lt;UIView&gt;</code></td>
+<td align="left">A non-scrollling <code>&lt;div&gt;</code></td>
+<td align="left">普通容器</td>
+</tr>
+<tr>
+<td align="left"><code>&lt;Text&gt;</code></td>
+<td align="left"><code>&lt;TextView&gt;</code></td>
+<td align="left"><code>&lt;UITextView&gt;</code></td>
+<td align="left"><code>&lt;p&gt;</code></td>
+<td align="left">文本标签</td>
+</tr>
+<tr>
+<td align="left"><code>&lt;Image&gt;</code></td>
+<td align="left"><code>&lt;ImageView&gt;</code></td>
+<td align="left"><code>&lt;UIImageView&gt;</code></td>
+<td align="left"><code>&lt;img&gt;</code></td>
+<td align="left">图片标签</td>
+</tr>
+<tr>
+<td align="left"><code>&lt;ScrollView&gt;</code></td>
+<td align="left"><code>&lt;ScrollView&gt;</code></td>
+<td align="left"><code>&lt;UIScrollView&gt;</code></td>
+<td align="left"><code>&lt;div&gt;</code></td>
+<td align="left">可以滚动的容器</td>
+</tr>
+<tr>
+<td align="left"><code>&lt;TextInput&gt;</code></td>
+<td align="left"><code>&lt;EditText&gt;</code></td>
+<td align="left"><code>&lt;UITextField&gt;</code></td>
+<td align="left"><code>&lt;input type=&quot;text&quot;&gt;</code></td>
+<td align="left">输入框</td>
+</tr>
+</tbody></table>
+<p>与android、ios、web之间的区别</p>
+<h1 id="常用组件"><a href="#常用组件" class="headerlink" title="常用组件"></a>常用组件</h1><h2 id="长列表"><a href="#长列表" class="headerlink" title="长列表"></a>长列表</h2><h3 id="FlatList"><a href="#FlatList" class="headerlink" title="FlatList"></a>FlatList</h3><p>显示一个垂直的滚动列表，和<a href="https://reactnative.cn/docs/using-a-scrollview" target="_blank" rel="noopener"><code>ScrollView</code></a>不同的是，<code>FlatList</code>并不立即渲染所有元素，而是优先渲染屏幕上可见的元素。</p>
+<p>主要必须的两个属性是<code>data</code>和<code>renderItem</code>。<code>data</code>是列表的数据源，<code>renderItem</code>则从数据源中逐个解析数据，然后返回一个设定好格式的组件来渲染。</p>
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">import React from &#39;react&#39;;</span><br><span class="line">import &#123; FlatList, StyleSheet, Text, View &#125; from &#39;react-native&#39;;</span><br><span class="line"></span><br><span class="line">const styles &#x3D; StyleSheet.create(&#123;</span><br><span class="line">  container: &#123;</span><br><span class="line">   flex: 1,</span><br><span class="line">   paddingTop: 22</span><br><span class="line">  &#125;,</span><br><span class="line">  item: &#123;</span><br><span class="line">    padding: 10,</span><br><span class="line">    fontSize: 18,</span><br><span class="line">    height: 44,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">const FlatListBasics &#x3D; () &#x3D;&gt; &#123;</span><br><span class="line">  return (</span><br><span class="line">    &lt;View style&#x3D;&#123;styles.container&#125;&gt;</span><br><span class="line">      &lt;FlatList</span><br><span class="line">        data&#x3D;&#123;[</span><br><span class="line">          &#123;key: &#39;Devin&#39;&#125;,</span><br><span class="line">          &#123;key: &#39;Dan&#39;&#125;,</span><br><span class="line">          &#123;key: &#39;Dominic&#39;&#125;,</span><br><span class="line">          &#123;key: &#39;Jackson&#39;&#125;,</span><br><span class="line">          &#123;key: &#39;James&#39;&#125;,</span><br><span class="line">          &#123;key: &#39;Joel&#39;&#125;,</span><br><span class="line">          &#123;key: &#39;John&#39;&#125;,</span><br><span class="line">          &#123;key: &#39;Jillian&#39;&#125;,</span><br><span class="line">          &#123;key: &#39;Jimmy&#39;&#125;,</span><br><span class="line">          &#123;key: &#39;Julie&#39;&#125;,</span><br><span class="line">        ]&#125;</span><br><span class="line">        renderItem&#x3D;&#123;(&#123;item&#125;) &#x3D;&gt; &lt;Text style&#x3D;&#123;styles.item&#125;&gt;&#123;item.key&#125;&lt;&#x2F;Text&gt;&#125;</span><br><span class="line">      &#x2F;&gt;</span><br><span class="line">    &lt;&#x2F;View&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default FlatListBasics;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="SectionList"><a href="#SectionList" class="headerlink" title="SectionList"></a>SectionList</h3><p>涉及到有三个属性sections、renderItem、renderSectionHeader，sections与FlatList的data属性类似，renderSectionHeader主要是用于标题头</p>
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">import React from &#39;react&#39;;</span><br><span class="line">import &#123; SectionList, StyleSheet, Text, View &#125; from &#39;react-native&#39;;</span><br><span class="line"></span><br><span class="line">const styles &#x3D; StyleSheet.create(&#123;</span><br><span class="line">  container: &#123;</span><br><span class="line">   flex: 1,</span><br><span class="line">   paddingTop: 22</span><br><span class="line">  &#125;,</span><br><span class="line">  sectionHeader: &#123;</span><br><span class="line">    paddingTop: 2,</span><br><span class="line">    paddingLeft: 10,</span><br><span class="line">    paddingRight: 10,</span><br><span class="line">    paddingBottom: 2,</span><br><span class="line">    fontSize: 14,</span><br><span class="line">    fontWeight: &#39;bold&#39;,</span><br><span class="line">    backgroundColor: &#39;rgba(247,247,247,1.0)&#39;,</span><br><span class="line">  &#125;,</span><br><span class="line">  item: &#123;</span><br><span class="line">    padding: 10,</span><br><span class="line">    fontSize: 18,</span><br><span class="line">    height: 44,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">const SectionListBasics &#x3D; () &#x3D;&gt; &#123;</span><br><span class="line">    return (</span><br><span class="line">      &lt;View style&#x3D;&#123;styles.container&#125;&gt;</span><br><span class="line">        &lt;SectionList</span><br><span class="line">          sections&#x3D;&#123;[</span><br><span class="line">            &#123;title: &#39;D&#39;, data: [&#39;Devin&#39;, &#39;Dan&#39;, &#39;Dominic&#39;]&#125;,</span><br><span class="line">            &#123;title: &#39;J&#39;, data: [&#39;Jackson&#39;, &#39;James&#39;, &#39;Jillian&#39;, &#39;Jimmy&#39;, &#39;Joel&#39;, &#39;John&#39;, &#39;Julie&#39;]&#125;,</span><br><span class="line">          ]&#125;</span><br><span class="line">          renderItem&#x3D;&#123;(&#123;item&#125;) &#x3D;&gt; &lt;Text style&#x3D;&#123;styles.item&#125;&gt;&#123;item&#125;&lt;&#x2F;Text&gt;&#125;</span><br><span class="line">          renderSectionHeader&#x3D;&#123;(&#123;section&#125;) &#x3D;&gt; &lt;Text style&#x3D;&#123;styles.sectionHeader&#125;&gt;&#123;section.title&#125;&lt;&#x2F;Text&gt;&#125;</span><br><span class="line">          keyExtractor&#x3D;&#123;(item, index) &#x3D;&gt; index&#125;</span><br><span class="line">        &#x2F;&gt;</span><br><span class="line">      &lt;&#x2F;View&gt;</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default SectionListBasics;</span><br></pre></td></tr></table></figure>
+
+<h1 id="特定平台代码"><a href="#特定平台代码" class="headerlink" title="特定平台代码"></a>特定平台代码</h1><p>跨平台代码复用，两种方案：Platform模块与特定平台扩展名</p>
+<h2 id="Platform模块"><a href="#Platform模块" class="headerlink" title="Platform模块"></a>Platform模块</h2><p>检测当前运行平台的模块</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import &#123; Platform, StyleSheet &#125; from &#39;react-native&#39;;</span><br><span class="line"></span><br><span class="line">const styles &#x3D; StyleSheet.create(&#123;</span><br><span class="line">  height: Platform.OS &#x3D;&#x3D;&#x3D; &#39;ios&#39; ? 200 : 100</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p><code>Platform.OS</code>在 iOS 上会返回<code>ios</code>，而在 Android 设备或模拟器上则会返回<code>android</code>。</p>
+<p>实用的方法<code>Platform.select()</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">import &#123; Platform, StyleSheet &#125; from &#39;react-native&#39;;</span><br><span class="line"></span><br><span class="line">const styles &#x3D; StyleSheet.create(&#123;</span><br><span class="line">  container: &#123;</span><br><span class="line">    flex: 1,</span><br><span class="line">    ...Platform.select(&#123;</span><br><span class="line">      ios: &#123;</span><br><span class="line">        backgroundColor: &#39;red&#39;</span><br><span class="line">      &#125;,</span><br><span class="line">      android: &#123;</span><br><span class="line">        backgroundColor: &#39;blue&#39;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>上面的代码会根据平台的不同返回不同的 container 样式 —— iOS 上背景色为红色，而 android 为蓝色。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const Component &#x3D; Platform.select(&#123;</span><br><span class="line">  ios: () &#x3D;&gt; require(&#39;ComponentIOS&#39;),</span><br><span class="line">  android: () &#x3D;&gt; require(&#39;ComponentAndroid&#39;)</span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line">&lt;Component &#x2F;&gt;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Android"><a href="#Android" class="headerlink" title="Android"></a>Android</h4><p><code>Platform.Version</code>在安卓是一个数字表示的是Android的api level，比如：25</p>
+<h4 id="ios"><a href="#ios" class="headerlink" title="ios"></a>ios</h4><p><code>Platform.Version</code>在ios是<code>-[UIDevice systemVersion]</code>的返回值，表示的是当前系统版本的字符串，比如：10.3</p>
+<h2 id="特定平台扩展名"><a href="#特定平台扩展名" class="headerlink" title="特定平台扩展名"></a>特定平台扩展名</h2><p>在项目中创建了下面的组件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">igButton.ios.js</span><br><span class="line">BigButton.android.js</span><br></pre></td></tr></table></figure>
+
+<p>去掉平台扩展名之后直接引用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import BigButton from &#39;.&#x2F;BigButton&#39;;</span><br></pre></td></tr></table></figure>
+
+<p>RN会根据当前运行的平台自动加载正确对应的文件</p>
+<p>如果在web端复用RN的代码，还可以使用<code>.native.js</code>的扩展名。此时iOS与Android会使用<code>BigButton.native.js</code>,web端会使用<code>BigButton.js</code></p>
+<p><strong>注意</strong>：为避免构建后的Web生产环境的代码中出现多余代码，要记得在Web打包工具中配置忽略<code>.native.js</code>结尾的文件，这样可以减少打包后的文件大小。</p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">react native</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/07/08/react-native-%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6%E4%B8%8E%E8%B7%A8%E5%B9%B3%E5%8F%B0%E5%A4%8D%E7%94%A8%E6%96%B9%E6%A1%88/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-px转化为rem" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1574,115 +1740,9 @@
 
 
   
-    <article id="post-router的两种模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/06/10/router%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%A8%A1%E5%BC%8F/" target="_blank">router的两种模式</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/06/10/router%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%A8%A1%E5%BC%8F/" class="archive-article-date">
-        <time datetime="2021-06-10T12:11:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-10</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>spa：single page application 单页面应用</p>
-<p>在单页面应用中使用vue-router，其中router有两种模式，hash模式与history模式</p>
-<h1 id="hash模式"><a href="#hash模式" class="headerlink" title="hash模式"></a>hash模式</h1><p>hash模式是vue-router的默认模式</p>
-<p>使用URL的hash来模拟一个完整的URL,当URL改变的时候,页面不会重新加载,当#后面的hash发生变化,不会导致浏览器向服务器发出请求,也不会刷新整个页面,并且会触发hasChange这个事件,通过监听hash值的变化来实现更新页面部分内容的操作</p>
-<p>例如<a href="http://www.baidu.com/#/hello，其中的hash为/#/hello,这里的hash不会带入与后端的Http请求中去，不会重新的加载整个页面" target="_blank" rel="noopener">http://www.baidu.com/#/hello，其中的hash为/#/hello,这里的hash不会带入与后端的Http请求中去，不会重新的加载整个页面</a></p>
-<p>hash模式会创建hashHistory对象,在访问不同的路由的时候,会发生两件事:<br> HashHistory.push()将新的路由添加到浏览器访问的历史的栈顶,和HasHistory.replace()替换到当前栈顶的路由</p>
-<p>hashchange只能改变#后面的url片段</p>
-<h1 id="history模式"><a href="#history模式" class="headerlink" title="history模式"></a>history模式</h1><p>使用HTML5的pushState()和replaceState()这两个api来实现的,pushState()可以改变url地址且不会发送请求,replaceState()可以读取历史记录栈,还可以对浏览器记录进行修改</p>
-<p>这两个方法应用于浏览器的历史记录栈，在当前已有的back、forward、go 的基础之上，它们提供了对历史记录进行修改的功能。只是当它们执行修改的时候，虽然改变了当前的URL，但你浏览器不会立即向后端发送请求。</p>
-<p>pushState设置的新URL可以是与当前URL同源的任意URL</p>
-<p>history模式则会将URL修改得就和正常请求后端的URL一样,如后端没有配置对应/user/id的路由处理，则会返回404错误</p>
-<p>history.pushState(data,title,url)：在浏览器中新增一条历史记录；<br> data会在onpopstate事件触发时作为参数传递过去，title为页面标题，url为页面地址；</p>
-<p>history.replaceState(data,title,url)：在浏览器中替换当前历史记录；<br> data会在onpopstate事件触发时作为参数传递过去，title为页面标题，url为页面地址；</p>
-<p>history.length()：当前历史列表中的历史记录条数；</p>
-<p>window.onpopstate：实际上popstate是一个浏览器内置的点击事件，响应pushState和replaceState的触发调用；</p>
-<p>history.back(-1):返回到当前页的上一页(原页面表单中的内容会保留)</p>
-<p>history.back(0):页面刷新</p>
-<p>history.back(1):当前页前进一页</p>
-<p>history.go(-1): 返回到当前页的上一页(原页面表单中的内容会丢失，效果基本和history.back(-1)一样</p>
-<p>history.forward():当前页面前进一页(和history.back(1)效果一样</p>
-<p>此外，history方法可以直接调用，例：history.pushState()，也可以用window.history.pushState()来调用。因为history是属于浏览器中的子对象，两种调用方法都是生效的；</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/06/10/router%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%A8%A1%E5%BC%8F/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/3/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/5/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/3/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/5/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -1817,6 +1877,10 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">RN</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">webpack</a>
               </li>
              
@@ -1825,15 +1889,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">RN</a>
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">vue</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1857,11 +1917,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
+                <a href="javascript:void(0)" class="js-tag color4">小程序</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">小程序</a>
+                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
               </li>
              
               <li class="article-tag-list-item">

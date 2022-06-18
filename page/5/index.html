@@ -202,6 +202,112 @@
             
 
   
+    <article id="post-router的两种模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/06/10/router%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%A8%A1%E5%BC%8F/" target="_blank">router的两种模式</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/06/10/router%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%A8%A1%E5%BC%8F/" class="archive-article-date">
+        <time datetime="2021-06-10T12:11:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-06-10</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>spa：single page application 单页面应用</p>
+<p>在单页面应用中使用vue-router，其中router有两种模式，hash模式与history模式</p>
+<h1 id="hash模式"><a href="#hash模式" class="headerlink" title="hash模式"></a>hash模式</h1><p>hash模式是vue-router的默认模式</p>
+<p>使用URL的hash来模拟一个完整的URL,当URL改变的时候,页面不会重新加载,当#后面的hash发生变化,不会导致浏览器向服务器发出请求,也不会刷新整个页面,并且会触发hasChange这个事件,通过监听hash值的变化来实现更新页面部分内容的操作</p>
+<p>例如<a href="http://www.baidu.com/#/hello，其中的hash为/#/hello,这里的hash不会带入与后端的Http请求中去，不会重新的加载整个页面" target="_blank" rel="noopener">http://www.baidu.com/#/hello，其中的hash为/#/hello,这里的hash不会带入与后端的Http请求中去，不会重新的加载整个页面</a></p>
+<p>hash模式会创建hashHistory对象,在访问不同的路由的时候,会发生两件事:<br> HashHistory.push()将新的路由添加到浏览器访问的历史的栈顶,和HasHistory.replace()替换到当前栈顶的路由</p>
+<p>hashchange只能改变#后面的url片段</p>
+<h1 id="history模式"><a href="#history模式" class="headerlink" title="history模式"></a>history模式</h1><p>使用HTML5的pushState()和replaceState()这两个api来实现的,pushState()可以改变url地址且不会发送请求,replaceState()可以读取历史记录栈,还可以对浏览器记录进行修改</p>
+<p>这两个方法应用于浏览器的历史记录栈，在当前已有的back、forward、go 的基础之上，它们提供了对历史记录进行修改的功能。只是当它们执行修改的时候，虽然改变了当前的URL，但你浏览器不会立即向后端发送请求。</p>
+<p>pushState设置的新URL可以是与当前URL同源的任意URL</p>
+<p>history模式则会将URL修改得就和正常请求后端的URL一样,如后端没有配置对应/user/id的路由处理，则会返回404错误</p>
+<p>history.pushState(data,title,url)：在浏览器中新增一条历史记录；<br> data会在onpopstate事件触发时作为参数传递过去，title为页面标题，url为页面地址；</p>
+<p>history.replaceState(data,title,url)：在浏览器中替换当前历史记录；<br> data会在onpopstate事件触发时作为参数传递过去，title为页面标题，url为页面地址；</p>
+<p>history.length()：当前历史列表中的历史记录条数；</p>
+<p>window.onpopstate：实际上popstate是一个浏览器内置的点击事件，响应pushState和replaceState的触发调用；</p>
+<p>history.back(-1):返回到当前页的上一页(原页面表单中的内容会保留)</p>
+<p>history.back(0):页面刷新</p>
+<p>history.back(1):当前页前进一页</p>
+<p>history.go(-1): 返回到当前页的上一页(原页面表单中的内容会丢失，效果基本和history.back(-1)一样</p>
+<p>history.forward():当前页面前进一页(和history.back(1)效果一样</p>
+<p>此外，history方法可以直接调用，例：history.pushState()，也可以用window.history.pushState()来调用。因为history是属于浏览器中的子对象，两种调用方法都是生效的；</p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/06/10/router%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%A8%A1%E5%BC%8F/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-合并分支" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1152,102 +1258,9 @@
 
 
   
-    <article id="post-triggerEvent" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/05/12/triggerEvent/" target="_blank">triggerEvent</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/05/12/triggerEvent/" class="archive-article-date">
-        <time datetime="2021-05-12T14:50:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-05-12</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="triggerEvent"><a href="#triggerEvent" class="headerlink" title="triggerEvent"></a>triggerEvent</h1><p>子组件中</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 组件的属性列表</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    properties: &#123;</span><br><span class="line">        hideBaitiao: &#123;</span><br><span class="line">            type: <span class="built_in">Boolean</span>,</span><br><span class="line">            <span class="comment">// 默认隐藏</span></span><br><span class="line">            value: <span class="literal">true</span></span><br><span class="line">        &#125;,</span><br><span class="line">        baitiao: &#123; <span class="comment">// 分期内容的数据</span></span><br><span class="line">            type: <span class="built_in">Array</span>,</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,    </span><br><span class="line">    data: &#123;</span><br><span class="line">        selectIndex:<span class="number">0</span></span><br><span class="line">    &#125;,</span><br><span class="line"> </span><br><span class="line">     makeBaitiao()&#123;<span class="comment">//立即打白条</span></span><br><span class="line"> </span><br><span class="line">            <span class="comment">// 取到点击的具体下标</span></span><br><span class="line">            <span class="keyword">let</span> selectIndex = <span class="keyword">this</span>.data.baitiao[<span class="keyword">this</span>.data.selectIndex]</span><br><span class="line">            <span class="comment">// 点击事件带参传入父级</span></span><br><span class="line">            <span class="keyword">this</span>.triggerEvent(<span class="string">'updataSelect'</span>,selectIndex)</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
-
-<p>父组件中接收</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;IOU bind:updataSelect&#x3D;&quot;selectItem&quot;&gt;&lt;&#x2F;IOU&gt;</span><br></pre></td></tr></table></figure>
-
-<h1 id="分割数组"><a href="#分割数组" class="headerlink" title="分割数组"></a>分割数组</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">splitArray(n, array)&#123;</span><br><span class="line">	var newArray &#x3D; []</span><br><span class="line">	 for (let i &#x3D; 0; array.length &gt; 0; i++)&#123;</span><br><span class="line">		newArray.push(array.splice(0, n))</span><br><span class="line">		&#125;</span><br><span class="line">		 return newArray</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">小程序</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/05/12/triggerEvent/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/4/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/6/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/4/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/6/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -1382,6 +1395,10 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">RN</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">webpack</a>
               </li>
              
@@ -1390,15 +1407,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">RN</a>
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">vue</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1422,11 +1435,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
+                <a href="javascript:void(0)" class="js-tag color4">小程序</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">小程序</a>
+                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
               </li>
              
               <li class="article-tag-list-item">
