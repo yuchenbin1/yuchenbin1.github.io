@@ -202,6 +202,226 @@
             
 
   
+    <article id="post-react-hooks的闭包陷阱" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/12/01/react-hooks%E7%9A%84%E9%97%AD%E5%8C%85%E9%99%B7%E9%98%B1/" target="_blank">react hooks的闭包陷阱</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/12/01/react-hooks%E7%9A%84%E9%97%AD%E5%8C%85%E9%99%B7%E9%98%B1/" class="archive-article-date">
+        <time datetime="2021-12-01T13:15:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-01</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="useEffect的异步带来的问题"><a href="#useEffect的异步带来的问题" class="headerlink" title="useEffect的异步带来的问题"></a>useEffect的异步带来的问题</h1><h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><p>有三个按钮</p>
+<p>start：开启一个定时器interval，显示器每一秒都会加一</p>
+<p>stop：停止定时器interval</p>
+<p>clear：清除定时器interval，显示器清除为0</p>
+<h3 id="实际情况"><a href="#实际情况" class="headerlink" title="实际情况"></a>实际情况</h3><p>会出现一个问题，在interval开启的情况下，显示器不会清除为0</p>
+<h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><p><code>useEffect</code> 是异步的，也就是说我们执行 <code>useEffect</code> 中绑定的函数或者是解绑的函数，<strong>都不是在一次 <code>setState</code> 产生的更新中被同步执行的。</strong></p>
+<h3 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h3><p>正常的同步流程：</p>
+<p>点击来 <code>clear</code> 之后，我们调用了设置显示器函数和设置定时器函数，这两个方法是用来更新 state 的，所以他们会标记组件更新，然后通知 React 我们需要重新渲染，于是执行到对应的组件进行解绑</p>
+<p>实际的流程：</p>
+<p>在执行到对应的组件更新之后，因为useEffect是异步的，于是设置显示器函数会再次触发，导致这个问题</p>
+<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p>使用<code>useLayoutEffect</code></p>
+<p>useLayoutEffect可以看成useEffect的同步版本，但是大量的使用会导致浏览器的卡顿</p>
+<p>不使用<code>useLayoutEffect</code></p>
+<p>从根本上解决这个问题，主要原因是在更新组件之后，定时器的设置显示器函数再次执行导致的。</p>
+<p>第一反应在setInterval中加入回调，但是这个方法是不行的，setInterval中回调方法保存了他的闭包，回调中的running永远都是true的，于是使用useReducer，逃出闭包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">const [state,dispatch]&#x3D;React.useState(stateReducer,&#123;</span><br><span class="line">  lapse:0,</span><br><span class="line">  running:false</span><br><span class="line">&#125;)</span><br><span class="line">function updateState(action)&#123;</span><br><span class="line">  setState(state&#x3D;&gt;&#123;</span><br><span class="line">    switch (action.type)&#123;</span><br><span class="line">      case TOGGLE:</span><br><span class="line">        return &#123;...state,running:!state.running&#125;</span><br><span class="line">      case TICK:</span><br><span class="line">        if(state.running)&#123;</span><br><span class="line">          return &#123;...state,lapse:action.lapse&#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return state</span><br><span class="line">      case CLEAR:</span><br><span class="line">        return &#123;running:false,lapse:0&#125;</span><br><span class="line">      default:</span><br><span class="line">        return state</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">react</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/12/01/react-hooks%E7%9A%84%E9%97%AD%E5%8C%85%E9%99%B7%E9%98%B1/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-vue-cli-service" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/11/23/vue-cli-service/" target="_blank">vue-cli-service</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/11/23/vue-cli-service/" class="archive-article-date">
+        <time datetime="2021-11-23T11:40:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-23</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>之前被vue-cli-service的–modern的打包坑了一回，所以今天系统的学习一下</p>
+<h1 id="serve"><a href="#serve" class="headerlink" title="serve"></a>serve</h1><p>命令会启动一个开发服务器（基于webpack-dev-server）并附带开箱即用的模块热重载（Hot-Module-Replacement）</p>
+<p>命令行参数【entry】是唯一入口，而非额外的追加入口，尝试使用【entry】覆盖config.pages中的entry将可能引发错误</p>
+<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><p><code>vue-cli-service serve [options] [entry]</code></p>
+<p>选项options</p>
+<h3 id="–open"><a href="#–open" class="headerlink" title="–open"></a>–open</h3><p>在服务器启动时打开浏览器</p>
+<h3 id="–copy"><a href="#–copy" class="headerlink" title="–copy"></a>–copy</h3><p>在服务器启动时将URL复制到剪切版</p>
+<h3 id="–mode"><a href="#–mode" class="headerlink" title="–mode"></a>–mode</h3><p>指定环境模式（默认值：development）</p>
+<h3 id="–host"><a href="#–host" class="headerlink" title="–host"></a>–host</h3><p>指定host（默认值：0.0.0.0）</p>
+<h3 id="–port"><a href="#–port" class="headerlink" title="–port"></a>–port</h3><p>指定端口port（默认值： 8080）</p>
+<h3 id="–https"><a href="#–https" class="headerlink" title="–https"></a>–https</h3><p>使用https（默认值：false）</p>
+<h1 id="build"><a href="#build" class="headerlink" title="build"></a>build</h1><p>会在 <code>dist/</code> 目录产生一个可用于生产环境的包，带有 JS/CSS/HTML 的压缩，和为更好的缓存而做的自动的 vendor chunk splitting。它的 chunk manifest 会内联在 HTML 里</p>
+<h2 id="用法-1"><a href="#用法-1" class="headerlink" title="用法"></a>用法</h2><p><code>vue-cli-service build [options] [entry]</code></p>
+<p>选项options</p>
+<h3 id="–mode-1"><a href="#–mode-1" class="headerlink" title="–mode"></a>–mode</h3><p>指定环境模式（默认值：production）</p>
+<h3 id="–dest"><a href="#–dest" class="headerlink" title="–dest"></a>–dest</h3><p>指定输出目录（默认值：dist）</p>
+<h3 id="–modern"><a href="#–modern" class="headerlink" title="–modern"></a>–modern</h3><p>面向现代浏览器带自动退回的构建应用</p>
+<p>使用<a href="https://cli.vuejs.org/zh/guide/browser-compatibility.html#现代模式" target="_blank" rel="noopener">现代模式</a>构建应用，为现代浏览器交付原生支持的 ES2015 代码，并生成一个兼容老浏览器的包用来自动回退。</p>
+<h3 id="–target"><a href="#–target" class="headerlink" title="–target"></a>–target</h3><p>app｜lib｜wc｜wc-async（默认值：app）</p>
+<p>允许你将项目中的任何组件以一个库或 Web Components 组件的方式进行构建。更多细节请查阅<a href="https://cli.vuejs.org/zh/guide/build-targets.html" target="_blank" rel="noopener">构建目标</a></p>
+<h3 id="–name"><a href="#–name" class="headerlink" title="–name"></a>–name</h3><p>库或Web Components模式下的名字（默认值：package.json中的’name’字段或入口文件名）</p>
+<h3 id="–no-clean"><a href="#–no-clean" class="headerlink" title="–no-clean"></a>–no-clean</h3><p>在构建项目之前不清除目标目录</p>
+<h3 id="–report"><a href="#–report" class="headerlink" title="–report"></a>–report</h3><p>生成report.html以帮助分析包内容</p>
+<h3 id="–report-json"><a href="#–report-json" class="headerlink" title="–report-json"></a>–report-json</h3><p>生成report.json以帮助分析包内容</p>
+<h3 id="–watch"><a href="#–watch" class="headerlink" title="–watch"></a>–watch</h3><p>监听文件变化</p>
+<h1 id="inspect"><a href="#inspect" class="headerlink" title="inspect"></a>inspect</h1><p>可以使用 <code>vue-cli-service inspect</code> 来审查一个 Vue CLI 项目的 webpack config。更多细节请查阅<a href="https://cli.vuejs.org/zh/guide/webpack.html#审查项目的-webpack-config" target="_blank" rel="noopener">审查 webpack config</a></p>
+<h3 id="用法-2"><a href="#用法-2" class="headerlink" title="用法"></a>用法</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vue-cli-service inspect [options] [...paths]</span><br></pre></td></tr></table></figure>
+
+<p>选项options</p>
+<h3 id="–mode-2"><a href="#–mode-2" class="headerlink" title="–mode"></a>–mode</h3><p>指定环境模式（默认：development）</p>
+<h1 id="help"><a href="#help" class="headerlink" title="help"></a>help</h1><p>使用<code>npx vue-cli-service help</code>查看所有注入的额外命令</p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/11/23/vue-cli-service/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-打包modern" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1074,270 +1294,6 @@
 
 
   
-    <article id="post-node构建脚手架" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/10/10/node%E6%9E%84%E5%BB%BA%E8%84%9A%E6%89%8B%E6%9E%B6/" target="_blank">node构建脚手架</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/10/10/node%E6%9E%84%E5%BB%BA%E8%84%9A%E6%89%8B%E6%9E%B6/" class="archive-article-date">
-        <time datetime="2021-10-10T08:15:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-10</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="使用node搭建脚手架"><a href="#使用node搭建脚手架" class="headerlink" title="使用node搭建脚手架"></a>使用node搭建脚手架</h1><h2 id="1-安装配置文件"><a href="#1-安装配置文件" class="headerlink" title="1.安装配置文件"></a>1.安装配置文件</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
-
-<p>新建项目</p>
-<h2 id="2-修改文件，新增bin"><a href="#2-修改文件，新增bin" class="headerlink" title="2.修改文件，新增bin"></a>2.修改文件，新增bin</h2><h3 id="bin的作用"><a href="#bin的作用" class="headerlink" title="bin的作用"></a>bin的作用</h3><p>如果有某几个可执行文件想放置到全局，在bin这个字段导入路径就行，它会创建一个软链接到该文件</p>
-<p><strong>确保bin文件的里面开头要写上#!/usr/bin/env node</strong>，否则文件脚本不会在Node环境下运行</p>
-<h2 id="3-新建一个bin的文件夹"><a href="#3-新建一个bin的文件夹" class="headerlink" title="3.新建一个bin的文件夹"></a>3.新建一个bin的文件夹</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/usr/bin/env node</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> fs=<span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"><span class="keyword">const</span> path=<span class="built_in">require</span>(<span class="string">'path'</span>);</span><br><span class="line"><span class="comment">//命令行询问</span></span><br><span class="line"><span class="keyword">const</span> inquirer=<span class="built_in">require</span>(<span class="string">'inquirer'</span>);</span><br><span class="line"><span class="comment">//模版引擎</span></span><br><span class="line"><span class="keyword">const</span> ejs=<span class="built_in">require</span>(<span class="string">'ejs'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//发起命令行的询问</span></span><br><span class="line">inquirer.prompt([</span><br><span class="line">  &#123;</span><br><span class="line">    type:<span class="string">'input'</span>,<span class="comment">//问题的输入方式</span></span><br><span class="line">    name:<span class="string">'name'</span>,<span class="comment">//问题的返回的键</span></span><br><span class="line">    message:<span class="string">'Project name?'</span><span class="comment">//屏幕的提示</span></span><br><span class="line">  &#125;</span><br><span class="line">]).then(<span class="function"><span class="params">anwsers</span>=&gt;</span>&#123;</span><br><span class="line">  <span class="comment">//根据用户回答生成文件</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">//模版目录</span></span><br><span class="line">  <span class="keyword">const</span> tmpDir=path.join(__dirname,<span class="string">'templates'</span>)</span><br><span class="line">  </span><br><span class="line">  <span class="comment">//输出目录</span></span><br><span class="line">  <span class="keyword">const</span> destDir=process.cwd()</span><br><span class="line">  </span><br><span class="line">  <span class="comment">//将模块的全部文件转换到目标目录</span></span><br><span class="line">  fs.readdir(tepDir,(err,files)=&gt;&#123;</span><br><span class="line">    <span class="keyword">if</span>(err) <span class="keyword">throw</span> err</span><br><span class="line">    files.forEach(<span class="function"><span class="params">file</span>=&gt;</span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'templates下的具体文件'</span>,file)</span><br><span class="line">      <span class="comment">//通过模版引擎去渲染</span></span><br><span class="line">      ejs.renderFile(path.join(tmpDir,file),anwsers,(err,result)=&gt;&#123;</span><br><span class="line">        <span class="keyword">if</span>(err) <span class="keyword">throw</span> err</span><br><span class="line">        <span class="comment">//写入文件</span></span><br><span class="line">        fs.writeFileSync(path.join(destDir,file),result)</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<h2 id="4-新建templates文件夹模版"><a href="#4-新建templates文件夹模版" class="headerlink" title="4.新建templates文件夹模版"></a>4.新建templates文件夹模版</h2><p>需要引入的模版</p>
-<p>生成</p>
-<p>index.js与style.css</p>
-<p>Index.js</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;<span class="name">%=name</span> %&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>Style.css</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.&lt;%=name%&gt;&#123;</span><br><span class="line">    color:pink;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>&lt;%=name%&gt;可以获取到来自inquirer.prompt的数据</p>
-<h2 id="4-将脚手架全局使用"><a href="#4-将脚手架全局使用" class="headerlink" title="4.将脚手架全局使用"></a>4.将脚手架全局使用</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn link或者npm link</span><br></pre></td></tr></table></figure>
-
-<h2 id="5-测试脚手架全局是否可以"><a href="#5-测试脚手架全局是否可以" class="headerlink" title="5.测试脚手架全局是否可以"></a>5.测试脚手架全局是否可以</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ generator-make --help</span><br><span class="line"></span><br><span class="line"><span class="comment">//成功</span></span><br></pre></td></tr></table></figure>
-
-<p>如果失败可能是没有权限</p>
-<p>解决方法</p>
-<p>首先，返回上一级</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd ..</span><br></pre></td></tr></table></figure>
-
-<p>然后给该脚手架权限</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chmod -R <span class="number">777</span> generator-make</span><br></pre></td></tr></table></figure>
-
-<p>最后再次测试</p>
-<p>如果出现找不到的模块的错误，可以npm install对应的模块</p>
-<h2 id="6-脚手架搭建项目"><a href="#6-脚手架搭建项目" class="headerlink" title="6.脚手架搭建项目"></a>6.脚手架搭建项目</h2><p>新建文件夹</p>
-<p>在命令行中输入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$generator-make?Project name?bar</span><br></pre></td></tr></table></figure>
-
-<p>bar文件生成成功</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">node</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/10/10/node%E6%9E%84%E5%BB%BA%E8%84%9A%E6%89%8B%E6%9E%B6/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-前端报错收集" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/10/08/%E5%89%8D%E7%AB%AF%E6%8A%A5%E9%94%99%E6%94%B6%E9%9B%86/" target="_blank">前端报错收集</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/10/08/%E5%89%8D%E7%AB%AF%E6%8A%A5%E9%94%99%E6%94%B6%E9%9B%86/" class="archive-article-date">
-        <time datetime="2021-10-08T14:34:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-08</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="现有插件"><a href="#现有插件" class="headerlink" title="现有插件"></a>现有插件</h1><p><code>fundebug</code>，要付费的,代码异常监控体系</p>
-<h1 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h1><p>收集日志的三个层次：</p>
-<p>第一层，及时的发现问题，日志告诉我们错误在哪里？</p>
-<p>第二层，不仅告诉我们错误在哪里，还告诉我们如何处理这个错误。</p>
-<p>第三层，发现错误，自动容错</p>
-<h1 id="客户端收集"><a href="#客户端收集" class="headerlink" title="客户端收集"></a>客户端收集</h1><h2 id="window-onerror"><a href="#window-onerror" class="headerlink" title="window.onerror"></a>window.onerror</h2><p>Window.onerror会全局的在js运行时错误、预发错误发生时触发。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onerror=<span class="function">(<span class="params">msg,url,lineNum,colNum,err</span>)=&gt;</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">`错误发生的异常信息（字符串）:<span class="subst">$&#123;msg&#125;</span>`</span>)</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`错误发生的脚本URL（字符串）:<span class="subst">$&#123;url&#125;</span>`</span>)</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`错误发生的行号（数字）:<span class="subst">$&#123;lineNum&#125;</span>`</span>)</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`错误发生的列号（数字）:<span class="subst">$&#123;colNum&#125;</span>`</span>)</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`错误发生的Error对象（错误对象）:<span class="subst">$&#123;err&#125;</span>`</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>注意这里拿到的错误是被throw，没有被catch过的错误，而不能拿到promise这样的错误。</strong></p>
-<p>但是现在只能拿到Script error并没有错误本身的message、url等信息，在lineNum与colNum也都是0，并不是真正错误发生时的错误信息。</p>
-<p>原因是浏览器在同源策略限制下所产生的，浏览器出于安全上的考虑，当页面引用的非同域的外部脚本中抛出了异常，此时页面无权限获取这个异常，将输出Script Error的错误信息。在Chrome中有这样的安全机制，不会把完整的跨域错误信息暴露给你，在Firefox、Safari中均可以正常的拿到完整的错误信息。</p>
-<h2 id="解决Script-Error"><a href="#解决Script-Error" class="headerlink" title="解决Script Error"></a>解决Script Error</h2><p>解决这个问题，可以使用跨域资源共享机制（CORS）</p>
-<p>1.为页面的Script标签添加crossorigin属性</p>
-<p>添加crossorigin属性后，浏览器将自动在请求头中添加一个Origin字段，告诉服务器自己的来源，服务器再判断是否返回</p>
-<p>2.响应头中添加Access-Control-Allow-Origin来支持跨域资源共享</p>
-<p>根据需求判断是否需要处理这个问题，收集这部分的错误信息</p>
-<h2 id="unhandledrejection"><a href="#unhandledrejection" class="headerlink" title="unhandledrejection"></a>unhandledrejection</h2><p>promise中的错误不能被try…catch…和window.onerror捕获，这时候我们需要使用unhandledrejection来帮我们捕获这部分错误</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'unhandledrejection'</span>,(e)=&gt;&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`Promise.reject()中的内容，告诉你发生错误的原因:<span class="subst">$&#123;e.reason&#125;</span>`</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`Promise对象:<span class="subst">$&#123;e.promise&#125;</span>`</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>但是unhandledrejection兼容性不太好</p>
-<h2 id="console-error"><a href="#console-error" class="headerlink" title="console.error"></a>console.error</h2><p>Console.error常被视为打印的日志，可预知的错误</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">  </span><br><span class="line">&#125;<span class="keyword">catch</span>(err)&#123;</span><br><span class="line">  <span class="built_in">console</span>.error(err)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>经常像上面这样输出错误，但是其实是不够的，可以多做一下对错误收集系统的上报</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.error=(<span class="function"><span class="params">func</span>=&gt;</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function">(<span class="params">...args</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="comment">//在这里可以做一些处理，比如错误上报</span></span><br><span class="line">    func.apply(<span class="built_in">console</span>,args);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)(<span class="built_in">console</span>.error);</span><br></pre></td></tr></table></figure>
-
-<h2 id="addEventListener-‘error’"><a href="#addEventListener-‘error’" class="headerlink" title="addEventListener(‘error’)"></a>addEventListener(‘error’)</h2><p>静态资源上面的方法是无法捕获的,有如下两种方法</p>
-<h3 id="onerror捕获"><a href="#onerror捕获" class="headerlink" title="onerror捕获"></a>onerror捕获</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://baidu.com/js/test.js"</span> <span class="attr">onerror</span>=<span class="string">"errorHandler(this)"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"https://baidu.com/css/test.css"</span> <span class="attr">onerror</span>=<span class="string">"errorHandler(this)"</span>&gt;</span><span class="tag">&lt;/<span class="name">link</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>这样就可以拿到这些静态资源的错误，但是对代码的侵入性强了一些。</p>
-<h3 id="addEventListener-‘error’-1"><a href="#addEventListener-‘error’-1" class="headerlink" title="addEventListener(‘error’)"></a>addEventListener(‘error’)</h3><p>大多数的情况下addEventListener(‘error’)和window.onerror的效果是差不多的，这两种方法分别是通过捕获与冒泡来拿到error。</p>
-<p>因为资源加载事件中没有冒泡，所以window.onerror是拿不到资源加载错误的，而addEventListener可以拿到错误，但是拿到错误之后，需要区分是资源加载错误，但是其他错误。</p>
-<p>他们之间有明显的区别，其他普通错误会有一个message字段，资源加载错误没有这个字段</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'error'</span>,(errorEvent)=&gt;&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(errorEvent)</span><br><span class="line">	<span class="built_in">console</span>.log(errorEvent.message)</span><br><span class="line">&#125;，<span class="literal">true</span>)</span><br></pre></td></tr></table></figure>
-
-<p><strong>注意这里拿到的是一个事件，并不是error对象</strong></p>
-<h1 id="服务端收集"><a href="#服务端收集" class="headerlink" title="服务端收集"></a>服务端收集</h1><p>在Node服务端收集与客户端收集大同小异，只是一些方法上的区别。</p>
-<h2 id="uncaughtException"><a href="#uncaughtException" class="headerlink" title="uncaughtException"></a>uncaughtException</h2><p>通过Node的全局处理，捕获所有未被处理的错误，这是最后一道关卡，如果还不处理往往会导致程序崩溃。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">process.on(<span class="string">'uncaughtException'</span>,err=&gt;&#123;</span><br><span class="line">  <span class="comment">//do something</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<h2 id="unhandledRejection"><a href="#unhandledRejection" class="headerlink" title="unhandledRejection"></a>unhandledRejection</h2><p>在Node中，Promise同样不能被try…catch…和uncaughtException捕获。所以需要unhandledRejection来捕获这部分的错误。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">process.on(<span class="string">'unhandledRejection'</span>,err=&gt;&#123;</span><br><span class="line">  <span class="comment">//do something</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<h2 id="console-error-1"><a href="#console-error-1" class="headerlink" title="console.error"></a>console.error</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.error=<span class="function">(<span class="params">func=&gt;&#123;  <span class="keyword">return</span> (...args</span>)=&gt;</span>&#123;    <span class="comment">//在这里可以做一些处理，比如错误上报    func.apply(console,args);  &#125;&#125;)(console.error);</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="错误类型的总结"><a href="#错误类型的总结" class="headerlink" title="错误类型的总结"></a>错误类型的总结</h2><ol>
-<li>同步错误 =&gt; 可以被1.try…catch 2.window.onerror 3.process.on(‘uncaughtException’)捕获。</li>
-<li>异步错误 =&gt; 例如setInterval、没有被await的异步函数等，是不会被try…catch捕获的，但是会被window.onerror和process.on(‘uncaughtException’)捕获。</li>
-<li>Promise错误 =&gt; Promise.reject(new Error(‘some wrong’));像是这样的promise错误，是不会被window.onerror和process.on(‘uncaughtException’)捕获的，更不会被try…catch捕获，想要捕获它们只能，process.on(‘unhandledRejection’)以及window.addEventListener(‘unhandledrejection’)</li>
-</ol>
-<p><strong>注意的是在局部try…catch了的错误不会继续往上层抛出了，所以全局处理的捕获是肯定捕获不到的，除非在catch到以后处理完成，将错误继续向上层throw</strong></p>
-<h2 id="异常的统一处理"><a href="#异常的统一处理" class="headerlink" title="异常的统一处理"></a>异常的统一处理</h2><p>在业务层对错误捕获包装后继续向上层抛出，在包装中的时候，将所有的错误都继承自我们自己定义的错误类，在错误类中有很多我们自定义好的错误类型，在抛出的时候只需要简单的抛一下这个错误类型的实例就好，在最后中间件的时候我们可以catch到全部的错误做统一的处理。这时的错误是被分过类，分过级的，还有一部分可能是之前从未被捕获的，在这就可以干很多事了。</p>
-<h3 id="错误类的定义"><a href="#错误类的定义" class="headerlink" title="错误类的定义"></a>错误类的定义</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SystemError</span> <span class="keyword">extends</span> <span class="title">Error</span></span>&#123;  <span class="keyword">constructor</span>(message)&#123;    <span class="comment">//错误类型    //错误等级    //错误信息    //...  &#125;  static wrapper(e)&#123;    const error = new this(e.message);    //将e上各种东西包装到error上    return error;  &#125;&#125;//可以对常见的错误提前定义好createDBError(xxx)&#123;  const sysError=systemError.wrapper(error);  //写入错误信息  //写入错误类型  //写入错误等级  //...  return sysError;&#125;//这样在业务中抛出错误的时候只需要简单的throw createDBError(error,&#123;someInfo&#125;);</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="错误捕获"><a href="#错误捕获" class="headerlink" title="错误捕获"></a>错误捕获</h2><p>在业务中尽可能精确的捕获错误，根据错误，进行定级，分类等操作，然后继续向上层抛出。</p>
-<p>可能会导致有大量的try…catch嵌套的情况，尽量避免</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;  <span class="keyword">try</span>&#123;    <span class="comment">//操作数据库  &#125;catch(err)&#123;    throw createDBError(error,&#123;someInfo&#125;);  &#125;  try&#123;    //正常业务  &#125;catch(err)&#123;    throw createBusinessError(error,&#123;someInfo&#125;);  &#125;&#125;catch(err)&#123;  throw err&#125;</span></span><br></pre></td></tr></table></figure>
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/10/08/%E5%89%8D%E7%AB%AF%E6%8A%A5%E9%94%99%E6%94%B6%E9%9B%86/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
@@ -1483,11 +1439,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">RN</a>
+                <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+                <a href="javascript:void(0)" class="js-tag color3">RN</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1495,7 +1451,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">js</a>
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1515,11 +1471,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
+                <a href="javascript:void(0)" class="js-tag color4">小程序</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">小程序</a>
+                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
               </li>
              
               <li class="article-tag-list-item">
