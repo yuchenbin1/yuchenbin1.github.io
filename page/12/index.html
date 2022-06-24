@@ -202,6 +202,313 @@
             
 
   
+    <article id="post-vue的编程式导航" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/04/18/vue%E7%9A%84%E7%BC%96%E7%A8%8B%E5%BC%8F%E5%AF%BC%E8%88%AA/" target="_blank">vue的编程式导航</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/04/18/vue%E7%9A%84%E7%BC%96%E7%A8%8B%E5%BC%8F%E5%AF%BC%E8%88%AA/" class="archive-article-date">
+        <time datetime="2020-04-18T08:22:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-18</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="vue的编程式导航"><a href="#vue的编程式导航" class="headerlink" title="vue的编程式导航"></a>vue的编程式导航</h1><h3 id="两个导航方式"><a href="#两个导航方式" class="headerlink" title="两个导航方式:"></a>两个导航方式:</h3><p>  1.声明式导航:通过点击链接实现导航的方式</p>
+<p>  例如:普通网页中的<code>&lt;a&gt;&lt;/a&gt;</code>链接或vue中的<code>&lt;router-link&gt;&lt;/router-link&gt;</code></p>
+<p>  2.编程式导航:通过JavaScript形式的API实现导航的方式</p>
+<p>  例如:普通网页中的<code>location.href</code></p>
+<h3 id="常用的API"><a href="#常用的API" class="headerlink" title="常用的API:"></a>常用的API:</h3><p>  this.$router.push(‘hash地址’)</p>
+<p>  this.$router.go(n)</p>
+<p>  这里n为1则前进一位，-1则后退一位</p>
+<h3 id="router-push-方法的参数规则"><a href="#router-push-方法的参数规则" class="headerlink" title="router.push()方法的参数规则"></a>router.push()方法的参数规则</h3><ol>
+<li><p>router.push(‘/home’)</p>
+</li>
+<li><p>router.push({path:’/home’})</p>
+</li>
+<li><p>router.push({name:’/user’,params:{userId:123}})</p>
+</li>
+<li><p>router.push({path:’/register’,query:{uName:’zhangsan’}})</p>
+</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">    &lt;meta name=<span class="string">"viewport"</span> content=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span><br><span class="line">    &lt;title&gt;vue-router&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;!--</span><br><span class="line">    两个导航方式:</span><br><span class="line">    <span class="number">1.</span>声明式导航:通过点击链接实现导航的方式</span><br><span class="line">    例如:普通网页中的&lt;a&gt;&lt;<span class="regexp">/a&gt;链接或vue中的&lt;router-link&gt;&lt;/</span>router-link&gt;</span><br><span class="line">    <span class="number">2.</span>编程式导航:通过JavaScript形式的API实现导航的方式</span><br><span class="line">    例如:普通网页中的location.href</span><br><span class="line">    --&gt;</span><br><span class="line">    &lt;!--</span><br><span class="line">    常用的API:</span><br><span class="line">    <span class="keyword">this</span>.$router.push(<span class="string">'hash地址'</span>)</span><br><span class="line">    <span class="keyword">this</span>.$router.go(n)</span><br><span class="line">    这里n为<span class="number">1</span>则前进一位，<span class="number">-1</span>则后退一位</span><br><span class="line">    --&gt;</span><br><span class="line">    &lt;!--</span><br><span class="line">    router.push()方法的参数规则</span><br><span class="line">    <span class="number">1.</span> router.push(<span class="string">'/home'</span>)</span><br><span class="line">    <span class="number">2.</span> router.push(&#123;<span class="attr">path</span>:<span class="string">'/home'</span>&#125;)</span><br><span class="line">    <span class="number">3.</span> router.push(&#123;<span class="attr">name</span>:<span class="string">'/user'</span>,<span class="attr">params</span>:&#123;<span class="attr">userId</span>:<span class="number">123</span>&#125;&#125;)</span><br><span class="line">    <span class="number">4.</span> router.push(&#123;<span class="attr">path</span>:<span class="string">'/register'</span>,<span class="attr">query</span>:&#123;<span class="attr">uName</span>:<span class="string">'zhangsan'</span>&#125;&#125;)</span><br><span class="line">    --&gt;</span><br><span class="line">   </span><br><span class="line">    &lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        &lt;router-link to=<span class="string">"/zhuye"</span>&gt;主页&lt;<span class="regexp">/router-link&gt;</span></span><br><span class="line"><span class="regexp">        &lt;router-link to="/</span>keji/<span class="number">1</span><span class="string">"&gt;科技1&lt;/router-link&gt;</span></span><br><span class="line"><span class="string">        &lt;router-link :to="</span>&#123;<span class="attr">name</span>:<span class="string">'keji'</span>,<span class="attr">params</span>:&#123;<span class="attr">id</span>:<span class="number">2</span>&#125;&#125;<span class="string">"&gt;科技2&lt;/router-link&gt;&lt;!--注意绑定的对象外面有引号--&gt;</span></span><br><span class="line"><span class="string">        &lt;router-link to="</span>/keji/<span class="number">3</span><span class="string">"&gt;科技3&lt;/router-link&gt;</span></span><br><span class="line"><span class="string">        &lt;router-link to="</span>/caijing<span class="string">"&gt;财经&lt;/router-link&gt;</span></span><br><span class="line"><span class="string">        &lt;router-link to="</span>/yule<span class="string">"&gt;娱乐&lt;/router-link&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        </span></span><br><span class="line"><span class="string">        &lt;router-view&gt;&lt;/router-view&gt;</span></span><br><span class="line"><span class="string">    &lt;/div&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &lt;script src="</span>https:<span class="comment">//cdn.jsdelivr.net/npm/vue/dist/vue.js"&gt;&lt;/script&gt;</span></span><br><span class="line">    &lt;script src=<span class="string">"https://unpkg.com/vue-router/dist/vue-router.js"</span>&gt;&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">    &lt;script&gt;</span></span><br><span class="line"><span class="regexp">        const zhuye=&#123;</span></span><br><span class="line"><span class="regexp">            template:`&lt;div&gt;</span></span><br><span class="line"><span class="regexp">                &lt;h1&gt;主页组件&lt;/</span>h1&gt;</span><br><span class="line">                &lt;button @click=<span class="string">"goYule"</span>&gt;跳转到娱乐页面&lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp">                &lt;/</span>div&gt;<span class="string">`,</span></span><br><span class="line"><span class="string">            methods: &#123;</span></span><br><span class="line"><span class="string">                goYule:function()&#123;</span></span><br><span class="line"><span class="string">                    this.$router.push('/yule');//跳转到娱乐页面</span></span><br><span class="line"><span class="string">                &#125;</span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">        const keji=&#123;</span></span><br><span class="line"><span class="string">            props:['id','name','age'],</span></span><br><span class="line"><span class="string">            template:`</span>&lt;h1&gt;科技信息--用户id为&#123;&#123;id&#125;&#125;--名字为&#123;&#123;name&#125;&#125;--年龄为&#123;&#123;age&#125;&#125;&lt;<span class="regexp">/h1&gt;`</span></span><br><span class="line"><span class="regexp">        &#125;</span></span><br><span class="line"><span class="regexp">        const caijing=&#123;</span></span><br><span class="line"><span class="regexp">            template:`&lt;h1&gt;财经信息&lt;/</span>h1&gt;<span class="string">`</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">        const yule=&#123;</span></span><br><span class="line"><span class="string">            template:`</span>&lt;div&gt; </span><br><span class="line">                &lt;h1&gt;娱乐信息&lt;<span class="regexp">/h1&gt;</span></span><br><span class="line"><span class="regexp">                &lt;button @click="goBack"&gt;后退&lt;/</span>button&gt;</span><br><span class="line">                &lt;<span class="regexp">/div&gt;`,</span></span><br><span class="line"><span class="regexp">            methods:&#123;</span></span><br><span class="line"><span class="regexp">                goBack:function()&#123;</span></span><br><span class="line"><span class="regexp">                    this.$router.go(-1);</span></span><br><span class="line"><span class="regexp">                &#125;</span></span><br><span class="line"><span class="regexp">            &#125;</span></span><br><span class="line"><span class="regexp">        &#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">        const router=new VueRouter(&#123;</span></span><br><span class="line"><span class="regexp">            routes:[</span></span><br><span class="line"><span class="regexp">                &#123;path:'/',redirect: '/zhuye'&#125;,</span></span><br><span class="line"><span class="regexp">                // 命名路由的规则</span></span><br><span class="line"><span class="regexp">                &#123;path:'/zhuye',component:zhuye &#125;,</span></span><br><span class="line"><span class="regexp">                &#123;name:'keji', path:'/keji/:id',component:keji,props:route=&gt;(&#123;name:'bob',age:31,id:route.params.id&#125;)&#125;,//props为函数类型时，id是获取不到的</span></span><br><span class="line"><span class="regexp">                &#123;path:'/caijing',component:caijing &#125;,</span></span><br><span class="line"><span class="regexp">                &#123;path:'/yule',component:yule &#125;,</span></span><br><span class="line"><span class="regexp">               </span></span><br><span class="line"><span class="regexp">            ]</span></span><br><span class="line"><span class="regexp">        &#125;)</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">        const vm=new Vue(&#123;</span></span><br><span class="line"><span class="regexp">            el:'#app',</span></span><br><span class="line"><span class="regexp">            data:&#123;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">            &#125;,</span></span><br><span class="line"><span class="regexp">            router:router/</span><span class="regexp">/一定要挂载</span></span><br><span class="line"><span class="regexp">        &#125;)</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">        </span></span><br><span class="line"><span class="regexp">    &lt;/</span>script&gt;</span><br><span class="line">&lt;<span class="regexp">/body&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>html&gt;</span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/04/18/vue%E7%9A%84%E7%BC%96%E7%A8%8B%E5%BC%8F%E5%AF%BC%E8%88%AA/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-vue-router的基本用法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/04/17/vue-router%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/" target="_blank">vue-router的基本用法</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/04/17/vue-router%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/" class="archive-article-date">
+        <time datetime="2020-04-17T09:03:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-17</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="vue-router的基本用法"><a href="#vue-router的基本用法" class="headerlink" title="vue-router的基本用法"></a>vue-router的基本用法</h1><ol>
+<li>引入相关的库函数（注意先引入vue再引入vue-router）</li>
+<li>添加路由链接<code>&lt;router-link to=&quot;&quot;&gt;&lt;/router-link&gt;</code></li>
+<li>添加路由的填充位<code>&lt;router-view&gt;&lt;/router-view&gt;</code></li>
+<li>定义路由的组件<code>const name1={template:``}</code></li>
+<li>配置路由规则并创建路由实例<code>const router=new VueRouter({routes:[{path:&#39;&#39;,component:name1}]})</code></li>
+<li>把路由挂载到Vue的根实例中<code>router:router</code></li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">    &lt;meta name=<span class="string">"viewport"</span> content=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span><br><span class="line">    &lt;title&gt;vue-router&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">&lt;!--    router-link是vue的标签默认是a标签</span><br><span class="line">        to属性默认为href属性</span><br><span class="line">        to属性的值默认会被渲染为#开头的hash地址 </span><br><span class="line">--&gt;</span><br><span class="line"></span><br><span class="line">        &lt;router-link to=<span class="string">"/zhuye"</span>&gt;主页&lt;<span class="regexp">/router-link&gt;</span></span><br><span class="line"><span class="regexp">        &lt;router-link to="/</span>keji<span class="string">"&gt;科技&lt;/router-link&gt;</span></span><br><span class="line"><span class="string">        &lt;router-link to="</span>/caijing<span class="string">"&gt;财经&lt;/router-link&gt;</span></span><br><span class="line"><span class="string">        &lt;router-link to="</span>/yule<span class="string">"&gt;娱乐&lt;/router-link&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        &lt;!-- router-view是路由的填充位 --&gt;</span></span><br><span class="line"><span class="string">        &lt;router-view&gt;&lt;/router-view&gt;</span></span><br><span class="line"><span class="string">    &lt;/div&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &lt;script src="</span>https:<span class="comment">//cdn.jsdelivr.net/npm/vue/dist/vue.js"&gt;&lt;/script&gt;</span></span><br><span class="line">    &lt;script src=<span class="string">"https://unpkg.com/vue-router/dist/vue-router.js"</span>&gt;&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">    &lt;script&gt;</span></span><br><span class="line"><span class="regexp">        const zhuye=&#123;</span></span><br><span class="line"><span class="regexp">            template:`&lt;h1&gt;主页信息&lt;/</span>h1&gt;<span class="string">`</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">        const keji=&#123;</span></span><br><span class="line"><span class="string">            template:`</span>&lt;h1&gt;科技信息&lt;<span class="regexp">/h1&gt;`</span></span><br><span class="line"><span class="regexp">        &#125;</span></span><br><span class="line"><span class="regexp">        const caijing=&#123;</span></span><br><span class="line"><span class="regexp">            template:`&lt;h1&gt;财经信息&lt;/</span>h1&gt;<span class="string">`</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">        const yule=&#123;</span></span><br><span class="line"><span class="string">            template:`</span>&lt;h1&gt;娱乐信息&lt;<span class="regexp">/h1&gt;`</span></span><br><span class="line"><span class="regexp">        &#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">        const router=new VueRouter(&#123;</span></span><br><span class="line"><span class="regexp">            routes:[</span></span><br><span class="line"><span class="regexp">                &#123;path:'/',redirect: '/zhuye'&#125;,//路由的重定向,设定一开始显示的页面</span></span><br><span class="line"><span class="regexp">                &#123;path:'/zhuye',component:zhuye &#125;,</span></span><br><span class="line"><span class="regexp">                &#123;path:'/keji',component:keji &#125;,</span></span><br><span class="line"><span class="regexp">                &#123;path:'/caijing',component:caijing &#125;,</span></span><br><span class="line"><span class="regexp">                &#123;path:'/yule',component:yule &#125;,</span></span><br><span class="line"><span class="regexp">               </span></span><br><span class="line"><span class="regexp">            ]</span></span><br><span class="line"><span class="regexp">        &#125;)</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">        const vm=new Vue(&#123;</span></span><br><span class="line"><span class="regexp">            el:'#app',</span></span><br><span class="line"><span class="regexp">            data:&#123;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">            &#125;,</span></span><br><span class="line"><span class="regexp">            router:router/</span><span class="regexp">/一定要挂载</span></span><br><span class="line"><span class="regexp">        &#125;)</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">        </span></span><br><span class="line"><span class="regexp">    &lt;/</span>script&gt;</span><br><span class="line">&lt;<span class="regexp">/body&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>html&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="路由的重定向"><a href="#路由的重定向" class="headerlink" title="路由的重定向"></a>路由的重定向</h2><p>可以把某路径指向另外一个路径</p>
+<p>常用于把’/‘根路径指向某个路径，使它一开始就显示某个页面</p>
+<p>在routes中添加</p>
+<p><code>{path:&#39;/&#39;,redirect:&#39;/zhuye&#39;}</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">    &lt;meta name=<span class="string">"viewport"</span> content=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span><br><span class="line">    &lt;title&gt;vue-router&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">&lt;!--    router-link是vue的标签默认是a标签</span><br><span class="line">        to属性默认为href属性</span><br><span class="line">        to属性的值默认会被渲染为#开头的hash地址 </span><br><span class="line">--&gt;</span><br><span class="line"></span><br><span class="line">        &lt;router-link to=<span class="string">"/zhuye"</span>&gt;主页&lt;<span class="regexp">/router-link&gt;</span></span><br><span class="line"><span class="regexp">        &lt;router-link to="/</span>keji<span class="string">"&gt;科技&lt;/router-link&gt;</span></span><br><span class="line"><span class="string">        &lt;router-link to="</span>/caijing<span class="string">"&gt;财经&lt;/router-link&gt;</span></span><br><span class="line"><span class="string">        &lt;router-link to="</span>/yule<span class="string">"&gt;娱乐&lt;/router-link&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        &lt;!-- router-view是路由的填充位 --&gt;</span></span><br><span class="line"><span class="string">        &lt;router-view&gt;&lt;/router-view&gt;</span></span><br><span class="line"><span class="string">    &lt;/div&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &lt;script src="</span>https:<span class="comment">//cdn.jsdelivr.net/npm/vue/dist/vue.js"&gt;&lt;/script&gt;</span></span><br><span class="line">    &lt;script src=<span class="string">"https://unpkg.com/vue-router/dist/vue-router.js"</span>&gt;&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">    &lt;script&gt;</span></span><br><span class="line"><span class="regexp">        const zhuye=&#123;</span></span><br><span class="line"><span class="regexp">            template:`&lt;h1&gt;主页信息&lt;/</span>h1&gt;<span class="string">`</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">        const keji=&#123;</span></span><br><span class="line"><span class="string">            template:`</span>&lt;h1&gt;科技信息&lt;<span class="regexp">/h1&gt;`</span></span><br><span class="line"><span class="regexp">        &#125;</span></span><br><span class="line"><span class="regexp">        const caijing=&#123;</span></span><br><span class="line"><span class="regexp">            template:`&lt;h1&gt;财经信息&lt;/</span>h1&gt;<span class="string">`</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">        const yule=&#123;</span></span><br><span class="line"><span class="string">            template:`</span>&lt;h1&gt;娱乐信息&lt;<span class="regexp">/h1&gt;`</span></span><br><span class="line"><span class="regexp">        &#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">        const router=new VueRouter(&#123;</span></span><br><span class="line"><span class="regexp">            routes:[</span></span><br><span class="line"><span class="regexp">                &#123;path:'/',redirect: '/zhuye'&#125;,//路由的重定向,设定一开始显示的页面</span></span><br><span class="line"><span class="regexp">                &#123;path:'/zhuye',component:zhuye &#125;,</span></span><br><span class="line"><span class="regexp">                &#123;path:'/keji',component:keji &#125;,</span></span><br><span class="line"><span class="regexp">                &#123;path:'/caijing',component:caijing &#125;,</span></span><br><span class="line"><span class="regexp">                &#123;path:'/yule',component:yule &#125;,</span></span><br><span class="line"><span class="regexp">               </span></span><br><span class="line"><span class="regexp">            ]</span></span><br><span class="line"><span class="regexp">        &#125;)</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">        const vm=new Vue(&#123;</span></span><br><span class="line"><span class="regexp">            el:'#app',</span></span><br><span class="line"><span class="regexp">            data:&#123;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">            &#125;,</span></span><br><span class="line"><span class="regexp">            router:router/</span><span class="regexp">/一定要挂载</span></span><br><span class="line"><span class="regexp">        &#125;)</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">        </span></span><br><span class="line"><span class="regexp">    &lt;/</span>script&gt;</span><br><span class="line">&lt;<span class="regexp">/body&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>html&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="嵌套路由的用法"><a href="#嵌套路由的用法" class="headerlink" title="嵌套路由的用法"></a>嵌套路由的用法</h2><ol>
+<li>在对应定义的父组件的template中用router-link和router-view分别为子组件创建链接和占位</li>
+<li>在配置路由规则的实例中，routes中某个对应的父组件path和component后面加上children[]，在里面加上子组件对应的path和component</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">    &lt;meta name=<span class="string">"viewport"</span> content=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span><br><span class="line">    &lt;title&gt;vue-router&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">&lt;!--    router-link是vue的标签默认是a标签</span><br><span class="line">        to属性默认为href属性</span><br><span class="line">        to属性的值默认会被渲染为#开头的hash地址 </span><br><span class="line">--&gt;</span><br><span class="line"></span><br><span class="line">        &lt;router-link to=<span class="string">"/zhuye"</span>&gt;主页&lt;<span class="regexp">/router-link&gt;</span></span><br><span class="line"><span class="regexp">        &lt;router-link to="/</span>keji<span class="string">"&gt;科技&lt;/router-link&gt;</span></span><br><span class="line"><span class="string">        &lt;router-link to="</span>/caijing<span class="string">"&gt;财经&lt;/router-link&gt;</span></span><br><span class="line"><span class="string">        &lt;router-link to="</span>/yule<span class="string">"&gt;娱乐&lt;/router-link&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        &lt;!-- router-view是路由的填充位 --&gt;</span></span><br><span class="line"><span class="string">        &lt;router-view&gt;&lt;/router-view&gt;</span></span><br><span class="line"><span class="string">    &lt;/div&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &lt;script src="</span>https:<span class="comment">//cdn.jsdelivr.net/npm/vue/dist/vue.js"&gt;&lt;/script&gt;</span></span><br><span class="line">    &lt;script src=<span class="string">"https://unpkg.com/vue-router/dist/vue-router.js"</span>&gt;&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">    &lt;script&gt;</span></span><br><span class="line"><span class="regexp">        const zhuye=&#123;</span></span><br><span class="line"><span class="regexp">            template:`&lt;h1&gt;主页信息&lt;/</span>h1&gt;<span class="string">`</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">        const keji=&#123;</span></span><br><span class="line"><span class="string">            template:`</span>&lt;h1&gt;科技信息&lt;<span class="regexp">/h1&gt;`</span></span><br><span class="line"><span class="regexp">        &#125;</span></span><br><span class="line"><span class="regexp">        const caijing=&#123;</span></span><br><span class="line"><span class="regexp">            template:`&lt;div&gt;</span></span><br><span class="line"><span class="regexp">                &lt;h1&gt;caijing组件&lt;/</span>h1&gt;</span><br><span class="line">                &lt;hr/&gt;</span><br><span class="line"></span><br><span class="line">                &lt;!--子路由链接--&gt;</span><br><span class="line">                &lt;router-link to=<span class="string">"/caijing/tab1"</span>&gt;tab1&lt;<span class="regexp">/router-link&gt;</span></span><br><span class="line"><span class="regexp">                &lt;router-link to="/</span>caijing/tab2<span class="string">"&gt;tab2&lt;/router-link&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">                &lt;!-- 子路由的占位符--&gt;</span></span><br><span class="line"><span class="string">                &lt;router-view&gt;&lt;/router-view&gt;</span></span><br><span class="line"><span class="string">            &lt;/div&gt;`</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">        const yule=&#123;</span></span><br><span class="line"><span class="string">            template:`&lt;h1&gt;娱乐信息&lt;/h1&gt;`</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        const tab1=&#123;</span></span><br><span class="line"><span class="string">            template:`&lt;h3&gt;tab1信息&lt;/h3&gt;`</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        const tab2=&#123;</span></span><br><span class="line"><span class="string">            template:`&lt;h3&gt;tab2信息&lt;/h3&gt;`</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        const router=new VueRouter(&#123;</span></span><br><span class="line"><span class="string">            routes:[</span></span><br><span class="line"><span class="string">                &#123;path:'/',redirect: '/zhuye'&#125;,//路由的重定向,设定一开始显示的页面</span></span><br><span class="line"><span class="string">                &#123;path:'/zhuye',component:zhuye &#125;,</span></span><br><span class="line"><span class="string">                &#123;path:'/keji',component:keji &#125;,</span></span><br><span class="line"><span class="string">                &#123;path:'/caijing',component:caijing ,children:[</span></span><br><span class="line"><span class="string">                    &#123;path:'/caijing/tab1',component:tab1&#125;,</span></span><br><span class="line"><span class="string">                    &#123;path:'/caijing/tab2',component:tab2&#125;</span></span><br><span class="line"><span class="string">                ]&#125;,//children表示子路由规则</span></span><br><span class="line"><span class="string">                &#123;path:'/yule',component:yule &#125;,</span></span><br><span class="line"><span class="string">               </span></span><br><span class="line"><span class="string">            ]</span></span><br><span class="line"><span class="string">        &#125;)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        const vm=new Vue(&#123;</span></span><br><span class="line"><span class="string">            el:'#app',</span></span><br><span class="line"><span class="string">            data:&#123;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">            &#125;,</span></span><br><span class="line"><span class="string">            router:router//一定要挂载</span></span><br><span class="line"><span class="string">        &#125;)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        </span></span><br><span class="line"><span class="string">    &lt;/script&gt;</span></span><br><span class="line"><span class="string">&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/04/17/vue-router%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-vue的简单路由" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/04/16/vue%E7%9A%84%E7%AE%80%E5%8D%95%E8%B7%AF%E7%94%B1/" target="_blank">vue的简单路由</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/04/16/vue%E7%9A%84%E7%AE%80%E5%8D%95%E8%B7%AF%E7%94%B1/" class="archive-article-date">
+        <time datetime="2020-04-16T14:13:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-16</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="路由是什么"><a href="#路由是什么" class="headerlink" title="路由是什么"></a>路由是什么</h1><p>本质是对应关系</p>
+<p>路由分为前端路由和后端路由</p>
+<p>后端路由：根据不同用户的URL请求返回不同的内容</p>
+<p>前端路由：根据不同的用户事件，显示不同的页面内容</p>
+<p>由不同的hash值，控制组件的切换</p>
+<p><code>window.onhashchange(){}</code>用来监听hash是否改变，改变则触发</p>
+<p><code>location.hash</code>获取最新的hash值（是带#/的）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">    &lt;meta name=<span class="string">"viewport"</span> content=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span><br><span class="line">    &lt;title&gt;路由&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;!-- <span class="built_in">window</span>.onhashchange=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="comment">//监听hash值的改变</span></span><br><span class="line">       <span class="comment">// 通过location.hash获取到最新的hash值</span></span><br><span class="line">    &#125; --&gt;</span><br><span class="line">    &lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">       &lt;a href=<span class="string">"#/zhuye"</span>&gt;主页&lt;<span class="regexp">/a&gt;    </span></span><br><span class="line"><span class="regexp">       &lt;a href="#/</span>keji<span class="string">"&gt;科技&lt;/a&gt;    </span></span><br><span class="line">       &lt;a href="#/caijing"&gt;财经&lt;/a&gt;    </span><br><span class="line">       &lt;a href=<span class="string">"#/yule"</span>&gt;娱乐&lt;<span class="regexp">/a&gt;   </span></span><br><span class="line"><span class="regexp">       </span></span><br><span class="line"><span class="regexp">       &lt;component :is="comName"&gt;&lt;/</span>component&gt;</span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">		&lt;script src="https:/</span><span class="regexp">/cdn.jsdelivr.net/</span>npm/vue/dist/vue.js<span class="string">"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="string">        &lt;script&gt;</span></span><br><span class="line"><span class="string">            const zhuye=&#123;</span></span><br><span class="line"><span class="string">                template:'&lt;h1&gt;主页信息&lt;/h1&gt;'</span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">            const keji=&#123;</span></span><br><span class="line"><span class="string">                template:'&lt;h1&gt;科技信息&lt;/h1&gt;'</span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">            const caijing=&#123;</span></span><br><span class="line"><span class="string">                template:'&lt;h1&gt;财经信息&lt;/h1&gt;'</span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">            const yule=&#123;</span></span><br><span class="line"><span class="string">                template:'&lt;h1&gt;娱乐信息&lt;/h1&gt;'</span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">            const vm=new Vue(&#123;</span></span><br><span class="line"><span class="string">                el:'#app',</span></span><br><span class="line"><span class="string">                data:&#123;</span></span><br><span class="line"><span class="string">                    comName:'keji',</span></span><br><span class="line"><span class="string">                &#125;,</span></span><br><span class="line"><span class="string">                components: &#123;</span></span><br><span class="line"><span class="string">                    zhuye,</span></span><br><span class="line"><span class="string">                    keji,</span></span><br><span class="line"><span class="string">                    caijing,</span></span><br><span class="line"><span class="string">                    yule</span></span><br><span class="line"><span class="string">                &#125;</span></span><br><span class="line"><span class="string">            &#125;)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">            window.onhashchange=function()&#123;</span></span><br><span class="line"><span class="string">                // console.log(location.hash)</span></span><br><span class="line"><span class="string">                switch(location.hash.slice(1))&#123;</span></span><br><span class="line"><span class="string">                    case '/zhuye': vm.comName='zhuye';break;</span></span><br><span class="line"><span class="string">                    case '/keji': vm.comName='keji';break;</span></span><br><span class="line"><span class="string">                    case '/caijing': vm.comName='caijing';break;</span></span><br><span class="line"><span class="string">                    case '/yule': vm.comName='yule';break;</span></span><br><span class="line"><span class="string">                &#125;</span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string">        &lt;/script&gt;</span></span><br><span class="line"><span class="string">&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/04/16/vue%E7%9A%84%E7%AE%80%E5%8D%95%E8%B7%AF%E7%94%B1/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-交互的模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -936,310 +1243,6 @@
 
 
   
-    <article id="post-vue非父子组件间的数据交换" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/04/11/vue%E9%9D%9E%E7%88%B6%E5%AD%90%E7%BB%84%E4%BB%B6%E9%97%B4%E7%9A%84%E6%95%B0%E6%8D%AE%E4%BA%A4%E6%8D%A2/" target="_blank">vue非父子组件间的数据交换</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/04/11/vue%E9%9D%9E%E7%88%B6%E5%AD%90%E7%BB%84%E4%BB%B6%E9%97%B4%E7%9A%84%E6%95%B0%E6%8D%AE%E4%BA%A4%E6%8D%A2/" class="archive-article-date">
-        <time datetime="2020-04-11T08:04:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-11</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="vue非父子（兄弟之间）组件的数据交换"><a href="#vue非父子（兄弟之间）组件的数据交换" class="headerlink" title="vue非父子（兄弟之间）组件的数据交换"></a>vue非父子（兄弟之间）组件的数据交换</h1><p>通过中心事件来过渡</p>
-<p><img src="QQ%E5%9B%BE%E7%89%8720200411162640.png" alt=""></p>
-<ol>
-<li>创建事件中心</li>
-<li>$emit触发事件</li>
-<li>$on监听事件</li>
-<li>$off销毁事件</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=<span class="string">"utf-8"</span>&gt;</span><br><span class="line">		&lt;title&gt;&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;!-- </span><br><span class="line">		非父子间组件的数据交互</span><br><span class="line">		<span class="number">1.</span>创建一个单独的实践中心，管理组件之间的通信</span><br><span class="line">		<span class="keyword">var</span> eventHub=<span class="keyword">new</span> Vue()</span><br><span class="line">		<span class="number">2.</span>监听事件与销毁事件</span><br><span class="line">		eventHub.$on(<span class="string">'add-todo'</span>,addTodo)</span><br><span class="line">		eventHub.$off(<span class="string">'add-todo'</span>)</span><br><span class="line">		<span class="number">3.</span>触发事件</span><br><span class="line">		eventHub.$emit(<span class="string">'add-todo'</span>,id)</span><br><span class="line">		 --&gt;</span><br><span class="line">		 &lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">			 &lt;div&gt;父组件&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">			 &lt;div&gt;</span></span><br><span class="line"><span class="regexp">				 &lt;button @click="handle"&gt;销毁事件&lt;/</span>button&gt;</span><br><span class="line">			 &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">			 &lt;test-tom&gt;&lt;/</span>test-tom&gt;</span><br><span class="line">			 &lt;test-jerry&gt;&lt;<span class="regexp">/test-jerry&gt;</span></span><br><span class="line"><span class="regexp">		&lt;/</span>div&gt;</span><br><span class="line">					</span><br><span class="line">			</span><br><span class="line">		&lt;script src=<span class="string">"https://cdn.jsdelivr.net/npm/vue/dist/vue.js"</span>&gt;&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">		&lt;script&gt;</span></span><br><span class="line"><span class="regexp">			var hub=new Vue();/</span><span class="regexp">/提供事件中心</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">			Vue.component('test-tom',&#123;/</span><span class="regexp">/子组件1</span></span><br><span class="line"><span class="regexp">				data:function()&#123;</span></span><br><span class="line"><span class="regexp">					return &#123;</span></span><br><span class="line"><span class="regexp">						num:0,</span></span><br><span class="line"><span class="regexp">						change:1</span></span><br><span class="line"><span class="regexp">					&#125;</span></span><br><span class="line"><span class="regexp">				&#125;,</span></span><br><span class="line"><span class="regexp">				template:`</span></span><br><span class="line"><span class="regexp">				&lt;div&gt;</span></span><br><span class="line"><span class="regexp">					&lt;div&gt;Tom:&#123;&#123;num&#125;&#125;&lt;/</span>div&gt;		</span><br><span class="line">					&lt;div&gt;</span><br><span class="line">						&lt;button @click=<span class="string">'handle'</span>&gt;点击&lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp">					&lt;/</span>div&gt;</span><br><span class="line">				&lt;<span class="regexp">/div&gt;	</span></span><br><span class="line"><span class="regexp">				`, </span></span><br><span class="line"><span class="regexp">				methods: &#123;</span></span><br><span class="line"><span class="regexp">					handle:function()&#123;</span></span><br><span class="line"><span class="regexp">						hub.$emit('jerry-event',this.change);</span></span><br><span class="line"><span class="regexp">					&#125;</span></span><br><span class="line"><span class="regexp">				&#125;,</span></span><br><span class="line"><span class="regexp">				mounted:function()&#123;/</span><span class="regexp">/模板部署完成</span></span><br><span class="line"><span class="regexp">					hub.$on('tom-event', (val)=&gt;&#123;/</span><span class="regexp">/这里的val是jerry提供的</span></span><br><span class="line"><span class="regexp">						this.num+=val;</span></span><br><span class="line"><span class="regexp">					&#125;)</span></span><br><span class="line"><span class="regexp">				&#125;</span></span><br><span class="line"><span class="regexp">			&#125;);</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">			Vue.component('test-jerry',&#123;/</span><span class="regexp">/子组件2</span></span><br><span class="line"><span class="regexp">				data:function()&#123;</span></span><br><span class="line"><span class="regexp">					return &#123;</span></span><br><span class="line"><span class="regexp">						num:0,</span></span><br><span class="line"><span class="regexp">						change:2</span></span><br><span class="line"><span class="regexp">					&#125;</span></span><br><span class="line"><span class="regexp">				&#125;,</span></span><br><span class="line"><span class="regexp">				template:`</span></span><br><span class="line"><span class="regexp">				&lt;div&gt;</span></span><br><span class="line"><span class="regexp">					&lt;div&gt;JERRY:&#123;&#123;num&#125;&#125;&lt;/</span>div&gt;		</span><br><span class="line">					&lt;div&gt;</span><br><span class="line">						&lt;button @click=<span class="string">'handle'</span>&gt;点击&lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp">					&lt;/</span>div&gt;</span><br><span class="line">				&lt;<span class="regexp">/div&gt;	</span></span><br><span class="line"><span class="regexp">				`,</span></span><br><span class="line"><span class="regexp">				methods: &#123;</span></span><br><span class="line"><span class="regexp">					handle:function()&#123;</span></span><br><span class="line"><span class="regexp">						hub.$emit('tom-event',this.change);</span></span><br><span class="line"><span class="regexp">					&#125;</span></span><br><span class="line"><span class="regexp">				&#125;,</span></span><br><span class="line"><span class="regexp">				mounted:function()&#123;</span></span><br><span class="line"><span class="regexp">					hub.$on('jerry-event',(val)=&gt;&#123;</span></span><br><span class="line"><span class="regexp">						this.num+=val;</span></span><br><span class="line"><span class="regexp">					&#125;)</span></span><br><span class="line"><span class="regexp">				&#125;</span></span><br><span class="line"><span class="regexp">			&#125;);</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">			var vm=new Vue(&#123;</span></span><br><span class="line"><span class="regexp">				el:'#app',</span></span><br><span class="line"><span class="regexp">				data:&#123;</span></span><br><span class="line"><span class="regexp">					</span></span><br><span class="line"><span class="regexp">				&#125;,</span></span><br><span class="line"><span class="regexp">				methods:&#123;</span></span><br><span class="line"><span class="regexp">					handle:function()&#123;/</span><span class="regexp">/销毁事件之后点击无效</span></span><br><span class="line"><span class="regexp">						hub.$off('tom-event');</span></span><br><span class="line"><span class="regexp">						hub.$off('jerry-event');</span></span><br><span class="line"><span class="regexp">					&#125;</span></span><br><span class="line"><span class="regexp">				&#125;</span></span><br><span class="line"><span class="regexp">			&#125;)</span></span><br><span class="line"><span class="regexp">		&lt;/</span>script&gt;</span><br><span class="line">	&lt;<span class="regexp">/body&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>html&gt;</span><br></pre></td></tr></table></figure>
-
-<p><strong>我在这犯了一个错误，切记在methods中调用data中的数据需要用this，而在模板字符串中不需要用this</strong></p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/04/11/vue%E9%9D%9E%E7%88%B6%E5%AD%90%E7%BB%84%E4%BB%B6%E9%97%B4%E7%9A%84%E6%95%B0%E6%8D%AE%E4%BA%A4%E6%8D%A2/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-vue子组件向父组件传值" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/04/10/vue%E5%AD%90%E7%BB%84%E4%BB%B6%E5%90%91%E7%88%B6%E7%BB%84%E4%BB%B6%E4%BC%A0%E5%80%BC/" target="_blank">vue子组件向父组件传值</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/04/10/vue%E5%AD%90%E7%BB%84%E4%BB%B6%E5%90%91%E7%88%B6%E7%BB%84%E4%BB%B6%E4%BC%A0%E5%80%BC/" class="archive-article-date">
-        <time datetime="2020-04-10T13:38:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-10</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="vue子组件向父组件传值"><a href="#vue子组件向父组件传值" class="headerlink" title="vue子组件向父组件传值"></a>vue子组件向父组件传值</h1><p>子组件通过自定义事件向父组件传递信息</p>
-<p><strong>就是子组件先监听一个事件，运行对应方法用$emit(‘’)定义</strong></p>
-<p><strong>再在父组件中监听这个在子组件中新定义的方法，运行一个方法</strong></p>
-<p><strong>该方法在父组件methods中定义就好了</strong></p>
-<p>比如：</p>
-<p>先在子组件menu-item的template属性中<code>&lt;button @click=&quot;$emit(&#39;handleChild&#39;)&quot;&gt;&lt;/button&gt;</code></p>
-<p>再在父组件中运用<code>&lt;menu-item @handleChild=&quot;handleParent&quot;&gt;&lt;/menu-item&gt;</code></p>
-<p>然后在父组件中定义这个handleParent方法就好了</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=<span class="string">"utf-8"</span>&gt;</span><br><span class="line">		&lt;title&gt;&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;!-- 子组件通过自定义事件向父组件传递信息 --&gt;</span><br><span class="line">		&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">			&lt;span :style=<span class="string">"&#123;fontSize:size+'px'&#125;"</span>&gt;&#123;&#123;msg&#125;&#125;&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">			&lt;menu-item @large-text="handle"&gt;&lt;/m</span>enu-item&gt;</span><br><span class="line">		&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">		&lt;script src="https:/</span><span class="regexp">/cdn.jsdelivr.net/</span>npm/vue/dist/vue.js<span class="string">"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="string">		&lt;script&gt;</span></span><br><span class="line"><span class="string">			Vue.component('menu-item',&#123;</span></span><br><span class="line"><span class="string">				template:`</span></span><br><span class="line"><span class="string">				&lt;div&gt;</span></span><br><span class="line"><span class="string">					&lt;button @click="</span>$emit(<span class="string">'large-text'</span>)<span class="string">"&gt;扩大字体&lt;/button&gt;</span></span><br><span class="line"><span class="string">				&lt;/div&gt;</span></span><br><span class="line"><span class="string">				`</span></span><br><span class="line"><span class="string">			&#125;);</span></span><br><span class="line"><span class="string">			var vm=new Vue(&#123;</span></span><br><span class="line"><span class="string">				el:'#app',</span></span><br><span class="line"><span class="string">				data:&#123;</span></span><br><span class="line"><span class="string">					msg:'父组件中的内容',</span></span><br><span class="line"><span class="string">					size:18,</span></span><br><span class="line"><span class="string">				&#125;,</span></span><br><span class="line"><span class="string">				methods:&#123;</span></span><br><span class="line"><span class="string">					handle:function()&#123;</span></span><br><span class="line"><span class="string">						this.size+=1;</span></span><br><span class="line"><span class="string">					&#125;</span></span><br><span class="line"><span class="string">				&#125;</span></span><br><span class="line"><span class="string">			&#125;)</span></span><br><span class="line"><span class="string">		&lt;/script&gt;</span></span><br><span class="line"><span class="string">	&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>要真正的传值可以把变为<code>$emit(&#39;large-text&#39;,omsg)</code>这里的omsg携带了子组件的值</p>
-<p>在父组件中监听运行方法有参数<code>@large-text=&quot;handle($event)&quot;</code></p>
-<p>在父组件中定义一个带参数的方法</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=<span class="string">"utf-8"</span>&gt;</span><br><span class="line">		&lt;title&gt;&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;!-- 子组件通过自定义事件向父组件传递信息 --&gt;</span><br><span class="line">		&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">			&lt;span :style=<span class="string">"&#123;fontSize:size+'px'&#125;"</span>&gt;&#123;&#123;msg&#125;&#125;&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">			&lt;menu-item @large-text="handle($event)"&gt;&lt;/m</span>enu-item&gt;</span><br><span class="line">		&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">		&lt;script src="https:/</span><span class="regexp">/cdn.jsdelivr.net/</span>npm/vue/dist/vue.js<span class="string">"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="string">		&lt;script&gt;</span></span><br><span class="line"><span class="string">			Vue.component('menu-item',&#123;</span></span><br><span class="line"><span class="string">				data:function()&#123;</span></span><br><span class="line"><span class="string">					return &#123;</span></span><br><span class="line"><span class="string">						omsg:1,</span></span><br><span class="line"><span class="string">					&#125;</span></span><br><span class="line"><span class="string">				&#125;,</span></span><br><span class="line"><span class="string">				template:`</span></span><br><span class="line"><span class="string">				&lt;div&gt;</span></span><br><span class="line"><span class="string">					&lt;button @click="</span>$emit(<span class="string">'large-text'</span>,omsg)<span class="string">"&gt;扩大字体&lt;/button&gt;</span></span><br><span class="line"><span class="string">				&lt;/div&gt;</span></span><br><span class="line"><span class="string">				`</span></span><br><span class="line"><span class="string">			&#125;);</span></span><br><span class="line"><span class="string">			var vm=new Vue(&#123;</span></span><br><span class="line"><span class="string">				el:'#app',</span></span><br><span class="line"><span class="string">				data:&#123;</span></span><br><span class="line"><span class="string">					msg:'父组件中的内容',</span></span><br><span class="line"><span class="string">					size:18,</span></span><br><span class="line"><span class="string">				&#125;,</span></span><br><span class="line"><span class="string">				methods:&#123;</span></span><br><span class="line"><span class="string">					handle:function($event)&#123;</span></span><br><span class="line"><span class="string">						this.size+=$event;</span></span><br><span class="line"><span class="string">					&#125;</span></span><br><span class="line"><span class="string">				&#125;</span></span><br><span class="line"><span class="string">			&#125;)</span></span><br><span class="line"><span class="string">		&lt;/script&gt;</span></span><br><span class="line"><span class="string">	&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="父组件传值给子组件"><a href="#父组件传值给子组件" class="headerlink" title="父组件传值给子组件"></a>父组件传值给子组件</h3><p><a href=" [https://yuchenbin1.github.io/2020/04/09/vue%E7%88%B6%E7%BB%84%E4%BB%B6%E5%90%91%E5%AD%90%E7%BB%84%E4%BB%B6%E4%BC%A0%E5%80%BC/](https://yuchenbin1.github.io/2020/04/09/vue父组件向子组件传值/) ">原文链接</a></p>
-<p>利用props创建一个新的属性，在父组件中把值赋给这个新的属性，新的属性就可以在子组件中用了。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=<span class="string">"utf-8"</span>&gt;</span><br><span class="line">		&lt;title&gt;&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">			&lt;menu-item &gt;&lt;<span class="regexp">/menu-item&gt;</span></span><br><span class="line"><span class="regexp">			&lt;menu-item title="parentMsg"&gt;&lt;/m</span>enu-item&gt;&lt;!-- 这里显示parentMsg --&gt;</span><br><span class="line">			&lt;menu-item :title=<span class="string">"parentMsg"</span>&gt;&lt;<span class="regexp">/menu-item&gt;&lt;!-- 这里显示父组件中的数据 --&gt;</span></span><br><span class="line"><span class="regexp">		&lt;/</span>div&gt;</span><br><span class="line">		&lt;script src=<span class="string">"https://cdn.jsdelivr.net/npm/vue/dist/vue.js"</span>&gt;&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">		&lt;script&gt;</span></span><br><span class="line"><span class="regexp">			Vue.component('menu-item',&#123;</span></span><br><span class="line"><span class="regexp">				props:['title'],</span></span><br><span class="line"><span class="regexp">				data:function()&#123;</span></span><br><span class="line"><span class="regexp">					return &#123;</span></span><br><span class="line"><span class="regexp">						msg:'子组件本身的数据'</span></span><br><span class="line"><span class="regexp">					&#125;</span></span><br><span class="line"><span class="regexp">				&#125;,</span></span><br><span class="line"><span class="regexp">				template:'&lt;div&gt;&#123;&#123;msg+"---"+title&#125;&#125;&lt;/</span>div&gt;<span class="string">' //切记引号内嵌要用单双引号</span></span><br><span class="line"><span class="string">			&#125;);</span></span><br><span class="line"><span class="string">			var vm=new Vue(&#123;</span></span><br><span class="line">				el:'#app',</span><br><span class="line">				data:&#123;</span><br><span class="line">					parentMsg:<span class="string">'父组件中的数据'</span></span><br><span class="line">				&#125;</span><br><span class="line">			&#125;);</span><br><span class="line">		&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>body&gt;</span><br><span class="line">&lt;<span class="regexp">/html&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/04/10/vue%E5%AD%90%E7%BB%84%E4%BB%B6%E5%90%91%E7%88%B6%E7%BB%84%E4%BB%B6%E4%BC%A0%E5%80%BC/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-vue父组件向子组件传值" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2020/04/09/vue%E7%88%B6%E7%BB%84%E4%BB%B6%E5%90%91%E5%AD%90%E7%BB%84%E4%BB%B6%E4%BC%A0%E5%80%BC/" target="_blank">vue父组件向子组件传值</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2020/04/09/vue%E7%88%B6%E7%BB%84%E4%BB%B6%E5%90%91%E5%AD%90%E7%BB%84%E4%BB%B6%E4%BC%A0%E5%80%BC/" class="archive-article-date">
-        <time datetime="2020-04-09T13:13:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-09</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="父组件向子组件传值"><a href="#父组件向子组件传值" class="headerlink" title="父组件向子组件传值"></a>父组件向子组件传值</h1><p>组件化开发</p>
-<p>props:[‘属性名1’，’属性名2’]</p>
-<h3 id="props属性名规则"><a href="#props属性名规则" class="headerlink" title="props属性名规则"></a>props属性名规则</h3><ol>
-<li>在props中使用驼峰式，在模板中使用对应的短横线形式</li>
-<li>字符串形式模板中没有这个限制``</li>
-</ol>
-<h3 id="props属性值的类型"><a href="#props属性值的类型" class="headerlink" title="props属性值的类型"></a>props属性值的类型</h3><p>属性名=’属性值‘              ：属性名=’属性值‘</p>
-<ol>
-<li>字符串string</li>
-<li>数值，在上述第一种情况是字符串，第二种是数值</li>
-<li>布尔值，在上述对重情况是字符串，第二种是布尔值</li>
-<li>数组</li>
-<li>对象，可以用.取对象中的属性名</li>
-</ol>
-<p>一般使用</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=<span class="string">"utf-8"</span>&gt;</span><br><span class="line">		&lt;title&gt;&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">			&lt;menu-item &gt;&lt;<span class="regexp">/menu-item&gt;</span></span><br><span class="line"><span class="regexp">			&lt;menu-item title="parentMsg"&gt;&lt;/m</span>enu-item&gt;&lt;!-- 这里显示parentMsg --&gt;</span><br><span class="line">			&lt;menu-item :title=<span class="string">"parentMsg"</span>&gt;&lt;<span class="regexp">/menu-item&gt;&lt;!-- 这里显示父组件中的数据 --&gt;</span></span><br><span class="line"><span class="regexp">		&lt;/</span>div&gt;</span><br><span class="line">		&lt;script src=<span class="string">"https://cdn.jsdelivr.net/npm/vue/dist/vue.js"</span>&gt;&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">		&lt;script&gt;</span></span><br><span class="line"><span class="regexp">			Vue.component('menu-item',&#123;</span></span><br><span class="line"><span class="regexp">				props:['title'],</span></span><br><span class="line"><span class="regexp">				data:function()&#123;</span></span><br><span class="line"><span class="regexp">					return &#123;</span></span><br><span class="line"><span class="regexp">						msg:'子组件本身的数据'</span></span><br><span class="line"><span class="regexp">					&#125;</span></span><br><span class="line"><span class="regexp">				&#125;,</span></span><br><span class="line"><span class="regexp">				template:'&lt;div&gt;&#123;&#123;msg+"---"+title&#125;&#125;&lt;/</span>div&gt;<span class="string">' //切记引号内嵌要用单双引号</span></span><br><span class="line"><span class="string">			&#125;);</span></span><br><span class="line"><span class="string">			var vm=new Vue(&#123;</span></span><br><span class="line">				el:'#app',</span><br><span class="line">				data:&#123;</span><br><span class="line">					parentMsg:<span class="string">'父组件中的数据'</span></span><br><span class="line">				&#125;</span><br><span class="line">			&#125;);</span><br><span class="line">		&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">	&lt;/</span>body&gt;</span><br><span class="line">&lt;<span class="regexp">/html&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2020/04/09/vue%E7%88%B6%E7%BB%84%E4%BB%B6%E5%90%91%E5%AD%90%E7%BB%84%E4%BB%B6%E4%BC%A0%E5%80%BC/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/11/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/13/">Next &amp;raquo;</a>
@@ -1377,6 +1380,10 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">webpack</a>
               </li>
              
@@ -1390,10 +1397,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">RN</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">基础</a>
               </li>
              
               <li class="article-tag-list-item">

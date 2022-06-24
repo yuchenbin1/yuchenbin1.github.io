@@ -202,6 +202,372 @@
             
 
   
+    <article id="post-pnpm" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2022/01/23/pnpm/" target="_blank">pnpm</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2022/01/23/pnpm/" class="archive-article-date">
+        <time datetime="2022-01-23T06:16:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-01-23</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>现代打包工具<code>performant npm</code>，意为高性能的npm</p>
+<p>pnpm相较于npm、yarn的优化</p>
+<h3 id="hard-link-机制"><a href="#hard-link-机制" class="headerlink" title="hard link 机制"></a>hard link 机制</h3><p>在安装依赖方面做的优化，hard link机制，使得用户用不同的路径访问某个文件，pnpm会在全局的store目录里存储项目node_mdules文件的hard links文件</p>
+<p>举个例子，项目打包获取依赖时候，有1MB的依赖包a，在pnpm看上去有2MB，因为同时在npm_modules中有依赖包a，在全局store目录中也有依赖包a，加起来时2MB。但是因为hard link机制使得两个目录相同的1MB空间能从不同的两个位置进行寻址，因此实际上依赖包a只占用了1MB</p>
+<h3 id="store目录"><a href="#store目录" class="headerlink" title="store目录"></a>store目录</h3><p>store目录，全局的依赖包存储地址</p>
+<p>默认放在<code>${os.homedir}/.pnpm-store</code>具体可以看<code>@pnpm/store-path</code>这个包中的代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> homedir = os.homedir()</span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">await</span> canLinkToSubdir(tempFile, homedir)) &#123;</span><br><span class="line">  <span class="keyword">await</span> fs.unlink(tempFile)</span><br><span class="line">  <span class="comment">// If the project is on the drive on which the OS home directory</span></span><br><span class="line">  <span class="comment">// then the store is placed in the home directory</span></span><br><span class="line">  <span class="keyword">return</span> path.join(homedir, relStore, STORE_VERSION)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们也可以在<code>.npmrc</code>设置这个目录</p>
+<p>因此，用户多个项目用到了同一个依赖，在版本相同的情况下，只需要安装一次</p>
+<p>如果是npm或者是yarn，那么这个依赖需要在每个项目都要安装一次</p>
+<p>在使用pnpm安装依赖的时候，如果在store中存在依赖，则不需要额外依赖</p>
+<p>store目录下的文件会越来越大，怎么解决？</p>
+<p>pnpm官方提供了方法<a href="https://pnpm.io/zh/cli/store" target="_blank" rel="noopener">https://pnpm.io/zh/cli/store</a></p>
+<p>使用方法 <code>pnpm store prune</code>可以删除一些不被全局引用的依赖，比如，axios1.0版本的项目在某次更新后使用1.1版本，那么执行后axios1.0版本的就会被删除掉</p>
+<h4 id="node-modules目录"><a href="#node-modules目录" class="headerlink" title="node_modules目录"></a>node_modules目录</h4><p>pnpm 项目的 node_modules 结构: <a href="https://link.zhihu.com/?target=https%3A//pnpm.io/blog/2020/05/27/flat-node-modules-is-not-the-only-way">Flat node_modules is not the only way | pnpm</a></p>
+<p>pnpm安装express依赖,会生成两个目录</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">node_modules/express/...</span><br><span class="line">node_modules/.pnpm/express@<span class="number">4.17</span><span class="number">.1</span>/node_modules/xxx</span><br></pre></td></tr></table></figure>
+
+<p><code>node_modules/express/...</code>啥也没有，只是一个软链接，连接到第二个目录</p>
+<p>其中<code>.pnpm</code> 是个虚拟磁盘目录，然后 express 这个依赖的一些依赖会被平铺到 <code>.pnpm/express@4.17.1/node_modules/</code> 这个目录下面</p>
+<p>pnpm版本依赖问题<a href="https://pnpm.io/zh/how-peers-are-resolved" target="_blank" rel="noopener">https://pnpm.io/zh/how-peers-are-resolved</a></p>
+<h5 id="symlink和hardlink"><a href="#symlink和hardlink" class="headerlink" title="symlink和hardlink"></a>symlink和hardlink</h5><p>symlink为软链接，hardlink为硬链接</p>
+<p>为解决文件共享问题，linux引入这两种链接</p>
+<p><strong>hardlink</strong></p>
+<p>创建硬链接</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">link oldfile newfile</span><br><span class="line">ln oldfile newfile</span><br></pre></td></tr></table></figure>
+
+<p><strong>特性</strong></p>
+<ul>
+<li>文件有相同的 inode 及 data block 以及权限等信息</li>
+<li>只能对已存在的文件进行创建</li>
+<li>不能跨文件系统进行硬链接的创建</li>
+<li>不能对目录进行创建，只可对文件创建</li>
+<li>删除一个硬链接文件并不影响其他有相同 inode 号的文件</li>
+</ul>
+<p><strong>symlink</strong></p>
+<p>创建软链接</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s oldfile newfile</span><br></pre></td></tr></table></figure>
+
+<p><strong>特性</strong></p>
+<ul>
+<li>软链接有自己的文件属性及权限等</li>
+<li>可对不存在的文件或目录创建软链接</li>
+<li>软链接可交叉文件系统</li>
+<li>软链接可对文件或目录创建</li>
+<li>创建软链接时，链接计数 i_nlink 不会增加</li>
+<li>删除软链接并不影响被指向的文件，但若被指向的原文件被删除，则相关软连接被称为死链接，若被指向路径文件被重新创建，死链接可恢复为正常的软链接</li>
+</ul>
+<p>pnpm通过hardlink在全局搞了一个store目录来存储node_modules依赖里面的hard link地址，然后在引用依赖的时候通过symlink去找到对应的虚拟磁盘目录下的（.pnpm）依赖地址。</p>
+<h3 id="兼容性"><a href="#兼容性" class="headerlink" title="兼容性"></a>兼容性</h3><p>在大多数系统上面没有什么影响，但是symlink软链接的方法在windows上会存在兼容性问题，pnpm提供了解决的方案，在win上面使用 <a href="https://link.zhihu.com/?target=https%3A//docs.microsoft.com/en-us/windows/win32/fileio/hard-links-and-junctions">junctions</a> 的特性替代symlink，这个方案在win上面的兼容性要好于symlink</p>
+<p>为什么不都用软链接symlink的方式？</p>
+<p>store里面的目录其实也是通过软链接的方式去找到了，node提供<code>--preserve-symlinks</code> 的参数来支持 symlink，但是这个参数对symlink的支持并不是很好，pnpm的作者放弃了这个方法</p>
+<h3 id="痛点解决"><a href="#痛点解决" class="headerlink" title="痛点解决"></a>痛点解决</h3><p>Monorepo下的问题</p>
+<p><code>Phantom dependencies</code> 和 <code>NPM doppelgangers</code></p>
+<p><strong>Phantom dependencies</strong></p>
+<p>表示的是幽灵依赖，解释一下就是某些依赖没有在package.json引入，但是可以引用，主要形成的原因是yarn或者npm（v3以上）会对依赖会扁平化的处理，比如项目依赖foo这个包，在package.json文件中引入，同时依赖包foo依赖与bar这个依赖，扁平化之后可以直接require依赖包bar了。这个bar就是幽灵依赖。</p>
+<p>yarn提供了hoist机制（一些底层子项目的依赖会被提升到顶层node_modules）中，会存在很多的幽灵依赖，</p>
+<p>但是pnpm不会出现，扁平化的依赖会被放在<code>.pnpm</code>这个虚拟磁盘下面，用户是require不到的</p>
+<p><strong>NPM doppelgangers</strong></p>
+<p>doppelgangers表示相似的幽灵，这个问题也是hoist机制导致的，会有大量的依赖包会被重复的安装</p>
+<p>如果是pnpm的话不会出现这样的问题，因为依赖始终都是存在store目录下的hard links，一份不通的依赖始终会安装一次。</p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2022/01/23/pnpm/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-es2021" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2022/01/16/es2021/" target="_blank">es2021</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2022/01/16/es2021/" class="archive-article-date">
+        <time datetime="2022-01-16T13:26:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-01-16</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h1><h2 id="amp-amp"><a href="#amp-amp" class="headerlink" title="??= &amp;&amp;= ||="></a>??= &amp;&amp;= ||=</h2><p><code>??=</code>的判断逻辑与<code>??</code>是一致的，左值为<code>null</code>或<code>undefined</code>时返回右值，否则返回左值</p>
+<p>不同的是<code>??=</code>还附带了赋值的操作,<code>&amp;&amp;=</code>和<code>||=</code>类似</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 旧</span></span><br><span class="line"><span class="keyword">let</span> a = <span class="literal">null</span>;</span><br><span class="line">a = a ?? <span class="string">'daotin'</span>;</span><br><span class="line">a = a &amp;&amp; <span class="string">'daotin'</span>;</span><br><span class="line">a = a || <span class="string">'daotin'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 新</span></span><br><span class="line"><span class="keyword">let</span> a = <span class="literal">null</span>;</span><br><span class="line">a ??= <span class="string">'daotin'</span>;</span><br><span class="line">a &amp;&amp;= <span class="string">'daotin'</span>;</span><br><span class="line">a ||= <span class="string">'daotin'</span>;</span><br></pre></td></tr></table></figure>
+
+<h1 id="数字分隔符"><a href="#数字分隔符" class="headerlink" title="数字分隔符"></a>数字分隔符</h1><p>允许数字字面量中间加入不连续的<code>_</code>,以提高可读性</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>_000_000_000           <span class="comment">// Ah, so a billion</span></span><br><span class="line"><span class="number">101</span>_475_938<span class="number">.38</span>          <span class="comment">// And this is hundreds of millions</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> a = <span class="number">1</span>_1; <span class="comment">// 11</span></span><br><span class="line"><span class="keyword">let</span> a = <span class="number">1</span>__1 <span class="comment">// 错误，只允许一个下划线作为数字分隔符</span></span><br><span class="line"><span class="keyword">let</span> a = <span class="number">1</span>_;  <span class="comment">// 错误，分隔符不能在尾部 </span></span><br><span class="line"><span class="keyword">let</span> a = _1;  <span class="comment">// 错误，分隔符不能在头部 </span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Number</span>(<span class="number">1</span>_1); <span class="comment">// 11</span></span><br><span class="line"><span class="built_in">Number</span>(<span class="string">'1_1'</span>); <span class="comment">// NaN</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>注意</strong>：分隔符不能在尾部和头部，<strong>只能在数字之间，只允许一个下划线作为数字分隔符，不可连续。</strong>分隔符不影响数值的类型转换值，也无法在字符串转数值时被识别</p>
+<h2 id="Promise-any-amp-AggregateError"><a href="#Promise-any-amp-AggregateError" class="headerlink" title="Promise.any &amp; AggregateError"></a>Promise.any &amp; AggregateError</h2><p>any 接受 Promise 数组作为参数，返回合成的 Promise。只要给定的迭代中的一个 <code>promise</code> 成功，就采用第一个 <code>promise</code> 的值作为它的返回值</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> promises = [</span><br><span class="line">  fetch(<span class="string">'/endpoint-a'</span>).then(<span class="function"><span class="params">()</span> =&gt;</span> <span class="string">'a'</span>),</span><br><span class="line">  fetch(<span class="string">'/endpoint-b'</span>).then(<span class="function"><span class="params">()</span> =&gt;</span> <span class="string">'b'</span>),</span><br><span class="line">  fetch(<span class="string">'/endpoint-c'</span>).then(<span class="function"><span class="params">()</span> =&gt;</span> <span class="string">'c'</span>),</span><br><span class="line">];</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> first = <span class="keyword">await</span> <span class="built_in">Promise</span>.any(promises);</span><br><span class="line">  <span class="comment">// Any of the promises was fulfilled.</span></span><br><span class="line">  <span class="built_in">console</span>.log(first);</span><br><span class="line">  <span class="comment">// → e.g. 'b'</span></span><br><span class="line">&#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">  <span class="comment">// All of the promises were rejected.</span></span><br><span class="line">  <span class="built_in">console</span>.assert(error <span class="keyword">instanceof</span> AggregateError);</span><br><span class="line">  <span class="comment">// Log the rejection values:</span></span><br><span class="line">  <span class="built_in">console</span>.log(error.errors);</span><br><span class="line">  <span class="comment">// → [</span></span><br><span class="line">  <span class="comment">//     &lt;TypeError: Failed to fetch /endpoint-a&gt;,</span></span><br><span class="line">  <span class="comment">//     &lt;TypeError: Failed to fetch /endpoint-b&gt;,</span></span><br><span class="line">  <span class="comment">//     &lt;TypeError: Failed to fetch /endpoint-c&gt;</span></span><br><span class="line">  <span class="comment">//   ]</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>只有当 所有 请求都失败时，我们才最终进入代码 <code>catch</code> 块，然后在其中处理错误。</p>
+<h2 id="String-prototype-replaceAll"><a href="#String-prototype-replaceAll" class="headerlink" title="String.prototype.replaceAll"></a>String.prototype.replaceAll</h2><p>与<code>String.prototype.replace</code>相比，如果不使用全局的正则表达式匹配，只会替换匹配到的第一个，<code>String.prototype.replaceAll</code>可以替换所有的匹配项</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'hello world'</span>.replace(<span class="string">'o'</span>, <span class="string">'_'</span>); <span class="comment">// hell_ world</span></span><br><span class="line"></span><br><span class="line"><span class="string">'hello world'</span>.replace(<span class="regexp">/o/g</span>, <span class="string">'_'</span>); <span class="comment">// hell_ w_rld</span></span><br><span class="line"></span><br><span class="line"><span class="string">'hello world'</span>.replaceAll(<span class="string">'o'</span>, <span class="string">'_'</span>); <span class="comment">// hell_ w_rld</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="WeakRefs-amp-FinalizationRegistry对象"><a href="#WeakRefs-amp-FinalizationRegistry对象" class="headerlink" title="WeakRefs &amp; FinalizationRegistry对象"></a>WeakRefs &amp; FinalizationRegistry对象</h1><p>一般来说，在JavaScript中，对象的引用是强引用的，这意味着只要持有对象的引用，它就不会被垃圾回收。只有当该对象没有任何的强引用时， js引擎垃圾回收器才会销毁该对象并且回收该对象所占的内存空间。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;<span class="attr">a</span>:<span class="number">1</span>, <span class="attr">b</span>:<span class="number">2</span>&#125;; <span class="comment">// 只要我们访问 obj 对象，这个对象就不会被垃圾回收</span></span><br></pre></td></tr></table></figure>
+
+<p>但是 WeakRefs 可以创建一个弱引用，对象的弱引用是指当该对象应该被 js引擎垃圾回收器回收时不会阻止垃圾回收器的回收行为。</p>
+<p>Weakref 实例具有一个方法 deref，该方法返回被引用的原始对象，如果原始对象已被收集，则返回 undefined 对象。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> ref = <span class="keyword">new</span> WeakRef(&#123; <span class="attr">name</span>: <span class="string">'zhangsan'</span> &#125;);</span><br><span class="line"><span class="keyword">let</span> obj = ref.deref();</span><br><span class="line"><span class="keyword">if</span> (obj) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(obj.name);<span class="comment">//zhangsan</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用 <code>FinalizationRegistry</code> 对象可以在垃圾回收器回收对象时执行回调函数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> registry = <span class="keyword">new</span> FinalizationRegistry(<span class="function"><span class="params">heldValue</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'----'</span>, heldValue);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> obj = &#123;&#125;;</span><br><span class="line"><span class="keyword">const</span> token = &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 注册监听</span></span><br><span class="line">registry.register(obj, <span class="string">"obj deleted!"</span>, token);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 取消监听</span></span><br><span class="line">registry.unregister(token);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 可能很久以后，回调执行</span></span><br><span class="line"><span class="comment">// ---- obj deleted!</span></span><br></pre></td></tr></table></figure>
+
+<p>register的参数</p>
+<ul>
+<li>需要监听的对象</li>
+<li>执行回调函数的参数</li>
+<li>取消监听用的标识符</li>
+</ul>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2022/01/16/es2021/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-options预检请求" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2021/12/18/options%E9%A2%84%E6%A3%80%E8%AF%B7%E6%B1%82/" target="_blank">options预检请求</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2021/12/18/options%E9%A2%84%E6%A3%80%E8%AF%B7%E6%B1%82/" class="archive-article-date">
+        <time datetime="2021-12-18T15:07:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-18</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="options"><a href="#options" class="headerlink" title="options"></a>options</h1><p>在实际的开发过程中，又遇到过许多的跨域问题，基本都是通过跨域资源共享解决的，遇到过有一次是options的预检请求。于是想了解一下什么时候会发options的预检请求，并且在实际的请求过程中，它做了什么，意义是什么？</p>
+<h2 id="CORS"><a href="#CORS" class="headerlink" title="CORS"></a>CORS</h2><p>跨域资源共享</p>
+<p>CORS是一种网络浏览器的技术规范，它为Web服务器定义了一种方式，允许网页从不同的域访问其资源。而这种访问是被同源策略所禁止的。CORS系统定义了一种浏览器和服务器交互的方式来确定是否允许跨域请求。</p>
+<p>前端：</p>
+<p>客户端使用XmlHttpRequest发起Ajax请求，当前绝大部分浏览器已经支持CORS方式，且主流浏览器均提供了对跨域资源共享的支持</p>
+<p>服务器端：</p>
+<p>服务器端未做任何配置，会得到CORS Access Deny，即跨域访问被拒绝</p>
+<p>需要配置Access-Control-Allow-Origin</p>
+<h2 id="预检请求"><a href="#预检请求" class="headerlink" title="预检请求"></a>预检请求</h2><p>预检请求首先需要向另外一个域名的资源发送一个 HTTP OPTIONS 请求头，其目的就是为了判断实际发送的请求是否是安全的</p>
+<h3 id="什么时候会发送"><a href="#什么时候会发送" class="headerlink" title="什么时候会发送"></a>什么时候会发送</h3><p>1.非简单请求，比如使用Content-Type 为 application/xml 或 text/xml 的 POST 请求；</p>
+<p>详细一些：（满足一下三个条件的是简单请求，否则是非简单请求）</p>
+<p>条件一：请求方式只能是：GET、POST、HEAD</p>
+<p>条件二：HTTP请求头限制这几种字段：Accept、Accept-Language、Content-Language、Content-Type、Last-Event-ID</p>
+<p>条件三：Content-type只能取：application/x-www-form-urlencoded、multipart/form-data、text/plain</p>
+<p>2.中设置自定义头，比如 X-JSON、X-MENGXIANHUI 等。</p>
+<h3 id="做了什么"><a href="#做了什么" class="headerlink" title="做了什么"></a>做了什么</h3><p>OPTIONS方法是用于请求获得由Request-URI标识的资源在请求/响应的通信过程中可以使用的功能选项。通过这个方法，客户端可以在采取具体资源请求之前，决定对该资源采取何种必要措施，或者了解服务器的性能。</p>
+<p>1.获取服务器支持的HTTP请求方法</p>
+<p>2.用来检查服务器的性能。例如：AJAX进行跨域请求时的预检，需要向另外一个域名的资源发送一个HTTP OPTIONS请求头，用以判断实际发送的请求是否安全</p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2021/12/18/options%E9%A2%84%E6%A3%80%E8%AF%B7%E6%B1%82/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-react-hooks的闭包陷阱" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -995,305 +1361,6 @@
 
 
   
-    <article id="post-shadow" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/10/27/shadow/" target="_blank">shadow</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/10/27/shadow/" class="archive-article-date">
-        <time datetime="2021-10-27T15:10:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-27</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="box-shadow"><a href="#box-shadow" class="headerlink" title="box-shadow"></a>box-shadow</h1><p>盒模型的阴影，边框的阴影，有6个参数</p>
-<p>常用的形式,用其中4个参数</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">box-shadow</span>: 10<span class="selector-tag">px</span> 10<span class="selector-tag">px</span> 5<span class="selector-tag">px</span> <span class="selector-id">#888888</span>;</span><br></pre></td></tr></table></figure>
-
-<p>box-shadow: <em>h-shadow v-shadow blur spread color</em> inset;</p>
-<h3 id="h-shadow"><a href="#h-shadow" class="headerlink" title="h-shadow"></a>h-shadow</h3><p>必须，水平阴影的位置，可以是负值</p>
-<h3 id="v-shadow"><a href="#v-shadow" class="headerlink" title="v-shadow"></a>v-shadow</h3><p>必须，垂直阴影的位置，可以是负值</p>
-<h3 id="blur"><a href="#blur" class="headerlink" title="blur"></a>blur</h3><p>可选，模糊距离</p>
-<h3 id="spread"><a href="#spread" class="headerlink" title="spread"></a>spread</h3><p>可选，阴影的大小</p>
-<h3 id="color"><a href="#color" class="headerlink" title="color"></a>color</h3><p>可选，颜色</p>
-<h3 id="inset"><a href="#inset" class="headerlink" title="inset"></a>inset</h3><p>可选，从外层阴影（开始时）改变阴影内侧阴影</p>
-<h1 id="text-shadow"><a href="#text-shadow" class="headerlink" title="text-shadow"></a>text-shadow</h1><p>文本的阴影，有4个参数，与box-shadow类似</p>
-<p>常用的形式,用</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">text-shadow</span>: 10<span class="selector-tag">px</span> 10<span class="selector-tag">px</span> 5<span class="selector-tag">px</span> <span class="selector-id">#888888</span>;</span><br></pre></td></tr></table></figure>
-
-<h3 id="h-shadow-1"><a href="#h-shadow-1" class="headerlink" title="h-shadow"></a>h-shadow</h3><p>必须，水平阴影的位置，可以是负值</p>
-<h3 id="v-shadow-1"><a href="#v-shadow-1" class="headerlink" title="v-shadow"></a>v-shadow</h3><p>必须，垂直阴影的位置，可以是负值</p>
-<h3 id="blur-1"><a href="#blur-1" class="headerlink" title="blur"></a>blur</h3><p>可选，模糊距离</p>
-<h3 id="color-1"><a href="#color-1" class="headerlink" title="color"></a>color</h3><p>可选，颜色</p>
-<h1 id="drop-shadow"><a href="#drop-shadow" class="headerlink" title="drop-shadow"></a>drop-shadow</h1><p>投影，滤镜，参数与box-shadow类似</p>
-<p>常用用法</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">filter</span>: <span class="selector-tag">drop-shadow</span>(10<span class="selector-tag">px</span> ,10<span class="selector-tag">px</span> ,5<span class="selector-tag">px</span> ,<span class="selector-id">#888888</span>);</span><br></pre></td></tr></table></figure>
-
-<h4 id="与box-shadow的区别"><a href="#与box-shadow的区别" class="headerlink" title="与box-shadow的区别"></a>与box-shadow的区别</h4><p>box-shadow的阴影是在盒模型的外面，而drop-shadow如果盒模型的内部时透明的，它内部会有投影</p>
-<p>box-shadow各大浏览器一般都是支持的，IE9以上支持</p>
-<p>drop-shadow谷歌浏览器是不支持的，IE13以上支持 </p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">css</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/10/27/shadow/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-RN存在的问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/10/25/RN%E5%AD%98%E5%9C%A8%E7%9A%84%E9%97%AE%E9%A2%98/" target="_blank">RN存在的问题</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/10/25/RN%E5%AD%98%E5%9C%A8%E7%9A%84%E9%97%AE%E9%A2%98/" class="archive-article-date">
-        <time datetime="2021-10-25T11:36:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-25</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="性能优化"><a href="#性能优化" class="headerlink" title="性能优化"></a>性能优化</h1><p>1.异步逐层渲染（ScrollView和ListView相当于Web的table布局，Web的table会再内部渲染完成之后再展示，RN白屏时间过长也是内部的渲染时间过长），使用requestAnimationFrame（在下一帧有空闲的时候做一些事情）或者setTimeout定时将单个组件push进ScrollView容器。（react-progressive做了这一件事）</p>
-<p>2.shouldComponentUpdate</p>
-<p>子组件的属性改变，会通知到父组件，父组件会先进行DOMDIFF，之后全部重新渲染子组件</p>
-<p>3.立即修改可能会增加渲染的压力，直接修改State使用requestAnimationFrame(fn),使用setNativeProps方法可以理解为Web的直接修改dom，性能分析工具React.addons.Perf</p>
-<p>4.首屏不要有太多的组件，区分动态组件和静态组件，最小化结构</p>
-<p>5.最小化ListView，子选项不可见的时候减小list（react-native-sglistview，CRNlistView）</p>
-<h1 id="开发"><a href="#开发" class="headerlink" title="开发"></a>开发</h1><p>RN接近于原生，用户体验极佳，接口完备，什么都可以做</p>
-<p>但是开发、测试成本高，开发效率一般，版本发布不灵活</p>
-<p>H5开发体验好，发布版本灵活，但是用户体验较差，优化成本较高</p>
-<h1 id="上线"><a href="#上线" class="headerlink" title="上线"></a>上线</h1><p>生成增量包上线</p>
-<p>google-diff-match-patch</p>
-<p>bsdiff生成差异</p>
-<p>bspath生成差异</p>
-<h1 id="版本并存方案"><a href="#版本并存方案" class="headerlink" title="版本并存方案"></a>版本并存方案</h1><p>1.搭个动态server，提供个接口，接收表达客户端情况的几个参数，根据这些参数的不同输出不同的配置信息，客户端读取配置信息时，都通过访问server上的这个接口</p>
-<p>2.写一个js文件，写一个函数，接收表达客户端情况的几个参数，根据这些参数的不同输出不同的配置信息，把这个JS文件作为静态资源部署到server，客户端读取配置信息时，都通过访问server拉取这个JS文件，然后将其中的内容作为JavaScriptCore的code执行一下，然后调用其中的函数来获取配置信息</p>
-<p>3.其他工具，react-native-code-push版本发布的工具，moles-packer帮助拆分bundle的工具</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">RN</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/10/25/RN%E5%AD%98%E5%9C%A8%E7%9A%84%E9%97%AE%E9%A2%98/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-实现数据响应式的类" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/10/15/%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E5%93%8D%E5%BA%94%E5%BC%8F%E7%9A%84%E7%B1%BB/" target="_blank">实现数据响应式的类</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/10/15/%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E5%93%8D%E5%BA%94%E5%BC%8F%E7%9A%84%E7%B1%BB/" class="archive-article-date">
-        <time datetime="2021-10-15T11:28:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-15</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">nvue</span></span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(options)&#123;</span><br><span class="line">    <span class="keyword">this</span>.$options=options;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//数据响应式</span></span><br><span class="line">    <span class="keyword">this</span>.$data=options.data;</span><br><span class="line">    <span class="keyword">this</span>.observe(<span class="keyword">this</span>.$data);</span><br><span class="line">  &#125;</span><br><span class="line">  observe(val)&#123;</span><br><span class="line">    <span class="keyword">if</span>(!val&amp;&amp;<span class="keyword">typeof</span> val !==<span class="string">'object'</span>)&#123;</span><br><span class="line">      <span class="keyword">return</span>; </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">Object</span>.keys(val).foreach(<span class="function">(<span class="params">key</span>)=&gt;</span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.defineReactive(value,key,value[key]);</span><br><span class="line">    &#125;)</span><br><span class="line">    defineReactive(obj,key,val)&#123;</span><br><span class="line">      <span class="keyword">if</span>(<span class="keyword">typeof</span> val===<span class="string">'object'</span>)&#123;</span><br><span class="line">        <span class="keyword">this</span>.observe(val);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="built_in">Object</span>.defineProperty(obj,key,&#123;</span><br><span class="line">        <span class="keyword">get</span>()&#123;</span><br><span class="line">          <span class="keyword">return</span> val;</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="keyword">set</span>(newVal)&#123;</span><br><span class="line">          <span class="keyword">if</span>(newVal===val)&#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">          &#125;</span><br><span class="line">          val=newVal;</span><br><span class="line">          <span class="built_in">console</span>.log(<span class="string">"更新了"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/10/15/%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E5%93%8D%E5%BA%94%E5%BC%8F%E7%9A%84%E7%B1%BB/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
@@ -1431,6 +1498,10 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">webpack</a>
               </li>
              
@@ -1444,10 +1515,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">RN</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">基础</a>
               </li>
              
               <li class="article-tag-list-item">
