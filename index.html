@@ -202,6 +202,125 @@
             
 
   
+    <article id="post-vue源码-数据驱动" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2022/07/02/vue%E6%BA%90%E7%A0%81-%E6%95%B0%E6%8D%AE%E9%A9%B1%E5%8A%A8/" target="_blank">vue源码 数据驱动</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2022/07/02/vue%E6%BA%90%E7%A0%81-%E6%95%B0%E6%8D%AE%E9%A9%B1%E5%8A%A8/" class="archive-article-date">
+        <time datetime="2022-07-02T10:24:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-07-02</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="Vue与模版"><a href="#Vue与模版" class="headerlink" title="Vue与模版"></a>Vue与模版</h1><p>使用步骤：</p>
+<p>1.编写页面模版</p>
+<p>（1）直接在HTML标签中写标签</p>
+<p>（2）使用template</p>
+<p>（3）使用单文件（<tempalte/>）</p>
+<p>2.创建VUE的实例</p>
+<p>在vue的构造函数中提供data、methods、computed、watcher、props……</p>
+<p>3.将VUE挂载到页面中（mount）</p>
+<h1 id="数据驱动模型"><a href="#数据驱动模型" class="headerlink" title="数据驱动模型"></a>数据驱动模型</h1><p>vue的执行流程</p>
+<p>1.获取模板：模板中有’’坑’’</p>
+<p>2.利用Vue构造函数中的所提供的数据来填坑，得到可以在页面显示的标签</p>
+<p>3.将标签替换页面中原来有坑的标签</p>
+<h3 id="替换的核心方法"><a href="#替换的核心方法" class="headerlink" title="替换的核心方法"></a>替换的核心方法</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> rkuohao = <span class="regexp">/\&#123;\&#123;.+?\&#125;\&#125;/g</span>;<span class="comment">//正则匹配&#123;&#123;&#125;&#125;</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">compiler</span>(<span class="params">template,data</span>)</span>&#123;<span class="comment">//template是需要替换的真实DOM的克隆，data是替换的数据源</span></span><br><span class="line">  <span class="keyword">let</span> childNodes = template.childNodes;<span class="comment">//取出子元素</span></span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>;i&lt;childNodes.length;i++)&#123;</span><br><span class="line">    <span class="keyword">let</span> type = childNodes[i].nodeType;<span class="comment">//1是元素，3是文本</span></span><br><span class="line">    <span class="keyword">if</span>(type===<span class="number">3</span>)&#123;</span><br><span class="line">      <span class="keyword">let</span> txt = childNodes[i].nodeValue;</span><br><span class="line">      txt.replace(rkuohao,<span class="function"><span class="keyword">function</span>(<span class="params">_,g</span>)</span>&#123;函数的第n个参数表示正则中的第n组</span><br><span class="line">        <span class="keyword">let</span> key = g.trim();</span><br><span class="line">        <span class="keyword">let</span> value = data[key];</span><br><span class="line">                <span class="keyword">return</span> value;</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(type===<span class="number">1</span>)&#123;</span><br><span class="line">      <span class="keyword">this</span>.compiler(childNodes[i],data)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="整合一下"><a href="#整合一下" class="headerlink" title="整合一下"></a>整合一下</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> app = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el:<span class="string">'#root'</span>,</span><br><span class="line">  data: &#123;</span><br><span class="line">    name:<span class="string">'zhang'</span>,</span><br><span class="line">       message:<span class="string">'info'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>这么用，我写一下构造函数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Vue</span>(<span class="params">options</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">this</span>._data = options.data;</span><br><span class="line">  <span class="keyword">this</span>._el = options.el;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//准备好的模版</span></span><br><span class="line">  <span class="keyword">this</span>.$el = <span class="keyword">this</span>._templateDom = <span class="built_in">document</span>.querySelector(<span class="keyword">this</span>._el);</span><br><span class="line">  <span class="keyword">this</span>._parent = <span class="keyword">this</span>._templateDom.parentNode;</span><br><span class="line">  <span class="comment">//渲染</span></span><br><span class="line">  <span class="keyword">this</span>.render();</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//渲染，将有数据的模版更新到Dom中去</span></span><br><span class="line">Vue.protoType.render = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.compiler();</span><br><span class="line">&#125;</span><br><span class="line">Vue.protoType.compiler = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> realHtmlDom = <span class="keyword">this</span>._templateDom.cloneNode(<span class="literal">true</span>);</span><br><span class="line">  compiler(realHtmlDom,<span class="keyword">this</span>._data);</span><br><span class="line">  <span class="keyword">this</span>.update(realHtmlDom,<span class="keyword">this</span>._data);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//更新</span></span><br><span class="line">Vue.protoType.update = <span class="function"><span class="keyword">function</span>(<span class="params">real</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">this</span>._parent.replaceChild(real,<span class="built_in">document</span>.querySelector(<span class="string">'#root'</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="层级属性怎么替换？"><a href="#层级属性怎么替换？" class="headerlink" title="层级属性怎么替换？"></a>层级属性怎么替换？</h3><p>比如，可以使用递归查询</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getValueByPath</span>(<span class="params">obj,path</span>)</span>&#123;<span class="comment">//obj是data中的对象，path是xxx.yyy.zzz</span></span><br><span class="line">  <span class="keyword">let</span> paths = path.split(<span class="string">'.'</span>);</span><br><span class="line">  <span class="keyword">let</span> res = obj;</span><br><span class="line">  <span class="keyword">let</span> prop;</span><br><span class="line">  <span class="keyword">while</span>(prop = paths.shift()) &#123;</span><br><span class="line">    res= res[prop];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>柯里化优化(闭包)</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createGetValueByPath</span>(<span class="params">path</span>)</span>&#123;<span class="comment">//</span></span><br><span class="line">  <span class="keyword">let</span> paths = path.split(<span class="string">'.'</span>);</span><br><span class="line">  <span class="keyword">return</span> getValueByPath(obj)&#123;</span><br><span class="line">    <span class="keyword">let</span> res =obj;</span><br><span class="line">    <span class="keyword">let</span> prop;</span><br><span class="line">    <span class="keyword">while</span>(prop = paths.shift()) &#123;</span><br><span class="line">      res = res[prop];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="虚拟DOM"><a href="#虚拟DOM" class="headerlink" title="虚拟DOM"></a>虚拟DOM</h1><p>1.怎么将真正的DOM转化为虚拟DOM</p>
+<p>2.怎么将虚拟DOM转化为正式的DOM</p>
+<p>基本原理就是与深拷贝类似</p>
+<p>使用虚拟DOM性能会快很多，因为虚拟DOM在内存中，重新渲染只需要更新一次</p>
+<p>dom转化成json对象</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;div/&gt;转化为&#123;<span class="attr">tag</span>:<span class="string">'div'</span>&#125;</span><br><span class="line">文本节点转化为&#123;<span class="attr">tag</span>:<span class="literal">undefined</span>,<span class="attr">value</span>:<span class="string">'文本节点'</span>&#125;</span><br><span class="line">&lt;div title=<span class="string">"1"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"c"</span> /&gt;转化为&#123;<span class="attr">tag</span>:<span class="string">'div'</span>,<span class="attr">data</span>:&#123;<span class="attr">title</span>:<span class="string">'1'</span>,<span class="attr">class</span>:<span class="string">'c'</span>&#125;&#125;</span><br><span class="line">&lt;div&gt;</span><br><span class="line">  &lt;div/&gt;转化为&#123;<span class="attr">tag</span>:<span class="string">'div'</span>,children[&#123;<span class="attr">tag</span>:<span class="string">'div'</span>&#125;]&#125;</span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>使用递归遍历DOM元素，生成虚拟DOM</p>
+<p>VUE中使用的是 栈结构，使用栈存储父元素来实现，因为vue中是处理的字符串</p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2022/07/02/vue%E6%BA%90%E7%A0%81-%E6%95%B0%E6%8D%AE%E9%A9%B1%E5%8A%A8/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-浏览器缓存" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1402,153 +1521,6 @@
 
 
   
-    <article id="post-pnpm" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2022/01/23/pnpm/" target="_blank">pnpm</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2022/01/23/pnpm/" class="archive-article-date">
-        <time datetime="2022-01-23T06:16:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-01-23</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>现代打包工具<code>performant npm</code>，意为高性能的npm</p>
-<p>pnpm相较于npm、yarn的优化</p>
-<h3 id="hard-link-机制"><a href="#hard-link-机制" class="headerlink" title="hard link 机制"></a>hard link 机制</h3><p>在安装依赖方面做的优化，hard link机制，使得用户用不同的路径访问某个文件，pnpm会在全局的store目录里存储项目node_mdules文件的hard links文件</p>
-<p>举个例子，项目打包获取依赖时候，有1MB的依赖包a，在pnpm看上去有2MB，因为同时在npm_modules中有依赖包a，在全局store目录中也有依赖包a，加起来时2MB。但是因为hard link机制使得两个目录相同的1MB空间能从不同的两个位置进行寻址，因此实际上依赖包a只占用了1MB</p>
-<h3 id="store目录"><a href="#store目录" class="headerlink" title="store目录"></a>store目录</h3><p>store目录，全局的依赖包存储地址</p>
-<p>默认放在<code>${os.homedir}/.pnpm-store</code>具体可以看<code>@pnpm/store-path</code>这个包中的代码</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> homedir = os.homedir()</span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">await</span> canLinkToSubdir(tempFile, homedir)) &#123;</span><br><span class="line">  <span class="keyword">await</span> fs.unlink(tempFile)</span><br><span class="line">  <span class="comment">// If the project is on the drive on which the OS home directory</span></span><br><span class="line">  <span class="comment">// then the store is placed in the home directory</span></span><br><span class="line">  <span class="keyword">return</span> path.join(homedir, relStore, STORE_VERSION)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>我们也可以在<code>.npmrc</code>设置这个目录</p>
-<p>因此，用户多个项目用到了同一个依赖，在版本相同的情况下，只需要安装一次</p>
-<p>如果是npm或者是yarn，那么这个依赖需要在每个项目都要安装一次</p>
-<p>在使用pnpm安装依赖的时候，如果在store中存在依赖，则不需要额外依赖</p>
-<p>store目录下的文件会越来越大，怎么解决？</p>
-<p>pnpm官方提供了方法<a href="https://pnpm.io/zh/cli/store" target="_blank" rel="noopener">https://pnpm.io/zh/cli/store</a></p>
-<p>使用方法 <code>pnpm store prune</code>可以删除一些不被全局引用的依赖，比如，axios1.0版本的项目在某次更新后使用1.1版本，那么执行后axios1.0版本的就会被删除掉</p>
-<h4 id="node-modules目录"><a href="#node-modules目录" class="headerlink" title="node_modules目录"></a>node_modules目录</h4><p>pnpm 项目的 node_modules 结构: <a href="https://link.zhihu.com/?target=https%3A//pnpm.io/blog/2020/05/27/flat-node-modules-is-not-the-only-way">Flat node_modules is not the only way | pnpm</a></p>
-<p>pnpm安装express依赖,会生成两个目录</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">node_modules/express/...</span><br><span class="line">node_modules/.pnpm/express@<span class="number">4.17</span><span class="number">.1</span>/node_modules/xxx</span><br></pre></td></tr></table></figure>
-
-<p><code>node_modules/express/...</code>啥也没有，只是一个软链接，连接到第二个目录</p>
-<p>其中<code>.pnpm</code> 是个虚拟磁盘目录，然后 express 这个依赖的一些依赖会被平铺到 <code>.pnpm/express@4.17.1/node_modules/</code> 这个目录下面</p>
-<p>pnpm版本依赖问题<a href="https://pnpm.io/zh/how-peers-are-resolved" target="_blank" rel="noopener">https://pnpm.io/zh/how-peers-are-resolved</a></p>
-<h5 id="symlink和hardlink"><a href="#symlink和hardlink" class="headerlink" title="symlink和hardlink"></a>symlink和hardlink</h5><p>symlink为软链接，hardlink为硬链接</p>
-<p>为解决文件共享问题，linux引入这两种链接</p>
-<p><strong>hardlink</strong></p>
-<p>创建硬链接</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">link oldfile newfile</span><br><span class="line">ln oldfile newfile</span><br></pre></td></tr></table></figure>
-
-<p><strong>特性</strong></p>
-<ul>
-<li>文件有相同的 inode 及 data block 以及权限等信息</li>
-<li>只能对已存在的文件进行创建</li>
-<li>不能跨文件系统进行硬链接的创建</li>
-<li>不能对目录进行创建，只可对文件创建</li>
-<li>删除一个硬链接文件并不影响其他有相同 inode 号的文件</li>
-</ul>
-<p><strong>symlink</strong></p>
-<p>创建软链接</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s oldfile newfile</span><br></pre></td></tr></table></figure>
-
-<p><strong>特性</strong></p>
-<ul>
-<li>软链接有自己的文件属性及权限等</li>
-<li>可对不存在的文件或目录创建软链接</li>
-<li>软链接可交叉文件系统</li>
-<li>软链接可对文件或目录创建</li>
-<li>创建软链接时，链接计数 i_nlink 不会增加</li>
-<li>删除软链接并不影响被指向的文件，但若被指向的原文件被删除，则相关软连接被称为死链接，若被指向路径文件被重新创建，死链接可恢复为正常的软链接</li>
-</ul>
-<p>pnpm通过hardlink在全局搞了一个store目录来存储node_modules依赖里面的hard link地址，然后在引用依赖的时候通过symlink去找到对应的虚拟磁盘目录下的（.pnpm）依赖地址。</p>
-<h3 id="兼容性"><a href="#兼容性" class="headerlink" title="兼容性"></a>兼容性</h3><p>在大多数系统上面没有什么影响，但是symlink软链接的方法在windows上会存在兼容性问题，pnpm提供了解决的方案，在win上面使用 <a href="https://link.zhihu.com/?target=https%3A//docs.microsoft.com/en-us/windows/win32/fileio/hard-links-and-junctions">junctions</a> 的特性替代symlink，这个方案在win上面的兼容性要好于symlink</p>
-<p>为什么不都用软链接symlink的方式？</p>
-<p>store里面的目录其实也是通过软链接的方式去找到了，node提供<code>--preserve-symlinks</code> 的参数来支持 symlink，但是这个参数对symlink的支持并不是很好，pnpm的作者放弃了这个方法</p>
-<h3 id="痛点解决"><a href="#痛点解决" class="headerlink" title="痛点解决"></a>痛点解决</h3><p>Monorepo下的问题</p>
-<p><code>Phantom dependencies</code> 和 <code>NPM doppelgangers</code></p>
-<p><strong>Phantom dependencies</strong></p>
-<p>表示的是幽灵依赖，解释一下就是某些依赖没有在package.json引入，但是可以引用，主要形成的原因是yarn或者npm（v3以上）会对依赖会扁平化的处理，比如项目依赖foo这个包，在package.json文件中引入，同时依赖包foo依赖与bar这个依赖，扁平化之后可以直接require依赖包bar了。这个bar就是幽灵依赖。</p>
-<p>yarn提供了hoist机制（一些底层子项目的依赖会被提升到顶层node_modules）中，会存在很多的幽灵依赖，</p>
-<p>但是pnpm不会出现，扁平化的依赖会被放在<code>.pnpm</code>这个虚拟磁盘下面，用户是require不到的</p>
-<p><strong>NPM doppelgangers</strong></p>
-<p>doppelgangers表示相似的幽灵，这个问题也是hoist机制导致的，会有大量的依赖包会被重复的安装</p>
-<p>如果是pnpm的话不会出现这样的问题，因为依赖始终都是存在store目录下的hard links，一份不通的依赖始终会安装一次。</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2022/01/23/pnpm/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1690,11 +1662,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">react</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">RN</a>
+                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1702,11 +1670,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
+                <a href="javascript:void(0)" class="js-tag color3">RN</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">css</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">react</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1726,11 +1698,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">小程序</a>
+                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
+                <a href="javascript:void(0)" class="js-tag color4">小程序</a>
               </li>
              
               <li class="article-tag-list-item">

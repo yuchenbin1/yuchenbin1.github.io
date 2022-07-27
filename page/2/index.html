@@ -202,6 +202,153 @@
             
 
   
+    <article id="post-pnpm" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2022/01/23/pnpm/" target="_blank">pnpm</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2022/01/23/pnpm/" class="archive-article-date">
+        <time datetime="2022-01-23T06:16:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-01-23</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>现代打包工具<code>performant npm</code>，意为高性能的npm</p>
+<p>pnpm相较于npm、yarn的优化</p>
+<h3 id="hard-link-机制"><a href="#hard-link-机制" class="headerlink" title="hard link 机制"></a>hard link 机制</h3><p>在安装依赖方面做的优化，hard link机制，使得用户用不同的路径访问某个文件，pnpm会在全局的store目录里存储项目node_mdules文件的hard links文件</p>
+<p>举个例子，项目打包获取依赖时候，有1MB的依赖包a，在pnpm看上去有2MB，因为同时在npm_modules中有依赖包a，在全局store目录中也有依赖包a，加起来时2MB。但是因为hard link机制使得两个目录相同的1MB空间能从不同的两个位置进行寻址，因此实际上依赖包a只占用了1MB</p>
+<h3 id="store目录"><a href="#store目录" class="headerlink" title="store目录"></a>store目录</h3><p>store目录，全局的依赖包存储地址</p>
+<p>默认放在<code>${os.homedir}/.pnpm-store</code>具体可以看<code>@pnpm/store-path</code>这个包中的代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> homedir = os.homedir()</span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">await</span> canLinkToSubdir(tempFile, homedir)) &#123;</span><br><span class="line">  <span class="keyword">await</span> fs.unlink(tempFile)</span><br><span class="line">  <span class="comment">// If the project is on the drive on which the OS home directory</span></span><br><span class="line">  <span class="comment">// then the store is placed in the home directory</span></span><br><span class="line">  <span class="keyword">return</span> path.join(homedir, relStore, STORE_VERSION)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们也可以在<code>.npmrc</code>设置这个目录</p>
+<p>因此，用户多个项目用到了同一个依赖，在版本相同的情况下，只需要安装一次</p>
+<p>如果是npm或者是yarn，那么这个依赖需要在每个项目都要安装一次</p>
+<p>在使用pnpm安装依赖的时候，如果在store中存在依赖，则不需要额外依赖</p>
+<p>store目录下的文件会越来越大，怎么解决？</p>
+<p>pnpm官方提供了方法<a href="https://pnpm.io/zh/cli/store" target="_blank" rel="noopener">https://pnpm.io/zh/cli/store</a></p>
+<p>使用方法 <code>pnpm store prune</code>可以删除一些不被全局引用的依赖，比如，axios1.0版本的项目在某次更新后使用1.1版本，那么执行后axios1.0版本的就会被删除掉</p>
+<h4 id="node-modules目录"><a href="#node-modules目录" class="headerlink" title="node_modules目录"></a>node_modules目录</h4><p>pnpm 项目的 node_modules 结构: <a href="https://link.zhihu.com/?target=https%3A//pnpm.io/blog/2020/05/27/flat-node-modules-is-not-the-only-way">Flat node_modules is not the only way | pnpm</a></p>
+<p>pnpm安装express依赖,会生成两个目录</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">node_modules/express/...</span><br><span class="line">node_modules/.pnpm/express@<span class="number">4.17</span><span class="number">.1</span>/node_modules/xxx</span><br></pre></td></tr></table></figure>
+
+<p><code>node_modules/express/...</code>啥也没有，只是一个软链接，连接到第二个目录</p>
+<p>其中<code>.pnpm</code> 是个虚拟磁盘目录，然后 express 这个依赖的一些依赖会被平铺到 <code>.pnpm/express@4.17.1/node_modules/</code> 这个目录下面</p>
+<p>pnpm版本依赖问题<a href="https://pnpm.io/zh/how-peers-are-resolved" target="_blank" rel="noopener">https://pnpm.io/zh/how-peers-are-resolved</a></p>
+<h5 id="symlink和hardlink"><a href="#symlink和hardlink" class="headerlink" title="symlink和hardlink"></a>symlink和hardlink</h5><p>symlink为软链接，hardlink为硬链接</p>
+<p>为解决文件共享问题，linux引入这两种链接</p>
+<p><strong>hardlink</strong></p>
+<p>创建硬链接</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">link oldfile newfile</span><br><span class="line">ln oldfile newfile</span><br></pre></td></tr></table></figure>
+
+<p><strong>特性</strong></p>
+<ul>
+<li>文件有相同的 inode 及 data block 以及权限等信息</li>
+<li>只能对已存在的文件进行创建</li>
+<li>不能跨文件系统进行硬链接的创建</li>
+<li>不能对目录进行创建，只可对文件创建</li>
+<li>删除一个硬链接文件并不影响其他有相同 inode 号的文件</li>
+</ul>
+<p><strong>symlink</strong></p>
+<p>创建软链接</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s oldfile newfile</span><br></pre></td></tr></table></figure>
+
+<p><strong>特性</strong></p>
+<ul>
+<li>软链接有自己的文件属性及权限等</li>
+<li>可对不存在的文件或目录创建软链接</li>
+<li>软链接可交叉文件系统</li>
+<li>软链接可对文件或目录创建</li>
+<li>创建软链接时，链接计数 i_nlink 不会增加</li>
+<li>删除软链接并不影响被指向的文件，但若被指向的原文件被删除，则相关软连接被称为死链接，若被指向路径文件被重新创建，死链接可恢复为正常的软链接</li>
+</ul>
+<p>pnpm通过hardlink在全局搞了一个store目录来存储node_modules依赖里面的hard link地址，然后在引用依赖的时候通过symlink去找到对应的虚拟磁盘目录下的（.pnpm）依赖地址。</p>
+<h3 id="兼容性"><a href="#兼容性" class="headerlink" title="兼容性"></a>兼容性</h3><p>在大多数系统上面没有什么影响，但是symlink软链接的方法在windows上会存在兼容性问题，pnpm提供了解决的方案，在win上面使用 <a href="https://link.zhihu.com/?target=https%3A//docs.microsoft.com/en-us/windows/win32/fileio/hard-links-and-junctions">junctions</a> 的特性替代symlink，这个方案在win上面的兼容性要好于symlink</p>
+<p>为什么不都用软链接symlink的方式？</p>
+<p>store里面的目录其实也是通过软链接的方式去找到了，node提供<code>--preserve-symlinks</code> 的参数来支持 symlink，但是这个参数对symlink的支持并不是很好，pnpm的作者放弃了这个方法</p>
+<h3 id="痛点解决"><a href="#痛点解决" class="headerlink" title="痛点解决"></a>痛点解决</h3><p>Monorepo下的问题</p>
+<p><code>Phantom dependencies</code> 和 <code>NPM doppelgangers</code></p>
+<p><strong>Phantom dependencies</strong></p>
+<p>表示的是幽灵依赖，解释一下就是某些依赖没有在package.json引入，但是可以引用，主要形成的原因是yarn或者npm（v3以上）会对依赖会扁平化的处理，比如项目依赖foo这个包，在package.json文件中引入，同时依赖包foo依赖与bar这个依赖，扁平化之后可以直接require依赖包bar了。这个bar就是幽灵依赖。</p>
+<p>yarn提供了hoist机制（一些底层子项目的依赖会被提升到顶层node_modules）中，会存在很多的幽灵依赖，</p>
+<p>但是pnpm不会出现，扁平化的依赖会被放在<code>.pnpm</code>这个虚拟磁盘下面，用户是require不到的</p>
+<p><strong>NPM doppelgangers</strong></p>
+<p>doppelgangers表示相似的幽灵，这个问题也是hoist机制导致的，会有大量的依赖包会被重复的安装</p>
+<p>如果是pnpm的话不会出现这样的问题，因为依赖始终都是存在store目录下的hard links，一份不通的依赖始终会安装一次。</p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2022/01/23/pnpm/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-es2021" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1214,117 +1361,6 @@
 
 
   
-    <article id="post-shadow" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2021/10/27/shadow/" target="_blank">shadow</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2021/10/27/shadow/" class="archive-article-date">
-        <time datetime="2021-10-27T15:10:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-27</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="box-shadow"><a href="#box-shadow" class="headerlink" title="box-shadow"></a>box-shadow</h1><p>盒模型的阴影，边框的阴影，有6个参数</p>
-<p>常用的形式,用其中4个参数</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">box-shadow</span>: 10<span class="selector-tag">px</span> 10<span class="selector-tag">px</span> 5<span class="selector-tag">px</span> <span class="selector-id">#888888</span>;</span><br></pre></td></tr></table></figure>
-
-<p>box-shadow: <em>h-shadow v-shadow blur spread color</em> inset;</p>
-<h3 id="h-shadow"><a href="#h-shadow" class="headerlink" title="h-shadow"></a>h-shadow</h3><p>必须，水平阴影的位置，可以是负值</p>
-<h3 id="v-shadow"><a href="#v-shadow" class="headerlink" title="v-shadow"></a>v-shadow</h3><p>必须，垂直阴影的位置，可以是负值</p>
-<h3 id="blur"><a href="#blur" class="headerlink" title="blur"></a>blur</h3><p>可选，模糊距离</p>
-<h3 id="spread"><a href="#spread" class="headerlink" title="spread"></a>spread</h3><p>可选，阴影的大小</p>
-<h3 id="color"><a href="#color" class="headerlink" title="color"></a>color</h3><p>可选，颜色</p>
-<h3 id="inset"><a href="#inset" class="headerlink" title="inset"></a>inset</h3><p>可选，从外层阴影（开始时）改变阴影内侧阴影</p>
-<h1 id="text-shadow"><a href="#text-shadow" class="headerlink" title="text-shadow"></a>text-shadow</h1><p>文本的阴影，有4个参数，与box-shadow类似</p>
-<p>常用的形式,用</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">text-shadow</span>: 10<span class="selector-tag">px</span> 10<span class="selector-tag">px</span> 5<span class="selector-tag">px</span> <span class="selector-id">#888888</span>;</span><br></pre></td></tr></table></figure>
-
-<h3 id="h-shadow-1"><a href="#h-shadow-1" class="headerlink" title="h-shadow"></a>h-shadow</h3><p>必须，水平阴影的位置，可以是负值</p>
-<h3 id="v-shadow-1"><a href="#v-shadow-1" class="headerlink" title="v-shadow"></a>v-shadow</h3><p>必须，垂直阴影的位置，可以是负值</p>
-<h3 id="blur-1"><a href="#blur-1" class="headerlink" title="blur"></a>blur</h3><p>可选，模糊距离</p>
-<h3 id="color-1"><a href="#color-1" class="headerlink" title="color"></a>color</h3><p>可选，颜色</p>
-<h1 id="drop-shadow"><a href="#drop-shadow" class="headerlink" title="drop-shadow"></a>drop-shadow</h1><p>投影，滤镜，参数与box-shadow类似</p>
-<p>常用用法</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">filter</span>: <span class="selector-tag">drop-shadow</span>(10<span class="selector-tag">px</span> ,10<span class="selector-tag">px</span> ,5<span class="selector-tag">px</span> ,<span class="selector-id">#888888</span>);</span><br></pre></td></tr></table></figure>
-
-<h4 id="与box-shadow的区别"><a href="#与box-shadow的区别" class="headerlink" title="与box-shadow的区别"></a>与box-shadow的区别</h4><p>box-shadow的阴影是在盒模型的外面，而drop-shadow如果盒模型的内部时透明的，它内部会有投影</p>
-<p>box-shadow各大浏览器一般都是支持的，IE9以上支持</p>
-<p>drop-shadow谷歌浏览器是不支持的，IE13以上支持 </p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">css</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2021/10/27/shadow/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
@@ -1466,11 +1502,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">react</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">RN</a>
+                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1478,11 +1510,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">webpack</a>
+                <a href="javascript:void(0)" class="js-tag color3">RN</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">css</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">react</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1502,11 +1538,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">小程序</a>
+                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">页面项目</a>
+                <a href="javascript:void(0)" class="js-tag color4">小程序</a>
               </li>
              
               <li class="article-tag-list-item">
